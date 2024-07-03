@@ -35,3 +35,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 .history
+
+# it was making installing dependencies slow
+package-lock.json
+yarn.lock
