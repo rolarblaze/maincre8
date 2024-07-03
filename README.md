@@ -67,6 +67,7 @@ When working on any features or fixes, create a new branch from `dev` using the 
 - **Feature implementation**: `feat/name-of-feature`
 - **Bug fixes**: `bug/name-of-bug`
 - **UI design implementation**: `design/name-of-design`
+- **Codebase cleanup**: `cleanup/description`
 
 Example:
 ```bash
@@ -93,6 +94,7 @@ All commit messages must be descriptive and follow these guidelines:
   - **feat**: for new features
   - **fix**: for bug fixes
   - **design**: for design changes
+  - **cleanup**: for codebase cleanup
 
 Example:
 ```bash
