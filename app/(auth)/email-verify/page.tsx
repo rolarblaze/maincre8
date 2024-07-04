@@ -7,7 +7,7 @@ const VerifyEmail = () => {
     <form className="max-w-[37rem] size-full">
       <fieldset className="space-y-10">
         {/* FORM LEGEND */}
-        <legend className="text-grey900 text-center text-[2.5rem] font-bold">
+        <legend className="text-grey900 text-center text-4.5xl font-bold">
           Verify your email address
         </legend>
 
