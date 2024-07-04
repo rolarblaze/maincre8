@@ -72,7 +72,7 @@ export default function Login() {
           >
             Forgot password?
           </Link>
-          <div className="flex items-center gap-3 mb-[14px]">
+          <div className="flex items-center gap-3 mb-3.5">
             <Checked />{" "}
             <span className="text-sm text-grey500">Remember me</span>
           </div>

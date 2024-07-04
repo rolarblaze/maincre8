@@ -3,21 +3,17 @@ import { useState } from "react";
 
 import Image from "next/image";
 import { InputField, Button } from "@/components";
+import { ConfirmIcon } from "@/public/icons";
 
 function ConfirmForgotPassword() {
   return (
     <main className="flex flex-col gap-4 md:gap-8 text-center mb-14 md:mb-20">
       <h1>Check your email for password reset link</h1>
       <section className="w-full flex flex-col gap-4 border border-grey200 rounded-lg p-5 md:gap-8 md:p-10">
-        <div className=" border border-grey200 h-[48px] rounded-[4px] flex items-center gap-3 pl-4">
-          <div className="w-[6px] h-[48px] bg-primary700 rounded-tl-md rounded-bl-md ml-[23px]" />
-          <Image
-            src={"/icons/confirm-icon.svg"}
-            width={24}
-            height={24}
-            alt="confirm"
-          />
-
+        <div className=" border border-grey200 h-[48px] rounded flex items-center gap-3 pl-4">
+          {/* the ml should be 23px tho  */}
+          <div className="w-1.5 h-12 bg-primary700 rounded-tl-md rounded-bl-md ml-6" />
+          <ConfirmIcon />
           <p className="text-sm font-semibold text-grey900">
             Check your email for password reset link
           </p>
