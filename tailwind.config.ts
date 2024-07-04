@@ -8,7 +8,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      fontFamily: {
+      fontSize: {
         "4.5xl": "2.5rem",
       },
       colors: {
