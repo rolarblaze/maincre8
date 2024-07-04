@@ -8,17 +8,19 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        "4.5xl": "2.5rem",
+      },
       colors: {
         grey200: "#E4E7EC",
         grey300: "#D0D5DD",
         grey400: "#98A2B3",
         grey500: "#667185",
         grey600: "#475367",
-        grey900:  "#101928",
+        grey900: "#101928",
         primary400: "#1374E4",
         primary500: "#1574E5",
-
-
+        primary600: "#136AD0",
       },
     },
   },
