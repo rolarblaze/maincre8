@@ -13,7 +13,7 @@ function ConfirmForgotPassword() {
         <div className=" border border-grey200 h-[48px] rounded flex items-center gap-3 pl-4">
           {/* the ml should be 23px tho  */}
           <div className="w-1.5 h-12 bg-primary700 rounded-tl-md rounded-bl-md ml-6" />
-          <ConfirmIcon />
+          <Image src={ConfirmIcon} width={24} height={24} alt="confirm" />
           <p className="text-sm font-semibold text-grey900">
             Check your email for password reset link
           </p>
