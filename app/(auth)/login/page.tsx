@@ -1,17 +1,12 @@
 "use client";
 import { useState } from "react";
-
-import InputField from "@/components/Forms/InputField/InputField";
-import Button from "@/components/Button";
-import SocialSignUp from "@/components/Auth/SocialSignUp";
 import {
   passwordCriteria,
   validatePassword,
 } from "@/utils/helpers/passwordValidation";
-import EyeIcon from "../../../public/icons/eye.svg";
-import Unchecked from "../../../public/icons/unchecked-checkbox.svg";
-import Checked from "../../../public/icons/checked-checkbox.svg";
 import Link from "next/link";
+import { InputField, Button, SocialSignUp } from "@/components";
+import { EyeIcon, Checked } from "@/public/icons";
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);

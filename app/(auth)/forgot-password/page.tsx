@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
-import InputField from "@/components/Forms/InputField/InputField";
-import Button from "@/components/Button";
+
 import Image from "next/image";
+import { InputField, Button } from "@/components";
 
 function ConfirmForgotPassword() {
   return (

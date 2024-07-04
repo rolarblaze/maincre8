@@ -1,6 +1,4 @@
-import { useState } from 'react';
-import UserIcon from '@/public/svgs/UserIcon';
-import BuildingIcon from '@/public/svgs/BuildingIcon';
+import { UserIcon, BuildingIcon } from "@/public/svgs";
 
 interface Tab {
   id: string;
@@ -10,14 +8,14 @@ interface Tab {
 
 const tabs: Tab[] = [
   {
-    id: 'individual',
+    id: "individual",
     icon: UserIcon,
-    label: 'I am an individual',
+    label: "I am an individual",
   },
   {
-    id: 'business',
+    id: "business",
     icon: BuildingIcon,
-    label: 'I am a business',
+    label: "I am a business",
   },
 ];
 
@@ -32,8 +30,8 @@ export default function Tabs({ activeTab, setActiveTab }: TabsProps) {
       {tabs.map((tab) => {
         const Icon = tab.icon;
         const isActive = activeTab === tab.id;
-        const textColor = isActive ? 'text-primary400' : 'text-grey400';
-        const borderColor = isActive ? 'border-primary400' : 'border-grey400';
+        const textColor = isActive ? "text-primary400" : "text-grey400";
+        const borderColor = isActive ? "border-primary400" : "border-grey400";
 
         return (
           <div
@@ -41,8 +39,12 @@ export default function Tabs({ activeTab, setActiveTab }: TabsProps) {
             className={`w-full flex items-center gap-2 py-2 md:py-4 cursor-pointer border-b ${borderColor} transition-all duration-500`}
             onClick={() => setActiveTab(tab.id)}
           >
-            <Icon fillColor={isActive ? '#1374E4' : '#98A2B3'} />
-            <p className={`${textColor} text-xs md:text-sm transition-all duration-500`}>{tab.label}</p>
+            <Icon fillColor={isActive ? "#1374E4" : "#98A2B3"} />
+            <p
+              className={`${textColor} text-xs md:text-sm transition-all duration-500`}
+            >
+              {tab.label}
+            </p>
           </div>
         );
       })}

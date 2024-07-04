@@ -1,16 +1,11 @@
 "use client";
 import { useState } from "react";
-import Tabs from "@/components/Auth/Tabs";
-import InputField from "@/components/Forms/InputField/InputField";
-import Button from "@/components/Button";
-import SocialSignUp from "@/components/Auth/SocialSignUp";
-import EyeIcon from "../../../public/icons/eye.svg";
-import Unchecked from "../../../public/icons/unchecked-checkbox.svg";
-import Checked from "../../../public/icons/checked-checkbox.svg";
 import {
   validatePassword,
   passwordCriteria,
 } from "@/utils/helpers/passwordValidation";
+import { Tabs, InputField, Button, SocialSignUp } from "@/components";
+import { Checked, EyeIcon, Unchecked } from "@/public/icons";
 
 export default function Signup() {
   const [activeTab, setActiveTab] = useState<string>("individual");
@@ -129,9 +124,8 @@ export default function Signup() {
             classNames="mt-4"
           />
         </form>
-      <SocialSignUp/>
+        <SocialSignUp />
       </section>
-
     </main>
   );
 }

@@ -1,7 +1,5 @@
+import { GoogleIcon, FacebookIcon, LinkedInIcon } from "@/public/icons";
 import React from "react";
-import LinkedInIcon from "../../../public/icons/linkedin.svg";
-import GoogleIcon from "../../../public/icons/google.svg";
-import FacebookIcon from "../../../public/icons/facebook.svg";
 
 const SocialSignUp = ({ isLogin }: { isLogin?: boolean }) => {
   return (
