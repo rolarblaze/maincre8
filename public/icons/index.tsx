@@ -5,3 +5,4 @@ export { default as EyeIcon } from "./eye.svg";
 export { default as ConfirmIcon } from "./confirm-icon.svg";
 export { default as Checked } from "./checked-checkbox.svg";
 export { default as Unchecked } from "./unchecked-checkbox.svg";
+export { default as Logo } from "./logo.svg";
