@@ -20,7 +20,6 @@ const config: Config = {
         grey900: "#101928",
         primary400: "#1374E4",
         primary500: "#1574E5",
-        primary600: "#136AD0",
         primary700: "#0D5EBA",
       },
     },
