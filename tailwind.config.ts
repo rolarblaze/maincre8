@@ -8,6 +8,15 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      lineHeight: {
+        loosest: "5rem",
+      },
+      spacing: {
+        "4.5": "1.125rem",
+      },
+      borderRadius: {
+        "5xl": "1.875rem",
+      },
       fontSize: {
         "4.5xl": "2.5rem",
       },
@@ -22,6 +31,7 @@ const config: Config = {
         primary500: "#1574E5",
         primary700: "#0D5EBA",
         primary600: "#136AD0",
+        primary800: "#083160",
       },
     },
   },
