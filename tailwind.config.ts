@@ -21,6 +21,7 @@ const config: Config = {
         primary400: "#1374E4",
         primary500: "#1574E5",
         primary700: "#0D5EBA",
+        primary600: "#136AD0",
       },
     },
   },

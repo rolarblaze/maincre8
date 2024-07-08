@@ -1,6 +1,6 @@
 "use client";
 import { Button } from "@/components";
-import InputField from "@/components/Forms/InputField/InputField";
+import InputField from "@/components/Forms/InputField";
 
 const VerifyEmail = () => {
   return (
@@ -37,12 +37,7 @@ const VerifyEmail = () => {
             label="Verify email address"
             onClick={() => console.log("Hello")} //! This causes a reload
           />
-          <Button
-            label="Resend code"
-            onClick={() => console.log("Resend Code")}
-            classNames="text-[#136AD0] bg-transparent" //! text-primary600 refusing to show
-            //* type="button"
-          />
+          <p className="text-primary600">Resend code</p>
         </div>
       </form>
     </div>
