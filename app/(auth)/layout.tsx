@@ -35,6 +35,9 @@ const AuthPageLayout: FC<Props> = ({ children }) => {
     }
   }, [pathname]);
 
+  const maxWClass =
+    pathname === "/forgot-password" ? "max-w-3xl" : "max-w-[592px]";
+
   return (
     <main className="min-h-screen relative">
       <div className="w-full mx-auto flex flex-col gap-5 p-4 md:py-8 md:px-28 md:gap-10">
@@ -45,7 +48,9 @@ const AuthPageLayout: FC<Props> = ({ children }) => {
           {text}
         </div>
 
-        <div className="max-w-[592px] w-full h-full mx-auto self-center bg-white relative overflow-y-auto z-50">
+        <div
+          className={`w-full h-full mx-auto self-center bg-white relative overflow-y-auto z-50 ${maxWClass}`}
+        >
           <div className="flex flex-col gap-4 md:gap-8 text-center">
             {children}
           </div>

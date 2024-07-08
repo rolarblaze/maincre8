@@ -92,7 +92,7 @@ export default function Login() {
             </label>
           </div>
           <Button
-            label="login"
+            label="Login"
             isLoading={isLoading}
             onClick={handleSubmit}
             classNames="mt-4"

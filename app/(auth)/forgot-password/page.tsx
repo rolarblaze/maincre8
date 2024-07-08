@@ -6,9 +6,11 @@ import Image from "next/image";
 
 function ConfirmForgotPassword() {
   return (
-    <Fragment>
-      <h1>Check your email for password reset link</h1>
-      <div className="w-full  border border-grey200 rounded-lg p-10">
+    <>
+      <h1 className="text-2xl md:text-4xl">
+        Check your email for password reset link
+      </h1>
+      <div className="w-full  border border-grey200 rounded-lg p-10 max-w-[592px] mx-auto">
         <div className="border border-grey200 h-[48px] rounded flex items-center gap-3">
           {/* the ml should be 23px tho  */}
           <div className="w-1.5 h-12 bg-primary700 rounded-tl-md rounded-bl-md relative right-1.5" />
@@ -20,7 +22,7 @@ function ConfirmForgotPassword() {
           </p>
         </div>
       </div>
-    </Fragment>
+    </>
   );
 }
 
@@ -38,11 +40,11 @@ export default function ForgotPassword() {
   };
 
   return (
-    <main className="flex flex-col gap-4 md:gap-8 text-center ">
+    <main className="flex flex-col gap-4 md:gap-8 text-center">
       {isSubmitted ? (
         <ConfirmForgotPassword />
       ) : (
-        <>
+        <div className=" flex flex-col gap-4 md:gap-8 max-w-[592px] mx-auto">
           <h1>Reset your account password</h1>
           <section className="w-full flex flex-col gap-4 border border-grey200 rounded-lg p-5 md:gap-8 md:p-10">
             <form className="w-full flex flex-col">
@@ -61,7 +63,7 @@ export default function ForgotPassword() {
               />
             </form>
           </section>
-        </>
+        </div>
       )}
     </main>
   );
