@@ -10,3 +10,4 @@ export { default as Smiley } from "./smiley.svg";
 export { default as LightBulb } from "./lightbulb.svg";
 export { default as Rocket } from "./rocket.svg";
 export { default as Pencil } from "./pencil.svg";
+export { default as CurvedArrow } from "./curved-arrow.svg";
