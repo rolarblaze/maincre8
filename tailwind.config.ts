@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontSize: {
+        "4.5xl": "2.5rem",
+      },
       colors: {
         grey200: "#E4E7EC",
         grey300: "#D0D5DD",
