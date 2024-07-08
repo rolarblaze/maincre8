@@ -22,6 +22,7 @@ const config: Config = {
         "5.5xl": "3.5rem",
       },
       colors: {
+        grey50: "#F9FAFB",
         grey200: "#E4E7EC",
         grey300: "#D0D5DD",
         grey400: "#98A2B3",
@@ -33,6 +34,7 @@ const config: Config = {
         primary700: "#0D5EBA",
         primary600: "#136AD0",
         primary800: "#083160",
+        primary900: "#072548",
       },
     },
   },
