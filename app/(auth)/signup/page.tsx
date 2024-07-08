@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import {
   validatePassword,
   passwordCriteria,
@@ -39,7 +39,7 @@ export default function Signup() {
   };
 
   return (
-    <main className="flex flex-col gap-4 md:gap-8 text-center mb-14 md:mb-20 ">
+    <Fragment>
       <h1>Create your account</h1>
 
       <section className="w-full flex flex-col gap-4 border border-grey200 rounded-lg p-5 md:gap-8 md:p-10">
@@ -126,6 +126,6 @@ export default function Signup() {
         </form>
         <SocialSignUp />
       </section>
-    </main>
+    </Fragment>
   );
 }

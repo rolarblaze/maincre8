@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 
 import Image from "next/image";
 import { InputField, Button } from "@/components";
@@ -7,7 +7,7 @@ import { ConfirmIcon } from "@/public/icons";
 
 function ConfirmForgotPassword() {
   return (
-    <main className="flex flex-col gap-4 md:gap-8 text-center mb-14 md:mb-20">
+    <Fragment>
       <h1>Check your email for password reset link</h1>
       <section className="w-full flex flex-col gap-4 border border-grey200 rounded-lg p-5 md:gap-8 md:p-10">
         <div className=" border border-grey200 h-[48px] rounded flex items-center gap-3 pl-4">
@@ -19,7 +19,7 @@ function ConfirmForgotPassword() {
           </p>
         </div>
       </section>
-    </main>
+    </Fragment>
   );
 }
 
@@ -37,7 +37,7 @@ export default function ForgotPassword() {
   };
 
   return (
-    <main className="flex flex-col gap-4 md:gap-8 text-center mb-14 md:mb-20">
+    <main className="flex flex-col gap-4 md:gap-8 text-center ">
       {isSubmitted ? (
         <ConfirmForgotPassword />
       ) : (
