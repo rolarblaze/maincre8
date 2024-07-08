@@ -6,3 +6,7 @@ export { default as ConfirmIcon } from "./confirm-icon.svg";
 export { default as Checked } from "./checked-checkbox.svg";
 export { default as Unchecked } from "./unchecked-checkbox.svg";
 export { default as Logo } from "./logo.svg";
+export { default as Smiley } from "./smiley.svg";
+export { default as LightBulb } from "./lightbulb.svg";
+export { default as Rocket } from "./rocket.svg";
+export { default as Pencil } from "./pencil.svg";
