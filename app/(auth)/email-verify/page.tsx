@@ -11,7 +11,7 @@ const VerifyEmail = () => {
       </h1>
 
       {/* FORM ELEMENT */}
-      <form className="p-10 border rounded-lg border-grey200 space-y-10">
+      <form className="p-10 border rounded-lg border-grey200 space-y-10 text-left">
         <legend className="space-y-1">
           <h3 className="text-grey600 text-2xl font-bold tracking-[-0.03rem]">
             We emailed you a code
@@ -37,7 +37,7 @@ const VerifyEmail = () => {
             label="Verify email address"
             onClick={() => console.log("Hello")} //! This causes a reload
           />
-          <p className="text-primary600">Resend code</p>
+          <button className="text-primary600 py-4">Resend code</button>
         </div>
       </form>
     </div>
