@@ -19,6 +19,7 @@ const config: Config = {
       },
       fontSize: {
         "4.5xl": "2.5rem",
+        "5.5xl": "3.5rem",
       },
       colors: {
         grey200: "#E4E7EC",
