@@ -54,14 +54,12 @@ export default function Signup() {
                   type="text"
                   placeholder="Enter first name"
                   onChange={(e) => console.log(e.target.value)}
-                  isRequired
                 />
                 <InputField
                   label="Last name"
                   type="text"
                   placeholder="Enter last name"
                   onChange={(e) => console.log(e.target.value)}
-                  isRequired
                 />
               </div>
             )}
@@ -72,7 +70,6 @@ export default function Signup() {
                 type="text"
                 placeholder="Enter business name"
                 onChange={(e) => console.log(e.target.value)}
-                isRequired
               />
             )}
 
@@ -81,7 +78,6 @@ export default function Signup() {
               type="text"
               placeholder="Enter email address"
               onChange={(e) => console.log(e.target.value)}
-              isRequired
             />
 
             <div className="flex flex-col gap-4">
@@ -94,7 +90,6 @@ export default function Signup() {
                 icon={<EyeIcon className="w-5 h-5" />}
                 onInputIconClick={togglePasswordVisibility}
                 onEnterPressed={() => console.log("Enter pressed")}
-                isRequired
               />
 
               <div className="flex items-center gap-2">
