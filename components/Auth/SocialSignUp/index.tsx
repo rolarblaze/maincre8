@@ -7,7 +7,7 @@ const SocialSignUp = ({ isLogin }: { isLogin?: boolean }) => {
       <div className="flex items-center gap-3 w-full">
         <div className="flex-grow border-t border-grey200"></div>
         <span className=" text-grey500">
-          {isLogin ? "Login in with" : "Or sign up with"}
+          {isLogin ? "Or login with" : "Or sign up with"}
         </span>
         <div className="flex-grow border-t border-grey200"></div>
       </div>
