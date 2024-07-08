@@ -6,7 +6,7 @@ import {
 } from "@/utils/helpers/passwordValidation";
 import Link from "next/link";
 import { InputField, Button, SocialSignUp } from "@/components";
-import { EyeIcon, Checked } from "@/public/icons";
+import { EyeIcon, Checked, Unchecked } from "@/public/icons";
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
@@ -18,8 +18,9 @@ export default function Login() {
       isValid: false,
     }))
   );
+  const [rememberMe, setRememberMe] = useState(false);
 
-  //toggle password visibility
+  // Toggle password visibility
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -38,6 +39,10 @@ export default function Login() {
     }, 2000);
   };
 
+  const handleRememberMeChange = () => {
+    setRememberMe(!rememberMe);
+  };
+
   return (
     <Fragment>
       <h1>Login to your account</h1>
@@ -50,7 +55,6 @@ export default function Login() {
             placeholder="Enter email address"
             onChange={(e) => console.log(e.target.value)}
             classNames="mb-6"
-            isRequired
           />
 
           <InputField
@@ -63,7 +67,6 @@ export default function Login() {
             onInputIconClick={togglePasswordVisibility}
             onEnterPressed={() => console.log("Enter pressed")}
             classNames="mb-2"
-            isRequired
           />
 
           <Link
@@ -73,8 +76,20 @@ export default function Login() {
             Forgot password?
           </Link>
           <div className="flex items-center gap-3 mb-3.5">
-            <Checked />{" "}
-            <span className="text-sm text-grey500">Remember me</span>
+            <input
+              type="checkbox"
+              id="rememberMe"
+              checked={rememberMe}
+              onChange={handleRememberMeChange}
+              className="hidden"
+            />
+            <label
+              htmlFor="rememberMe"
+              className="flex items-center gap-2 cursor-pointer"
+            >
+              {rememberMe ? <Checked /> : <Unchecked />}
+              <span className="text-sm text-grey500">Remember me</span>
+            </label>
           </div>
           <Button
             label="login"

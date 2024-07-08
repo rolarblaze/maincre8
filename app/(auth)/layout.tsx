@@ -54,7 +54,7 @@ const AuthPageLayout: FC<Props> = ({ children }) => {
       <img
         src={Wave.src}
         alt="wave"
-        className="absolute bottom-0 w-full h-auto"
+        className="absolute bottom-0 w-full h-64"
       />
     </main>
   );
