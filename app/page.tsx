@@ -3,6 +3,7 @@ import AppWrapper from "@/components/LandingPage/AppWrapper";
 import BrandSection from "@/components/LandingPage/Sections/BrandSection";
 import DashboardSection from "@/components/LandingPage/Sections/DashboardSection";
 import HeroSection from "@/components/LandingPage/Sections/HeroSection";
+import SubscribeSection from "@/components/LandingPage/Sections/SubscribeSection";
 export default function Home() {
   return (
     <AppWrapper type="">
@@ -13,6 +14,7 @@ export default function Home() {
         <HomepageBundles />
         <DashboardSection />
         <BrandSection />
+        <SubscribeSection />
       </main>
     </AppWrapper>
   );
