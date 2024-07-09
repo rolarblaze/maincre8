@@ -6,9 +6,9 @@ const VerifyEmail = () => {
   return (
     <div className="max-w-[37rem] size-full mt-12 flex flex-col gap-10">
       {/* FORM LEGEND */}
-      <h1 className="text-grey900 text-center text-4.5xl font-bold">
+      <h3 className="text-grey900 text-center text-4.5xl font-bold">
         Verify your email address
-      </h1>
+      </h3>
 
       {/* FORM ELEMENT */}
       <form className="p-10 border rounded-lg border-grey200 space-y-10 text-left">
