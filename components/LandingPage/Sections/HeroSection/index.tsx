@@ -1,5 +1,10 @@
-import { LightBulb, Pencil, Rocket, Smiley } from "@/public/icons";
-import Button from "../../../Button";
+import {
+  AttachBrief,
+  ColorPalette,
+  LaunchGif,
+  StartProject,
+} from "@/public/icons";
+import Image from "next/image";
 
 const HeroSection = () => {
   return (
@@ -36,11 +41,27 @@ const HeroSection = () => {
         {/* BIG BLUE DIV */}
         <div className="w-full mt-8 bg-primary800 rounded-5xl min-h-[25.875rem]"></div>
 
-        {/* FLOATING ICONS */}
-        <Smiley className="absolute top-4 left-40" />
-        <LightBulb className="absolute top-10 right-32" />
-        <Rocket className="absolute top-56 left-0" />
-        <Pencil className="absolute top-72 right-0" />
+        {/* FLOATING GIFS */}
+        <Image
+          src={LaunchGif}
+          alt="launch"
+          className="absolute top-4 left-40 size-[4.75rem]"
+        />
+        <Image
+          src={StartProject}
+          alt="launch"
+          className="absolute top-10 right-32 size-[4.75rem]"
+        />
+        <Image
+          src={AttachBrief}
+          alt="launch"
+          className="absolute top-56 left-0 size-[4.75rem]"
+        />
+        <Image
+          src={ColorPalette}
+          alt="launch"
+          className="absolute top-72 right-0 size-[4.75rem]"
+        />
       </div>
     </section>
   );
