@@ -1,5 +1,5 @@
 import { LightBulb, Pencil, Rocket, Smiley } from "@/public/icons";
-import Button from "../../Button";
+import Button from "../../../Button";
 
 const HeroSection = () => {
   return (
