@@ -1,4 +1,8 @@
-import { HomepageBundles, HomepageServices } from "@/components";
+import {
+  HomepageBenefits,
+  HomepageBundles,
+  HomepageServices,
+} from "@/components";
 import AppWrapper from "@/components/LandingPage/AppWrapper";
 export default function Home() {
   return (
@@ -7,6 +11,7 @@ export default function Home() {
         <h1>Home page</h1>
         <HomepageServices />
         <HomepageBundles />
+        <HomepageBenefits />
       </main>
     </AppWrapper>
   );
