@@ -29,6 +29,23 @@ const config: Config = {
         primary600: "#136AD0",
         "dark-cyan-blue": "#030E1C",
       },
+      boxShadow: {
+        'custom-strong': '0 5px 10px rgba(0, 0, 0, 0.15), 0 -5px 10px rgba(0, 0, 0, 0.15), 5px 0 10px rgba(0, 0, 0, 0.15), -5px 0 10px rgba(0, 0, 0, 0.15)',
+      },
+      keyframes: {
+        fadeInDown: {
+          '0%': { opacity: '0', transform: 'translateY(-20px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        fadeOutUp: {
+          '0%': { opacity: '1', transform: 'translateY(0)' },
+          '100%': { opacity: '0', transform: 'translateY(-20px)' },
+        },
+      },
+      animation: {
+        fadeInDown: 'fadeInDown 0.6s ease-out',
+        fadeOutUp: 'fadeOutUp 0.8s ease-out',
+      },
     },
   },
   plugins: [],
