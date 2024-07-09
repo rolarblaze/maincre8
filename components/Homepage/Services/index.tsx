@@ -7,7 +7,7 @@ import {
 } from "@/public/icons";
 import React from "react";
 
-const SERVICES = [
+const services = [
   {
     icon: <TailoredServiceIcon />,
     title: "Tailored Service Bundles",
@@ -59,7 +59,7 @@ const Service = () => {
       </h2>
 
       <div className="grid grid-cols-4 gap-8">
-        {SERVICES.map((service, index) => (
+        {services.map((service, index) => (
           <Card
             key={index}
             icon={service.icon}
