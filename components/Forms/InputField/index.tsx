@@ -1,7 +1,8 @@
+"use client"
 import React, { ChangeEvent, KeyboardEvent, ReactNode } from 'react';
 
 interface InputFieldProps {
-  label: string;
+  label?: string;
   type: 'text' | 'password' | 'email' | 'number';
   placeholder?: string;
   value?: string;
