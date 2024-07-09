@@ -23,6 +23,7 @@ const config: Config = {
       },
       colors: {
         grey50: "#F9FAFB",
+        grey100: "#F0F2F5",
         grey200: "#E4E7EC",
         grey300: "#D0D5DD",
         grey400: "#98A2B3",
@@ -35,6 +36,7 @@ const config: Config = {
         primary600: "#136AD0",
         primary800: "#083160",
         primary900: "#072548",
+        "dark-cyan-blue": "#030E1C",
       },
     },
   },
