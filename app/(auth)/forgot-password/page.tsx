@@ -45,7 +45,7 @@ export default function ForgotPassword() {
         <ConfirmForgotPassword />
       ) : (
         <div className=" flex flex-col gap-4 md:gap-8 max-w-[592px] mx-auto">
-          <h1>Reset your account password</h1>
+          <h3>Reset your account password</h3>
           <section className="w-full flex flex-col gap-4 border border-grey200 rounded-lg p-5 md:gap-8 md:p-10">
             <form className="w-full flex flex-col">
               <InputField
