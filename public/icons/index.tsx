@@ -16,3 +16,7 @@ export { default as LightBulb } from "./lightbulb.svg";
 export { default as Rocket } from "./rocket.svg";
 export { default as Pencil } from "./pencil.svg";
 export { default as CurvedArrow } from "./curved-arrow.svg";
+export { default as LaunchGif } from "./launch.gif";
+export { default as ColorPalette } from "./colour-palette.gif";
+export { default as AttachBrief } from "./attach-brief.gif";
+export { default as StartProject } from "./start-project.gif";
