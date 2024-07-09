@@ -40,7 +40,7 @@ export default function Signup() {
 
   return (
     <Fragment>
-      <h1>Create your account</h1>
+      <h3>Create your account</h3>
 
       <section className="w-full flex flex-col gap-4 border border-grey200 rounded-lg p-5 md:gap-8 md:p-10">
         <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />

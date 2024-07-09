@@ -45,7 +45,7 @@ export default function Login() {
 
   return (
     <Fragment>
-      <h1>Login to your account</h1>
+      <h3>Login to your account</h3>
 
       <section className="w-full flex flex-col gap-4 border border-grey200 rounded-lg p-5 md:gap-8 md:p-10">
         <form className="w-full flex flex-col">

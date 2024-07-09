@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      backgroundImage: {
+        "blue-gradient":
+          "linear-gradient(to right bottom, #083160 0%, #083160 25%, #04182F 50%, #04182F 100%)",
+      },
       fontSize: {
         "4.5xl": "2.5rem",
       },
