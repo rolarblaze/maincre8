@@ -5,8 +5,8 @@ export default function Home() {
     <AppWrapper type="">
       <main className="flex flex-col items-center justify-between">
         <h1>Home page</h1>
-        <HomepageBundles />
         <HomepageServices />
+        <HomepageBundles />
       </main>
     </AppWrapper>
   );

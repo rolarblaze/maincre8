@@ -11,3 +11,7 @@ export { default as TailoredServiceIcon } from "./computer.svg";
 export { default as UserFriendlyServiceIcon } from "./user.svg";
 export { default as SecurePaymentServiceIcon } from "./secure.svg";
 export { default as ProjectServiceIcon } from "./comprehensive.svg";
+export { default as Crea8Star } from "./crea8-star.svg";
+export { default as ListCheck } from "./list-check.svg";
+export { default as Chart } from "./chart.svg";
+export { default as Palette } from "./palette.svg";

@@ -16,6 +16,7 @@ const config: Config = {
         "4.5xl": "2.5rem",
       },
       colors: {
+        grey50: "#F9FAFB",
         grey100: "#F0F2F5",
         grey200: "#E4E7EC",
         grey300: "#D0D5DD",
