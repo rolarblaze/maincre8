@@ -23,8 +23,6 @@ export default function Home() {
         <CustomerReviews />
         <HomepageCTA />
         <HomepageSubscribe />
-        <HomepageServices />
-        <HomepageBundles />
       </main>
     </AppWrapper>
   );
