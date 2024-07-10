@@ -11,7 +11,6 @@ const SubscribeSection = () => {
         <div className="space-y-4 ">
           {/* PILL DIV */}
           <div className="border p-2 w-fit border-grey50 rounded-[0.625rem]">
-            {/* TODO: IMPORT MANROPE FONT FOR SPAN */}
             <span className="text-lg text-grey50 font-semibold leading-7">
               Subscribe to Our Newsletter 
             </span>

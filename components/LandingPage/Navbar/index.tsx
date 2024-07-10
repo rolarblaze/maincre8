@@ -1,4 +1,4 @@
-import {useState} from "react";
+import { useState } from "react";
 import SolutionsMenu from "./SolutionsMenu";
 import ResourcesMenu from "./ResourcesMenu";
 import Link from "next/link";
@@ -35,16 +35,24 @@ const Navbar: React.FC = () => {
           <Logo />
         </Link>
 
-        <section className="flex items-center gap-6 text-sm text-grey900 ">
+        {/* the solution and resources weight and size were different */}
+
+        <section className="flex items-center gap-6 span text-grey900 font-semibold">
           <Link href={"/"}>Home</Link>
           <Link href={"/"}>About Us</Link>
-          <div className="flex items-center gap-2 cursor-pointer " onClick={toggleSolutionsMenu}>
-            <p>Solutions</p>
+          <div
+            className="flex items-center gap-2 cursor-pointer "
+            onClick={toggleSolutionsMenu}
+          >
+            <span>Solutions</span>
             <Arrow />
           </div>
           <Link href={"/"}>Contact Us</Link>
-          <div className="flex items-center gap-2 cursor-pointer" onClick={toggleResourcesMenu}>
-            <p>Resources</p>
+          <div
+            className="flex items-center gap-2 cursor-pointer"
+            onClick={toggleResourcesMenu}
+          >
+            <span>Resources</span>
             <Arrow />
           </div>
         </section>
@@ -58,8 +66,18 @@ const Navbar: React.FC = () => {
             classNames="px-4 py-1 text-xs font-normal md:text-sm"
           />
         </div>
-      {showSolutions && <SolutionsMenu isVisible={showSolutions} onClose={closeSolutionsMenu}  />}
-      {showResources && <ResourcesMenu isVisible={showResources} onClose={closeResourcesMenu} />}
+        {showSolutions && (
+          <SolutionsMenu
+            isVisible={showSolutions}
+            onClose={closeSolutionsMenu}
+          />
+        )}
+        {showResources && (
+          <ResourcesMenu
+            isVisible={showResources}
+            onClose={closeResourcesMenu}
+          />
+        )}
       </nav>
     </header>
   );
