@@ -1,6 +1,7 @@
 import { HomepageBundles, HomepageServices } from "@/components";
 import AppWrapper from "@/components/LandingPage/AppWrapper";
 import BrandSection from "@/components/LandingPage/Sections/BrandSection";
+import CTASection from "@/components/LandingPage/Sections/CTASection";
 import DashboardSection from "@/components/LandingPage/Sections/DashboardSection";
 import HeroSection from "@/components/LandingPage/Sections/HeroSection";
 import SubscribeSection from "@/components/LandingPage/Sections/SubscribeSection";
@@ -14,6 +15,7 @@ export default function Home() {
         <HomepageBundles />
         <DashboardSection />
         <BrandSection />
+        <CTASection />
         <SubscribeSection />
       </main>
     </AppWrapper>
