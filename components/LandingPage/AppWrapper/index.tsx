@@ -20,7 +20,7 @@ const AppWrapper = ({
   return (
     <main className="mx-auto flex flex-col min-h-screen">
       <Navbar/>
-      <div className="flex-grow px-4 md:px-14 lg:px-28">{children}</div>
+      <div className="flex-grow">{children}</div>
       <Footer/>
     </main>
   );
