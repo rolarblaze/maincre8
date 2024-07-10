@@ -1,6 +1,7 @@
 import {
   HomepageBenefits,
   HomepageBundles,
+  HomepageCustomerReview,
   HomepageServices,
 } from "@/components";
 import AppWrapper from "@/components/LandingPage/AppWrapper";
@@ -12,6 +13,7 @@ export default function Home() {
         <HomepageServices />
         <HomepageBundles />
         <HomepageBenefits />
+        <HomepageCustomerReview />
       </main>
     </AppWrapper>
   );

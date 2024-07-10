@@ -1,3 +1,4 @@
+export { default as AvatarIcon } from "./avatar.svg";
 export { default as BlueCheckIcon } from "./blue-check.svg";
 export { default as BlueProfileIcon } from "./blue-profile.svg";
 export { default as BlueProjectIcon } from "./blue-project.svg";
