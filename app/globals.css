@@ -1,33 +1,92 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  margin: 0 auto;
+  padding: 0;
+  height: 100%;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 400;
+  background-color: #ffffff;
+  color: #475367;
+  text-align: left;
+  line-height: 1.5;
+  overflow-x: hidden;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 700;
+  color: #101928;
+}
+
+h1,
+h2 {
+  font-size: 1.5rem;
+}
+
+h3,
+h4 {
+  font-size: 1.25rem;
+}
+
+@media screen and (min-width: 768px) {
+  body {
+    font-size: 1rem;
+  }
+  h1,
+  .h1 {
+    font-size: 4.5rem;
+    line-height: 5rem;
+    letter-spacing: -0.05em;
+  }
+
+  h2,
+  .h2 {
+    font-size: 3.375rem;
+    line-height: 4rem;
+    letter-spacing: -0.03em;
+  }
+  h3,
+  .h3 {
+    font-size: 2.5rem;
+    line-height: 3rem;
+    letter-spacing: -0.02em;
+  }
+
+  h4,
+  .h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 2rem;
+    letter-spacing: -0.02em;
+  }
+
+  p,
+  .p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    letter-spacing: -0.01em;
+  }
+
+  span,
+  .span {
+    font-size: 0.9rem;
+    line-height: 1.131rem;
+    letter-spacing: -0.01em;
   }
 }
