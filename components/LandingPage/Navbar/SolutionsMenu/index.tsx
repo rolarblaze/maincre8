@@ -14,13 +14,13 @@ interface SolutionsMenuProps {
                 {solutionsData.map((solution, index) => {
                     const Icon = solution.icon;
                     return (
-                        <div key={index} className="max-w-[276px] w-full flex items-start gap-3">
+                        <div key={index} className="max-w-[276px] w-full flex items-start gap-3 group hover:text-primary500">
                             <div>
                                 <Icon />
                             </div>
                             <div>
-                                <p className="font-medium text-grey900">{solution.title}</p>
-                                <p className="text-sm">
+                                <p className="font-medium text-grey900 group-hover:text-primary500">{solution.title}</p>
+                                <p className="text-sm group-hover:text-primary500">
                                     {solution.description}
                                 </p>
                             </div>
