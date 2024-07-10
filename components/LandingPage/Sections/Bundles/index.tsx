@@ -3,7 +3,7 @@
 import { Crea8Star } from "@/public/icons";
 import { CreativeServicesIcon, DigitalServicesIcon } from "@/public/svgs";
 import { useState } from "react";
-import { Card, TabButton, serviceBundles } from "./Components";
+import { TabButton, serviceBundles, Card } from "./Components";
 
 const Bundles = () => {
   const [activeTab, setActiveTab] = useState<"digital" | "creative">("digital");
