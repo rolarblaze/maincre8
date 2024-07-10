@@ -1,28 +1,30 @@
-"use client";
+// "use client";
 import {
   AppWrapper,
-  BrandSection,
+  HomepageDashboard,
+  HomepageHero,
+  HomepageBrand,
   CustomerReviews,
-  DashboardSection,
-  HeroSection,
+  HomepageCTA,
   HomepageBenefits,
   HomepageBundles,
+  HomepageSubscribe,
   HomepageServices,
-  SubscribeSection,
 } from "@/components";
 
 export default function Home() {
   return (
     <AppWrapper type="">
       <main className="flex flex-col items-center justify-between">
-        <HeroSection />
+        <HomepageHero />
         <HomepageServices />
         <HomepageBundles />
-        <DashboardSection />
+        <HomepageDashboard />
         <HomepageBenefits />
-        <BrandSection />
+        <HomepageBrand />
         <CustomerReviews />
-        <SubscribeSection />
+        <HomepageCTA />
+        <HomepageSubscribe />
       </main>
     </AppWrapper>
   );

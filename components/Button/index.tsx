@@ -1,6 +1,7 @@
-"use client"
+"use client";
 import React from "react";
 import Link from "next/link";
+import { twMerge } from "tailwind-merge";
 import Spinner from "../Spinner";
 
 interface ButtonProps {
@@ -25,7 +26,10 @@ const Button: React.FC<ButtonProps> = ({
       <Link
         href={link}
         passHref
-        className={`w-full flex justify-center items-center gap-2 py-4 px-8 rounded-lg bg-primary500 text-white font-semibold text-center text-sm md:text-base ${classNames}`}
+        className={twMerge(
+          `w-full flex justify-center items-center gap-2 py-4 px-8 rounded-lg bg-primary500 text-white font-semibold text-center text-sm md:text-base `,
+          classNames
+        )}
         onClick={onClick}
       >
         {content}
@@ -35,7 +39,10 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
-    className={`w-full flex justify-center items-center gap-2 py-4 px-8 rounded-lg bg-primary500 text-white font-semibold text-center text-sm md:text-base ${classNames}`}
+      className={twMerge(
+        `w-full flex justify-center items-center gap-2 py-4 px-8 rounded-lg bg-primary500 text-white font-semibold text-center text-sm md:text-base`,
+        classNames
+      )}
       onClick={onClick}
       disabled={isLoading}
     >
