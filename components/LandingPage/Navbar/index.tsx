@@ -55,7 +55,7 @@ const Navbar: React.FC = () => {
           <Button
             label="Sign Up"
             link="/signup"
-            classNames="px-4 py-1 text-xs font-normal md:text-sm"
+            classNames="px-4 py-2 text-xs font-normal md:text-sm"
           />
         </div>
       {showSolutions && <SolutionsMenu isVisible={showSolutions} onClose={closeSolutionsMenu}  />}
