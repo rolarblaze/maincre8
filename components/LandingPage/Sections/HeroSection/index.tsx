@@ -19,13 +19,12 @@ const HeroSection = () => {
 
         {/* HERO CONTENT */}
         <div className="text-center size-full space-y-4.5">
-          {/* correction for AJ */}
           <h1 className="-tracking-[0.225rem] leading-loosest font-extrabold">
             Your <span className="text-primary500 h1"> One-Stop</span> Creative
             <br /> and Digital Solutions Hub
           </h1>
 
-          <p className="max-w-[56.75rem] mx-auto">
+          <p className="max-w-[55.25rem] mx-auto">
             SellCrea8 is a productized eCommerce platform designed by SMG to
             deliver affordable, high-quality, and personalized creative and
             digital services. Simplify your service access and project
