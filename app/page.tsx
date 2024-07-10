@@ -9,6 +9,7 @@ import {
   HomepageBundles,
   HomepageSubscribe,
   HomepageServices,
+  FAQ,
 } from "@/components";
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
         <HomepageBenefits />
         <HomepageBrand />
         <CustomerReviews />
+        <FAQ/>
         <HomepageCTA />
         <HomepageSubscribe />
       </main>

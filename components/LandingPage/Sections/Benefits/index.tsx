@@ -3,7 +3,7 @@ import { Benefits1, Benefits2, Section } from "./Components";
 
 const Benefits = () => {
   return (
-    <section className="py-20 w-full">
+    <section className="py-20 w-full bg-white z-20">
       <div className="max-w-[1216px] mx-auto text-center">
         <Section
           title="Businesses"

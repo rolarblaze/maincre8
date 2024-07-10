@@ -2,7 +2,7 @@ import { CurvedArrow } from "@/public/icons";
 
 const DashboardSection = () => {
   return (
-    <section className="w-full max-w-[76rem]">
+    <section className="w-full max-w-[76rem] sticky top-0">
       <div className="space-y-8 py-20">
         {/* CONTENT */}
         <div className="space-y-4.5">

@@ -4,7 +4,7 @@ import { Highlight } from "@/public/icons";
 
 const CTASection = () => {
   return (
-    <section className="py-20 size-full">
+    <section className="py-20 size-full bg-white z-20">
       <div className="bg-primary50 py-8 px-28 mx-auto rounded-2xl max-w-[76rem] flex justify-start items-center gap-16">
         <HoneyCombDisplay />
 
