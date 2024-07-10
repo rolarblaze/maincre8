@@ -26,7 +26,7 @@ const FAQ = () => {
               activeIndex === index ? "bg-primary900 text-white" : ""
             }`}
             style={{
-                gridRow: activeIndex === index ? 'span 2' : 'span 1'
+                gridRow: activeIndex === index ? 'span 3' : 'span 1'
               }}
           >
             <div
