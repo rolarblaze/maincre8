@@ -34,6 +34,7 @@ const config: Config = {
         grey400: "#98A2B3",
         grey500: "#667185",
         grey600: "#475367",
+        grey700: "#344054",
         grey800: "#1D2739",
         grey900: "#101928",
         primary50: "#E8F1FC",

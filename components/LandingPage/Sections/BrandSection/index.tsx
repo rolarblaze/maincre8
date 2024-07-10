@@ -1,7 +1,7 @@
 const BrandSection = () => {
   const brands = ["DevSEAL", "SellPlanner", "SellMerch", "Piazza"];
   return (
-    <section className="w-full  bg-primary900">
+    <section className="w-full  bg-primary900 z-20">
       <div className="text-center space-y-8 py-20 max-w-[76rem] flex flex-col justify-center items-center mx-auto">
         {/* CONTENT */}
         <div className="space-y-4.5">

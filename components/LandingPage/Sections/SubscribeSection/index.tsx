@@ -6,7 +6,7 @@ import Image from "next/image";
 
 const SubscribeSection = () => {
   return (
-    <section className="w-full bg-grey800">
+    <section className="w-full bg-grey800 z-20">
       <div className="py-20 mx-auto max-w-[76rem] flex justify-between items-center">
         <div className="space-y-4 ">
           {/* PILL DIV */}
