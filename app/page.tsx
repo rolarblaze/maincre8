@@ -5,6 +5,7 @@ import {
   CustomerReviews,
   DashboardSection,
   HeroSection,
+  HomepageBenefits,
   HomepageBundles,
   HomepageServices,
   SubscribeSection,
@@ -18,6 +19,7 @@ export default function Home() {
         <HomepageServices />
         <HomepageBundles />
         <DashboardSection />
+        <HomepageBenefits />
         <BrandSection />
         <CustomerReviews />
         <SubscribeSection />

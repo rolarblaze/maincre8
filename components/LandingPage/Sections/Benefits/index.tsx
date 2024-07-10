@@ -75,84 +75,86 @@ const Card = ({
 
 const Benefits = () => {
   return (
-    <>
-      <div className="w-full text-center py-20">
-        <div className="flex justify-center">
-          <HighlightDown />
-          <h2>
-            {" "}
-            Benefits for <span className="h2 text-primary500"> Businesses</span>
-             
-          </h2>
-          <HighlightUp />
-        </div>
-        <p>Maximize Your Business Potential with SellCrea8</p>
+    <section className="py-20 w-full">
+      <div className="max-w-[1216px] mx-auto text-center">
+        <div>
+          <div className="flex justify-center">
+            <HighlightDown />
+            <h2>
+              {" "}
+              Benefits for{" "}
+              <span className="h2 text-primary500"> Businesses</span> 
+            </h2>
+            <HighlightUp />
+          </div>
+          <p>Maximize Your Business Potential with SellCrea8</p>
 
-        <div className="w-full flex items-center justify-between my-8">
-          <div className="flex flex-col gap-8 max-w-[591px]">
-            {Benefits1.map((benefits) => (
-              <Card
-                key={benefits.title}
-                title={benefits.title}
-                description={benefits.description}
-                icon={benefits.icons}
-              />
-            ))}
+          <div className="w-full flex items-center justify-between my-8 ">
+            <div className="flex flex-col gap-8 max-w-[591px]">
+              {Benefits1.map((benefits) => (
+                <Card
+                  key={benefits.title}
+                  title={benefits.title}
+                  description={benefits.description}
+                  icon={benefits.icons}
+                />
+              ))}
+            </div>
+
+            <img
+              src={Benefit.src}
+              alt="benefits"
+              width={"430px"}
+              height={"100%"}
+            />
           </div>
 
-          <img
-            src={Benefit.src}
-            alt="benefits"
-            width={"430px"}
-            height={"100%"}
+          <Button
+            label="Discover More Benefits"
+            classNames="!py-2 !text-xs mt-4 mb-6 w-max mx-auto"
           />
         </div>
 
-        <Button
-          label="Discover More Benefits"
-          classNames="!py-2 !text-xs mt-4 mb-6 w-max mx-auto"
-        />
-      </div>
+        {/* -------------- */}
 
-      {/* -------------- */}
-
-      <div className="w-full text-center py-20">
-        <div className="flex justify-center">
-          <HighlightDown />
-          <h2>
-            {" "}
-            Benefits for <span className="h2 text-primary500"> Businesses</span>
-             
-          </h2>
-          <HighlightUp />
-        </div>
-        <p>Unlock Your Creative Potential with SellCrea8</p>
-
-        <div className="w-full flex items-center justify-between my-8">
-          <img
-            src={Benefit.src}
-            alt="benefits"
-            width={"430px"}
-            height={"100%"}
-          />
-          <div className="flex flex-col gap-8 max-w-[591px]">
-            {Benefits2.map((benefits) => (
-              <Card
-                key={benefits.title}
-                title={benefits.title}
-                description={benefits.description}
-                icon={benefits.icons}
-              />
-            ))}
+        <div className="py-20">
+          <div className="flex justify-center">
+            <HighlightDown />
+            <h2>
+              {" "}
+              Benefits for{" "}
+              <span className="h2 text-primary500"> Businesses</span> 
+            </h2>
+            <HighlightUp />
           </div>
-        </div>
+          <p>Unlock Your Creative Potential with SellCrea8</p>
 
-        <Button
-          label="Discover More Benefits"
-          classNames="!py-2 !text-xs mt-4 mb-6 w-max mx-auto"
-        />
+          <div className="w-full flex items-center justify-between my-8">
+            <img
+              src={Benefit.src}
+              alt="benefits"
+              width={"430px"}
+              height={"100%"}
+            />
+            <div className="flex flex-col gap-8 max-w-[591px]">
+              {Benefits2.map((benefits) => (
+                <Card
+                  key={benefits.title}
+                  title={benefits.title}
+                  description={benefits.description}
+                  icon={benefits.icons}
+                />
+              ))}
+            </div>
+          </div>
+
+          <Button
+            label="Discover More Benefits"
+            classNames="!py-2 !text-xs mt-4 mb-6 w-max mx-auto"
+          />
+        </div>
       </div>
-    </>
+    </section>
   );
 };
 

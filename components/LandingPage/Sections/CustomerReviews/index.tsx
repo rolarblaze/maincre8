@@ -46,25 +46,27 @@ const Card = ({
 
 const CustomerReviews = () => {
   return (
-    <div className="py-20 text-center">
-      <h2>
-        What Our <span className="h2 text-primary500"> Customers</span> Say  
-      </h2>
+    <section className="w-full py-20 text-center">
+      <div className="max-w-[1216px] mx-auto">
+        <h2>
+          What Our <span className="h2 text-primary500"> Customers</span> Say  
+        </h2>
 
-      <p className="mb-8 mt-2">Customer Reviews</p>
+        <p className="mb-8 mt-2">Customer Reviews</p>
 
-      <div className="grid grid-cols-3 gap-8 text-left">
-        {Reviews.map((review) => (
-          <Card
-            key={review.name}
-            icon={<AvatarIcon />}
-            review={review.review}
-            name={review.name}
-            role={review.role}
-          />
-        ))}
+        <div className="grid grid-cols-3 gap-8 text-left">
+          {Reviews.map((review) => (
+            <Card
+              key={review.name}
+              icon={<AvatarIcon />}
+              review={review.review}
+              name={review.name}
+              role={review.role}
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
