@@ -1,4 +1,3 @@
-// "use client";
 import {
   AppWrapper,
   HomepageDashboard,
@@ -6,6 +5,7 @@ import {
   HomepageBrand,
   CustomerReviews,
   HomepageCTA,
+  HomepageBenefits,
   HomepageBundles,
   HomepageSubscribe,
   HomepageServices,
@@ -19,6 +19,7 @@ export default function Home() {
         <HomepageServices />
         <HomepageBundles />
         <HomepageDashboard />
+        <HomepageBenefits />
         <HomepageBrand />
         <CustomerReviews />
         <HomepageCTA />
