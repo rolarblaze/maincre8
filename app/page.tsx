@@ -1,26 +1,30 @@
+// "use client";
 import {
-  HomepageBrand,
-  HomepageBundles,
-  HomepageCTA,
+  AppWrapper,
   HomepageDashboard,
   HomepageHero,
-  HomepageServices,
+  HomepageBrand,
+  CustomerReviews,
+  HomepageCTA,
+  HomepageBundles,
   HomepageSubscribe,
+  HomepageServices,
 } from "@/components";
-import AppWrapper from "@/components/LandingPage/AppWrapper";
 
 export default function Home() {
   return (
     <AppWrapper type="">
       <main className="flex flex-col items-center justify-between">
-        <h1>Home page</h1>
         <HomepageHero />
         <HomepageServices />
         <HomepageBundles />
         <HomepageDashboard />
         <HomepageBrand />
+        <CustomerReviews />
         <HomepageCTA />
         <HomepageSubscribe />
+        <HomepageServices />
+        <HomepageBundles />
       </main>
     </AppWrapper>
   );

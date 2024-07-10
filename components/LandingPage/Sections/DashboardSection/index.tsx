@@ -8,7 +8,10 @@ const DashboardSection = () => {
         <div className="space-y-4.5">
           <div className="relative w-fit">
             <h2 className="text-grey900 text-5.5xl leading-[4rem]">
-              Experience <span className="text-primary500">Seamless</span>{" "}
+              {/* correction for AJ */}
+              Experience <span className="text-primary500 h2">
+                Seamless
+              </span>{" "}
               Project <br /> Management with Our User Dashboard
             </h2>
             {/* CURVED ARROW ICON */}

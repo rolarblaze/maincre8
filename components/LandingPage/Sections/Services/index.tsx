@@ -54,7 +54,8 @@ const Service = () => {
   return (
     <div className="py-20 max-w-[1216px] mx-auto">
       <h2 className="flex">
-        Why Choose <span className="text-primary400"> SellCrea8?</span>{" "}
+        Why Choose{" "}
+        <span className="text-primary400 h2 ml-1.5"> SellCrea8?</span>
         <Highlight />
       </h2>
 

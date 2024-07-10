@@ -16,14 +16,14 @@ const ResourcesMenu: React.FC<ResourcesMenuProps> = ({ isVisible, onClose }) => 
                     {leftResourcesData.map((resource, index) => {
                         const Icon = resource.icon;
                         return (
-                            <div key={index} className="flex items-start gap-3">
+                            <div key={index} className="flex items-start gap-3 group hover:text-primary500">
                                 <div>
 
                                     <Icon />
                                 </div>
                                 <div>
-                                    <p className="font-medium text-grey900">{resource.title}</p>
-                                    <p className="text-sm ">{resource.description}</p>
+                                    <p className="font-medium text-grey900 group-hover:text-primary500">{resource.title}</p>
+                                    <p className="text-sm group-hover:text-primary500">{resource.description}</p>
                                 </div>
                             </div>
                         );
@@ -33,14 +33,14 @@ const ResourcesMenu: React.FC<ResourcesMenuProps> = ({ isVisible, onClose }) => 
                     {rightResourcesData.map((resource, index) => {
                         const Icon = resource.icon;
                         return (
-                            <div key={index} className="flex items-start gap-3">
+                            <div key={index} className="flex items-start gap-3 group hover:text-primary500">
                                 <div>
 
                                     <Icon />
                                 </div>
                                 <div>
-                                    <p className="font-medium text-grey900">{resource.title}</p>
-                                    <p className="text-sm ">{resource.description}</p>
+                                    <p className="font-medium text-grey900 group-hover:text-primary500">{resource.title}</p>
+                                    <p className="text-sm group-hover:text-primary500">{resource.description}</p>
                                 </div>
                             </div>
                         );
