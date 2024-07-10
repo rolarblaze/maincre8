@@ -3,7 +3,7 @@ import {
   ColorPalette,
   LaunchGif,
   StartProject,
-} from "@/public/icons";
+} from "@/public/gif";
 import Image from "next/image";
 
 const HeroSection = () => {
@@ -12,7 +12,6 @@ const HeroSection = () => {
       <div className="relative flex flex-col py-20 justify-center items-center">
         {/* PILL DIV */}
         <div className="mb-4.5 border p-2 border-primary500 text-grey900 rounded-[0.625rem]">
-          {/* TODO: IMPORT MANROPE FONT FOR SPAN */}
           <span className="text-grey900 text-lg font-semibold leading-7">
             Welcome to SellCrea8
           </span>
@@ -20,9 +19,9 @@ const HeroSection = () => {
 
         {/* HERO CONTENT */}
         <div className="text-center size-full space-y-4.5">
-          {/* TODO: IMPORT MANROPE FONT FOR H1 */}
-          <h1 className="-tracking-[0.225rem] leading-loosest text-7xl font-extrabold">
-            Your <span className="text-primary500"> One-Stop</span> Creative
+          {/* correction for AJ */}
+          <h1 className="-tracking-[0.225rem] leading-loosest font-extrabold">
+            Your <span className="text-primary500 h1"> One-Stop</span> Creative
             <br /> and Digital Solutions Hub
           </h1>
 

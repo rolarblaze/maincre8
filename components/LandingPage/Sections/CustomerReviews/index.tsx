@@ -56,6 +56,7 @@ const CustomerReviews = () => {
       <div className="grid grid-cols-3 gap-8 text-left">
         {Reviews.map((review) => (
           <Card
+            key={review.name}
             icon={<AvatarIcon />}
             review={review.review}
             name={review.name}
