@@ -3,7 +3,7 @@ import SolutionsMenu from "./SolutionsMenu";
 import ResourcesMenu from "./ResourcesMenu";
 import Link from "next/link";
 import Button from "@/components/Button";
-import { Logo } from "@/public/icons";
+import Logo  from "@/public/icons/logo.svg";
 import Arrow from "@/public/icons/arrow-down.svg";
 
 const Navbar: React.FC = () => {
