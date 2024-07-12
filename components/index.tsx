@@ -2,6 +2,9 @@ export { default as SocialSignUp } from "./Auth/SocialSignUp";
 export { default as Tabs } from "./Auth/Tabs";
 export { default as Button } from "./Button";
 export { default as InputField } from "./Forms/InputField";
+export { default as ProjectForm } from "./ProjectForm";
+export { default as Textarea } from "./Forms/Textarea";
+export { default as DropdownSelect } from "./Forms/Select";
 
 // LANDING PAGE SECTION IMPORTS
 export { default as AppWrapper } from "./LandingPage/AppWrapper";
