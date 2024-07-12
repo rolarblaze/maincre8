@@ -4,7 +4,7 @@ import { EyeIcon } from "@/public/icons";
 import {
   passwordCriteria,
   validatePassword,
-} from "@/utils/helpers/passwordValidation";
+} from "@/utils/helpers/auth/passwordValidation";
 import React, { useState } from "react";
 
 const NewPassword = () => {

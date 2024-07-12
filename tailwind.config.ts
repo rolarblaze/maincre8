@@ -45,6 +45,9 @@ const config: Config = {
         primary800: "#083160",
         primary900: "#072548",
         "dark-cyan-blue": "#030E1C",
+        "alert-green": "#04802E",
+        "alert-red": "#CB1A14"
+
       },
       boxShadow: {
         'custom-strong': '0 5px 10px rgba(0, 0, 0, 0.15), 0 -5px 10px rgba(0, 0, 0, 0.15), 5px 0 10px rgba(0, 0, 0, 0.15), -5px 0 10px rgba(0, 0, 0, 0.15)',

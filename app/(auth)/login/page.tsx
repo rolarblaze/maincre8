@@ -3,7 +3,7 @@ import { Fragment, useState } from "react";
 import {
   passwordCriteria,
   validatePassword,
-} from "@/utils/helpers/passwordValidation";
+} from "@/utils/helpers/auth/passwordValidation";
 import Link from "next/link";
 import { InputField, Button, SocialSignUp } from "@/components";
 import { EyeIcon, Checked, Unchecked } from "@/public/icons";
