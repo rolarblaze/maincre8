@@ -84,7 +84,7 @@ const ProjectForms = () => {
           onChange={() => console.log("hello")}
           placeholder="Type in your message"
         />
-        <button className="flex items-center gap-1 py-2.5 px-4 w-fit bg-neutral100 text-black border border-ash rounded-[12px] mb-8 text-sm ">
+        <button className="flex items-center gap-1 py-2.5 px-4 w-fit bg-neutral100 text-black border border-ash rounded-lg mb-8 text-sm ">
           <AttachIcon />
           <input type="file" name="file" id="file" hidden />
           Attach a file{" "}
