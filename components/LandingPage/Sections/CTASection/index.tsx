@@ -1,5 +1,5 @@
 import Button from "@/components/Button";
-import HoneyCombDisplay from "@/components/HoneyCombGrid";
+import HoneyCombDisplay from "@/components/UI/HoneyCombGrid";
 import { Highlight } from "@/public/icons";
 
 const CTASection = () => {
