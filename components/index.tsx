@@ -15,3 +15,7 @@ export { default as HomepageBrand } from "./LandingPage/Sections/BrandSection";
 export { default as HomepageCTA } from "./LandingPage/Sections/CTASection";
 export { default as HomepageSubscribe } from "./LandingPage/Sections/SubscribeSection";
 export { default as FAQ } from "./LandingPage/Sections/FAQ/index";
+
+
+// UI COMPONENTS
+export { default as PillDiv } from "./UI/PillDiv/index";
