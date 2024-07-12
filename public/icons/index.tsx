@@ -31,4 +31,5 @@ export { default as ListCheck } from "./list-check.svg";
 export { default as ProjectServiceIcon } from "./comprehensive.svg";
 export { default as TailoredServiceIcon } from "./computer.svg";
 export { default as ArrowDown } from "./arrow-down.svg";
+export { default as AshArrowDown } from "./ash-arrow-down.svg";
 export { default as AttachIcon } from "./attach.svg";

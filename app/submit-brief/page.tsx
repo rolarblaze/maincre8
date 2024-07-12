@@ -3,6 +3,7 @@ import {
   HomepageCTA,
   HomepageSubscribe,
   PillDiv,
+  ProjectForm,
 } from "@/components";
 
 const SubmitBrief = () => {
@@ -20,7 +21,7 @@ const SubmitBrief = () => {
         </header>
 
         {/* FORM HERE */}
-        <div>Form</div>
+        <ProjectForm />
       </div>
 
       <HomepageCTA />

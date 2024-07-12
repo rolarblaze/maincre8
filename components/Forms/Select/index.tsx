@@ -1,4 +1,4 @@
-import { ArrowDown } from "@/public/icons";
+import { AshArrowDown } from "@/public/icons";
 import React from "react";
 
 interface Option {
@@ -51,7 +51,7 @@ const ControlledSelect: React.FC<ControlledSelectProps> = ({
           ))}
         </select>
         <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-          <ArrowDown />
+          <AshArrowDown />
         </div>
       </div>
     </div>
