@@ -1,3 +1,4 @@
+"use client";
 import {
   Highlight,
   ProjectServiceIcon,
@@ -6,6 +7,7 @@ import {
   UserFriendlyServiceIcon,
 } from "@/public/icons";
 import React from "react";
+import { motion } from "framer-motion";
 
 const services = [
   {
@@ -53,13 +55,23 @@ const Card = ({
 const Service = () => {
   return (
     <div className="py-20 max-w-[1216px] mx-auto">
-      <h2 className="flex">
+      <motion.h2
+        className="flex"
+        initial={{ x: -50, opacity: 0 }}
+        whileInView={{ x: 0, opacity: 1 }}
+        transition={{ delay: 0.5 }}
+      >
         Why Choose{" "}
         <span className="text-primary400 h2 ml-1.5"> SellCrea8?</span>
         <Highlight />
-      </h2>
+      </motion.h2>
 
-      <div className="grid grid-cols-4 gap-8">
+      <motion.div
+        className="grid grid-cols-4 gap-8"
+        initial={{ y: 100, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.5 }}
+      >
         {services.map((service, index) => (
           <Card
             key={index}
@@ -68,7 +80,7 @@ const Service = () => {
             description={service.description}
           />
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };
