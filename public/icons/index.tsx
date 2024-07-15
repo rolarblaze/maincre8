@@ -32,4 +32,6 @@ export { default as ProjectServiceIcon } from "./comprehensive.svg";
 export { default as TailoredServiceIcon } from "./computer.svg";
 export { default as ArrowDown } from "./arrow-down.svg";
 export { default as AshArrowDown } from "./ash-arrow-down.svg";
+export { default as BlueArrowRight } from "./blue-arrow-right.svg";
+export { default as BlueArrowLeft } from "./blue-arrow-left.svg";
 export { default as AttachIcon } from "./attach.svg";
