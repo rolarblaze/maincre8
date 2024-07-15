@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
       }
       lastScrollY = window.scrollY;
 
-      if (window.scrollY >= 70) {
+      if (window.scrollY >= 120) {
         setNavColor(true);
       } else {
         setNavColor(false);
@@ -57,16 +57,22 @@ const Navbar: React.FC = () => {
     >
       <nav
         className={`
-        ${navScroll ? "-translate-y-28" : "translate-x-0"} ${navColor && "bg-white"}
+        ${navScroll ? "-translate-y-28 opacity-0" : "translate-x-0 opacity-100"} ${
+          navColor? "bg-white": "bg-transparent"
+        }
         mx-auto px-4 py-3 flex items-center justify-between md:px-14 md:py-6 lg:px-28 relative transition-all ease-in-out duration-500`}
       >
         <Link href="/" className="text-2xl font-bold">
-          <Logo />
+          <Logo className={!navColor && "*:fill-white"} />
         </Link>
 
         {/* the solution and resources weight and size were different */}
 
-        <section className="flex items-center gap-6 span text-grey900 font-semibold">
+        <section
+          className={`flex items-center gap-6 span ${
+            navColor ? "text-grey900" : "text-white"
+          } font-semibold`}
+        >
           <Link href={"/"}>Home</Link>
           <Link href={"/"}>About Us</Link>
           <div
@@ -74,7 +80,7 @@ const Navbar: React.FC = () => {
             onClick={toggleSolutionsMenu}
           >
             <span>Solutions</span>
-            <Arrow />
+            <Arrow className={!navColor && "*:fill-white"} />
           </div>
           <Link href={"/"}>Contact Us</Link>
           <div
@@ -82,19 +88,30 @@ const Navbar: React.FC = () => {
             onClick={toggleResourcesMenu}
           >
             <span>Resources</span>
-            <Arrow />
+            <Arrow className={!navColor && "*:fill-white"} />
           </div>
         </section>
+
         <div className="flex items-center gap-6">
-          <Link href="/login" className="text-blue-500 hover:text-blue-700">
+          <Link
+            href="/login"
+            className={`${
+              navColor
+                ? "text-blue-500 hover:text-blue-700"
+                : "text-white hover:text-primary100"
+            }`}
+          >
             Login
           </Link>
           <Button
             label="Sign Up"
             link="/signup"
-            classNames="px-4 py-2 text-xs font-normal md:text-sm"
+            classNames={`px-4 py-2 text-sm font-semibold md:text-sm ${
+              !navColor && "bg-white text-primary900"
+            }`}
           />
         </div>
+
         {showSolutions && (
           <SolutionsMenu
             isVisible={showSolutions}
