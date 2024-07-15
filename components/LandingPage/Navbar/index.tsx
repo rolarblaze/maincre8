@@ -30,7 +30,7 @@ const Navbar: React.FC = () => {
 
   return (
     <header className="fixed top-0 w-full bg-white border-b border-grey200 z-50 ">
-      <nav className="mx-auto max-w-[76rem] py-3 flex items-center justify-between md:py-6 relative">
+      <nav className="mx-auto max-w-[76rem] max-xl:px-4 py-3 flex items-center justify-between md:py-6 relative">
         <Link href="/" className="text-2xl font-bold">
           <Logo />
         </Link>
