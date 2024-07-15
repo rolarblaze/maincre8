@@ -12,7 +12,7 @@ import Image from "next/image";
 
 const HeroSection = () => {
   return (
-    <section className="relative overflow-hidden size-full pt-28 -mt-28">
+    <section className="relative overflow-hidden size-full min-h-[48rem] pt-28 -mt-28">
       <div className="z-20 w-full max-w-[76rem] mx-auto flex flex-col py-20 justify-center items-center gap-8">
         {/* HERO CONTENT */}
         <div className="text-center size-full flex flex-col justify-center items-center gap-6">
@@ -40,7 +40,7 @@ const HeroSection = () => {
         <Button label="Get Started" classNames="w-fit" />
 
         {/* VIDEO BACKGROUND */}
-        <video autoPlay muted loop className="absolute mx-auto -z-[1] inset-0">
+        <video autoPlay muted loop className="absolute object-cover -z-[1] inset-0 min-h-full min-w-full">
           <source src="/video/bgVideoDark.webm" type="video/webm" />
         </video>
 
