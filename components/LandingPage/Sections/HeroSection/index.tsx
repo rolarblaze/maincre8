@@ -1,3 +1,7 @@
+import Button from "@/components/Button";
+import PillDiv from "@/components/UI/PillDiv";
+// import bgVideo from "@/public/video/bgVideoDark.webm"
+
 import {
   AttachBrief,
   ColorPalette,
@@ -8,58 +12,62 @@ import Image from "next/image";
 
 const HeroSection = () => {
   return (
-    <section className="w-full max-w-[76rem]">
-      <div className="relative flex flex-col py-20 justify-center items-center">
-        {/* PILL DIV */}
-        <div className="mb-4.5 border p-2 border-primary500 text-grey900 rounded-[0.625rem]">
-          <span className="text-grey900 text-lg font-semibold leading-7">
-            Welcome to SellCrea8
-          </span>
-        </div>
-
+    <section className="relative overflow-hidden size-full pt-28 -mt-28">
+      <div className="z-20 w-full max-w-[76rem] mx-auto flex flex-col py-20 justify-center items-center gap-8">
         {/* HERO CONTENT */}
-        <div className="text-center size-full space-y-4.5">
-          <h1 className="-tracking-[0.225rem] leading-loosest font-extrabold">
-            Your <span className="text-primary500 h1"> One-Stop</span> Creative
-            <br /> and Digital Solutions Hub
+        <div className="text-center size-full flex flex-col justify-center items-center gap-6">
+          {/* PILL DIV */}
+          <PillDiv className="mb-0 border-primary100 text-white">
+            Welcome to SellCrea8
+          </PillDiv>
+
+          {/* HERO TITLE */}
+          <h1 className="-tracking-[0.225rem] leading-loosest text-[5.5rem] font-extrabold text-primary50">
+            Your One-Stop <br />
+            Creative and Digital <br />
+            Solutions Hub
           </h1>
 
-          <p className="max-w-[55.25rem] mx-auto">
+          {/* HERO CONTENT */}
+          <p className="text-center text-white">
             SellCrea8 is a productized eCommerce platform designed by SMG to
-            deliver affordable, high-quality, and personalized creative and
-            digital services. Simplify your service access and project
-            management with our user-friendly interface.
+            deliver affordable, high-quality, and personalized <br />
+            creative and digital services. Simplify your service access and
+            project management with our user-friendly interface.
           </p>
-
-          <button className="bg-primary500 text-white rounded-lg text-sm font-semibold px-4 py-2">
-            Get Started
-          </button>
         </div>
 
-        {/* BIG BLUE DIV */}
-        <div className="w-full mt-8 bg-primary800 rounded-5xl min-h-[25.875rem]"></div>
+        <Button label="Get Started" classNames="w-fit" />
+
+        {/* VIDEO BACKGROUND */}
+        <video autoPlay muted loop className="absolute mx-auto -z-[1] inset-0">
+          <source src="/video/bgVideoDark.webm" type="video/webm" />
+        </video>
+
+        {/* FALLBACK IF THE VIDEO DOES NOT LOAD */}
+        <div className="absolute inset-0 bg-primary800 -z-[2]"></div>
 
         {/* FLOATING GIFS */}
         <Image
           src={LaunchGif}
           alt="launch"
-          className="absolute top-4 left-40 size-[4.75rem]"
+          className="absolute top-44 left-40 size-[4.75rem]"
         />
         <Image
           src={StartProject}
           alt="launch"
-          className="absolute top-10 right-32 size-[4.75rem]"
+          className="absolute top-52 right-32 size-[4.75rem]"
         />
-        <Image
+        {/* <Image
           src={AttachBrief}
           alt="launch"
           className="absolute top-56 left-0 size-[4.75rem]"
-        />
-        <Image
+        /> */}
+        {/* <Image
           src={ColorPalette}
           alt="launch"
           className="absolute top-72 right-0 size-[4.75rem]"
-        />
+        /> */}
       </div>
     </section>
   );
