@@ -1,10 +1,14 @@
+"use client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import SolutionsMenu from "./SolutionsMenu";
 import ResourcesMenu from "./ResourcesMenu";
 import Button from "@/components/Button";
 import Logo from "@/public/icons/logo.svg";
 import Arrow from "@/public/icons/arrow-down.svg";
+import { m } from "framer-motion";
+import { twMerge } from "tailwind-merge";
 
 const Navbar: React.FC = () => {
   const [showSolutions, setShowSolutions] = useState(false);
@@ -12,6 +16,9 @@ const Navbar: React.FC = () => {
 
   const [navColor, setNavColor] = useState(false);
   const [navScroll, setNavScroll] = useState(false);
+
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   const toggleSolutionsMenu = () => {
     setShowSolutions(!showSolutions);
@@ -32,6 +39,7 @@ const Navbar: React.FC = () => {
   };
 
   // HANDLE NAVBAR SCROLL ANIMATION
+  console.log(window.scrollY);
   useEffect(() => {
     let lastScrollY = window.scrollY;
 
@@ -54,24 +62,29 @@ const Navbar: React.FC = () => {
   return (
     <header
       className={`
-        ${navColor? "bg-white": "bg-transparent"} 
-        ${navScroll ? "-translate-y-28 opacity-0" : "translate-x-0 opacity-100"} 
-        fixed top-0 w-full bg-transparent border-b border-transparent z-50  transition-all ease-in-out duration-500
+        ${isHome && navColor ? "bg-white" : "bg-transparent"} 
+        ${
+          navScroll ? "-translate-y-28 opacity-0" : "translate-x-0 opacity-100"
+        } 
+        fixed top-0 w-full ${
+          isHome ? "bg-transparent " : "bg-white"
+        } border-b border-transparent z-50  transition-all ease-in-out duration-500
       `}
     >
       <nav
         className={`mx-auto py-3 flex items-center justify-between max-w-[76rem] max-xl:px-4 md:py-6 relative`}
       >
         <Link href="/" className="text-2xl font-bold">
-          <Logo className={!navColor && "*:fill-white"} />
+          <Logo className={isHome && !navColor && "*:fill-white"} />
         </Link>
 
         {/* the solution and resources weight and size were different */}
 
         <section
-          className={`flex items-center gap-6 span ${
-            navColor ? "text-grey900" : "text-white"
-          } font-semibold`}
+          className={twMerge(
+            `flex items-center text-grey900 gap-6 span  font-semibold`,
+            `${isHome && !navColor && "text-white"}`
+          )}
         >
           <Link href={"/"}>Home</Link>
           <Link href={"/"}>About Us</Link>
@@ -80,7 +93,7 @@ const Navbar: React.FC = () => {
             onClick={toggleSolutionsMenu}
           >
             <span>Solutions</span>
-            <Arrow className={!navColor && "*:fill-white"} />
+            <Arrow className={isHome && !navColor && "*:fill-white"} />
           </div>
           <Link href={"/"}>Contact Us</Link>
           <div
@@ -88,7 +101,7 @@ const Navbar: React.FC = () => {
             onClick={toggleResourcesMenu}
           >
             <span>Resources</span>
-            <Arrow className={!navColor && "*:fill-white"} />
+            <Arrow className={isHome && !navColor && "*:fill-white"} />
           </div>
         </section>
 
@@ -96,7 +109,7 @@ const Navbar: React.FC = () => {
           <Link
             href="/login"
             className={`${
-              navColor
+              isHome && navColor
                 ? "text-blue-500 hover:text-blue-700"
                 : "text-white hover:text-primary100"
             }`}
@@ -107,7 +120,7 @@ const Navbar: React.FC = () => {
             label="Sign Up"
             link="/signup"
             classNames={`px-4 py-2 text-sm font-semibold md:text-sm ${
-              !navColor && "bg-white text-primary900"
+              isHome && !navColor && "bg-white text-primary900"
             }`}
           />
         </div>
