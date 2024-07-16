@@ -43,7 +43,7 @@ const Navbar: React.FC = () => {
       }
       lastScrollY = window.scrollY;
 
-      if (window.scrollY >= 120) {
+      if (window.scrollY >= 140) {
         setNavColor(true);
       } else {
         setNavColor(false);
@@ -53,14 +53,14 @@ const Navbar: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 w-full bg-transparent border-b border-transparent z-50 `}
+      className={`
+        ${navColor? "bg-white": "bg-transparent"} 
+        ${navScroll ? "-translate-y-28 opacity-0" : "translate-x-0 opacity-100"} 
+        fixed top-0 w-full bg-transparent border-b border-transparent z-50  transition-all ease-in-out duration-500
+      `}
     >
       <nav
-        className={`
-        ${navScroll ? "-translate-y-28 opacity-0" : "translate-x-0 opacity-100"} ${
-          navColor? "bg-white": "bg-transparent"
-        }
-        mx-auto px-4 py-3 flex items-center justify-between md:px-14 md:py-6 lg:px-28 relative transition-all ease-in-out duration-500`}
+        className={`mx-auto py-3 flex items-center justify-between max-w-[76rem] max-xl:px-4 md:py-6 relative`}
       >
         <Link href="/" className="text-2xl font-bold">
           <Logo className={!navColor && "*:fill-white"} />

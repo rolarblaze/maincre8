@@ -12,7 +12,7 @@ import Image from "next/image";
 
 const HeroSection = () => {
   return (
-    <section className="relative overflow-hidden size-full min-h-[48rem] pt-28 -mt-28">
+    <section className="relative overflow-hidden size-full min-h-[48rem] pt-24 pb-4 -mt-28">
       <div className="z-20 w-full max-w-[76rem] mx-auto flex flex-col py-20 justify-center items-center gap-8">
         {/* HERO CONTENT */}
         <div className="text-center size-full flex flex-col justify-center items-center gap-6">
@@ -29,9 +29,9 @@ const HeroSection = () => {
           </h1>
 
           {/* HERO CONTENT */}
-          <p className="text-center text-white">
+          <p className="text-center text-white max-w-[55rem]">
             SellCrea8 is a productized eCommerce platform designed by SMG to
-            deliver affordable, high-quality, and personalized <br />
+            deliver affordable, high-quality, and personalized 
             creative and digital services. Simplify your service access and
             project management with our user-friendly interface.
           </p>
