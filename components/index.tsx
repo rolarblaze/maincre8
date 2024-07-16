@@ -19,6 +19,8 @@ export { default as HomepageCTA } from "./LandingPage/Sections/CTASection";
 export { default as HomepageSubscribe } from "./LandingPage/Sections/SubscribeSection";
 export { default as FAQ } from "./LandingPage/Sections/FAQ/index";
 
-
 // UI COMPONENTS
 export { default as PillDiv } from "./UI/PillDiv/index";
+
+// SHOP PAGE SECTION IMPORTS
+export { default as ServicesSection } from "./Shop";

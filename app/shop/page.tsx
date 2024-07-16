@@ -1,4 +1,5 @@
 import { AppWrapper, HomepageCTA, HomepageSubscribe } from "@/components";
+import ShopSections from "@/components/Shop";
 
 const Shop = () => {
   return (
@@ -9,6 +10,7 @@ const Shop = () => {
 
         {/* DIGITAL MARKETING SERVICES */}
         <div>DMS SECTION</div>
+        <ShopSections />
 
         {/* CREATIVE DESIGN SERVICES */}
         <div>CDS SECTION</div>

@@ -90,3 +90,12 @@ h4 {
     letter-spacing: -0.01em;
   }
 }
+
+.noScrollbar {
+  -ms-overflow-style: none !important; /* Internet Explorer 10+ */
+  scrollbar-width: none !important; /* Firefox */
+}
+
+.noScrollbar::-webkit-scrollbar {
+  display: none !important; /* Safari and Chrome */
+}
