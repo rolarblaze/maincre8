@@ -24,7 +24,7 @@ const Card = ({
     </p>
     <p>{description}</p>
 
-    <Button label="Get Started" classNames="!py-2 !text-xs mt-4 mb-6" />
+    <Button label="Get Started" classNames="!py-2 !text-xs mt-4 mb-6" link="/shop" />
     {features.map((feature, index) => (
       <div className="flex gap-2 mb-4" key={index}>
         <ListCheck /> <span>{feature}</span>
