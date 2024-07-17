@@ -1,9 +1,20 @@
-const PillDiv = ({ children }: { children: string }) => {
+import { twMerge } from "tailwind-merge";
+
+const PillDiv = ({
+  children,
+  className,
+}: {
+  children: string;
+  className?: string;
+}) => {
   return (
-    <div className="mb-4.5 border w-fit p-2 border-primary500 text-grey900 rounded-[0.625rem]">
-      <span className="text-grey900 text-lg font-semibold leading-7">
-        {children}
-      </span>
+    <div
+      className={twMerge(
+        `mb-4.5 border w-fit p-2 text-lg font-semibold leading-7 border-primary500 text-grey900 rounded-[0.625rem]`,
+        className
+      )}
+    >
+      {children}
     </div>
   );
 };

@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       lineHeight: {
-        loosest: "5rem",
+        loosest: "6rem",
       },
       spacing: {
         "4.5": "1.125rem",
@@ -39,6 +39,7 @@ const config: Config = {
         grey800: "#1D2739",
         grey900: "#101928",
         primary50: "#E8F1FC",
+        primary100: "#B6D4F7",
         primary400: "#1374E4",
         primary500: "#1574E5",
         primary700: "#0D5EBA",
