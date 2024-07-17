@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { ChangeEvent, KeyboardEvent, ReactNode } from 'react';
 
 interface InputFieldProps {
@@ -7,6 +7,7 @@ interface InputFieldProps {
   placeholder?: string;
   value?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onBlur?: (e: ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
   onClick?: () => void;
   icon?: ReactNode; 
@@ -16,6 +17,8 @@ interface InputFieldProps {
   classNames?: string;
   isRequired?: boolean;
   onInputIconClick?: () => void;
+  error?: string;
+  name?: string;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -24,6 +27,7 @@ const InputField: React.FC<InputFieldProps> = ({
   placeholder,
   value,
   onChange,
+  onBlur,
   onKeyDown,
   onClick,
   icon,
@@ -32,7 +36,9 @@ const InputField: React.FC<InputFieldProps> = ({
   onEnterPressed,
   classNames,
   isRequired,
-  onInputIconClick
+  onInputIconClick,
+  error,
+  name 
 }) => {
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && onEnterPressed) {
@@ -55,7 +61,9 @@ const InputField: React.FC<InputFieldProps> = ({
           type={type}
           placeholder={placeholder}
           value={value}
+          name={name}
           onChange={onChange}
+          onBlur={onBlur}
           onKeyDown={handleKeyDown}
           onClick={onClick}
           readOnly={readOnly}
@@ -68,6 +76,7 @@ const InputField: React.FC<InputFieldProps> = ({
           </div>
         )}
       </div>
+      {error && <p className="text-red-500 text-xs">{error}</p>}
     </div>
   );
 };

@@ -10,6 +10,7 @@ interface ButtonProps {
   onClick?: () => void;
   classNames?: string;
   link?: string;
+  type?: "button" | "submit" | "reset"; 
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -18,6 +19,7 @@ const Button: React.FC<ButtonProps> = ({
   onClick,
   classNames,
   link,
+  type = "button",
 }) => {
   const content = isLoading ? <Spinner /> : label;
 
@@ -39,6 +41,7 @@ const Button: React.FC<ButtonProps> = ({
 
   return (
     <button
+    type={type}
       className={twMerge(
         `w-full flex justify-center items-center gap-2 py-4 px-8 rounded-lg bg-primary500 text-white font-semibold text-center text-sm md:text-base`,
         classNames

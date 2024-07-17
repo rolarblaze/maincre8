@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Manrope } from "next/font/google";
 import "./globals.css";
+import { GlobalProvider } from "@/redux/provider";
+import AlertWrapper from "@/components/AlertWrapper";
+import { useAppSelector } from "@/redux/store";
+import { RootState } from "@/redux/store";
 
 const inter = Manrope({ subsets: ["latin"] });
 
@@ -11,12 +15,19 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
+
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang="en" className="scroll-smooth antialiased">
+      <body className={inter.className}>
+        <GlobalProvider>
+          <AlertWrapper />
+
+          {children}
+        </GlobalProvider>
+      </body>
     </html>
   );
 }
