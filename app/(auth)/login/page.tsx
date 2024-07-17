@@ -1,5 +1,9 @@
 "use client";
 import { Fragment, useState } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useRouter } from "next/navigation";
+import { useDispatch } from "react-redux";
 import {
   passwordCriteria,
   validatePassword,
@@ -7,40 +11,72 @@ import {
 import Link from "next/link";
 import { InputField, Button, SocialSignUp } from "@/components";
 import { EyeIcon, Checked, Unchecked } from "@/public/icons";
+import { loginUser } from "@/redux/auth/features";
+import { addAlert } from "@/redux/alerts";
+import { AppDispatch, useAppDispatch, useAppSelector } from "@/redux/store";
+
+const LoginSchema = Yup.object().shape({
+  email: Yup.string().email("Invalid email").required("Email address is required"),
+  password: Yup.string().required("Password is required"),
+});
 
 export default function Login() {
-  const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useAppDispatch();
+  const { isLoading } = useAppSelector((state) => state.auth);
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
-  const [password, setPassword] = useState("");
-  const [passwordValidation, setPasswordValidation] = useState(
-    passwordCriteria.map((criterion) => ({
-      label: criterion.label,
-      isValid: false,
-    }))
-  );
   const [rememberMe, setRememberMe] = useState(false);
+
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: LoginSchema,
+    onSubmit: async (values) => {
+      await handleLogin(values, dispatch);
+    },
+  });
+
 
   // Toggle password visibility
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newPassword = e.target.value;
-    setPassword(newPassword);
-    setPasswordValidation(validatePassword(newPassword));
-  };
-
-  const handleSubmit = () => {
-    setIsLoading(true);
-
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-  };
+  const passwordValidation = validatePassword(formik.values.password);
 
   const handleRememberMeChange = () => {
     setRememberMe(!rememberMe);
+  };
+
+
+  const handleLogin = async (payload: { email: string; password: string }, dispatch: AppDispatch) => {
+    const actionResult = await dispatch(loginUser(payload));
+
+    if (loginUser.fulfilled.match(actionResult)) {
+      dispatch(
+        addAlert({
+          id: "",
+          headText: "Success",
+          subText: "Successfully logged in.",
+          type: "success",
+        })
+      );
+      // router.push("/dashboard"); // Redirect to dashboard or desired page
+    } else if (loginUser.rejected.match(actionResult)) {
+      if (actionResult.error) {
+        const errorMessage = actionResult.error?.message || "An error occurred during login. Please try again.";
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Error",
+            subText: errorMessage,
+            type: "error",
+          })
+        );
+      }
+    }
   };
 
   return (
@@ -48,12 +84,16 @@ export default function Login() {
       <h3>Login to your account</h3>
 
       <section className="w-full flex flex-col gap-4 border border-grey200 rounded-lg p-5 md:gap-8 md:p-10">
-        <form className="w-full flex flex-col">
+        <form className="w-full flex flex-col" onSubmit={formik.handleSubmit}>
           <InputField
             label="Email address"
             type="text"
             placeholder="Enter email address"
-            onChange={(e) => console.log(e.target.value)}
+            value={formik.values.email}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            name="email"
+            error={formik.touched.email && formik.errors.email ? formik.errors.email : ""}
             classNames="mb-6"
           />
 
@@ -61,11 +101,13 @@ export default function Login() {
             label="Password"
             type={showPassword ? "text" : "password"}
             placeholder="Enter password"
-            value={password}
-            onChange={handlePasswordChange}
+            value={formik.values.password}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            name="password"
             icon={<EyeIcon className="w-5 h-5" />}
             onInputIconClick={togglePasswordVisibility}
-            onEnterPressed={() => console.log("Enter pressed")}
+            error={formik.touched.password && formik.errors.password ? formik.errors.password : ""}
             classNames="mb-2"
           />
 
@@ -94,7 +136,7 @@ export default function Login() {
           <Button
             label="Login"
             isLoading={isLoading}
-            onClick={handleSubmit}
+             type="submit"
             classNames="mt-4"
           />
         </form>

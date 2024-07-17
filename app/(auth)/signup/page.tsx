@@ -13,6 +13,9 @@ import {
   validatePassword,
   passwordCriteria,
 } from "@/utils/helpers/auth/passwordValidation";
+import { useRouter } from "next/navigation";
+
+
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string().test(
@@ -48,6 +51,7 @@ export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((state) => state.auth);
+  const router = useRouter();
 
   const formik = useFormik<SignUpFormValues>({
     initialValues: {
@@ -78,6 +82,7 @@ export default function Signup() {
 
     if (signUpIndividual.fulfilled.match(actionResult) || signUpBusiness.fulfilled.match(actionResult)) {
       const { data } = actionResult.payload;
+      sessionStorage.setItem("userEmail", payload.email); // Store email in session storage
       dispatch(
         addAlert({
           id: "",
@@ -88,7 +93,7 @@ export default function Signup() {
           type: "success",
         })
       );
-      // router.push(`/email-verify?email=${encodeURIComponent(data.email)}`);
+      router.push("/email-verify");
     } else if (signUpIndividual.rejected.match(actionResult) || signUpBusiness.rejected.match(actionResult)) {
       if (actionResult.error) {
         const errorMessage = actionResult.error?.message || "An error occurred during registration. Please try again.";
@@ -170,11 +175,11 @@ export default function Signup() {
                 onInputIconClick={togglePasswordVisibility}
                 error={formik.touched.password && formik.errors.password ? formik.errors.password : ""}
               />
-              <div className="flex items-center gap-2">
+              <div className="grid grid-cols-2 gap-2">
                 {passwordCriteria.map((criterion, index) => (
                   <div
                     key={index}
-                    className="flex items-center gap-2 py-1 px-2 rounded-full border border-grey300 text-xs md:text-sm text-grey500 font-medium"
+                    className="flex items-center gap-2 py-1 px-2 rounded-full border border-grey300 text-xs  text-grey500 font-medium"
                   >
                     <div className="transition-transform duration-500 ease-in-out">
                       {passwordValidation.some((v) => v.label === criterion.label && v.isValid) ? (
