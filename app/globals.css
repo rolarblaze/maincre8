@@ -99,3 +99,98 @@ h4 {
 .noScrollbar::-webkit-scrollbar {
   display: none !important; /* Safari and Chrome */
 }
+
+/* ----- tooltip---- */
+.relative {
+  position: relative;
+}
+
+.tooltip {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  background-color: #101928;
+  padding: 16px;
+  width: 330px;
+  border-radius: 8px;
+  z-index: 10;
+  white-space: pre-wrap;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  -ms-border-radius: 8px;
+  -o-border-radius: 8px;
+}
+
+.tooltip-arrow {
+  position: absolute;
+  top: 50%;
+  left: -10px;
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-right: 15px solid #101928;
+  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+}
+
+.tooltip-text {
+  display: block;
+}
+
+/* styles/global.css */
+.phone-input-container {
+  display: flex;
+  flex-direction: column;
+  font-family: inherit !important;
+}
+
+.react-tel-input .form-control {
+  width: 100% !important;
+  height: 56px !important;
+  border: 1px solid #d0d5dd !important;
+  border-radius: 6px !important;
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
+  -ms-border-radius: 6px;
+  -o-border-radius: 6px;
+}
+
+.react-tel-input .flag-dropdown {
+  border: none !important;
+  background-color: transparent !important;
+}
+.react-tel-input .selected-flag {
+}
+
+.react-tel-input .flag {
+}
+
+.react-tel-input .selected-flag .flag {
+  /* height: 56px !important; */
+}
+
+.react-tel-input .selected-flag .arrow {
+}
+
+.phone-input {
+  width: 100%;
+  padding: 8px;
+  margin-top: 8px;
+  font-size: 16px;
+}
+
+.phone-input-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.phone-input-dropdown {
+  /* max-height: 200px; */
+  overflow-y: auto;
+}
