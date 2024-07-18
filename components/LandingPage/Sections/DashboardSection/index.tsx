@@ -1,4 +1,6 @@
+import Image from "next/image";
 import { CurvedArrow } from "@/public/icons";
+import dashboardImage from "@/public/imgs/dashboard.webp"
 
 const DashboardSection = () => {
   return (
@@ -30,7 +32,9 @@ const DashboardSection = () => {
         </button>
 
         {/* BIG BLUE DIV */}
-        <div className="w-full bg-primary800 rounded-5xl min-h-[25.875rem]"></div>
+        <div className="w-full bg-primary800 rounded-5xl min-h-[25.875rem] pt-10 px-6 ">
+          <Image src={dashboardImage} alt="Dashboard display" />
+        </div>
       </div>
     </section>
   );
