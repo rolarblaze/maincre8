@@ -104,14 +104,14 @@ const ProjectForms = () => {
 
         <div className="flex items-center gap-2  mb-8 ">
           <input type="file" name="file" id="selectedFile" hidden />
-          <input
+          <button
             className="flex items-center gap-1 py-2.5 px-4 w-fit bg-neutral100 text-black border border-ash rounded-lg text-sm"
             onClick={handleClick}
           >
             <AttachIcon fillColor="#484848" />
             Attach a file{" "}
             <input type="file" id="selectedFile" style={{ display: "none" }} />
-          </input>
+          </button>
 
           <span className="text-grey500">PDF or DOC (max. 5mb)</span>
         </div>
