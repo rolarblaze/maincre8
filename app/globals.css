@@ -164,18 +164,6 @@ h4 {
   border: none !important;
   background-color: transparent !important;
 }
-.react-tel-input .selected-flag {
-}
-
-.react-tel-input .flag {
-}
-
-.react-tel-input .selected-flag .flag {
-  /* height: 56px !important; */
-}
-
-.react-tel-input .selected-flag .arrow {
-}
 
 .phone-input {
   width: 100%;
@@ -191,6 +179,5 @@ h4 {
 }
 
 .phone-input-dropdown {
-  /* max-height: 200px; */
   overflow-y: auto;
 }

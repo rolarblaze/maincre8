@@ -37,7 +37,7 @@ const ControlledSelect: React.FC<ControlledSelectProps> = ({
           name={name}
           value={value}
           onChange={onChange}
-          className="block w-full border border-gray-300 rounded-lg h-14 pl-4 pr-10 appearance-none focus:outline-none focus:ring-2 focus:ring-blue-500 custom-select"
+          className="block w-full border border-gray-300 rounded-lg h-14 pl-4 pr-10 appearance-none focus:outline-none  custom-select"
         >
           {placeholder && (
             <option disabled hidden value="">

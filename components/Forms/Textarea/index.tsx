@@ -26,8 +26,8 @@ const Textarea: React.FC<ControlledTextareaProps> = ({
 
   return (
     <div className="relative">
-      <div className="flex gap-2 items-center">
-        <label htmlFor={id} className="block text-sm text-grey900 mb-2">
+      <div className="flex gap-2 items-center mb-1">
+        <label htmlFor={id} className="block text-sm text-grey900 ">
           {label}
         </label>
         {tooltipText && (

@@ -12,17 +12,17 @@ const ProjectForms = () => {
   const [industry, setIndustry] = useState("");
   const [briefDescription, setBriefDescription] = useState("");
   const [phone, setPhone] = useState<string>("");
-  const handleClick = () => {
-    document.getElementById("selectedFile")?.click();
-  };
+
   const handleBriefDescription = (
     event: React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     setBriefDescription(event.target.value);
   };
+
   const handleIndustryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setIndustry(e.target.value);
   };
+
   return (
     <form className="max-w-[744px] mx-auto mb-[80px] md:border rounded-2xl md:p-8 md:shadow-dark-blue">
       <div className="flex flex-col gap-6">
@@ -43,11 +43,13 @@ const ProjectForms = () => {
           label="Company name"
           placeholder="Enter Company Name"
         />
-        <InputField
-          type="number"
+
+        <PhoneNumberInput
+          value={phone}
+          onChange={setPhone}
           label="Phone number"
-          placeholder="Enter Phone Number"
         />
+
         <InputField
           type="email"
           label="Work Email"
@@ -102,17 +104,15 @@ const ProjectForms = () => {
           placeholder="Type in your message"
         />
 
-        <div className="flex items-center gap-2  mb-8 ">
-          <input type="file" name="file" id="selectedFile" hidden />
-          <button
-            className="flex items-center gap-1 py-2.5 px-4 w-fit bg-neutral100 text-black border border-ash rounded-lg text-sm"
-            onClick={handleClick}
+        <div className="flex items-center gap-2 mb-8">
+          <label
+            htmlFor="selectedFile"
+            className="flex items-center gap-1 py-2.5 px-4 w-fit bg-neutral100 text-black border border-ash rounded-lg text-sm cursor-pointer"
           >
             <AttachIcon fillColor="#484848" />
-            Attach a file{" "}
-            <input type="file" id="selectedFile" style={{ display: "none" }} />
-          </button>
-
+            Attach a file
+          </label>
+          <input type="file" name="selectedFile" id="selectedFile" hidden />
           <span className="text-grey500">PDF or DOC (max. 5mb)</span>
         </div>
       </div>
@@ -124,9 +124,6 @@ const ProjectForms = () => {
           <span className="text-primary500 ml-1"> Download this form </span>
         </div>
       </div>
-
-      <PhoneNumberInput value={phone} onChange={setPhone} />
-      <p>Entered phone number: {phone}</p>
     </form>
   );
 };

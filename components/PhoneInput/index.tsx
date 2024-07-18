@@ -6,11 +6,13 @@ import "react-phone-input-2/lib/style.css";
 interface PhoneNumberInputProps {
   value: string;
   onChange: (value: string) => void;
+  label: string;
 }
 
 const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
   value,
   onChange,
+  label,
 }) => {
   const handleChange = (phone: string) => {
     onChange(phone);
@@ -18,6 +20,7 @@ const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
 
   return (
     <div>
+      {label && <label className="text-sm text-grey900">{label}</label>}
       <PhoneInput
         country={"ng"}
         value={value}
@@ -30,9 +33,6 @@ const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
         dropdownStyle={{ zIndex: 999 }}
         buttonStyle={{ display: "flex", alignItems: "center" }}
       />
-      {/* {value && !validatePhoneNumber(value) && (
-        <p style={{ color: "red" }}>Invalid phone number</p>
-      )} */}
     </div>
   );
 };
