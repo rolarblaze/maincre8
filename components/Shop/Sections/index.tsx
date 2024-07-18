@@ -1,5 +1,11 @@
 "use client";
-import React, { useRef, useState, useEffect, RefObject } from "react";
+import React, {
+  useRef,
+  useState,
+  useEffect,
+  RefObject,
+  ReactElement,
+} from "react";
 import { twMerge } from "tailwind-merge";
 import { BlueArrowLeft, BlueArrowRight } from "@/public/icons";
 import Card from "../SectionCard";
@@ -12,12 +18,17 @@ interface SideScrollItem {
   coming_soon?: boolean;
 }
 
-interface Bundle {
-  bundle: string;
-  icon: React.ReactElement;
+interface Package {
+  packageName: string;
+  icon: ReactElement;
   description: string;
   price: string;
   features: string[];
+}
+
+interface Bundle {
+  bundle: string;
+  packages: Package[];
 }
 
 interface SectionProps {
@@ -33,7 +44,7 @@ const Section: React.FC<SectionProps> = ({
 }) => {
   const sliderRef: RefObject<HTMLDivElement> = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<number | null>(null);
+  const [activeTab, setActiveTab] = useState<number>(0); // Set the default active tab to the first bundle
 
   const [leftArrowBg, setLeftArrowBg] = useState<string>("transparent");
   const [rightArrowBg, setRightArrowBg] = useState<string>("bg-primary50");
@@ -107,7 +118,7 @@ const Section: React.FC<SectionProps> = ({
         </div>
 
         <div className="flex overflow-x-auto noScrollbar" ref={sliderRef}>
-          {sideScrollItems.map((item, index) => (
+          {sideScrollItems?.map((item, index) => (
             <p
               key={index}
               onClick={() => handleItemClick(index, item)}
@@ -116,7 +127,7 @@ const Section: React.FC<SectionProps> = ({
                 activeTab === index ? "bg-black text-white" : ""
               )}
             >
-              {item.name}
+              {item?.name}
               {item["talk-to-sales"] && (
                 <span className="text-primary900 bg-primary50 rounded-[10px] ml-2 py-0.5 px-2">
                   talk to sales
@@ -144,14 +155,14 @@ const Section: React.FC<SectionProps> = ({
 
       {/* Bundles */}
       <div className="w-full flex gap-8">
-        {bundles.map((bundle, index) => (
+        {bundles[activeTab]?.packages.map((pkg, index) => (
           <Card
-            key={bundle.bundle}
-            icon={bundle.icon}
-            title={bundle.bundle}
-            description={bundle.description}
-            price={bundle.price}
-            features={bundle.features}
+            key={pkg?.packageName}
+            icon={pkg?.icon}
+            title={pkg?.packageName}
+            description={pkg?.description}
+            price={pkg?.price}
+            features={pkg?.features}
             showAll={showAllStates[index]}
             onShowAllToggle={() => handleShowAllToggle(index)}
           />

@@ -1,12 +1,10 @@
-
 import { configureStore } from "@reduxjs/toolkit";
 import { persistStore } from "redux-persist";
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 
 import { AuthSlice } from "./auth";
 import { AlertsSlice } from "./alerts";
-
-
+import { shopReducer } from "./shop";
 
 // configure the store with all reducers
 export const store = configureStore({
@@ -14,7 +12,7 @@ export const store = configureStore({
     // all your slice reducers goes here
     auth: AuthSlice.reducer,
     alerts: AlertsSlice.reducer,
-
+    shop: shopReducer,
   },
 });
 
