@@ -32,14 +32,14 @@ const Card = ({
           <div>{icon}</div>
           <p className="font-semibold text-grey500 text-lg">{title}</p>
         </div>
-        <div className="flex flex-col gap-2 text-grey900 text-left">
+        <div className="flex flex-col gap-2 text-grey900 text-sm text-left">
           <p className="font-bold text-3xl">
             {price}
             <span className="text-base font-medium">/year</span>
           </p>
           <p className="text-grey800 font-normal text-base">{description}</p>
         </div>
-        <Button label="Get Started" classNames="!py-2 !text-xs" />
+        <Button label="Talk to sales" classNames="!py-2 !text-xs" />
       </section>
 
       <div className="space-y-3 flex flex-col justify-start flex-grow">

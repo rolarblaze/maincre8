@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import Section from "./Sections";
-import { getServices } from "@/redux/shop/features";
+import { getServices } from "../../redux/shop/features";
 import { RootState } from "@/redux/store";
 import { mapServicesToProps } from "./Data/shopData";
 
@@ -37,7 +37,9 @@ const ShopSections = () => {
         <Section
           key={index}
           pageTitle={service.serviceName}
-          sideScrollItems={service.bundles.map(bundle => ({ name: bundle.bundle }))}
+          sideScrollItems={service.bundles.map((bundle) => ({
+            name: bundle.bundle,
+          }))}
           bundles={service.bundles}
         />
       ))}
