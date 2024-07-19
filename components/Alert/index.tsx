@@ -49,7 +49,7 @@ const Alert: React.FC<AlertProps> = ({
 
   return (
     <div
-      className={`max-w-96 w-full h-auto  mb-4 ${alertStyles[type]} flex items-start justify-between  rounded z-50`}
+      className={`max-w-96 w-full h-auto  mb-4 ${alertStyles[type]} flex items-start justify-between  rounded z-[10000]`}
     >
       <div className="w-full  flex items-start gap-3 border-r border-grey100 py-3 px-4">
         <div>

@@ -92,7 +92,7 @@ const InputField: React.FC<InputFieldProps> = ({
           onClick={onClick}
           readOnly={readOnly}
           disabled={disabled}
-          className={`w-full outline-none text-grey400 text-sm ${
+          className={`w-full outline-none text-grey900 text-sm ${
             readOnly ? "bg-grey200" : "bg-transparent"
           } ${disabled ? "cursor-not-allowed" : ""}`}
         />

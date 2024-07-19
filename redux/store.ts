@@ -6,6 +6,7 @@ import { AlertsSlice } from "./alerts";
 import { AuthSlice } from "./auth";
 import { briefReducer } from "./brief";
 import { fileUploadReducer } from "./file";
+import newsletterReducer from "./newsletter";
 import { shopReducer } from "./shop";
 
 // configure the store with all reducers
@@ -15,6 +16,7 @@ export const store = configureStore({
     auth: AuthSlice.reducer,
     alerts: AlertsSlice.reducer,
     shop: shopReducer,
+    newsletter: newsletterReducer,
     fileUpload: fileUploadReducer,
     brief: briefReducer,
   },
