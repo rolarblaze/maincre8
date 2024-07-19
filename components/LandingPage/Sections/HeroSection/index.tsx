@@ -37,7 +37,7 @@ const HeroSection = () => {
           </p>
         </div>
 
-        <Button label="Get Started" classNames="w-fit" />
+        <Button label="Get Started" classNames="w-fit" link="/shop" />
 
         {/* VIDEO BACKGROUND */}
         <video autoPlay muted loop className="absolute object-cover -z-[1] inset-0 min-h-full min-w-full">

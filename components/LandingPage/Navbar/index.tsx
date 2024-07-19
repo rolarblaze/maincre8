@@ -39,7 +39,6 @@ const Navbar: React.FC = () => {
   };
 
   // HANDLE NAVBAR SCROLL ANIMATION
-
   useEffect(() => {
     let lastScrollY = window.scrollY;
 

@@ -18,7 +18,7 @@ const CTASection = () => {
           </p>
 
           <div className="relative mt-2 w-fit">
-            <Button label="Get Started" classNames="py-2 px-4 w-fit" />
+            <Button label="Get Started" classNames="py-2 px-4 w-fit" link="/shop" />
             <Highlight className="absolute -top-8 -right-[5.5rem] rotate-[280deg]" />
           </div>
 
