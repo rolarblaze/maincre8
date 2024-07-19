@@ -104,7 +104,7 @@ const Navbar: React.FC = () => {
           </div>
         </section>
 
-        <div className="flex items-center gap-6">
+        {/* <div className="flex items-center gap-6">
           <Link
             href="/login"
             className={`${
@@ -122,7 +122,7 @@ const Navbar: React.FC = () => {
               isHome && !navColor && "bg-white text-primary900"
             }`}
           />
-        </div>
+        </div> */}
 
         {showSolutions && (
           <SolutionsMenu

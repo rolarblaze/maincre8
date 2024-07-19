@@ -5,6 +5,7 @@ import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import { AuthSlice } from "./auth";
 import { AlertsSlice } from "./alerts";
 import { shopReducer } from "./shop";
+import newsletterReducer from "./newsletter";
 
 // configure the store with all reducers
 export const store = configureStore({
@@ -13,6 +14,7 @@ export const store = configureStore({
     auth: AuthSlice.reducer,
     alerts: AlertsSlice.reducer,
     shop: shopReducer,
+    newsletter: newsletterReducer,
   },
 });
 

@@ -50,12 +50,14 @@ const config: Config = {
         "dark-cyan-blue": "#030E1C",
         "alert-green": "#04802E",
         "alert-red": "#CB1A14"
-
+      },
+      zIndex: {
+        "10000": "10000"
       },
       boxShadow: {
         "custom-strong":
           "0 5px 10px rgba(0, 0, 0, 0.15), 0 -5px 10px rgba(0, 0, 0, 0.15), 5px 0 10px rgba(0, 0, 0, 0.15), -5px 0 10px rgba(0, 0, 0, 0.15)",
-        "dark-blue": "0 4px 20px  rgba(4, 60, 72, 0.08)",
+        "dark-blue": "0 4px 20px rgba(4, 60, 72, 0.08)",
       },
       keyframes: {
         fadeInDown: {

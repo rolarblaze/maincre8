@@ -202,3 +202,8 @@ h4 {
 @keyframes l27 {
   100% {transform: rotate(1turn)}
 }
+
+
+.z-[10000] {
+  z-index: 10000;
+}
