@@ -1,34 +1,51 @@
 "use client";
+import React, { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import Section from "./Sections";
-import {
-  Content_services,
-  Creative_services,
-  Digital_services,
-} from "./Data/ShopBundlesData";
-import {
-  Content_Copywriting_Services,
-  Creative_Design_Services,
-  Digital_Marketing_Services,
-} from "./Data/shopData";
+import { getServices } from "../../redux/shop/features";
+import { RootState } from "@/redux/store";
+import { mapServicesToProps } from "./Data/shopData";
+import Loader from "../Spinner/Loader";
 
 const ShopSections = () => {
+  const dispatch = useAppDispatch();
+  const shopState = useAppSelector((state: RootState) => state.shop);
+
+  useEffect(() => {
+    console.log("Dispatching getServices...");
+    dispatch(getServices());
+  }, [dispatch]);
+
+  useEffect(() => {
+    console.log("Services state updated:", shopState.services);
+  }, [shopState.services]);
+
+  if (shopState.isLoading) {
+    return (
+      <div className="mx-auto flex items-center justify-center"><Loader/></div>
+    );
+  }
+
+  if (shopState.error) {
+    return <div>Error: {shopState.error}</div>;
+  }
+
+  const { services } = shopState;
+
+  const serviceProps = mapServicesToProps(services);
+
   return (
     <div className="flex flex-col gap-40 mb-40">
-      <Section
-        pageTitle="Digital Marketing Services"
-        sideScrollItems={Digital_Marketing_Services}
-        bundles={Digital_services}
-      />
-      <Section
-        pageTitle="Creative Design Services s"
-        sideScrollItems={Creative_Design_Services}
-        bundles={Creative_services}
-      />
-      <Section
-        pageTitle="Content/Copywriting Services "
-        sideScrollItems={Content_Copywriting_Services}
-        bundles={Content_services}
-      />
+      {serviceProps.map((service, index) => (
+        <Section
+          key={index}
+          pageTitle={service.serviceName}
+          sideScrollItems={service.bundles.map((bundle) => ({
+            name: bundle.bundle,
+          }))}
+          bundles={service.bundles}
+        />
+      ))}
     </div>
   );
 };

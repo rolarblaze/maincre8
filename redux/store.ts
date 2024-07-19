@@ -3,8 +3,6 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { persistStore } from "redux-persist";
 
 import { AlertsSlice } from "./alerts";
-import { AuthSlice } from "./auth";
-import fileUploadSlice from "./file";
 
 // configure the store with all reducers
 export const store = configureStore({
@@ -12,7 +10,6 @@ export const store = configureStore({
     // all your slice reducers goes here
     auth: AuthSlice.reducer,
     alerts: AlertsSlice.reducer,
-    fileUpload: fileUploadSlice.reducer,
   },
 });
 

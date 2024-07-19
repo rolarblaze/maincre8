@@ -1,31 +1,38 @@
-export const Digital_Marketing_Services = [
-  { name: "Search Engine Optimization (SEO) Bundle" },
-  { name: "Pay-Per-Click (PPC) Advertising Bundle" },
-  { name: "Social Media Management Bundle" },
-  { name: "Email Marketing Bundle" },
-  { name: "Content Marketing Bundle" },
-  { name: "Influencer Marketing Bundle", "talk-to-sales": true },
-  { name: "Affiliate Marketing Bundle", "talk-to-sales": true },
-  { name: "Video Marketing Bundle", "talk-to-sales": true },
-];
+import { ReactElement } from "react";
+import { Service } from "@/redux/shop/interface";
+import BasicIcon from "@/public/icons/basic.svg"
+import StandardIcon from "@/public/icons/standard.svg"
+import PremiumIcon from "@/public/icons/premium.svg"
 
-export const Creative_Design_Services = [
-  { name: "Full Logo Design Bundles" },
-  { name: "Single Logo Design Bundles" },
-  { name: "Branding Bundle" },
-  { name: "Print Design Bundle " },
-  { name: "Infographic Design Bundle " },
-  { name: "Print Design Bundle" },
-  { name: "Infographic Design Bundle " },
-  { name: "Motion Graphics Bundle ", coming_soon: true },
-  { name: "UI/UX Design Bundle", "talk-to-sales": true },
-];
+const getIconForPackage = (packageName: string): ReactElement => {
+  switch (packageName) {
+    case "Basic Package":
+      return BasicIcon;
+    case "Standard Package":
+      return StandardIcon;
+    case "Premium Package":
+      return PremiumIcon;
+    default:
+      return BasicIcon; // Default icon
+  }
+};
 
-export const Content_Copywriting_Services = [
-  { name: "Copywriting Bundle " },
-  { name: "Blogging Bundle " },
-  { name: "Video Production Bundle", "talk-to-sales": true },
-  { name: "Podcast Production Bundle", coming_soon: true },
-  { name: "Photography Bundle", coming_soon: true },
-  { name: "Animation Bundle", coming_soon: true },
-];
+
+export const mapServicesToProps = (servicesData: Service[]) => {
+  return servicesData.map(service => ({
+    serviceName: service.service_name,
+    bundles: service.bundles?.map(bundle => ({
+      bundleId: bundle.bundle_id,
+      bundle: bundle.bundle_name,
+      packages: bundle.packages?.map(pkg => ({
+        packageId: pkg.package_id,
+        packageName: pkg.package_name,
+        icon: getIconForPackage(pkg.package_name),
+        description: pkg.description || "",
+        price: pkg.price || "$0.00",
+        features: pkg.provisions.map(provision => provision.description) || [],
+      })) || []
+    })) || []
+  }));
+};
+
