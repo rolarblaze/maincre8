@@ -1,5 +1,3 @@
-// redux/newsletter/interface.ts
-
 // Define the shape of the newsletter response
 export interface NewsletterResponse {
     detail: string;
