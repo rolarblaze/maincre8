@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 import { persistStore } from "redux-persist";
-import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 
-import { AuthSlice } from "./auth";
 import { AlertsSlice } from "./alerts";
-import { shopReducer } from "./shop";
+import { AuthSlice } from "./auth";
+import { briefReducer } from "./brief";
+import { fileUploadReducer } from "./file";
 import newsletterReducer from "./newsletter";
+import { shopReducer } from "./shop";
 
 // configure the store with all reducers
 export const store = configureStore({
@@ -15,6 +17,8 @@ export const store = configureStore({
     alerts: AlertsSlice.reducer,
     shop: shopReducer,
     newsletter: newsletterReducer,
+    fileUpload: fileUploadReducer,
+    brief: briefReducer,
   },
 });
 
