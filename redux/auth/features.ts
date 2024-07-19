@@ -11,7 +11,6 @@ export const loginUser = createAsyncThunk(
   async ({ email, password }: { email: string; password: string }, { rejectWithValue }) => {
     try {
       const response = await api.post("login/user", { email, password });
-      console.log("login:", response.data);
       setUserTokenCookie(response.data.access_token); // Set the user token cookie
       return response.data;
     } catch (error) {
@@ -32,7 +31,6 @@ export const signUpIndividual = createAsyncThunk(
         email: payload.email,
         password: payload.password,
       });
-      console.log("individual reg:", response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(handleAxiosError(error));
@@ -50,7 +48,6 @@ export const signUpBusiness = createAsyncThunk(
         email: payload.email,
         password: payload.password,
       });
-      console.log("business reg:", response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(handleAxiosError(error));
@@ -64,7 +61,6 @@ export const resendVerificationCode = createAsyncThunk(
   async (email: string, { rejectWithValue }) => {
     try {
       const response = await api.post("api/users/resend-verification-otp", { email });
-      console.log("resend code:", response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(handleAxiosError(error));
@@ -78,7 +74,6 @@ export const verifyUser = createAsyncThunk(
   async ({ otp, email }: { otp: string; email: string }, { rejectWithValue }) => {
     try {
       const response = await api.post("api/users/verify-user", { otp, email });
-      console.log("verify user:", response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(handleAxiosError(error));
@@ -92,7 +87,7 @@ export const forgotPassword = createAsyncThunk(
   async ({ email, callback_url }: { email: string; callback_url: string }, { rejectWithValue }) => {
     try {
       const response = await api.post("request-password-reset", { email, callback_url });
-      console.log("forgot password:", response.data);
+      // console.log("forgot password:", response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(handleAxiosError(error));
@@ -106,7 +101,6 @@ export const resetPassword = createAsyncThunk(
   async ({ code, password, confirm_password }: { code: string; password: string; confirm_password: string }, { rejectWithValue }) => {
     try {
       const response = await api.put("reset-password", { code, password, confirm_password });
-      console.log("reset password:", response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(handleAxiosError(error));
