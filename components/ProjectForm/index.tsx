@@ -75,21 +75,6 @@ const ProjectForms = () => {
     setIsSubmitting(true);
     const bundleId = Number(sessionStorage.getItem("bundleId"));
     const packageId = Number(sessionStorage.getItem("packageId"));
-    console.log({
-      first_name: firstName,
-      last_name: lastName,
-      company_name: companyName,
-      phone_number: `+${phone}`,
-      work_email: workEmail,
-      industry_type: industry,
-      brief_objectives: briefObjectives,
-      brief_description: briefDescription,
-      competitors: competitors,
-      benchmarks: benchmarks,
-      brief_attachment: fileAttachment ?? "",
-      package_id: packageId,
-      bundle_id: bundleId,
-    });
 
     try {
       const res = await dispatch(
