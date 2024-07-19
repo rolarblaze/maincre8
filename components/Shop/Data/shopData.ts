@@ -1,8 +1,8 @@
 import { ReactElement } from "react";
 import { Service } from "@/redux/shop/interface";
-import BasicIcon from "@/public/icons/basic.svg";
-import StandardIcon from "@/public/icons/standard.svg";
-import PremiumIcon from "@/public/icons/premium.svg";
+import BasicIcon from "@/public/icons/basic.svg"
+import StandardIcon from "@/public/icons/standard.svg"
+import PremiumIcon from "@/public/icons/premium.svg"
 
 const getIconForPackage = (packageName: string): ReactElement => {
   switch (packageName) {
@@ -16,6 +16,7 @@ const getIconForPackage = (packageName: string): ReactElement => {
       return BasicIcon; // Default icon
   }
 };
+
 
 export const mapServicesToProps = (servicesData: Service[]) => {
   return servicesData.map(service => ({
@@ -32,3 +33,4 @@ export const mapServicesToProps = (servicesData: Service[]) => {
     })) || []
   }));
 };
+

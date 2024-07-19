@@ -11,6 +11,9 @@ import { BlueArrowLeft, BlueArrowRight } from "@/public/icons";
 import Card from "../SectionCard";
 import Modal from "@/components/Modals/CustomModal";
 import SalesPopUp from "@/components/SalesPopUp";
+import BasicIcon from "@/public/icons/basic.svg";
+import StandardIcon from "@/public/icons/standard.svg";
+import PremiumIcon from "@/public/icons/premium.svg";
 
 interface SideScrollItem {
   name: string;
@@ -45,18 +48,23 @@ const Section: React.FC<SectionProps> = ({
   const sliderRef: RefObject<HTMLDivElement> = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<number>(0); // Set the default active tab to the first bundle
-
   const [leftArrowBg, setLeftArrowBg] = useState<string>("transparent");
   const [rightArrowBg, setRightArrowBg] = useState<string>("bg-primary50");
+  const [showAllStates, setShowAllStates] = useState<{
+    [key: string]: boolean;
+  }>({});
 
-  const [showAllStates, setShowAllStates] = useState(
-    new Array(bundles.length).fill(false)
-  );
+  const handleShowAllToggle = (packageIndex: number) => {
+    setShowAllStates((prevStates) => ({
+      ...prevStates,
+      [packageIndex]: !prevStates[packageIndex],
+    }));
+  };
 
-  const handleShowAllToggle = (index: number) => {
-    const newShowAllStates = [...showAllStates];
-    newShowAllStates[index] = !newShowAllStates[index];
-    setShowAllStates(newShowAllStates);
+  const packageIcons = {
+    "Basic Package": BasicIcon,
+    "Standard Package": StandardIcon,
+    "Premium Package": PremiumIcon,
   };
 
   const handleScroll = () => {
@@ -155,18 +163,23 @@ const Section: React.FC<SectionProps> = ({
 
       {/* Bundles */}
       <div className="w-full flex gap-8">
-        {bundles[activeTab]?.packages.map((pkg, index) => (
-          <Card
-            key={pkg?.packageName}
-            icon={pkg?.icon}
-            title={pkg?.packageName}
-            description={pkg?.description}
-            price={pkg?.price}
-            features={pkg?.features}
-            showAll={showAllStates[index]}
-            onShowAllToggle={() => handleShowAllToggle(index)}
-          />
-        ))}
+        {bundles[activeTab]?.packages.map((pkg, index) => {
+          const Icon =
+            packageIcons[pkg.packageName as keyof typeof packageIcons] ||
+            BasicIcon;
+          return (
+            <Card
+              key={pkg?.packageName}
+              icon={<Icon width={24} height={24} />}
+              title={pkg?.packageName}
+              description={pkg?.description}
+              price={pkg?.price}
+              features={pkg?.features}
+              showAll={showAllStates[index]}
+              onShowAllToggle={() => handleShowAllToggle(index)}
+            />
+          );
+        })}
       </div>
 
       {/* Modal */}
