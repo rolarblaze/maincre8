@@ -22,5 +22,7 @@ export { default as FAQ } from "./LandingPage/Sections/FAQ/index";
 // UI COMPONENTS
 export { default as PillDiv } from "./UI/PillDiv/index";
 
+
 // SHOP PAGE SECTION IMPORTS
 export { default as ServicesSection } from "./Shop";
+export { default as SearchFilterSection } from "./Shop/SearchFilter";

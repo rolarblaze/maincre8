@@ -42,3 +42,4 @@ export { default as PhoneNumberIcon } from "./phone-number.svg";
 export { default as SubmitBriefIcon } from "./submit-a-brief.svg";
 export { default as EmailAddressIcon } from "./email-address.svg";
 export { default as CancelIcon } from "./cancel.svg";
+export { default as SearchIcon } from "./search.svg";

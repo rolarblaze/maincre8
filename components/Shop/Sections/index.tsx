@@ -33,7 +33,7 @@ const Section: React.FC<SectionProps> = ({
 }) => {
   const sliderRef: RefObject<HTMLDivElement> = useRef(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState<number | null>(null);
+  const [activeTab, setActiveTab] = useState<number | null>(0);
 
   const [leftArrowBg, setLeftArrowBg] = useState<string>("transparent");
   const [rightArrowBg, setRightArrowBg] = useState<string>("bg-primary50");
