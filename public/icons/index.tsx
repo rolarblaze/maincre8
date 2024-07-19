@@ -42,3 +42,6 @@ export { default as PhoneNumberIcon } from "./phone-number.svg";
 export { default as SubmitBriefIcon } from "./submit-a-brief.svg";
 export { default as EmailAddressIcon } from "./email-address.svg";
 export { default as CancelIcon } from "./cancel.svg";
+export { default as ToolTipIcon } from "./tooltip.svg";
+export { default as ThrashIcon } from "./bin.svg";
+export { default as DownloadIcon } from "./download.svg";
