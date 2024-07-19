@@ -22,8 +22,10 @@ export const mapServicesToProps = (servicesData: Service[]) => {
   return servicesData.map(service => ({
     serviceName: service.service_name,
     bundles: service.bundles?.map(bundle => ({
+      bundleId: bundle.bundle_id,
       bundle: bundle.bundle_name,
       packages: bundle.packages?.map(pkg => ({
+        packageId: pkg.package_id,
         packageName: pkg.package_name,
         icon: getIconForPackage(pkg.package_name),
         description: pkg.description || "",

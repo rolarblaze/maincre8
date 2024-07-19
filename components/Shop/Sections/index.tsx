@@ -22,6 +22,7 @@ interface SideScrollItem {
 }
 
 interface Package {
+  packageId: number; 
   packageName: string;
   icon: ReactElement;
   description: string;
@@ -30,6 +31,7 @@ interface Package {
 }
 
 interface Bundle {
+  bundleId: number;
   bundle: string;
   packages: Package[];
 }
@@ -177,6 +179,8 @@ const Section: React.FC<SectionProps> = ({
               features={pkg?.features}
               showAll={showAllStates[index]}
               onShowAllToggle={() => handleShowAllToggle(index)}
+              bundleId={bundles[activeTab].bundleId} 
+              packageId={pkg.packageId} 
             />
           );
         })}

@@ -5,6 +5,7 @@ import Section from "./Sections";
 import { getServices } from "../../redux/shop/features";
 import { RootState } from "@/redux/store";
 import { mapServicesToProps } from "./Data/shopData";
+import Loader from "../Spinner/Loader";
 
 const ShopSections = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +21,9 @@ const ShopSections = () => {
   }, [shopState.services]);
 
   if (shopState.isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="mx-auto flex items-center justify-center"><Loader/></div>
+    );
   }
 
   if (shopState.error) {
