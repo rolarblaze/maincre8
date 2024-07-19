@@ -11,14 +11,23 @@ export const uploadFiles = createAsyncThunk(
   "/uploadFile",
   async (payload: UploadFile, { rejectWithValue }) => {
     try {
-      const response = await api.post("briefs/upload-brief/company_brief", {
-        first_name: payload.file,
-      });
-      console.log("file upload response", response.data);
+      const formData = new FormData();
+      formData.append("file", payload.file);
+
+      const response = await api.post(
+        "briefs/upload-brief/company_brief",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+
+      // console.log("file upload response", response.data);
       return response.data;
     } catch (error) {
-      console.log("file upload error", error);
-
+      // console.log("file upload error", error);
       return rejectWithValue(handleAxiosError(error));
     }
   }

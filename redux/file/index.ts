@@ -36,7 +36,7 @@ const fileUploadSlice = createSlice({
   },
 });
 
-export default fileUploadSlice;
+export const fileUploadReducer = fileUploadSlice.reducer;
 
 // Selectors
 export const selectFileUploadStatus = (state: RootState) =>
