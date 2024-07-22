@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { CurvedArrow } from "@/public/icons";
-import dashboardImage from "@/public/imgs/dashboard.webp"
+import dashboardImage from "@/public/imgs/dashboard.webp";
+import Button from "@/components/Button";
 
 const DashboardSection = () => {
   return (
@@ -27,9 +28,11 @@ const DashboardSection = () => {
           </p>
         </div>
 
-        <button className="bg-primary500 text-white rounded-lg text-sm font-semibold px-4 py-2">
-          Explore the Dashboard
-        </button>
+        <Button label="Explore the Dashboard" classNames="max-w-[14.25rem] px-6" />
+
+        {/* <button className="bg-primary500 text-white rounded-lg text-sm font-semibold px-4 py-2">
+         
+        </button> */}
 
         {/* BIG BLUE DIV */}
         <div className="w-full bg-primary800 rounded-5xl min-h-[25.875rem] pt-10 px-6 ">

@@ -17,7 +17,7 @@ const Bundles = () => {
         <div className="absolute right-0">
           <Crea8Star />
         </div>
-        <h2 className="text-white">Our Top Creative Bundles</h2>
+        <h2 className="text-white">Our Top Bundles</h2>
         <p className="text-grey50 max-w-[412px] mx-auto my-4">
           Hiring a world-class team of creative geniuses doesn't have to be
           expensive or complicated.

@@ -69,7 +69,7 @@ const Section: React.FC<SectionProps> = ({
       </div>
       <Button
         label={buttonLabel}
-        classNames="!py-2 !text-xs mt-4 mb-6 w-max mx-auto"
+        classNames="mt-4 mb-6 w-max mx-auto"
       />
     </div>
   );
