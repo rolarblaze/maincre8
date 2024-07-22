@@ -90,7 +90,7 @@ const SubscribeSection = () => {
 
         <figure className="relative size-[16.6875rem] mr-12">
           <Image src={computer} alt="computer image" />
-          <StartProjectText className="absolute bottom-6 right-7" />
+          {/* <StartProjectText className="absolute bottom-6 right-7" /> */}
         </figure>
       </div>
     </section>
