@@ -20,7 +20,8 @@ export { default as HomepageSubscribe } from "./LandingPage/Sections/SubscribeSe
 export { default as FAQ } from "./LandingPage/Sections/FAQ/index";
 
 // UI COMPONENTS
-export { default as PillDiv } from "./UI/PillDiv/index";
+export { default as PillDiv } from "./UI/PillDiv";
+export { default as AvatarIcon } from "./UI/AvatarIcon";
 
 
 // SHOP PAGE SECTION IMPORTS

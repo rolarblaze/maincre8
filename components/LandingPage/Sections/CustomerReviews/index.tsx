@@ -1,4 +1,4 @@
-import { AvatarIcon } from "@/public/icons";
+import { AvatarIcon } from "@/components";
 import { Card, Reviews } from "./Components";
 
 const CustomerReviews = () => {
@@ -15,7 +15,7 @@ const CustomerReviews = () => {
           {Reviews.map((review) => (
             <Card
               key={review.name}
-              icon={<AvatarIcon />}
+              icon={<AvatarIcon src={review.src} />}
               review={review.review}
               name={review.name}
               role={review.role}
