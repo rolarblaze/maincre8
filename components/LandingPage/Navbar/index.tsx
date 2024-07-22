@@ -74,7 +74,11 @@ const Navbar: React.FC = () => {
         className={`mx-auto py-3 flex items-center justify-between max-w-[76rem] max-xl:px-4 md:py-6 relative`}
       >
         <Link href="/" className="text-2xl font-bold">
-          <Logo className={isHome && !navColor && "*:fill-white"} />
+          <Logo
+            className={
+              isHome && !navColor ? "*:fill-white" : "*:fill-primary500"
+            }
+          />
         </Link>
 
         {/* the solution and resources weight and size were different */}
