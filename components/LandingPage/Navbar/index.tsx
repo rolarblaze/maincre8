@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
         ${
           navScroll ? "-translate-y-28 opacity-0" : "translate-x-0 opacity-100"
         } 
-        fixed top-0 w-full z-50 ${
+        fixed top-0 w-full z-[40] ${
           isHome ? "bg-transparent " : "bg-white"
         } border-b border-transparent z-50  transition-all ease-in-out duration-500
       `}
