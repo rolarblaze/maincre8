@@ -63,7 +63,7 @@ const Service = () => {
       >
         Why Choose{" "}
         <span className="text-primary400 h2 ml-1.5"> SellCrea8?</span>
-        <Highlight className="text-xl" />
+        <Highlight />
       </motion.h2>
 
       <motion.div
