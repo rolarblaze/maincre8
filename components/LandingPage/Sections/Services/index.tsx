@@ -54,7 +54,7 @@ const Card = ({
 
 const Service = () => {
   return (
-    <div className="pb-12 pt-8 lg:py-20 max-w-[1216px] mx-auto max-xl:px-4">
+    <div className="pb-12 pt-8 lg:py-20 max-w-[1216px] mx-auto max-xl:px-6">
       <motion.h2
         className="flex justify-start items-center"
         initial={{ x: -50, opacity: 0 }}
