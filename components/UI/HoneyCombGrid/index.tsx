@@ -15,7 +15,7 @@ const HoneyCombDisplay = () => {
       <ul className={styles.contain}>
         {images.map((image, index) => (
           <li key={index}>
-            <Image src={image} alt="Honey comb image"/>
+            <Image src={image} alt="Honey comb image" placeholder = 'blur' priority />
           </li>
         ))}
       </ul>

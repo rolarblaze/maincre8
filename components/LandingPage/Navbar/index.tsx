@@ -65,7 +65,7 @@ const Navbar: React.FC = () => {
         ${
           navScroll ? "-translate-y-28 opacity-0" : "translate-x-0 opacity-100"
         } 
-        fixed top-0 w-full z-50 ${
+        fixed top-0 w-full z-[40] ${
           isHome ? "bg-transparent " : "bg-white"
         } border-b border-transparent z-50  transition-all ease-in-out duration-500
       `}
@@ -75,7 +75,11 @@ const Navbar: React.FC = () => {
         className={`mx-auto py-3 flex items-center justify-between max-w-[76rem] max-xl:px-4 md:py-6 relative`}
       >
         <Link href="/" className="text-2xl font-bold">
-          <Logo className={isHome && !navColor && "*:fill-white"} />
+          <Logo
+            className={
+              isHome && !navColor ? "*:fill-white" : "*:fill-primary500"
+            }
+          />
         </Link>
 
         {/* the solution and resources weight and size were different */}

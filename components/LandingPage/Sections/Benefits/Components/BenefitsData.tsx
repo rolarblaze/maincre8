@@ -7,6 +7,9 @@ import {
   BlueUserIcon,
 } from "@/public/icons";
 
+import { Benefit, BenefitIndividual } from "@/public/imgs";
+import { StaticImageData } from "next/image";
+
 export const Benefits1 = [
   {
     icons: <BlueCheckIcon />,
@@ -48,5 +51,16 @@ export const Benefits2 = [
     title: "Dedicated Support",
     description:
       "Receive prompt and effective support through our live chat and ticketing system, ensuring all your queries and issues are addressed swiftly.",
+  },
+];
+
+export const BenefitImages: { title: string; src: StaticImageData; }[] = [
+  {
+    title: "Businesses",
+    src: Benefit,
+  },
+  {
+    title: "Individuals",
+    src: BenefitIndividual,
   },
 ];

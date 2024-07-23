@@ -2,9 +2,10 @@
 import React from "react";
 import Button from "@/components/Button";
 import { HighlightDown, HighlightUp } from "@/public/icons";
-import { Benefit } from "@/public/imgs";
+import { Benefit, BenefitIndividual } from "@/public/imgs";
 import Card from "./BenefitsCard";
 import { motion } from "framer-motion";
+import { BenefitImages } from "./BenefitsData";
 
 interface Benefit {
   title: string;
@@ -27,6 +28,10 @@ const Section: React.FC<SectionProps> = ({
   buttonLabel,
   reverse = false,
 }) => {
+  const selectImg = BenefitImages.find((img) => {
+    return img.title === title;
+  })
+  
   return (
     <div className="py-20">
       <div className="flex justify-center">
@@ -57,8 +62,11 @@ const Section: React.FC<SectionProps> = ({
             />
           ))}
         </motion.div>
+        
+        {}
+
         <motion.img
-          src={Benefit.src}
+          src={selectImg?.src.src}
           alt="benefits"
           width={"430px"}
           height={"100%"}
@@ -67,10 +75,7 @@ const Section: React.FC<SectionProps> = ({
           transition={{ delay: 0.5 }}
         />
       </div>
-      <Button
-        label={buttonLabel}
-        classNames="!py-2 !text-xs mt-4 mb-6 w-max mx-auto"
-      />
+      <Button label={buttonLabel} classNames="mt-4 mb-6 w-max mx-auto" />
     </div>
   );
 };

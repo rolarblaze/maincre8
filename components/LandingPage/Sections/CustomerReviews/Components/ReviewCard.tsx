@@ -1,5 +1,3 @@
-import { AvatarIcon } from "@/public/icons";
-
 const Card = ({
   icon,
   review,
@@ -14,7 +12,7 @@ const Card = ({
   <div className="border rounded-lg p-6 flex flex-col gap-6">
     <p className="font-semibold max-w-[300px]">{review}</p>
     <div className="flex gap-3">
-      <AvatarIcon />
+      {icon}
       <div>
         <p className="font-semibold text-base">{name}</p>
         <p className="text-grey600 text-base">{role}</p>
