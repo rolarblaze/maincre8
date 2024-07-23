@@ -69,6 +69,7 @@ const Navbar: React.FC = () => {
           isHome ? "bg-transparent " : "bg-white"
         } border-b border-transparent z-50  transition-all ease-in-out duration-500
       `}
+      style={{ zIndex: 10000 }}
     >
       <nav
         className={`mx-auto py-3 flex items-center justify-between max-w-[76rem] max-xl:px-4 md:py-6 relative`}
@@ -86,7 +87,7 @@ const Navbar: React.FC = () => {
           )}
         >
           <Link href={"/"}>Home</Link>
-          <Link href={"/"}>About Us</Link>
+          <Link href={"/about-us"}>About Us</Link>
           <div
             className="flex items-center gap-2 cursor-pointer "
             onClick={toggleSolutionsMenu}

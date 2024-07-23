@@ -28,6 +28,7 @@ const config: Config = {
       },
       colors: {
         neutral100: "#F2F4F7",
+        grey25: "#040404",
         grey50: "#F9FAFB",
         grey100: "#F0F2F5",
         grey200: "#E4E7EC",
@@ -47,6 +48,7 @@ const config: Config = {
         primary800: "#083160",
         primary900: "#072548",
         ash: "#D0D5DD",
+        ash10: "#5D5D5D",
         "dark-cyan-blue": "#030E1C",
         "alert-green": "#04802E",
         "alert-red": "#CB1A14"
