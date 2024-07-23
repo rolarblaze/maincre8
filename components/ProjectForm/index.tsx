@@ -168,7 +168,7 @@ const ProjectForms = () => {
 
         {/* Select field for type of enquiry */}
         <DropdownSelect
-          label="Type of Enquiry"
+          label="Type of Industry"
           options={INDUSTRY}
           value={industry}
           onChange={handleIndustryChange}
