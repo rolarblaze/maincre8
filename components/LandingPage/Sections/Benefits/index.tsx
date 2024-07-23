@@ -12,7 +12,7 @@ const Benefits = () => {
           buttonLabel="Discover More Benefits"
         />
         <Section
-          title="Businesses"
+          title="Individuals"
           subtitle="Unlock Your Creative Potential with SellCrea8"
           benefits={Benefits2}
           buttonLabel="Discover More Benefits"
