@@ -66,7 +66,7 @@ const Section: React.FC<SectionProps> = ({
         {}
 
         <motion.img
-          src={selectImg?.src.src}
+          src={selectImg?.src?.src}
           alt="benefits"
           width={"430px"}
           height={"100%"}
