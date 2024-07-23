@@ -16,21 +16,21 @@ const HeroSection = () => {
     <section className="relative overflow-hidden size-full min-h-[48rem] pt-24 pb-16 -mt-28">
       <div className="z-20 w-full max-w-[76rem] mx-auto flex flex-col py-20 justify-center items-center gap-8">
         {/* HERO CONTENT */}
-        <div className="text-center size-full flex flex-col justify-center items-center gap-6">
+        <div className="max-sm:max-w-[21rem] text-center size-full flex flex-col justify-center items-center gap-6">
           {/* PILL DIV */}
-          <PillDiv className="mb-0 border-primary100 text-white">
+          <PillDiv className="mb-0 border-primary100 text-white text-[clamp(0.75rem,_3vw,_1.125rem)]">
             Welcome to SellCrea8
           </PillDiv>
 
           {/* HERO TITLE */}
-          <h1 className="-tracking-[0.225rem] leading-loosest text-[5.5rem] font-extrabold text-primary50">
+          <h1 className="-tracking-[0.05rem] lg:-tracking-[0.225rem] leading-[clamp(3rem,_8vw,_6rem)] text-[clamp(2.5rem,_8vw,_5.5rem)] font-extrabold text-primary50">
             Your One-Stop <br />
-            Creative and Digital <br />
-            Solutions Hub
+            Creative and Digital <br className="max-lg:hidden" />
+            Solutions <br className="sm:hidden" />Hub
           </h1>
 
           {/* HERO CONTENT */}
-          <p className="text-center text-white max-w-[55rem]">
+          <p className="text-center text-white lg:max-w-[55rem] sm:px-8">
             SellCrea8 is a productized eCommerce platform designed by SMG to
             deliver affordable, high-quality, and personalized creative and
             digital services. Simplify your service access and project
@@ -57,12 +57,12 @@ const HeroSection = () => {
         <Image
           src={ColorPalette}
           alt="launch"
-          className="absolute top-36 left-60 size-[4.75rem]"
+          className="absolute top-36 left-60 size-[4.75rem] max-lg:hidden"
         />
         <Image
           src={IdeaBulb}
           alt="launch"
-          className="absolute top-36 right-60 size-[4.75rem]"
+          className="absolute top-36 right-60 size-[4.75rem] max-lg:hidden"
         />
         {/* <Image
           src={AttachBrief}
