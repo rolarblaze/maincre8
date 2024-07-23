@@ -27,3 +27,11 @@ export { default as AvatarIcon } from "./UI/AvatarIcon";
 // SHOP PAGE SECTION IMPORTS
 export { default as ServicesSection } from "./Shop";
 export { default as SearchFilterSection } from "./Shop/SearchFilter";
+
+
+//ABOUT US 
+export { default as CreativeApproach } from "./LandingPage/AboutUs/CreativeApproach";
+export { default as Team } from "./LandingPage/AboutUs/Team";
+export { default as Statement } from "./LandingPage/AboutUs/Statement";
+export { default as CoreValues } from "./LandingPage/AboutUs/CoreValues";
+export { default as WhoWeAre } from "./LandingPage/AboutUs/WhoWeAre";
