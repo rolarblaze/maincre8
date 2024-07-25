@@ -29,6 +29,7 @@ const config: Config = {
       },
       colors: {
         neutral100: "#F2F4F7",
+        grey10: "#F5F5F5",
         grey25: "#040404",
         grey50: "#F9FAFB",
         grey100: "#F0F2F5",
