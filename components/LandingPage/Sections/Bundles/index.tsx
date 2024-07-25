@@ -45,7 +45,7 @@ const Bundles = () => {
         </div>
       </div>
 
-      <div className="flex gap-8 md:max-w-[1216px] mx-auto w-full pt-8 max-lg:overflow-x-scroll ">
+      <div className="flex gap-8 md:max-w-[1216px] mx-auto w-full pt-8 max-lg:overflow-x-scroll no-scrollbar">
         {serviceBundles[activeTab].map((service, index) => (
           <Card
             key={index}
