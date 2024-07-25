@@ -92,6 +92,7 @@ const Navbar: React.FC = () => {
         >
           <Link href={"/"}>Home</Link>
           <Link href={"/about-us"}>About Us</Link>
+          <Link href={"/services"}>How it works</Link>
           <div
             className="flex items-center gap-2 cursor-pointer "
             onClick={toggleSolutionsMenu}
