@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
   const [navScroll, setNavScroll] = useState(false);
 
   const pathname = usePathname();
-  const isHome = pathname === "/";
+  const isHome = pathname === "/" || pathname === "/about-us";
 
   const toggleSolutionsMenu = () => {
     setShowSolutions(!showSolutions);
@@ -109,7 +109,7 @@ const Navbar: React.FC = () => {
           </div>
         </section>
 
-        {/* <div className="flex items-center gap-6">
+        <div className="flex items-center gap-6">
           <Link
             href="/login"
             className={`${
@@ -127,7 +127,7 @@ const Navbar: React.FC = () => {
               isHome && !navColor && "bg-white text-primary900"
             }`}
           />
-        </div> */}
+        </div>
 
         {showSolutions && (
           <SolutionsMenu

@@ -20,6 +20,7 @@ const config: Config = {
       backgroundImage: {
         "blue-gradient":
           "linear-gradient(to right bottom, #083160 0%, #083160 25%, #04182F 50%, #04182F 100%)",
+        "getStarted-bg": "url(/images/getstarted-frame.svg)",
       },
       fontSize: {
         "3.5xl": "2rem",
@@ -28,6 +29,7 @@ const config: Config = {
       },
       colors: {
         neutral100: "#F2F4F7",
+        grey10: "#F5F5F5",
         grey25: "#040404",
         grey50: "#F9FAFB",
         grey100: "#F0F2F5",
@@ -51,10 +53,10 @@ const config: Config = {
         ash10: "#5D5D5D",
         "dark-cyan-blue": "#030E1C",
         "alert-green": "#04802E",
-        "alert-red": "#CB1A14"
+        "alert-red": "#CB1A14",
       },
       zIndex: {
-        "10000": "10000"
+        "10000": "10000",
       },
       boxShadow: {
         "custom-strong":
