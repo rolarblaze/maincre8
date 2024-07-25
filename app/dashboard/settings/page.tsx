@@ -13,7 +13,7 @@ export default function Settings() {
       name: "Profile",
     },
     {
-      name: "Security",
+      name: "Password",
     },
     {
       name: "Payment",
