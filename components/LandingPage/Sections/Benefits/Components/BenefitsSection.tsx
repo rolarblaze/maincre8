@@ -33,7 +33,7 @@ const Section: React.FC<SectionProps> = ({
   })
   
   return (
-    <div className="py-20 max-lg:px-5">
+    <div className="py-20 max-xl:px-5">
       <div className="flex justify-center">
         <HighlightDown />
         <h2>
