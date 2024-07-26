@@ -28,10 +28,12 @@ const Footer: React.FC = () => {
             </div>
           </section>
 
-          <section className="grid grid-cols-1 gap-5 md:gap-10 lg:gap-28 md:grid-cols-2 lg:grid-cols-3">
+          <section className="grid grid-cols-2 gap-5 md:gap-10 lg:gap-28  lg:grid-cols-3">
             {footerData.sections.map((section, index) => (
               <div key={index} className="flex flex-col gap-6">
-                <p className="text-base text-grey100/80 ">{section.title}</p>
+                <p className="text-base text-grey100/80 font-semibold">
+                  {section.title}
+                </p>
                 <ul className="flex flex-col gap-4">
                   {section.links.map((link, idx) => (
                     <li key={idx}>{link}</li>
