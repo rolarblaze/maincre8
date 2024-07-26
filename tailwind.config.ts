@@ -21,6 +21,7 @@ const config: Config = {
         "blue-gradient":
           "linear-gradient(to right bottom, #083160 0%, #083160 25%, #04182F 50%, #04182F 100%)",
         "getStarted-bg": "url(/images/getstarted-frame.svg)",
+        "getStarted-bg-mob": "url(/images/getstarted-frame-mob.svg)",
       },
       fontSize: {
         "3.5xl": "2rem",
