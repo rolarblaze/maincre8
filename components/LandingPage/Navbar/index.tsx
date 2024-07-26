@@ -7,16 +7,16 @@ import ResourcesMenu from "./ResourcesMenu";
 import Button from "@/components/Button";
 import Logo from "@/public/icons/logo.svg";
 import Arrow from "@/public/icons/arrow-down.svg";
-import { m } from "framer-motion";
+import { MobileToggle } from "@/public/icons";
 import { twMerge } from "tailwind-merge";
 import { HamburgerIcon } from "@/public/svgs";
 
 const Navbar: React.FC = () => {
   const [showSolutions, setShowSolutions] = useState(false);
   const [showResources, setShowResources] = useState(false);
-
   const [navColor, setNavColor] = useState(false);
   const [navScroll, setNavScroll] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const pathname = usePathname();
   const isHome =
@@ -38,6 +38,10 @@ const Navbar: React.FC = () => {
 
   const closeResourcesMenu = () => {
     setShowResources(false);
+  };
+
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
   };
 
   // HANDLE NAVBAR SCROLL ANIMATION
@@ -84,10 +88,23 @@ const Navbar: React.FC = () => {
           />
         </Link>
 
+<<<<<<< HEAD
+        {/* Mobile Menu Toggle */}
+        <div className="lg:hidden" onClick={toggleMobileMenu}>
+          <MobileToggle className="w-6 h-6" />{" "}
+          {/* Use the imported MobileToggle icon */}
+        </div>
+
+        {/* Desktop Menu */}
+        <section
+          className={twMerge(
+            `hidden lg:flex items-center text-grey900 gap-6 span  font-semibold`,
+=======
         {/* DESKTOP NAVIGATION */}
         <section
           className={twMerge(
             `text-grey900 font-semibold flex items-center gap-6 max-lg:hidden`,
+>>>>>>> 3a7fa1e2eb8c1278e61f711c10be6c50f281149b
             `${isHome && !navColor && "text-white"}`
           )}
         >
@@ -111,7 +128,8 @@ const Navbar: React.FC = () => {
           </div>
         </section>
 
-        <div className="flex items-center gap-6">
+        {/* Desktop Buttons */}
+        <div className="hidden lg:flex items-center gap-6">
           <Link
             href="/login"
             className={`${
@@ -130,6 +148,58 @@ const Navbar: React.FC = () => {
             }`}
           />
         </div>
+
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="absolute top-full left-0 w-full bg-white shadow-md transition-transform transform translate-y-0">
+            <div className="flex flex-col p-4 gap-4">
+              <Link href={"/"} onClick={toggleMobileMenu}>
+                Home
+              </Link>
+              <Link href={"/about-us"} onClick={toggleMobileMenu}>
+                About Us
+              </Link>
+              <Link href={"/services"} onClick={toggleMobileMenu}>
+                How it works
+              </Link>
+              <div
+                className="flex items-center gap-2 cursor-pointer"
+                onClick={toggleSolutionsMenu}
+              >
+                <span>Solutions</span>
+                <Arrow className={isHome && !navColor && "*:fill-white"} />
+              </div>
+              <Link href={"/"} onClick={toggleMobileMenu}>
+                Contact Us
+              </Link>
+              <div
+                className="flex items-center gap-2 cursor-pointer"
+                onClick={toggleResourcesMenu}
+              >
+                <span>Resources</span>
+                <Arrow className={isHome && !navColor && "*:fill-white"} />
+              </div>
+              <Link
+                href="/login"
+                className={`${
+                  isHome && navColor
+                    ? "text-blue-500 hover:text-blue-700"
+                    : "text-primary900 hover:text-primary700"
+                }`}
+                onClick={toggleMobileMenu}
+              >
+                Login
+              </Link>
+              <Button
+                label="Sign Up"
+                link="/signup"
+                classNames={`px-4 py-2 text-sm font-semibold md:text-sm ${
+                  isHome && !navColor && "bg-primary900 text-white"
+                }`}
+              />
+            </div>
+          </div>
+        )}
 
         {showSolutions && (
           <SolutionsMenu
