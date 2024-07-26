@@ -18,7 +18,8 @@ const Navbar: React.FC = () => {
   const [navScroll, setNavScroll] = useState(false);
 
   const pathname = usePathname();
-  const isHome = pathname === "/" || pathname === "/about-us";
+  const isHome =
+    pathname === "/" || pathname === "/about-us" || pathname === "/services";
 
   const toggleSolutionsMenu = () => {
     setShowSolutions(!showSolutions);
