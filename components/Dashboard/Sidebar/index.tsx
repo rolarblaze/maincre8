@@ -1,7 +1,6 @@
 "use client";
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import Logo from "@/public/icons/logo-blue.svg";
 import OverviewIcon from "@/public/svgs/OverviewIcon";
@@ -14,6 +13,7 @@ import SettingsIcon from "@/public/svgs/SettingIcon";
 import UserImage from "@/public/images/user-image.svg";
 import Logout from "@/public/icons/logout.svg";
 import { Tab } from "./types";
+import { MobileToggle } from "@/public/icons";
 
 type SidebarProps = {
   setActiveTab: (tab: Tab) => void;

@@ -47,3 +47,4 @@ export { default as ToolTipIcon } from "./tooltip.svg";
 export { default as ThrashIcon } from "./bin.svg";
 export { default as DownloadIcon } from "./download.svg";
 export { default as UserProfilePhoto } from "./user-profile-picture.svg";
+export { default as MobileToggle } from "./hamburger.svg";
