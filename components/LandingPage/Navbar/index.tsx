@@ -9,6 +9,7 @@ import Logo from "@/public/icons/logo.svg";
 import Arrow from "@/public/icons/arrow-down.svg";
 import { MobileToggle } from "@/public/icons";
 import { twMerge } from "tailwind-merge";
+import { HamburgerIcon } from "@/public/svgs";
 
 const Navbar: React.FC = () => {
   const [showSolutions, setShowSolutions] = useState(false);
@@ -77,7 +78,7 @@ const Navbar: React.FC = () => {
       style={{ zIndex: 10000 }}
     >
       <nav
-        className={`mx-auto py-3 flex items-center justify-between max-w-[76rem] max-xl:px-4 md:py-6 relative`}
+        className={`mx-auto py-6 flex items-center justify-between max-w-[76rem] max-xl:px-4 relative`}
       >
         <Link href="/" className="text-2xl font-bold">
           <Logo
@@ -87,16 +88,10 @@ const Navbar: React.FC = () => {
           />
         </Link>
 
-        {/* Mobile Menu Toggle */}
-        <div className="lg:hidden" onClick={toggleMobileMenu}>
-          <MobileToggle className="w-6 h-6" />{" "}
-          {/* Use the imported MobileToggle icon */}
-        </div>
-
-        {/* Desktop Menu */}
+        {/* DESKTOP NAVIGATION */}
         <section
           className={twMerge(
-            `hidden lg:flex items-center text-grey900 gap-6 span  font-semibold`,
+            `text-grey900 font-semibold flex items-center gap-6 max-lg:hidden`,
             `${isHome && !navColor && "text-white"}`
           )}
         >
@@ -205,6 +200,11 @@ const Navbar: React.FC = () => {
             onClose={closeResourcesMenu}
           />
         )}
+
+        {/* MOBILE NAVIGATION */}
+        <div>
+          <HamburgerIcon />
+        </div>
       </nav>
     </header>
   );

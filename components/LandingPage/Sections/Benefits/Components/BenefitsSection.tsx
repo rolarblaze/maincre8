@@ -33,7 +33,7 @@ const Section: React.FC<SectionProps> = ({
   })
   
   return (
-    <div className="py-20">
+    <div className="py-20 max-xl:px-5">
       <div className="flex justify-center">
         <HighlightDown />
         <h2>
@@ -41,10 +41,10 @@ const Section: React.FC<SectionProps> = ({
         </h2>
         <HighlightUp />
       </div>
-      <p>{subtitle}</p>
+      <p className="max-lg:text-center">{subtitle}</p>
       <div
-        className={`w-full flex items-center justify-between my-8 ${
-          reverse ? "flex-row-reverse" : ""
+        className={`w-full flex max-lg:flex-col max-lg:gap-8 items-center justify-between my-8 ${
+          reverse ? "lg:flex-row-reverse" : ""
         }`}
       >
         <motion.div
@@ -63,8 +63,6 @@ const Section: React.FC<SectionProps> = ({
           ))}
         </motion.div>
         
-        {}
-
         <motion.img
           src={selectImg?.src?.src}
           alt="benefits"

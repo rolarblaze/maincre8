@@ -11,7 +11,7 @@ const FAQ = () => {
   };
 
   return (
-    <section className="mx-auto w-full flex flex-col items-center gap-8 bg-white z-20">
+    <section className="mx-auto max-xl:px-5 w-full flex flex-col items-center gap-8 bg-white z-20">
       <motion.div
         className="max-w-[721px] w-full flex flex-col items-center gap-2"
         initial={{ y: -50, opacity: 0 }}
