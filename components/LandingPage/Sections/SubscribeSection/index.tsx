@@ -50,7 +50,7 @@ const SubscribeSection = () => {
 
   return (
     <section className="w-full bg-grey800 z-20">
-      <div className="py-20 mx-auto max-w-[76rem] flex justify-between items-center">
+      <div className="py-20 mx-auto max-w-[76rem] flex max-xl:px-5 max-md:flex-col-reverse max-md:gap-6 justify-between items-center">
         <div className="space-y-4 ">
           {/* PILL DIV */}
           <div className="border p-2 w-fit border-grey50 rounded-[0.625rem]">
@@ -74,7 +74,7 @@ const SubscribeSection = () => {
               label=""
               type="text"
               placeholder="Enter email address"
-              classNames="max-w-[13rem] bg-white"
+              classNames="max-w-[13rem] bg-white py-3.5"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />

@@ -14,7 +14,7 @@ const Card = ({
   price: string;
   features: string[];
 }) => (
-  <div className="bg-white py-4 px-8 rounded-lg">
+  <div className="bg-white py-4 px-8 rounded-lg min-w-[18.875rem]">
     <div className="flex items-center justify-center gap-2 bg-grey50 rounded-lg py-1.5 mb-4">
       <p>{icon}</p>
       <p className="font-semibold text-grey500">{title}</p>

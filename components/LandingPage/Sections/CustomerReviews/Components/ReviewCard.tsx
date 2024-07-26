@@ -9,7 +9,7 @@ const Card = ({
   name: string;
   role: string;
 }) => (
-  <div className="border rounded-lg p-6 flex flex-col gap-6">
+  <div className="border rounded-lg p-6 flex flex-col gap-6 w-full max-lg:min-w-80">
     <p className="font-semibold max-w-[300px]">{review}</p>
     <div className="flex gap-3">
       {icon}

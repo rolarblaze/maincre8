@@ -54,9 +54,9 @@ const Card = ({
 
 const Service = () => {
   return (
-    <div className="py-20 max-w-[1216px] mx-auto">
+    <div className="pb-12 pt-8 lg:py-20 max-w-[1216px] mx-auto max-xl:px-6">
       <motion.h2
-        className="flex"
+        className="flex justify-start items-center"
         initial={{ x: -50, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.5 }}
@@ -67,7 +67,7 @@ const Service = () => {
       </motion.h2>
 
       <motion.div
-        className="grid grid-cols-4 gap-8"
+        className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8"
         initial={{ y: 100, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.5 }}
