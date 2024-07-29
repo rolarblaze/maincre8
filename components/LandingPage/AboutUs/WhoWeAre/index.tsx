@@ -32,12 +32,14 @@ const WhoWeAre = () => {
             media and marketing space.
           </p>
         </div>
-        <div className="w-full h-auto">
-          <div className="hidden w-full rounded-lg overflow-hidden md:flex">
-            <TeamImage className="w-full h-full rounded-lg" />
-          </div>
-          <div className="w-full rounded-lg overflow-hidden md:hidden">
-            <TeamImageMobile className="w-full h-full rounded-lg" />
+        <div className="w-full h-auto m-auto">
+          <div className="flex justify-center items-center">
+            <div className="hidden w-full rounded-lg overflow-hidden md:flex">
+              <TeamImage className="w-full h-full rounded-lg" />
+            </div>
+            <div className="w-full rounded-lg overflow-hidden md:hidden">
+              <TeamImageMobile className="w-fit m-auto  h-full rounded-lg" />
+            </div>
           </div>
 
           {/* <div className="max-w-[486px] w-full h-auto rounded-lg overflow-hidden">
