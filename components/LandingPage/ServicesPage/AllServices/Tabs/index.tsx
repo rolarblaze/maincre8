@@ -15,12 +15,26 @@ const Section = ({ title, subTitle, content }: SectionProps) => {
     <>
       <h2 className="mb-6">{title}</h2>
       <p className="mb-10">{subTitle}</p>
+
       {content?.map((content, index) => (
         <div
-          className="grid grid-cols-2 items-center gap-8 mb-20"
+          className={`flex max-md:flex-col ${(Number(index) % 2 === 0) && "md:flex-row-reverse"} items-center gap-8 mb-20`}
           key={content.heading}
         >
-          {index === 1 ? (
+          <>
+            <img
+              src={"/images/servicesImages/placeholder.svg"}
+              alt={content.heading}
+              width={"50%"}
+              height={"100%"}
+              className="md:w-1/2 w-full"
+            />
+            <div className="text-left">
+              <h4 className="mb-4">{content.heading}</h4>
+              <p>{content.description}</p>
+            </div>
+          </>
+          {/* {index === 1 ? (
             <>
               <img
                 src={"/images/servicesImages/placeholder.svg"}
@@ -46,7 +60,7 @@ const Section = ({ title, subTitle, content }: SectionProps) => {
                 height={"100%"}
               />
             </>
-          )}
+          )} */}
         </div>
       ))}
     </>

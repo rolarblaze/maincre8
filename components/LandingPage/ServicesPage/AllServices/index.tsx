@@ -44,7 +44,7 @@ const AllServices = () => {
           </span>
         ))}
       </div>
-      <div className="max-w-[1219px] mx-auto text-center mt-[120px]">
+      <div className="max-w-[1219px] max-xl:px-6 mx-auto text-center mt-[120px]">
         <Section {...activeService} />
       </div>
     </section>
