@@ -29,11 +29,11 @@ const AllServices = () => {
 
   return (
     <section className="relative">
-      <div className="sticky top-0 z-10 max-w-[1216px] mx-auto bg-white shadow-dark-blue flex items-center gap-7 py-7 px-36">
+      <div className="sticky top-0 no-scrollbar z-10 max-lg:overflow-x-auto max-w-[1216px] mx-auto bg-white shadow-dark-blue flex items-center gap-2 lg:gap-7 py-7 px-6 lg:px-36">
         {Tabs.map((tab, i) => (
           <span
             key={i}
-            className={`text-sm font-medium border rounded-lg py-1.5 px-3 cursor-pointer ${
+            className={`text-sm text-nowrap font-medium border rounded-lg py-1.5 px-3 cursor-pointer ${
               tab === activeTab
                 ? "bg-black text-white"
                 : "text-grey900 border-grey500"
