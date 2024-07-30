@@ -88,23 +88,10 @@ const Navbar: React.FC = () => {
           />
         </Link>
 
-<<<<<<< HEAD
-        {/* Mobile Menu Toggle */}
-        <div className="lg:hidden" onClick={toggleMobileMenu}>
-          <MobileToggle className="w-6 h-6" />{" "}
-          {/* Use the imported MobileToggle icon */}
-        </div>
-
-        {/* Desktop Menu */}
-        <section
-          className={twMerge(
-            `hidden lg:flex items-center text-grey900 gap-6 span  font-semibold`,
-=======
         {/* DESKTOP NAVIGATION */}
         <section
           className={twMerge(
             `text-grey900 font-semibold flex items-center gap-6 max-lg:hidden`,
->>>>>>> 3a7fa1e2eb8c1278e61f711c10be6c50f281149b
             `${isHome && !navColor && "text-white"}`
           )}
         >
