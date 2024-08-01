@@ -1,15 +1,14 @@
 "use client";
-import { useEffect, useState } from "react";
+import Button from "@/components/Button";
+import Arrow from "@/public/icons/arrow-down.svg";
+import Logo from "@/public/icons/logo.svg";
+import { HamburgerIcon } from "@/public/svgs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import SolutionsMenu from "./SolutionsMenu";
-import ResourcesMenu from "./ResourcesMenu";
-import Button from "@/components/Button";
-import Logo from "@/public/icons/logo.svg";
-import Arrow from "@/public/icons/arrow-down.svg";
-import { MobileToggle } from "@/public/icons";
+import { useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
-import { HamburgerIcon } from "@/public/svgs";
+import ResourcesMenu from "./ResourcesMenu";
+import SolutionsMenu from "./SolutionsMenu";
 
 const Navbar: React.FC = () => {
   const [showSolutions, setShowSolutions] = useState(false);
@@ -87,24 +86,10 @@ const Navbar: React.FC = () => {
             }
           />
         </Link>
-
-<<<<<<< HEAD
-        {/* Mobile Menu Toggle */}
-        <div className="lg:hidden" onClick={toggleMobileMenu}>
-          <MobileToggle className="w-6 h-6" />{" "}
-          {/* Use the imported MobileToggle icon */}
-        </div>
-
-        {/* Desktop Menu */}
-        <section
-          className={twMerge(
-            `hidden lg:flex items-center text-grey900 gap-6 span  font-semibold`,
-=======
         {/* DESKTOP NAVIGATION */}
         <section
           className={twMerge(
             `text-grey900 font-semibold flex items-center gap-6 max-lg:hidden`,
->>>>>>> 3a7fa1e2eb8c1278e61f711c10be6c50f281149b
             `${isHome && !navColor && "text-white"}`
           )}
         >
@@ -127,8 +112,7 @@ const Navbar: React.FC = () => {
             <Arrow className={isHome && !navColor && "*:fill-white"} />
           </div>
         </section>
-
-        {/* Desktop Buttons */}
+        f {/* Desktop Buttons */}
         <div className="hidden lg:flex items-center gap-6">
           <Link
             href="/login"
@@ -148,7 +132,6 @@ const Navbar: React.FC = () => {
             }`}
           />
         </div>
-
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="absolute top-full left-0 w-full bg-white shadow-md transition-transform transform translate-y-0">
@@ -200,7 +183,6 @@ const Navbar: React.FC = () => {
             </div>
           </div>
         )}
-
         {showSolutions && (
           <SolutionsMenu
             isVisible={showSolutions}
@@ -213,7 +195,6 @@ const Navbar: React.FC = () => {
             onClose={closeResourcesMenu}
           />
         )}
-
         {/* MOBILE NAVIGATION */}
         <div>
           <HamburgerIcon />

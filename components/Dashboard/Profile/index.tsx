@@ -15,9 +15,34 @@ export default function Profile() {
   const [countryList, setCountryList] = useState<
     { label: string; value: string }[]
   >([]);
+  const [stateOfResidence, setStateOfResidence] = useState("");
+  const [address, setAddress] = useState("");
 
   const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCountry(e.target.value);
+  };
+
+  const handleSaveChanges = () => {
+    const formData = {
+      firstName,
+      lastName,
+      phone,
+      country,
+      stateOfResidence,
+      address,
+    };
+
+    console.log(formData);
+  };
+
+  const handleResetChanges = () => {
+    setFirstName("");
+    setLastName("");
+    setEmail("");
+    setPhone("");
+    setCountry("");
+    setStateOfResidence("");
+    setAddress("");
   };
 
   useEffect(() => {
@@ -43,6 +68,7 @@ export default function Profile() {
 
     fetchCountryCodes();
   }, []);
+
   return (
     <form className="border border-grey200 p-6 rounded-lg flex flex-col gap-6 max-w-[740px]">
       <p className="text-lg font-semibold">Basic information</p>
@@ -94,23 +120,28 @@ export default function Profile() {
         type="text"
         label="State of residence"
         placeholder="Lagos"
-        value={lastName}
-        onChange={(e) => setLastName(e.target.value)}
+        value={stateOfResidence}
+        onChange={(e) => setStateOfResidence(e.target.value)}
       />
 
       <InputField
         type="text"
         label="Address"
         placeholder="example, yaba, lagos"
-        value={lastName}
-        onChange={(e) => setLastName(e.target.value)}
+        value={address}
+        onChange={(e) => setAddress(e.target.value)}
       />
 
       <div className="flex gap-4">
-        <Button label="Save changes" classNames=" w-fit py-3 px-4" />
+        <Button
+          label="Save changes"
+          classNames="w-fit py-3 px-4"
+          onClick={handleSaveChanges}
+        />
         <Button
           label="Reset changes"
-          classNames=" w-fit bg-transparent text-primary600 border border-primary400  py-3 px-4"
+          classNames="w-fit bg-transparent text-primary600 border border-primary400 py-3 px-4"
+          onClick={handleResetChanges}
         />
       </div>
     </form>
