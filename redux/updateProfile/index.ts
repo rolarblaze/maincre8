@@ -1,23 +1,23 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { updateInfo } from "./updateProfile";
 
-interface BriefState {
+interface ProfileState {
   briefData: any | null;
   status: "idle" | "loading" | "succeeded" | "failed";
   error: string | null;
 }
 
-const initialState: BriefState = {
+const initialState: ProfileState = {
   briefData: null,
   status: "idle",
   error: null,
 };
 
-const briefSlice = createSlice({
-  name: "brief",
+const updateProfileSlice = createSlice({
+  name: "updateProfile",
   initialState,
   reducers: {
-    clearBriefState: (state) => {
+    clearProfileState: (state) => {
       state.briefData = null;
       state.status = "idle";
       state.error = null;
@@ -41,5 +41,5 @@ const briefSlice = createSlice({
   },
 });
 
-export const { clearBriefState } = briefSlice.actions;
-export const briefReducer = briefSlice.reducer;
+export const { clearProfileState } = updateProfileSlice.actions;
+export const updateProfileReducer = updateProfileSlice.reducer;
