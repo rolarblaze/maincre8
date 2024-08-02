@@ -141,6 +141,7 @@ export default function Profile() {
         label="Phone number"
       />
 
+      {/* maybe delay the whole component... but it's kinda slow  */}
       {countryListLoading ? (
         <p>Loading country list...</p>
       ) : (
