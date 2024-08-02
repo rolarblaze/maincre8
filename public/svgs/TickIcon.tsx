@@ -1,7 +1,7 @@
 import React from 'react';
 
 interface TickProps {
-  color: string;
+  color?: string;
 }
 
 const TickIcon: React.FC<TickProps> = ({ color }) => {
