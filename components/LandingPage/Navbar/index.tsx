@@ -12,6 +12,7 @@ import { twMerge } from "tailwind-merge";
 import { BigCancelIcon } from "@/public/svgs/BigCancelIcon";
 import { Url } from "next/dist/shared/lib/router/router";
 import MobileSolutionsMenu from "./MobileSolutionsMenu";
+import MobileResourcesMenu from "./MobileResourcesMenu";
 import { useEffect, useState } from "react";
 
 const Navbar: React.FC = () => {
@@ -206,6 +207,8 @@ const Navbar: React.FC = () => {
                           {nav.name}
                         </Link>
                       )}
+
+                      {/* Solutions Menu */}
                       {nav.name === "Solutions" && (
                         <div>
                           {showMobileSolutions ? (
@@ -223,6 +226,32 @@ const Navbar: React.FC = () => {
                               <button
                                 className="w-fit h-fit cursor-pointer self-center"
                                 onClick={toggleMobileSolutionsMenu}
+                              >
+                                <ArrowDown />
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Resources menu */}
+                      {nav.name === "Resources" && (
+                        <div>
+                          {showMobileResources ? (
+                            <MobileResourcesMenu
+                              onClick={() => setShowMobileResources(false)}
+                              className={`${
+                                showMobileResources
+                                  ? "animate-fadeInDown"
+                                  : "animate-fadeOutUp"
+                              }`}
+                            />
+                          ) : (
+                            <div className="flex gap-3">
+                              <span className="font-semibold">Resources</span>
+                              <button
+                                className="w-fit h-fit cursor-pointer self-center"
+                                onClick={toggleMobileResourcesMenu}
                               >
                                 <ArrowDown />
                               </button>
