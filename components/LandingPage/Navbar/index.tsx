@@ -194,14 +194,14 @@ const Navbar: React.FC = () => {
             {/* Mobile nav body */}
             <div className="flex flex-col p-4 gap-4">
               {/* Mobile navigations */}
-              <div className="flex flex-col gap-6 text-grey25">
+              <div className="flex flex-col gap-7 text-grey25">
                 {mobileNavData.map((nav, navIdx) => {
                   return (
                     <div key={navIdx}>
                       {nav.name !== "Solutions" && nav.name !== "Resources" && (
                         <Link
                           href={nav.href as Url}
-                          className="font-semibold"
+                          className="font-semibold text-grey900"
                           onClick={toggleMobileMenu}
                         >
                           {nav.name}
@@ -222,7 +222,7 @@ const Navbar: React.FC = () => {
                             />
                           ) : (
                             <div className="flex gap-3">
-                              <span className="font-semibold">Solutions</span>
+                              <span className="font-semibold text-grey900">Solutions</span>
                               <button
                                 className="w-fit h-fit cursor-pointer self-center"
                                 onClick={toggleMobileSolutionsMenu}
@@ -248,7 +248,7 @@ const Navbar: React.FC = () => {
                             />
                           ) : (
                             <div className="flex gap-3">
-                              <span className="font-semibold">Resources</span>
+                              <span className="font-semibold text-grey900">Resources</span>
                               <button
                                 className="w-fit h-fit cursor-pointer self-center"
                                 onClick={toggleMobileResourcesMenu}
@@ -268,7 +268,7 @@ const Navbar: React.FC = () => {
               <div className="flex flex-col gap-4">
                 <Link
                   href="/login"
-                  className={`py-2 rounded-lg text-center border border-primary500 text-primary500 font-semibold          
+                  className={`py-[9.5px] rounded-lg text-center border border-primary500 text-primary500 font-semibold          
                   `}
                   onClick={toggleMobileMenu}
                 >
@@ -277,7 +277,7 @@ const Navbar: React.FC = () => {
                 <Button
                   label="Sign Up"
                   link="/signup"
-                  classNames={`px-4 py-2 text-sm font-medium md:text-sm bg-primary500`}
+                  classNames={`px-4 py-[9.5px] text-sm font-medium md:text-sm bg-primary50`}
                 />
               </div>
             </div>

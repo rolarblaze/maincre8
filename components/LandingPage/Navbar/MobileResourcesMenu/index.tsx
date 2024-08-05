@@ -50,7 +50,7 @@ const MobileResourcesMenu: React.FC<MobileResourcesMenuProps> = ({
   return (
     <div className={`flex flex-col bg-grey50 ${className}`}>
       <div className="w-full flex justify-between border-b border-primary500 py-4 px-3">
-        <span className="font-semibold text-primary500">Resources</span>
+        <span className="font-medium text-primary500">Resources</span>
         <button className="w-fit h-fit" onClick={onClick}>
           <CancelIcon />
         </button>
