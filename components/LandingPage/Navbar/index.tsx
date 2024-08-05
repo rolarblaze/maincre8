@@ -1,14 +1,18 @@
 "use client";
-import Button from "@/components/Button";
 import Arrow from "@/public/icons/arrow-down.svg";
 import Logo from "@/public/icons/logo.svg";
 import { HamburgerIcon } from "@/public/svgs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
-import { twMerge } from "tailwind-merge";
-import ResourcesMenu from "./ResourcesMenu";
 import SolutionsMenu from "./SolutionsMenu";
+import ResourcesMenu from "./ResourcesMenu";
+import Button from "@/components/Button";
+import { ArrowDown, MobileToggle } from "@/public/icons";
+import { twMerge } from "tailwind-merge";
+import { BigCancelIcon } from "@/public/svgs/BigCancelIcon";
+import { Url } from "next/dist/shared/lib/router/router";
+import MobileSolutionsMenu from "./MobileSolutionsMenu";
+import { useEffect, useState } from "react";
 
 const Navbar: React.FC = () => {
   const [showSolutions, setShowSolutions] = useState(false);
@@ -16,10 +20,39 @@ const Navbar: React.FC = () => {
   const [navColor, setNavColor] = useState(false);
   const [navScroll, setNavScroll] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [showMobileSolutions, setShowMobileSolutions] = useState(false);
+  const [showMobileResources, setShowMobileResources] = useState(false);
 
   const pathname = usePathname();
   const isHome =
     pathname === "/" || pathname === "/about-us" || pathname === "/services";
+
+  const mobileNavData = [
+    {
+      name: "Home",
+      href: "/",
+    },
+    {
+      name: "About Us",
+      href: "/about-us",
+    },
+    {
+      name: "How It Works",
+      href: "/services",
+    },
+    {
+      name: "Solutions",
+      href: "",
+    },
+    {
+      name: "Contact Us",
+      href: "/",
+    },
+    {
+      name: "Resources",
+      href: "",
+    },
+  ];
 
   const toggleSolutionsMenu = () => {
     setShowSolutions(!showSolutions);
@@ -41,6 +74,16 @@ const Navbar: React.FC = () => {
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+  const toggleMobileSolutionsMenu = () => {
+    setShowMobileSolutions(!showSolutions);
+    if (showMobileResources) setShowMobileResources(false); // Close resources menu if it's open
+  };
+
+  const toggleMobileResourcesMenu = () => {
+    setShowMobileResources(!showResources);
+    if (showMobileSolutions) setShowMobileSolutions(false); // Close solutions menu if it's open
   };
 
   // HANDLE NAVBAR SCROLL ANIMATION
@@ -70,9 +113,8 @@ const Navbar: React.FC = () => {
         ${
           navScroll ? "-translate-y-28 opacity-0" : "translate-x-0 opacity-100"
         } 
-        fixed top-0 w-full z-[40] ${
-          isHome ? "bg-transparent " : "bg-white"
-        } border-b border-transparent z-50  transition-all ease-in-out duration-500
+        ${isHome ? "bg-transparent " : "bg-white"}
+        fixed top-0 w-full border-b border-transparent z-50  transition-all ease-in-out duration-500 border-box
       `}
       style={{ zIndex: 10000 }}
     >
@@ -134,52 +176,81 @@ const Navbar: React.FC = () => {
         </div>
         {/* Mobile Menu */}
         {mobileMenuOpen && (
-          <div className="absolute top-full left-0 w-full bg-white shadow-md transition-transform transform translate-y-0">
-            <div className="flex flex-col p-4 gap-4">
-              <Link href={"/"} onClick={toggleMobileMenu}>
-                Home
+          <div className="absolute top-0 left-0 w-full bg-white shadow-md transition-transform transform translate-y-0 flex flex-col gap-3 h-screen overflow-y-auto">
+            {/* Mobile Nav header */}
+            <div className="flex justify-between w-full py-4 pl-5 pr-3 border-b border-grey300">
+              <Link href="/" className="text-2xl font-bold">
+                <Logo className="*:fill-primary500" />
               </Link>
-              <Link href={"/about-us"} onClick={toggleMobileMenu}>
-                About Us
-              </Link>
-              <Link href={"/services"} onClick={toggleMobileMenu}>
-                How it works
-              </Link>
-              <div
-                className="flex items-center gap-2 cursor-pointer"
-                onClick={toggleSolutionsMenu}
-              >
-                <span>Solutions</span>
-                <Arrow className={isHome && !navColor && "*:fill-white"} />
-              </div>
-              <Link href={"/"} onClick={toggleMobileMenu}>
-                Contact Us
-              </Link>
-              <div
-                className="flex items-center gap-2 cursor-pointer"
-                onClick={toggleResourcesMenu}
-              >
-                <span>Resources</span>
-                <Arrow className={isHome && !navColor && "*:fill-white"} />
-              </div>
-              <Link
-                href="/login"
-                className={`${
-                  isHome && navColor
-                    ? "text-blue-500 hover:text-blue-700"
-                    : "text-primary900 hover:text-primary700"
-                }`}
+              <button
+                className="w-fit h-fit cursor-pointer"
                 onClick={toggleMobileMenu}
               >
-                Login
-              </Link>
-              <Button
-                label="Sign Up"
-                link="/signup"
-                classNames={`px-4 py-2 text-sm font-semibold md:text-sm ${
-                  isHome && !navColor && "bg-primary900 text-white"
-                }`}
-              />
+                <BigCancelIcon />
+              </button>
+            </div>
+
+            {/* Mobile nav body */}
+            <div className="flex flex-col p-4 gap-4">
+              {/* Mobile navigations */}
+              <div className="flex flex-col gap-6 text-grey25">
+                {mobileNavData.map((nav, navIdx) => {
+                  return (
+                    <div key={navIdx}>
+                      {nav.name !== "Solutions" && nav.name !== "Resources" && (
+                        <Link
+                          href={nav.href as Url}
+                          className="font-semibold"
+                          onClick={toggleMobileMenu}
+                        >
+                          {nav.name}
+                        </Link>
+                      )}
+                      {nav.name === "Solutions" && (
+                        <div>
+                          {showMobileSolutions ? (
+                            <MobileSolutionsMenu
+                              onClick={() => setShowMobileSolutions(false)}
+                              className={`${
+                                showMobileSolutions
+                                  ? "animate-fadeInDown"
+                                  : "animate-fadeOutUp"
+                              }`}
+                            />
+                          ) : (
+                            <div className="flex gap-3">
+                              <span className="font-semibold">Solutions</span>
+                              <button
+                                className="w-fit h-fit cursor-pointer self-center"
+                                onClick={toggleMobileSolutionsMenu}
+                              >
+                                <ArrowDown />
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Nav Buttons */}
+              <div className="flex flex-col gap-4">
+                <Link
+                  href="/login"
+                  className={`py-2 rounded-lg text-center border border-primary500 text-primary500 font-semibold          
+                  `}
+                  onClick={toggleMobileMenu}
+                >
+                  Login
+                </Link>
+                <Button
+                  label="Sign Up"
+                  link="/signup"
+                  classNames={`px-4 py-2 text-sm font-medium md:text-sm bg-primary500`}
+                />
+              </div>
             </div>
           </div>
         )}
@@ -195,10 +266,14 @@ const Navbar: React.FC = () => {
             onClose={closeResourcesMenu}
           />
         )}
-        {/* MOBILE NAVIGATION */}
-        <div>
+
+        {/* MOBILE HAMBURGER */}
+        <button
+          className="md:hidden w-fit h-fit cursor-pointer"
+          onClick={toggleMobileMenu}
+        >
           <HamburgerIcon />
-        </div>
+        </button>
       </nav>
     </header>
   );
