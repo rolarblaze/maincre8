@@ -1,7 +1,7 @@
 "use client";
 import { Button, FullLoader, TabsToggle } from "@/components";
 import { ArrowBackIcon } from "@/public/icons";
-import AllIcon from "@/public/svgs/HomeAltIcon";
+import { AllIcon } from "@/public/svgs";
 import { getPackageDetails } from "@/redux/getPackage/getPkg";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import Link from "next/link";

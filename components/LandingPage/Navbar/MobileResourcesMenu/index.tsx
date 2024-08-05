@@ -1,6 +1,6 @@
 import React from "react";
-import CircleCancel from "@/public/svgs/CircleCancel";
 import { BlogIcon, DemoIcon, GuideIcon, ResourceIcon, WebinarIcon } from "@/public/icons";
+import { CircleCancel } from "@/public/svgs";
 
 interface MobileResourcesMenuProps {
   onClick: () => void;

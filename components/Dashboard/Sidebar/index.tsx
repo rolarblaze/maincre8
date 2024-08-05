@@ -1,17 +1,11 @@
 "use client";
 import UserImage from "@/public/images/user-image.svg";
-import CalendarIcon from "@/public/svgs/CalendarIcon";
-import HistoryIcon from "@/public/svgs/HistoryIcon";
-import NotificationsIcon from "@/public/svgs/NotificationIcon";
-import OverviewIcon from "@/public/svgs/OverviewIcon";
-import ServicesIcon from "@/public/svgs/ServicesIcon";
-import SettingsIcon from "@/public/svgs/SettingIcon";
-import SupportIcon from "@/public/svgs/SupportIcon";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { Tab } from "./types";
 import { Logo, Logout } from "@/public/icons";
+import { CalendarIcon, HistoryIcon, NotificationsIcon, OverviewIcon, ServicesIcon, SettingsIcon, SupportIcon } from "@/public/svgs";
 
 type SidebarProps = {
   setActiveTab: (tab: Tab) => void;

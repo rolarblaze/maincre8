@@ -2,8 +2,8 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { removeAlert } from "@/redux/alerts/index";
-import Tick from "@/public/svgs/TickIcon";
-import { Close } from "@/public/svgs";
+import { Tick } from "@/public/svgs";
+import { Close } from "@/public/icons";
 
 interface AlertProps {
   id: string;
