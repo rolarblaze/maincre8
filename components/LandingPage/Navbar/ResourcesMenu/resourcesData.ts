@@ -1,8 +1,5 @@
-import DemoIcon from '@/public/icons/book.svg';
-import ResourceIcon from '@/public/icons/file-cloud.svg';
-import WebinarIcon from '@/public/icons/devices.svg';
-import BlogIcon from '@/public/icons/box.svg';
-import GuideIcon from '@/public/icons/gps.svg';
+import { DemoIcon, ResourceIcon, WebinarIcon, BlogIcon, GuideIcon } from "@/public/icons";
+
 
 export const leftResourcesData = [
   {

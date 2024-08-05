@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { removeAlert } from "@/redux/alerts/index";
 import Tick from "@/public/svgs/TickIcon";
-import Close from "@/public/icons/multiply.svg";
+import { Close } from "@/public/svgs";
 
 interface AlertProps {
   id: string;

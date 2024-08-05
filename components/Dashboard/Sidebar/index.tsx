@@ -1,6 +1,4 @@
 "use client";
-import Logo from "@/public/icons/logo-blue.svg";
-import Logout from "@/public/icons/logout.svg";
 import UserImage from "@/public/images/user-image.svg";
 import CalendarIcon from "@/public/svgs/CalendarIcon";
 import HistoryIcon from "@/public/svgs/HistoryIcon";
@@ -13,6 +11,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { Tab } from "./types";
+import { Logo, Logout } from "@/public/icons";
 
 type SidebarProps = {
   setActiveTab: (tab: Tab) => void;

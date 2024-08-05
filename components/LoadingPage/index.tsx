@@ -1,9 +1,8 @@
 "use client";
 
 import React, { FC } from "react";
-import Image from "next/image";
+import { Logo } from "@/public/icons";
 
-import Logo from "@/public/icons/logo.svg";
 
 const LoadingPage: FC = ({}) => {
   return (

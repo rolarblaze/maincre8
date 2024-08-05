@@ -1,5 +1,6 @@
+import { Icon } from "@/public/icons";
 import React from "react";
-import Icon from "@/public/icons/vision-icon.svg";
+
 
 const statements = [
   {
