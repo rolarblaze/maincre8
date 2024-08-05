@@ -1,10 +1,10 @@
 import React from "react";
-import { CancelIcon } from "@/public/icons";
 import DemoIcon from '@/public/icons/book.svg';
 import ResourceIcon from '@/public/icons/file-cloud.svg';
 import WebinarIcon from '@/public/icons/devices.svg';
 import BlogIcon from '@/public/icons/box.svg';
 import GuideIcon from '@/public/icons/gps.svg';
+import CircleCancel from "@/public/svgs/CircleCancel";
 
 interface MobileResourcesMenuProps {
   onClick: () => void;
@@ -52,7 +52,7 @@ const MobileResourcesMenu: React.FC<MobileResourcesMenuProps> = ({
       <div className="w-full flex justify-between border-b border-primary500 py-4 px-3">
         <span className="font-medium text-primary500">Resources</span>
         <button className="w-fit h-fit" onClick={onClick}>
-          <CancelIcon />
+          <CircleCancel />
         </button>
       </div>
       <div className="flex flex-col">
@@ -69,7 +69,7 @@ const MobileResourcesMenu: React.FC<MobileResourcesMenuProps> = ({
                   {resource.title}
                 </span>
               </div>
-              <p className="text-sm group-hover:text-primary500">
+              <p className="text-sm group-hover:text-primary500 text-grey600">
                 {resource.description}
               </p>
             </div>

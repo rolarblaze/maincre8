@@ -1,6 +1,7 @@
 import React from "react";
 import { solutionsData } from "../SolutionsMenu/solutionsData";
 import { CancelIcon } from "@/public/icons";
+import CircleCancel from "@/public/svgs/CircleCancel";
 
 interface MobileSolutionsMenuProps {
   onClick: () => void;
@@ -16,7 +17,7 @@ const MobileSolutionsMenu: React.FC<MobileSolutionsMenuProps> = ({
       <div className="w-full flex justify-between border-b border-primary500 py-4 px-3">
         <span className="font-medium text-primary500">Solutions</span>
         <button className="w-fit h-fit" onClick={onClick}>
-          <CancelIcon />
+          <CircleCancel />
         </button>
       </div>
       <div className="flex flex-col">
@@ -27,13 +28,15 @@ const MobileSolutionsMenu: React.FC<MobileSolutionsMenuProps> = ({
               key={soluIdx}
               className="group hover:text-primary500 flex flex-col gap-3 py-4 border-b border-t border-grey100 px-3"
             >
-              <div className="flex gap-2">
-                <Icon />
+              <div className="flex gap-4">
+                <div className="w-[13px] h-[13px]">
+                  <Icon />
+                </div>
                 <span className="text-grey900 group-hover:text-primary500 font-semibold">
                   {solu.title}
                 </span>
               </div>
-              <p className="text-sm group-hover:text-primary500">
+              <p className="text-sm group-hover:text-primary500 text-grey600">
                 {solu.description}
               </p>
             </div>
