@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { persistStore } from "redux-persist";
+
 
 import { AlertsSlice } from "./alerts";
 import { AuthSlice } from "./auth";
@@ -22,7 +22,7 @@ export const store = configureStore({
   },
 });
 
-export const persistor = persistStore(store);
+
 
 // define RootState and AppDispatch types
 export type RootState = ReturnType<typeof store.getState>;

@@ -14,6 +14,7 @@ import {
   passwordCriteria,
 } from "@/utils/helpers/auth/passwordValidation";
 import { useRouter } from "next/navigation";
+// import { type } from '../../../.history/components/LandingPage/AboutUs/Team/teamData_20240723003307';
 
 
 
@@ -198,6 +199,7 @@ export default function Signup() {
             label="Create account"
             isLoading={isLoading}
             classNames="mt-4"
+            type="submit"
           />
         </form>
         <SocialSignUp />
