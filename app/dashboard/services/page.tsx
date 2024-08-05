@@ -1,8 +1,6 @@
 "use client";
-import { InputField } from "@/components";
-import ServiceCard from "@/components/Dashboard/ServiceCard";
+import { InputField, Loader, ServiceCard } from "@/components";
 import Tabs from "@/components/Dashboard/Tabs";
-import Loader from "@/components/Spinner/Loader";
 import { SearchIcon } from "@/public/icons";
 import { AllIcon, ContentCopywritingIcon, CreativeDesignIcon, DigitalMarketingIcon } from "@/public/svgs";
 import { getServices } from "@/redux/shop/features";

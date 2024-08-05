@@ -2,8 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
-import { Button } from "@/components";
-import InputField from "@/components/Forms/InputField";
+import { Button, InputField } from "@/components";
 import { AppDispatch, useAppDispatch } from "@/redux/store";
 import { resendVerificationCode, verifyUser } from "@/redux/auth/features";
 import { addAlert } from "@/redux/alerts";

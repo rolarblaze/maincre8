@@ -1,9 +1,7 @@
 "use client";
 import { useState } from "react";
 import Tabs from "@/components/Dashboard/Tabs";
-import Profile from "@/components/Dashboard/Profile";
-import Security from "@/components/Dashboard/Security";
-import Payment from "@/components/Dashboard/Payment";
+import { Payment, Profile, Security } from "@/components";
 
 export default function Settings() {
   const [activeTab, setActiveTab] = useState<string>("Profile");

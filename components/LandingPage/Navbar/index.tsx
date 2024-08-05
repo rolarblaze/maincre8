@@ -4,13 +4,14 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SolutionsMenu from "./SolutionsMenu";
 import ResourcesMenu from "./ResourcesMenu";
-import Button from "@/components/Button";
 import { Arrow, ArrowDown, Logo} from "@/public/icons";
 import { twMerge } from "tailwind-merge";
 import { Url } from "next/dist/shared/lib/router/router";
 import MobileSolutionsMenu from "./MobileSolutionsMenu";
 import MobileResourcesMenu from "./MobileResourcesMenu";
 import { useEffect, useState } from "react";
+import Button from "@/components/Button";
+
 
 const Navbar: React.FC = () => {
   const [showSolutions, setShowSolutions] = useState(false);

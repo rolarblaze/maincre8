@@ -1,7 +1,5 @@
 "use client";
-import Header from "@/components/Dashboard/Header";
-import Sidebar from "@/components/Dashboard/Sidebar";
-import { Tab } from "@/components/Dashboard/Sidebar/types";
+import { Header, Sidebar, Tab } from "@/components";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 

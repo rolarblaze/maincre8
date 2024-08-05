@@ -1,8 +1,7 @@
 "use client";
 import { useState } from "react";
-import Tabs from "@/components/Dashboard/Tabs";
-import Order from "@/components/Dashboard/Order";
 import { AllIcon, CheckboxIcon } from "@/public/svgs";
+import { Order, Tabs } from "@/components";
 
 export default function OrderHistory() {
   const [activeTab, setActiveTab] = useState<string>("All");
