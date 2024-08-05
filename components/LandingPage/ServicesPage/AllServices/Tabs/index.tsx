@@ -23,7 +23,7 @@ const Section = ({ title, subTitle, content }: SectionProps) => {
         >
           <>
             <img
-              src={"/images/servicesImages/placeholder.svg"}
+              src={content.imgSrc}
               alt={content.heading}
               width={"50%"}
               height={"100%"}
