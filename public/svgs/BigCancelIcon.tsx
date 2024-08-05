@@ -1,6 +1,6 @@
 import React from "react";
 
-export const BigCancelIcon = () => {
+const BigCancelIcon = () => {
   return (
     <svg
       width="25"
@@ -19,3 +19,5 @@ export const BigCancelIcon = () => {
     </svg>
   );
 };
+
+export default BigCancelIcon

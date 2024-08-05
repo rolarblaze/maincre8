@@ -1,7 +1,7 @@
 "use client";
 import Arrow from "@/public/icons/arrow-down.svg";
 import Logo from "@/public/icons/logo.svg";
-import { HamburgerIcon } from "@/public/svgs";
+import { BigCancelIcon, HamburgerIcon } from "@/public/svgs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SolutionsMenu from "./SolutionsMenu";
@@ -9,7 +9,6 @@ import ResourcesMenu from "./ResourcesMenu";
 import Button from "@/components/Button";
 import { ArrowDown} from "@/public/icons";
 import { twMerge } from "tailwind-merge";
-import { BigCancelIcon } from "@/public/svgs/BigCancelIcon";
 import { Url } from "next/dist/shared/lib/router/router";
 import MobileSolutionsMenu from "./MobileSolutionsMenu";
 import MobileResourcesMenu from "./MobileResourcesMenu";
