@@ -1,3 +1,4 @@
+// GLOBAL COMPONENTS
 export { default as SocialSignUp } from "./Auth/SocialSignUp";
 export { default as Tabs } from "./Auth/Tabs";
 export { default as Button } from "./Button";
@@ -9,6 +10,8 @@ export { default as ProjectForm } from "./ProjectForm";
 export { default as Spinner } from "./Spinner";
 export { default as FullLoader } from "./Spinner/Loader";
 export { default as AlertWrapper } from "./AlertWrapper";
+
+
 
 // LANDING PAGE SECTION IMPORTS
 export { default as AppWrapper } from "./LandingPage/AppWrapper";

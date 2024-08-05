@@ -1,3 +1,4 @@
+export { default as Arrow } from "./arrow-down.svg";
 export { default as ArrowBackIcon } from "./arrow-back-desktop.svg";
 export { default as ArrowDown } from "./arrow-down.svg";
 export { default as AshArrowDown } from "./ash-arrow-down.svg";
