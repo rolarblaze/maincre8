@@ -128,7 +128,7 @@ const ProjectForms = () => {
       onSubmit={handleSubmit}
     >
       <div className="flex flex-col gap-6">
-        <div className="flex gap-8">
+        <div className="flex max-lg:flex-col gap-8">
           <InputField
             type="text"
             label="First name"

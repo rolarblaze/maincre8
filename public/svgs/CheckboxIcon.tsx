@@ -2,15 +2,17 @@ import React from "react";
 
 interface CheckboxIconProps {
   fillColor: string;
+  className?: string
 }
 
-const CheckboxIcon: React.FC<CheckboxIconProps> = ({ fillColor }) => {
+const CheckboxIcon: React.FC<CheckboxIconProps> = ({ fillColor, className }) => {
   return (
     <svg
       width="20"
       height="21"
       viewBox="0 0 20 21"
       fill="none"
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
