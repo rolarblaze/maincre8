@@ -2,7 +2,7 @@ import api from "@/utils/axios/api";
 import { setUserTokenCookie } from "@/utils/helpers/auth/cookieUtility";
 import { handleAxiosError } from "@/utils/helpers/general/errorHandler";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { SignUpFormValues } from "./interface";
+import { SignUpFormValues, UpdateInfo } from "./interface";
 
 // Login user
 export const loginUser = createAsyncThunk(
@@ -125,6 +125,25 @@ export const resetPassword = createAsyncThunk(
         password,
         confirm_password,
       });
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(handleAxiosError(error));
+    }
+  }
+);
+
+// update user info
+export const updateInfo = createAsyncThunk(
+  "dashboard/updateProfile",
+  async (payload: UpdateInfo, { rejectWithValue }) => {
+    try {
+      const response = await api.put("user/update-profile-info", {
+        phone_number: payload.phone_number,
+        country: payload.country,
+        state: payload.state,
+        address: payload.address,
+      });
+
       return response.data;
     } catch (error) {
       return rejectWithValue(handleAxiosError(error));

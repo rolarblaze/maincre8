@@ -4,14 +4,14 @@ import InputField from "@/components/Forms/InputField";
 import PhoneNumberInput from "@/components/PhoneInput";
 import { UserProfilePhoto } from "@/public/icons";
 import { addAlert } from "@/redux/alerts";
+import { updateInfo } from "@/redux/auth/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { updateInfo } from "@/redux/updateProfile/updateProfile";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
 export default function Profile() {
   const dispatch = useAppDispatch();
-  const { status } = useAppSelector((state) => state.updateProfile);
+  const { isLoading } = useAppSelector((state) => state.auth);
 
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -30,14 +30,32 @@ export default function Profile() {
   };
 
   const handleSaveChanges = async () => {
+    if (
+      !firstName ||
+      !lastName ||
+      !email ||
+      !phone ||
+      !country ||
+      !stateOfResidence ||
+      !address
+    ) {
+      dispatch(
+        addAlert({
+          id: "",
+          headText: "Validation Error",
+          subText: "Please fill in all required fields.",
+          type: "error",
+        })
+      );
+      return;
+    }
+
     const payload = {
       phone_number: phone,
       country,
       state: stateOfResidence,
       address,
     };
-
-    console.log(payload);
 
     const actionResult = await dispatch(updateInfo(payload));
 
@@ -80,7 +98,7 @@ export default function Profile() {
       setCountryListLoading(true);
       try {
         const response = await axios.get(
-          "https://sellcrea8-api-4aefdc9b08e3.herokuapp.com/admin-user/country_codes"
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}admin-user/country_codes`
         );
         const countryCodesData = response.data.country_codes_data;
 
@@ -99,10 +117,6 @@ export default function Profile() {
 
     fetchCountryCodes();
   }, []);
-
-  useEffect(() => {
-    console.log(status);
-  }, [status]);
 
   return (
     <form className="border border-grey200 p-6 rounded-lg flex flex-col gap-6 max-w-[740px]">
