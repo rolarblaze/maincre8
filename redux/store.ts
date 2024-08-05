@@ -17,7 +17,7 @@ import { fileUploadReducer } from "./file";
 import { getPackageReducer } from "./getPackage";
 import newsletterReducer from "./newsletter";
 import { shopReducer } from "./shop";
-import { updateProfileReducer } from "./updateProfile";
+
 import customStorage from "@/utils/createStorage";
 
 const rootReducer = combineReducers({
@@ -27,7 +27,6 @@ const rootReducer = combineReducers({
   newsletter: newsletterReducer,
   fileUpload: fileUploadReducer,
   brief: briefReducer,
-  updateProfile: updateProfileReducer,
   getPackageDetails: getPackageReducer,
 });
 
