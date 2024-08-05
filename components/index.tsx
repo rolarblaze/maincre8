@@ -1,10 +1,13 @@
 export { default as SocialSignUp } from "./Auth/SocialSignUp";
 export { default as Tabs } from "./Auth/Tabs";
 export { default as Button } from "./Button";
+export { default as TabsToggle } from "./Dashboard/ServicesTab/TabToggle";
 export { default as InputField } from "./Forms/InputField";
 export { default as DropdownSelect } from "./Forms/Select";
 export { default as Textarea } from "./Forms/Textarea";
 export { default as ProjectForm } from "./ProjectForm";
+export { default as Spinner } from "./Spinner";
+export { default as FullLoader } from "./Spinner/Loader";
 
 // LANDING PAGE SECTION IMPORTS
 export { default as AppWrapper } from "./LandingPage/AppWrapper";

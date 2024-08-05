@@ -1,11 +1,13 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 interface ServiceCardProps {
   category: string;
   title: string;
   description: string;
   color: string;
+  id: number;
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({
@@ -13,9 +15,13 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   title,
   description,
   color,
+  id,
 }) => {
   return (
-    <div className="max-w-[388px] w-full rounded-lg border border-grey300 ">
+    <Link
+      className="max-w-[388px] w-full rounded-lg border border-grey300 "
+      href={`/dashboard/services/${id}`}
+    >
       <div className="relative">
         <Image
           src="/images/seo-image.svg"
@@ -35,7 +41,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         <h4 className="text-lg font-semibold text-grey900">{title}</h4>
         <p className="text-sm text-grey500">{description}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 
