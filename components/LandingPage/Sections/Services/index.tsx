@@ -1,6 +1,7 @@
 "use client";
 import {
   Highlight,
+  HighlightMobile,
   ProjectServiceIcon,
   SecurePaymentServiceIcon,
   TailoredServiceIcon,
@@ -46,8 +47,8 @@ const Card = ({
   description: string;
 }) => (
   <div className="border border-grey200 rounded-lg p-5 flex flex-col gap-3 text-start items-start">
-    <div className="mb-5">{icon}</div>
-    <h4>{title}</h4>
+    <div className="mb-4 md:mb-5">{icon}</div>
+    <h4 className="font-semibold line-clamp-2 max-sm:text-base">{title}</h4>
     <p className="text-grey500">{description}</p>
   </div>
 );
@@ -62,8 +63,9 @@ const Service = () => {
         transition={{ delay: 0.5 }}
       >
         Why Choose{" "}
-        <span className="text-primary400 h2 ml-1.5"> SellCrea8?</span>
-        <Highlight />
+        <span className="text-primary400 ml-1.5"> SellCrea8?</span>
+        <Highlight className="max-lg:hidden" />
+        <HighlightMobile className="lg:hidden" />
       </motion.h2>
 
       <motion.div

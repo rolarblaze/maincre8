@@ -30,6 +30,7 @@ export { default as MobileToggle } from "./hamburger.svg";
 export { default as HighlightDown } from "./highlight-down.svg";
 export { default as HighlightUp } from "./highlight-up.svg";
 export { default as Highlight } from "./highlight.svg";
+export { default as HighlightMobile } from "./highlight-mobile.svg";
 export { default as LightBulb } from "./lightbulb.svg";
 export { default as LinkedInIcon } from "./linkedin.svg";
 export { default as ListCheck } from "./list-check.svg";
