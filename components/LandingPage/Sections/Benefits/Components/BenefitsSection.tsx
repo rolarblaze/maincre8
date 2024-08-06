@@ -1,11 +1,11 @@
 "use client";
 import React from "react";
-import Button from "@/components/Button";
 import { HighlightDown, HighlightUp } from "@/public/icons";
 import { Benefit, BenefitIndividual } from "@/public/imgs";
 import Card from "./BenefitsCard";
 import { motion } from "framer-motion";
 import { BenefitImages } from "./BenefitsData";
+import Button from "@/components/Button";
 
 interface Benefit {
   title: string;

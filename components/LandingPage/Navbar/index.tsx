@@ -1,18 +1,17 @@
 "use client";
-import Arrow from "@/public/icons/arrow-down.svg";
-import Logo from "@/public/icons/logo.svg";
 import { BigCancelIcon, HamburgerIcon } from "@/public/svgs";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import SolutionsMenu from "./SolutionsMenu";
 import ResourcesMenu from "./ResourcesMenu";
-import Button from "@/components/Button";
-import { ArrowDown} from "@/public/icons";
+import { Arrow, ArrowDown, Logo} from "@/public/icons";
 import { twMerge } from "tailwind-merge";
 import { Url } from "next/dist/shared/lib/router/router";
 import MobileSolutionsMenu from "./MobileSolutionsMenu";
 import MobileResourcesMenu from "./MobileResourcesMenu";
 import { useEffect, useState } from "react";
+import Button from "@/components/Button";
+
 
 const Navbar: React.FC = () => {
   const [showSolutions, setShowSolutions] = useState(false);

@@ -1,3 +1,4 @@
+// GLOBAL COMPONENTS
 export { default as SocialSignUp } from "./Auth/SocialSignUp";
 export { default as Tabs } from "./Auth/Tabs";
 export { default as Button } from "./Button";
@@ -9,6 +10,16 @@ export { default as ProjectForm } from "./ProjectForm";
 export { default as Spinner } from "./Spinner";
 export { default as FullLoader } from "./Spinner/Loader";
 export { default as AlertWrapper } from "./AlertWrapper";
+export { default as Loader } from "./Spinner/Loader";
+export { default as ShopSections } from "./Shop";
+export { default as Alert } from "./Alert";
+export { default as SalesPopUp } from "./SalesPopUp";
+export { default as PhoneNumberInput } from "./PhoneInput";
+
+// MODALS
+export { default as DropdownWrapper } from "./Modals/DropdownWrapper";
+export { default as Modal } from "./Modals/CustomModal";
+
 
 // LANDING PAGE SECTION IMPORTS
 export { default as AppWrapper } from "./LandingPage/AppWrapper";
@@ -22,7 +33,7 @@ export { default as FAQ } from "./LandingPage/Sections/FAQ/index";
 export { default as HomepageHero } from "./LandingPage/Sections/HeroSection";
 export { default as HomepageServices } from "./LandingPage/Sections/Services";
 export { default as HomepageSubscribe } from "./LandingPage/Sections/SubscribeSection";
-
+export { default as CTASection } from "./LandingPage/Sections/CTASection";
 
 // UI COMPONENTS
 export { default as AvatarIcon } from "./UI/AvatarIcon";
@@ -43,3 +54,13 @@ export { default as WhoWeAre } from "./LandingPage/AboutUs/WhoWeAre";
 export { default as AllServices } from "./LandingPage/ServicesPage/AllServices";
 export { default as GetStarted } from "./LandingPage/ServicesPage/GetStarted";
 export { default as HowWeDeliver } from "./LandingPage/ServicesPage/HowWeDeliver";
+
+// DASHBOARD
+export { default as Header } from "./Dashboard/Header";
+export { default as Sidebar } from "./Dashboard/Sidebar";
+export type { default as Tab } from "./Dashboard/Sidebar/types";
+export { default as Order } from "./Dashboard/Order";
+export { default as ServiceCard } from "./Dashboard/ServiceCard";
+export { default as Profile } from "./Dashboard/Profile";
+export { default as Security } from "./Dashboard/Security";
+export { default as Payment } from "./Dashboard/Payment";

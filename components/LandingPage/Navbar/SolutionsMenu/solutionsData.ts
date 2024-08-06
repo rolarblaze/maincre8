@@ -1,6 +1,5 @@
-import CreativeIcon from "@/public/icons/creative.svg";
-import DigitalIcon from "@/public/icons/digital.svg";
-import TopIcon from "@/public/icons/lamp.svg";
+import { CreativeIcon, DigitalIcon, TopIcon } from "@/public/icons";
+
 
 export const solutionsData = [
   {

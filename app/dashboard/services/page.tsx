@@ -1,13 +1,8 @@
 "use client";
-import { InputField } from "@/components";
-import ServiceCard from "@/components/Dashboard/ServiceCard";
+import { InputField, Loader, ServiceCard } from "@/components";
 import Tabs from "@/components/Dashboard/Tabs";
-import Loader from "@/components/Spinner/Loader";
 import { SearchIcon } from "@/public/icons";
-import CreativeDesignIcon from "@/public/svgs/BrushIcon";
-import AllIcon from "@/public/svgs/HomeAltIcon";
-import DigitalMarketingIcon from "@/public/svgs/PcUserIcon";
-import ContentCopywritingIcon from "@/public/svgs/PencilIcon";
+import { AllIcon, ContentCopywritingIcon, CreativeDesignIcon, DigitalMarketingIcon } from "@/public/svgs";
 import { getServices } from "@/redux/shop/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { useEffect, useState } from "react";
