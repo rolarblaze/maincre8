@@ -5,7 +5,7 @@ import { solutionsData } from './solutionsData';
 interface SolutionsMenuProps {
     isVisible: boolean;
     onClose: () => void;
-  }
+}
 
   const SolutionsMenu: React.FC<SolutionsMenuProps> = ({ isVisible, onClose }) => {
     return (

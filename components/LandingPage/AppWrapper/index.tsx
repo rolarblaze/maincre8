@@ -12,7 +12,7 @@ const AppWrapper = ({
   type: string;
 }) => {
   return (
-    <main className="mx-auto flex flex-col min-h-screen">
+    <main className="mx-auto flex flex-col min-h-screen overflow-x-hidden">
       <Navbar />
       {/* pt to prevent content running into the navbar */}
       <div className="flex-grow pt-24">{children}</div>

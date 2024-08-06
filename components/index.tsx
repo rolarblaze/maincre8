@@ -8,6 +8,7 @@ export { default as Textarea } from "./Forms/Textarea";
 export { default as ProjectForm } from "./ProjectForm";
 export { default as Spinner } from "./Spinner";
 export { default as FullLoader } from "./Spinner/Loader";
+export { default as AlertWrapper } from "./AlertWrapper";
 
 // LANDING PAGE SECTION IMPORTS
 export { default as AppWrapper } from "./LandingPage/AppWrapper";
@@ -21,6 +22,7 @@ export { default as FAQ } from "./LandingPage/Sections/FAQ/index";
 export { default as HomepageHero } from "./LandingPage/Sections/HeroSection";
 export { default as HomepageServices } from "./LandingPage/Sections/Services";
 export { default as HomepageSubscribe } from "./LandingPage/Sections/SubscribeSection";
+
 
 // UI COMPONENTS
 export { default as AvatarIcon } from "./UI/AvatarIcon";
