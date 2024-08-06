@@ -1,28 +1,32 @@
 "use client";
-import React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import Logo from "@/public/icons/logo-blue.svg";
-import OverviewIcon from "@/public/svgs/OverviewIcon";
-import ServicesIcon from "@/public/svgs/ServicesIcon";
+import Logout from "@/public/icons/logout.svg";
+import UserImage from "@/public/images/user-image.svg";
 import CalendarIcon from "@/public/svgs/CalendarIcon";
 import HistoryIcon from "@/public/svgs/HistoryIcon";
-import SupportIcon from "@/public/svgs/SupportIcon";
 import NotificationsIcon from "@/public/svgs/NotificationIcon";
+import OverviewIcon from "@/public/svgs/OverviewIcon";
+import ServicesIcon from "@/public/svgs/ServicesIcon";
 import SettingsIcon from "@/public/svgs/SettingIcon";
-import UserImage from "@/public/images/user-image.svg";
-import Logout from "@/public/icons/logout.svg";
+import SupportIcon from "@/public/svgs/SupportIcon";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import React from "react";
 import { Tab } from "./types";
-import { MobileToggle } from "@/public/icons";
 
 type SidebarProps = {
   setActiveTab: (tab: Tab) => void;
 };
 
 const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
+  const router = useRouter();
   const pathname = usePathname();
 
   const isActive = (path: string) => pathname === path;
+
+  const handleLogout = () => {
+    router.push("/login");
+  };
 
   return (
     <aside className="max-w-[272px] w-full h-screen flex flex-col justify-between px-2 bg-white border-r border-grey200">
@@ -235,7 +239,8 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
           </div>
         </div>
 
-        <div>
+        {/* will implement later */}
+        <div onClick={handleLogout} className="cursor-pointer">
           <Logout />
         </div>
       </div>
