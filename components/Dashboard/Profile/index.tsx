@@ -191,7 +191,7 @@ export default function Profile() {
           label="Save changes"
           classNames="w-fit py-3 px-4"
           onClick={handleSaveChanges}
-          isLoading={status === "loading"}
+          isLoading={isLoading}
         />
         <Button
           label="Reset changes"
