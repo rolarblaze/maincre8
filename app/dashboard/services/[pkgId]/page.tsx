@@ -2,8 +2,9 @@
 import { Button, FullLoader, TabsToggle } from "@/components";
 import { ArrowBackIcon } from "@/public/icons";
 import { getPackageDetails } from "@/redux/getPackage/getPkg";
+import { Package } from "@/redux/shop/interface";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { Package } from "@/types";
+
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";

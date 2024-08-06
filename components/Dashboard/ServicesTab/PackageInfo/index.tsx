@@ -1,6 +1,6 @@
 import { AvailableIcon, NonAvailableIcon } from "@/public/icons";
 import { PackageIcon } from "@/public/svgs";
-import { Provision } from "@/types";
+import { Provision } from "@/redux/shop/interface";
 
 const PackageInfo = ({ Benefits }: { Benefits: Provision[] }) => {
   const groupedBenefits = Benefits.reduce((acc, benefit) => {

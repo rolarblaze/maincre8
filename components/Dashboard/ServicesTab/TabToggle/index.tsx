@@ -1,9 +1,10 @@
 "use client";
 import { FolderIcon, PackageIcon } from "@/public/svgs";
-import { Provision } from "@/types";
+
 import React, { useEffect, useState } from "react";
 import MyPackage from "../MyPackage";
 import PackageInfo from "../PackageInfo";
+import { Provision } from "@/redux/shop/interface";
 
 type Tab = {
   name: string;
