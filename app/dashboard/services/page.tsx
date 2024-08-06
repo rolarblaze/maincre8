@@ -1,16 +1,16 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { getServices } from "@/redux/shop/features";
-import Tabs from "@/components/Dashboard/Tabs";
-import ServiceCard from "@/components/Dashboard/ServiceCard";
-import Loader from "@/components/Spinner/Loader";
 import { InputField } from "@/components";
+import ServiceCard from "@/components/Dashboard/ServiceCard";
+import Tabs from "@/components/Dashboard/Tabs";
+import Loader from "@/components/Spinner/Loader";
 import { SearchIcon } from "@/public/icons";
+import CreativeDesignIcon from "@/public/svgs/BrushIcon";
 import AllIcon from "@/public/svgs/HomeAltIcon";
 import DigitalMarketingIcon from "@/public/svgs/PcUserIcon";
-import CreativeDesignIcon from "@/public/svgs/BrushIcon";
 import ContentCopywritingIcon from "@/public/svgs/PencilIcon";
+import { getServices } from "@/redux/shop/features";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { useEffect, useState } from "react";
 
 const Services = () => {
   const dispatch = useAppDispatch();
@@ -120,6 +120,7 @@ const Services = () => {
                       title: pkg.package_name,
                       description: pkg.description,
                       color: bundleColors[bundle.bundle_name],
+                      id: pkg.package_id,
                     }))
                   )
                 )
@@ -130,6 +131,7 @@ const Services = () => {
                     title={card.title}
                     description={card.description}
                     color={card.color}
+                    id={card.id}
                   />
                 ))}
             </>

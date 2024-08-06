@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 
@@ -6,6 +6,7 @@ import { AlertsSlice } from "./alerts";
 import { AuthSlice } from "./auth";
 import { briefReducer } from "./brief";
 import { fileUploadReducer } from "./file";
+import { getPackageReducer } from "./getPackage";
 import newsletterReducer from "./newsletter";
 import { shopReducer } from "./shop";
 
@@ -28,6 +29,5 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-// create hooks for use in components
 export const useAppDispatch: () => AppDispatch = useDispatch;
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
