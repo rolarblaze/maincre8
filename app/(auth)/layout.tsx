@@ -2,7 +2,7 @@
 import { FC, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Logo } from "@/public/icons";
+import { LogoBlack } from "@/public/icons";
 import { Wave } from "@/public/imgs";
 
 interface Props {
@@ -43,7 +43,7 @@ const AuthPageLayout: FC<Props> = ({ children }) => {
       <div className="w-full mx-auto flex flex-col gap-5 p-4 md:py-8 md:px-28 md:gap-10">
         <div className="flex items-center justify-between">
           <Link href={"/"}>
-            <Logo />
+            <LogoBlack />
           </Link>
           {text}
         </div>

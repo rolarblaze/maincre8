@@ -49,3 +49,6 @@ export { default as ToolTipIcon } from "./tooltip.svg";
 export { default as Unchecked } from "./unchecked-checkbox.svg";
 export { default as UserProfilePhoto } from "./user-profile-picture.svg";
 export { default as UserFriendlyServiceIcon } from "./user.svg";
+export { default as LogoBlack } from "./logo-black.svg";
+export { default as Copy } from "./copy.svg";
+export { default as LinkIcon } from "./link-icon.svg";

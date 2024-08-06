@@ -7,6 +7,10 @@ export interface User {
   is_business?: boolean;
   is_individual?: boolean;
   is_verified?: boolean;
+  phone_number?: string; 
+  country?: string;     
+  state?: string;        
+  address?: string;
 }
 
 export interface SignUpFormValues {
