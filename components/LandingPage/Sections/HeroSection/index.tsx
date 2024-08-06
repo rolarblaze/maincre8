@@ -68,12 +68,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             <Image
               src={ColorPalette}
               alt="Color Palette"
-              className="absolute top-36 left-60 size-[4.75rem]"
+              className="absolute max-lg:hidden top-36 left-60 size-[4.75rem]"
             />
             <Image
               src={IdeaBulb}
               alt="Idea Bulb"
-              className="absolute top-36 right-60 size-[4.75rem]"
+              className="absolute max-lg:hidden top-36 right-60 size-[4.75rem]"
             />
           </>
         )}

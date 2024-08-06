@@ -10,13 +10,13 @@ import Arrow from "@/public/icons/arrow-down.svg";
 import { MobileToggle } from "@/public/icons";
 import { twMerge } from "tailwind-merge";
 import { HamburgerIcon } from "@/public/svgs";
+import { useNavScrollAnimation } from "@/hooks";
 
 const Navbar: React.FC = () => {
   const [showSolutions, setShowSolutions] = useState(false);
   const [showResources, setShowResources] = useState(false);
-  const [navColor, setNavColor] = useState(false);
-  const [navScroll, setNavScroll] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [navColor, navScroll] = useNavScrollAnimation();
 
   const pathname = usePathname();
   const isHome =
@@ -44,26 +44,6 @@ const Navbar: React.FC = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
-  // HANDLE NAVBAR SCROLL ANIMATION
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
-
-    window.addEventListener("scroll", () => {
-      if (lastScrollY < window.scrollY) {
-        setNavScroll(true);
-      } else {
-        setNavScroll(false);
-      }
-      lastScrollY = window.scrollY;
-
-      if (window.scrollY >= 140) {
-        setNavColor(true);
-      } else {
-        setNavColor(false);
-      }
-    });
-  }, [navScroll, navColor]);
-
   return (
     <header
       className={`
@@ -75,7 +55,6 @@ const Navbar: React.FC = () => {
           isHome ? "bg-transparent " : "bg-white"
         } border-b border-transparent z-50  transition-all ease-in-out duration-500
       `}
-      style={{ zIndex: 10000 }}
     >
       <nav
         className={`mx-auto py-6 flex items-center justify-between max-w-[76rem] max-xl:px-4 relative`}
