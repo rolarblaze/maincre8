@@ -19,7 +19,12 @@ export interface AuthSliceState {
   user: User;
   isLoading: boolean;
   isLoadingProfile: boolean;
-  profile: User;
+  profile: {
+    business_name?: string | null;
+    first_name?: string | null;
+    last_name?: string | null;
+    user: User;
+  };
   otpMessage: string | null;
 }
 
@@ -28,7 +33,12 @@ const initialState: AuthSliceState = {
   user: {},
   isLoading: false,
   isLoadingProfile: true,
-  profile: {},
+  profile: {
+    business_name: null,
+    first_name: null,
+    last_name: null,
+    user: {},
+  },
   otpMessage: null,
 };
 
@@ -40,7 +50,13 @@ export const AuthSlice = createSlice({
       removeUserTokenCookie();
       state.isAuthenticated = false;
       state.user = {};
-      state.profile = {};
+      state.profile = {
+        business_name: null,
+        first_name: null,
+        last_name: null,
+        user: {},
+      };
+
       state.otpMessage = null;
     },
   },
@@ -172,7 +188,12 @@ export const AuthSlice = createSlice({
         removeUserTokenCookie();
         state.isAuthenticated = false;
         state.user = {};
-        state.profile = {};
+        state.profile = {
+          business_name: null,
+          first_name: null,
+          last_name: null,
+          user: {},
+        };
       })
 
       // Update user info
@@ -206,7 +227,12 @@ export const AuthSlice = createSlice({
         removeUserTokenCookie();
         state.isAuthenticated = false;
         state.user = {};
-        state.profile = {};
+        state.profile = {
+          business_name: null,
+          first_name: null,
+          last_name: null,
+          user: {},
+        };
       });
   },
 });

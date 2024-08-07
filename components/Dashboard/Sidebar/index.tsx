@@ -14,7 +14,6 @@ import OverviewIcon from "@/public/svgs/OverviewIcon";
 import ServicesIcon from "@/public/svgs/ServicesIcon";
 import SettingsIcon from "@/public/svgs/SettingIcon";
 import SupportIcon from "@/public/svgs/SupportIcon";
-import ArrowDown from "@/public/icons/arrow-down.svg";
 import ArrowUp from "@/public/icons/arrow-up.svg";
 
 
@@ -253,8 +252,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
             <UserImage />
           </div>
           <div>
-            <p className="text-grey900 text-sm font-bold">Peace Ojo</p>
-            <p className="text-grey600 text-sm">{profile.email || " "}</p>
+            <p className="text-grey900 text-sm font-bold">   {profile.user.is_business
+              ? profile?.business_name
+              : `${profile?.first_name} ${profile?.last_name}`}</p>
+            <p className="text-grey600 text-sm">{profile?.user?.profile?.user_email || " "}</p>
           </div>
         </div>
 
