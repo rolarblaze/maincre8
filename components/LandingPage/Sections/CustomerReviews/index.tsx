@@ -9,7 +9,7 @@ const CustomerReviews = () => {
           What Our <span className="text-2xl md:text-4xl lg:text-5.5xl text-primary500"> Customers</span> Say  
         </h2>
 
-        <p className="mb-8 mt-2 md:mt-4 leading-6">Customer Reviews</p>
+        <p className="mb-8 mt-2 font-medium max-sm:text-xs max-md:text-sm md:mt-4 leading-6">Customer Reviews</p>
 
         <div className="flex gap-8 text-left max-lg:overflow-x-scroll no-scrollbar">
           {Reviews.map((review) => (

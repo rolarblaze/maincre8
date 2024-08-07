@@ -10,10 +10,10 @@ const CTASection = () => {
 
         <div className="flex flex-col gap-4 w-full sm:max-md:text-center">
           <h3 className="max-sm:text-2xl text-3.5xl leading-10 tracking-[-0.04rem] text-grey900">
-            Ready to Transform Your <br className="max-sm:hidden" /> Business?
+            Ready to Transform Your <br className="max-lg:hidden" /> Business?
           </h3>
           <p>
-            Get started with a bundle or a plan today and experience the <br className="max-sm:hidden" />
+            Get started with a bundle or a plan today and experience the <br className="max-lg:hidden" />
             difference with SellCrea8.
           </p>
 
