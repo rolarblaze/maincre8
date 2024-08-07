@@ -1,5 +1,10 @@
 "use client";
-import { Button, DropdownSelect, InputField, PhoneNumberInput } from "@/components";
+import {
+  Button,
+  DropdownSelect,
+  InputField,
+  PhoneNumberInput,
+} from "@/components";
 import { UserProfilePhoto } from "@/public/icons";
 import { addAlert } from "@/redux/alerts";
 import { updateInfo } from "@/redux/auth/features";
@@ -117,17 +122,18 @@ export default function Profile() {
   }, []);
 
   return (
-    <form className="border border-grey200 p-6 rounded-lg flex flex-col gap-6 max-w-[740px]">
+    <form className="md:border border-grey200 md:p-6 rounded-lg flex flex-col gap-6 max-w-[740px]">
       <p className="text-lg font-semibold">Basic information</p>
       <UserProfilePhoto />
 
-      <div className="flex gap-6">
+      <div className="flex flex-col md:flex-row gap-6">
         <InputField
           type="text"
           label="First name"
           placeholder="Enter First Name"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
+          classNames="p-4"
         />
 
         <InputField
@@ -136,6 +142,7 @@ export default function Profile() {
           placeholder="Enter Last Name"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
+          classNames="p-4"
         />
       </div>
 
@@ -145,6 +152,7 @@ export default function Profile() {
         placeholder="Enter Work Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
+        classNames="p-4"
       />
 
       <PhoneNumberInput
@@ -174,6 +182,7 @@ export default function Profile() {
         placeholder="Lagos"
         value={stateOfResidence}
         onChange={(e) => setStateOfResidence(e.target.value)}
+        classNames="p-4"
       />
 
       <InputField
@@ -182,18 +191,20 @@ export default function Profile() {
         placeholder="example, yaba, lagos"
         value={address}
         onChange={(e) => setAddress(e.target.value)}
+        classNames="p-4"
       />
 
-      <div className="flex gap-4">
+      <div className="flex flex-col md:flex-row gap-4">
+        {" "}
         <Button
           label="Save changes"
-          classNames="w-fit py-3 px-4"
+          classNames="md:w-fit py-3 px-4"
           onClick={handleSaveChanges}
           isLoading={isLoading}
         />
         <Button
           label="Reset changes"
-          classNames="w-fit bg-transparent text-primary600 border border-primary400 py-3 px-4"
+          classNames="md:w-fit bg-transparent text-primary600 border border-primary400 py-3 px-4"
           onClick={handleResetChanges}
         />
       </div>
