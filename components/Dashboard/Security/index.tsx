@@ -1,6 +1,5 @@
 "use client";
-import { Button } from "@/components";
-import InputField from "@/components/Forms/InputField";
+import { Button, InputField } from "@/components";
 import { EyeIcon, Checked, Unchecked } from "@/public/icons";
 import { addAlert } from "@/redux/alerts";
 import {
