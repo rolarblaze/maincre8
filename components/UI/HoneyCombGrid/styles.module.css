@@ -2,18 +2,25 @@
   --s: 130px;
   @apply my-10 grid w-fit gap-x-2;
   max-width: calc(var(--s) * 3.25);
-  /* @apply ; */
+
   /* GRID LAYOUT FOR HONEYCOMB */
   grid-template-columns: repeat(6, minmax(0, calc(var(--s) / 2)));
+}
+
+@media screen and (max-width: 480px) {
+  .contain {
+    --s: 105px;
+    @apply gap-x-1;
+  }
 }
 
 .contain li {
   width: var(--s);
   height: calc(var(--s) * 1.155);
-  
+
   /* GIVE HONEYCOMB SHAPE */
   clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
-  
+
   /* ARRANGE LI ITEMS TO GIVE HONEY BOMB STRUCTURE */
   @apply -mb-6 odd:bg-white bg-primary500 
   first:col-span-3 first:col-start-3 
@@ -21,7 +28,5 @@
   [&:nth-child(3)]:col-start-4 [&:nth-child(3)]:row-start-2
   [&:nth-child(4)]:row-start-3 
   [&:nth-child(5)]:col-start-3 [&:nth-child(5)]:row-start-3 
-  [&:nth-child(6)]:col-start-5 [&:nth-child(6)]:row-start-3
+  [&:nth-child(6)]:col-start-5 [&:nth-child(6)]:row-start-3;
 }
-
-
