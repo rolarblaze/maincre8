@@ -69,26 +69,26 @@ const SubscribeSection = () => {
           </p>
 
           {/* BUTTONS */}
-          <div className="max-w-[28.5rem] max-sm:py-4 max-sm:flex-col flex justify-center max-sm:items-start items-center gap-4 sm:gap-10">
+          <div className="max-w-[28.5rem] max-md:py-4 max-md:flex-col flex justify-center max-md:items-start items-center gap-4 md:gap-10">
             <InputField
               label=""
               type="text"
               placeholder="Enter email address"
-              classNames="sm:max-w-[13rem] bg-white py-3.5"
+              classNames="md:max-w-[13rem] bg-white py-3.5"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
 
             <Button
               label="Subscribe"
-              classNames="max-sm:max-w-[6.5rem] max-sm:py-2 max-w-[13rem]"
+              classNames="max-md:max-w-[6.5rem] max-md:py-2 max-w-[13rem]"
               onClick={handleSubscribe}
               isLoading={isLoading}
             />
           </div>
         </div>
 
-        <figure className="relative size-[16.6875rem] mr-12">
+        <figure className="relative size-[16.6875rem] lg:mr-12">
           <Image src={computer} alt="computer image" />
           {/* <StartProjectText className="absolute bottom-6 right-7" /> */}
         </figure>

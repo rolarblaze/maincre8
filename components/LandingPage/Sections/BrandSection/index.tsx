@@ -10,8 +10,8 @@ const BrandSection = () => {
     <section className="w-full bg-primary900 z-20 overflow-hidden">
       <div className="text-center space-y-8 py-20 max-w-[76rem] flex flex-col justify-center items-center mx-auto">
         {/* CONTENT */}
-        <div className="max-sm:space-y-2 space-y-4.5">
-          <h2 className="text-[clamp(1.5rem_5vw_3.5rem)] font-bold max-sm:tracking-[-0.03rem] tracking-[-0.105rem] text-grey50">
+        <div className="max-md:space-y-2 space-y-4.5">
+          <h2 className="text-2xl md:text-4xl lg:text-5.5xl font-bold max-sm:tracking-[-0.03rem] tracking-[-0.105rem] text-grey50">
             Brands We've Served
           </h2>
           <p className="font-medium max-sm:text-sm text-white/70">

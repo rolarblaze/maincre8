@@ -10,9 +10,9 @@ const DashboardSection = () => {
         {/* CONTENT */}
         <div className="space-y-4.5">
           <div className="relative w-fit">
-            <h2 className="text-grey900 max-w-[62.75rem] text-[clamp(1.5rem,_4vw,_3.5rem)] leading-[clamp(2rem,_6vw,_4rem)]">
+            <h2 className="text-grey900 max-w-[62.75rem] text-2xl md:text-4xl lg:text-5.5xl leading-8 md:leading-[3rem] lg:leading-[4rem]">
               Experience{" "}
-              <span className="text-primary500 text-[clamp(1.5rem,_5vw,_3.5rem)]">
+              <span className="text-primary500 text-2xl md:text-4xl lg:text-5.5xl">
                 Seamless
               </span>{" "}
               Project Management with Our User Dashboard
@@ -30,9 +30,9 @@ const DashboardSection = () => {
 
         <Button
           label="Explore the Dashboard"
-          classNames="max-w-[11.875rem] px-4 max-sm:py-2 leading-5 lg:max-w-[14.25rem]"
+          classNames="max-w-[11.875rem] leading-5 max-md:px-4 max-md:py-2 max-md:text-sm lg:max-w-[14.25rem]"
         />
-
+{/* max-w-[11.875rem] md:max-w-[12.5rem] */}
         {/* <button className="bg-primary500 text-white rounded-lg text-sm font-semibold px-4 py-2">
          
         </button> */}
