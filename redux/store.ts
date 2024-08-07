@@ -1,6 +1,5 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-
 
 import { AlertsSlice } from "./alerts";
 import { AuthSlice } from "./auth";
@@ -20,10 +19,9 @@ export const store = configureStore({
     newsletter: newsletterReducer,
     fileUpload: fileUploadReducer,
     brief: briefReducer,
+    getPackageDetails: getPackageReducer,
   },
 });
-
-
 
 // define RootState and AppDispatch types
 export type RootState = ReturnType<typeof store.getState>;
