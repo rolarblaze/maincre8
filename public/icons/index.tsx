@@ -64,6 +64,7 @@ export { default as SortIcon } from "./arrow-down.svg";
 export { default as CheckCircleIcon } from "./check-circle.svg";
 export { default as Icon } from "./vision-icon.svg";
 export { default as ArrowDrawing } from "./arrow-drawing.svg";
+export { default as ArrowDrawingMobile } from "./arrow-drawing-mobile.svg";
 export { default as TwitterIcon } from "./team-x.svg";
 export { default as TeamLinkedIn } from "./team-linkedin.svg";
 export { default as TeamFacebook } from "./team-fb.svg";
