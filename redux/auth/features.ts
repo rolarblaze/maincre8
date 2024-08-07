@@ -57,6 +57,19 @@ export const signUpBusiness = createAsyncThunk(
   }
 );
 
+export const renewRefreshToken = createAsyncThunk(
+  "auth/renewRefreshToken",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.post("renew-refresh-token");
+      setUserTokenCookie(response.data.access_token); // Set the new access token
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(handleAxiosError(error));
+    }
+  }
+);
+
 // Resend verification code
 export const resendVerificationCode = createAsyncThunk(
   "auth/resendVerificationCode",
@@ -100,7 +113,6 @@ export const forgotPassword = createAsyncThunk(
         email,
         callback_url,
       });
-      // console.log("forgot password:", response.data);
       return response.data;
     } catch (error) {
       return rejectWithValue(handleAxiosError(error));
@@ -131,6 +143,21 @@ export const resetPassword = createAsyncThunk(
     }
   }
 );
+
+// Fetch user profile
+export const getUserProfile = createAsyncThunk(
+  "auth/getUserProfile",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.get("user/get-profile-info");
+      return response.data;
+    } catch (error) {
+      console.log("Error fetching user profile:", error);
+      return rejectWithValue(handleAxiosError(error));
+    }
+  }
+);
+
 
 // update user info
 export const updateInfo = createAsyncThunk(

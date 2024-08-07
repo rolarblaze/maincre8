@@ -1,4 +1,4 @@
-import { removeUserTokenCookie } from "@/utils/helpers/auth/cookieUtility";
+import { removeUserTokenCookie, getUserTokenCookie, setUserTokenCookie } from "@/utils/helpers/auth/cookieUtility";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   forgotPassword,
@@ -9,6 +9,8 @@ import {
   signUpIndividual,
   updateInfo,
   verifyUser,
+  getUserProfile,
+  renewRefreshToken
 } from "./features";
 import { User } from "./interface";
 
@@ -16,17 +18,27 @@ export interface AuthSliceState {
   isAuthenticated: boolean;
   user: User;
   isLoading: boolean;
-  isLoadingUser?: boolean;
-  profile: User;
+  isLoadingProfile: boolean;
+  profile: {
+    business_name?: string | null;
+    first_name?: string | null;
+    last_name?: string | null;
+    user: User;
+  };
   otpMessage: string | null;
 }
 
 const initialState: AuthSliceState = {
-  isAuthenticated: false,
+  isAuthenticated: !!getUserTokenCookie(),
   user: {},
   isLoading: false,
-  isLoadingUser: true,
-  profile: {},
+  isLoadingProfile: true,
+  profile: {
+    business_name: null,
+    first_name: null,
+    last_name: null,
+    user: {},
+  },
   otpMessage: null,
 };
 
@@ -38,7 +50,13 @@ export const AuthSlice = createSlice({
       removeUserTokenCookie();
       state.isAuthenticated = false;
       state.user = {};
-      state.profile = {};
+      state.profile = {
+        business_name: null,
+        first_name: null,
+        last_name: null,
+        user: {},
+      };
+
       state.otpMessage = null;
     },
   },
@@ -89,6 +107,7 @@ export const AuthSlice = createSlice({
       .addCase(resendVerificationCode.rejected, (state: AuthSliceState) => {
         state.isLoading = false;
       })
+
       // Verify user
       .addCase(verifyUser.pending, (state: AuthSliceState) => {
         state.isLoading = true;
@@ -103,6 +122,7 @@ export const AuthSlice = createSlice({
       .addCase(verifyUser.rejected, (state: AuthSliceState) => {
         state.isLoading = false;
       })
+
       // Login user
       .addCase(loginUser.pending, (state: AuthSliceState) => {
         state.isLoading = true;
@@ -119,6 +139,7 @@ export const AuthSlice = createSlice({
       .addCase(loginUser.rejected, (state: AuthSliceState) => {
         state.isLoading = false;
       })
+
       // Forgot password
       .addCase(forgotPassword.pending, (state: AuthSliceState) => {
         state.isLoading = true;
@@ -134,6 +155,7 @@ export const AuthSlice = createSlice({
       .addCase(forgotPassword.rejected, (state: AuthSliceState) => {
         state.isLoading = false;
       })
+
       // Reset password
       .addCase(resetPassword.pending, (state: AuthSliceState) => {
         state.isLoading = true;
@@ -147,6 +169,33 @@ export const AuthSlice = createSlice({
       .addCase(resetPassword.rejected, (state: AuthSliceState) => {
         state.isLoading = false;
       })
+
+      // Renew refresh token
+      .addCase(renewRefreshToken.pending, (state: AuthSliceState) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        renewRefreshToken.fulfilled,
+        (state: AuthSliceState, action: PayloadAction<any>) => {
+          const { access_token } = action.payload;
+          setUserTokenCookie(access_token);
+          state.isAuthenticated = true;
+          state.isLoading = false;
+        }
+      )
+      .addCase(renewRefreshToken.rejected, (state: AuthSliceState) => {
+        state.isLoading = false;
+        removeUserTokenCookie();
+        state.isAuthenticated = false;
+        state.user = {};
+        state.profile = {
+          business_name: null,
+          first_name: null,
+          last_name: null,
+          user: {},
+        };
+      })
+
       // Update user info
       .addCase(updateInfo.pending, (state: AuthSliceState) => {
         state.isLoading = true;
@@ -160,6 +209,30 @@ export const AuthSlice = createSlice({
       )
       .addCase(updateInfo.rejected, (state: AuthSliceState) => {
         state.isLoading = false;
+      })
+
+      // Fetch user profile
+      .addCase(getUserProfile.pending, (state: AuthSliceState) => {
+        state.isLoadingProfile = true;
+      })
+      .addCase(
+        getUserProfile.fulfilled,
+        (state: AuthSliceState, action: PayloadAction<any>) => {
+          state.profile = action.payload;
+          state.isLoadingProfile = false;
+        }
+      )
+      .addCase(getUserProfile.rejected, (state: AuthSliceState) => {
+        state.isLoadingProfile = false;
+        removeUserTokenCookie();
+        state.isAuthenticated = false;
+        state.user = {};
+        state.profile = {
+          business_name: null,
+          first_name: null,
+          last_name: null,
+          user: {},
+        };
       });
   },
 });
