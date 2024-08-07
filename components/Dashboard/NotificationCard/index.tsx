@@ -24,7 +24,7 @@ const NotificationCard: React.FC<NotificationCardProps> = ({
             <h4 className="text-grey500 text-base font-medium">{date}</h4>
 
             <section className="flex items-start gap-0">
-                <div className={`h-full w-1.5 rounded-l ${borderColor}`}></div>
+                <div className={`h-full w-1.5 rounded-l `} style={{ backgroundColor: `${borderColor}` }}></div>
                 <div className='w-full flex items-start gap-4 p-5 cursor-pointer border border-grey200 rounded '>
                     <div>
                         <VideoIcon color={iconColor} />
