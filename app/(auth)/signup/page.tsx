@@ -238,7 +238,6 @@ export default function Signup() {
             isLoading={isLoading}
             type="submit"
             classNames="mt-4"
-            type="submit"
           />
         </form>
         <SocialSignUp />

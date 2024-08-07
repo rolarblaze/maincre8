@@ -52,6 +52,9 @@ export { default as ToolTipIcon } from "./tooltip.svg";
 export { default as Unchecked } from "./unchecked-checkbox.svg";
 export { default as UserProfilePhoto } from "./user-profile-picture.svg";
 export { default as UserFriendlyServiceIcon } from "./user.svg";
+export { default as LogoBlack } from "./logo-black.svg";
+export { default as Copy } from "./copy.svg";
+export { default as LinkIcon } from "./link-icon.svg";
 export { default as Close } from "./multiply.svg";
 export { default as Logout } from "./logout.svg";
 export { default as SortIcon } from "./arrow-down.svg";
@@ -72,3 +75,4 @@ export { default as TopIcon } from "lamp.svg";
 export { default as BasicIcon } from "basic.svg";
 export { default as PremiumIcon } from "premium.svg";
 export { default as StandardIcon } from "standard.svg";
+
