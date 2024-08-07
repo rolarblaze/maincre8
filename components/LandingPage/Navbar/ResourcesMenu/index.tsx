@@ -1,6 +1,6 @@
 import React from 'react';
-import DropdownWrapper from '@/components/Modals/DropdownWrapper';
 import { leftResourcesData, rightResourcesData } from './resourcesData';
+import DropdownWrapper from '@/components/Modals/DropdownWrapper';
 
 interface ResourcesMenuProps {
     isVisible: boolean;

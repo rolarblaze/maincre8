@@ -1,6 +1,5 @@
 import React from "react";
 import Button from "@/components/Button";
-import PillDiv from "@/components/UI/PillDiv";
 import Image, { StaticImageData } from "next/image";
 
 import {
@@ -10,6 +9,7 @@ import {
   LaunchGif,
   StartProject,
 } from "@/public/gif";
+import PillDiv from "@/components/UI/PillDiv";
 
 interface HeroSectionProps {
   pillText: string;

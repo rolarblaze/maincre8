@@ -1,12 +1,8 @@
 "use client";
 import React from "react";
-import Image from "next/image";
 import TeamImage from "@/public/images/team-group.svg";
 import TeamImageMobile from "@/public/images/team-group-mobile.svg";
-import TeamImage1 from "@/public/images/team-group1.svg";
-import TeamImage2 from "@/public/images/team-group2.svg";
-import ArrowIcon from "@/public/icons/arrow-drawing.svg";
-import ArrowIcon2 from "@/public/icons/arrow-up-drawing.svg";
+
 
 const WhoWeAre = () => {
   return (

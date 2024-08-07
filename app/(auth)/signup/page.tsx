@@ -14,6 +14,7 @@ import {
   passwordCriteria,
 } from "@/utils/helpers/auth/passwordValidation";
 import { useRouter } from "next/navigation";
+// import { type } from '../../../.history/components/LandingPage/AboutUs/Team/teamData_20240723003307';
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string().test(

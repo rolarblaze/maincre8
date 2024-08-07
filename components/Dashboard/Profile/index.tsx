@@ -1,7 +1,5 @@
 "use client";
-import { Button, DropdownSelect } from "@/components";
-import InputField from "@/components/Forms/InputField";
-import PhoneNumberInput from "@/components/PhoneInput";
+import { Button, DropdownSelect, InputField, PhoneNumberInput } from "@/components";
 import { UserProfilePhoto } from "@/public/icons";
 import { addAlert } from "@/redux/alerts";
 import { updateInfo } from "@/redux/auth/features";
@@ -191,7 +189,7 @@ export default function Profile() {
           label="Save changes"
           classNames="w-fit py-3 px-4"
           onClick={handleSaveChanges}
-          isLoading={status === "loading"}
+          isLoading={isLoading}
         />
         <Button
           label="Reset changes"

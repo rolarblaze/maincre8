@@ -1,18 +1,15 @@
 "use client";
-import Logo from "@/public/icons/logo-blue.svg";
-import Logout from "@/public/icons/logout.svg";
-import UserImage from "@/public/images/user-image.svg";
-import CalendarIcon from "@/public/svgs/CalendarIcon";
-import HistoryIcon from "@/public/svgs/HistoryIcon";
-import NotificationsIcon from "@/public/svgs/NotificationIcon";
-import OverviewIcon from "@/public/svgs/OverviewIcon";
-import ServicesIcon from "@/public/svgs/ServicesIcon";
-import SettingsIcon from "@/public/svgs/SettingIcon";
-import SupportIcon from "@/public/svgs/SupportIcon";
+
+import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import React from "react";
 import { Tab } from "./types";
+import { useAppSelector } from "@/redux/store";
+import UserImage from "@/public/images/user-image.svg";
+import ArrowUp from "@/public/icons/arrow-up.svg";
+import { Logo, Logout } from "@/public/icons";
+import { CalendarIcon, HistoryIcon, NotificationsIcon, OverviewIcon, ServicesIcon, SettingsIcon, SupportIcon } from "@/public/svgs";
+
 
 type SidebarProps = {
   setActiveTab: (tab: Tab) => void;
@@ -21,6 +18,8 @@ type SidebarProps = {
 const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
   const router = useRouter();
   const pathname = usePathname();
+  const { profile } = useAppSelector((state) => state.auth);
+  const [isSupportOpen, setIsSupportOpen] = useState(false);
 
   const isActive = (path: string) => pathname === path;
 
@@ -28,8 +27,12 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
     router.push("/login");
   };
 
+  const toggleSupport = () => {
+    setIsSupportOpen(!isSupportOpen);
+  };
+
   return (
-    <aside className="max-w-[272px] w-full h-screen flex flex-col justify-between px-2 bg-white border-r border-grey200">
+    <aside className="max-w-[272px] w-full h-full flex flex-col justify-between px-2 bg-white border-r border-grey200">
       <section className="flex flex-col gap-3 ">
         <Link href="/">
           <Logo className="w-full h-full px-2 py-6" />
@@ -38,22 +41,20 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
         <nav className="flex flex-col gap-1  pb-4 border-b border-grey200">
           <Link href="/dashboard">
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${
-                isActive("/dashboard")
-                  ? "bg-primary50 rounded-sm text-primary600 "
-                  : ""
-              }`}
+              className={`flex items-center gap-3 py-3 px-4 ${isActive("/dashboard")
+                ? "bg-primary50 rounded-sm text-primary600 "
+                : ""
+                }`}
               onClick={() => setActiveTab("Overview")}
             >
               <OverviewIcon
                 fillColor={isActive("/dashboard") ? "#136AD0" : "#667185"}
               />
               <span
-                className={`text-sm ${
-                  isActive("/dashboard")
-                    ? "text-primary600 text-medium"
-                    : "grey700"
-                }`}
+                className={`text-sm ${isActive("/dashboard")
+                  ? "text-primary600 text-medium"
+                  : "grey700"
+                  }`}
               >
                 Overview
               </span>
@@ -62,11 +63,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
 
           <Link href="/dashboard/services">
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${
-                isActive("/dashboard/services")
-                  ? "bg-primary50 rounded-sm text-primary600"
-                  : ""
-              }`}
+              className={`flex items-center gap-3 py-3 px-4 ${isActive("/dashboard/services")
+                ? "bg-primary50 rounded-sm text-primary600"
+                : ""
+                }`}
               onClick={() => setActiveTab("Services")}
             >
               <ServicesIcon
@@ -75,11 +75,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
                 }
               />
               <span
-                className={`text-sm ${
-                  isActive("/dashboard/services")
-                    ? "text-primary600 text-medium"
-                    : "grey700"
-                }`}
+                className={`text-sm ${isActive("/dashboard/services")
+                  ? "text-primary600 text-medium"
+                  : "grey700"
+                  }`}
               >
                 Services
               </span>
@@ -88,11 +87,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
 
           <Link href="/dashboard/calendar">
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${
-                isActive("/dashboard/calendar")
-                  ? "bg-primary50 rounded-sm text-primary600"
-                  : ""
-              }`}
+              className={`flex items-center gap-3 py-3 px-4 ${isActive("/dashboard/calendar")
+                ? "bg-primary50 rounded-sm text-primary600"
+                : ""
+                }`}
               onClick={() => setActiveTab("Calendar")}
             >
               <CalendarIcon
@@ -101,11 +99,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
                 }
               />
               <span
-                className={`text-sm ${
-                  isActive("/dashboard/calendar")
-                    ? "text-primary600 text-medium"
-                    : "grey700"
-                }`}
+                className={`text-sm ${isActive("/dashboard/calendar")
+                  ? "text-primary600 text-medium"
+                  : "grey700"
+                  }`}
               >
                 Calendar
               </span>
@@ -114,11 +111,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
 
           <Link href="/dashboard/order-history">
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${
-                isActive("/dashboard/order-history")
-                  ? "bg-primary50 rounded-sm text-primary600"
-                  : ""
-              }`}
+              className={`flex items-center gap-3 py-3 px-4 ${isActive("/dashboard/order-history")
+                ? "bg-primary50 rounded-sm text-primary600"
+                : ""
+                }`}
               onClick={() => setActiveTab("History")}
             >
               <HistoryIcon
@@ -127,42 +123,62 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
                 }
               />
               <span
-                className={`text-sm ${
-                  isActive("/dashboard/order-history")
-                    ? "text-primary600 text-medium"
-                    : "grey700"
-                }`}
+                className={`text-sm ${isActive("/dashboard/order-history")
+                  ? "text-primary600 text-medium"
+                  : "grey700"
+                  }`}
               >
                 History
               </span>
             </div>
           </Link>
 
-          <Link href="/dashboard/support">
+          <div onClick={toggleSupport}>
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${
-                isActive("/dashboard/support")
-                  ? "bg-primary50 rounded-sm text-primary600"
-                  : ""
-              }`}
-              onClick={() => setActiveTab("Support")}
+              className={`flex items-center justify-between gap-3 py-3 px-4 cursor-pointer ${isActive("/dashboard/support")
+                ? " text-primary600"
+                : ""
+                }`}
             >
-              <SupportIcon
-                fillColor={
-                  isActive("/dashboard/support") ? "#136AD0" : "#667185"
-                }
-              />
-              <span
-                className={`text-sm ${
-                  isActive("/dashboard/support")
+              <div className="flex items-center gap-3">
+                <SupportIcon
+                  fillColor={isActive("/dashboard/support") ? "#136AD0" : "#667185"}
+                />
+                <span
+                  className={`text-sm ${isActive("/dashboard/support")
                     ? "text-primary600 text-medium"
                     : "grey700"
-                }`}
+                    }`}
+                >
+                  Support
+                </span>
+              </div>
+              <div
+                className={`transition-transform duration-300 ${isSupportOpen ? "rotate-180" : ""
+                  }`}
               >
-                Support
-              </span>
+                <ArrowUp />
+              </div>
+
             </div>
-          </Link>
+            {isSupportOpen && (
+              <div className="flex flex-col gap-2 fadeInDown">
+                <Link href="/dashboard/support" onClick={() => setActiveTab("Support")}>
+                  <div
+                    className={`py-2 pl-4 pr-2 text-sm rounded-sm cursor-pointer ${isActive("/dashboard/support") ? "bg-primary50 text-grey900" : "text-grey700"
+                      }`}
+                  >
+                    Support Info
+                  </div>
+                </Link>
+                <div className="flex items-center justify-between py-2 pl-4 pr-2 text-sm rounded-sm cursor-pointer text-grey700">
+                  Support Inbox
+                  <span className="text-white bg-primary500 px-1 py-0.5 rounded-full text-xs">Coming soon</span>
+                </div>
+              </div>
+            )}
+          </div>
+
         </nav>
       </section>
 
@@ -170,11 +186,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
         <div className="flex flex-col gap-1 pb-3">
           <Link href="/dashboard/notifications">
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${
-                isActive("/dashboard/notifications")
-                  ? "bg-primary50 rounded-sm text-primary600"
-                  : ""
-              }`}
+              className={`flex items-center gap-3 py-3 px-4 ${isActive("/dashboard/notifications")
+                ? "bg-primary50 rounded-sm text-primary600"
+                : ""
+                }`}
               onClick={() => setActiveTab("Notifications")}
             >
               <NotificationsIcon
@@ -183,11 +198,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
                 }
               />
               <span
-                className={`text-sm ${
-                  isActive("/dashboard/notifications")
-                    ? "text-primary600 text-medium"
-                    : "grey700"
-                }`}
+                className={`text-sm ${isActive("/dashboard/notifications")
+                  ? "text-primary600 text-medium"
+                  : "grey700"
+                  }`}
               >
                 Notifications
               </span>
@@ -196,11 +210,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
 
           <Link href="/dashboard/settings">
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${
-                isActive("/dashboard/settings")
-                  ? "bg-primary50 rounded-sm text-primary600"
-                  : ""
-              }`}
+              className={`flex items-center gap-3 py-3 px-4 ${isActive("/dashboard/settings")
+                ? "bg-primary50 rounded-sm text-primary600"
+                : ""
+                }`}
               onClick={() => setActiveTab("Settings")}
             >
               <SettingsIcon
@@ -209,11 +222,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
                 }
               />
               <span
-                className={`text-sm ${
-                  isActive("/dashboard/settings")
-                    ? "text-primary600 text-medium"
-                    : "grey700"
-                }`}
+                className={`text-sm ${isActive("/dashboard/settings")
+                  ? "text-primary600 text-medium"
+                  : "grey700"
+                  }`}
               >
                 Settings
               </span>
@@ -234,8 +246,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
             <UserImage />
           </div>
           <div>
-            <p className="text-grey900 text-sm font-bold">Peace Ojo</p>
-            <p className="text-grey600 text-sm">peaceojo@smg.com</p>
+            <p className="text-grey900 text-sm font-bold">   {profile.user.is_business
+              ? profile?.business_name
+              : `${profile?.first_name} ${profile?.last_name}`}</p>
+            <p className="text-grey600 text-sm">{profile?.user?.profile?.user_email || " "}</p>
           </div>
         </div>
 

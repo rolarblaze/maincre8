@@ -1,7 +1,8 @@
 .contain {
   --s: 130px;
   @apply my-10 grid w-fit gap-x-2;
-  min-width: calc(var(--s) * 3.25);
+  max-width: calc(var(--s) * 3.25);
+  /* @apply ; */
   /* GRID LAYOUT FOR HONEYCOMB */
   grid-template-columns: repeat(6, minmax(0, calc(var(--s) / 2)));
 }

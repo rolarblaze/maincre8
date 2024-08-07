@@ -1,15 +1,6 @@
-import { combineReducers, configureStore } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import {
-  FLUSH,
-  PAUSE,
-  PERSIST,
-  persistReducer,
-  persistStore,
-  PURGE,
-  REGISTER,
-  REHYDRATE,
-} from "redux-persist";
+
 import { AlertsSlice } from "./alerts";
 import { AuthSlice } from "./auth";
 import { briefReducer } from "./brief";
@@ -18,38 +9,21 @@ import { getPackageReducer } from "./getPackage";
 import newsletterReducer from "./newsletter";
 import { shopReducer } from "./shop";
 
-import customStorage from "@/utils/createStorage";
-
-const rootReducer = combineReducers({
-  auth: AuthSlice.reducer,
-  alerts: AlertsSlice.reducer,
-  shop: shopReducer,
-  newsletter: newsletterReducer,
-  fileUpload: fileUploadReducer,
-  brief: briefReducer,
-  getPackageDetails: getPackageReducer,
-});
-
-const persistConfig = {
-  key: "root",
-  storage: customStorage,
-  whitelist: ["auth"],
-};
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
+// configure the store with all reducers
 export const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
+  reducer: {
+    // all your slice reducers goes here
+    auth: AuthSlice.reducer,
+    alerts: AlertsSlice.reducer,
+    shop: shopReducer,
+    newsletter: newsletterReducer,
+    fileUpload: fileUploadReducer,
+    brief: briefReducer,
+    getPackageDetails: getPackageReducer,
+  },
 });
 
-export const persistor = persistStore(store);
-
+// define RootState and AppDispatch types
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 

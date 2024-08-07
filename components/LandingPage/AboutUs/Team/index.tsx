@@ -2,11 +2,8 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import Arrow from "@/public/icons/arrow-drawing.svg";
-import TwitterIcon from "@/public/icons/team-x.svg";
-import LinkedInIcon from "@/public/icons/team-linkedin.svg";
-import FacebookIcon from "@/public/icons/team-fb.svg";
 import teamMembers from "./teamData";
+import { ArrowDrawing, TeamFacebook, TeamLinkedIn, TwitterIcon } from "@/public/icons";
 
 const Team = () => {
   return (
@@ -20,7 +17,7 @@ const Team = () => {
             </span>
           </h2>
           <div className="self-start">
-            <Arrow />
+            <ArrowDrawing />
           </div>
         </div>
         <div className="w-full overflow-x-auto no-scrollbar">
@@ -55,14 +52,14 @@ const Team = () => {
                   {member.linkedin && (
                     <Link href={member.linkedin}>
                       <div className="cursor-pointer">
-                        <LinkedInIcon />
+                        <TeamLinkedIn />
                       </div>
                     </Link>
                   )}
                   {member.facebook && (
                     <Link href={member.facebook}>
                       <div className="cursor-pointer">
-                        <FacebookIcon />
+                        <TeamFacebook />
                       </div>
                     </Link>
                   )}
