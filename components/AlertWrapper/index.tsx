@@ -2,9 +2,9 @@
 "use client";
 
 import React from "react";
-import Alert from "@/components/Alert";
 import { useAppSelector } from "@/redux/store";
 import { RootState } from "@/redux/store";
+import Alert from "../Alert";
 
 const AlertWrapper: React.FC = () => {
   const alerts = useAppSelector((state: RootState) => state.alerts.messages);

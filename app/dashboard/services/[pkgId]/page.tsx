@@ -1,28 +1,13 @@
 "use client";
 import { Button, FullLoader, TabsToggle } from "@/components";
 import { ArrowBackIcon } from "@/public/icons";
-import AllIcon from "@/public/svgs/HomeAltIcon";
 import { getPackageDetails } from "@/redux/getPackage/getPkg";
+import { Package } from "@/redux/shop/interface";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
+
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
-
-interface Package {
-  package_name: string;
-  package_id: number;
-  bundle_id: number;
-  price: number | null;
-  description: string;
-  provisions: Provision[];
-}
-
-interface Provision {
-  description: string;
-  provision_id: number;
-  package_id: number;
-  availability: boolean;
-}
 
 const PackageDetails = () => {
   const { pkgId } = useParams();
@@ -36,26 +21,12 @@ const PackageDetails = () => {
     status,
     pkgDetails,
     error,
-  }: { status: string; pkgDetails: Package | null; error: string | null } =
+  }: { status: string; pkgDetails: Package; error: string | null } =
     useAppSelector((state) => state.getPackageDetails);
 
   if (status !== "succeeded") return <FullLoader />;
   if (error) return <div>Error: {error}</div>;
 
-  const tabs = [
-    {
-      name: "My package",
-      icon: <AllIcon fillColor={activeTab === "All" ? "#1574E5" : "#98A2B3"} />,
-    },
-    {
-      name: "package info",
-      icon: (
-        <AllIcon
-          fillColor={activeTab === "package info" ? "#1574E5" : "#98A2B3"}
-        />
-      ),
-    },
-  ];
   return (
     <div>
       <Link href={"/dashboard/services"} className="flex w-fit mb-14 pl-6">
@@ -76,14 +47,13 @@ const PackageDetails = () => {
 
       {/* ------------------------------------------------ */}
       {/* ------------------------------------------------ */}
-      <div className="border-l border-t border-grey200 py-4 px-6 mt-6 h-full">
-        <div className="">
-          <TabsToggle
-            activeTab={activeTab}
-            onTabClick={setActiveTab}
-            disableMyPackage={false}
-          />
-        </div>
+      <div className="border-l border-t border-grey200 py-4 px-6 mt-6 h-full ">
+        <TabsToggle
+          activeTab={activeTab}
+          onTabClick={setActiveTab}
+          disableMyPackage={false}
+          provisions={pkgDetails?.provisions}
+        />
       </div>
     </div>
   );

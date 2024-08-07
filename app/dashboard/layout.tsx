@@ -1,8 +1,10 @@
 "use client";
+
 import Header from "@/components/Dashboard/Header";
 import Sidebar from "@/components/Dashboard/Sidebar";
 import { Tab } from "@/components/Dashboard/Sidebar/types";
 import Middleware from "@/utils/middleware";
+
 import { usePathname } from "next/navigation";
 import { useState, useEffect } from "react";
 

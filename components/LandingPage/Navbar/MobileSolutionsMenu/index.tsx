@@ -1,7 +1,6 @@
 import React from "react";
 import { solutionsData } from "../SolutionsMenu/solutionsData";
-import { CancelIcon } from "@/public/icons";
-import CircleCancel from "@/public/svgs/CircleCancel";
+import { CircleCancel } from "@/public/svgs";
 
 interface MobileSolutionsMenuProps {
   onClick: () => void;

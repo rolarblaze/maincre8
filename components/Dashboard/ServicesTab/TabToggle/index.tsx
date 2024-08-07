@@ -1,8 +1,10 @@
 "use client";
 import { FolderIcon, PackageIcon } from "@/public/svgs";
+
 import React, { useEffect, useState } from "react";
 import MyPackage from "../MyPackage";
 import PackageInfo from "../PackageInfo";
+import { Provision } from "@/redux/shop/interface";
 
 type Tab = {
   name: string;
@@ -14,19 +16,19 @@ type TabsProps = {
   activeTab?: string;
   onTabClick: (tabName: string) => void;
   disableMyPackage?: boolean;
+  provisions: Provision[];
 };
 
 const TabsToggle: React.FC<TabsProps> = ({
   activeTab: initialActiveTab = "package info",
   onTabClick,
   disableMyPackage = false,
+  provisions,
 }) => {
   const [activeTab, setActiveTab] = useState(initialActiveTab);
 
   useEffect(() => {
     setActiveTab(initialActiveTab);
-    console.log(activeTab);
-    console.log(initialActiveTab);
   }, [initialActiveTab]);
 
   const handleTabClick = (tabName: string) => {
@@ -35,10 +37,6 @@ const TabsToggle: React.FC<TabsProps> = ({
       onTabClick(tabName);
     }
   };
-
-  useEffect(() => {
-    console.log(activeTab);
-  }, [activeTab]);
 
   const tabs: Tab[] = [
     {
@@ -57,7 +55,7 @@ const TabsToggle: React.FC<TabsProps> = ({
           fillColor={activeTab === "package info" ? "#1574E5" : "#344054"}
         />
       ),
-      component: <PackageInfo />,
+      component: <PackageInfo Benefits={provisions} />,
     },
   ];
 

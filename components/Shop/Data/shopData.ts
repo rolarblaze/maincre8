@@ -1,8 +1,6 @@
 import { ReactElement } from "react";
 import { Service } from "@/redux/shop/interface";
-import BasicIcon from "@/public/icons/basic.svg"
-import StandardIcon from "@/public/icons/standard.svg"
-import PremiumIcon from "@/public/icons/premium.svg"
+import { BasicIcon, PremiumIcon, StandardIcon } from "@/public/icons";
 
 const getIconForPackage = (packageName: string): ReactElement => {
   switch (packageName) {

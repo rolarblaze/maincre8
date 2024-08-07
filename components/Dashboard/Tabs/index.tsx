@@ -1,6 +1,7 @@
 "use client";
+import { SortIcon } from "@/public/icons";
 import React, { useState } from "react";
-import SortIcon from "@/public/icons/arrow-down.svg";
+
 
 type Tab = {
   name: string;

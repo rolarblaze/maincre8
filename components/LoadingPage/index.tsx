@@ -1,9 +1,10 @@
 "use client";
 
 import React, { FC } from "react";
-import Image from "next/image";
+import { Logo } from "@/public/icons";
 
 import { LogoBlack } from "@/public/icons";
+
 
 const LoadingPage: FC = ({}) => {
   return (

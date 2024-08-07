@@ -7,13 +7,11 @@ import React, {
   ReactElement,
 } from "react";
 import { twMerge } from "tailwind-merge";
-import { BlueArrowLeft, BlueArrowRight } from "@/public/icons";
+import { BasicIcon, BlueArrowLeft, BlueArrowRight, PremiumIcon, StandardIcon } from "@/public/icons";
 import Card from "../SectionCard";
 import Modal from "@/components/Modals/CustomModal";
 import SalesPopUp from "@/components/SalesPopUp";
-import BasicIcon from "@/public/icons/basic.svg";
-import StandardIcon from "@/public/icons/standard.svg";
-import PremiumIcon from "@/public/icons/premium.svg";
+
 
 interface SideScrollItem {
   name: string;

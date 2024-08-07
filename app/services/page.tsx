@@ -1,11 +1,11 @@
 import {
   AllServices,
   AppWrapper,
+  CTASection,
   GetStarted,
   HomepageHero,
   HowWeDeliver,
 } from "@/components";
-import CTASection from "@/components/LandingPage/Sections/CTASection";
 
 const Services = () => {
   return (

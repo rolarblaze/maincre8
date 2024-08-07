@@ -1,5 +1,6 @@
+import { CheckCircleIcon } from "@/public/icons";
 import React from "react";
-import CheckCircleIcon from "@/public/icons/check-circle.svg";
+
 
 export default function Approach() {
   const approachData = [

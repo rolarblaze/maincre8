@@ -1,6 +1,5 @@
-import { InfoIcon, NoCheckFillIcon } from "@/public/svgs";
-import CheckFill from "@/public/svgs/CheckFillIcon";
-import TickIcon from "@/public/svgs/TickIcon";
+import { CheckFill, InfoIcon, NoCheckFillIcon } from "@/public/svgs";
+
 
 const bundleStats = [
   {

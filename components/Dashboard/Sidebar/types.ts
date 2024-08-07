@@ -1,4 +1,6 @@
+
 export type Tab =
+type Tab =
   | "Overview"
   | "Services"
   | "Calendar"
@@ -8,4 +10,6 @@ export type Tab =
   | "SupportInbox"
   | "Notifications"
   | "Settings";
+
+export default Tab;
 
