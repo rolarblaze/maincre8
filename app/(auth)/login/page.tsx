@@ -64,7 +64,7 @@ export default function Login() {
           type: "success",
         })
       );
-      window.location.replace("/dashboard");
+      router.push("/dashboard");
     } else if (loginUser.rejected.match(actionResult)) {
       if (actionResult.error) {
         console.log(actionResult.error.message);
