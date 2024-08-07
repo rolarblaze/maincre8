@@ -25,6 +25,8 @@ export { default as ServicesIcon } from "./ServicesIcon";
 export { default as SettingsIcon } from "./SettingIcon";
 export { default as SupportIcon } from "./SupportIcon";
 export { default as CircleCancel } from "./CircleCancel";
+export { default as VideoIcon } from "./VideoIcon";
+export { default as VisionIcon } from "./VisionIcon";
 export { default as BlueArrowRight } from "./BlueArrowRightIcon";
 export { default as BlueArrowLeft } from "./BlueArrowLeftIcon";
 export { default as BlueCheckIcon } from "./BlueCheckIcon";
@@ -33,4 +35,4 @@ export { default as BlueProjectIcon } from "./BlueProjectIcon";
 export { default as BlueSupportIcon } from "./BlueSupportIcon";
 export { default as BlueTargetIcon } from "./BlueTargetIcon";
 export { default as BlueUserIcon } from "./BlueUserIcon";
-export { default as VisionIcon } from "./VisionIcon";
+
