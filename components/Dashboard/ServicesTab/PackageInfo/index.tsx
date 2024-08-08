@@ -12,7 +12,7 @@ const PackageInfo = ({ Benefits }: { Benefits: Provision[] }) => {
   }, {} as Record<string, Provision[]>);
 
   return (
-    <div className="grid grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       {Object.keys(groupedBenefits).map((tag) => {
         const benefits = groupedBenefits[tag];
         const sortedBenefits = benefits.sort((a, b) =>

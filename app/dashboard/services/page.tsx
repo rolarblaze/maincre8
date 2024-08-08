@@ -105,7 +105,7 @@ const Services = () => {
             icon={<SearchIcon className="w-5 h-5" />}
           />
         </div>
-        <div className="grid grid-cols-3 gap-6 overflow-y-auto">
+        <div className="grid grids-cols-1 md:grids-cols-2 lg:grid-cols-3 gap-6 overflow-y-auto">
           {isLoading ? (
             <div>
               <Loader />

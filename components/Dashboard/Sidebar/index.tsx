@@ -41,7 +41,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
   };
 
   return (
-    <aside className="max-w-[272px] w-full h-full flex flex-col justify-between px-2 bg-white border-r border-grey200">
+    <aside className="hidden max-w-[272px] w-full h-full md:flex flex-col justify-between px-2 bg-white border-r border-grey200">
       <section className="flex flex-col gap-3 ">
         <Link href="/">
           <LogoBlue className="w-full h-full px-2 py-6" />

@@ -54,15 +54,15 @@ const PackageDetails = () => {
         <ArrowBackIcon />
         <span className="align-super text-grey600 ml-2">Back to services</span>
       </Link>
-      <div className="flex justify-between items-center px-6">
+      <div className=" flex justify-between items-center px-2 md:px-6 flex-wrap gap-4">
         <div>
           <h4>{pkgDetails?.package_name}</h4>
           <p>{pkgDetails?.description}</p>
         </div>
 
         <div className="flex gap-6 items-center">
-          <h4>{pkgDetails?.price || "$499"}</h4>
-          <Button label={`Buy for ${pkgDetails?.price || "$499"}`} />
+          <h4 className="hidden md:block">{pkgDetails?.price || "$499"}</h4>
+          <Button label={`Buy for ${pkgDetails?.price || "$499"}`} classNames="self-start" />
         </div>
       </div>
 
