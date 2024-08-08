@@ -1,5 +1,5 @@
-"use client";
-import React, { ReactNode, useEffect, useRef } from "react";
+"use client"
+import React, { ReactNode, useEffect, useRef } from 'react';
 
 interface DropdownWrapperProps {
   children: ReactNode;

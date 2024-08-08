@@ -24,8 +24,7 @@ const NotificationCard: React.FC<NotificationCardProps> = ({
     <section className="max-w-[568px] w-full space-y-4">
       <h4 className="text-grey500 text-base font-medium">{date}</h4>
 
-      <section className="flex gap-0">
-        {/* tailwind does not work properly with dynamic bg color */}
+      <section className="flex gap-0 cursor-pointer">
         <div
           className={twMerge(
             `w-1.5 rounded-l flex-shrink-0`,

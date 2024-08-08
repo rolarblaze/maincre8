@@ -18,7 +18,7 @@ const Bundles = () => {
           <Crea8Star />
         </div>
         <h2 className="text-white text-[clamp(1.5rem_,5vw,_3.5rem)]">Our Top Bundles</h2>
-        <p className="text-grey50 max-w-[412px] mx-auto my-4">
+        <p className="text-grey50 max-sm:text-sm max-w-[412px] mx-auto my-4">
           Hiring a world-class team of creative geniuses doesn't have to be
           expensive or complicated.
         </p>
@@ -27,7 +27,7 @@ const Bundles = () => {
         </div>
 
         {/* tab buttons */}
-        <div className="flex justify-center gap-6 my-8">
+        <div className="flex justify-center max-sm:gap-5 gap-6 my-8">
           <TabButton
             tab="digital"
             activeTab={activeTab}
@@ -45,7 +45,7 @@ const Bundles = () => {
         </div>
       </div>
 
-      <div className="flex gap-8 md:max-w-[1216px] mx-auto w-full pt-8 max-lg:overflow-x-scroll no-scrollbar">
+      <div className="flex max-sm:gap-6 gap-8 md:max-w-[1216px] mx-auto w-full pt-8 max-lg:overflow-x-scroll no-scrollbar">
         {serviceBundles[activeTab].map((service, index) => (
           <Card
             key={index}

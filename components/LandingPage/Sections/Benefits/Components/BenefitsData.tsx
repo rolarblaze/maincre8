@@ -5,7 +5,7 @@ import {
   BlueSupportIcon,
   BlueTargetIcon,
   BlueUserIcon,
-} from "@/public/icons";
+} from "@/public/svgs";
 
 import { Benefit, BenefitIndividual } from "@/public/imgs";
 import { StaticImageData } from "next/image";

@@ -51,44 +51,44 @@ const SubscribeSection = () => {
   return (
     <section className="w-full bg-grey800 z-20">
       <div className="py-20 mx-auto max-w-[76rem] flex max-xl:px-5 max-md:flex-col-reverse max-md:gap-6 justify-between items-center">
-        <div className="space-y-4 ">
+        <div className="flex flex-col gap-2">
           {/* PILL DIV */}
-          <div className="border p-2 w-fit border-grey50 rounded-[0.625rem]">
-            <span className="text-lg text-grey50 font-semibold leading-7">
+          <div className="border p-2 mb-2 w-fit border-grey50 rounded-[0.625rem]">
+            <span className="text-lg max-sm:text-xs text-grey50 font-semibold leading-7">
               Subscribe to Our Newsletter 
             </span>
           </div>
 
-          <h3 className="text-grey50 font-bold text-3.5xl leading-10">
+          <h3 className="text-grey50 font-bold text-2xl md:text-3xl lg:text-3.5xl leading-8 lg:leading-10">
             Stay Updated!
           </h3>
 
-          <p className="text-grey50 font-medium leading-6">
+          <p className="text-grey50 max-sm:text-sm font-medium leading-6">
             Subscribe to our newsletter for the latest updates, discounts, and
             promotions.
           </p>
 
           {/* BUTTONS */}
-          <div className="max-w-[28.5rem] flex justify-center items-center gap-10">
+          <div className="max-w-[28.5rem] max-md:py-4 max-md:flex-col flex justify-center max-md:items-start items-center gap-4 md:gap-10">
             <InputField
               label=""
               type="text"
               placeholder="Enter email address"
-              classNames="max-w-[13rem] bg-white py-3.5"
+              classNames="md:max-w-[13rem] bg-white py-3.5"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />
 
             <Button
               label="Subscribe"
-              classNames="max-w-[13rem]"
+              classNames="max-md:max-w-[6.5rem] max-md:py-2 max-w-[13rem]"
               onClick={handleSubscribe}
               isLoading={isLoading}
             />
           </div>
         </div>
 
-        <figure className="relative size-[16.6875rem] mr-12">
+        <figure className="relative size-[16.6875rem] lg:mr-12">
           <Image src={computer} alt="computer image" />
           {/* <StartProjectText className="absolute bottom-6 right-7" /> */}
         </figure>

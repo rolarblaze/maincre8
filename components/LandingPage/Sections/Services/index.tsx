@@ -1,6 +1,7 @@
 "use client";
 import {
   Highlight,
+  HighlightMobile,
   ProjectServiceIcon,
   SecurePaymentServiceIcon,
   TailoredServiceIcon,
@@ -46,24 +47,30 @@ const Card = ({
   description: string;
 }) => (
   <div className="border border-grey200 rounded-lg p-5 flex flex-col gap-3 text-start items-start">
-    <div className="mb-5">{icon}</div>
-    <h4>{title}</h4>
+    <div className="mb-4 md:mb-5">{icon}</div>
+    <h4 className="font-semibold line-clamp-2 max-sm:text-base">{title}</h4>
     <p className="text-grey500">{description}</p>
   </div>
 );
 
 const Service = () => {
   return (
-    <div className="pb-12 pt-8 lg:py-20 max-w-[1216px] mx-auto max-xl:px-6">
+    <div className="pb-12 pt-8 lg:py-20 space-y-8 max-w-[1216px] mx-auto max-xl:px-6">
       <motion.h2
-        className="flex justify-start items-center"
+        className="flex justify-start text-2xl lg:text-[3.5rem] items-center"
         initial={{ x: -50, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.5 }}
+        viewport={{
+          margin: "-200px",
+          once: true,
+        }}
       >
         Why Choose{" "}
-        <span className="text-primary400 h2 ml-1.5"> SellCrea8?</span>
-        <Highlight />
+        <span className="text-primary400 text-2xl lg:text-[3.5rem] ml-1.5"> SellCrea8?</span>
+       
+        <Highlight className="max-md:hidden" />
+        <HighlightMobile className="md:hidden" />
       </motion.h2>
 
       <motion.div
@@ -71,6 +78,10 @@ const Service = () => {
         initial={{ y: 100, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.5 }}
+        viewport={{
+          margin: "-200px",
+          once: true,
+        }}
       >
         {services.map((service, index) => (
           <Card
