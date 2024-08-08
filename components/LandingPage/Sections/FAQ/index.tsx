@@ -18,9 +18,9 @@ const FAQ = () => {
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.5 }}
       >
-        <h2>
+        <h2 className="text-2xl md:text-4xl lg:text-5.5xl">
           Frequently Asked{" "}
-          <span className="h2 text-primary500"> Questions</span>
+          <span className="text-2xl md:text-4xl lg:text-5.5xl text-primary500"> Questions</span>
         </h2>
         <p className="">Customer Reviews</p>
       </motion.div>

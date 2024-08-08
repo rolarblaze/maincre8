@@ -1,11 +1,16 @@
 "use client";
 import React from "react";
-import { HighlightDown, HighlightUp } from "@/public/icons";
+import Button from "@/components/Button";
+import {
+  HighlightDown,
+  HighlightDownMobile,
+  HighlightUp,
+  HighlightUpMobile,
+} from "@/public/icons";
 import { Benefit, BenefitIndividual } from "@/public/imgs";
 import Card from "./BenefitsCard";
 import { motion } from "framer-motion";
 import { BenefitImages } from "./BenefitsData";
-import Button from "@/components/Button";
 
 interface Benefit {
   title: string;
@@ -30,18 +35,20 @@ const Section: React.FC<SectionProps> = ({
 }) => {
   const selectImg = BenefitImages.find((img) => {
     return img.title === title;
-  })
-  
+  });
+
   return (
-    <div className="py-20 max-xl:px-5">
-      <div className="flex justify-center">
-        <HighlightDown />
-        <h2>
-          Benefits for <span className="h2 text-primary500">{title}</span>
+    <div className="max-sm:py-10 py-20 max-xl:px-5">
+      <div className="flex -mb-1 items-start justify-center">
+        <HighlightDown className="max-md:hidden" />
+        <HighlightDownMobile className="md:hidden" />
+        <h2 className="text-center text-[1.3rem] md:text-5xl lg:text-5.5xl">
+          Benefits for <span className="text-[1.3rem] md:text-5xl lg:text-5.5xl text-primary500">{title}</span>
         </h2>
-        <HighlightUp />
+        <HighlightUp className="max-md:hidden" />
+        <HighlightUpMobile className="md:hidden" />
       </div>
-      <p className="max-lg:text-center">{subtitle}</p>
+      <p className="text-center md:-mt-10 lg:-mt-6">{subtitle}</p>
       <div
         className={`w-full flex max-lg:flex-col max-lg:gap-8 items-center justify-between my-8 ${
           reverse ? "lg:flex-row-reverse" : ""
@@ -62,7 +69,7 @@ const Section: React.FC<SectionProps> = ({
             />
           ))}
         </motion.div>
-        
+
         <motion.img
           src={selectImg?.src?.src}
           alt="benefits"

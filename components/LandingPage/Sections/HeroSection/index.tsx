@@ -32,14 +32,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({
     <section className="relative overflow-hidden size-full min-h-[28rem] px-5 pt-24 pb-14 md:pb-16 -mt-28">
       <div className="z-20 w-full max-w-[76rem] mx-auto flex flex-col pt-10 md:py-20 justify-center items-center gap-8">
         {/* HERO CONTENT */}
-        <div className="max-w-[880px] w-full text-center size-full flex flex-col justify-center items-center gap-6">
+        <div className="max-sm:max-w-[21rem] max-w-[880px] w-full text-center size-full flex flex-col justify-center items-center gap-6">
           {/* PILL DIV */}
           <PillDiv className="mb-0 border-primary100 text-white text-xs md:text-lg">
             {pillText}
           </PillDiv>
 
           {/* HERO TITLE */}
-          <h1 className="md:-tracking-[0.225rem] text-5xl md:leading-loosest md:text-[5.5rem] font-extrabold text-primary50">
+          <h1 className="md:-tracking-[0.225rem] text-[2.5rem] md:text-5xl leading-[3rem] md:leading-loosest md:text-[5.5rem] font-extrabold text-primary50">
             {title}
           </h1>
 
@@ -68,12 +68,12 @@ const HeroSection: React.FC<HeroSectionProps> = ({
             <Image
               src={ColorPalette}
               alt="Color Palette"
-              className="absolute top-36 left-60 size-[4.75rem]"
+              className="absolute max-lg:hidden top-36 left-60 size-[4.75rem]"
             />
             <Image
               src={IdeaBulb}
               alt="Idea Bulb"
-              className="absolute top-36 right-60 size-[4.75rem]"
+              className="absolute max-lg:hidden top-36 right-60 size-[4.75rem]"
             />
           </>
         )}
