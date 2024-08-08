@@ -13,7 +13,7 @@ interface SectionProps {
 const Section = ({ title, subTitle, content }: SectionProps) => {
   return (
     <>
-      <h2 className="mb-6">{title}</h2>
+      <h2 className="mb-6 max-sm:text-2xl">{title}</h2>
       <p className="mb-10">{subTitle}</p>
 
       {content?.map((content, index) => (
@@ -30,7 +30,7 @@ const Section = ({ title, subTitle, content }: SectionProps) => {
               className="md:w-1/2 w-full"
             />
             <div className="text-left">
-              <h4 className="mb-4">{content.heading}</h4>
+              <h4 className="mb-4 text-lg">{content.heading}</h4>
               <p>{content.description}</p>
             </div>
           </>
