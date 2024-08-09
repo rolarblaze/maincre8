@@ -24,7 +24,7 @@ const Navbar: React.FC = () => {
 
   const pathname = usePathname();
   const isHome =
-    pathname === "/" || pathname === "/about-us" || pathname === "/services";
+    pathname === "/" || pathname === "/about-us" || pathname === "/services" || pathname === "/watch-demo";
 
   const mobileNavData = [
     {
