@@ -34,6 +34,8 @@ export { default as HomepageHero } from "./LandingPage/Sections/HeroSection";
 export { default as HomepageServices } from "./LandingPage/Sections/Services";
 export { default as HomepageSubscribe } from "./LandingPage/Sections/SubscribeSection";
 export { default as CTASection } from "./LandingPage/Sections/CTASection";
+export { default as HelpCenter } from "./LandingPage/HelpCenter";
+export { default as BreadCrumb } from "./BreadCrumb";
 
 // UI COMPONENTS
 export { default as AvatarIcon } from "./UI/AvatarIcon";

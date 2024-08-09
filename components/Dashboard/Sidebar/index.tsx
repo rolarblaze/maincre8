@@ -7,7 +7,7 @@ import { Tab } from "./types";
 import { useAppSelector } from "@/redux/store";
 import UserImage from "@/public/images/user-image.svg";
 import ArrowUp from "@/public/icons/arrow-up.svg";
-import { Logo, Logout } from "@/public/icons";
+import { LogoBlue, Logout } from "@/public/icons";
 import { CalendarIcon, HistoryIcon, NotificationsIcon, OverviewIcon, ServicesIcon, SettingsIcon, SupportIcon } from "@/public/svgs";
 
 
@@ -35,7 +35,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
     <aside className="max-w-[272px] w-full h-full flex flex-col justify-between px-2 bg-white border-r border-grey200">
       <section className="flex flex-col gap-3 ">
         <Link href="/">
-          <Logo className="w-full h-full px-2 py-6" />
+          <LogoBlue className="w-full h-full px-2 py-6" />
         </Link>
 
         <nav className="flex flex-col gap-1  pb-4 border-b border-grey200">
