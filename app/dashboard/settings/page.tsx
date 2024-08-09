@@ -27,7 +27,7 @@ export default function Settings() {
       />
       <section>
         {activeTab === "Profile" && <Profile />}
-        {activeTab === "Security" && <Security />}
+        {activeTab === "Password" && <Security />}
         {activeTab === "Payment" && <Payment />}
       </section>
     </div>
