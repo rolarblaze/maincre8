@@ -2,7 +2,12 @@
 import { InputField, Loader, ServiceCard } from "@/components";
 import Tabs from "@/components/Dashboard/Tabs";
 import { SearchIcon } from "@/public/icons";
-import { AllIcon, ContentCopywritingIcon, CreativeDesignIcon, DigitalMarketingIcon } from "@/public/svgs";
+import {
+  AllIcon,
+  ContentCopywritingIcon,
+  CreativeDesignIcon,
+  DigitalMarketingIcon,
+} from "@/public/svgs";
 import { getServices } from "@/redux/shop/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { useEffect, useState } from "react";
@@ -110,13 +115,15 @@ const Services = () => {
               {filteredServices
                 .flatMap((service) =>
                   service.bundles.flatMap((bundle) =>
-                    bundle.packages.map((pkg) => ({
-                      category: bundle.bundle_name,
-                      title: pkg.package_name,
-                      description: pkg.description,
-                      color: bundleColors[bundle.bundle_name],
-                      id: pkg.package_id,
-                    }))
+                    bundle.packages.flatMap((pkg) =>
+                      pkg.provisions.map((provision) => ({
+                        category: bundle.bundle_name,
+                        title: pkg.package_name,
+                        description: provision.description,
+                        color: bundleColors[bundle.bundle_name],
+                        id: pkg.package_id,
+                      }))
+                    )
                   )
                 )
                 .map((card, index) => (
