@@ -150,6 +150,7 @@ export const getUserProfile = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await api.get("user/get-profile-info");
+      console.log("user Profile", response.data)
       return response.data;
     } catch (error) {
       console.log("Error fetching user profile:", error);
