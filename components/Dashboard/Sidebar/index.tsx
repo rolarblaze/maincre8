@@ -7,24 +7,30 @@ import { Tab } from "./types";
 import { useAppSelector } from "@/redux/store";
 import UserImage from "@/public/images/user-image.svg";
 import ArrowUp from "@/public/icons/arrow-up.svg";
-import { LogoBlue, Logout } from "@/public/icons";
+import { BulbIcon, CancelIcon, LogoBlue, Logout } from "@/public/icons";
 import {
-  BulbIcon,
   CalendarIcon,
   HistoryIcon,
-  MyServicesIcon,
+  MobileBlueLogo,
   NotificationsIcon,
   OverviewIcon,
   ServicesIcon,
   SettingsIcon,
   SupportIcon,
 } from "@/public/svgs";
+import MyServicesIcon from "@/public/svgs/MyServicesIcon";
 
 type SidebarProps = {
   setActiveTab: (tab: Tab) => void;
+  onClick?: () => void;
+  isMobile: boolean;
 };
 
-const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
+const Sidebar: React.FC<SidebarProps> = ({
+  setActiveTab,
+  onClick,
+  isMobile,
+}) => {
   const router = useRouter();
   const pathname = usePathname();
   const { profile } = useAppSelector((state) => state.auth);
@@ -41,11 +47,26 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
   };
 
   return (
-    <aside className="hidden max-w-[272px] w-full h-full md:flex flex-col justify-between px-2 bg-white border-r border-grey200">
+    <aside
+      className={`${
+        isMobile ? "hidden fixed z-50 inset-x-0 top-0" : ""
+      } max-w-[272px] w-full h-full md:flex flex-col justify-between px-2 bg-white border-r border-grey200`}
+    >
+      {/* Upper section */}
       <section className="flex flex-col gap-3 ">
         <Link href="/">
           <LogoBlue className="w-full h-full px-2 py-6" />
         </Link>
+
+        {/* Mobile Logo */}
+        <div className=" flex justify-between w-full md:hidden">
+          <Link href={"/"} className="">
+            <MobileBlueLogo />
+          </Link>
+          <button className="w-fit h-fit" onClick={onClick}>
+            <CancelIcon />
+          </button>
+        </div>
 
         <nav className="flex flex-col gap-1  pb-4 border-b border-grey200">
           <Link href="/dashboard">
@@ -110,7 +131,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
             >
               <BulbIcon
                 fillColor={
-                  isActive("/dashboard/custom-recommendation") ? "#136AD0" : "#667185"
+                  isActive("/dashboard/my-services") ? "#136AD0" : "#667185"
                 }
               />
               <span
@@ -228,6 +249,9 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
                   <span className="text-white bg-primary500 px-1 py-0.5 rounded-full text-xs">
                     Coming soon
                   </span>
+                  <span className="text-white bg-primary500 px-1 py-0.5 rounded-full text-xs">
+                    Coming soon
+                  </span>
                 </div>
               </div>
             )}
@@ -235,6 +259,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
         </nav>
       </section>
 
+      {/* Notification */}
       <section className="flex flex-col gap-3 ">
         <div className="flex flex-col gap-1 pb-3">
           <Link href="/dashboard/notifications">
@@ -291,6 +316,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
         </div>
       </section>
 
+      {/* Profile */}
       <div className="flex items-center gap-5 py-5 px-6">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full relative">
@@ -303,6 +329,15 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
             <UserImage />
           </div>
           <div>
+            <p className="text-grey900 text-sm font-bold">
+              {" "}
+              {profile.user.is_business
+                ? profile?.business_name
+                : `${profile?.first_name} ${profile?.last_name}`}
+            </p>
+            <p className="text-grey600 text-sm">
+              {profile?.user?.profile?.user_email || " "}
+            </p>
             <p className="text-grey900 text-sm font-bold">
               {" "}
               {profile.user.is_business
