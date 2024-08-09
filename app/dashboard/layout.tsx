@@ -54,11 +54,10 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
 
   return (
     <Middleware>
-      <div className="flex h-screen">
+      <div className="flex h-screen pt-10 md:pt-0">
         {/* Desktop sidebar */}
         <Sidebar
           setActiveTab={setActiveTab}
-          onClick={closeSidebar}
           isMobile={false}
         />
         {/* Mobile sidebar */}

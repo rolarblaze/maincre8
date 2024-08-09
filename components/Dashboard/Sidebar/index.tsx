@@ -31,6 +31,11 @@ const Sidebar: React.FC<SidebarProps> = ({
   onClick,
   isMobile,
 }) => {
+const Sidebar: React.FC<SidebarProps> = ({
+  setActiveTab,
+  onClick,
+  isMobile,
+}) => {
   const router = useRouter();
   const pathname = usePathname();
   const { profile } = useAppSelector((state) => state.auth);
@@ -51,6 +56,11 @@ const Sidebar: React.FC<SidebarProps> = ({
       className={`${
         isMobile ? "hidden fixed z-50 inset-x-0 top-0" : ""
       } max-w-[272px] w-full h-full md:flex flex-col justify-between px-2 bg-white border-r border-grey200`}
+    >
+    <aside
+      className={`max-w-[272px] w-full h-full flex flex-col justify-between px-2 bg-green-500 border-r border-grey200 ${
+        isMobile ? "fixed z-1000 inset-x-0 top-0 bg-red-800" : "hidden"
+      }`}
     >
       {/* Upper section */}
       <section className="flex flex-col gap-3 ">
@@ -259,6 +269,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         </nav>
       </section>
 
+
       {/* Notification */}
       <section className="flex flex-col gap-3 ">
         <div className="flex flex-col gap-1 pb-3">
@@ -315,6 +326,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           </Link>
         </div>
       </section>
+
 
       {/* Profile */}
       <div className="flex items-center gap-5 py-5 px-6">
