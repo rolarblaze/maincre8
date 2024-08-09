@@ -38,7 +38,6 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
     Settings: "",
   };
 
-
   // Check if the current route is dynamic
   const isDynamicRoute = pathname.split("/").length > 3;
 
@@ -53,7 +52,9 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
               subtitle={headerSubtitles[activeTab]}
             />
           )}
-          <main className="flex-1 p-6 bg-white overflow-y-auto">{children}</main>
+          <main className="flex-1 md:p-6 bg-white overflow-y-auto">
+            {children}
+          </main>
         </div>
       </div>
     </Middleware>

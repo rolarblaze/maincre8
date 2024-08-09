@@ -35,3 +35,7 @@ export interface UpdateInfo {
   state: string;
   address: string;
 }
+
+export interface UpdatePassword {
+  new_password: string;
+}
