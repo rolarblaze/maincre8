@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { CurvedArrow } from "@/public/icons";
+import assetLibrary from "@/library";
 import dashboardImage from "@/public/imgs/dashboard.webp";
 import Button from "@/components/Button";
 
@@ -18,13 +19,22 @@ const DashboardSection = () => {
               Project Management with Our User Dashboard
             </h2>
             {/* CURVED ARROW ICON */}
-            <CurvedArrow className="absolute -bottom-2 -right-24" />
+            <Image
+              alt={"man"}
+              src={assetLibrary.curvedArrow}
+              width={72}
+              height={72}
+              quality={100}
+              className="max-md:hidden absolute -bottom-2 -right-20"
+            />
+            {/* <CurvedArrow className="absolute -bottom-2 -right-24" /> */}
           </div>
 
           <p>
             At SellCrea8, we prioritize user experience by providing a
-            comprehensive and <br className="max-lg:hidden" /> intuitive dashboard that simplifies your
-            creative and digital service management.
+            comprehensive and <br className="max-lg:hidden" /> intuitive
+            dashboard that simplifies your creative and digital service
+            management.
           </p>
         </div>
 
@@ -32,7 +42,7 @@ const DashboardSection = () => {
           label="Explore the Dashboard"
           classNames="max-w-[11.875rem] leading-5 max-md:px-4 max-md:py-2 max-md:text-sm lg:max-w-[14.25rem]"
         />
-{/* max-w-[11.875rem] md:max-w-[12.5rem] */}
+        {/* max-w-[11.875rem] md:max-w-[12.5rem] */}
         {/* <button className="bg-primary500 text-white rounded-lg text-sm font-semibold px-4 py-2">
          
         </button> */}

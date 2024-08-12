@@ -8,7 +8,9 @@ import {
   UserFriendlyServiceIcon,
 } from "@/public/icons";
 import React from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
+import assetLibrary from "@/library";
 
 const services = [
   {
@@ -62,15 +64,20 @@ const Service = () => {
         whileInView={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.5 }}
         viewport={{
-          margin: "-200px",
           once: true,
         }}
       >
         Why Choose{" "}
         <span className="text-primary400 text-2xl lg:text-[3.5rem] ml-1.5"> SellCrea8?</span>
        
-        <Highlight className="max-md:hidden" />
-        <HighlightMobile className="md:hidden" />
+        <Image
+          alt={"highlight"}
+          src={assetLibrary.highlight}
+          width={72}
+          height={72}
+          // quality={100}
+          className="object-contain mt-4 max-md:size-[2.5rem]"
+        />
       </motion.h2>
 
       <motion.div

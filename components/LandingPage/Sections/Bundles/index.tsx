@@ -1,8 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import { Crea8Star } from "@/public/icons";
 import { CreativeServicesIcon, DigitalServicesIcon } from "@/public/svgs";
-import { useState } from "react";
 import { TabButton, serviceBundles, Card } from "./Components";
 
 const Bundles = () => {
