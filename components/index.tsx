@@ -15,11 +15,11 @@ export { default as ShopSections } from "./Shop";
 export { default as Alert } from "./Alert";
 export { default as SalesPopUp } from "./SalesPopUp";
 export { default as PhoneNumberInput } from "./PhoneInput";
+export { default as EmptyState } from "./EmptyState";
 
 // MODALS
 export { default as DropdownWrapper } from "./Modals/DropdownWrapper";
 export { default as Modal } from "./Modals/CustomModal";
-
 
 // LANDING PAGE SECTION IMPORTS
 export { default as AppWrapper } from "./LandingPage/AppWrapper";
@@ -34,6 +34,8 @@ export { default as HomepageHero } from "./LandingPage/Sections/HeroSection";
 export { default as HomepageServices } from "./LandingPage/Sections/Services";
 export { default as HomepageSubscribe } from "./LandingPage/Sections/SubscribeSection";
 export { default as CTASection } from "./LandingPage/Sections/CTASection";
+export { default as HelpCenter } from "./LandingPage/HelpCenter";
+export { default as BreadCrumb } from "./BreadCrumb";
 
 // UI COMPONENTS
 export { default as AvatarIcon } from "./UI/AvatarIcon";

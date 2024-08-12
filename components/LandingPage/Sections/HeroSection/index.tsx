@@ -12,11 +12,11 @@ import {
 import PillDiv from "@/components/UI/PillDiv";
 
 interface HeroSectionProps {
-  pillText: string;
-  title: string;
-  subtitle: string;
-  buttonLabel: string;
-  buttonLink: string;
+  pillText?: string;
+  title?: string;
+  subtitle?: string;
+  buttonLabel?: string;
+  buttonLink?: string;
   showGifs?: boolean;
 }
 
@@ -47,7 +47,10 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           <p className="text-center text-white max-w-[55rem]">{subtitle}</p>
         </div>
 
-        <Button label={buttonLabel} classNames="w-fit" link={buttonLink} />
+        {buttonLabel && buttonLink && (
+          <Button label={buttonLabel} classNames="w-fit" link={buttonLink} />
+        )}
+
 
         {/* VIDEO BACKGROUND */}
         <video

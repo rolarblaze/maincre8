@@ -25,9 +25,9 @@ export default function Settings() {
         activeTab={activeTab}
         onTabClick={setActiveTab}
       />
-      <section>
+      <section className="px-5 py-6 md:p-0">
         {activeTab === "Profile" && <Profile />}
-        {activeTab === "Security" && <Security />}
+        {activeTab === "Password" && <Security />}
         {activeTab === "Payment" && <Payment />}
       </section>
     </div>

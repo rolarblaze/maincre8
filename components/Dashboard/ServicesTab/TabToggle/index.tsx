@@ -61,7 +61,7 @@ const TabsToggle: React.FC<TabsProps> = ({
 
   return (
     <div>
-      <div className="flex items-center justify-between py-2 px-6 ">
+      <div className="flex items-center justify-between py-2 md:px-6 ">
         <div className="flex items-center gap-1 border-b border-grey200">
           {tabs.map((tab) => (
             <div

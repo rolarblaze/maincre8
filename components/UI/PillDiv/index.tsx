@@ -1,12 +1,11 @@
 import { twMerge } from "tailwind-merge";
 
-const PillDiv = ({
-  children,
-  className,
-}: {
-  children: string;
+interface PillDivProps {
+  children: React.ReactNode;
   className?: string;
-}) => {
+}
+
+const PillDiv: React.FC<PillDivProps> = ({ children, className }) => {
   return (
     <div
       className={twMerge(
@@ -18,4 +17,5 @@ const PillDiv = ({
     </div>
   );
 };
+
 export default PillDiv;
