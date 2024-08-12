@@ -1,13 +1,12 @@
 "use client";
-import React, { useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/redux/store";
-import Button from "@/components/Button";
-import { StartProjectText } from "@/public/icons";
-import computer from "@/public/imgs/computer.png";
 import Image from "next/image";
+import React, { useState } from "react";
+import Button from "@/components/Button";
+import InputField from "@/components/Forms/InputField";
+import computer from "@/public/imgs/computer.png";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { subscribeToNewsletter } from "@/redux/newsletter/features";
 import { addAlert } from "@/redux/alerts";
-import InputField from "@/components/Forms/InputField";
 
 const SubscribeSection = () => {
   const [email, setEmail] = useState("");

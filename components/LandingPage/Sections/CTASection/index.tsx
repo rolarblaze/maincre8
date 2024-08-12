@@ -1,6 +1,7 @@
+import Image from "next/image";
+import assetLibrary from "@/library";
 import Button from "@/components/Button";
 import HoneyCombDisplay from "@/components/UI/HoneyCombGrid";
-import { Highlight } from "@/public/icons";
 
 const CTASection = () => {
   return (
@@ -13,15 +14,28 @@ const CTASection = () => {
             Ready to Transform Your <br className="max-lg:hidden" /> Business?
           </h3>
           <p>
-            Get started with a bundle or a plan today and experience the <br className="max-lg:hidden" />
+            Get started with a bundle or a plan today and experience the{" "}
+            <br className="max-lg:hidden" />
             difference with SellCrea8.
           </p>
 
           <div className="relative mt-2 w-fit sm:max-md:mx-auto">
-            <Button label="Get Started" classNames="py-2 px-4 w-fit" link="/shop" />
-            <Highlight className="absolute -top-8 -right-[5.5rem] rotate-[280deg]" />
-          </div>
+            <Button
+              label="Get Started"
+              classNames="py-2 px-4 w-fit"
+              link="/shop"
+            />
 
+            <Image
+              alt={"man"}
+              src={assetLibrary.highlight}
+              width={82}
+              height={82}
+              quality={100}
+              className=" max-md:hidden absolute -top-6 -right-20 rotate-[280deg]"
+            />
+            {/* <Highlight className="absolute -top-8 -right-[5.5rem] rotate-[280deg]" /> */}
+          </div>
         </div>
       </div>
     </section>
