@@ -1,7 +1,21 @@
+export interface Transaction {
+  amount: number;
+  created_at: string;
+  currency: string;
+  package: Package;
+  status: string;
+  trans_ref: string;
+  transaction_id: number | string;
+  updated_at: string;
+}
+
 export interface Package {
   package_name: string;
   package_id: number;
+  description?: string;
+  price?: string | null;
   provisions: Provision[];
+  bundle: Bundle;
 }
 
 export interface Provision {
@@ -14,6 +28,10 @@ export interface Provision {
 export interface Bundle {
   bundle_name: string;
   bundle_id: number;
+  service?: {
+    service_name: string;
+    service_id: number;
+  };
   packages: Package[];
 }
 

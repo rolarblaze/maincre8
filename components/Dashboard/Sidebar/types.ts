@@ -1,8 +1,7 @@
-
 export type Tab =
-type Tab =
   | "Overview"
   | "Services"
+  | "MyServices"
   | "Calendar"
   | "History"
   | "Support"
@@ -12,4 +11,3 @@ type Tab =
   | "Settings";
 
 export default Tab;
-
