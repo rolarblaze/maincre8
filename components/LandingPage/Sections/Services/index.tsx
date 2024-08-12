@@ -1,7 +1,5 @@
 "use client";
 import {
-  Highlight,
-  HighlightMobile,
   ProjectServiceIcon,
   SecurePaymentServiceIcon,
   TailoredServiceIcon,

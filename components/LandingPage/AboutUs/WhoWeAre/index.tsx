@@ -1,8 +1,9 @@
 "use client";
 import React from "react";
-import TeamImage from "@/public/images/team-group.svg";
-import TeamImageMobile from "@/public/images/team-group-mobile.svg";
-
+import assetLibrary from "@/library";
+// import TeamImage from "@/public/images/team-group.svg";
+// import TeamImageMobile from "@/public/images/team-group-mobile.svg";
+import Image from "next/image";
 
 const WhoWeAre = () => {
   return (
@@ -31,11 +32,19 @@ const WhoWeAre = () => {
         <div className="w-full h-auto m-auto">
           <div className="flex justify-center items-center">
             <div className="hidden w-full rounded-lg overflow-hidden md:flex">
-              <TeamImage className="w-fit m-auto  h-full rounded-lg" />
+              {/* <TeamImage className="w-fit m-auto  h-full rounded-lg" /> */}
+              <Image
+                alt={"arrow drawing"}
+                src={assetLibrary.teamGroup}
+                width={400}
+                height={300}
+                quality={100}
+                className="size-full m-auto  h-full object-cover"
+              />
             </div>
-            <div className="w-full rounded-lg overflow-hidden md:hidden">
+            {/* <div className="w-full rounded-lg overflow-hidden md:hidden">
               <TeamImageMobile className="w-fit m-auto  h-full rounded-lg" />
-            </div>
+            </div> */}
           </div>
 
           {/* <div className="max-w-[486px] w-full h-auto rounded-lg overflow-hidden">

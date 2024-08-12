@@ -13,9 +13,9 @@ const CircleCancel = () => {
       <path
         d="M6.47803 10.3224L8.40046 8.4L10.3229 10.3224M10.3229 6.47757L8.40009 8.4L6.47803 6.47757"
         stroke="white"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

@@ -2,8 +2,14 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import assetLibrary from "@/library";
 import teamMembers from "./teamData";
-import { ArrowDrawing, TeamFacebook, TeamLinkedIn, TwitterIcon } from "@/public/icons";
+
+import {
+  TeamFacebook,
+  TeamLinkedIn,
+  TwitterIcon,
+} from "@/public/icons";
 
 const Team = () => {
   return (
@@ -17,7 +23,15 @@ const Team = () => {
             </span>
           </h2>
           <div className="self-start">
-            <ArrowDrawing />
+            {/* <ArrowDrawing /> */}
+            {/* <Image
+              alt={"arrow drawing"}
+              src={assetLibrary.arrowDrawing}
+              width={76}
+              height={76}
+              quality={100}
+              className="w-full h-full object-contain"
+            /> */}
           </div>
         </div>
         <div className="w-full overflow-x-auto no-scrollbar">
@@ -31,9 +45,8 @@ const Team = () => {
                   <Image
                     src={member.imageUrl}
                     alt={member.name}
-                    layout="fill"
-                    objectFit="cover"
-                    className="w-full h-full"
+                    fill
+                    className="w-full h-full object-cover"
                   />
                 </div>
 

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { CurvedArrow } from "@/public/icons";
 import assetLibrary from "@/library";
 import dashboardImage from "@/public/imgs/dashboard.webp";
 import Button from "@/components/Button";
