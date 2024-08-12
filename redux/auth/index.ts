@@ -1,4 +1,8 @@
-import { removeUserTokenCookie, getUserTokenCookie, setUserTokenCookie } from "@/utils/helpers/auth/cookieUtility";
+import {
+  removeUserTokenCookie,
+  getUserTokenCookie,
+  setUserTokenCookie,
+} from "@/utils/helpers/auth/cookieUtility";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import {
   forgotPassword,
@@ -10,9 +14,10 @@ import {
   updateInfo,
   verifyUser,
   getUserProfile,
-  renewRefreshToken
+  renewRefreshToken,
 } from "./features";
 import { User } from "./interface";
+import { Transaction } from "../shop/interface";
 
 export interface AuthSliceState {
   isAuthenticated: boolean;
@@ -23,6 +28,7 @@ export interface AuthSliceState {
     business_name?: string | null;
     first_name?: string | null;
     last_name?: string | null;
+    transactions: Transaction[];
     user: User;
   };
   otpMessage: string | null;
@@ -30,14 +36,19 @@ export interface AuthSliceState {
 
 const initialState: AuthSliceState = {
   isAuthenticated: !!getUserTokenCookie(),
-  user: {},
+  user: {
+    transactions: [],
+  },
   isLoading: false,
   isLoadingProfile: true,
   profile: {
     business_name: null,
     first_name: null,
     last_name: null,
-    user: {},
+    transactions: [],
+    user: {
+      transactions: [],
+    },
   },
   otpMessage: null,
 };
@@ -49,12 +60,17 @@ export const AuthSlice = createSlice({
     signOut: (state: AuthSliceState) => {
       removeUserTokenCookie();
       state.isAuthenticated = false;
-      state.user = {};
+      state.user = {
+        transactions: [],
+      };
       state.profile = {
         business_name: null,
         first_name: null,
         last_name: null,
-        user: {},
+        transactions: [],
+        user: {
+          transactions: [],
+        },
       };
 
       state.otpMessage = null;
@@ -187,12 +203,17 @@ export const AuthSlice = createSlice({
         state.isLoading = false;
         removeUserTokenCookie();
         state.isAuthenticated = false;
-        state.user = {};
+        state.user = {
+          transactions: [],
+        };
         state.profile = {
           business_name: null,
           first_name: null,
           last_name: null,
-          user: {},
+          transactions: [],
+          user: {
+            transactions: [],
+          },
         };
       })
 
@@ -226,12 +247,17 @@ export const AuthSlice = createSlice({
         state.isLoadingProfile = false;
         removeUserTokenCookie();
         state.isAuthenticated = false;
-        state.user = {};
+        state.user = {
+          transactions: [],
+        };
         state.profile = {
           business_name: null,
           first_name: null,
           last_name: null,
-          user: {},
+          transactions: [],
+          user: {
+            transactions: [],
+          },
         };
       });
   },
