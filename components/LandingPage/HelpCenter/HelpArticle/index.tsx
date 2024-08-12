@@ -9,7 +9,7 @@ interface HelpArticleProps {
 
 const HelpArticle: React.FC<HelpArticleProps> = ({ onArticleClick }) => {
     return (
-        <div className="w-full flex flex-col gap-4">
+        <div className="max-w-[996px] w-full mx-auto flex flex-col gap-4 px-4 py-10 md:py-20">
             {helpArticles.map((article) => (
                 <div
                     key={article.id}
