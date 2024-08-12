@@ -22,8 +22,8 @@ const DashboardSection = () => {
             <Image
               alt={"man"}
               src={assetLibrary.curvedArrow}
-              width={72}
-              height={72}
+              width={76}
+              height={76}
               quality={100}
               className="max-md:hidden absolute -bottom-2 -right-20"
             />
