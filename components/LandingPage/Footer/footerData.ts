@@ -9,24 +9,30 @@ export const footerData = {
     {
       title: "Our Services",
       links: [
-        "Digital Marketing",
-        "Creative Design",
-        "Content/copywriting",
-        "Stop Motion",
+        { name: "Digital Marketing", href: null },
+        { name: "Creative Design", href: null },
+        { name: "Content/copywriting", href: null },
+        { name: "Stop Motion", href: null },
       ],
     },
     {
       title: "Privacy and settings",
       links: [
-        "Privacy policy",
-        "Terms and conditions",
-        "Social media policy",
-        "Copyright notice",
+        { name: "Privacy policy", href: null },
+        { name: "Terms and conditions", href: null },
+        { name: "Social media policy", href: null },
+        { name: "Copyright notice", href: null },
+        { name: "Help center", href: "/help-center" },  
       ],
     },
     {
       title: "Other Products",
-      links: ["Sell Merch", "Sell Talk", "Sell Planner", "Piazza"],
+      links: [
+        { name: "Sell Merch", href: null },
+        { name: "Sell Talk", href: null },
+        { name: "Sell Planner", href: null },
+        { name: "Piazza", href: null },
+      ],
     },
   ],
 };
