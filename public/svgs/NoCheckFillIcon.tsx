@@ -12,9 +12,9 @@ const NoCheckFill = ({ className }: { className?: string }) => {
       <path
         d="M8.09766 12.903L10.5007 10.5L12.9037 12.903M12.9037 8.09692L10.5002 10.5L8.09766 8.09692"
         stroke="white"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

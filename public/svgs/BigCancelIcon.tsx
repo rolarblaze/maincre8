@@ -12,9 +12,9 @@ const BigCancelIcon = () => {
       <path
         d="M7.25781 17.2431L12.5008 12.0001L17.7438 17.2431M17.7438 6.75708L12.4998 12.0001L7.25781 6.75708"
         stroke="#140227"
-        stroke-width="1.5"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );

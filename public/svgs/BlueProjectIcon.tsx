@@ -5,6 +5,7 @@ const BlueProjectIcon: React.FC<IconProps> = ({ className }) => {
       height="56"
       viewBox="0 0 56 56"
       fill="none"
+      className={className}
       xmlns="http://www.w3.org/2000/svg"
     >
       <rect width="56" height="56" rx="28" fill="#1574E5" />

@@ -4,7 +4,7 @@ export { default as ArrowDown } from "./ash-arrow-down.svg";
 export { default as AshArrowDown } from "./ash-arrow-down.svg";
 export { default as AttachIcon } from "./attach.svg";
 export { default as AvailableIcon } from "./available.svg";
-export { default as AvatarIcon } from "./avatar.svg";
+// export { default as AvatarIcon } from "./avatar.svg"; // pending
 export { default as BasicPackageIcon } from "./basic-package-icon.svg";
 export { default as ThrashIcon } from "./bin.svg";
 export { default as BlueArrowLeft } from "./blue-arrow-left.svg";
@@ -22,7 +22,7 @@ export { default as ProjectServiceIcon } from "./comprehensive.svg";
 export { default as TailoredServiceIcon } from "./computer.svg";
 export { default as ConfirmIcon } from "./confirm-icon.svg";
 export { default as Crea8Star } from "./crea8-star.svg";
-export { default as CurvedArrow } from "./curved-arrow.svg";
+// export { default as CurvedArrow } from "./curved-arrow.svg";
 export { default as DownloadIcon } from "./download.svg";
 export { default as EmailAddressIcon } from "./email-address.svg";
 export { default as EyeIcon } from "./eye.svg";
@@ -42,7 +42,7 @@ export { default as Logo } from "./logo.svg";
 export { default as LogoBlue } from "./logo-blue.svg";
 export { default as NonAvailableIcon } from "./non-available.svg";
 export { default as Palette } from "./palette.svg";
-export { default as Pencil } from "./pencil.svg";
+// export { default as Pencil } from "./pencil.svg"; // pending
 export { default as PhoneNumberIcon } from "./phone-number.svg";
 export { default as PremiumPackageIcon } from "./premium-package-icon.svg";
 export { default as Rocket } from "./rocket.svg";

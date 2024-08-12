@@ -45,9 +45,8 @@ const Team = () => {
                   <Image
                     src={member.imageUrl}
                     alt={member.name}
-                    layout="fill"
-                    objectFit="cover"
-                    className="w-full h-full"
+                    fill
+                    className="w-full h-full object-cover"
                   />
                 </div>
 
