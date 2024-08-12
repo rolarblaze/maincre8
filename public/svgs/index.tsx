@@ -35,4 +35,4 @@ export { default as BlueProjectIcon } from "./BlueProjectIcon";
 export { default as BlueSupportIcon } from "./BlueSupportIcon";
 export { default as BlueTargetIcon } from "./BlueTargetIcon";
 export { default as BlueUserIcon } from "./BlueUserIcon";
-
+export { default as MyServicesIcon } from "./MyServicesIcon";

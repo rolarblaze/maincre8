@@ -17,6 +17,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
   const headerTitles: Record<Tab, string> = {
     Overview: "Overview",
     Services: "Explore Services",
+    MyServices: "My services",
     Calendar: "Calendar",
     History: "Order History",
     Support: "Support",
@@ -29,6 +30,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
   const headerSubtitles: Record<Tab, string> = {
     Overview: "",
     Services: "Select a service to get started",
+    MyServices: "Select a service to track fulfilment",
     Calendar: "",
     History: "",
     Support: "",
@@ -52,7 +54,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
               subtitle={headerSubtitles[activeTab]}
             />
           )}
-          <main className="flex-1 md:p-6 bg-white overflow-y-auto">
+          <main className="flex-1 md:p-6 bg-grey10 overflow-y-auto">
             {children}
           </main>
         </div>

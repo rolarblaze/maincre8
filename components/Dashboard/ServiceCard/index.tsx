@@ -5,9 +5,10 @@ import Link from "next/link";
 interface ServiceCardProps {
   category: string;
   title: string;
-  description: string;
+  description?: string;
   color: string;
   id: number;
+  isPaid?: boolean;
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({
@@ -16,6 +17,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   description,
   color,
   id,
+  isPaid,
 }) => {
   return (
     <Link
@@ -37,9 +39,14 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
           {category}
         </div>
       </div>
-      <div className="p-4">
+      <div className="p-4 ">
         <h4 className="text-lg font-semibold text-grey900">{title}</h4>
-        <p className="text-sm text-grey500">{description}</p>
+        <p className="text-sm text-grey500 mb-4">{description}</p>
+        {isPaid && (
+          <span className="font-semibold text-primary500 text-sm">
+            Track package
+          </span>
+        )}
       </div>
     </Link>
   );

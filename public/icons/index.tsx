@@ -80,4 +80,4 @@ export { default as BasicIcon } from "./basic.svg";
 export { default as PremiumIcon } from "./premium.svg";
 export { default as StandardIcon } from "./standard.svg";
 export { default as Edit } from "./edit.svg";
-
+export { default as BulbIcon } from "./bulb.svg";
