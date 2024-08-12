@@ -1,8 +1,7 @@
+import Image from "next/image";
+import assetLibrary from "@/library";
 import Button from "@/components/Button";
 import HoneyCombDisplay from "@/components/UI/HoneyCombGrid";
-import assetLibrary from "@/library";
-import { Highlight } from "@/public/icons";
-import Image from "next/image";
 
 const CTASection = () => {
   return (
