@@ -13,6 +13,7 @@ const assetLibrary = {
   highlightDown: "/optimised/highlight-down.webp",
   highlightDownMobile: "/optimised/highlight-down-mobile.webp",
   curvedArrow: "/optimised/curved-arrow.webp",
+  arrowDrawing: "/optimised/arrow-drawing.webp",
 };
 
 export default assetLibrary;
