@@ -15,7 +15,7 @@ const SubmitBrief = () => {
           <PillDiv className="max-sm:px-2 max-sm:py-1 max-sm:text-xs max-md:text-base">Want to work with Us?</PillDiv>
 
           {/* TODO: IMPORT MANROPE FONT */}
-          <h2 className="font-bold text-2xl md:text-4xl lg:text-5.5xl md:leading-[4rem]">
+          <h2 className=" font-medium lg:font-semibold text-2xl md:text-4xl lg:text-5.5xl md:leading-[4rem]">
             Submit a brief
           </h2>
         </header>

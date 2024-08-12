@@ -62,7 +62,6 @@ const Service = () => {
         whileInView={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.5 }}
         viewport={{
-          margin: "-200px",
           once: true,
         }}
       >

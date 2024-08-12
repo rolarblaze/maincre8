@@ -79,7 +79,7 @@ const InputField: React.FC<InputFieldProps> = ({
         )}
       </div>
       <div
-        className={`flex items-center gap-3 p-2 border border-grey300 rounded-md md:p-4 ${classNames}`}
+        className={`flex items-center gap-3 border border-grey300 rounded-md p-4 ${classNames}`}
       >
         <input
           type={type}
