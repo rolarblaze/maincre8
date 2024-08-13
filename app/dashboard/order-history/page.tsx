@@ -1,17 +1,29 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { AllIcon, CheckboxIcon } from "@/public/svgs";
 import { Order } from "@/components";
 import Tabs from "@/components/Dashboard/Tabs";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { fetchUserOrderHistory } from "@/redux/order/features";
+import { UserTransaction } from "@/redux/order/interface";
+import Loader from "@/components/Spinner/Loader";
+import { EmptyState } from "@/components";
 
 export default function OrderHistory() {
   const [activeTab, setActiveTab] = useState<string>("All");
+  const dispatch = useAppDispatch();
+  const { orders, isLoading, error } = useAppSelector((state) => state.order);
+
+  // Trigger fetching user order history on component mount
+  useEffect(() => {
+    dispatch(fetchUserOrderHistory());
+  }, [dispatch]);
 
   const tabs = [
     {
       name: "All",
       icon: <AllIcon fillColor={activeTab === "All" ? "#1574E5" : "#98A2B3"} />,
-      count: 38,
+      count: orders?.user_transactions.length || 0,
     },
     {
       name: "Completed",
@@ -20,98 +32,22 @@ export default function OrderHistory() {
           fillColor={activeTab === "Completed" ? "#1574E5" : "#98A2B3"}
         />
       ),
-      count: 10,
+      count: orders?.user_transactions.filter(order => order.status === "successful").length || 0,
     },
     {
       name: "Open",
 
-      count: 28,
+      count: orders?.user_transactions.filter(order => order.status !== "successful").length || 0,
     },
   ];
 
-  const orders: {
-    packageName: string;
-    price: string;
-    dateBought: string;
-    dateCompleted: string;
-    status: "Open" | "Completed";
-  }[] = [
-    {
-      packageName: "Search Engine Optimisation Basic",
-      price: "$499",
-      dateBought: "20 July 2024",
-      dateCompleted: "-",
-      status: "Open",
-    },
-    {
-      packageName: "Search Engine Optimisation Basic",
-      price: "$499",
-      dateBought: "24 June 2024",
-      dateCompleted: "24 June 2024",
-      status: "Completed",
-    },
-    {
-      packageName: "Search Engine Optimisation Basic",
-      price: "$499",
-      dateBought: "3 June 2024",
-      dateCompleted: "3 June 2024",
-      status: "Completed",
-    },
-    {
-      packageName: "Content Marketing Standard",
-      price: "$699",
-      dateBought: "12 May 2024",
-      dateCompleted: "12 June 2024",
-      status: "Completed",
-    },
-    {
-      packageName: "Social Media Management Basic",
-      price: "$399",
-      dateBought: "5 May 2024",
-      dateCompleted: "-",
-      status: "Open",
-    },
-    {
-      packageName: "Email Marketing Advanced",
-      price: "$599",
-      dateBought: "22 April 2024",
-      dateCompleted: "22 May 2024",
-      status: "Completed",
-    },
-    {
-      packageName: "PPC Advertising Basic",
-      price: "$299",
-      dateBought: "15 April 2024",
-      dateCompleted: "-",
-      status: "Open",
-    },
-    {
-      packageName: "SEO Advanced",
-      price: "$899",
-      dateBought: "10 April 2024",
-      dateCompleted: "10 May 2024",
-      status: "Completed",
-    },
-    {
-      packageName: "Content Creation Standard",
-      price: "$499",
-      dateBought: "1 April 2024",
-      dateCompleted: "-",
-      status: "Open",
-    },
-    {
-      packageName: "Graphic Design Basic",
-      price: "$199",
-      dateBought: "25 March 2024",
-      dateCompleted: "25 April 2024",
-      status: "Completed",
-    },
-  ];
 
   const filteredOrders =
     activeTab === "All"
-      ? orders
-      : orders.filter((order) => order.status === activeTab);
+      ? orders?.user_transactions
+      : orders?.user_transactions.filter(order =>
+        activeTab === "Completed" ? order.status === "successful" : order.status !== "successful"
+      );
 
   return (
     <section className="container mx-auto space-y-8">
@@ -121,19 +57,36 @@ export default function OrderHistory() {
         activeTab={activeTab}
         onTabClick={setActiveTab}
       />
+      {
+        isLoading ? (
+          <Loader />
+        ) : (
+          filteredOrders?.length === 0 ? (
+            <div className="w-full mx-auto flex items-center justify-center">
+              <EmptyState
+                imgSrc="order-empty"
+                text="You have not bought any service. Buy a package to get started"
+                link="Browse packages"
+                to="/dashboard/services"
+              />
+            </div>
+          ) : (
+            <div className="space-y-10">
+              {filteredOrders?.map((order: UserTransaction, index: number) => (
+                <Order
+                  key={index}
+                  packageName={order.package.package_name}
+                  price={order.amount.toLocaleString("en-US", { style: "currency", currency: order.currency })}
+                  dateBought={new Date(order.created_at).toLocaleDateString()}
+                  dateCompleted={order.status === "successful" ? new Date(order.updated_at).toLocaleDateString() : "-"}
+                  status={order.status === "successful" ? "Completed" : "Open"}
+                />
+              ))}
+            </div>
+          )
+        )
+      }
 
-      <div className="space-y-10">
-        {filteredOrders.map((order, index) => (
-          <Order
-            key={index}
-            packageName={order.packageName}
-            price={order.price}
-            dateBought={order.dateBought}
-            dateCompleted={order.dateCompleted}
-            status={order.status}
-          />
-        ))}
-      </div>
     </section>
   );
 }
