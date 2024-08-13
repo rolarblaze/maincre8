@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import Image from "next/image";
 import { footerData } from "./footerData";
 import Logo from "../../../public/icons/footer-logo.svg";
@@ -33,8 +34,18 @@ const Footer: React.FC = () => {
               <div key={index} className="flex flex-col gap-6 min-w-40">
                 <p className="text-base text-grey100/80 ">{section.title}</p>
                 <ul className="flex flex-col gap-4">
-                  {section.links.map((link, idx) => (
-                    <li key={idx}>{link}</li>
+                {section.links.map((link, idx) => (
+                    <li key={idx}>
+                      {link.href ? (
+                        <Link href={link.href}>
+                          <p className="text-grey100/80 hover:underline">
+                            {link.name}
+                          </p>
+                        </Link>
+                      ) : (
+                        link.name
+                      )}
+                    </li>
                   ))}
                 </ul>
               </div>

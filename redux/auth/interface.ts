@@ -1,3 +1,5 @@
+import { Transaction } from "../shop/interface";
+
 export interface UserProfile {
   purchases: any[];
   user_email: string;
@@ -18,6 +20,7 @@ export interface User {
   is_individual?: boolean;
   is_verified?: boolean;
   profile?: UserProfile;
+  transactions: Transaction[];
 }
 
 export interface SignUpFormValues {

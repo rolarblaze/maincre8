@@ -13,7 +13,7 @@ import {
 
 const Team = () => {
   return (
-    <section className="w-full py-20 bg-white">
+    <section className="w-full py-10 md:py-14 lg:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-left">
         <div className="flex items-center">
           <h2 className="text-2xl font-bold text-gray-900 mb-8 md:text-5xl">

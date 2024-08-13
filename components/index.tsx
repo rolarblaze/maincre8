@@ -15,11 +15,11 @@ export { default as ShopSections } from "./Shop";
 export { default as Alert } from "./Alert";
 export { default as SalesPopUp } from "./SalesPopUp";
 export { default as PhoneNumberInput } from "./PhoneInput";
+export { default as EmptyState } from "./EmptyState";
 
 // MODALS
 export { default as DropdownWrapper } from "./Modals/DropdownWrapper";
 export { default as Modal } from "./Modals/CustomModal";
-
 
 // LANDING PAGE SECTION IMPORTS
 export { default as AppWrapper } from "./LandingPage/AppWrapper";

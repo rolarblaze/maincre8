@@ -1,20 +1,30 @@
-import { createRequire } from 'module';
-const require = createRequire(import.meta.url);
+import withBundleAnalyzer from '@next/bundle-analyzer';
 
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE === 'true',
-});
-
-/** @type {import('next').NextConfig} */
 const nextConfig = {
-    webpack(config) {
-      config.module.rules.push({
-        test: /\.svg$/,
-        use: ['@svgr/webpack'],
-      });
-  
-      return config;
-    },
-  };
+  webpack(config) {
+    config.module.rules.push({
+      test: /\.svg$/,
+      use: [
+        {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react'],
+            compact: true, // This will remove the "deoptimized styling" warning
+          },
+        },
+        {
+          loader: '@svgr/webpack',
+          options: {
+            babel: false,
+          },
+        },
+      ],
+    });
 
-  export default withBundleAnalyzer(nextConfig);
+    return config;
+  },
+};
+
+export default withBundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+})(nextConfig);
