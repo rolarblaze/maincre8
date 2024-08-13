@@ -2,10 +2,10 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import assetLibrary from "@/library";
 import teamMembers from "./teamData";
+
 import {
-  ArrowDrawing,
-  ArrowDrawingMobile,
   TeamFacebook,
   TeamLinkedIn,
   TwitterIcon,
@@ -23,8 +23,15 @@ const Team = () => {
             </span>
           </h2>
           <div className="self-start">
-            <ArrowDrawing className="max-sm:hidden -mt-4" />
-            <ArrowDrawingMobile className="sm:hidden -ml-1 -mt-2" />
+            {/* <ArrowDrawing /> */}
+            {/* <Image
+              alt={"arrow drawing"}
+              src={assetLibrary.arrowDrawing}
+              width={76}
+              height={76}
+              quality={100}
+              className="w-full h-full object-contain"
+            /> */}
           </div>
         </div>
         <div className="w-full overflow-x-auto no-scrollbar">
@@ -38,9 +45,8 @@ const Team = () => {
                   <Image
                     src={member.imageUrl}
                     alt={member.name}
-                    layout="fill"
-                    objectFit="cover"
-                    className="w-full h-full"
+                    fill
+                    className="w-full h-full object-cover"
                   />
                 </div>
 
