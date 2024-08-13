@@ -82,3 +82,5 @@ export { default as PremiumIcon } from "./premium.svg";
 export { default as StandardIcon } from "./standard.svg";
 export { default as Edit } from "./edit.svg";
 export { default as BulbIcon } from "./bulb.svg";
+export { default as ArrowRight } from "./arrow-right.svg";
+

@@ -37,3 +37,5 @@ export { default as BlueTargetIcon } from "./BlueTargetIcon";
 export { default as BlueUserIcon } from "./BlueUserIcon";
 export { default as MyServicesIcon } from "./MyServicesIcon";
 export { default as CheckCircleIcon } from "./CheckCircleIcon";
+export { default as BulbIcon } from "./BulbIcon";
+export { default as PlusIcon } from "./PlusIcon";

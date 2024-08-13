@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 import Spinner from "../Spinner";
 
 interface ButtonProps {
-  label: string;
+  label: React.ReactNode | string;
   isLoading?: boolean;
   onClick?: () => void;
   classNames?: string;

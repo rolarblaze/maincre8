@@ -9,6 +9,7 @@ import UserImage from "@/public/images/user-image.svg";
 import ArrowUp from "@/public/icons/arrow-up.svg";
 import { LogoBlue, Logout } from "@/public/icons";
 import {
+  BulbIcon,
   CalendarIcon,
   HistoryIcon,
   MyServicesIcon,
@@ -97,28 +98,29 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
             </div>
           </Link>
 
-          <Link href="/dashboard/my-services">
+          {/* CUSTOM RECOMMENDATIONS */}
+          <Link href="/dashboard/custom-recommendation">
             <div
               className={`flex items-center gap-3 py-3 px-4 ${
-                isActive("/dashboard/my-services")
+                isActive("/dashboard/custom-recommendation")
                   ? "bg-primary50 rounded-sm text-primary600"
                   : ""
               }`}
-              onClick={() => setActiveTab("MyServices")}
+              onClick={() => setActiveTab("Services")}
             >
-              <MyServicesIcon
+              <BulbIcon
                 fillColor={
-                  isActive("/dashboard/my-services") ? "#136AD0" : "#667185"
+                  isActive("/dashboard/custom-recommendation") ? "#136AD0" : "#667185"
                 }
               />
               <span
                 className={`text-sm ${
-                  isActive("/dashboard/my-services")
+                  isActive("/dashboard/custom-recommendation")
                     ? "text-primary600 text-medium"
                     : "grey700"
                 }`}
               >
-                My Services
+                Custom Recommendation
               </span>
             </div>
           </Link>
