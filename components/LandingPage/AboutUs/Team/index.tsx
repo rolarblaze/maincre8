@@ -4,14 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import assetLibrary from "@/library";
 import teamMembers from "./teamData";
-<<<<<<< HEAD
 
 import {
-=======
-import {
-  ArrowDrawing,
-  ArrowDrawingMobile,
->>>>>>> 17e03c62f64b1cdd628b586dc1c58a7874e73d20
   TeamFacebook,
   TeamLinkedIn,
   TwitterIcon,
@@ -29,7 +23,6 @@ const Team = () => {
             </span>
           </h2>
           <div className="self-start">
-<<<<<<< HEAD
             {/* <ArrowDrawing /> */}
             {/* <Image
               alt={"arrow drawing"}
@@ -39,10 +32,6 @@ const Team = () => {
               quality={100}
               className="w-full h-full object-contain"
             /> */}
-=======
-            <ArrowDrawing className="max-sm:hidden -mt-4" />
-            <ArrowDrawingMobile className="sm:hidden -ml-1 -mt-2" />
->>>>>>> 17e03c62f64b1cdd628b586dc1c58a7874e73d20
           </div>
         </div>
         <div className="w-full overflow-x-auto no-scrollbar">
