@@ -17,7 +17,7 @@ const Order: React.FC<OrderProps> = ({
   status,
 }) => {
   return (
-    <div className="space-y-4 bg-white">
+    <div className="space-y-4 bg-white px-5 py-10">
       <h4 className="text-grey500 text-2xl font-semibold">{dateBought}</h4>
 
       <section className=" bg-grey10 py-4 px-6 rounded-lg border border-grey200">

@@ -8,6 +8,7 @@ import { fileUploadReducer } from "./file";
 import { getPackageReducer } from "./getPackage";
 import newsletterReducer from "./newsletter";
 import { shopReducer } from "./shop";
+import {OrderSlice} from "./order";
 
 // configure the store with all reducers
 export const store = configureStore({
@@ -20,6 +21,7 @@ export const store = configureStore({
     fileUpload: fileUploadReducer,
     brief: briefReducer,
     getPackageDetails: getPackageReducer,
+    order: OrderSlice.reducer, 
   },
 });
 
