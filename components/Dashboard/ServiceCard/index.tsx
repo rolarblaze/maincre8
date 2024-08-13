@@ -9,6 +9,7 @@ interface ServiceCardProps {
   color: string;
   id: number;
   isPaid?: boolean;
+  transactionId?: number;
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({
@@ -18,9 +19,10 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   color,
   id,
   isPaid,
+  transactionId,
 }) => {
   const linkUrl = isPaid
-    ? `/dashboard/services/${id}/?tab=my-package`
+    ? `/dashboard/services/${id}/?transactionId=${transactionId}&tab=my-package`
     : `/dashboard/services/${id}/?tab=package-info`;
 
   return (

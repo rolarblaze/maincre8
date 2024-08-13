@@ -92,6 +92,7 @@ const Overview = () => {
                 description={transaction.package.description}
                 color={bundleColors[transaction.package.bundle.bundle_name]}
                 id={transaction.package.package_id}
+                transactionId={transaction.transaction_id}
                 isPaid
               />
             ))

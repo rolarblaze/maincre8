@@ -1,6 +1,11 @@
+import { useAppSelector } from "@/redux/store";
 import WrapperComponent from "../Wrapper";
+import { formatDate } from "@/helpers/formatDate";
 
 const SubmittedBrief = () => {
+  const { trackingDetails } = useAppSelector((state) => state.services);
+
+  const dateSubmitted = formatDate(trackingDetails?.brief_submission_date);
   return (
     <WrapperComponent
       iconFillColor="#D0D5DD"

@@ -9,10 +9,10 @@ export const trackUserOrder = createAsyncThunk(
   async (id: number, { rejectWithValue }) => {
     try {
       const response = await api.get(`user/package-tracking/${id}`);
-      console.log(response.data);
+      // console.log(response.data);
       return response.data.tracking_details;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       return rejectWithValue(handleAxiosError(error));
     }
   }
@@ -24,7 +24,7 @@ export const getUserOrderHistory = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await api.get("user/get-user-order-history");
-      console.log(response.data);
+
       return response.data.user_transactions;
     } catch (error) {
       console.log(error);

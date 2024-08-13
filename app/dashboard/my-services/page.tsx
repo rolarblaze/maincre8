@@ -15,6 +15,10 @@ const MyServices = () => {
 
   const bundleColors: { [key: string]: string } = {};
 
+  if (orderHistory) {
+    console.log(orderHistory);
+  }
+
   if (loading) return <FullLoader />;
 
   return (
@@ -36,6 +40,7 @@ const MyServices = () => {
               description={transaction.package.description}
               color={bundleColors[transaction.package.bundle.bundle_name]}
               id={transaction.package.package_id}
+              transactionId={transaction.transaction_id}
               isPaid
             />
           ))}
