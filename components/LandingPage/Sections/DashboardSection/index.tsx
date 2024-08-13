@@ -30,7 +30,7 @@ const DashboardSection = () => {
 
         <Button
           label="Explore the Dashboard"
-          classNames="max-w-[11.875rem] leading-5 max-md:px-4 max-md:py-2 max-md:text-sm lg:max-w-[14.25rem]"
+          classNames="max-w-[11.875rem] leading-5 px-0 max-md:py-2 max-md:text-sm lg:max-w-[14.25rem]"
         />
 {/* max-w-[11.875rem] md:max-w-[12.5rem] */}
         {/* <button className="bg-primary500 text-white rounded-lg text-sm font-semibold px-4 py-2">
