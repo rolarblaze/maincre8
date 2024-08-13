@@ -22,8 +22,6 @@ import MyServicesIcon from "@/public/svgs/MyServicesIcon";
 
 type SidebarProps = {
   setActiveTab: (tab: Tab) => void;
-  onClick?: () => void;
-  isMobile: boolean;
 };
 
 const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
@@ -51,16 +49,6 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
         <Link href="/">
           <LogoBlue className="w-full h-full px-2 py-6" />
         </Link>
-
-        {/* Mobile Logo */}
-        <div className=" flex justify-between w-full md:hidden">
-          <Link href={"/"} className="">
-            <MobileBlueLogo />
-          </Link>
-          <button className="w-fit h-fit" onClick={onClick}>
-            <CancelIcon />
-          </button>
-        </div>
 
         <nav className="flex flex-col gap-1  pb-4 border-b border-grey200">
           <Link href="/dashboard">
@@ -323,15 +311,6 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
             <UserImage />
           </div>
           <div>
-            <p className="text-grey900 text-sm font-bold">
-              {" "}
-              {profile.user.is_business
-                ? profile?.business_name
-                : `${profile?.first_name} ${profile?.last_name}`}
-            </p>
-            <p className="text-grey600 text-sm">
-              {profile?.user?.profile?.user_email || " "}
-            </p>
             <p className="text-grey900 text-sm font-bold">
               {" "}
               {profile.user.is_business
