@@ -9,15 +9,10 @@ import UserImage from "@/public/images/user-image.svg";
 import ArrowUp from "@/public/icons/arrow-up.svg";
 import { LogoBlue, Logout } from "@/public/icons";
 import {
-<<<<<<< HEAD
   BulbIcon,
   CalendarIcon,
   HistoryIcon,
-=======
-  CalendarIcon,
-  HistoryIcon,
   MyServicesIcon,
->>>>>>> 17e03c62f64b1cdd628b586dc1c58a7874e73d20
   NotificationsIcon,
   OverviewIcon,
   ServicesIcon,
@@ -103,7 +98,6 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
             </div>
           </Link>
 
-<<<<<<< HEAD
           {/* CUSTOM RECOMMENDATIONS */}
           <Link href="/dashboard/custom-recommendation">
             <div
@@ -117,38 +111,16 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
               <BulbIcon
                 fillColor={
                   isActive("/dashboard/custom-recommendation") ? "#136AD0" : "#667185"
-=======
-          <Link href="/dashboard/my-services">
-            <div
-              className={`flex items-center gap-3 py-3 px-4 ${
-                isActive("/dashboard/my-services")
-                  ? "bg-primary50 rounded-sm text-primary600"
-                  : ""
-              }`}
-              onClick={() => setActiveTab("MyServices")}
-            >
-              <MyServicesIcon
-                fillColor={
-                  isActive("/dashboard/my-services") ? "#136AD0" : "#667185"
->>>>>>> 17e03c62f64b1cdd628b586dc1c58a7874e73d20
                 }
               />
               <span
                 className={`text-sm ${
-<<<<<<< HEAD
                   isActive("/dashboard/custom-recommendation")
-=======
-                  isActive("/dashboard/my-services")
->>>>>>> 17e03c62f64b1cdd628b586dc1c58a7874e73d20
                     ? "text-primary600 text-medium"
                     : "grey700"
                 }`}
               >
-<<<<<<< HEAD
                 Custom Recommendation
-=======
-                My Services
->>>>>>> 17e03c62f64b1cdd628b586dc1c58a7874e73d20
               </span>
             </div>
           </Link>
