@@ -2,6 +2,7 @@
 
 import Header from "@/components/Dashboard/Header";
 import MobileNav from "@/components/Dashboard/MobileNav";
+import MobileSidebar from "@/components/Dashboard/MobileSidebar";
 import Sidebar from "@/components/Dashboard/Sidebar";
 import { Tab } from "@/components/Dashboard/Sidebar/types";
 import Middleware from "@/utils/middleware";
@@ -56,23 +57,15 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
     <Middleware>
       <div className="flex h-screen pt-10 md:pt-0">
         {/* Desktop sidebar */}
-        <Sidebar
-          setActiveTab={setActiveTab}
-          isMobile={false}
-        />
+        <Sidebar setActiveTab={setActiveTab} />
         {/* Mobile sidebar */}
-        {sidebarOpen && (<Sidebar
-          setActiveTab={setActiveTab}
-          onClick={closeSidebar}
-          isMobile={true}
-        />)}
+        {sidebarOpen && (
+          <MobileSidebar setActiveTab={setActiveTab} onClick={closeSidebar} />
+        )}
         <div className="flex flex-col flex-1">
+          <MobileNav onClick={openSidebar} title={headerTitles[activeTab]} />
           {!isDynamicRoute && (
             <div>
-              <MobileNav
-                onClick={openSidebar}
-                title={headerTitles[activeTab]}
-              />
               <Header
                 title={headerTitles[activeTab]}
                 subtitle={headerSubtitles[activeTab]}

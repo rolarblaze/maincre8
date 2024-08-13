@@ -47,7 +47,7 @@ const Overview = () => {
   const hasTransactions = orderHistory && orderHistory?.length > 0;
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto pt-6 md:pt-0">
       <div>
         <h4>Welcome, {profile.first_name}</h4>
         <p className="text-grey500">Select a service to get started</p>
