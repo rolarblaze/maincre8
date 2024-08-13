@@ -23,7 +23,7 @@ const Tabs: React.FC<TabsProps> = ({
 }) => {
   return (
     <div className="flex items-center justify-between flex-wrap gap-y-4 md:gap-y-0 py-2 md:px-6">
-      <div className="flex items-center gap-1 border-b border-grey200">
+      <div className="flexw flex-wrap items-center gap-1 border-b border-grey200">
         {tabs.map((tab) => (
           <div
             key={tab.name}

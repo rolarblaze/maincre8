@@ -252,7 +252,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
       {/* Notification and Settings */}
       <section className="flex flex-col gap-3 pt-2">
         <div className="flex flex-col gap-1 pb-3">
-          <Link href="/dashboard/notifications">
+          <Link href="/dashboard/notifications" onClick={onClick}>
             <div
               className={`flex items-center gap-3 py-3 px-4 ${
                 isActive("/dashboard/notifications")
@@ -278,7 +278,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
             </div>
           </Link>
 
-          <Link href="/dashboard/settings">
+          <Link href="/dashboard/settings" onClick={onClick}>
             <div
               className={`flex items-center gap-3 py-3 px-4 ${
                 isActive("/dashboard/settings")

@@ -1,6 +1,5 @@
 "use client";
 
-import { ArrowBackIcon } from "@/public/icons";
 import { MobileMenu } from "@/public/svgs";
 import DashArrowLeft from "@/public/svgs/DashArrowLeft";
 import Link from "next/link";
@@ -19,6 +18,7 @@ const MobileNav: React.FC<MobileNavprops> = ({ title, onClick }) => {
   return (
     <nav className="fixed inset-x-0 top-0 z-20 md:hidden lg:hidden py-4 px-[22px] bg-primary50">
       {isPackageInfo ? (
+        // For Services package info header
         <div>
           <Link
             href={"/dashboard/services"}
@@ -31,11 +31,12 @@ const MobileNav: React.FC<MobileNavprops> = ({ title, onClick }) => {
           </Link>
         </div>
       ) : (
+        // For other headers
         <div className="flex gap-4">
-          <button className="w-fit h-fit" onClick={onClick}>
-            <MobileMenu />
+          <button className="w-fit h-fit self-center" onClick={onClick}>
+            <MobileMenu className="" />
           </button>
-          <span>{title}</span>
+          <span className="font-semibold text-2xl text-grey900">{title}</span>
         </div>
       )}
     </nav>
