@@ -1,18 +1,29 @@
 "use client";
-import { EmptyState, ServiceCard } from "@/components";
-import { useAppSelector } from "@/redux/store";
-import React from "react";
+import { EmptyState, FullLoader, ServiceCard } from "@/components";
+import { getUserOrderHistory } from "@/redux/servicesTracker/features";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import React, { useEffect } from "react";
 
 const MyServices = () => {
-  const { profile } = useAppSelector((state) => state.auth);
+  const { orderHistory, loading } = useAppSelector((state) => state.services);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(getUserOrderHistory());
+  }, []);
 
   const bundleColors: { [key: string]: string } = {};
 
-  const transactions = profile.user.transactions;
+  if (orderHistory) {
+    console.log(orderHistory);
+  }
+
+  if (loading) return <FullLoader />;
 
   return (
     <>
-      {transactions.length < 1 ? (
+      {orderHistory!.length < 1 ? (
         <EmptyState
           imgSrc="myservices-empty"
           text="Buy a package to get started"
@@ -21,7 +32,7 @@ const MyServices = () => {
         />
       ) : (
         <div className="grid md:grid-cols-3 gap-6 overflow-y-auto">
-          {transactions?.map((transaction, i) => (
+          {orderHistory?.map((transaction, i) => (
             <ServiceCard
               key={i}
               category={transaction.package.package_name}
@@ -29,6 +40,7 @@ const MyServices = () => {
               description={transaction.package.description}
               color={bundleColors[transaction.package.bundle.bundle_name]}
               id={transaction.package.package_id}
+              transactionId={transaction.transaction_id}
               isPaid
             />
           ))}
