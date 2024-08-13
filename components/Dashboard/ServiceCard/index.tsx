@@ -19,10 +19,14 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   id,
   isPaid,
 }) => {
+  const linkUrl = isPaid
+    ? `/dashboard/services/${id}/?tab=my-package`
+    : `/dashboard/services/${id}/?tab=package-info`;
+
   return (
     <Link
-      className="max-w-[388px] w-full rounded-lg border border-grey300 "
-      href={`/dashboard/services/${id}`}
+      className="max-w-[388px] w-full rounded-lg border border-grey300"
+      href={linkUrl}
     >
       <div className="relative">
         <Image
@@ -39,7 +43,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
           {category}
         </div>
       </div>
-      <div className="p-4 ">
+      <div className="p-4">
         <h4 className="text-lg font-semibold text-grey900">{title}</h4>
         <p className="text-sm text-grey500 mb-4">{description}</p>
         {isPaid && (

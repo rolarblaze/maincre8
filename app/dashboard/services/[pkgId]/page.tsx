@@ -13,6 +13,7 @@ const PackageDetails = () => {
   const { pkgId } = useParams();
   const [activeTab, setActiveTab] = useState("package info");
   const dispatch = useAppDispatch();
+  const { profile } = useAppSelector((state) => state.auth);
   const id = Array.isArray(pkgId) ? pkgId[0] : pkgId;
   useEffect(() => {
     dispatch(getPackageDetails({ id }));
@@ -26,6 +27,14 @@ const PackageDetails = () => {
 
   if (status !== "succeeded") return <FullLoader />;
   if (error) return <div>Error: {error}</div>;
+
+  // if (pkgDetails) {
+  //   console.log(pkgDetails.package_id);
+  // }
+
+  // if (profile) {
+  //   console.log("profile", profile.user.transactions);
+  // }
 
   return (
     <div>
@@ -52,7 +61,7 @@ const PackageDetails = () => {
       {/* ------------------------------------------------ */}
       <div className="border-l border-t border-grey200 py-4 px-6 mt-6 h-full ">
         <TabsToggle
-          activeTab={activeTab}
+          // activeTab={activeTab}
           onTabClick={setActiveTab}
           disableMyPackage={false}
           provisions={pkgDetails?.provisions}

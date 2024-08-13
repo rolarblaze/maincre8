@@ -1,6 +1,7 @@
 "use client";
 import { Button, FullLoader, Loader, ServiceCard } from "@/components";
 import { BulbIcon } from "@/public/icons";
+import { getUserOrderHistory } from "@/redux/servicesTracker/features";
 import { getServices } from "@/redux/shop/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import Link from "next/link";
@@ -11,10 +12,12 @@ const Overview = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { services, isLoading, error } = useAppSelector((state) => state.shop);
+  const { orderHistory, loading } = useAppSelector((state) => state.services);
   const { isLoadingProfile, profile } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     dispatch(getServices());
+    dispatch(getUserOrderHistory());
   }, [dispatch]);
 
   const bundleColors: { [key: string]: string } = {};
@@ -31,7 +34,7 @@ const Overview = () => {
     return <div>Error: {error}</div>;
   }
 
-  if (isLoadingProfile) {
+  if (isLoadingProfile || loading) {
     return <FullLoader />;
   }
 
@@ -41,7 +44,7 @@ const Overview = () => {
     !profile.user.profile?.state ||
     !profile.user.profile?.phone_number;
 
-  const hasTransactions = profile?.user?.transactions?.length > 0;
+  const hasTransactions = orderHistory && orderHistory?.length > 0;
 
   return (
     <div className="container mx-auto">
@@ -81,7 +84,7 @@ const Overview = () => {
       <section className="flex flex-col gap-10">
         <div className="grid md:grid-cols-3 gap-6 overflow-y-auto">
           {hasTransactions ? (
-            profile.user.transactions.map((transaction, i) => (
+            orderHistory?.map((transaction, i) => (
               <ServiceCard
                 key={i}
                 category={transaction.package.package_name}

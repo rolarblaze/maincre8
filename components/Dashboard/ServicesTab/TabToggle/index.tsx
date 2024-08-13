@@ -1,10 +1,10 @@
 "use client";
 import { FolderIcon, PackageIcon } from "@/public/svgs";
-
 import React, { useEffect, useState } from "react";
 import MyPackage from "../MyPackage";
 import PackageInfo from "../PackageInfo";
 import { Provision } from "@/redux/shop/interface";
+import { useSearchParams, useRouter, usePathname } from "next/navigation";
 
 type Tab = {
   name: string;
@@ -13,18 +13,21 @@ type Tab = {
 };
 
 type TabsProps = {
-  activeTab?: string;
   onTabClick: (tabName: string) => void;
   disableMyPackage?: boolean;
   provisions: Provision[];
 };
 
 const TabsToggle: React.FC<TabsProps> = ({
-  activeTab: initialActiveTab = "package info",
   onTabClick,
   disableMyPackage = false,
   provisions,
 }) => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const pathname = usePathname();
+  const initialActiveTab = searchParams.get("tab") || "package-info";
+
   const [activeTab, setActiveTab] = useState(initialActiveTab);
 
   useEffect(() => {
@@ -32,27 +35,30 @@ const TabsToggle: React.FC<TabsProps> = ({
   }, [initialActiveTab]);
 
   const handleTabClick = (tabName: string) => {
-    if (!(disableMyPackage && tabName === "my package")) {
+    if (!(disableMyPackage && tabName === "my-package")) {
       setActiveTab(tabName);
       onTabClick(tabName);
+      const newParams = new URLSearchParams(searchParams.toString());
+      newParams.set("tab", tabName);
+      router.push(`${pathname}?${newParams.toString()}`);
     }
   };
 
   const tabs: Tab[] = [
     {
-      name: "my package",
+      name: "my-package",
       icon: (
         <FolderIcon
-          fillColor={activeTab === "my package" ? "#1574E5" : "#344054"}
+          fillColor={activeTab === "my-package" ? "#1574E5" : "#344054"}
         />
       ),
       component: <MyPackage />,
     },
     {
-      name: "package info",
+      name: "package-info",
       icon: (
         <PackageIcon
-          fillColor={activeTab === "package info" ? "#1574E5" : "#344054"}
+          fillColor={activeTab === "package-info" ? "#1574E5" : "#344054"}
         />
       ),
       component: <PackageInfo Benefits={provisions} />,
@@ -71,7 +77,7 @@ const TabsToggle: React.FC<TabsProps> = ({
                   ? "text-primary500 border-b border-primary500"
                   : "text-grey700"
               } ${
-                disableMyPackage && tab.name === "My Package"
+                disableMyPackage && tab.name === "my-package"
                   ? "opacity-50 cursor-not-allowed"
                   : ""
               }`}
@@ -83,7 +89,7 @@ const TabsToggle: React.FC<TabsProps> = ({
                   activeTab === tab.name ? "text-primary500" : "text-grey700"
                 }`}
               >
-                {tab.name}
+                {tab.name.replace("-", " ")}
               </span>
             </div>
           ))}
