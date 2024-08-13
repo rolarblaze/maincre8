@@ -1,6 +1,5 @@
-import { CheckCircleIcon } from "@/public/icons";
 import React from "react";
-
+import { CheckCircleIcon } from "@/public/svgs";
 
 export default function Approach() {
   const approachData = [
@@ -13,19 +12,19 @@ export default function Approach() {
   ];
 
   return (
-    <section className="w-full py-20 bg-white">
+    <section className="w-full py-10 md:py-14 lg:py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="max-w-2xl w-full text-2xl font-bold text-gray-900 mb-8 lg:text-5xl text-left">
+        <h2 className="max-w-2xl w-full text-2xl font-bold lg:leading-[4rem] text-gray-900 mb-8 md:text-4xl lg:text-5xl text-left">
           Our Dynamic and Creative Approach
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {approachData.map((item, index) => (
             <div
               key={index}
-              className="flex items-center gap-4 p-8 bg-white border rounded-lg shadow-sm md:gap-8"
+              className="flex justify-center items-center gap-4 px-5 py-6 md:p-8 bg-white border rounded-lg shadow-sm md:gap-8"
             >
-              <div>
-                <CheckCircleIcon />
+              <div className="">
+                <CheckCircleIcon className="max-md:size-8" />
               </div>
               <p className="text-gray-700 text-left text-sm md:text-base">{item}</p>
             </div>

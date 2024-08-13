@@ -29,7 +29,10 @@ const PackageDetails = () => {
 
   return (
     <div>
-      <Link href={"/dashboard/services"} className="flex w-fit mb-14 pl-6">
+      <Link
+        href={"/dashboard/services"}
+        className="flex items-center w-fit mb-14 pl-6"
+      >
         <ArrowBackIcon />
         <span className="align-super text-grey600 ml-2">Back to services</span>
       </Link>
