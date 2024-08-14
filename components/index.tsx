@@ -66,3 +66,4 @@ export { default as ServiceCard } from "./Dashboard/ServiceCard";
 export { default as Profile } from "./Dashboard/Profile";
 export { default as Security } from "./Dashboard/Security";
 export { default as Payment } from "./Dashboard/Payment";
+export { default as BusinessBriefForm } from "./Dashboard/BusinessBriefForm";
