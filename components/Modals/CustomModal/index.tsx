@@ -6,6 +6,7 @@ interface ModalProps {
   onClose?: () => void;
   children: ReactNode;
   className?: string;
+  showCancelIcon?: boolean;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -13,6 +14,7 @@ const Modal: React.FC<ModalProps> = ({
   onClose,
   children,
   className,
+  showCancelIcon = true,
 }) => {
   if (!isOpen) return null;
 
@@ -25,9 +27,11 @@ const Modal: React.FC<ModalProps> = ({
       <div
         className={`max-w-[744px] rounded-[20px] shadow-dark-blue z-10 bg-white py-14 px-32 ${className}`}
       >
-        <div onClick={onClose} className="w-fit ml-auto mb-4 cursor-pointer">
-          <CancelIcon />
-        </div>
+        {showCancelIcon && (
+          <div onClick={onClose} className="w-fit ml-auto mb-4 cursor-pointer">
+            <CancelIcon />
+          </div>
+        )}
         {children}
       </div>
     </div>
