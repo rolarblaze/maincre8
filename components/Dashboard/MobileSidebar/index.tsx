@@ -1,13 +1,8 @@
-"use client";
-
 import React, { useState } from "react";
-import Link from "next/link";
+import Tab from "../Sidebar/types";
 import { usePathname, useRouter } from "next/navigation";
-import { Tab } from "./types";
 import { useAppSelector } from "@/redux/store";
-import UserImage from "@/public/images/user-image.svg";
-import ArrowUp from "@/public/icons/arrow-up.svg";
-import { BulbIcon, CancelIcon, LogoBlue, Logout } from "@/public/icons";
+import { CancelIcon, LogoBlue, Logout } from "@/public/icons";
 import {
   CalendarIcon,
   HistoryIcon,
@@ -18,13 +13,20 @@ import {
   SettingsIcon,
   SupportIcon,
 } from "@/public/svgs";
+import Link from "next/link";
+import UserImage from "@/public/images/user-image.svg";
 import MyServicesIcon from "@/public/svgs/MyServicesIcon";
+import ArrowUp from "@/public/icons/arrow-up.svg";
 
-type SidebarProps = {
+type MobileSidebarProps = {
   setActiveTab: (tab: Tab) => void;
+  onClick?: () => void;
 };
 
-const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
+const MobileSidebar: React.FC<MobileSidebarProps> = ({
+  setActiveTab,
+  onClick,
+}) => {
   const router = useRouter();
   const pathname = usePathname();
   const { profile } = useAppSelector((state) => state.auth);
@@ -42,16 +44,23 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
 
   return (
     <aside
-      className={`hidden max-w-[272px] w-full h-full md:flex flex-col justify-between px-2 border-r border-grey200 bg-white`}
+      className={`md:hidden h-full flex flex-col gap-7 px-6 border-r border-grey200 fixed z-40 bg-white inset-x-0 top-0 overflow-y-auto py-8 overflow-x-hidden box-border`}
     >
-      {/* Upper section */}
-      <section className="flex flex-col gap-3 ">
-        <Link href="/">
-          <LogoBlue className="w-full h-full px-2 py-6" />
-        </Link>
+      {/* Logo section */}
+      <section className="flex flex-col gap-14 ">
+        {/* Mobile Logo */}
+        <div className=" flex justify-between w-full md:hidden">
+          <Link href={"/"} className="">
+            <MobileBlueLogo />
+          </Link>
+          <button className="w-fit h-fit" onClick={onClick}>
+            <CancelIcon />
+          </button>
+        </div>
 
-        <nav className="flex flex-col gap-1  pb-4 border-b border-grey200">
-          <Link href="/dashboard">
+        {/* Navigations */}
+        <nav className="flex flex-col gap-1 pb-6 border-b border-grey200">
+          <Link href="/dashboard" onClick={onClick}>
             <div
               className={`flex items-center gap-3 py-3 px-4 ${
                 isActive("/dashboard")
@@ -75,7 +84,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
             </div>
           </Link>
 
-          <Link href="/dashboard/services">
+          <Link href="/dashboard/services" onClick={onClick}>
             <div
               className={`flex items-center gap-3 py-3 px-4 ${
                 isActive("/dashboard/services")
@@ -101,34 +110,33 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
             </div>
           </Link>
 
-          {/* CUSTOM RECOMMENDATIONS */}
-          <Link href="/dashboard/custom-recommendation">
+          <Link href="/dashboard/my-services" onClick={onClick}>
             <div
               className={`flex items-center gap-3 py-3 px-4 ${
-                isActive("/dashboard/custom-recommendation")
+                isActive("/dashboard/my-services")
                   ? "bg-primary50 rounded-sm text-primary600"
                   : ""
               }`}
-              onClick={() => setActiveTab("Services")}
+              onClick={() => setActiveTab("MyServices")}
             >
-              <BulbIcon
+              <MyServicesIcon
                 fillColor={
                   isActive("/dashboard/my-services") ? "#136AD0" : "#667185"
                 }
               />
               <span
                 className={`text-sm ${
-                  isActive("/dashboard/custom-recommendation")
+                  isActive("/dashboard/my-services")
                     ? "text-primary600 text-medium"
                     : "grey700"
                 }`}
               >
-                Custom Recommendation
+                My Services
               </span>
             </div>
           </Link>
 
-          <Link href="/dashboard/calendar">
+          <Link href="/dashboard/calendar" onClick={onClick}>
             <div
               className={`flex items-center gap-3 py-3 px-4 ${
                 isActive("/dashboard/calendar")
@@ -154,7 +162,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
             </div>
           </Link>
 
-          <Link href="/dashboard/order-history">
+          <Link href="/dashboard/order-history" onClick={onClick}>
             <div
               className={`flex items-center gap-3 py-3 px-4 ${
                 isActive("/dashboard/order-history")
@@ -241,10 +249,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
         </nav>
       </section>
 
-      {/* Notification and settings */}
-      <section className="flex flex-col gap-3 ">
+      {/* Notification and Settings */}
+      <section className="flex flex-col gap-3 pt-2">
         <div className="flex flex-col gap-1 pb-3">
-          <Link href="/dashboard/notifications">
+          <Link href="/dashboard/notifications" onClick={onClick}>
             <div
               className={`flex items-center gap-3 py-3 px-4 ${
                 isActive("/dashboard/notifications")
@@ -270,7 +278,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
             </div>
           </Link>
 
-          <Link href="/dashboard/settings">
+          <Link href="/dashboard/settings" onClick={onClick}>
             <div
               className={`flex items-center gap-3 py-3 px-4 ${
                 isActive("/dashboard/settings")
@@ -299,7 +307,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
       </section>
 
       {/* Profile */}
-      <div className="flex items-center gap-5 py-5 px-6">
+      <div className="flex items-center flex-wrap gap-8 px-6">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 rounded-full relative">
             {/* <Image
@@ -332,4 +340,4 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
   );
 };
 
-export default Sidebar;
+export default MobileSidebar;

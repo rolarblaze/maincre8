@@ -1,7 +1,7 @@
 // components/Dashboard/Order.tsx
 import React from "react";
 
-interface OrderProps {
+export interface OrderProps {
   packageName: string;
   price: string;
   dateBought: string;
@@ -17,32 +17,45 @@ const Order: React.FC<OrderProps> = ({
   status,
 }) => {
   return (
-    <div className="space-y-4 bg-white px-5 py-10">
+    <div className="space-y-4 bg-white hidden md:block">
       <h4 className="text-grey500 text-2xl font-semibold">{dateBought}</h4>
 
       <section className=" bg-grey10 py-4 px-6 rounded-lg border border-grey200">
+        {/* Section 1 */}
         <div className="flex items-center justify-between py-3 px-2 border-b border-grey200">
           <div className="flex-1">
-            <div className="text-grey500 text-xs font-semibold mb-1">PACKAGE</div>
+            <div className="text-grey500 text-xs font-semibold mb-1">
+              PACKAGE
+            </div>
           </div>
           <div className="flex-1">
             <div className="text-grey500 text-xs font-semibold mb-1">PRICE</div>
           </div>
           <div className="flex-1">
-            <div className="text-grey500 text-xs font-semibold mb-1">DATE BOUGHT</div>
+            <div className="text-grey500 text-xs font-semibold mb-1">
+              DATE BOUGHT
+            </div>
           </div>
           <div className="flex-1">
-            <div className="text-grey500 text-xs font-semibold mb-1">DATE COMPLETED</div>
+            <div className="text-grey500 text-xs font-semibold mb-1">
+              DATE COMPLETED
+            </div>
           </div>
           <div className="flex-1">
-            <div className="text-grey500 text-xs font-semibold mb-1">STATUS</div>
+            <div className="text-grey500 text-xs font-semibold mb-1">
+              STATUS
+            </div>
           </div>
 
           <div className="flex-1"></div>
         </div>
+
+        {/* Section 2 */}
         <div className="flex items-center justify-between py-3 px-2 ">
           <div className="flex-1">
-            <div className="text-grey900 text-base font-semibold ">{packageName}</div>
+            <div className="text-grey900 text-base font-semibold ">
+              {packageName}
+            </div>
           </div>
           <div className="flex-1">
             <div className="text-grey500 text-base ">{price}</div>

@@ -46,27 +46,32 @@ const PackageDetails = () => {
   }
 
   return (
-    <div>
+    <div className="pt-[22px] md:pt-0">
       <Link
         href={"/dashboard/services"}
-        className="flex items-center w-fit mb-14 pl-6"
+        className="hidden md:flex items-center w-fit mb-14 pl-6"
       >
         <ArrowBackIcon />
         <span className="align-super text-grey600 ml-2">Back to services</span>
       </Link>
-      <div className="flex justify-between items-center px-6">
+      <div className=" flex justify-between items-center px-2 md:px-6 flex-wrap gap-4">
         <div>
           <h4>{pkgDetails?.package_name}</h4>
           <p>{pkgDetails?.description}</p>
         </div>
 
         <div className="flex gap-6 items-center">
-          <h4>{pkgDetails?.price || "$499"}</h4>
-          <Button label={`Buy for ${pkgDetails?.price || "$499"}`} />
+          <h4 className="hidden md:block">{pkgDetails?.price || "$499"}</h4>
+          <Button
+            label={`Buy for ${pkgDetails?.price || "$499"}`}
+            classNames="self-start"
+          />
         </div>
       </div>
 
-      <div className="border-l border-t border-grey200 py-4 px-6 mt-6 h-full">
+      {/* ------------------------------------------------ */}
+      {/* ------------------------------------------------ */}
+      <div className="border-l border-t border-grey200 py-4 px-6 mt-4 md:mt-6 h-full ">
         <TabsToggle
           onTabClick={setActiveTab}
           disableMyPackage={false}
