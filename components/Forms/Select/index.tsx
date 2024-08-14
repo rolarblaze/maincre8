@@ -1,5 +1,6 @@
 import { AshArrowDown } from "@/public/icons";
 import React from "react";
+import { twMerge } from "tailwind-merge";
 
 interface Option {
   label: string;
@@ -14,6 +15,7 @@ interface ControlledSelectProps {
   id: string;
   name: string;
   placeholder?: string;
+  className?: string
 }
 
 const ControlledSelect: React.FC<ControlledSelectProps> = ({
@@ -23,6 +25,7 @@ const ControlledSelect: React.FC<ControlledSelectProps> = ({
   onChange,
   id,
   name,
+  className,
   placeholder = "Select type",
 }) => {
   return (
@@ -30,7 +33,7 @@ const ControlledSelect: React.FC<ControlledSelectProps> = ({
       <label htmlFor={id} className="block text-sm text-gray-900 mb-2">
         {label}
       </label>
-      <div className="relative">
+      <div className={twMerge("relative", className)}>
         <select
           required
           id={id}
