@@ -3,9 +3,9 @@ import { BusinessBriefForm } from "@/components";
 
 const BusinessForm = () => {
   return (
-    <div>
+    <div className="relative">
       {/* NAVIGATE BACK */}
-      <div className="mb-10 flex justify-start items-center gap-2">
+      <div className="fixed top-0 pt-8 pb-4 bg-gray-100 z-10 w-full mb-8 flex justify-start items-center gap-2">
         <ArrowBackIcon />
         <p className="font-medium leading-6 text-grey600">
           Back to Custom recommendation
@@ -13,7 +13,7 @@ const BusinessForm = () => {
       </div>
 
       {/* HEADING */}
-      <header className="py-6 border-b">
+      <header className="mt-10 py-6 border-b">
         <h2 className="text-2xl font-semibold leading-8 text-grey900">
           Business Brief Submission Form
         </h2>
