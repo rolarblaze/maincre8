@@ -47,14 +47,14 @@ const Overview = () => {
   const hasTransactions = orderHistory && orderHistory?.length > 0;
 
   return (
-    <div className="container mx-auto pt-6 md:pt-0">
+    <div className="container mx-auto pt-6 md:pt-0 flex flex-col gap-8">
       <div>
         <h4>Welcome, {profile.first_name}</h4>
         <p className="text-grey500">Select a service to get started</p>
       </div>
 
       {profileIncomplete && (
-        <div className="mt-8 mb-10 bg-white py-4 px-6 flex items-center justify-between rounded-lg">
+        <div className="mt-8 mb-10 bg-white py-4 px-6 flex items-center justify-between flex-wrap gap-6 md:gap-0 rounded-lg">
           <p className="text-black">Complete your profile setup</p>
           <Button
             label="Setup profile"
@@ -65,7 +65,7 @@ const Overview = () => {
       )}
 
       <div
-        className="ml-auto flex gap-2 items-center w-fit border-none bg-primary500 text-white py-2 px-3 rounded-lg cursor-pointer mt-8"
+        className="ml-auto hidden md:flex gap-2 items-center w-fit border-none bg-primary500 text-white py-2 px-3 rounded-lg cursor-pointer mt-8"
         onClick={() => router.replace("/dashboard/custom-recommendations")}
       >
         <BulbIcon />
@@ -73,7 +73,9 @@ const Overview = () => {
       </div>
 
       <div className="py-4 flex items-center justify-between">
-        <h4 className="text-black">Popular services</h4>
+        <h4 className="text-black text-[18px] md:text-[24px] font-medium md:font-bold">
+          Popular services
+        </h4>
         <Button
           label="See all"
           classNames="bg-transparent w-fit border-none text-primary600 px-0 py-0"
@@ -82,20 +84,23 @@ const Overview = () => {
       </div>
 
       <section className="flex flex-col gap-10">
-        <div className="grid md:grid-cols-3 gap-6 overflow-y-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 place-items-center md:place-items-start gap-6 overflow-y-auto">
+          {/* Show only the first three cards */}
           {hasTransactions ? (
-            orderHistory?.map((transaction, i) => (
-              <ServiceCard
-                key={i}
-                category={transaction.package.package_name}
-                title={transaction.package.package_name}
-                description={transaction.package.description}
-                color={bundleColors[transaction.package.bundle.bundle_name]}
-                id={transaction.package.package_id}
-                transactionId={transaction.transaction_id}
-                isPaid
-              />
-            ))
+            orderHistory
+              ?.slice(0, 3)
+              .map((transaction, i) => (
+                <ServiceCard
+                  key={i}
+                  category={transaction.package.package_name}
+                  title={transaction.package.package_name}
+                  description={transaction.package.description}
+                  color={bundleColors[transaction.package.bundle.bundle_name]}
+                  id={transaction.package.package_id}
+                  transactionId={transaction.transaction_id}
+                  isPaid
+                />
+              ))
           ) : isLoading ? (
             <Loader />
           ) : (
@@ -113,6 +118,7 @@ const Overview = () => {
                   )
                 )
               )
+              .slice(0, 3)
               .map((card, index) => (
                 <ServiceCard
                   key={index}
