@@ -10,7 +10,7 @@ interface Option {
 interface ControlledSelectProps {
   label: string;
   options: Option[];
-  value: string;
+  value: string | undefined;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   id: string;
   name: string;
@@ -43,7 +43,7 @@ const ControlledSelect: React.FC<ControlledSelectProps> = ({
           className="block w-full border border-gray-300 rounded-lg h-14 pl-4 pr-10 appearance-none focus:outline-none  custom-select"
         >
           {placeholder && (
-            <option disabled hidden value="">
+            <option disabled hidden value="" className="text-sm bg-red-500 text-grey400">
               {placeholder}
             </option>
           )}
