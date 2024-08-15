@@ -7,8 +7,9 @@ import { Tab } from "./types";
 import { useAppSelector } from "@/redux/store";
 import UserImage from "@/public/images/user-image.svg";
 import ArrowUp from "@/public/icons/arrow-up.svg";
-import { BulbIcon, CancelIcon, LogoBlue, Logout } from "@/public/icons";
+import { CancelIcon, LogoBlue, Logout } from "@/public/icons";
 import {
+  BulbIcon,
   CalendarIcon,
   HistoryIcon,
   MobileBlueLogo,
@@ -97,6 +98,32 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
                 }`}
               >
                 Services
+              </span>
+            </div>
+          </Link>
+
+          <Link href="/dashboard/my-services">
+            <div
+              className={`flex items-center gap-3 py-3 px-4 ${
+                isActive("/dashboard/my-services")
+                  ? "bg-primary50 rounded-sm text-primary600"
+                  : ""
+              }`}
+              onClick={() => setActiveTab("MyServices")}
+            >
+              <MyServicesIcon
+                fillColor={
+                  isActive("/dashboard/my-services") ? "#136AD0" : "#667185"
+                }
+              />
+              <span
+                className={`text-sm ${
+                  isActive("/dashboard/my-services")
+                    ? "text-primary600 text-medium"
+                    : "grey700"
+                }`}
+              >
+                My Services
               </span>
             </div>
           </Link>
