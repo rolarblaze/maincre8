@@ -1,5 +1,6 @@
 "use client";
 import { Button, FullLoader, Loader, ServiceCard } from "@/components";
+import BarChart from "@/components/Dashboard/BarChart";
 import UpcomingAppointment from "@/components/Dashboard/UpcomingAppointment";
 import { BulbIcon } from "@/public/icons";
 import { getUserOrderHistory } from "@/redux/servicesTracker/features";
@@ -21,6 +22,7 @@ const Overview = () => {
     dispatch(getUserOrderHistory());
   }, [dispatch]);
 
+  // Dummy data: waiting for api
   const upcomingAppointmentsData = [
     {
       callType: "Offboarding call",
@@ -38,6 +40,13 @@ const Overview = () => {
       date: "29 July 2024",
     },
   ];
+
+  // Dummy data, waiting for api
+  const barChartData = {
+    labels: ["Active Services", "Completed Services", "Total Services Bought"],
+    dataValues: [5.8, 3, 7],
+  };
+
   const bundleColors: { [key: string]: string } = {};
   const colors = ["#620FA3", "#006AA5", "#A30F44"];
   services.forEach((service, index) => {
@@ -160,20 +169,25 @@ const Overview = () => {
             Activity
           </h3>
           {/* Chart Section*/}
-          <div className="flex flex-col rounded-lg bg-white px-6 py-4">
+          <div className="flex flex-col justify-between rounded-lg bg-white px-6 py-4">
             <h4 className="text-lg font-semibold text-grey900 border-b border-grey200 pb-4">
               My Services
             </h4>
             {/* Chart */}
-            <div></div>
+            <div>
+              <BarChart
+                labels={barChartData.labels}
+                dataValues={barChartData.dataValues}
+              />
+            </div>
           </div>
 
           {/* Upcoming Appointments */}
-          <div className="rounded-lg bg-white px-6 py-4 flex flex-col gap-8">
+          <div className="rounded-lg bg-white px-6 py-4 flex flex-col gap-4">
             <h4 className="text-lg font-semibold text-grey900 border-b border-grey200 pb-4">
               Upcoming Appointments
             </h4>
-            <div className="flex flex-col gap-7">
+            <div className="flex flex-col">
               {upcomingAppointmentsData.map((app, idx) => {
                 return (
                   <UpcomingAppointment
