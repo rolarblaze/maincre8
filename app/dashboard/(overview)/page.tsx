@@ -76,11 +76,15 @@ const Overview = () => {
         <h4 className="text-black text-[18px] md:text-[24px] font-medium md:font-bold">
           Popular services
         </h4>
-        <Button
-          label="See all"
-          classNames="bg-transparent w-fit border-none text-primary600 px-0 py-0"
-          onClick={() => router.push("/dashboard/services")}
-        />
+        {hasTransactions &&
+          orderHistory?.length > 3 &&
+          services?.length > 3 && (
+            <Button
+              label="See all"
+              classNames="bg-transparent w-fit border-none text-primary600 px-0 py-0"
+              onClick={() => router.push("/dashboard/services")}
+            />
+          )}
       </div>
 
       <section className="flex flex-col gap-10">
