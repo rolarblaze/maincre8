@@ -79,7 +79,7 @@ const Overview = () => {
         <Button
           label="See all"
           classNames="bg-transparent w-fit border-none text-primary600 px-0 py-0"
-          onClick={() => router.replace("/dashboard/services")}
+          onClick={() => router.push("/dashboard/services")}
         />
       </div>
 
