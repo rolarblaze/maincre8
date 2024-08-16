@@ -9,38 +9,38 @@ interface FormValues {
   contactPhoneNumber: string;
 
   // BUSINESS CHALLENGES
-  // challenges: string;
-  // digitalSolution: string;
-  // solutionOutcomes: string;
+  challenges: string;
+  digitalSolution: string;
+  solutionOutcomes: string;
 
   // TARGET AUDIENCE
-  // audience: string;
-  // ageGroup: string;
-  // gender: "male" | "female" | "others" | null;
-  // location: string;
-  // interestBehaviours: string;
-  // customerPersonas: string;
-  // personaDescribe: string;
+  audience: string;
+  ageGroup: string;
+  gender: "male" | "female" | "others" | null;
+  location: string;
+  interestBehaviours: string;
+  customerPersonas: string;
+  personaDescribe: string;
 
   // DESIRED OUTCOMES
-  // desiredOutcomes: string;
+  desiredOutcomes: string;
 
   // BUDGET
-  // budgetProjection: string;
+  budgetProjection: string;
 
   // PREFERRED SOLUTIONS
-  // usefulDigitalServices: string[];
-  // webDevelopment: boolean,
-  // eCommerce: boolean,
+  usefulDigitalServices: string[];
+  webDevelopment: boolean,
+  eCommerce: boolean,
 
   // COMPETITOR ANALYSIS
-  // mainCompetitor: string;
-  // mainCompetitorWebsite: string;
-  // dislikeDigitalPrescence: string;
+  mainCompetitor: string;
+  mainCompetitorWebsite: string;
+  dislikeDigitalPrescence: string;
 
   // ADDITIONAL INFORMATION
-  // additionalInformation: string;
+  additionalInformation: string;
 
   // CONSENT
-  // receiveUpdates: "Yes" | "No" | null;
+  receiveUpdates: "Yes" | "No" | null;
 }

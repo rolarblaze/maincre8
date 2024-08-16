@@ -1,4 +1,4 @@
-export const initialValues: FormValues = {
+export const INITIAL_VALUES: FormValues = {
   // BUSINESS INFORMATION
   industry: "",
   companyName: "",
@@ -8,42 +8,49 @@ export const initialValues: FormValues = {
   contactEmail: "",
   contactPhoneNumber: "",
 
-  // // BUSINESS CHALLENGES
-  // challenges: "",
-  // digitalSolution: "",
-  // solutionOutcomes: "",
+  // BUSINESS CHALLENGES
+  challenges: "",
+  digitalSolution: "",
+  solutionOutcomes: "",
 
-  // // TARGET AUDIENCE
-  // audience: "",
-  // ageGroup: "",
-  // gender: null,
-  // location: "",
-  // interestBehaviours: "",
-  // customerPersonas: "",
-  // personaDescribe: "",
+  // TARGET AUDIENCE
+  audience: "",
+  ageGroup: "",
+  gender: null,
+  location: "",
+  interestBehaviours: "",
+  customerPersonas: "",
+  personaDescribe: "",
 
-  // // DESIRED OUTCOMES
-  // desiredOutcomes: "",
+  // DESIRED OUTCOMES
+  desiredOutcomes: "",
 
-  // // BUDGET
-  // budgetProjection: "",
+  // BUDGET
+  budgetProjection: "",
 
-  // // PREFERRED SOLUTIONS
-  // usefulDigitalServices: [],
-  // webDevelopment: false,
-  // eCommerce: false,
+  // PREFERRED SOLUTIONS
+  usefulDigitalServices: [],
+  webDevelopment: false,
+  eCommerce: false,
 
-  // // COMPETITOR ANALYSIS
-  // mainCompetitor: "",
-  // mainCompetitorWebsite: "",
-  // dislikeDigitalPrescence: "",
+  // COMPETITOR ANALYSIS
+  mainCompetitor: "",
+  mainCompetitorWebsite: "",
+  dislikeDigitalPrescence: "",
 
-  // // ADDITIONAL INFORMATION
-  // additionalInformation: "",
+  // ADDITIONAL INFORMATION
+  additionalInformation: "",
 
-  // // CONSENT
-  // receiveUpdates: null,
+  // CONSENT
+  receiveUpdates: null,
 };
+
+export const optionHolder = [
+  {
+    label: "default",
+    value: "default",
+  },
+];
 
 export const UsefulDigitalServicesCheckbox = [
   { key: "Option 1", value: "cOption1" },

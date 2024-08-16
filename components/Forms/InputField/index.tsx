@@ -4,7 +4,7 @@ import React, { ChangeEvent, KeyboardEvent, ReactNode, useState } from "react";
 
 interface InputFieldProps {
   label?: string;
-  type: "text" | "password" | "email" | "number";
+  type: "text" | "password" | "email" | "number" | "url";
   placeholder?: string;
   value?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -18,7 +18,7 @@ interface InputFieldProps {
   classNames?: string;
   isRequired?: boolean;
   onInputIconClick?: () => void;
-  error?: string;
+  error?: string | boolean;
   name?: string;
   tooltipText?: string;
 }
