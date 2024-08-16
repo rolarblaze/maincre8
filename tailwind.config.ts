@@ -52,6 +52,7 @@ const config: Config = {
         primary900: "#072548",
         ash: "#D0D5DD",
         ash10: "#5D5D5D",
+        "dashboard-bg": "#F5F5F5",
         "dark-cyan-blue": "#030E1C",
         "alert-green": "#04802E",
         "alert-red": "#CB1A14",
