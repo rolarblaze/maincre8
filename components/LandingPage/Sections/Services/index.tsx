@@ -5,7 +5,7 @@ import {
   TailoredServiceIcon,
   UserFriendlyServiceIcon,
 } from "@/public/icons";
-import React from "react";
+import React, { forwardRef } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import assetLibrary from "@/library";
@@ -53,9 +53,12 @@ const Card = ({
   </div>
 );
 
-const Service = () => {
+const Service = forwardRef<HTMLDivElement>((_, ref) => {
   return (
-    <div className="pb-12 pt-8 lg:py-20 space-y-8 max-w-[1216px] mx-auto max-xl:px-6">
+    <div
+      className="pb-12 pt-8 lg:py-20 space-y-8 max-w-[1216px] mx-auto max-xl:px-6"
+      ref={ref}
+    >
       <motion.h2
         className="flex justify-start text-2xl lg:text-[3.5rem] items-center"
         initial={{ x: -50, opacity: 0 }}
@@ -66,8 +69,10 @@ const Service = () => {
         }}
       >
         Why Choose{" "}
-        <span className="text-primary400 text-2xl lg:text-[3.5rem] ml-1.5"> SellCrea8?</span>
-       
+        <span className="text-primary400 text-2xl lg:text-[3.5rem] ml-1.5">
+          {" "}
+          SellCrea8?
+        </span>
         <Image
           alt={"highlight"}
           src={assetLibrary.highlight}
@@ -99,6 +104,6 @@ const Service = () => {
       </motion.div>
     </div>
   );
-};
+});
 
 export default Service;

@@ -41,4 +41,3 @@ export { default as BulbIcon } from "./BulbIcon";
 export { default as PlusIcon } from "./PlusIcon";
 export { default as MobileMenu } from "./MobileMenu";
 export { default as MobileBlueLogo } from "./MobileBlueLogo";
-
