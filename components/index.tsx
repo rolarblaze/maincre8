@@ -3,6 +3,7 @@ export { default as SocialSignUp } from "./Auth/SocialSignUp";
 export { default as Tabs } from "./Auth/Tabs";
 export { default as Button } from "./Button";
 export { default as TabsToggle } from "./Dashboard/ServicesTab/TabToggle";
+export { default as CheckBoxField } from "./Forms/Checkbox";
 export { default as InputField } from "./Forms/InputField";
 export { default as DropdownSelect } from "./Forms/Select";
 export { default as Textarea } from "./Forms/Textarea";
