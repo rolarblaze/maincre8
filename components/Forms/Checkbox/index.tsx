@@ -9,6 +9,7 @@ interface CheckboxFieldProps {
   disabled?: boolean;
   className?: string;
   error?: string;
+  value?: string
   name?: string;
   tooltipText?: string;
 }
@@ -20,7 +21,7 @@ const CheckboxField: React.FC<CheckboxFieldProps> = ({
   disabled,
   className,
   error,
-  tooltipText,
+  value,
   name,
 }) => {
   return (
@@ -29,6 +30,7 @@ const CheckboxField: React.FC<CheckboxFieldProps> = ({
         type="checkbox"
         checked={checked}
         name={name}
+        value={value}
         onChange={onChange}
         disabled={disabled}
         className={`mt-1 cursor-pointer ${

@@ -30,8 +30,6 @@ export const INITIAL_VALUES: FormValues = {
 
   // PREFERRED SOLUTIONS
   usefulDigitalServices: [],
-  webDevelopment: false,
-  eCommerce: false,
 
   // COMPETITOR ANALYSIS
   mainCompetitor: "",
@@ -52,8 +50,12 @@ export const optionHolder = [
   },
 ];
 
-export const UsefulDigitalServicesCheckbox = [
-  { key: "Option 1", value: "cOption1" },
-  { key: "Option 2", value: "cOption2" },
-  { key: "Option 3", value: "cOption3" },
+export const USEFUL_DIGITAL_SERVICES = [
+  { key: "digitalMarketing", value: "Digital Marketing (SEO, PPC, Social Media Marketing)" },
+  { key: "contentCreation", value: "Content Creation (Blogs, Videos, Graphics)" },
+  { key: "webDevandDesign", value: "Website Development and Design" },
+  { key: "eCommerce", value: "E-commerce Solutions" },
+  { key: "dataAnalyticsandReporting", value: "Data Analytics and Reporting" },
+  { key: "emailMarketing", value: "Email Marketing" },
+  { key: "others", value: "Others (please specify)" },
 ];

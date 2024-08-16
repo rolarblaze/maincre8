@@ -1,12 +1,16 @@
 "use client";
-import { FormikHelpers, useFormik } from "formik";
+import { Field, FormikHelpers, useFormik } from "formik";
 import {
   Button,
   CheckBoxField,
   DropdownSelect,
   InputField,
 } from "@/components";
-import { INITIAL_VALUES, optionHolder } from "./constants";
+import {
+  INITIAL_VALUES,
+  optionHolder,
+  USEFUL_DIGITAL_SERVICES,
+} from "./constants";
 import { validationSchema } from "./schema";
 
 const BusinessBriefForm = () => {
@@ -30,6 +34,8 @@ const BusinessBriefForm = () => {
     console.log(values);
     // resetForm();
   };
+
+  console.log(values);
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8 w-full max-w-[50rem]">
@@ -325,12 +331,16 @@ const BusinessBriefForm = () => {
             Which of the following digital services do you think might be
             useful? (Select all that apply)
           </label>
-          <CheckBoxField
-            label="Website Development and Design"
-            checked={false}
-            // onChange={}
-            name="webDevelopment"
-          />
+
+          {USEFUL_DIGITAL_SERVICES.map((item) => (
+            <CheckBoxField
+              key={item.key}
+              name="usefulDigitalServices"
+              label={item.value}
+              value={item.value}
+              onChange={handleChange}
+            />
+          ))}
         </div>
       </div>
 
@@ -436,6 +446,7 @@ const BusinessBriefForm = () => {
       <Button
         type="submit"
         label="Submit a brief"
+        isLoading={isSubmitting}
         classNames="w-fit text-sm px-4 py-2 active:scale-[0.98] rounded-bl-2xl"
       />
     </form>

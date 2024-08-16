@@ -34,8 +34,6 @@ export const validationSchema = Yup.object({
 
   // PREFERRED SOLUTIONS
   usefulDigitalServices: Yup.array().of(Yup.string()).required('Useful Digital Services are required'),
-  webDevelopment: Yup.boolean(),
-  eCommerce: Yup.boolean(),
 
   // COMPETITOR ANALYSIS
   mainCompetitor: Yup.string().required('Main Competitor is required'),

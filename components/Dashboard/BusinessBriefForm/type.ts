@@ -30,8 +30,6 @@ interface FormValues {
 
   // PREFERRED SOLUTIONS
   usefulDigitalServices: string[];
-  webDevelopment: boolean,
-  eCommerce: boolean,
 
   // COMPETITOR ANALYSIS
   mainCompetitor: string;
