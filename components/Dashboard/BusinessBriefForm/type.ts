@@ -39,6 +39,9 @@ interface FormValues {
   // ADDITIONAL INFORMATION
   additionalInformation: string;
 
+  // ATTACH A FILE
+  document: File | null 
+
   // CONSENT
   receiveUpdates: "Yes" | "No" | null;
 }

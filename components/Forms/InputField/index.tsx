@@ -58,7 +58,7 @@ const InputField: React.FC<InputFieldProps> = ({
     <div className="w-full flex flex-col gap-1 text-left">
       <div className="flex gap-2 items-center">
         {label && (
-          <label className="text-sm text-grey900">
+          <label className="text-sm text-grey900 font-medium">
             {label} {isRequired && <span className="text-primary400">*</span>}{" "}
           </label>
         )}

@@ -5,6 +5,7 @@ import {
   CheckBoxField,
   DropdownSelect,
   InputField,
+  UploadFile,
 } from "@/components";
 import {
   INITIAL_VALUES,
@@ -22,6 +23,7 @@ const BusinessBriefForm = () => {
     handleBlur,
     handleChange,
     handleSubmit,
+    setFieldValue,
   } = useFormik({
     initialValues: INITIAL_VALUES,
     validationSchema: validationSchema,
@@ -327,7 +329,7 @@ const BusinessBriefForm = () => {
         </legend>
 
         <div className="space-y-6">
-          <label htmlFor="usefulDigitalSolutions">
+          <label htmlFor="usefulDigitalSolutions" className="font-medium">
             Which of the following digital services do you think might be
             useful? (Select all that apply)
           </label>
@@ -419,7 +421,20 @@ const BusinessBriefForm = () => {
           />
 
           {/* ATTACH FILE */}
-          <div>ATTACH FILE</div>
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-grey900 leading-6">
+              Attach any relevant documents or files (e.g., existing marketing
+              plans, analytics reports, design briefs).
+            </label>
+
+            <UploadFile
+              data={values.document}
+              errors={errors.document || ""}
+              setFieldValue={(field: string, value: File | null) =>
+                setFieldValue(field, value)
+              }
+            />
+          </div>
         </div>
       </div>
 

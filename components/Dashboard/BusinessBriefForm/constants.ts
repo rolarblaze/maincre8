@@ -38,6 +38,7 @@ export const INITIAL_VALUES: FormValues = {
 
   // ADDITIONAL INFORMATION
   additionalInformation: "",
+  document: null as File | null,
 
   // CONSENT
   receiveUpdates: null,

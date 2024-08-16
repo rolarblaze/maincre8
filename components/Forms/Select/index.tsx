@@ -16,7 +16,7 @@ interface ControlledSelectProps {
   id: string;
   name: string;
   placeholder?: string;
-  className?: string
+  className?: string;
 }
 
 const ControlledSelect: React.FC<ControlledSelectProps> = ({
@@ -32,7 +32,10 @@ const ControlledSelect: React.FC<ControlledSelectProps> = ({
 }) => {
   return (
     <div>
-      <label htmlFor={id} className="block text-sm text-gray-900 mb-2">
+      <label
+        htmlFor={id}
+        className="block text-sm text-gray-900 font-medium mb-2"
+      >
         {label}
       </label>
       <div className={twMerge("relative", className)}>
@@ -45,7 +48,12 @@ const ControlledSelect: React.FC<ControlledSelectProps> = ({
           className="block w-full border border-gray-300 rounded-lg h-14 pl-4 pr-10 appearance-none focus:outline-none  custom-select"
         >
           {placeholder && (
-            <option disabled hidden value="" className="text-sm bg-red-500 text-grey400">
+            <option
+              disabled
+              hidden
+              value=""
+              className="text-sm bg-red-500 text-grey400"
+            >
               {placeholder}
             </option>
           )}
