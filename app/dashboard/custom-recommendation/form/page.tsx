@@ -1,16 +1,17 @@
 import { ArrowBackIcon } from "@/public/icons";
 import { BusinessBriefForm } from "@/components";
+import Link from "next/link";
 
 const BusinessForm = () => {
   return (
     <div className="relative">
       {/* NAVIGATE BACK */}
-      <div className="fixed top-0 pt-8 pb-4 bg-gray-100 z-10 w-full mb-8 flex justify-start items-center gap-2">
+      <Link href={`/dashboard/custom-recommendation`} className="fixed top-0 pt-8 pb-4 bg-gray-100 z-10 w-full mb-8 flex justify-start items-center gap-2">
         <ArrowBackIcon />
         <p className="font-medium leading-6 text-grey600">
           Back to Custom recommendation
         </p>
-      </div>
+      </Link>
 
       {/* HEADING */}
       <header className="mt-10 py-6 border-b">

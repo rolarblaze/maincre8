@@ -7,6 +7,7 @@ const CustomRecommendation = () => {
   return (
     <div className="space-y-12">
       <Button
+        link="/dashboard/custom-recommendation/form"
         label={
           <div className="flex justify-center items-center gap-2">
             <PlusIcon />
