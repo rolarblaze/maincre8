@@ -122,7 +122,9 @@ h4 {
   top: 50%;
   left: 100%;
   transform: translateY(-50%);
-  background-color: #101928;
+  /* background-color: #101928; */
+  background-color: #FFF;
+  border: 1px solid #F0F2F5;
   padding: 16px;
   width: 330px;
   border-radius: 8px;
@@ -142,7 +144,7 @@ h4 {
   height: 0;
   border-top: 15px solid transparent;
   border-bottom: 15px solid transparent;
-  border-right: 15px solid #101928;
+  border-right: 15px solid #FFF;
   transform: translateY(-50%);
   -webkit-transform: translateY(-50%);
   -moz-transform: translateY(-50%);

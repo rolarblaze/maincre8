@@ -3,6 +3,7 @@ export { default as SocialSignUp } from "./Auth/SocialSignUp";
 export { default as Tabs } from "./Auth/Tabs";
 export { default as Button } from "./Button";
 export { default as TabsToggle } from "./Dashboard/ServicesTab/TabToggle";
+export { default as CheckBoxField } from "./Forms/Checkbox";
 export { default as InputField } from "./Forms/InputField";
 export { default as DropdownSelect } from "./Forms/Select";
 export { default as Textarea } from "./Forms/Textarea";
@@ -40,6 +41,7 @@ export { default as BreadCrumb } from "./BreadCrumb";
 // UI COMPONENTS
 export { default as AvatarIcon } from "./UI/AvatarIcon";
 export { default as PillDiv } from "./UI/PillDiv";
+export { default as UploadFile } from "./UI/UploadFile";
 
 // SHOP PAGE SECTION IMPORTS
 export { default as ServicesSection } from "./Shop";
@@ -66,3 +68,4 @@ export { default as ServiceCard } from "./Dashboard/ServiceCard";
 export { default as Profile } from "./Dashboard/Profile";
 export { default as Security } from "./Dashboard/Security";
 export { default as Payment } from "./Dashboard/Payment";
+export { default as BusinessBriefForm } from "./Dashboard/BusinessBriefForm";

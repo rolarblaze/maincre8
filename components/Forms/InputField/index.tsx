@@ -4,7 +4,7 @@ import React, { ChangeEvent, KeyboardEvent, ReactNode, useState } from "react";
 
 interface InputFieldProps {
   label?: string;
-  type: "text" | "password" | "email" | "number";
+  type: "text" | "password" | "email" | "number" | "url";
   placeholder?: string;
   value?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
@@ -18,7 +18,7 @@ interface InputFieldProps {
   classNames?: string;
   isRequired?: boolean;
   onInputIconClick?: () => void;
-  error?: string;
+  error?: string | boolean;
   name?: string;
   tooltipText?: string;
 }
@@ -58,7 +58,7 @@ const InputField: React.FC<InputFieldProps> = ({
     <div className="w-full flex flex-col gap-1 text-left">
       <div className="flex gap-2 items-center">
         {label && (
-          <label className="text-sm text-grey900">
+          <label className="text-sm text-grey900 font-medium">
             {label} {isRequired && <span className="text-primary400">*</span>}{" "}
           </label>
         )}
@@ -71,7 +71,7 @@ const InputField: React.FC<InputFieldProps> = ({
             <ToolTipIcon />
             {showTooltip && (
               <div className="tooltip">
-                <span className="tooltip-text text-grey300">{tooltipText}</span>
+                <span className="tooltip-text text-grey500 leading-[1.3125rem]">{tooltipText}</span>
                 <div className="tooltip-arrow"></div>
               </div>
             )}
