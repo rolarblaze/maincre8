@@ -4,6 +4,7 @@ import BarChart from "@/components/Dashboard/BarChart";
 import UpcomingAppointment from "@/components/Dashboard/UpcomingAppointment";
 import { BulbIcon } from "@/public/icons";
 import { getUserOrderHistory } from "@/redux/servicesTracker/features";
+import { fetchLatestAppointments } from "@/redux/order/features";
 import { getServices } from "@/redux/shop/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import Link from "next/link";
@@ -16,10 +17,12 @@ const Overview = () => {
   const { services, isLoading, error } = useAppSelector((state) => state.shop);
   const { orderHistory, loading } = useAppSelector((state) => state.services);
   const { isLoadingProfile, profile } = useAppSelector((state) => state.auth);
+  const { appointments, isApointmentLoading } = useAppSelector((state) => state.order);
 
   useEffect(() => {
     dispatch(getServices());
     dispatch(getUserOrderHistory());
+    dispatch(fetchLatestAppointments());
   }, [dispatch]);
 
   // Dummy data: waiting for api
@@ -188,16 +191,18 @@ const Overview = () => {
               Upcoming Appointments
             </h4>
             <div className="flex flex-col">
-              {upcomingAppointmentsData.map((app, idx) => {
-                return (
-                  <UpcomingAppointment
-                    key={idx}
-                    callType={app.callType}
-                    desc={app.desc}
-                    date={app.date}
-                  />
-                );
-              })}
+              {appointments?.map((app, idx) => (
+                <UpcomingAppointment
+                  key={idx}
+                  callType={app.event_name}
+                  desc={app.product_name}
+                  date={new Date(app.event_date).toLocaleDateString('en-US', {
+                    day: '2-digit',
+                    month: 'long',
+                    year: 'numeric',
+                  })}
+                />
+              ))}
             </div>
           </div>
         </div>

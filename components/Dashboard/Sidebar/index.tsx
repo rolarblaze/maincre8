@@ -43,7 +43,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
 
   return (
     <aside
-      className={`hidden max-w-[272px] w-full h-full overflow-y-auto md:flex flex-col justify-between px-2 border-r border-grey200 bg-white`}
+      className={`hidden max-w-[372px] w-full h-full overflow-y-auto md:flex flex-col justify-between px-2 border-r border-grey200 bg-white`}
     >
       {/* Upper section */}
       <section className="flex flex-col gap-3 ">
