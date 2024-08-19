@@ -38,11 +38,15 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
           height={240}
           className="w-full h-full object-cover"
         />
-        <div
-          className="absolute top-[8%] right-[-3%] bg-primary500 text-white text-sm font-semibold py-1 px-4 z-20"
-          style={{ backgroundColor: color }}
-        >
-          {category}
+        <div className="absolute top-[8%] right-[-3%] flex items-center z-20">
+          {/* Triangle */}
+          <div className="w-0 h-0 border-l-[14px] border-l-transparent border-y-[14px] border-y-primary500 border-r-[14px] border-r-primary500"></div>
+          {/* Label */}
+          <div
+            className={`text-white text-sm font-semibold py-1 pr-4 pl-6 bg-primary500 ${color}`}
+          >
+            {category}
+          </div>
         </div>
       </div>
       <div className="p-4">

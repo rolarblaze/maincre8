@@ -4,6 +4,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useAppSelector } from "@/redux/store";
 import { CancelIcon, LogoBlue, Logout } from "@/public/icons";
 import {
+  BulbIcon,
   CalendarIcon,
   HistoryIcon,
   MobileBlueLogo,
@@ -132,6 +133,33 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
                 }`}
               >
                 My Services
+              </span>
+            </div>
+          </Link>
+
+          {/* CUSTOM RECOMMENDATIONS */}
+          <Link href="/dashboard/custom-recommendation">
+            <div
+              className={`flex items-center gap-3 py-3 px-4 ${
+                isActive("/dashboard/custom-recommendation")
+                  ? "bg-primary50 rounded-sm text-primary600"
+                  : ""
+              }`}
+              onClick={() => setActiveTab("Services")}
+            >
+              <BulbIcon
+                fillColor={
+                  isActive("/dashboard/my-services") ? "#136AD0" : "#667185"
+                }
+              />
+              <span
+                className={`text-sm ${
+                  isActive("/dashboard/custom-recommendation")
+                    ? "text-primary600 text-medium"
+                    : "grey700"
+                }`}
+              >
+                Custom Recommendation
               </span>
             </div>
           </Link>

@@ -7,8 +7,9 @@ import { Tab } from "./types";
 import { useAppSelector } from "@/redux/store";
 import UserImage from "@/public/images/user-image.svg";
 import ArrowUp from "@/public/icons/arrow-up.svg";
-import { BulbIcon, CancelIcon, LogoBlue, Logout } from "@/public/icons";
+import { CancelIcon, LogoBlue, Logout } from "@/public/icons";
 import {
+  BulbIcon,
   CalendarIcon,
   HistoryIcon,
   MobileBlueLogo,
@@ -42,7 +43,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
 
   return (
     <aside
-      className={`hidden max-w-[272px] w-full h-full md:flex flex-col justify-between px-2 border-r border-grey200 bg-white`}
+      className={`hidden max-w-[272px] w-full h-full overflow-y-auto md:flex flex-col justify-between px-2 border-r border-grey200 bg-white`}
     >
       {/* Upper section */}
       <section className="flex flex-col gap-3 ">
@@ -50,7 +51,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
           <LogoBlue className="w-full h-full px-2 py-6" />
         </Link>
 
-        <nav className="flex flex-col gap-1  pb-4 border-b border-grey200">
+        <nav className="flex flex-col gap-1 pb-4 border-b border-grey200">
           <Link href="/dashboard">
             <div
               className={`flex items-center gap-3 py-3 px-4 ${
@@ -97,6 +98,32 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
                 }`}
               >
                 Services
+              </span>
+            </div>
+          </Link>
+
+          <Link href="/dashboard/my-services">
+            <div
+              className={`flex items-center gap-3 py-3 px-4 ${
+                isActive("/dashboard/my-services")
+                  ? "bg-primary50 rounded-sm text-primary600"
+                  : ""
+              }`}
+              onClick={() => setActiveTab("MyServices")}
+            >
+              <MyServicesIcon
+                fillColor={
+                  isActive("/dashboard/my-services") ? "#136AD0" : "#667185"
+                }
+              />
+              <span
+                className={`text-sm ${
+                  isActive("/dashboard/my-services")
+                    ? "text-primary600 text-medium"
+                    : "grey700"
+                }`}
+              >
+                My Services
               </span>
             </div>
           </Link>
@@ -299,8 +326,8 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
       </section>
 
       {/* Profile */}
-      <div className="flex items-center gap-5 py-5 px-6">
-        <div className="flex items-center gap-3">
+      <div className="flex gap-5 py-5 pl-3">
+        <div className="flex gap-3">
           <div className="w-10 h-10 rounded-full relative">
             {/* <Image
               src={UserImage}
