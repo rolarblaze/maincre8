@@ -4,6 +4,7 @@ const assetLibrary = {
   deliverSteps: "/optimised/deliver-steps.webp",
   seoImage: "/optimised/seo-image.webp",
   teamGroup: "/optimised/team-group.webp",
+  recomEmpty: "/optimised/empty-state.webp",
 
   // SVGS
   highlight: "/optimised/highlight.webp",
