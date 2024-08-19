@@ -1,5 +1,5 @@
 "use client";
-import { Button, FullLoader, Loader, ServiceCard } from "@/components";
+import { Button, FullLoader, Loader, ServiceCard, EmptyState } from "@/components";
 import BarChart from "@/components/Dashboard/BarChart";
 import UpcomingAppointment from "@/components/Dashboard/UpcomingAppointment";
 import { BulbIcon } from "@/public/icons";
@@ -25,24 +25,6 @@ const Overview = () => {
     dispatch(fetchLatestAppointments());
   }, [dispatch]);
 
-  // Dummy data: waiting for api
-  const upcomingAppointmentsData = [
-    {
-      callType: "Offboarding call",
-      desc: "Search Engine Optimisation Basic",
-      date: "29 July 2024",
-    },
-    {
-      callType: "Onboarding call",
-      desc: "Search Engine Optimisation Basic",
-      date: "29 July 2024",
-    },
-    {
-      callType: "Offboarding call",
-      desc: "Search Engine Optimisation Basic",
-      date: "29 July 2024",
-    },
-  ];
 
   // Dummy data, waiting for api
   const barChartData = {
@@ -96,7 +78,7 @@ const Overview = () => {
 
       <div
         className="ml-auto hidden md:flex gap-2 items-center w-fit border-none bg-primary500 text-white py-2 px-3 rounded-lg cursor-pointer mt-8"
-        onClick={() => router.replace("/dashboard/custom-recommendations")}
+        onClick={() => router.push("/dashboard/custom-recommendation")}
       >
         <BulbIcon />
         <span>Custom recommendations</span>

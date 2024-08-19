@@ -1,8 +1,22 @@
-import { Button } from "@/components";
+"use client"
+import { useEffect } from "react";
+import { Button, Loader, EmptyState } from "@/components";
 import { PlusIcon } from "@/public/svgs";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { fetchRecommendationHistory } from "@/redux/order/features";
+import assetLibrary from "@/library";
 
 const CustomRecommendation = () => {
-  const history = [1, 2, 3, 4];
+  const dispatch = useAppDispatch();
+  const { recommendationHistory, isLoading } = useAppSelector((state) => state.order);
+
+  useEffect(() => {
+    dispatch(fetchRecommendationHistory());
+  }, [dispatch]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className="space-y-12">
@@ -23,18 +37,32 @@ const CustomRecommendation = () => {
         </h3>
 
         <div className="space-y-4">
-          {history.map((item) => (
-            <div
-              key={item}
-              className="max-w-[28.3125rem] text-sm leading-6 flex justify-between items-center p-4 rounded-lg bg-grey100 text-grey800"
-            >
-              <p className="font-semibold">Requested service recommendation</p>
-              <p>20th July 2024</p>
-            </div>
-          ))}
+          {recommendationHistory && recommendationHistory.length > 0 ? (
+            recommendationHistory.map((item) => (
+              <div
+                key={item.id}
+                className="max-w-[28.3125rem] text-sm leading-6 flex justify-between items-center p-4 rounded-lg bg-grey100 text-grey800"
+              >
+                <p className="font-semibold">{item.preferred_solutions}</p>
+                <p>{new Date(item.created_at).toLocaleDateString('en-US', {
+                  day: 'numeric',
+                  month: 'long',
+                  year: 'numeric'
+                })}</p>
+              </div>
+            ))
+          ) : (
+            <EmptyState
+              imgSrc={assetLibrary.recomEmpty}
+              text="No recommendations found"
+              link="Get a new recommendation"
+              to="/dashboard/custom-recommendation/form"
+            />
+          )}
         </div>
       </div>
     </div>
   );
 };
+
 export default CustomRecommendation;
