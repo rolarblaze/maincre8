@@ -8,8 +8,15 @@ import {
   UploadFile,
 } from "@/components";
 import {
+  budgetProjectionOptions,
+  companySizeOptions,
+  customerPersonaOptions,
+  digitalSolutionOptions,
+  genderOptions,
   INITIAL_VALUES,
   optionHolder,
+  typeOfIndustryOptions,
+  updateOptions,
   USEFUL_DIGITAL_SERVICES,
 } from "./constants";
 import { validationSchema } from "./schema";
@@ -67,7 +74,7 @@ const BusinessBriefForm = () => {
             name="industry"
             label="Type of Industry"
             placeholder="Select type"
-            options={optionHolder}
+            options={typeOfIndustryOptions}
             value={values.industry}
             onChange={handleChange}
           />
@@ -78,7 +85,7 @@ const BusinessBriefForm = () => {
             name="companySize"
             label="Company Size"
             placeholder="Number of employees"
-            options={optionHolder}
+            options={companySizeOptions}
             value={values.companySize}
             onChange={handleChange}
           />
@@ -164,7 +171,7 @@ const BusinessBriefForm = () => {
             name="digitalSolution"
             label="Have you previously implemented any digital solutions?"
             placeholder="Select Type"
-            options={optionHolder}
+            options={digitalSolutionOptions}
             value={values.digitalSolution}
             onChange={handleChange}
           />
@@ -223,7 +230,7 @@ const BusinessBriefForm = () => {
             name="gender"
             label="Gender"
             placeholder="Select Gender"
-            options={optionHolder}
+            options={genderOptions}
             value={values.gender || undefined}
             onChange={handleChange}
           />
@@ -260,7 +267,7 @@ const BusinessBriefForm = () => {
             name="customerPersonas"
             label="Do you have existing customer personas?"
             placeholder="Yes/No"
-            options={optionHolder}
+            options={customerPersonaOptions}
             value={values.customerPersonas || undefined}
             onChange={handleChange}
           />
@@ -283,7 +290,7 @@ const BusinessBriefForm = () => {
       {/* DESIRED OUTCOMES */}
       <div className="space-y-6">
         <legend className="text-lg font-semibold text-grey900 leading-6">
-          Target Audience
+          Desired Outcomes
         </legend>
 
         <div className="space-y-6">
@@ -319,6 +326,17 @@ const BusinessBriefForm = () => {
             onChange={handleChange}
             onBlur={handleBlur}
           />
+          <div>
+            <DropdownSelect
+              id="budget"
+              name="budget"
+              label="What is your budget projection for this solution?"//..................................
+              placeholder="Choose Range"
+              options={budgetProjectionOptions}
+              value={values.budget || undefined}
+              onChange={handleChange}
+            />
+          </div>
         </div>
       </div>
 
@@ -451,7 +469,7 @@ const BusinessBriefForm = () => {
             name="industry"
             label="Would you like to receive updates and newsletters from us?"
             placeholder="Yes/No"
-            options={optionHolder}
+            options={updateOptions}
             value={values.receiveUpdates || undefined}
             onChange={handleChange}
           />
