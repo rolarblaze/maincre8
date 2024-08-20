@@ -21,7 +21,7 @@ import {
 interface InitialState {
   trackingDetails: TrackingDetails | null;
   orderHistory: OrderHistoryResponse[] | null;
-  uploadResponse: SubmitBriefForPackage | null;
+  uploadBrief: SubmitBriefForPackage | null;
   downloadBrief: DownloadSubmittedTransactionBrief | null;
   discoveryCall: BookDiscoveryCall | null;
   calendlyDetails: CalendlyDetails | null;
@@ -33,7 +33,7 @@ interface InitialState {
 const initialState: InitialState = {
   trackingDetails: null,
   orderHistory: null,
-  uploadResponse: null,
+  uploadBrief: null,
   downloadBrief: null,
   discoveryCall: null,
   calendlyDetails: null,
@@ -83,7 +83,7 @@ export const servicesSlice = createSlice({
       })
       .addCase(submitBriefForTracking.fulfilled, (state, { payload }) => {
         state.loading = false;
-        state.uploadResponse = payload;
+        state.uploadBrief = payload;
       })
       .addCase(submitBriefForTracking.rejected, (state, { payload }) => {
         state.loading = false;

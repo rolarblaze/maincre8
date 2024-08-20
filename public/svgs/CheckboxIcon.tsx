@@ -5,12 +5,14 @@ interface CheckboxIconProps {
   fillColor: string;
   className?: string;
   unchecked?: boolean;
+  disabled?: boolean;
 }
 
 const CheckboxIcon: React.FC<CheckboxIconProps> = ({
   fillColor,
   className,
   unchecked = false,
+  disabled = false,
 }) => {
   const [isChecked, setIsChecked] = useState(!unchecked);
 
@@ -19,11 +21,16 @@ const CheckboxIcon: React.FC<CheckboxIconProps> = ({
   }, [unchecked]);
 
   const toggleCheckbox = () => {
-    setIsChecked((prev) => !prev);
+    if (!disabled) {
+      setIsChecked((prev) => !prev);
+    }
   };
 
   return (
-    <div onClick={toggleCheckbox} style={{ cursor: "pointer" }}>
+    <div
+      onClick={toggleCheckbox}
+      style={{ cursor: disabled ? "not-allowed" : "pointer" }}
+    >
       <svg
         width="20"
         height="21"

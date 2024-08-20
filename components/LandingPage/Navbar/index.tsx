@@ -8,11 +8,10 @@ import { useNavScrollAnimation } from "@/hooks";
 import { BigCancelIcon, HamburgerIcon } from "@/public/svgs";
 import SolutionsMenu from "./SolutionsMenu";
 import ResourcesMenu from "./ResourcesMenu";
-import { Arrow, ArrowDown, Logo} from "@/public/icons";
+import { Arrow, ArrowDown, Logo } from "@/public/icons";
 import { Url } from "next/dist/shared/lib/router/router";
 import MobileSolutionsMenu from "./MobileSolutionsMenu";
 import MobileResourcesMenu from "./MobileResourcesMenu";
-
 
 const Navbar: React.FC = () => {
   const [showSolutions, setShowSolutions] = useState(false);
@@ -24,7 +23,10 @@ const Navbar: React.FC = () => {
 
   const pathname = usePathname();
   const isHome =
-    pathname === "/" || pathname === "/about-us" || pathname === "/services" || pathname === "/watch-demo";
+    pathname === "/" ||
+    pathname === "/about-us" ||
+    pathname === "/services" ||
+    pathname === "/watch-demo";
 
   const mobileNavData = [
     {
@@ -133,7 +135,7 @@ const Navbar: React.FC = () => {
           </div>
         </section>
         {/* Desktop Buttons */}
-        <div className="hidden lg:flex items-center gap-6">
+        {/* <div className="hidden lg:flex items-center gap-6">
           <Link
             href="/login"
             className={`${
@@ -151,7 +153,7 @@ const Navbar: React.FC = () => {
               isHome && !navColor && "bg-white text-primary900"
             }`}
           />
-        </div>
+        </div> */}
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="absolute top-0 left-0 w-full bg-white shadow-md transition-transform transform translate-y-0 flex flex-col gap-3 h-screen overflow-y-auto">
@@ -199,7 +201,9 @@ const Navbar: React.FC = () => {
                             />
                           ) : (
                             <div className="flex gap-3">
-                              <span className="font-semibold text-grey900 text-sm">Solutions</span>
+                              <span className="font-semibold text-grey900 text-sm">
+                                Solutions
+                              </span>
                               <button
                                 className="w-fit h-fit cursor-pointer self-center"
                                 onClick={toggleMobileSolutionsMenu}
@@ -225,7 +229,9 @@ const Navbar: React.FC = () => {
                             />
                           ) : (
                             <div className="flex gap-3">
-                              <span className="font-semibold text-grey900 text-sm">Resources</span>
+                              <span className="font-semibold text-grey900 text-sm">
+                                Resources
+                              </span>
                               <button
                                 className="w-fit h-fit cursor-pointer self-center"
                                 onClick={toggleMobileResourcesMenu}
@@ -242,7 +248,7 @@ const Navbar: React.FC = () => {
               </div>
 
               {/* Nav Buttons */}
-              <div className="flex flex-col gap-4">
+              {/* <div className="flex flex-col gap-4">
                 <Link
                   href="/login"
                   className={`py-[9.5px] rounded-lg text-center border border-primary500 text-primary500 font-semibold          
@@ -256,7 +262,7 @@ const Navbar: React.FC = () => {
                   link="/signup"
                   classNames={`px-4 py-[9.5px] text-sm font-medium md:text-sm bg-primary500`}
                 />
-              </div>
+              </div> */}
             </div>
           </div>
         )}
