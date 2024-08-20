@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import Modal from "../Modals/CustomModal";
 import {
   FileUploadIcon,
@@ -12,6 +12,7 @@ import ModalTrashIcon from "@/public/svgs/ModalThrash";
 interface FileUploadModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onUpload: (file: File) => void;
   status: "idle" | "error" | "progress" | "success";
   progress?: number;
   fileName?: string;
@@ -20,13 +21,14 @@ interface FileUploadModalProps {
 const FileUploadModal: React.FC<FileUploadModalProps> = ({
   isOpen,
   onClose,
+  onUpload,
   status,
   progress,
   fileName,
 }) => {
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
-      {status === "idle" && <FileUploadContent />}
+      {status === "idle" && <FileUploadContent onUpload={onUpload} />}
       {status === "error" && <ErrorMessage />}
       {status === "progress" && (
         <ProgressMessage progress={progress} fileName={fileName} />
@@ -36,26 +38,54 @@ const FileUploadModal: React.FC<FileUploadModalProps> = ({
   );
 };
 
-const FileUploadContent = () => (
-  <div className="flex flex-col items-center gap-4 rounded-2xl border border-grey300 border-dashed py-7 px-6 max-w-[400px]">
-    <FileUploadIcon />
-    <div>
-      <p className="flex gap-1 text-sm justify-center">
-        <span className="text-primary500">Click to upload</span>
-        <span className="text-grey600">or drag and drop</span>
-      </p>
-      <p className="text-grey400 text-xs text-center">PDF OR DOCX (max. 5MB)</p>
+interface FileUploadContentProps {
+  onUpload: (file: File) => void;
+}
+
+const FileUploadContent: React.FC<FileUploadContentProps> = ({ onUpload }) => {
+  const fileInputRef = useRef<HTMLInputElement>(null);
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+      const file = event.target.files[0];
+      onUpload(file);
+    }
+  };
+
+  const handleClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  return (
+    <div className="flex flex-col items-center gap-4 rounded-2xl border border-grey300 border-dashed py-7 px-6 max-w-[400px]">
+      <FileUploadIcon />
+      <div onClick={handleClick} className="cursor-pointer">
+        <p className="flex gap-1 text-sm justify-center">
+          <span className="text-primary500">Click to upload</span>
+          <span className="text-grey600">or drag and drop</span>
+        </p>
+        <p className="text-grey400 text-xs text-center">
+          PDF OR DOCX (max. 5MB)
+        </p>
+      </div>
+      <input
+        type="file"
+        accept=".pdf,.doc,.docx"
+        className="hidden"
+        ref={fileInputRef}
+        onChange={handleFileChange}
+      />
+      <button
+        className="text-white bg-[#EB5017] rounded-md px-4 py-2"
+        onClick={handleClick}
+      >
+        Browse Files
+      </button>
     </div>
-    <div className="flex gap-2 w-full justify-center">
-      <hr className="border-t-[1.5px] border-grey100 w-1/2 self-center" />
-      <p className="text-grey400 text-xs">OR</p>
-      <hr className="border-t-[1.5px] border-grey100 w-1/2  self-center" />
-    </div>
-    <button className="text-white bg-customOrange rounded-md px-4 py-2">
-      Browse Files
-    </button>
-  </div>
-);
+  );
+};
 
 const ErrorMessage = () => (
   <div className="flex flex-col items-center gap-4 rounded-2xl border border-errorRed border-dashed py-12 px-6 max-w-[400px]">
