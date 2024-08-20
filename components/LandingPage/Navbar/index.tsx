@@ -1,24 +1,59 @@
 "use client";
-import { useEffect, useState } from "react";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
+import { twMerge } from "tailwind-merge";
+import Button from "@/components/Button";
+import { useNavScrollAnimation } from "@/hooks";
+import { BigCancelIcon, HamburgerIcon } from "@/public/svgs";
 import SolutionsMenu from "./SolutionsMenu";
 import ResourcesMenu from "./ResourcesMenu";
-import Button from "@/components/Button";
-import Logo from "@/public/icons/logo.svg";
-import Arrow from "@/public/icons/arrow-down.svg";
-import { m } from "framer-motion";
-import { twMerge } from "tailwind-merge";
+import { Arrow, ArrowDown, Logo } from "@/public/icons";
+import { Url } from "next/dist/shared/lib/router/router";
+import MobileSolutionsMenu from "./MobileSolutionsMenu";
+import MobileResourcesMenu from "./MobileResourcesMenu";
 
 const Navbar: React.FC = () => {
   const [showSolutions, setShowSolutions] = useState(false);
   const [showResources, setShowResources] = useState(false);
-
-  const [navColor, setNavColor] = useState(false);
-  const [navScroll, setNavScroll] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [navColor, navScroll] = useNavScrollAnimation();
+  const [showMobileSolutions, setShowMobileSolutions] = useState(false);
+  const [showMobileResources, setShowMobileResources] = useState(false);
 
   const pathname = usePathname();
-  const isHome = pathname === "/";
+  const isHome =
+    pathname === "/" ||
+    pathname === "/about-us" ||
+    pathname === "/services" ||
+    pathname === "/watch-demo";
+
+  const mobileNavData = [
+    {
+      name: "Home",
+      href: "/",
+    },
+    {
+      name: "About Us",
+      href: "/about-us",
+    },
+    {
+      name: "How It Works",
+      href: "/services",
+    },
+    {
+      name: "Solutions",
+      href: "",
+    },
+    {
+      name: "Contact Us",
+      href: "/",
+    },
+    {
+      name: "Resources",
+      href: "",
+    },
+  ];
 
   const toggleSolutionsMenu = () => {
     setShowSolutions(!showSolutions);
@@ -38,25 +73,19 @@ const Navbar: React.FC = () => {
     setShowResources(false);
   };
 
-  // HANDLE NAVBAR SCROLL ANIMATION
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen);
+  };
 
-    window.addEventListener("scroll", () => {
-      if (lastScrollY < window.scrollY) {
-        setNavScroll(true);
-      } else {
-        setNavScroll(false);
-      }
-      lastScrollY = window.scrollY;
+  const toggleMobileSolutionsMenu = () => {
+    setShowMobileSolutions(!showSolutions);
+    if (showMobileResources) setShowMobileResources(false); // Close resources menu if it's open
+  };
 
-      if (window.scrollY >= 140) {
-        setNavColor(true);
-      } else {
-        setNavColor(false);
-      }
-    });
-  }, [navScroll, navColor]);
+  const toggleMobileResourcesMenu = () => {
+    setShowMobileResources(!showResources);
+    if (showMobileSolutions) setShowMobileSolutions(false); // Close solutions menu if it's open
+  };
 
   return (
     <header
@@ -65,28 +94,30 @@ const Navbar: React.FC = () => {
         ${
           navScroll ? "-translate-y-28 opacity-0" : "translate-x-0 opacity-100"
         } 
-        fixed top-0 w-full z-50 ${
-          isHome ? "bg-transparent " : "bg-white"
-        } border-b border-transparent z-50  transition-all ease-in-out duration-500
+        ${isHome ? "bg-transparent " : "bg-white"}
+        fixed top-0 w-full border-b border-transparent z-50  transition-all ease-in-out duration-500 border-box
       `}
     >
       <nav
-        className={`mx-auto py-3 flex items-center justify-between max-w-[76rem] max-xl:px-4 md:py-6 relative`}
+        className={`mx-auto py-6 flex items-center justify-between max-w-[76rem] max-xl:px-4 relative`}
       >
         <Link href="/" className="text-2xl font-bold">
-          <Logo className={isHome && !navColor && "*:fill-white"} />
+          <Logo
+            className={
+              isHome && !navColor ? "*:fill-white" : "*:fill-primary500"
+            }
+          />
         </Link>
-
-        {/* the solution and resources weight and size were different */}
-
+        {/* DESKTOP NAVIGATION */}
         <section
           className={twMerge(
-            `flex items-center text-grey900 gap-6 span  font-semibold`,
+            `text-grey900 font-semibold flex items-center gap-6 max-lg:hidden`,
             `${isHome && !navColor && "text-white"}`
           )}
         >
           <Link href={"/"}>Home</Link>
-          <Link href={"/"}>About Us</Link>
+          <Link href={"/about-us"}>About Us</Link>
+          <Link href={"/services"}>How it works</Link>
           <div
             className="flex items-center gap-2 cursor-pointer "
             onClick={toggleSolutionsMenu}
@@ -103,8 +134,8 @@ const Navbar: React.FC = () => {
             <Arrow className={isHome && !navColor && "*:fill-white"} />
           </div>
         </section>
-
-        {/* <div className="flex items-center gap-6">
+        {/* Desktop Buttons */}
+        {/* <div className="hidden lg:flex items-center gap-6">
           <Link
             href="/login"
             className={`${
@@ -123,7 +154,118 @@ const Navbar: React.FC = () => {
             }`}
           />
         </div> */}
+        {/* Mobile Menu */}
+        {mobileMenuOpen && (
+          <div className="absolute top-0 left-0 w-full bg-white shadow-md transition-transform transform translate-y-0 flex flex-col gap-3 h-screen overflow-y-auto">
+            {/* Mobile Nav header */}
+            <div className="flex justify-between w-full py-4 pl-5 pr-3 border-b border-grey300">
+              <Link href="/" className="text-2xl font-bold">
+                <Logo className="*:fill-primary500 w-full h-full" />
+              </Link>
+              <button
+                className="w-fit h-fit cursor-pointer"
+                onClick={toggleMobileMenu}
+              >
+                <BigCancelIcon />
+              </button>
+            </div>
 
+            {/* Mobile nav body */}
+            <div className="flex flex-col p-4 gap-4">
+              {/* Mobile navigations */}
+              <div className="flex flex-col gap-7 text-grey25">
+                {mobileNavData.map((nav, navIdx) => {
+                  return (
+                    <div key={navIdx}>
+                      {nav.name !== "Solutions" && nav.name !== "Resources" && (
+                        <Link
+                          href={nav.href as Url}
+                          className="font-semibold text-grey900 text-sm"
+                          onClick={toggleMobileMenu}
+                        >
+                          {nav.name}
+                        </Link>
+                      )}
+
+                      {/* Solutions Menu */}
+                      {nav.name === "Solutions" && (
+                        <div>
+                          {showMobileSolutions ? (
+                            <MobileSolutionsMenu
+                              onClick={() => setShowMobileSolutions(false)}
+                              className={`${
+                                showMobileSolutions
+                                  ? "animate-fadeInDown"
+                                  : "animate-fadeOutUp"
+                              }`}
+                            />
+                          ) : (
+                            <div className="flex gap-3">
+                              <span className="font-semibold text-grey900 text-sm">
+                                Solutions
+                              </span>
+                              <button
+                                className="w-fit h-fit cursor-pointer self-center"
+                                onClick={toggleMobileSolutionsMenu}
+                              >
+                                <ArrowDown />
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      )}
+
+                      {/* Resources menu */}
+                      {nav.name === "Resources" && (
+                        <div>
+                          {showMobileResources ? (
+                            <MobileResourcesMenu
+                              onClick={() => setShowMobileResources(false)}
+                              className={`${
+                                showMobileResources
+                                  ? "animate-fadeInDown"
+                                  : "animate-fadeOutUp"
+                              }`}
+                            />
+                          ) : (
+                            <div className="flex gap-3">
+                              <span className="font-semibold text-grey900 text-sm">
+                                Resources
+                              </span>
+                              <button
+                                className="w-fit h-fit cursor-pointer self-center"
+                                onClick={toggleMobileResourcesMenu}
+                              >
+                                <ArrowDown />
+                              </button>
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+
+              {/* Nav Buttons */}
+              {/* <div className="flex flex-col gap-4">
+                <Link
+                  href="/login"
+                  className={`py-[9.5px] rounded-lg text-center border border-primary500 text-primary500 font-semibold          
+                  `}
+                  onClick={toggleMobileMenu}
+                >
+                  Login
+                </Link>
+                <Button
+                  label="Sign Up"
+                  link="/signup"
+                  classNames={`px-4 py-[9.5px] text-sm font-medium md:text-sm bg-primary500`}
+                />
+              </div> */}
+            </div>
+          </div>
+        )}
         {showSolutions && (
           <SolutionsMenu
             isVisible={showSolutions}
@@ -136,6 +278,14 @@ const Navbar: React.FC = () => {
             onClose={closeResourcesMenu}
           />
         )}
+
+        {/* MOBILE HAMBURGER */}
+        <button
+          className="md:hidden w-fit h-fit cursor-pointer"
+          onClick={toggleMobileMenu}
+        >
+          <HamburgerIcon />
+        </button>
       </nav>
     </header>
   );

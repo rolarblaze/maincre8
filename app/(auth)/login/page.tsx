@@ -1,22 +1,20 @@
 "use client";
-import { Fragment, useState } from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { useRouter } from "next/navigation";
-import { useDispatch } from "react-redux";
-import {
-  passwordCriteria,
-  validatePassword,
-} from "@/utils/helpers/auth/passwordValidation";
-import Link from "next/link";
-import { InputField, Button, SocialSignUp } from "@/components";
-import { EyeIcon, Checked, Unchecked } from "@/public/icons";
-import { loginUser } from "@/redux/auth/features";
+import { Button, InputField, SocialSignUp } from "@/components";
+import { Checked, EyeIcon, Unchecked } from "@/public/icons";
 import { addAlert } from "@/redux/alerts";
+import { loginUser } from "@/redux/auth/features";
 import { AppDispatch, useAppDispatch, useAppSelector } from "@/redux/store";
+import { validatePassword } from "@/utils/helpers/auth/passwordValidation";
+import { useFormik } from "formik";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Fragment, useState } from "react";
+import * as Yup from "yup";
 
 const LoginSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Email address is required"),
+  email: Yup.string()
+    .email("Invalid email")
+    .required("Email address is required"),
   password: Yup.string().required("Password is required"),
 });
 
@@ -38,7 +36,6 @@ export default function Login() {
     },
   });
 
-
   // Toggle password visibility
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -50,9 +47,13 @@ export default function Login() {
     setRememberMe(!rememberMe);
   };
 
-
-  const handleLogin = async (payload: { email: string; password: string }, dispatch: AppDispatch) => {
+  const handleLogin = async (
+    payload: { email: string; password: string },
+    dispatch: AppDispatch
+  ) => {
     const actionResult = await dispatch(loginUser(payload));
+
+    console.log(actionResult);
 
     if (loginUser.fulfilled.match(actionResult)) {
       dispatch(
@@ -63,10 +64,13 @@ export default function Login() {
           type: "success",
         })
       );
-      // router.push("/dashboard"); // Redirect to dashboard 
+      router.push("/dashboard");
     } else if (loginUser.rejected.match(actionResult)) {
       if (actionResult.error) {
-        const errorMessage = actionResult.error?.message || "An error occurred during login. Please try again.";
+        console.log(actionResult.error.message);
+        const errorMessage =
+          actionResult.error?.message ||
+          "An error occurred during login. Please try again.";
         dispatch(
           addAlert({
             id: "",
@@ -93,7 +97,11 @@ export default function Login() {
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
             name="email"
-            error={formik.touched.email && formik.errors.email ? formik.errors.email : ""}
+            error={
+              formik.touched.email && formik.errors.email
+                ? formik.errors.email
+                : ""
+            }
             classNames="mb-6"
           />
 
@@ -107,7 +115,11 @@ export default function Login() {
             name="password"
             icon={<EyeIcon className="w-5 h-5" />}
             onInputIconClick={togglePasswordVisibility}
-            error={formik.touched.password && formik.errors.password ? formik.errors.password : ""}
+            error={
+              formik.touched.password && formik.errors.password
+                ? formik.errors.password
+                : ""
+            }
             classNames="mb-2"
           />
 
@@ -136,7 +148,7 @@ export default function Login() {
           <Button
             label="Login"
             isLoading={isLoading}
-             type="submit"
+            type="submit"
             classNames="mt-4"
           />
         </form>

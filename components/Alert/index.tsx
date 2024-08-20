@@ -2,8 +2,8 @@
 import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { removeAlert } from "@/redux/alerts/index";
-import Tick from "@/public/svgs/TickIcon";
-import Close from "@/public/icons/multiply.svg";
+import { Tick } from "@/public/svgs";
+import { Close } from "@/public/icons";
 
 interface AlertProps {
   id: string;
@@ -49,7 +49,7 @@ const Alert: React.FC<AlertProps> = ({
 
   return (
     <div
-      className={`max-w-96 w-full h-auto  mb-4 ${alertStyles[type]} flex items-start justify-between  rounded z-[10000]`}
+      className={`max-w-96 w-full h-auto mb-4 ${alertStyles[type]} flex items-start justify-between rounded z-50`}
     >
       <div className="w-full  flex items-start gap-3 border-r border-grey100 py-3 px-4">
         <div>
@@ -60,7 +60,7 @@ const Alert: React.FC<AlertProps> = ({
           <p className="text-grey600">{subText}</p>
         </div>
       </div>
-      <button onClick={handleClose} className="pl-4 ">
+      <button onClick={handleClose} className="pl-4 pt-2 pr-2 ">
         <Close />
       </button>
     </div>

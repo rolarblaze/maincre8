@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { GlobalProvider } from "@/redux/provider";
-import AlertWrapper from "@/components/AlertWrapper";
 import { useAppSelector } from "@/redux/store";
 import { RootState } from "@/redux/store";
+import NextTopLoader from "nextjs-toploader";
+import { AlertWrapper } from "@/components";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,13 +19,12 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-
   return (
     <html lang="en" className="scroll-smooth antialiased">
       <body className={inter.className}>
         <GlobalProvider>
           <AlertWrapper />
-
+          <NextTopLoader />
           {children}
         </GlobalProvider>
       </body>

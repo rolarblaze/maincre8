@@ -3,9 +3,8 @@ import {
   HomepageCTA,
   HomepageSubscribe,
   SearchFilterSection,
-  ServicesSection,
+  ShopSections,
 } from "@/components";
-import ShopSections from "@/components/Shop";
 
 const Shop = () => {
   return (

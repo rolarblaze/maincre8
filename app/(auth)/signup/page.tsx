@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { Fragment, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -14,36 +14,37 @@ import {
   passwordCriteria,
 } from "@/utils/helpers/auth/passwordValidation";
 import { useRouter } from "next/navigation";
-
-
+// import { type } from '../../../.history/components/LandingPage/AboutUs/Team/teamData_20240723003307';
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string().test(
-    'required-first-name',
-    'First name is required',
+    "required-first-name",
+    "First name is required",
     function (value) {
       const { isBusiness } = this.parent;
       return isBusiness ? true : !!value;
     }
   ),
   lastName: Yup.string().test(
-    'required-last-name',
-    'Last name is required',
+    "required-last-name",
+    "Last name is required",
     function (value) {
       const { isBusiness } = this.parent;
       return isBusiness ? true : !!value;
     }
   ),
   businessName: Yup.string().test(
-    'required-business-name',
-    'Business name is required',
+    "required-business-name",
+    "Business name is required",
     function (value) {
       const { isBusiness } = this.parent;
       return isBusiness ? !!value : true;
     }
   ),
-  email: Yup.string().email('Invalid email').required('Email address is required'),
-  password: Yup.string().required('Password is required'),
+  email: Yup.string()
+    .email("Invalid email")
+    .required("Email address is required"),
+  password: Yup.string().required("Password is required"),
 });
 
 export default function Signup() {
@@ -76,27 +77,40 @@ export default function Signup() {
   };
 
   // Signup function
-  const handleSignUp = async (payload: SignUpFormValues, dispatch: AppDispatch) => {
-    const action = activeTab === "individual" ? signUpIndividual : signUpBusiness;
+  const handleSignUp = async (
+    payload: SignUpFormValues,
+    dispatch: AppDispatch
+  ) => {
+    const action =
+      activeTab === "individual" ? signUpIndividual : signUpBusiness;
     const actionResult = await dispatch(action(payload));
 
-    if (signUpIndividual.fulfilled.match(actionResult) || signUpBusiness.fulfilled.match(actionResult)) {
+    if (
+      signUpIndividual.fulfilled.match(actionResult) ||
+      signUpBusiness.fulfilled.match(actionResult)
+    ) {
       const { data } = actionResult.payload;
       sessionStorage.setItem("userEmail", payload.email); // Store email in session storage
       dispatch(
         addAlert({
           id: "",
           headText: "Success",
-          subText: activeTab === "individual"
-            ? "Successfully registered as an individual. Please check your email for verification."
-            : "Successfully registered as a business. Please check your email for verification.",
+          subText:
+            activeTab === "individual"
+              ? "Successfully registered as an individual. Please check your email for verification."
+              : "Successfully registered as a business. Please check your email for verification.",
           type: "success",
         })
       );
       router.push("/email-verify");
-    } else if (signUpIndividual.rejected.match(actionResult) || signUpBusiness.rejected.match(actionResult)) {
+    } else if (
+      signUpIndividual.rejected.match(actionResult) ||
+      signUpBusiness.rejected.match(actionResult)
+    ) {
       if (actionResult.error) {
-        const errorMessage = actionResult.error?.message || "An error occurred during registration. Please try again.";
+        const errorMessage =
+          actionResult.error?.message ||
+          "An error occurred during registration. Please try again.";
         dispatch(
           addAlert({
             id: "",
@@ -114,7 +128,10 @@ export default function Signup() {
       <h3>Create your account</h3>
       <section className="w-full flex flex-col gap-4 border border-grey200 rounded-lg p-5 md:gap-8 md:p-10">
         <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
-        <form className="w-full flex flex-col gap-8" onSubmit={formik.handleSubmit}>
+        <form
+          className="w-full flex flex-col gap-8"
+          onSubmit={formik.handleSubmit}
+        >
           <section className="flex flex-col gap-4 md:gap-6">
             {activeTab === "individual" && (
               <div className="flex items-center gap-2">
@@ -126,7 +143,11 @@ export default function Signup() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   name="firstName"
-                  error={formik.touched.firstName && formik.errors.firstName ? formik.errors.firstName : ""}
+                  error={
+                    formik.touched.firstName && formik.errors.firstName
+                      ? formik.errors.firstName
+                      : ""
+                  }
                 />
                 <InputField
                   label="Last name"
@@ -136,7 +157,11 @@ export default function Signup() {
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                   name="lastName"
-                  error={formik.touched.lastName && formik.errors.lastName ? formik.errors.lastName : ""}
+                  error={
+                    formik.touched.lastName && formik.errors.lastName
+                      ? formik.errors.lastName
+                      : ""
+                  }
                 />
               </div>
             )}
@@ -149,7 +174,11 @@ export default function Signup() {
                 onChange={formik.handleChange}
                 onBlur={formik.handleBlur}
                 name="businessName"
-                error={formik.touched.businessName && formik.errors.businessName ? formik.errors.businessName : ""}
+                error={
+                  formik.touched.businessName && formik.errors.businessName
+                    ? formik.errors.businessName
+                    : ""
+                }
               />
             )}
             <InputField
@@ -160,7 +189,11 @@ export default function Signup() {
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               name="email"
-              error={formik.touched.email && formik.errors.email ? formik.errors.email : ""}
+              error={
+                formik.touched.email && formik.errors.email
+                  ? formik.errors.email
+                  : ""
+              }
             />
             <div className="flex flex-col gap-4">
               <InputField
@@ -173,7 +206,11 @@ export default function Signup() {
                 name="password"
                 icon={<EyeIcon className="w-5 h-5" />}
                 onInputIconClick={togglePasswordVisibility}
-                error={formik.touched.password && formik.errors.password ? formik.errors.password : ""}
+                error={
+                  formik.touched.password && formik.errors.password
+                    ? formik.errors.password
+                    : ""
+                }
               />
               <div className="grid grid-cols-2 gap-2">
                 {passwordCriteria.map((criterion, index) => (
@@ -182,7 +219,9 @@ export default function Signup() {
                     className="flex items-center gap-2 py-1 px-2 rounded-full border border-grey300 text-xs  text-grey500 font-medium"
                   >
                     <div className="transition-transform duration-500 ease-in-out">
-                      {passwordValidation.some((v) => v.label === criterion.label && v.isValid) ? (
+                      {passwordValidation.some(
+                        (v) => v.label === criterion.label && v.isValid
+                      ) ? (
                         <Checked className="w-5 h-5" />
                       ) : (
                         <Unchecked className="w-5 h-5" />
@@ -197,6 +236,7 @@ export default function Signup() {
           <Button
             label="Create account"
             isLoading={isLoading}
+            type="submit"
             classNames="mt-4"
           />
         </form>

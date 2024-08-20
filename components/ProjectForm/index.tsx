@@ -128,7 +128,7 @@ const ProjectForms = () => {
       onSubmit={handleSubmit}
     >
       <div className="flex flex-col gap-6">
-        <div className="flex gap-8">
+        <div className="flex max-lg:flex-col gap-8">
           <InputField
             type="text"
             label="First name"
@@ -168,7 +168,7 @@ const ProjectForms = () => {
 
         {/* Select field for type of enquiry */}
         <DropdownSelect
-          label="Type of Enquiry"
+          label="Type of Industry"
           options={INDUSTRY}
           value={industry}
           onChange={handleIndustryChange}
@@ -244,10 +244,10 @@ const ProjectForms = () => {
         </div>
       </div>
 
-      <div className="flex gap-4.5 items-end">
+      <div className="flex max-md:flex-col gap-4.5 items-end max-md:items-center ">
         <Button
-          label="Get Started"
-          classNames="py-2 px-4 w-fit"
+          label="Submit brief"
+          classNames="py-2 px-4 max-md:py-4 lg:w-fit"
           type="submit"
           isLoading={isSubmitting}
         />

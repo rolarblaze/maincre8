@@ -11,16 +11,16 @@ const FAQ = () => {
   };
 
   return (
-    <section className="mx-auto w-full flex flex-col items-center gap-8 bg-white z-20">
+    <section className="mx-auto max-xl:px-5 w-full flex flex-col items-center gap-8 bg-white z-20">
       <motion.div
-        className="max-w-[721px] w-full flex flex-col items-center gap-2"
+        className="text-center w-full flex flex-col items-center gap-2 lg:gap-4"
         initial={{ y: -50, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.5 }}
       >
-        <h2>
+        <h2 className="text-2xl md:text-4xl lg:text-5.5xl">
           Frequently Asked{" "}
-          <span className="h2 text-primary500"> Questions</span>
+          <span className="text-2xl md:text-4xl lg:text-5.5xl text-primary500">Questions</span>
         </h2>
         <p className="">Customer Reviews</p>
       </motion.div>

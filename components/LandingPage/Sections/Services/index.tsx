@@ -1,13 +1,14 @@
 "use client";
 import {
-  Highlight,
   ProjectServiceIcon,
   SecurePaymentServiceIcon,
   TailoredServiceIcon,
   UserFriendlyServiceIcon,
 } from "@/public/icons";
-import React from "react";
+import React, { forwardRef } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
+import assetLibrary from "@/library";
 
 const services = [
   {
@@ -46,31 +47,51 @@ const Card = ({
   description: string;
 }) => (
   <div className="border border-grey200 rounded-lg p-5 flex flex-col gap-3 text-start items-start">
-    <div className="mb-5">{icon}</div>
-    <h4>{title}</h4>
+    <div className="mb-4 md:mb-5">{icon}</div>
+    <h4 className="font-semibold line-clamp-2 max-sm:text-base">{title}</h4>
     <p className="text-grey500">{description}</p>
   </div>
 );
 
-const Service = () => {
+const Service = forwardRef<HTMLDivElement>((_, ref) => {
   return (
-    <div className="py-20 max-w-[1216px] mx-auto">
+    <div
+      className="pb-12 pt-8 lg:py-20 space-y-8 max-w-[1216px] mx-auto max-xl:px-6"
+      ref={ref}
+    >
       <motion.h2
-        className="flex"
+        className="flex justify-start text-2xl lg:text-[3.5rem] items-center"
         initial={{ x: -50, opacity: 0 }}
         whileInView={{ x: 0, opacity: 1 }}
         transition={{ delay: 0.5 }}
+        viewport={{
+          once: true,
+        }}
       >
         Why Choose{" "}
-        <span className="text-primary400 h2 ml-1.5"> SellCrea8?</span>
-        <Highlight />
+        <span className="text-primary400 text-2xl lg:text-[3.5rem] ml-1.5">
+          {" "}
+          SellCrea8?
+        </span>
+        <Image
+          alt={"highlight"}
+          src={assetLibrary.highlight}
+          width={72}
+          height={72}
+          // quality={100}
+          className="object-contain mt-4 max-md:size-[2.5rem]"
+        />
       </motion.h2>
 
       <motion.div
-        className="grid grid-cols-4 gap-8"
+        className="grid grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-8"
         initial={{ y: 100, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.5 }}
+        viewport={{
+          margin: "-200px",
+          once: true,
+        }}
       >
         {services.map((service, index) => (
           <Card
@@ -83,6 +104,6 @@ const Service = () => {
       </motion.div>
     </div>
   );
-};
+});
 
 export default Service;

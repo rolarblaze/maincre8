@@ -1,10 +1,11 @@
 "use client";
 import React from "react";
-import Button from "@/components/Button";
-import { HighlightDown, HighlightUp } from "@/public/icons";
-import { Benefit } from "@/public/imgs";
-import Card from "./BenefitsCard";
+import Image from "next/image";
 import { motion } from "framer-motion";
+import assetLibrary from "@/library";
+import Button from "@/components/Button";
+import Card from "./BenefitsCard";
+import { BenefitImages } from "./BenefitsData";
 
 interface Benefit {
   title: string;
@@ -27,19 +28,46 @@ const Section: React.FC<SectionProps> = ({
   buttonLabel,
   reverse = false,
 }) => {
+  const selectImg = BenefitImages.find((img) => {
+    return img.title === title;
+  });
+
   return (
-    <div className="py-20">
-      <div className="flex justify-center">
-        <HighlightDown />
-        <h2>
-          Benefits for <span className="h2 text-primary500">{title}</span>
+    <div className="max-sm:py-10 py-20 max-xl:px-5">
+      <div className="flex -mb-1 items-start justify-center">
+        {/* <HighlightDown className="max-md:hidden" /> */}
+        <Image
+          alt={"man"}
+          src={assetLibrary.highlightDown}
+          width={82}
+          height={82}
+          quality={100}
+          className="max-md:size-12"
+        />
+        {/* <HighlightDownMobile className="md:hidden" /> */}
+        <h2 className="text-center text-[1.3rem] md:text-4xl lg:text-5.5xl">
+          Benefits for{" "}
+          <span className="text-[1.3rem] md:text-4xl lg:text-5.5xl text-primary500">
+            {title}
+          </span>
         </h2>
-        <HighlightUp />
+
+        <Image
+          alt={"man"}
+          src={assetLibrary.highlightUp}
+          width={82}
+          height={82}
+          quality={100}
+          className="max-md:size-12"
+        />
+
+        {/* <HighlightUp className="max-md:hidden" />
+        <HighlightUpMobile className="md:hidden" /> */}
       </div>
-      <p>{subtitle}</p>
+      <p className="text-center md:-mt-6 lg:-mt-6">{subtitle}</p>
       <div
-        className={`w-full flex items-center justify-between my-8 ${
-          reverse ? "flex-row-reverse" : ""
+        className={`w-full flex max-lg:flex-col max-lg:gap-8 items-center justify-between my-8 ${
+          reverse ? "lg:flex-row-reverse" : ""
         }`}
       >
         <motion.div
@@ -57,8 +85,9 @@ const Section: React.FC<SectionProps> = ({
             />
           ))}
         </motion.div>
+
         <motion.img
-          src={Benefit.src}
+          src={selectImg?.src?.src}
           alt="benefits"
           width={"430px"}
           height={"100%"}
@@ -67,10 +96,7 @@ const Section: React.FC<SectionProps> = ({
           transition={{ delay: 0.5 }}
         />
       </div>
-      <Button
-        label={buttonLabel}
-        classNames="!py-2 !text-xs mt-4 mb-6 w-max mx-auto"
-      />
+      <Button label={buttonLabel} classNames="mt-4 mb-6 w-max mx-auto" />
     </div>
   );
 };
