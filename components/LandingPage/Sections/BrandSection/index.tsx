@@ -12,7 +12,7 @@ const BrandSection = () => {
         {/* CONTENT */}
         <div className="max-md:space-y-2 space-y-4.5">
           <h2 className="text-2xl md:text-4xl lg:text-5.5xl font-bold max-sm:tracking-[-0.03rem] tracking-[-0.105rem] text-grey50">
-            Brands We've Served
+            Brands We&apos;ve Served
           </h2>
           <p className="font-medium max-sm:text-sm text-white/70">
             Trusted by Leading Companies
