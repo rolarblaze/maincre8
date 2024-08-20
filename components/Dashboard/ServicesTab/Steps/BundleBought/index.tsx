@@ -1,23 +1,40 @@
-import { formatDate } from "@/helpers/formatDate";
+import { useEffect } from "react";
+import { useAppSelector, useAppDispatch } from "@/redux/store";
 import WrapperComponent from "../Wrapper";
-import { useAppSelector } from "@/redux/store";
+import { formatDate } from "@/helpers/formatDate";
+import { handleProgressUpdate } from "@/helpers/progressHandler";
+import { updateProgress } from "@/redux/servicesTracker/tracker";
 
 const BundleBought = () => {
+  const dispatch = useAppDispatch();
   const { trackingDetails } = useAppSelector((state) => state.services);
 
-  // Assuming trackingDetails contains a dateBought field
+  useEffect(() => {
+    handleProgressUpdate(dispatch, trackingDetails);
+  }, [dispatch, trackingDetails]);
+
   const dateBought = trackingDetails
-    ? formatDate(trackingDetails.meeting_start_time)
+    ? formatDate(trackingDetails.brief_submission_date)
     : "Unknown date";
+
+  // Set SubmitBriefInProgress if dateBought is not "Unknown date"
+  const isSubmitBriefCompleted = dateBought !== "Unknown date";
+
+  useEffect(() => {
+    if (isSubmitBriefCompleted) {
+      dispatch(updateProgress({ SubmitBriefInProgress: true }));
+    }
+  }, [dispatch, isSubmitBriefCompleted]);
+
+  const status = isSubmitBriefCompleted ? "completed" : "inactive";
 
   return (
     <WrapperComponent
-      iconFillColor="#1574E5"
+      status={status}
       title="Bundle bought"
       description={""}
       buttonLabel=""
       buttonClassNames=""
-      containerClassNames="border border-grey100 text-black"
       showButton={false}
       showDate={true}
       dateBought={dateBought}

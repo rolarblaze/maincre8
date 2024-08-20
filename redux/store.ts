@@ -10,6 +10,7 @@ import newsletterReducer from "./newsletter";
 import { shopReducer } from "./shop";
 import { OrderSlice } from "./order";
 import servicesSlice from "./servicesTracker";
+import { trackerReducer } from "./servicesTracker/tracker";
 
 // configure the store with all reducers
 export const store = configureStore({
@@ -24,6 +25,7 @@ export const store = configureStore({
     getPackageDetails: getPackageReducer,
     order: OrderSlice.reducer,
     services: servicesSlice,
+    tracker: trackerReducer,
   },
 });
 

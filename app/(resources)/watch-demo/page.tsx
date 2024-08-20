@@ -12,14 +12,6 @@ const WatchDemo = () => {
     <AppWrapper type="">
       <div className="relative w-full flex justify-center overflow-hidden items-center min-h-[25.5rem] bg-transparent -mt-24">
         {/* VIDEO PLAYGROUND */}
-        <video
-          autoPlay
-          muted
-          loop
-          className="absolute object-cover -z-[1] inset-0 min-h-full min-w-full"
-        >
-          <source src="/video/bgVideoDark.webm" type="video/webm" />
-        </video>
 
         {/* FALLBACK IF THE VIDEO DOES NOT LOAD */}
         <div className="absolute inset-0 bg-primary800 -z-[2]"></div>
@@ -42,7 +34,11 @@ const WatchDemo = () => {
         </article>
 
         {/* VIDEO */}
-        <div className="w-full min-h-[13.25rem] md:min-h-[20.5rem] lg:min-h-[28.75rem] bg-primary900 rounded-lg"></div>
+        <div className="w-full min-h-[13.25rem] md:min-h-[20.5rem] lg:min-h-[28.75rem] bg-white md:bg-primary900 rounded-lg">
+          <video autoPlay muted loop className="h-full w-full">
+            <source src="/video/demo-video.webm" type="video/webm" />
+          </video>
+        </div>
 
         {/* INSTRUCTIONS */}
         <article className="text-base text-grey700 space-y-4 lg:space-y-8">
