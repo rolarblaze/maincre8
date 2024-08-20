@@ -9,6 +9,7 @@ import { addAlert } from "@/redux/alerts";
 import FileUploadModal from "@/components/FileUploadModal";
 import { submitBriefForTracking } from "@/redux/servicesTracker/features";
 import { useSearchParams } from "next/navigation";
+import { SubmittedIcon } from "@/public/icons";
 
 const SubmittedBrief = () => {
   const searchParams = useSearchParams();
@@ -98,6 +99,12 @@ const SubmittedBrief = () => {
         buttonLabel="Upload a brief"
         buttonClassNames=""
         showDate={true}
+        completedState={
+          <div className="flex gap-2">
+            <p className="text-primary500 text-sm">Brief submitted</p>{" "}
+            <SubmittedIcon />
+          </div>
+        }
         dateBought={dateSubmitted}
         onClick={handleUploadedBrief}
       />

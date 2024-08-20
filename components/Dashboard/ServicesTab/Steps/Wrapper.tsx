@@ -12,6 +12,8 @@ interface CallComponentProps {
   dateBought?: string;
   status: "inactive" | "inprogress" | "completed";
   onClick?: any;
+  completedState?: React.ReactElement;
+  loading?: boolean;
 }
 
 const WrapperComponent: React.FC<CallComponentProps> = ({
@@ -24,6 +26,8 @@ const WrapperComponent: React.FC<CallComponentProps> = ({
   showDate = false,
   dateBought = "",
   onClick,
+  completedState,
+  loading,
 }) => {
   const iconFill = status === "inactive" ? "#D0D5DD" : "#1574E5";
   const iconCheck = status === "completed" ? false : true;
@@ -35,6 +39,9 @@ const WrapperComponent: React.FC<CallComponentProps> = ({
   const textColor = status === "inactive" ? "text-[#98A2B3]" : "text-[#344054]";
 
   const btnStyles = status !== "inprogress" ? "bg-grey300" : "bg-primary500";
+
+  const showDescription = status === "completed" ? "hidden" : "block";
+
   return (
     <div className="flex items-center">
       <div className="mx-auto w-[70px] h-[70px] grid place-items-center">
@@ -51,18 +58,25 @@ const WrapperComponent: React.FC<CallComponentProps> = ({
       >
         <div>
           <p className="text-lg font-semibold">{title}</p>
-          <p>{description}</p>
+          <p className={`${showDescription}`}>{description}</p>
         </div>
 
-        <div>
-          {showButton && (
-            <Button
-              label={buttonLabel}
-              classNames={`text-white  w-fit !text-xs !py-2 !px-4 ${btnStyles} ${buttonClassNames}`}
-              onClick={onClick}
-            />
+        <div className="text-end">
+          {status === "completed" && completedState
+            ? completedState
+            : showButton && (
+                <Button
+                  label={buttonLabel}
+                  classNames={`text-white w-fit !text-xs !py-2 !px-4 ${btnStyles} ${buttonClassNames}`}
+                  onClick={onClick}
+                  isLoading={loading}
+                />
+              )}
+          {showDate && (
+            <span className="text-sm text-grey500 mt-1 md:mt-2">
+              {dateBought}
+            </span>
           )}
-          {showDate && <p>{dateBought}</p>}
         </div>
       </div>
     </div>
