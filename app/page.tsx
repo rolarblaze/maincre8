@@ -76,13 +76,12 @@ export default function Home() {
         onClose={handleCloseModal}
         className="!px-4 !py-4"
         showCancelIcon={false}
-      >
-        <RecommendPopOut
-        title="Custom recommendations"
+      > */}
+      {/* <RecommendPopOut
           getRecommend={handleCloseModal}
           keepExploring={handleCloseModal}
-        />
-      </Modal> */}
+        /> */}
+      {/* </Modal> */}
     </AppWrapper>
   );
 }

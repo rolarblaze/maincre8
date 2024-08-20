@@ -8,8 +8,12 @@ import { updateProgress } from "@/redux/servicesTracker/tracker";
 import { addAlert } from "@/redux/alerts";
 import FileUploadModal from "@/components/FileUploadModal";
 import { submitBriefForTracking } from "@/redux/servicesTracker/features";
+import { useSearchParams } from "next/navigation";
 
 const SubmittedBrief = () => {
+  const searchParams = useSearchParams();
+  const transId = searchParams.get("transactionId");
+
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [fileAttachment, setFileAttachment] = useState<string | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -21,9 +25,7 @@ const SubmittedBrief = () => {
 
   const dispatch = useAppDispatch();
 
-  const { trackingDetails, loading } = useAppSelector(
-    (state) => state.services
-  ); // Ensure uploadBrief is not destructured here
+  const { trackingDetails } = useAppSelector((state) => state.services);
   const { trackingProgress } = useAppSelector((state) => state.tracker);
 
   const hasSubmittedBrief =
@@ -41,7 +43,7 @@ const SubmittedBrief = () => {
   }, [dispatch, trackingDetails]);
 
   useEffect(() => {
-    if (status == "completed") {
+    if (status === "completed") {
       dispatch(updateProgress({ BookDiscoveryCallInProgress: true }));
     }
   }, [dispatch, hasSubmittedBrief]);
@@ -60,25 +62,31 @@ const SubmittedBrief = () => {
 
   const handleFileUpload = (file: File) => {
     setModalStatus("progress");
-    dispatch(submitBriefForTracking({ file, id: 1 })) // Ensure correct payload is passed
-      .unwrap()
-      .then((response) => {
-        setFileAttachment(response.file_link);
-        setModalStatus("success");
-      })
-      .catch((error) => {
-        setUploadError(error?.message);
-        setModalStatus("error");
-        dispatch(
-          addAlert({
-            id: "",
-            headText: "Error",
-            subText: error?.message,
-            type: "error",
-          })
-        );
-        console.error("Error uploading file:", error);
-      });
+    if (transId)
+      dispatch(submitBriefForTracking({ file, id: parseInt(transId) }))
+        .unwrap()
+        .then((response) => {
+          setFileAttachment(response.file_link);
+          setModalStatus("success");
+        })
+        .catch((error) => {
+          setUploadError(error?.message);
+          setModalStatus("error");
+          dispatch(
+            addAlert({
+              id: "",
+              headText: "Error",
+              subText: error?.message,
+              type: "error",
+            })
+          );
+          console.error("Error uploading file:", error);
+        });
+  };
+
+  const handleFileSelect = (file: File) => {
+    setSelectedFile(file);
+    handleFileUpload(file);
   };
 
   return (
@@ -99,7 +107,16 @@ const SubmittedBrief = () => {
         status={modalStatus}
         progress={uploadProgress}
         fileName={selectedFile?.name}
+        onUpload={handleFileSelect}
       />
+      {isModalOpen && (
+        <input
+          type="file"
+          accept=".pdf,.doc,.docx"
+          style={{ display: "none" }}
+          onChange={handleFileChange}
+        />
+      )}
     </>
   );
 };
