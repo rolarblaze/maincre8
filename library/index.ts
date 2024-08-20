@@ -14,6 +14,7 @@ const assetLibrary = {
   readyToUseThree: "/optimised/ready-to-use-3.webp",
   unlimitedRevisionsTwo: "/optimised/unlimited-revisions-2.webp",
   unlimitedRevisionsThree: "/optimised/unlimited-revisions-3.webp",
+  notFound: "/optimised/not-found.webp",
 
   // SVGS
   highlight: "/optimised/highlight.webp",
