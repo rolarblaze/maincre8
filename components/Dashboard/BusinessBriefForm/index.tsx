@@ -20,6 +20,8 @@ import {
   USEFUL_DIGITAL_SERVICES,
 } from "./constants";
 import { validationSchema } from "./schema";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const BusinessBriefForm = () => {
   const {
@@ -39,12 +41,47 @@ const BusinessBriefForm = () => {
     },
   });
 
+  const [country, setCountry] = useState("");
+  const [countryList, setCountryList] = useState<
+    { label: string; value: string }[]
+  >([]);
+  const [countryListLoading, setCountryListLoading] = useState(false);
+
   const formSubmit = async (values: FormValues, resetForm: () => void) => {
     console.log(values);
     // resetForm();
   };
 
   console.log(values);
+
+  useEffect(() => {
+    const fetchCountryCodes = async () => {
+      setCountryListLoading(true);
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}admin-user/country_codes`
+        );
+        const countryCodesData = response.data.country_codes_data;
+
+        const formattedCountryCodes = countryCodesData.map((country: any) => ({
+          label: country?.name,
+          value: country?.name,
+        }));
+
+        setCountryList(formattedCountryCodes);
+      } catch (error) {
+        console.error("Error fetching country codes:", error);
+      } finally {
+        setCountryListLoading(false);
+      }
+    };
+
+    fetchCountryCodes();
+  }, []);
+
+  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setCountry(e.target.value);
+  };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8 w-full max-w-[50rem]">
@@ -130,17 +167,33 @@ const BusinessBriefForm = () => {
           />
 
           {/* CONTACT PHONE NUMBER */}
-          <InputField
-            type="text"
-            name="contactPhoneNumber"
-            label="Contact Phone Number"
-            placeholder="Contact Person's Name"
-            classNames="bg-white"
-            value={values.contactPhoneNumber}
-            error={touched.contactPhoneNumber && errors.contactPhoneNumber}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
+          <div>
+            {countryListLoading ? (
+              <p>Loading country list...</p>
+            ) : (
+              <DropdownSelect
+                label="Country of residence"
+                options={countryList}
+                value={country}
+                onChange={handleCountryChange}
+                id="country"
+                name="country"
+                placeholder="Select Country"
+              />
+            )}
+
+            <InputField
+              type="text"
+              name="contactPhoneNumber"
+              label="Contact Phone Number"
+              placeholder="Contact Person's Name"
+              classNames="bg-white"
+              value={values.contactPhoneNumber}
+              error={touched.contactPhoneNumber && errors.contactPhoneNumber}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          </div>
         </div>
       </div>
 
@@ -330,7 +383,7 @@ const BusinessBriefForm = () => {
             <DropdownSelect
               id="budget"
               name="budget"
-              label="What is your budget projection for this solution?"//..................................
+              label="What is your budget projection for this solution?" //..................................
               placeholder="Choose Range"
               options={budgetProjectionOptions}
               value={values.budget || undefined}
