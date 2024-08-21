@@ -19,7 +19,7 @@ const MissionVision = () => {
     <section className="w-full py-10 md:py-14 lg:py-20 bg-primary800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center ">
         <h2 className="max-w-3xl mx-auto w-full text-2xl font-bold mb-8 lg:leading-[4rem] text-grey50 md:text-5xl">
-          Sellcreat8 Mission and Vision Statement
+          Sellcrea8 Mission and Vision Statement
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
           {statements.map((statement) => (
