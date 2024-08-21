@@ -5,6 +5,7 @@ import {
   CheckBoxField,
   DropdownSelect,
   InputField,
+  PhoneNumberInput,
   UploadFile,
 } from "@/components";
 import {
@@ -20,8 +21,7 @@ import {
   USEFUL_DIGITAL_SERVICES,
 } from "./constants";
 import { validationSchema } from "./schema";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useState } from "react";
 
 const BusinessBriefForm = () => {
   const {
@@ -41,46 +41,11 @@ const BusinessBriefForm = () => {
     },
   });
 
-  const [country, setCountry] = useState("");
-  const [countryList, setCountryList] = useState<
-    { label: string; value: string }[]
-  >([]);
-  const [countryListLoading, setCountryListLoading] = useState(false);
+  const [phone, setPhone] = useState<string>()
 
   const formSubmit = async (values: FormValues, resetForm: () => void) => {
     console.log(values);
     // resetForm();
-  };
-
-  console.log(values);
-
-  useEffect(() => {
-    const fetchCountryCodes = async () => {
-      setCountryListLoading(true);
-      try {
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_BASE_URL}admin-user/country_codes`
-        );
-        const countryCodesData = response.data.country_codes_data;
-
-        const formattedCountryCodes = countryCodesData.map((country: any) => ({
-          label: country?.name,
-          value: country?.name,
-        }));
-
-        setCountryList(formattedCountryCodes);
-      } catch (error) {
-        console.error("Error fetching country codes:", error);
-      } finally {
-        setCountryListLoading(false);
-      }
-    };
-
-    fetchCountryCodes();
-  }, []);
-
-  const handleCountryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setCountry(e.target.value);
   };
 
   return (
@@ -168,21 +133,12 @@ const BusinessBriefForm = () => {
 
           {/* CONTACT PHONE NUMBER */}
           <div>
-            {countryListLoading ? (
-              <p>Loading country list...</p>
-            ) : (
-              <DropdownSelect
-                label="Country of residence"
-                options={countryList}
-                value={country}
-                onChange={handleCountryChange}
-                id="country"
-                name="country"
-                placeholder="Select Country"
-              />
-            )}
-
-            <InputField
+            <PhoneNumberInput
+              value={phone as string}
+              onChange={setPhone}
+              label="Contact Phone number"
+            />
+            {/* <InputField
               type="text"
               name="contactPhoneNumber"
               label="Contact Phone Number"
@@ -192,7 +148,7 @@ const BusinessBriefForm = () => {
               error={touched.contactPhoneNumber && errors.contactPhoneNumber}
               onChange={handleChange}
               onBlur={handleBlur}
-            />
+            /> */}
           </div>
         </div>
       </div>

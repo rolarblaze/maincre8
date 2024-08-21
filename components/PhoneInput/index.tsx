@@ -7,12 +7,14 @@ interface PhoneNumberInputProps {
   value: string;
   onChange: (value: string) => void;
   label: string;
+  placeholder?: string;
 }
 
 const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
   value,
   onChange,
   label,
+  placeholder,
 }) => {
   const handleChange = (phone: string) => {
     onChange(phone);
@@ -26,7 +28,7 @@ const PhoneNumberInput: React.FC<PhoneNumberInputProps> = ({
         value={value}
         onChange={handleChange}
         containerClass="phone-input-container"
-        placeholder="Enter phone number"
+        placeholder={placeholder || "Enter Phone Number"}
         inputClass="phone-input"
         buttonClass="phone-input-button"
         dropdownClass="phone-input-dropdown"
