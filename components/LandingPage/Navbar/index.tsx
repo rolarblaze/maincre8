@@ -134,6 +134,7 @@ const Navbar: React.FC = () => {
             <Arrow className={isHome && !navColor && "*:fill-white"} />
           </div>
         </section>
+        {/* <div className="hidden lg:flex items-center gap-6">
         {/* Desktop Buttons */}
         <div className="hidden lg:flex items-center gap-6">
           <Link
@@ -247,6 +248,7 @@ const Navbar: React.FC = () => {
                 })}
               </div>
 
+              {/* <div className="flex flex-col gap-4">
               {/* Nav Buttons */}
               <div className="flex flex-col gap-4">
                 <Link
