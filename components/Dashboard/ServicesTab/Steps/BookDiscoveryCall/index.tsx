@@ -7,7 +7,6 @@ import { updateProgress } from "@/redux/servicesTracker/tracker";
 import { bookDiscoveryCall } from "@/redux/servicesTracker/features";
 import { useSearchParams } from "next/navigation";
 import { addAlert } from "@/redux/alerts";
-import { createData } from "@/helpers/saveData";
 
 const BookDiscoveryCall = () => {
   // first step
@@ -23,7 +22,7 @@ const BookDiscoveryCall = () => {
   //second step
   // use a value to check if the step is completed or not (in active)
   const hasBookedDiscoveryCall =
-    trackingDetails?.onboarding_call_booked !== null ? "completed" : "inactive";
+    trackingDetails?.onboarding_call_booked == true ? "completed" : "inactive";
 
   const status = trackingProgress?.BookDiscoveryCallInProgress
     ? "inprogress"
@@ -37,13 +36,15 @@ const BookDiscoveryCall = () => {
 
   // set next step to inprogress
   useEffect(() => {
+    console.log(status);
+    console.log(trackingDetails?.onboarding_call_booked);
     if (
       status === "completed" &&
-      trackingDetails?.onboarding_call_booked !== null
+      trackingDetails?.onboarding_call_booked === true
     ) {
       dispatch(updateProgress({ CompleteOnboardingCallInProgress: true }));
     }
-  }, [dispatch, hasBookedDiscoveryCall]);
+  }, [dispatch, hasBookedDiscoveryCall, status]);
 
   const handleBookDiscoveryCall = async () => {
     setLoading(true);
@@ -53,7 +54,8 @@ const BookDiscoveryCall = () => {
       if (bookDiscoveryCall.fulfilled.match(actionResult)) {
         console.log(actionResult);
         const { detail, booking_link } = actionResult.payload;
-        createData("meeting-link", booking_link);
+        window.open(booking_link, "_blank");
+        // createData("meeting-link", booking_link);
         dispatch(
           addAlert({
             id: "",
@@ -82,10 +84,6 @@ const BookDiscoveryCall = () => {
     }
   };
 
-  if (trackingDetails) {
-    console.log(trackingDetails);
-  }
-
   return (
     <WrapperComponent
       status={status}
@@ -95,6 +93,7 @@ const BookDiscoveryCall = () => {
       buttonClassNames=""
       onClick={handleBookDiscoveryCall}
       loading={loading}
+      completedState={<span className="text-primary500">Completed</span>}
     />
   );
 };

@@ -7,6 +7,7 @@ import {
   bookDiscoveryCall,
   getCalendlyLink,
   bookOffBoardingCall,
+  payForPackage,
 } from "./features";
 import {
   TrackingDetails,
@@ -16,9 +17,11 @@ import {
   BookOffBoardingCall,
   OrderHistoryResponse,
   SubmitBriefForPackage,
+  PackagePayment,
 } from "./interface";
 
 interface InitialState {
+  payForPackage: PackagePayment | null;
   trackingDetails: TrackingDetails | null;
   orderHistory: OrderHistoryResponse[] | null;
   uploadBrief: SubmitBriefForPackage | null;
@@ -31,6 +34,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
+  payForPackage: null,
   trackingDetails: null,
   orderHistory: null,
   uploadBrief: null,
@@ -48,6 +52,19 @@ export const servicesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      // trackUserOrder cases
+      .addCase(payForPackage.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(payForPackage.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.trackingDetails = payload;
+      })
+      .addCase(payForPackage.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload as string;
+      })
       // trackUserOrder cases
       .addCase(trackUserOrder.pending, (state) => {
         state.loading = true;

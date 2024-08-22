@@ -47,7 +47,7 @@ const SubmittedBrief = () => {
     if (status === "completed") {
       dispatch(updateProgress({ BookDiscoveryCallInProgress: true }));
     }
-  }, [dispatch, hasSubmittedBrief]);
+  }, [dispatch, status]);
 
   const handleUploadedBrief = () => {
     setIsModalOpen(true);
@@ -100,10 +100,16 @@ const SubmittedBrief = () => {
         buttonClassNames=""
         showDate={true}
         completedState={
-          <div className="flex gap-2">
+          <a
+            href={trackingDetails?.brief_attachment_link}
+            target="_blank"
+            rel="noopener noreferrer"
+            download
+            className="flex gap-2"
+          >
             <p className="text-primary500 text-sm">Brief submitted</p>{" "}
             <SubmittedIcon />
-          </div>
+          </a>
         }
         dateBought={dateSubmitted}
         onClick={handleUploadedBrief}

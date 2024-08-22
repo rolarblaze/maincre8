@@ -14,7 +14,7 @@ const BundleBought = () => {
   }, [dispatch, trackingDetails]);
 
   const dateBought = trackingDetails
-    ? formatDate(trackingDetails.brief_submission_date)
+    ? formatDate(trackingDetails.transaction.created_at)
     : "Unknown date";
 
   // Set SubmitBriefInProgress if dateBought is not "Unknown date"

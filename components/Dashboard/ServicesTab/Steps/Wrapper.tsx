@@ -14,6 +14,7 @@ interface CallComponentProps {
   onClick?: any;
   completedState?: React.ReactElement;
   loading?: boolean;
+  extraDescription?: any;
 }
 
 const WrapperComponent: React.FC<CallComponentProps> = ({
@@ -28,6 +29,7 @@ const WrapperComponent: React.FC<CallComponentProps> = ({
   onClick,
   completedState,
   loading,
+  extraDescription,
 }) => {
   const iconFill = status === "inactive" ? "#D0D5DD" : "#1574E5";
   const iconCheck = status === "completed" ? false : true;
@@ -59,6 +61,7 @@ const WrapperComponent: React.FC<CallComponentProps> = ({
         <div>
           <p className="text-lg font-semibold">{title}</p>
           <p className={`${showDescription}`}>{description}</p>
+          <div className={`${showDescription}`}>{extraDescription}</div>
         </div>
 
         <div className="text-end">

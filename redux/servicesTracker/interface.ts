@@ -1,11 +1,19 @@
 import { Package } from "../shop/interface";
 
+export interface PackagePayment {
+  package_id: number;
+  currency: "NGN";
+}
 export interface UploadBriefFile {
   file: File;
   id: number;
 }
 
 export interface TrackingDetails {
+  transaction: {
+    transaction_id: number;
+    created_at: string;
+  };
   package_tracking_id: number;
   transaction_id: number;
   brief_submitted: boolean;

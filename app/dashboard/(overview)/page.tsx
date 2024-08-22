@@ -1,5 +1,11 @@
 "use client";
-import { Button, FullLoader, Loader, ServiceCard, EmptyState } from "@/components";
+import {
+  Button,
+  FullLoader,
+  Loader,
+  ServiceCard,
+  EmptyState,
+} from "@/components";
 import BarChart from "@/components/Dashboard/BarChart";
 import UpcomingAppointment from "@/components/Dashboard/UpcomingAppointment";
 import { BulbIcon } from "@/public/icons";
@@ -7,7 +13,6 @@ import { getUserOrderHistory } from "@/redux/servicesTracker/features";
 import { fetchLatestAppointments } from "@/redux/order/features";
 import { getServices } from "@/redux/shop/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
@@ -15,16 +20,17 @@ const Overview = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { services, isLoading, error } = useAppSelector((state) => state.shop);
-  const { orderHistory, loading } = useAppSelector((state) => state.services);
+  const { orderHistory } = useAppSelector((state) => state.services);
   const { isLoadingProfile, profile } = useAppSelector((state) => state.auth);
-  const { appointments, isApointmentLoading } = useAppSelector((state) => state.order);
+  const { appointments, isApointmentLoading } = useAppSelector(
+    (state) => state.order
+  );
 
   useEffect(() => {
     dispatch(getServices());
     dispatch(getUserOrderHistory());
     dispatch(fetchLatestAppointments());
   }, [dispatch]);
-
 
   // Dummy data, waiting for api
   const barChartData = {
@@ -46,7 +52,7 @@ const Overview = () => {
     return <div>Error: {error}</div>;
   }
 
-  if (isLoadingProfile || loading) {
+  if (isLoadingProfile) {
     return <FullLoader />;
   }
 
@@ -178,10 +184,10 @@ const Overview = () => {
                   key={idx}
                   callType={app.event_name}
                   desc={app.product_name}
-                  date={new Date(app.event_date).toLocaleDateString('en-US', {
-                    day: '2-digit',
-                    month: 'long',
-                    year: 'numeric',
+                  date={new Date(app.event_date).toLocaleDateString("en-US", {
+                    day: "2-digit",
+                    month: "long",
+                    year: "numeric",
                   })}
                 />
               ))}
