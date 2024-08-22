@@ -51,7 +51,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({
           <Button label={buttonLabel} classNames="w-fit" link={buttonLink} />
         )}
 
-
         {/* VIDEO BACKGROUND */}
         <video
           autoPlay
