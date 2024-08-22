@@ -1,13 +1,6 @@
 "use client";
 import { Field, FormikHelpers, useFormik } from "formik";
-import {
-  Button,
-  CheckBoxField,
-  DropdownSelect,
-  InputField,
-  PhoneNumberInput,
-  UploadFile,
-} from "@/components";
+import { Button, CheckBoxField, DropdownSelect, InputField, PhoneNumberInput, UploadFile } from "@/components";
 import {
   budgetProjectionOptions,
   companySizeOptions,
@@ -15,47 +8,84 @@ import {
   digitalSolutionOptions,
   genderOptions,
   INITIAL_VALUES,
-  optionHolder,
   typeOfIndustryOptions,
   updateOptions,
   USEFUL_DIGITAL_SERVICES,
 } from "./constants";
 import { validationSchema } from "./schema";
 import { useState } from "react";
+import { useAppDispatch } from "@/redux/store";
+import { uploadRelevantDocument, submitRecommendationBrief } from "@/redux/order/features";
 
 const BusinessBriefForm = () => {
-  const {
-    values,
-    errors,
-    touched,
-    isSubmitting,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    setFieldValue,
-  } = useFormik({
+  const dispatch = useAppDispatch();
+  const [phone, setPhone] = useState<string>();
+  const [uploadedDocumentLink, setUploadedDocumentLink] = useState<string | null>(null);
+
+  const formik = useFormik<FormValues>({
     initialValues: INITIAL_VALUES,
     validationSchema: validationSchema,
-    onSubmit: (values, { resetForm }: FormikHelpers<FormValues>) => {
-      formSubmit(values, resetForm);
+    onSubmit: async (values, { resetForm }: FormikHelpers<FormValues>) => {
+      console.log("Form submit triggered"); // Add this line
+      try {
+        console.log("Submitting form with values:", values);
+
+        const finalValues = {
+          ...values,
+          relevant_document_link: uploadedDocumentLink ?? undefined,
+          contact_phone_number: phone || '',
+        };
+
+        console.log("Final Values:", finalValues); // Add this line
+
+        await dispatch(submitRecommendationBrief(finalValues));
+        console.log("Form submitted successfully");
+        resetForm();
+      } catch (error) {
+        console.error("Error submitting form:", error);
+      }
     },
   });
 
-  const [phone, setPhone] = useState<string>()
 
-  const formSubmit = async (values: FormValues, resetForm: () => void) => {
-    console.log(values);
-    // resetForm();
+  const { values, errors, touched, isSubmitting, handleBlur, handleChange, handleSubmit, setFieldValue } = formik;
+
+  console.log("Errors:", errors); // Add this line
+
+  const handlePhoneChange = (value: string) => {
+    setPhone(value);
+    setFieldValue("contactPhoneNumber", value);  // Ensure the form field is updated
   };
+
+  const handleFileUpload = async (file: File | null) => {
+    if (file && file.size > 5000000) {
+      setFieldValue("document", null);
+      // setFieldError("document", "Max file size exceeded.");
+      return;
+    }
+
+    try {
+      if (file) {
+        const formData = new FormData();
+        formData.append("file", file);
+        const response = await dispatch(uploadRelevantDocument(formData)).unwrap();
+        const file_link = response.file_link;
+
+        console.log("File uploaded successfully:", file_link);
+        setUploadedDocumentLink(file_link); // Store the file link for later use
+        setFieldValue("document", file_link);
+      }
+    } catch (error) {
+      console.error("Error uploading file:", error);
+    }
+  };
+
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8 w-full max-w-[50rem]">
       {/* BUSINESS INFORMATION */}
       <div className="space-y-6">
-        <h3 className="text-lg font-semibold text-grey900 leading-6">
-          Business Informaion
-        </h3>
-
+        <h3 className="text-lg font-semibold text-grey900 leading-6">Business Information</h3>
         <div className="space-y-6 rounded-bl-lg">
           {/* COMPANY NAME */}
           <InputField
@@ -135,20 +165,9 @@ const BusinessBriefForm = () => {
           <div>
             <PhoneNumberInput
               value={phone as string}
-              onChange={setPhone}
+              onChange={handlePhoneChange}
               label="Contact Phone number"
             />
-            {/* <InputField
-              type="text"
-              name="contactPhoneNumber"
-              label="Contact Phone Number"
-              placeholder="Contact Person's Name"
-              classNames="bg-white"
-              value={values.contactPhoneNumber}
-              error={touched.contactPhoneNumber && errors.contactPhoneNumber}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            /> */}
           </div>
         </div>
       </div>
@@ -207,7 +226,7 @@ const BusinessBriefForm = () => {
         </legend>
 
         <div className="space-y-6">
-          {/* BUSINESS CHALLENGES */}
+          {/* TARGET AUDIENCE */}
           <InputField
             type="text"
             name="audience"
@@ -215,7 +234,7 @@ const BusinessBriefForm = () => {
             placeholder="Describe your target audience?"
             classNames="bg-white"
             value={values.audience}
-            error={touched.solutionOutcomes && errors.solutionOutcomes}
+            error={touched.audience && errors.audience}
             onChange={handleChange}
             onBlur={handleBlur}
           />
@@ -242,7 +261,9 @@ const BusinessBriefForm = () => {
             options={genderOptions}
             value={values.gender || undefined}
             onChange={handleChange}
+            // onBlur={handleBlur}
           />
+
 
           {/* LOCATION */}
           <InputField
@@ -323,7 +344,7 @@ const BusinessBriefForm = () => {
         <h3 className="text-lg font-semibold text-grey900 leading-6">Budget</h3>
 
         <div className="space-y-6">
-          <InputField
+          {/* <InputField
             type="text"
             name="budgetProjection"
             label="What is your budget projection for this solution?"
@@ -334,7 +355,7 @@ const BusinessBriefForm = () => {
             error={touched.budgetProjection && errors.budgetProjection}
             onChange={handleChange}
             onBlur={handleBlur}
-          />
+          /> */}
           <div>
             <DropdownSelect
               id="budget"
@@ -457,9 +478,7 @@ const BusinessBriefForm = () => {
             <UploadFile
               data={values.document}
               errors={errors.document || ""}
-              setFieldValue={(field: string, value: File | null) =>
-                setFieldValue(field, value)
-              }
+              setFieldValue={(field: string, value: File | null) => handleFileUpload(value)}
             />
           </div>
         </div>
@@ -494,4 +513,5 @@ const BusinessBriefForm = () => {
     </form>
   );
 };
+
 export default BusinessBriefForm;

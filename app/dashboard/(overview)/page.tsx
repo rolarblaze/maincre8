@@ -47,7 +47,11 @@ const Overview = () => {
   }
 
   if (isLoadingProfile || loading) {
-    return <FullLoader />;
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <Loader />
+      </div>
+    );
   }
 
   const profileIncomplete =
@@ -59,7 +63,7 @@ const Overview = () => {
   const hasTransactions = orderHistory && orderHistory?.length > 0;
 
   return (
-    <div className="container mx-auto pt-6 md:pt-0 flex flex-col gap-8 bg-dashboard-bg">
+    <div className="container mx-auto pt-6 md:pt-0 flex flex-col gap-8 bg-dashboard-bg overflow-y-scroll">
       <div>
         <h4>Welcome, {profile.first_name}</h4>
         <p className="text-grey500">Select a service to get started</p>
@@ -173,18 +177,26 @@ const Overview = () => {
               Upcoming Appointments
             </h4>
             <div className="flex flex-col">
-              {appointments?.map((app, idx) => (
-                <UpcomingAppointment
-                  key={idx}
-                  callType={app.event_name}
-                  desc={app.product_name}
-                  date={new Date(app.event_date).toLocaleDateString('en-US', {
-                    day: '2-digit',
-                    month: 'long',
-                    year: 'numeric',
-                  })}
-                />
-              ))}
+              {isApointmentLoading ? (
+                <div className="flex items-center justify-center">
+                  <Loader />
+                </div>
+              ) : appointments?.length === 0 ? (
+                <p className="flex items-center justify-center">No upcoming appointments</p>
+              ) : (
+                appointments?.map((app, idx) => (
+                  <UpcomingAppointment
+                    key={idx}
+                    callType={app.event_name}
+                    desc={app.product_name}
+                    date={new Date(app.event_date).toLocaleDateString('en-US', {
+                      day: '2-digit',
+                      month: 'long',
+                      year: 'numeric',
+                    })}
+                  />
+                ))
+              )}
             </div>
           </div>
         </div>

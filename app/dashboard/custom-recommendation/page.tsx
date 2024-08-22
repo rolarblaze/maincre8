@@ -15,7 +15,11 @@ const CustomRecommendation = () => {
   }, [dispatch]);
 
   if (isLoading) {
-    return <Loader />;
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <Loader />
+      </div>
+    );
   }
 
   return (
@@ -28,7 +32,7 @@ const CustomRecommendation = () => {
             <span>Get new recommendation</span>
           </div>
         }
-        classNames="max-w-[16.125rem] text-base leading-6 px-0"
+        classNames="max-w-[17.125rem] text-base leading-6 px-0"
       />
 
       <div className="space-y-6">
