@@ -11,7 +11,6 @@ export const getPackageDetails = createAsyncThunk(
   async (payload: GetPackage, { rejectWithValue }) => {
     try {
       const response = await api.get(`admin-user/packages/${payload.id}`);
-      console.log("form data:", response.data.package);
 
       return response.data.package;
     } catch (error) {

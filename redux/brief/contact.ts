@@ -21,7 +21,6 @@ interface SubmitBrief {
 export const submitBrief = createAsyncThunk(
   "auth/submitBrief",
   async (payload: SubmitBrief, { rejectWithValue }) => {
-    console.log(payload.competitors);
     try {
       const response = await api.post("briefs/submit-brief", {
         first_name: payload.first_name,
@@ -38,7 +37,6 @@ export const submitBrief = createAsyncThunk(
         package_id: payload.package_id,
         bundle_id: payload.bundle_id,
       });
-      console.log("form data:", response.data);
 
       return response.data;
     } catch (error) {

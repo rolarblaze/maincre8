@@ -21,6 +21,7 @@ export const INITIAL_VALUES: FormValues = {
   interestBehaviours: "",
   customerPersonas: "",
   personaDescribe: "",
+  relevant_document_link: "",
 
   // DESIRED OUTCOMES
   desiredOutcomes: "",
@@ -164,11 +165,15 @@ export const digitalSolutionOptions = [
 export const genderOptions = [
   {
     label: "Male",
-    value: "Male",
+    value: "male",
   },
   {
     label: "Female",
-    value: "Female",
+    value: "female",
+  },
+  {
+    label: "Other",
+    value: "other",
   },
 ];
 

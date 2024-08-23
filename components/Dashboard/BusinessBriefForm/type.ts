@@ -39,6 +39,7 @@ interface FormValues {
 
   // ADDITIONAL INFORMATION
   additionalInformation: string;
+  relevant_document_link: string;
 
   // ATTACH A FILE
   document: File | null;
