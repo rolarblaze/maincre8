@@ -1,9 +1,9 @@
 import * as Yup from "yup";
 
 export const validationSchema = Yup.object({
-  // BUSINESS INFORMATION
-  industry: Yup.string().required("Industry is required"),
+  // BUSINESS INFORMATION (Compulsory)
   companyName: Yup.string().required("Company Name is required"),
+  industry: Yup.string().required("Industry is required"),
   companySize: Yup.string().required("Company Size is required"),
   websiteURL: Yup.string()
     .url("Invalid URL format")
@@ -16,53 +16,45 @@ export const validationSchema = Yup.object({
     .matches(/^[0-9]{10,11}$/, "Phone number must be 10 or 11 digits")
     .required("Contact Phone Number is required"),
 
-  // BUSINESS CHALLENGES
-  challenges: Yup.string().required("Challenges are required"),
-  digitalSolution: Yup.string().required("Digital Solution is required"),
-  solutionOutcomes: Yup.string().required("Solution Outcomes are required"),
+  // BUSINESS CHALLENGES (Optional)
+  challenges: Yup.string().optional(),
+  digitalSolution: Yup.string().optional(),
+  solutionOutcomes: Yup.string().optional(),
 
-  // TARGET AUDIENCE
-  audience: Yup.string().required("Audience is required"),
-  ageGroup: Yup.string().required("Age Group is required"),
-  gender: Yup.string()
-    .oneOf(["male", "female", "other"], "Invalid Gender")
-    .required("Gender is required"),
-  location: Yup.string().required("Location is required"),
-  interestBehaviours: Yup.string().required("Interest Behaviours are required"),
-  customerPersonas: Yup.string().required("Customer Personas are required"),
-  personaDescribe: Yup.string().required("Persona Description is required"),
+  // TARGET AUDIENCE (Optional)
+  audience: Yup.string().optional(),
+  ageGroup: Yup.string().optional(),
+  gender: Yup.string().oneOf(["male", "female", "other"]).optional(),
+  location: Yup.string().optional(),
+  interestBehaviours: Yup.string().optional(),
+  customerPersonas: Yup.string().optional(),
+  personaDescribe: Yup.string().optional(),
 
-  // DESIRED OUTCOMES
-  desiredOutcomes: Yup.string().required("Desired Outcomes are required"),
+  // DESIRED OUTCOMES (Optional)
+  desiredOutcomes: Yup.string().optional(),
 
-  // BUDGET
-  budgetProjection: Yup.string().required("Budget Projection is required"),
+  // BUDGET (Optional)
+  budgetProjection: Yup.string().optional(),
+  budget: Yup.string().optional(),
 
-  // PREFERRED SOLUTIONS
-  usefulDigitalServices: Yup.array()
-    .of(Yup.string())
-    .required("Useful Digital Services are required"),
+  // PREFERRED SOLUTIONS (Optional)
+  usefulDigitalServices: Yup.array().of(Yup.string()).optional(),
 
-  // COMPETITOR ANALYSIS
-  mainCompetitor: Yup.string().required("Main Competitor is required"),
-  mainCompetitorWebsite: Yup.string()
-    .url("Invalid URL format")
-    .required("Main Competitor Website is required"),
-  dislikeDigitalPrescence: Yup.string().required(
-    "Dislike Digital Presence is required"
-  ),
+  // COMPETITOR ANALYSIS (Optional)
+  mainCompetitor: Yup.string().optional(),
+  mainCompetitorWebsite: Yup.string().url("Invalid URL format").optional(),
+  dislikeDigitalPrescence: Yup.string().optional(),
 
-  // ADDITIONAL INFORMATION
+  // ADDITIONAL INFORMATION (Optional)
   additionalInformation: Yup.string().optional(),
 
-  // ATTACH FILE
-  document: Yup.mixed()
-    .test("fileSize", "Max file size exceeded.", (value) => {
-      return !value || (value instanceof File && value.size <= 5000000);
-    })
-    .nullable()
-    .required("File is required"),
+  // ATTACH FILE (Optional)
+  document: Yup.mixed().nullable().test("fileSize", "Max file size exceeded.", (value) => {
+    if (!value) return true; // Skip validation if no file is provided
+    return value instanceof File && value.size <= 5000000;
+  }),
 
-  // CONSENT
-  receiveUpdates: Yup.boolean().nullable().required("Consent is required"),
+
+  // CONSENT (Optional)
+  receiveUpdates: Yup.boolean().nullable().optional(),
 });
