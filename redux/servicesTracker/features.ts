@@ -3,6 +3,25 @@ import { handleAxiosError } from "@/utils/helpers/general/errorHandler";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { PackagePayment, UploadBriefFile } from "./interface";
 
+//
+
+// test pay for package
+export const testPayForPackage = createAsyncThunk(
+  "services/testPayForPackage",
+  async (payload: PackagePayment, { rejectWithValue }) => {
+    try {
+      const response = await api.post(`user/make-test-payment`, {
+        package_id: payload.package_id,
+        currency: payload.currency || "NGN",
+      });
+      console.log(response);
+      return response.data.tracking_details;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(handleAxiosError(error));
+    }
+  }
+);
 // pay for package
 export const payForPackage = createAsyncThunk(
   "services/payForPackage",

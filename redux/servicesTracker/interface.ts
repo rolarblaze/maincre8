@@ -32,6 +32,7 @@ export interface TrackingDetails {
   off_boarding_meeting_end_time: string;
   zoho_project_is_available: true;
   zoho_project_status: string;
+  milestone_tracking_completed: boolean;
 }
 
 export interface BookDiscoveryCall {

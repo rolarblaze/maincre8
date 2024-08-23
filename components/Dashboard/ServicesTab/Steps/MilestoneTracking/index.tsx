@@ -18,6 +18,12 @@ const MilestoneTracking = () => {
     handleProgressUpdate(dispatch, trackingDetails);
   }, [dispatch, trackingDetails]);
 
+  if (trackingDetails) {
+    console.log(trackingDetails);
+  }
+
+  const isCompleted = false;
+
   return (
     <WrapperComponent
       status={status}
