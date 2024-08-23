@@ -13,6 +13,7 @@ import {
   USEFUL_DIGITAL_SERVICES,
 } from "./constants";
 import { validationSchema } from "./schema";
+import { addAlert } from "@/redux/alerts";
 import { useState } from "react";
 import { useAppDispatch } from "@/redux/store";
 import { uploadRelevantDocument, submitRecommendationBrief } from "@/redux/order/features";
@@ -24,28 +25,69 @@ const BusinessBriefForm = () => {
 
   const formik = useFormik<FormValues>({
     initialValues: INITIAL_VALUES,
-    validationSchema: validationSchema,
+
     onSubmit: async (values, { resetForm }: FormikHelpers<FormValues>) => {
-      console.log("Form submit triggered"); // Add this line
+      console.log("Form submit triggered");
       try {
         console.log("Submitting form with values:", values);
 
         const finalValues = {
-          ...values,
-          relevant_document_link: uploadedDocumentLink ?? undefined,
+          company_name: values.companyName,
+          type_of_industry: values.industry,
+          company_size: values.companySize,
+          website_url: values.websiteURL,
+          contact_person_name: values.contactPersonName,
+          contact_email: values.contactEmail,
           contact_phone_number: phone || '',
+          current_specific_business_challenges: values.challenges,
+          previously_implemented_digital_solutions: values.digitalSolution,
+          solution_and_outcome_description: values.solutionOutcomes,
+          target_audience: values.audience,
+          target_audience_age_group: values.ageGroup,
+          target_audience_gender: values.gender || undefined,
+          target_audience_location: values.location,
+          target_audience_interest: values.interestBehaviours,
+          existing_audience_persona_available: values.customerPersonas === "Yes",
+          existing_audience_persona_description: values.personaDescribe,
+          budget_projection_range: values.budget || values.budgetProjection,
+          preferred_solutions: values.usefulDigitalServices.join(", "),
+          main_competitors: values.mainCompetitor,
+          competitor_website_links: values.mainCompetitorWebsite,
+          competitor_like_and_dislike: values.dislikeDigitalPrescence,
+          additional_context: values.additionalInformation,
+          relevant_document_link: uploadedDocumentLink || values.relevant_document_link,
+          news_letter_subscription: values.receiveUpdates === "Yes"
         };
 
-        console.log("Final Values:", finalValues); // Add this line
+
+        console.log("Final Values:", finalValues);
 
         await dispatch(submitRecommendationBrief(finalValues));
+
         console.log("Form submitted successfully");
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Success",
+            subText: "Brief submitted successfully",
+            type: "success",
+          })
+        );
         resetForm();
       } catch (error) {
         console.error("Error submitting form:", error);
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Error",
+            subText: "Error submitting brief, please try again later",
+            type: "error",
+          })
+        );
       }
     },
   });
+
 
 
   const { values, errors, touched, isSubmitting, handleBlur, handleChange, handleSubmit, setFieldValue } = formik;
@@ -60,7 +102,7 @@ const BusinessBriefForm = () => {
   const handleFileUpload = async (file: File | null) => {
     if (file && file.size > 5000000) {
       setFieldValue("document", null);
-      // setFieldError("document", "Max file size exceeded.");
+      formik.setFieldError("document", "Max file size exceeded.");
       return;
     }
 
@@ -73,12 +115,15 @@ const BusinessBriefForm = () => {
 
         console.log("File uploaded successfully:", file_link);
         setUploadedDocumentLink(file_link); // Store the file link for later use
-        setFieldValue("document", file_link);
+        setFieldValue("document", file.name); // Store the file name as a string
+        formik.setFieldError("document", ""); // Clear any existing file errors
       }
     } catch (error) {
       console.error("Error uploading file:", error);
+      formik.setFieldError("document", "File upload failed.");
     }
   };
+
 
 
   return (
@@ -261,7 +306,7 @@ const BusinessBriefForm = () => {
             options={genderOptions}
             value={values.gender || undefined}
             onChange={handleChange}
-            // onBlur={handleBlur}
+          // onBlur={handleBlur}
           />
 
 
@@ -476,10 +521,12 @@ const BusinessBriefForm = () => {
             </label>
 
             <UploadFile
-              data={values.document}
+              //@ts-ignore
+              fileName={values.document || null} 
               errors={errors.document || ""}
               setFieldValue={(field: string, value: File | null) => handleFileUpload(value)}
             />
+
           </div>
         </div>
       </div>

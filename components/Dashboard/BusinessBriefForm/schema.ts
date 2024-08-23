@@ -49,12 +49,11 @@ export const validationSchema = Yup.object({
   additionalInformation: Yup.string().optional(),
 
   // ATTACH FILE (Optional)
-  document: Yup.mixed()
-    .test("fileSize", "Max file size exceeded.", (value) => {
-      return !value || (value instanceof File && value.size <= 5000000);
-    })
-    .nullable()
-    .optional(),
+  document: Yup.mixed().nullable().test("fileSize", "Max file size exceeded.", (value) => {
+    if (!value) return true; // Skip validation if no file is provided
+    return value instanceof File && value.size <= 5000000;
+  }),
+
 
   // CONSENT (Optional)
   receiveUpdates: Yup.boolean().nullable().optional(),

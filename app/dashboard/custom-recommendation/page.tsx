@@ -48,11 +48,11 @@ const CustomRecommendation = () => {
                 className="max-w-[28.3125rem] text-sm leading-6 flex justify-between items-center p-4 rounded-lg bg-grey100 text-grey800"
               >
                 <p className="font-semibold">{item.preferred_solutions}</p>
-                <p>{new Date(item.created_at).toLocaleDateString('en-US', {
+                <p>{item.created_at ? new Date(item.created_at).toLocaleDateString('en-US', {
                   day: 'numeric',
                   month: 'long',
                   year: 'numeric'
-                })}</p>
+                }) : "Date not available"}</p>
               </div>
             ))
           ) : (

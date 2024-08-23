@@ -49,7 +49,6 @@ export const submitRecommendationBrief = createAsyncThunk<void, Brief>(
   async (data, { rejectWithValue }) => {
     try {
       const response = await api.post("user/submit-recommendation-brief", data);
-      console.log("Brief submitted successfully:", response.data);
       return response.data;
     } catch (error) {
       console.error("Error submitting brief:", error);
@@ -66,7 +65,6 @@ export const uploadRelevantDocument = createAsyncThunk<{ file_link: string }, Fo
       const response = await api.post("user/upload-relevant-document/recommendation_brief", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
-      console.log("File uploaded successfully:", response.data);
       return response.data;
     } catch (error) {
       console.error("Error uploading file:", error);
