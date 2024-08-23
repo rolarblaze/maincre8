@@ -37,15 +37,11 @@ const CompleteOnboardingCall = () => {
     if (status === "completed" && trackingDetails?.onboarding_call_booked) {
       dispatch(updateProgress({ ZohoProjectOnboardingInProgress: true }));
     }
-  }, [dispatch, status, trackingDetails]);
+  }, [dispatch, status]);
 
   const handleJoinOnboardingCall = () => {
     window.open(callLink, "_blank");
   };
-
-  if (trackingDetails) {
-    console.log(trackingDetails);
-  }
 
   return (
     <WrapperComponent

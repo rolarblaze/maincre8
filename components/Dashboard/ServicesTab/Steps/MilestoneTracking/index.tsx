@@ -1,13 +1,24 @@
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import WrapperComponent from "../Wrapper";
 import { handleProgressUpdate } from "@/helpers/progressHandler";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 
 const MilestoneTracking = () => {
   const dispatch = useAppDispatch();
   const { trackingDetails } = useAppSelector((state) => state.services);
-  // const { trackingProgress } = useAppSelector((state) => state.tracker);
-  const status = "inactive";
+
+  const status = useMemo(() => {
+    if (
+      trackingDetails?.zoho_project_status === "Completed" &&
+      !trackingDetails.milestone_tracking_completed
+    ) {
+      return "inprogress";
+    } else if (trackingDetails?.milestone_tracking_completed) {
+      return "completed";
+    } else {
+      return "inactive";
+    }
+  }, [trackingDetails]);
 
   const buttonClassNames =
     status === "inactive"
@@ -21,8 +32,6 @@ const MilestoneTracking = () => {
   if (trackingDetails) {
     console.log(trackingDetails);
   }
-
-  const isCompleted = false;
 
   return (
     <WrapperComponent

@@ -2,39 +2,50 @@
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import WrapperComponent from "../Wrapper";
 import { handleProgressUpdate } from "@/helpers/progressHandler";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { updateProgress } from "@/redux/servicesTracker/tracker";
 import { bookOffBoardingCall } from "@/redux/servicesTracker/features";
 import { useSearchParams } from "next/navigation";
 import { addAlert } from "@/redux/alerts";
 
 const BookOffboardingCall = () => {
-  // first step
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
   const transId = searchParams.get("transactionId");
   const { trackingDetails } = useAppSelector((state) => state.services);
-  const { trackingProgress } = useAppSelector((state) => state.tracker);
 
   // State to manage loading
   const [loading, setLoading] = useState(false);
 
-  //second step
-  // use a value to check if the step is completed or not (in active)
-  const hasBookedDiscoveryCall =
-    trackingDetails?.onboarding_call_booked == true ? "completed" : "inactive";
+  // Status calculation based on provided conditions
+  const status = useMemo(() => {
+    const currentTime = new Date();
+    const offBoardingEndTime = trackingDetails?.off_boarding_meeting_end_time
+      ? new Date(trackingDetails.off_boarding_meeting_end_time)
+      : null;
 
-  const status = trackingProgress?.BookDiscoveryCallInProgress
-    ? "inprogress"
-    : hasBookedDiscoveryCall;
+    if (
+      trackingDetails?.milestone_tracking_completed &&
+      !trackingDetails?.offboarding_call_booked
+    ) {
+      return "inprogress";
+    } else if (
+      trackingDetails?.offboarding_call_booked &&
+      offBoardingEndTime &&
+      currentTime > offBoardingEndTime
+    ) {
+      return "completed";
+    } else {
+      return "inactive";
+    }
+  }, [trackingDetails]);
 
-  // third step
-  // check the current progress state of this step
+  // Update progress state
   useEffect(() => {
     handleProgressUpdate(dispatch, trackingDetails);
   }, [dispatch, trackingDetails]);
 
-  // set next step to inprogress
+  // Set next step to inprogress
   useEffect(() => {
     if (
       status === "completed" &&
@@ -83,7 +94,7 @@ const BookOffboardingCall = () => {
 
   return (
     <WrapperComponent
-      status={"inactive"}
+      status={status}
       title="Book Offboarding Call"
       description="Schedule an offboarding call to review the project"
       buttonLabel="Book offboarding call"

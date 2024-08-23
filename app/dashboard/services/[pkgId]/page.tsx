@@ -16,7 +16,6 @@ import { useEffect, useState } from "react";
 
 const PackageDetails = () => {
   const [isBuying, setIsBuying] = useState(false);
-  // const { loading } = useAppSelector((state) => state.services);
   const { pkgId } = useParams();
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState("package info");
@@ -49,9 +48,12 @@ const PackageDetails = () => {
   if (status !== "succeeded") return <FullLoader />;
   if (error) return <div>Error: {error}</div>;
 
+  // if package is paid for not
   const checkForPackage = orderHistory?.find(
     (orders) => orders.package.package_id === pkgDetails.package_id
   );
+
+  const disableMyPackageTab = checkForPackage ? false : true;
 
   const buyPackage = async () => {
     if (pkgId && id) {
@@ -122,10 +124,10 @@ const PackageDetails = () => {
 
       {/* ------------------------------------------------ */}
       {/* ------------------------------------------------ */}
-      <div className="border-l border-t border-grey200 py-4 px-6 mt-4 md:mt-6 h-full ">
+      <div className="border-l border-t border-grey200 py-4 md:px-6 mt-4 md:mt-6 h-full ">
         <TabsToggle
           onTabClick={setActiveTab}
-          disableMyPackage={false}
+          disableMyPackage={disableMyPackageTab}
           provisions={pkgDetails?.provisions}
         />
       </div>

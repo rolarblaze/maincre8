@@ -56,10 +56,10 @@ const WrapperComponent: React.FC<CallComponentProps> = ({
       </div>
 
       <div
-        className={`w-full flex items-center justify-between gap-2 rounded-lg p-6 ${containerStyle} ${textColor}`}
+        className={`w-full flex items-center justify-between gap-2 rounded-lg px-4 py-6 md:px-6 ${containerStyle} ${textColor}`}
       >
         <div>
-          <p className="text-lg font-semibold">{title}</p>
+          <p className="text-base md:text-lg font-semibold">{title}</p>
           <p className={`${showDescription}`}>{description}</p>
           <div className={`${showDescription}`}>{extraDescription}</div>
         </div>
