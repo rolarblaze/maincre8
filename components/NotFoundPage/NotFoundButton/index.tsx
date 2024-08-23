@@ -9,7 +9,7 @@ const NotFoundButton: FC<{
 }> = ({ className, content, href }) => {
   return (
     <button
-      className={`rounded-lg text-base font-semibold py-4 px-12 text-primary600 border border-primary600 ${className}`}
+      className={`rounded-lg text-base font-semibold py-4 px-[18.25px] md:px-12 text-primary600 border border-primary600 ${className}`}
     >
       <Link href={href as Url}>{content}</Link>
     </button>
