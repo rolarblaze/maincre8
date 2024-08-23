@@ -1,5 +1,7 @@
 import InputField from "@/components/Forms/InputField";
+import InputFile from "@/components/Forms/InputFile";
 import Textarea from "@/components/Forms/Textarea";
+import { AttachIcon } from "@/public/icons";
 import BlueMessageIcon from "@/public/svgs/BlueMessageIcon";
 import BluePhoneIcon from "@/public/svgs/BluePhoneIcon";
 import BlueSocialMediaIcon from "@/public/svgs/BlueSocialMediaIcon";
@@ -60,6 +62,13 @@ function ContactForm() {
       type: "textArea",
       label: "Message",
       placeholder: "Type in your message",
+    },
+    {
+      name: "contactFile",
+      type: "file",
+      id: "contactFile",
+      label: "Attach a file",
+      icon: <AttachIcon />,
     },
   ];
   return (

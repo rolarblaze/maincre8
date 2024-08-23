@@ -1,4 +1,4 @@
-import { AttachIcon } from "@/public/icons";
+"use client";
 import React, { ChangeEvent, KeyboardEvent, ReactNode, useState } from "react";
 
 interface InputFileProps {
@@ -17,7 +17,7 @@ interface InputFileProps {
   onFileChange?: (file: File | null) => void;
   error?: string | boolean;
   name?: string;
-  id?: string;
+  id: string;
 }
 
 function InputFile({
@@ -44,7 +44,7 @@ function InputFile({
     onFileChange?.(file);
   };
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex">
       {/* Hidden file input */}
       <input
         id={id}
@@ -62,7 +62,7 @@ function InputFile({
       {/* Custom styled button */}
       <label
         htmlFor={id}
-        className={`cursor-pointer px-4 py-[10px] text-white bg-grey200 rounded-xl flex gap-1 ${classNames}`}
+        className={`cursor-pointer px-4 py-[10px] text-white bg-grey200 rounded-xl flex gap-1 justify-center items-center ${classNames}`}
       >
         {icon}
         <span className="text-grey900 font-semibold">
