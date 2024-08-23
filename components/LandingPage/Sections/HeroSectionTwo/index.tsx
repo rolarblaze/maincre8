@@ -13,7 +13,7 @@ function HeroSectionTwo({ content }: HeroSectionTwoProps) {
         autoPlay
         muted
         loop
-        className="absolute object-cover -z-[1] inset-0 min-h-full min-w-full"
+        className="absolute object-cover -z-[1] inset-0 h-full w-full"
       >
         <source src="/video/bgVideoDark.webm" type="video/webm" />
       </video>
