@@ -1,9 +1,28 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
+import assetLibrary from "@/library";
+import Image from "next/image";
 
 const BrandSection = () => {
-  const brands = ["DevSEAL", "SellPlanner", "SellMerch", "Piazza"];
+  const brands = [
+    {
+      src: assetLibrary.devsealLogoWhite,
+      alt: "DevSeal Logo",
+    },
+    {
+      src: assetLibrary.sellplannerLogoWhite,
+      alt: "Sellplanner Logo",
+    },
+    {
+      src: assetLibrary.sellMerchLogoWhite,
+      alt: "SellMerch Logo",
+    },
+    {
+      src: assetLibrary.piazzaLogoWhite,
+      alt: "Piazza Logo",
+    },
+  ];
   const duplicatedBrands = [...brands, ...brands]; // Duplicate the brands array
 
   return (
@@ -28,11 +47,14 @@ const BrandSection = () => {
           style={{ whiteSpace: "nowrap" }}
         >
           {duplicatedBrands.map((item, index) => (
-            <div
-              key={index}
-              className="inline-block text-2xl font-bold text-grey50 leading-8 tracking-tight border border-grey600 p-4 rounded-lg"
-            >
-              {item}
+            <div key={index} className="inline-block w-[200px] h-[200px]">
+              <Image
+                src={item.src}
+                alt={item.alt}
+                width={200}
+                height={200}
+                layout="responsive"
+              />
             </div>
           ))}
         </motion.div>
