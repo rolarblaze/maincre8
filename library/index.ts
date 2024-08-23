@@ -26,6 +26,7 @@ const assetLibrary = {
   curvedArrow: "/optimised/curved-arrow.webp",
   arrowDrawing: "/optimised/arrow-drawing.webp",
   bulbIcon: "/icons/bulb-icon.svg",
+  logoBlueTwo: "/optimised/logo-blue-two.webp",
 };
 
 export default assetLibrary;
