@@ -15,9 +15,11 @@ interface InputFileProps {
   isRequired?: boolean;
   onInputIconClick?: () => void;
   onFileChange?: (file: File | null) => void;
-  error?: string | boolean;
+  error?: string | boolean | ReactNode;
   name?: string;
   id: string;
+  setFieldValue: (field: string, value: File | null) => void;
+  // touched?: boolean;
 }
 
 function InputFile({
@@ -35,22 +37,27 @@ function InputFile({
   error,
   name,
   id,
+  setFieldValue,
 }: InputFileProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = (
+    event: ChangeEvent<HTMLInputElement>,
+    name: string
+  ) => {
     const file = event.target.files?.[0] || null;
     setSelectedFile(file);
+    setFieldValue(name, file);
     onFileChange?.(file);
   };
   return (
-    <div className="flex">
+    <div className="flex gap-2">
       {/* Hidden file input */}
       <input
         id={id}
         type={type}
         name={name}
-        onChange={handleFileChange}
+        onChange={(e) => handleFileChange(e, name as string)}
         className="hidden"
         onBlur={onBlur}
         onKeyDown={onKeyDown}

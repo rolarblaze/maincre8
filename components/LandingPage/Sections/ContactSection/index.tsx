@@ -1,3 +1,4 @@
+"use client";
 import InputField from "@/components/Forms/InputField";
 import InputFile from "@/components/Forms/InputFile";
 import Textarea from "@/components/Forms/Textarea";
@@ -10,6 +11,9 @@ import InstagramIcon from "@/public/svgs/InstagramIcon";
 import LinkedInIcon from "@/public/svgs/LinkedInIcon";
 import XIcon from "@/public/svgs/XIcon";
 import React, { ReactNode } from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { ContactFormValues, FieldName } from "./formValues";
 
 function Contact({
   title,
@@ -32,7 +36,7 @@ function Contact({
 }
 
 function ContactForm() {
-  const formData = [
+  const contactFormData = [
     {
       name: "firstName",
       type: "text",
@@ -71,10 +75,38 @@ function ContactForm() {
       icon: <AttachIcon />,
     },
   ];
+  const validationSchema = Yup.object({
+    firstName: Yup.string().required("First name is required"),
+    lastName: Yup.string().required("Last name is required"),
+    phoneNumber: Yup.string().required("Phone number is required"),
+    email: Yup.string()
+      .email("Invalid email")
+      .required("Work email is required"),
+    message: Yup.string().required("Message is required"),
+    contactFile: Yup.mixed().nullable(), // allow null or undefined
+  });
+
+  const formik = useFormik<ContactFormValues>({
+    initialValues: {
+      firstName: "",
+      lastName: "",
+      phoneNumber: "",
+      email: "",
+      message: "",
+      contactFile: null,
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      // handle form submission
+      console.log(values, "form submitted!");
+    },
+  });
+
+ 
   return (
     <div className="px-8 py-8 w-full border border-grey200 rounded-lg">
-      <form className="space-y-8">
-        {formData.map((entity, idx) => {
+      <form onSubmit={formik.handleSubmit} className="space-y-8">
+        {contactFormData.map((entity, idx) => {
           return (
             <div key={idx}>
               {entity.type === "textArea" && (
@@ -82,6 +114,9 @@ function ContactForm() {
                   name={entity.name}
                   label={entity.label}
                   placeholder={entity.placeholder}
+                  error={formik.errors[entity.name as FieldName]}
+                  touched={formik.touched[entity.name as FieldName]}
+                  onChange={formik.handleChange}
                 />
               )}
               {entity.type !== "textArea" && (
@@ -97,12 +132,17 @@ function ContactForm() {
                   }
                   label={entity.label}
                   placeholder={entity.placeholder}
+                  error={formik.errors[entity.name as FieldName]}
+                  onChange={formik.handleChange}
                 />
               )}
             </div>
           );
         })}
-        <button className="rounded-[20px] bg-primary900 px-6 py-3 text-white">
+        <button
+          className="rounded-[20px] bg-primary900 px-6 py-3 text-white"
+          type="submit"
+        >
           Send us a message
         </button>
       </form>
