@@ -15,7 +15,11 @@ const CustomRecommendation = () => {
   }, [dispatch]);
 
   if (isLoading) {
-    return <Loader />;
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <Loader />
+      </div>
+    );
   }
 
   return (
@@ -28,7 +32,7 @@ const CustomRecommendation = () => {
             <span>Get new recommendation</span>
           </div>
         }
-        classNames="max-w-[16.125rem] text-base leading-6 px-0"
+        classNames="max-w-[17.125rem] text-base leading-6 px-0"
       />
 
       <div className="space-y-6">
@@ -44,11 +48,11 @@ const CustomRecommendation = () => {
                 className="max-w-[28.3125rem] text-sm leading-6 flex justify-between items-center p-4 rounded-lg bg-grey100 text-grey800"
               >
                 <p className="font-semibold">{item.preferred_solutions}</p>
-                <p>{new Date(item.created_at).toLocaleDateString('en-US', {
+                <p>{item.created_at ? new Date(item.created_at).toLocaleDateString('en-US', {
                   day: 'numeric',
                   month: 'long',
                   year: 'numeric'
-                })}</p>
+                }) : "Date not available"}</p>
               </div>
             ))
           ) : (

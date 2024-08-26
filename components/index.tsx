@@ -17,6 +17,7 @@ export { default as Alert } from "./Alert";
 export { default as SalesPopUp } from "./SalesPopUp";
 export { default as PhoneNumberInput } from "./PhoneInput";
 export { default as EmptyState } from "./EmptyState";
+export { default as FormatDate } from "./FormatDates";
 
 // MODALS
 export { default as DropdownWrapper } from "./Modals/DropdownWrapper";

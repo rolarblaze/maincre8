@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
     },
     {
       name: "Contact Us",
-      href: "/",
+      href: "/contact-us",
     },
     {
       name: "Resources",
@@ -125,7 +125,7 @@ const Navbar: React.FC = () => {
             <span>Solutions</span>
             <Arrow className={isHome && !navColor && "*:fill-white"} />
           </div>
-          <Link href={"/"}>Contact Us</Link>
+          <Link href={"/contact-us"}>Contact Us</Link>
           <div
             className="flex items-center gap-2 cursor-pointer"
             onClick={toggleResourcesMenu}
@@ -135,6 +135,8 @@ const Navbar: React.FC = () => {
           </div>
         </section>
         {/* <div className="hidden lg:flex items-center gap-6">
+        {/* Desktop Buttons */}
+        <div className="hidden lg:flex items-center gap-6">
           <Link
             href="/login"
             className={`${
@@ -152,7 +154,7 @@ const Navbar: React.FC = () => {
               isHome && !navColor && "bg-white text-primary900"
             }`}
           />
-        </div> */}
+        </div>
         {/* Mobile Menu */}
         {mobileMenuOpen && (
           <div className="absolute top-0 left-0 w-full bg-white shadow-md transition-transform transform translate-y-0 flex flex-col gap-3 h-screen overflow-y-auto">
@@ -247,6 +249,8 @@ const Navbar: React.FC = () => {
               </div>
 
               {/* <div className="flex flex-col gap-4">
+              {/* Nav Buttons */}
+              <div className="flex flex-col gap-4">
                 <Link
                   href="/login"
                   className={`py-[9.5px] rounded-lg text-center border border-primary500 text-primary500 font-semibold          
@@ -260,7 +264,7 @@ const Navbar: React.FC = () => {
                   link="/signup"
                   classNames={`px-4 py-[9.5px] text-sm font-medium md:text-sm bg-primary500`}
                 />
-              </div> */}
+              </div>
             </div>
           </div>
         )}

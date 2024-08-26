@@ -16,7 +16,6 @@ export const loginUser = createAsyncThunk(
       setUserTokenCookie(response.data.access_token); // Set the user token cookie
       return response.data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(handleAxiosError(error));
     }
   }
@@ -150,10 +149,8 @@ export const getUserProfile = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await api.get("user/get-profile-info");
-      console.log("user Profile", response.data)
       return response.data;
     } catch (error) {
-      console.log("Error fetching user profile:", error);
       return rejectWithValue(handleAxiosError(error));
     }
   }

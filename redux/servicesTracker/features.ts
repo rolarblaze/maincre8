@@ -1,7 +1,44 @@
 import api from "@/utils/axios/api";
 import { handleAxiosError } from "@/utils/helpers/general/errorHandler";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { UploadBriefFile } from "./interface";
+import { PackagePayment, UploadBriefFile } from "./interface";
+
+//
+
+// test pay for package
+export const testPayForPackage = createAsyncThunk(
+  "services/testPayForPackage",
+  async (payload: PackagePayment, { rejectWithValue }) => {
+    try {
+      const response = await api.post(`user/make-test-payment`, {
+        package_id: payload.package_id,
+        currency: payload.currency || "NGN",
+      });
+      console.log(response);
+      return response.data.tracking_details;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(handleAxiosError(error));
+    }
+  }
+);
+// pay for package
+export const payForPackage = createAsyncThunk(
+  "services/payForPackage",
+  async (payload: PackagePayment, { rejectWithValue }) => {
+    try {
+      const response = await api.post(`user/make-payment`, {
+        package_id: payload.package_id,
+        currency: payload.currency || "NGN",
+      });
+      console.log(response);
+      return response.data.tracking_details;
+    } catch (error) {
+      console.log(error);
+      return rejectWithValue(handleAxiosError(error));
+    }
+  }
+);
 
 // track user order
 export const trackUserOrder = createAsyncThunk(
@@ -9,10 +46,8 @@ export const trackUserOrder = createAsyncThunk(
   async (id: number, { rejectWithValue }) => {
     try {
       const response = await api.get(`user/package-tracking/${id}`);
-      // console.log(response.data);
       return response.data.tracking_details;
     } catch (error) {
-      // console.log(error);
       return rejectWithValue(handleAxiosError(error));
     }
   }
@@ -27,7 +62,6 @@ export const getUserOrderHistory = createAsyncThunk(
 
       return response.data.user_transactions;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(handleAxiosError(error));
     }
   }
@@ -51,10 +85,8 @@ export const submitBriefForTracking = createAsyncThunk(
         }
       );
 
-      console.log("file upload response", response.data);
       return response.data;
     } catch (error) {
-      console.log("file upload error", error);
       return rejectWithValue(handleAxiosError(error));
     }
   }
@@ -70,7 +102,6 @@ export const downloadBrief = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(handleAxiosError(error));
     }
   }
@@ -86,7 +117,6 @@ export const bookDiscoveryCall = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(handleAxiosError(error));
     }
   }
@@ -100,7 +130,6 @@ export const getCalendlyLink = createAsyncThunk(
       const response = await api.get(`meetings/get-calendly-user-data`);
       return response.data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(handleAxiosError(error));
     }
   }
@@ -116,7 +145,6 @@ export const bookOffBoardingCall = createAsyncThunk(
       );
       return response.data;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(handleAxiosError(error));
     }
   }
