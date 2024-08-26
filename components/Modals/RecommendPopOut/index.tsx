@@ -4,15 +4,15 @@ import Link from "next/link";
 import React from "react";
 
 interface RecommendPopOutProps {
-  title: string;
-  paragraph: string;
+  // title: string;
+  // paragraph: string;
   getRecommend?: () => void;
   keepExploring?: () => void;
 }
 
 const RecommendPopOut: React.FC<RecommendPopOutProps> = ({
-  title,
-  paragraph,
+  // title,
+  // paragraph,
   getRecommend,
   keepExploring,
 }) => {
