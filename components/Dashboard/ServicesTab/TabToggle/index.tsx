@@ -35,13 +35,11 @@ const TabsToggle: React.FC<TabsProps> = ({
   }, [initialActiveTab]);
 
   const handleTabClick = (tabName: string) => {
-    if (!(disableMyPackage && tabName === "my-package")) {
-      setActiveTab(tabName);
-      onTabClick(tabName);
-      const newParams = new URLSearchParams(searchParams.toString());
-      newParams.set("tab", tabName);
-      router.push(`${pathname}?${newParams.toString()}`);
-    }
+    setActiveTab(tabName);
+    onTabClick(tabName);
+    const newParams = new URLSearchParams(searchParams.toString());
+    newParams.set("tab", tabName);
+    router.push(`${pathname}?${newParams.toString()}`);
   };
 
   const tabs: Tab[] = [
@@ -63,7 +61,15 @@ const TabsToggle: React.FC<TabsProps> = ({
       ),
       component: <PackageInfo Benefits={provisions} />,
     },
-  ];
+  ].filter((tab) => !(disableMyPackage && tab.name === "my-package"));
+
+  // Ensure the active tab is not hidden by the filter
+  useEffect(() => {
+    if (disableMyPackage && activeTab === "my-package") {
+      setActiveTab("package-info");
+      router.push(`${pathname}?tab=package-info`);
+    }
+  }, [disableMyPackage, activeTab, router, pathname]);
 
   return (
     <div>
@@ -76,10 +82,6 @@ const TabsToggle: React.FC<TabsProps> = ({
                 activeTab === tab.name
                   ? "text-primary500 border-b border-primary500"
                   : "text-grey700"
-              } ${
-                disableMyPackage && tab.name === "my-package"
-                  ? "opacity-50 cursor-not-allowed"
-                  : ""
               }`}
               onClick={() => handleTabClick(tab.name)}
             >
@@ -95,7 +97,7 @@ const TabsToggle: React.FC<TabsProps> = ({
           ))}
         </div>
       </div>
-      <div className="p-6">
+      <div className="px-0 md:px-6 py-6">
         {tabs.find((tab) => tab.name === activeTab)?.component}
       </div>
     </div>

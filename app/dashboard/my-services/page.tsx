@@ -15,15 +15,15 @@ const MyServices = () => {
 
   const bundleColors: { [key: string]: string } = {};
 
-  if (orderHistory) {
-    console.log(orderHistory);
-  }
+  // if (orderHistory) {
+  //   console.log(orderHistory);
+  // }
 
   if (loading) return <FullLoader />;
 
   return (
     <>
-      {orderHistory!.length < 1 ? (
+      {orderHistory && orderHistory?.length < 1 ? (
         <EmptyState
           imgSrc="myservices-empty"
           text="Buy a package to get started"
