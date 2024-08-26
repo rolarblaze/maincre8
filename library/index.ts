@@ -14,6 +14,7 @@ const assetLibrary = {
   readyToUseThree: "/optimised/ready-to-use-3.webp",
   unlimitedRevisionsTwo: "/optimised/unlimited-revisions-2.webp",
   unlimitedRevisionsThree: "/optimised/unlimited-revisions-3.webp",
+  notFound: "/optimised/not-found.webp",
 
   // SVGS
   highlight: "/optimised/highlight.webp",
@@ -25,6 +26,7 @@ const assetLibrary = {
   curvedArrow: "/optimised/curved-arrow.webp",
   arrowDrawing: "/optimised/arrow-drawing.webp",
   bulbIcon: "/icons/bulb-icon.svg",
+  logoBlueTwo: "/optimised/logo-blue-two.webp",
 };
 
 export default assetLibrary;
