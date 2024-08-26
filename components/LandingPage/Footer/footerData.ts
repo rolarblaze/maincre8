@@ -28,9 +28,9 @@ export const footerData = {
     {
       title: "Other Products",
       links: [
+        { name: "Sell Planner", href: null },
         { name: "Sell Merch", href: null },
         { name: "Sell Talk", href: null },
-        { name: "Sell Planner", href: null },
         { name: "Piazza", href: null },
       ],
     },
