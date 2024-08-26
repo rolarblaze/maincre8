@@ -3,11 +3,11 @@ import { ToolTipIcon } from "@/public/icons";
 import React, { useState } from "react";
 
 interface ControlledTextareaProps {
-  label: string;
-  placeholder: string;
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  id: string;
+  label?: string;
+  placeholder?: string;
+  value?: string;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  id?: string;
   name: string;
 
   tooltipText?: string;

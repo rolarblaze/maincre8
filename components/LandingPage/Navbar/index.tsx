@@ -47,7 +47,7 @@ const Navbar: React.FC = () => {
     },
     {
       name: "Contact Us",
-      href: "/",
+      href: "/contact-us",
     },
     {
       name: "Resources",
@@ -125,7 +125,7 @@ const Navbar: React.FC = () => {
             <span>Solutions</span>
             <Arrow className={isHome && !navColor && "*:fill-white"} />
           </div>
-          <Link href={"/"}>Contact Us</Link>
+          <Link href={"/contact-us"}>Contact Us</Link>
           <div
             className="flex items-center gap-2 cursor-pointer"
             onClick={toggleResourcesMenu}

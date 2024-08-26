@@ -4,6 +4,8 @@ const assetLibrary = {
   deliverSteps: "/optimised/deliver-steps.webp",
   seoImage: "/optimised/seo-image.webp",
   teamGroup: "/optimised/team-group.webp",
+  teamGroupRecent: "/optimised/team-group-recent.webp",
+  teamGroupMobile: "/optimised/team-group-mobile.webp",
   recomEmpty: "/optimised/empty-state.webp",
   integrationOne: "/optimised/integration-1.webp",
   integrationTwo: "/optimised/integration-2.webp",
@@ -27,6 +29,10 @@ const assetLibrary = {
   arrowDrawing: "/optimised/arrow-drawing.webp",
   bulbIcon: "/icons/bulb-icon.svg",
   logoBlueTwo: "/optimised/logo-blue-two.webp",
+  sellMerchLogoWhite: "/optimised/sell-merch-logo-white.webp",
+  sellplannerLogoWhite: "/optimised/sellplanner-logo-white.webp",
+  devsealLogoWhite: "/optimised/devseal-logo-white.webp",
+  piazzaLogoWhite: "/optimised/piazza-logo-white.webp",
 };
 
 export default assetLibrary;
