@@ -54,7 +54,7 @@ const Footer: React.FC = () => {
         </section>
       </div>
       <div className="mx-auto w-full max-w-[76rem]">
-        <p>© {currentYear} Rayna. All rights reserved.</p>
+        <p>© {currentYear} SMG. All rights reserved.</p>
       </div>
     </footer>
   );
