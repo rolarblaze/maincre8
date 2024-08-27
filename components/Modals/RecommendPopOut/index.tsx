@@ -46,7 +46,7 @@ const RecommendPopOut: React.FC<RecommendPopOutProps> = ({
       </div>
       <div className="w-full flex flex-col gap-[18px] md:flex-row md:justify-between items-center md:items-start mt-4">
         <Link
-          href={"/"}
+          href={"/dashboard/custom-recommendation/form"}
           className="py-2 flex justify-center items-center rounded-lg w-full md:w-[11.3rem] text-sm bg-primary500 text-white font-semibold"
           onClick={getRecommend}
         >
