@@ -12,7 +12,7 @@ export const footerData = {
         { name: "Digital Marketing", href: null },
         { name: "Creative Design", href: null },
         { name: "Content/copywriting", href: null },
-        { name: "Stop Motion", href: null },
+        { name: "Custom Services", href: null },
       ],
     },
     {
