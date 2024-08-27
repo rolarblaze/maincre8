@@ -9,7 +9,6 @@ interface ControlledTextareaProps {
   onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   id?: string;
   name: string;
-  touched?: boolean;
   tooltipText?: string;
   error?: string | ReactNode | null;
 }
@@ -23,7 +22,6 @@ const Textarea: React.FC<ControlledTextareaProps> = ({
   tooltipText,
   name,
   error = null,
-  touched,
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
@@ -58,7 +56,7 @@ const Textarea: React.FC<ControlledTextareaProps> = ({
         value={value}
         onChange={onChange}
       ></textarea>
-      {error && touched && <p className="text-red-500 text-xs">{error}</p>}
+      {error && <p className="text-red-500 text-xs">{error}</p>}
     </div>
   );
 };

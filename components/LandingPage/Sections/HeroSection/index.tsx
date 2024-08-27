@@ -18,6 +18,7 @@ interface HeroSectionProps {
   buttonLabel?: string;
   buttonLink?: string;
   showGifs?: boolean;
+  showPillText?: boolean;
 }
 
 const HeroSection: React.FC<HeroSectionProps> = ({
@@ -27,6 +28,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({
   buttonLabel,
   buttonLink,
   showGifs = true,
+  showPillText = true,
 }) => {
   return (
     <section className="relative overflow-hidden size-full min-h-[28rem] px-5 pt-24 pb-14 md:pb-16 -mt-28">
@@ -34,9 +36,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({
         {/* HERO CONTENT */}
         <div className="max-sm:max-w-[21rem] max-w-[880px] w-full text-center size-full flex flex-col justify-center items-center gap-6">
           {/* PILL DIV */}
-          <PillDiv className="mb-0 border-primary100 text-white text-xs md:text-lg">
-            {pillText}
-          </PillDiv>
+          {showPillText && (
+            <PillDiv className="mb-0 border-primary100 text-white text-xs md:text-lg">
+              {pillText}
+            </PillDiv>
+          )}
 
           {/* HERO TITLE */}
           <h1 className="md:-tracking-[0.225rem] text-[2.5rem] md:text-5xl leading-[3rem] md:leading-loosest md:text-[5.5rem] font-extrabold text-primary50">

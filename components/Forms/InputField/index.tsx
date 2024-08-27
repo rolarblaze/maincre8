@@ -21,7 +21,6 @@ interface InputFieldProps {
   error?: string | boolean;
   name?: string;
   tooltipText?: string;
-  // touched?: boolean;
 }
 
 const InputField: React.FC<InputFieldProps> = ({
@@ -43,7 +42,6 @@ const InputField: React.FC<InputFieldProps> = ({
   error,
   tooltipText,
   name,
-  // touched
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
 

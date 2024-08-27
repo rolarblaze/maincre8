@@ -1,13 +1,13 @@
 import { AppWrapper, HomepageCTA, HomepageSubscribe } from "@/components";
 import ContactSection from "@/components/LandingPage/Sections/ContactSection";
-import HeroSectionTwo from "@/components/LandingPage/Sections/HeroSectionTwo";
+import HeroSection from "@/components/LandingPage/Sections/HeroSection";
 import React from "react";
 
 function ContactUs() {
   return (
     <AppWrapper type="">
-      <main className="flex flex-col items-center justify-center">
-        <HeroSectionTwo content="Contact Us" />
+      <main className="">
+        <HeroSection title="Contact Us" showGifs={false} showPillText={false} />
         <ContactSection />
         <HomepageCTA />
         <HomepageSubscribe />

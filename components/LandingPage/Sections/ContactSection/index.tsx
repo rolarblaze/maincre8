@@ -67,13 +67,13 @@ function ContactForm() {
       label: "Message",
       placeholder: "Type in your message",
     },
-    {
-      name: "contactFile",
-      type: "file",
-      id: "contactFile",
-      label: "Attach a file",
-      icon: <AttachIcon />,
-    },
+    // {
+    //   name: "contactFile",
+    //   type: "file",
+    //   id: "contactFile",
+    //   label: "Attach a file",
+    //   icon: <AttachIcon />,
+    // },
   ];
   const validationSchema = Yup.object({
     firstName: Yup.string().required("First name is required"),
@@ -102,7 +102,6 @@ function ContactForm() {
     },
   });
 
- 
   return (
     <div className="px-8 py-8 w-full border border-grey200 rounded-lg">
       <form onSubmit={formik.handleSubmit} className="space-y-8">
@@ -115,7 +114,6 @@ function ContactForm() {
                   label={entity.label}
                   placeholder={entity.placeholder}
                   error={formik.errors[entity.name as FieldName]}
-                  touched={formik.touched[entity.name as FieldName]}
                   onChange={formik.handleChange}
                 />
               )}
