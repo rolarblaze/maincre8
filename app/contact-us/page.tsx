@@ -7,7 +7,12 @@ function ContactUs() {
   return (
     <AppWrapper type="">
       <main className="">
-        <HeroSection title="Contact Us" showGifs={false} showPillText={false} />
+        <HeroSection
+          title="Contact Us"
+          showGifs={false}
+          showPillText={false}
+          applyTitleStyles={true}
+        />
         <ContactSection />
         <HomepageCTA />
         <HomepageSubscribe />
