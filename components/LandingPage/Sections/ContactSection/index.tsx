@@ -103,7 +103,7 @@ function ContactForm() {
   });
 
   return (
-    <div className="px-8 py-8 w-full border border-grey200 rounded-lg">
+    <div className="px-5 md:px-8 py-8 w-full border border-transparent md:border-grey200 rounded-lg">
       <form onSubmit={formik.handleSubmit} className="space-y-8">
         {contactFormData.map((entity, idx) => {
           return (
@@ -188,7 +188,7 @@ function ContactSection() {
       </p>
       <div className="flex flex-col md:flex-row gap-8 justify-between">
         {/* Contact */}
-        <div className="space-y-6">
+        <div className="space-y-6 order-2 md:order-1">
           {contactData.map((contact, contactIdx) => {
             return (
               <Contact
@@ -202,7 +202,7 @@ function ContactSection() {
         </div>
 
         {/* Conatct Form */}
-        <div className="max-w-[696px] w-full">
+        <div className="max-w-[696px] w-full order-1 md:order-2">
           <ContactForm />
         </div>
       </div>
