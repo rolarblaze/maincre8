@@ -22,7 +22,7 @@ export const footerData = {
         { name: "Terms and conditions", href: null },
         { name: "Social media policy", href: null },
         { name: "Copyright notice", href: null },
-        { name: "Help center", href: "/help-center" },  
+        { name: "Help center", href: "/help-center" },
       ],
     },
     {
@@ -32,6 +32,7 @@ export const footerData = {
         { name: "Sell Merch", href: null },
         { name: "Sell Talk", href: null },
         { name: "Piazza", href: null },
+        { name: "Boss Global", href: null },
       ],
     },
   ],

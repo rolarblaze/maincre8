@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { footerData } from "./footerData";
 import Logo from "../../../public/icons/footer-logo.svg";
 
