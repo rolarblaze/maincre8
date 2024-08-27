@@ -47,7 +47,6 @@ const Textarea: React.FC<ControlledTextareaProps> = ({
         )}
       </div>
       <textarea
-        required
         id={id}
         name={name}
         className="block w-full border border-gray-300 rounded-lg p-4 placeholder-grey400 text-base focus:outline-none focus:none"
