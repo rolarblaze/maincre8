@@ -126,7 +126,7 @@ function ContactForm() {
           type="submit"
           isLoading={isLoading}
           label="Send us a message"
-          classNames="!rounded-[20px] !bg-primary900 py-3 md:px-6 md:py-3"
+          classNames="!rounded-[20px] !bg-primary900 py-3 md:px-6 md:py-3 w-auto"
         />
       </form>
     </div>
