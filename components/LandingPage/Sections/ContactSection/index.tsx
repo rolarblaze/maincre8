@@ -16,6 +16,10 @@ import {
   FieldName,
   validationSchema,
 } from "./formValues";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { submitContactForm } from "@/redux/newsletter_n_contactform/features";
+import { addAlert } from "@/redux/alerts";
+import Button from "@/components/Button";
 
 function Contact({
   title,
@@ -38,11 +42,14 @@ function Contact({
 }
 
 function ContactForm() {
+  const dispatch = useAppDispatch();
+  const isLoading = useAppSelector((state) => state.contactForm.isLoading);
+
   const formik = useFormik<ContactFormValues>({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      phoneNumber: "",
+      first_name: "",
+      last_name: "",
+      phone_number: "",
       email: "",
       message: "",
     },
@@ -50,6 +57,33 @@ function ContactForm() {
     onSubmit: async (values) => {
       // handle form submission
       console.log(values, "form submitted!");
+      if (values) {
+        const actionResult = await dispatch(submitContactForm(values));
+        if (submitContactForm.fulfilled.match(actionResult)) {
+          dispatch(
+            addAlert({
+              id: "",
+              headText: "Success",
+              subText: `Message successfully sent`,
+              type: "success",
+            })
+          );
+        } else if (submitContactForm.rejected.match(actionResult)) {
+          const errorMessage =
+            actionResult.payload?.errorMessage ||
+            "An error occurred while sending message. Please try again.";
+          dispatch(
+            addAlert({
+              id: "",
+              headText: "Error",
+              subText: errorMessage,
+              type: "error",
+            })
+          );
+        }
+      } else {
+        console.error("Missing payload");
+      }
     },
   });
 
@@ -88,12 +122,12 @@ function ContactForm() {
             </div>
           );
         })}
-        <button
-          className="rounded-[20px] bg-primary900 px-6 py-3 text-white"
+        <Button
           type="submit"
-        >
-          Send us a message
-        </button>
+          isLoading={isLoading}
+          label="Send us a message"
+          classNames="!rounded-[20px] !bg-primary900 py-3 md:px-6 md:py-3"
+        />
       </form>
     </div>
   );

@@ -2,19 +2,19 @@ import * as Yup from "yup";
 
 export const contactFormData = [
   {
-    name: "firstName",
+    name: "first_name",
     type: "text",
     label: "First Name",
     placeholder: "Enter first name",
   },
   {
-    name: "lastName",
+    name: "last_name",
     type: "text",
     label: "Last Name",
     placeholder: "Enter last name",
   },
   {
-    name: "phoneNumber",
+    name: "phone_number",
     type: "text",
     label: "Phone Number",
     placeholder: "Enter phone number",
@@ -34,9 +34,9 @@ export const contactFormData = [
 ];
 
 export interface ContactFormValues {
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
+  first_name: string;
+  last_name: string;
+  phone_number: string;
   email: string;
   message: string;
 }
@@ -44,9 +44,9 @@ export interface ContactFormValues {
 export type FieldName = keyof ContactFormValues;
 
 export const validationSchema = Yup.object({
-  firstName: Yup.string().required("First name is required"),
-  lastName: Yup.string().required("Last name is required"),
-  phoneNumber: Yup.string().required("Phone number is required"),
+  first_name: Yup.string().required("First name is required"),
+  last_name: Yup.string().required("Last name is required"),
+  phone_number: Yup.string().required("Phone number is required"),
   email: Yup.string().email("Invalid email").required("Work email is required"),
   message: Yup.string().required("Message is required"),
 });
