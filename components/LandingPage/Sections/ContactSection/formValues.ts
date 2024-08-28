@@ -1,3 +1,5 @@
+import * as Yup from "yup";
+
 export const contactFormData = [
   {
     name: "firstName",
@@ -40,3 +42,11 @@ export interface ContactFormValues {
 }
 
 export type FieldName = keyof ContactFormValues;
+
+export const validationSchema = Yup.object({
+  firstName: Yup.string().required("First name is required"),
+  lastName: Yup.string().required("Last name is required"),
+  phoneNumber: Yup.string().required("Phone number is required"),
+  email: Yup.string().email("Invalid email").required("Work email is required"),
+  message: Yup.string().required("Message is required"),
+});

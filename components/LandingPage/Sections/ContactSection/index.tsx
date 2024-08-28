@@ -10,8 +10,12 @@ import LinkedInIcon from "@/public/svgs/LinkedInIcon";
 import XIcon from "@/public/svgs/XIcon";
 import React, { ReactNode } from "react";
 import { useFormik } from "formik";
-import * as Yup from "yup";
-import { contactFormData, ContactFormValues, FieldName } from "./formValues";
+import {
+  contactFormData,
+  ContactFormValues,
+  FieldName,
+  validationSchema,
+} from "./formValues";
 
 function Contact({
   title,
@@ -34,16 +38,6 @@ function Contact({
 }
 
 function ContactForm() {
-  const validationSchema = Yup.object({
-    firstName: Yup.string().required("First name is required"),
-    lastName: Yup.string().required("Last name is required"),
-    phoneNumber: Yup.string().required("Phone number is required"),
-    email: Yup.string()
-      .email("Invalid email")
-      .required("Work email is required"),
-    message: Yup.string().required("Message is required"),
-  });
-
   const formik = useFormik<ContactFormValues>({
     initialValues: {
       firstName: "",
