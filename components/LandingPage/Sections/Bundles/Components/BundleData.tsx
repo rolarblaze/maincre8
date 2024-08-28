@@ -4,9 +4,10 @@ const ServiceBundles = {
   digital: [
     {
       icon: <Chart />,
-      bundle: "SEO Optimization Bundle",
-      price: "$100",
-      description: "For most businesses that want to optimize web queries",
+      bundle: "Basic Package",
+      price: "$499",
+      description:
+        "Access to basic copywriting services, for small businesses or startups",
       features: [
         "Keyword Research",
         "On-Page SEO",
@@ -27,9 +28,10 @@ const ServiceBundles = {
     },
     {
       icon: <Chart />,
-      bundle: "Digital Marketing Strategy",
-      price: "$100",
-      description: "For most businesses that want to optimize web queries",
+      bundle: "Standard Package",
+      price: "$499",
+      description:
+        "Ideal for businesses seeking to take their marketing copies to the next level",
       features: [
         "Campaign Planning",
         "Ad Management",
@@ -50,9 +52,10 @@ const ServiceBundles = {
     },
     {
       icon: <Chart />,
-      bundle: "E-commerce Setup Bundle",
-      price: "$180",
-      description: "For most businesses that want to optimize web queries",
+      bundle: "Premium Package",
+      price: "$499",
+      description:
+        "Perfect for businesses with need for a full spectrum of copywriting services ",
       features: [
         "Storefront Design",
         "Product Listing",
@@ -74,9 +77,11 @@ const ServiceBundles = {
   creative: [
     {
       icon: <Palette />,
-      bundle: "Brand Identity Bundle",
+      bundle:
+        "For businesses establishing an online presence with essential blogging services",
       price: "$20",
-      description: "For most businesses that want to optimize web queries",
+      description:
+        "Ideal for growing businesses building a stronger online presence",
       features: [
         "Logo Design",
         "Brand Guidelines",
@@ -99,7 +104,8 @@ const ServiceBundles = {
       icon: <Palette />,
       bundle: "Social Media Content Creation",
       price: "$100",
-      description: "For most businesses that want to optimize web queries",
+      description:
+        "For established businesses seeking to dominate their industry’s online space",
       features: [
         "Post Design",
         "Content Calendar",

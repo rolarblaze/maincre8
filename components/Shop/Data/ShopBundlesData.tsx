@@ -1,6 +1,5 @@
 import {
   BasicPackageIcon,
-  Palette,
   PremiumPackageIcon,
   StandardPackageIcon,
 } from "@/public/icons";
