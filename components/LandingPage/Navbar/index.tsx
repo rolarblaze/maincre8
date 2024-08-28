@@ -111,7 +111,7 @@ const Navbar: React.FC = () => {
         {/* DESKTOP NAVIGATION */}
         <section
           className={twMerge(
-            `text-grey900 font-semibold flex items-center gap-6 max-lg:hidden`,
+            `text-grey900 text-sm font-semibold flex items-center gap-6 max-lg:hidden`,
             `${isHome && !navColor && "text-white"}`
           )}
         >
@@ -136,7 +136,7 @@ const Navbar: React.FC = () => {
         </section>
         {/* <div className="hidden lg:flex items-center gap-6">
         {/* Desktop Buttons */}
-        <div className="hidden lg:flex items-center gap-6">
+        <div className="hidden lg:flex items-center gap-6 text-sm">
           <Link
             href="/login"
             className={`${
@@ -253,7 +253,7 @@ const Navbar: React.FC = () => {
               <div className="flex flex-col gap-4">
                 <Link
                   href="/login"
-                  className={`py-[9.5px] rounded-lg text-center border border-primary500 text-primary500 font-semibold          
+                  className={`py-[9.5px] rounded-lg text-center border border-primary500 text-primary500 font-semibold text-sm        
                   `}
                   onClick={toggleMobileMenu}
                 >
