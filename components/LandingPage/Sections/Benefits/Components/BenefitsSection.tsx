@@ -96,7 +96,7 @@ const Section: React.FC<SectionProps> = ({
           transition={{ delay: 0.5 }}
         />
       </div>
-      <Button label={buttonLabel} classNames="mt-4 mb-6 w-max mx-auto" />
+      <Button label={buttonLabel} link="/shop" classNames="mt-4 mb-6 w-max mx-auto" />
     </div>
   );
 };

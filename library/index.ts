@@ -17,6 +17,7 @@ const assetLibrary = {
   unlimitedRevisionsTwo: "/optimised/unlimited-revisions-2.webp",
   unlimitedRevisionsThree: "/optimised/unlimited-revisions-3.webp",
   notFound: "/optimised/not-found.webp",
+  dashboardOverviewImg: "/optimised/dashboard-overview-img.webp",
 
   // SVGS
   highlight: "/optimised/highlight.webp",
