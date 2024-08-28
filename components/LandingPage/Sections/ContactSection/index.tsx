@@ -1,8 +1,6 @@
 "use client";
 import InputField from "@/components/Forms/InputField";
-import InputFile from "@/components/Forms/InputFile";
 import Textarea from "@/components/Forms/Textarea";
-import { AttachIcon } from "@/public/icons";
 import BlueMessageIcon from "@/public/svgs/BlueMessageIcon";
 import BluePhoneIcon from "@/public/svgs/BluePhoneIcon";
 import BlueSocialMediaIcon from "@/public/svgs/BlueSocialMediaIcon";
@@ -13,7 +11,7 @@ import XIcon from "@/public/svgs/XIcon";
 import React, { ReactNode } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { ContactFormValues, FieldName } from "./formValues";
+import { contactFormData, ContactFormValues, FieldName } from "./formValues";
 
 function Contact({
   title,
@@ -36,45 +34,6 @@ function Contact({
 }
 
 function ContactForm() {
-  const contactFormData = [
-    {
-      name: "firstName",
-      type: "text",
-      label: "First Name",
-      placeholder: "Enter first name",
-    },
-    {
-      name: "lastName",
-      type: "text",
-      label: "Last Name",
-      placeholder: "Enter last name",
-    },
-    {
-      name: "phoneNumber",
-      type: "text",
-      label: "Phone Number",
-      placeholder: "Enter phone number",
-    },
-    {
-      name: "email",
-      type: "email",
-      label: "Work Email",
-      placeholder: "Enter work email",
-    },
-    {
-      name: "message",
-      type: "textArea",
-      label: "Message",
-      placeholder: "Type in your message",
-    },
-    // {
-    //   name: "contactFile",
-    //   type: "file",
-    //   id: "contactFile",
-    //   label: "Attach a file",
-    //   icon: <AttachIcon />,
-    // },
-  ];
   const validationSchema = Yup.object({
     firstName: Yup.string().required("First name is required"),
     lastName: Yup.string().required("Last name is required"),
@@ -83,7 +42,6 @@ function ContactForm() {
       .email("Invalid email")
       .required("Work email is required"),
     message: Yup.string().required("Message is required"),
-    contactFile: Yup.mixed().nullable(), // allow null or undefined
   });
 
   const formik = useFormik<ContactFormValues>({
@@ -93,7 +51,6 @@ function ContactForm() {
       phoneNumber: "",
       email: "",
       message: "",
-      contactFile: null,
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
