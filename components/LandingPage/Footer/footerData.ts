@@ -12,7 +12,7 @@ export const footerData = {
         { name: "Digital Marketing", href: null },
         { name: "Creative Design", href: null },
         { name: "Content/copywriting", href: null },
-        { name: "Stop Motion", href: null },
+        { name: "Custom Services", href: null },
       ],
     },
     {
@@ -22,16 +22,17 @@ export const footerData = {
         { name: "Terms and conditions", href: null },
         { name: "Social media policy", href: null },
         { name: "Copyright notice", href: null },
-        { name: "Help center", href: "/help-center" },  
+        { name: "Help center", href: "/help-center" },
       ],
     },
     {
       title: "Other Products",
       links: [
+        { name: "Sell Planner", href: null },
         { name: "Sell Merch", href: null },
         { name: "Sell Talk", href: null },
-        { name: "Sell Planner", href: null },
         { name: "Piazza", href: null },
+        { name: "Boss Global", href: null },
       ],
     },
   ],

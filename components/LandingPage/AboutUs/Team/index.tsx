@@ -5,11 +5,7 @@ import Link from "next/link";
 import assetLibrary from "@/library";
 import teamMembers from "./teamData";
 
-import {
-  TeamFacebook,
-  TeamLinkedIn,
-  TwitterIcon,
-} from "@/public/icons";
+import { TeamFacebook, TeamLinkedIn, TwitterIcon } from "@/public/icons";
 
 const Team = () => {
   return (
@@ -50,9 +46,9 @@ const Team = () => {
                   />
                 </div>
 
-                <h3 className="text-lg font-semibold text-grey900">
+                {/* <h3 className="text-lg font-semibold text-grey900">
                   {member.name}
-                </h3>
+                </h3> */}
                 <p className="text-sm text-grey900">{member.title}</p>
                 <div className="flex items-center gap-3">
                   {member.twitter && (

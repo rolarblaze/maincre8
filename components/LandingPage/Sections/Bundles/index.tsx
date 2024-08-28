@@ -1,15 +1,46 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Crea8Star } from "@/public/icons";
 import { CreativeServicesIcon, DigitalServicesIcon } from "@/public/svgs";
 import { TabButton, serviceBundles, Card } from "./Components";
+import { useAppDispatch, useAppSelector, RootState } from "@/redux/store";
+import { getServices } from "@/redux/shop/features";
+import Loader from "@/components/Spinner/Loader";
+import { mapServicesToProps } from "@/components/Shop/Data/shopData";
 
 const Bundles = () => {
+  const dispatch = useAppDispatch();
+  const shopState = useAppSelector((state: RootState) => state.shop);
   const [activeTab, setActiveTab] = useState<"digital" | "creative">("digital");
   const handleTabClick = (tab: "digital" | "creative") => {
     setActiveTab(tab);
   };
+
+  useEffect(() => {
+    dispatch(getServices());
+  }, []);
+
+  if (shopState.isLoading) {
+    return (
+      <div className="mx-auto flex items-center justify-center">
+        <Loader />
+      </div>
+    );
+  }
+
+  if (shopState.error) {
+    return <div>Error: {shopState.error}</div>;
+  }
+
+  const { services } = shopState;
+
+  const serviceProps = mapServicesToProps(services);
+
+  if (serviceProps) {
+    console.log(serviceProps);
+  }
 
   return (
     <div className="min-h-screen bg-blue-gradient w-full py-20 px-6 md:px-28">
@@ -17,7 +48,9 @@ const Bundles = () => {
         <div className="absolute right-0 max-md:hidden">
           <Crea8Star />
         </div>
-        <h2 className="text-white text-[clamp(1.5rem_,5vw,_3.5rem)]">Our Top Bundles</h2>
+        <h2 className="text-white text-[clamp(1.5rem_,5vw,_3.5rem)]">
+          Our Top Bundles
+        </h2>
         <p className="text-grey50 max-sm:text-sm max-w-[412px] mx-auto my-4">
           Hiring a world-class team of creative geniuses doesn't have to be
           expensive or complicated.

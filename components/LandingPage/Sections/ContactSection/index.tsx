@@ -75,7 +75,7 @@ function ContactForm() {
                   placeholder={entity.placeholder}
                 />
               )}
-              {entity.type !== "textArea" && entity.type !== "file" && (
+              {entity.type !== "textArea" && (
                 <InputField
                   name={entity.name}
                   type={

@@ -71,17 +71,17 @@ export default function Home() {
       </main>
 
       {/* Modal component */}
-      {/* <Modal
+      <Modal
         isOpen={isModalOpen}
         onClose={handleCloseModal}
         className="!px-4 !py-4"
         showCancelIcon={false}
-      > */}
-      {/* <RecommendPopOut
+      >
+      <RecommendPopOut
           getRecommend={handleCloseModal}
           keepExploring={handleCloseModal}
-        /> */}
-      {/* </Modal> */}
+        />
+      </Modal>
     </AppWrapper>
   );
 }
