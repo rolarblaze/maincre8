@@ -5,9 +5,9 @@ const TabButton = ({
   Icon,
   label,
 }: {
-  tab: "digital" | "creative";
-  activeTab: "digital" | "creative";
-  onClick: (tab: "digital" | "creative") => void;
+  tab: "digital" | "creative" | "content";
+  activeTab: "digital" | "creative" | "content";
+  onClick: (tab: "digital" | "creative" | "content") => void;
   Icon: React.ComponentType<{ fillColor: string }>;
   label: string;
 }) => (

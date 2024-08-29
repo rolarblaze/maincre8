@@ -1,10 +1,13 @@
 /* eslint-disable react/no-unescaped-entities */
 "use client";
-
 import { useEffect, useState } from "react";
 import { Crea8Star } from "@/public/icons";
-import { CreativeServicesIcon, DigitalServicesIcon } from "@/public/svgs";
-import { TabButton, serviceBundles, Card } from "./Components";
+import {
+  ContentServiceIcon,
+  CreativeServicesIcon,
+  DigitalServicesIcon,
+} from "@/public/svgs";
+import { TabButton, Card, serviceBundles } from "./Components";
 import { useAppDispatch, useAppSelector, RootState } from "@/redux/store";
 import { getServices } from "@/redux/shop/features";
 import Loader from "@/components/Spinner/Loader";
@@ -13,14 +16,13 @@ import { mapServicesToProps } from "@/components/Shop/Data/shopData";
 const Bundles = () => {
   const dispatch = useAppDispatch();
   const shopState = useAppSelector((state: RootState) => state.shop);
-  const [activeTab, setActiveTab] = useState<"digital" | "creative">("digital");
-  const handleTabClick = (tab: "digital" | "creative") => {
-    setActiveTab(tab);
-  };
+  const [activeTab, setActiveTab] = useState<
+    "digital" | "creative" | "content"
+  >("digital");
 
   useEffect(() => {
     dispatch(getServices());
-  }, []);
+  }, [dispatch]);
 
   if (shopState.isLoading) {
     return (
@@ -34,13 +36,22 @@ const Bundles = () => {
     return <div>Error: {shopState.error}</div>;
   }
 
-  const { services } = shopState;
+  const serviceProps = mapServicesToProps(shopState.services);
 
-  const serviceProps = mapServicesToProps(services);
-
-  if (serviceProps) {
-    console.log(serviceProps);
-  }
+  const mergedBundles = {
+    digital: serviceBundles.digital.map((bundle, index) => ({
+      ...bundle,
+      features: serviceProps[0]?.bundles[0]?.packages[index]?.features || [],
+    })),
+    creative: serviceBundles.creative.map((bundle, index) => ({
+      ...bundle,
+      features: serviceProps[0]?.bundles[1]?.packages[index]?.features || [],
+    })),
+    content: serviceBundles.content.map((bundle, index) => ({
+      ...bundle,
+      features: serviceProps[0]?.bundles[2]?.packages[index]?.features || [],
+    })),
+  };
 
   return (
     <div className="min-h-screen bg-blue-gradient w-full py-20 px-6 md:px-28">
@@ -59,27 +70,34 @@ const Bundles = () => {
           <Crea8Star />
         </div>
 
-        {/* tab buttons */}
+        {/* Tab buttons */}
         <div className="flex justify-center max-sm:gap-5 gap-6 my-8">
           <TabButton
             tab="digital"
             activeTab={activeTab}
-            onClick={handleTabClick}
+            onClick={() => setActiveTab("digital")}
             Icon={DigitalServicesIcon}
             label="Digital Services"
           />
           <TabButton
             tab="creative"
             activeTab={activeTab}
-            onClick={handleTabClick}
+            onClick={() => setActiveTab("creative")}
             Icon={CreativeServicesIcon}
             label="Creative Services"
+          />
+          <TabButton
+            tab="content"
+            activeTab={activeTab}
+            onClick={() => setActiveTab("content")}
+            Icon={ContentServiceIcon}
+            label="Content Services"
           />
         </div>
       </div>
 
       <div className="flex max-sm:gap-6 gap-8 md:max-w-[1216px] mx-auto w-full pt-8 max-lg:overflow-x-scroll no-scrollbar">
-        {serviceBundles[activeTab].map((service, index) => (
+        {mergedBundles[activeTab].map((service, index) => (
           <Card
             key={index}
             price={service.price}
