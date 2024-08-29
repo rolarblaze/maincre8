@@ -1,3 +1,4 @@
+"use client";
 import InputField from "@/components/Forms/InputField";
 import Textarea from "@/components/Forms/Textarea";
 import BlueMessageIcon from "@/public/svgs/BlueMessageIcon";
@@ -8,6 +9,17 @@ import InstagramIcon from "@/public/svgs/InstagramIcon";
 import LinkedInIcon from "@/public/svgs/LinkedInIcon";
 import XIcon from "@/public/svgs/XIcon";
 import React, { ReactNode } from "react";
+import { useFormik } from "formik";
+import {
+  contactFormData,
+  ContactFormValues,
+  FieldName,
+  validationSchema,
+} from "./formValues";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { submitContactForm } from "@/redux/newsletter_n_contactform/features";
+import { addAlert } from "@/redux/alerts";
+import Button from "@/components/Button";
 
 function Contact({
   title,
@@ -30,42 +42,55 @@ function Contact({
 }
 
 function ContactForm() {
-  const formData = [
-    {
-      name: "firstName",
-      type: "text",
-      label: "First Name",
-      placeholder: "Enter first name",
+  const dispatch = useAppDispatch();
+  const isLoading = useAppSelector((state) => state.contactForm.isLoading);
+
+  const formik = useFormik<ContactFormValues>({
+    initialValues: {
+      first_name: "",
+      last_name: "",
+      phone_number: "",
+      email: "",
+      message: "",
     },
-    {
-      name: "lastName",
-      type: "text",
-      label: "Last Name",
-      placeholder: "Enter last name",
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      // handle form submission
+      console.log(values, "form submitted!");
+      if (values) {
+        const actionResult = await dispatch(submitContactForm(values));
+        if (submitContactForm.fulfilled.match(actionResult)) {
+          dispatch(
+            addAlert({
+              id: "",
+              headText: "Success",
+              subText: `Message successfully sent`,
+              type: "success",
+            })
+          );
+        } else if (submitContactForm.rejected.match(actionResult)) {
+          const errorMessage =
+            actionResult.payload?.errorMessage ||
+            "An error occurred while sending message. Please try again.";
+          dispatch(
+            addAlert({
+              id: "",
+              headText: "Error",
+              subText: errorMessage,
+              type: "error",
+            })
+          );
+        }
+      } else {
+        console.error("Missing payload");
+      }
     },
-    {
-      name: "phoneNumber",
-      type: "text",
-      label: "Phone Number",
-      placeholder: "Enter phone number",
-    },
-    {
-      name: "email",
-      type: "email",
-      label: "Work Email",
-      placeholder: "Enter work email",
-    },
-    {
-      name: "message",
-      type: "textArea",
-      label: "Message",
-      placeholder: "Type in your message",
-    },
-  ];
+  });
+
   return (
-    <div className="px-8 py-8 w-full border border-grey200 rounded-lg">
-      <form className="space-y-8">
-        {formData.map((entity, idx) => {
+    <div className="px-5 md:px-8 py-8 w-full border border-transparent md:border-grey200 rounded-lg">
+      <form onSubmit={formik.handleSubmit} className="space-y-8">
+        {contactFormData.map((entity, idx) => {
           return (
             <div key={idx}>
               {entity.type === "textArea" && (
@@ -73,6 +98,8 @@ function ContactForm() {
                   name={entity.name}
                   label={entity.label}
                   placeholder={entity.placeholder}
+                  error={formik.errors[entity.name as FieldName]}
+                  onChange={formik.handleChange}
                 />
               )}
               {entity.type !== "textArea" && (
@@ -88,14 +115,19 @@ function ContactForm() {
                   }
                   label={entity.label}
                   placeholder={entity.placeholder}
+                  error={formik.errors[entity.name as FieldName]}
+                  onChange={formik.handleChange}
                 />
               )}
             </div>
           );
         })}
-        <button className="rounded-[20px] bg-primary900 px-6 py-3 text-white">
-          Send us a message
-        </button>
+        <Button
+          type="submit"
+          isLoading={isLoading}
+          label="Send us a message"
+          classNames="!rounded-[20px] !bg-primary900 py-3 md:px-6 md:py-3 w-auto"
+        />
       </form>
     </div>
   );
@@ -141,7 +173,7 @@ function ContactSection() {
       </p>
       <div className="flex flex-col md:flex-row gap-8 justify-between">
         {/* Contact */}
-        <div className="space-y-6">
+        <div className="space-y-6 order-2 md:order-1">
           {contactData.map((contact, contactIdx) => {
             return (
               <Contact
@@ -155,7 +187,7 @@ function ContactSection() {
         </div>
 
         {/* Conatct Form */}
-        <div className="max-w-[696px] w-full">
+        <div className="max-w-[696px] w-full order-1 md:order-2">
           <ContactForm />
         </div>
       </div>
