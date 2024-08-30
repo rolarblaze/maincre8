@@ -36,7 +36,6 @@ const BookDiscoveryCall = () => {
 
   // set next step to inprogress
   useEffect(() => {
-    console.log(status);
     console.log(trackingDetails?.onboarding_call_booked);
     if (
       status === "completed" &&

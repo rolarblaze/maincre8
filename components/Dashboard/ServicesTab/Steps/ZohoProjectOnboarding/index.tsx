@@ -30,16 +30,6 @@ const ZohoProjectOnboarding = () => {
     }
   }, [dispatch, status]);
 
-  // console.log(status);
-
-  // if (trackingDetails) {
-  //   console.log(trackingDetails);
-  // }
-
-  // if (trackingDetails?.zoho_project_status) {
-  //   console.log(trackingDetails.zoho_project_status);
-  // }
-
   // Set button background color based on status
   const buttonClassNames =
     status === "inactive"

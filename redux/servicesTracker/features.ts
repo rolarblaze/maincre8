@@ -14,10 +14,9 @@ export const testPayForPackage = createAsyncThunk(
         package_id: payload.package_id,
         currency: payload.currency || "NGN",
       });
-      console.log(response);
+
       return response.data.tracking_details;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(handleAxiosError(error));
     }
   }
@@ -31,10 +30,9 @@ export const payForPackage = createAsyncThunk(
         package_id: payload.package_id,
         currency: payload.currency || "NGN",
       });
-      console.log(response);
+
       return response.data.tracking_details;
     } catch (error) {
-      console.log(error);
       return rejectWithValue(handleAxiosError(error));
     }
   }
