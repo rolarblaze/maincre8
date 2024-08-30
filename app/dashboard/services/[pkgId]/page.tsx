@@ -64,7 +64,6 @@ const PackageDetails = () => {
         );
 
         if (payForPackage.fulfilled.match(resultAction)) {
-          console.log("Package purchased successfully!", resultAction.payload);
           window.open(resultAction.payload.data.link, "_blank");
           dispatch(
             addAlert({
