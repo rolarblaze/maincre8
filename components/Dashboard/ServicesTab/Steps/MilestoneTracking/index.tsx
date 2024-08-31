@@ -30,7 +30,6 @@ const MilestoneTracking = () => {
   }, [dispatch, trackingDetails]);
 
   if (trackingDetails) {
-    console.log(trackingDetails);
   }
 
   return (

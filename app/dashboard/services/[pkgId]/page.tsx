@@ -62,9 +62,8 @@ const PackageDetails = () => {
         const resultAction = await dispatch(
           payForPackage({ package_id: Number(id), currency: "NGN" })
         );
-        console.log(resultAction);
+
         if (payForPackage.fulfilled.match(resultAction)) {
-          console.log("Package purchased successfully!", resultAction.payload);
           window.open(resultAction.payload.data.link, "_blank");
           dispatch(
             addAlert({

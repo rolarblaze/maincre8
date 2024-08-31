@@ -53,8 +53,6 @@ export default function Login() {
   ) => {
     const actionResult = await dispatch(loginUser(payload));
 
-    console.log(actionResult);
-
     if (loginUser.fulfilled.match(actionResult)) {
       dispatch(
         addAlert({
@@ -67,7 +65,6 @@ export default function Login() {
       router.push("/dashboard");
     } else if (loginUser.rejected.match(actionResult)) {
       if (actionResult.error) {
-        console.log(actionResult.error.message);
         const errorMessage =
           actionResult.error?.message ||
           "An error occurred during login. Please try again.";

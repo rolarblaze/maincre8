@@ -95,8 +95,6 @@ const ProjectForms = () => {
         })
       );
 
-      // console.log(br)
-
       if (briefStatus === "succeeded") {
         dispatch(
           addAlert({

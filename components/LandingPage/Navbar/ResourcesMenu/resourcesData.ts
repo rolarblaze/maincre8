@@ -21,13 +21,13 @@ export const leftResourcesData = [
     icon: ResourceIcon,
     link: "/help-center",
   },
-  {
-    title: "Webinar",
-    description:
-      "Interested in forging a partnership with us? Find out how we can work together to achieve common goals.",
-    icon: WebinarIcon,
-    link: "#",
-  },
+  // {
+  //   title: "Webinar",
+  //   description:
+  //     "Interested in forging a partnership with us? Find out how we can work together to achieve common goals.",
+  //   icon: WebinarIcon,
+  //   link: "#",
+  // },
 ];
 
 export const rightResourcesData = [

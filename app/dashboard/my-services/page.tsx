@@ -15,10 +15,6 @@ const MyServices = () => {
 
   const bundleColors: { [key: string]: string } = {};
 
-  // if (orderHistory) {
-  //   console.log(orderHistory);
-  // }
-
   if (loading) return <FullLoader />;
 
   return (
