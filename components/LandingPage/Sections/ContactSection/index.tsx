@@ -56,7 +56,6 @@ function ContactForm() {
     validationSchema: validationSchema,
     onSubmit: async (values) => {
       // handle form submission
-      console.log(values, "form submitted!");
       if (values) {
         const actionResult = await dispatch(submitContactForm(values));
         if (submitContactForm.fulfilled.match(actionResult)) {

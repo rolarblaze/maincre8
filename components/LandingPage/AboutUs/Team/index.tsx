@@ -2,7 +2,6 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import assetLibrary from "@/library";
 import teamMembers from "./teamData";
 
 import { TeamFacebook, TeamLinkedIn, TwitterIcon } from "@/public/icons";
@@ -52,25 +51,25 @@ const Team = () => {
                 <p className="text-sm text-grey900">{member.title}</p>
                 <div className="flex items-center gap-3">
                   {member.twitter && (
-                    <Link href={member.twitter}>
+                    <a href={member.twitter} target="_blank">
                       <div className="cursor-pointer">
                         <TwitterIcon />
                       </div>
-                    </Link>
+                    </a>
                   )}
                   {member.linkedin && (
-                    <Link href={member.linkedin}>
+                    <a href={member.linkedin} target="_blank">
                       <div className="cursor-pointer">
                         <TeamLinkedIn />
                       </div>
-                    </Link>
+                    </a>
                   )}
                   {member.facebook && (
-                    <Link href={member.facebook}>
+                    <a href={member.facebook} target="_blank">
                       <div className="cursor-pointer">
                         <TeamFacebook />
                       </div>
-                    </Link>
+                    </a>
                   )}
                 </div>
               </div>

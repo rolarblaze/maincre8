@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Card from "./Card";
 import { GetStartedSteps } from "./Card/data";
 

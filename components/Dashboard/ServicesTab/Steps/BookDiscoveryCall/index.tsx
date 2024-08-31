@@ -36,8 +36,6 @@ const BookDiscoveryCall = () => {
 
   // set next step to inprogress
   useEffect(() => {
-    console.log(status);
-    console.log(trackingDetails?.onboarding_call_booked);
     if (
       status === "completed" &&
       trackingDetails?.onboarding_call_booked === true
@@ -52,7 +50,6 @@ const BookDiscoveryCall = () => {
     try {
       const actionResult = await dispatch(bookDiscoveryCall(Number(transId)));
       if (bookDiscoveryCall.fulfilled.match(actionResult)) {
-        console.log(actionResult);
         const { detail, booking_link } = actionResult.payload;
         window.open(booking_link, "_blank");
         // createData("meeting-link", booking_link);

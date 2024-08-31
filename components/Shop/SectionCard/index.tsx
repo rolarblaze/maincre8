@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useRouter } from 'next/navigation'; 
+import { useRouter } from "next/navigation";
 import Button from "@/components/Button";
 import { ListCheck } from "@/public/icons";
 import { motion, AnimatePresence } from "framer-motion";
@@ -13,7 +13,7 @@ interface CardProps {
   features: string[];
   showAll: boolean;
   onShowAllToggle: () => void;
-  bundleId: number; 
+  bundleId: number;
   packageId: number;
 }
 
@@ -27,23 +27,17 @@ const Card = ({
   onShowAllToggle,
   bundleId,
   packageId,
-  
 }: CardProps) => {
-
   const router = useRouter();
   const visibleFeatures = showAll ? features : features.slice(0, 5);
 
   const handleTalkToSales = () => {
-    console.log('Talk to sales button clicked');
-    console.log('Bundle ID:', bundleId);
-    console.log('Package ID:', packageId);
-
     // Store IDs in session storage
-    sessionStorage.setItem('bundleId', bundleId.toString());
-    sessionStorage.setItem('packageId', packageId.toString());
+    sessionStorage.setItem("bundleId", bundleId.toString());
+    sessionStorage.setItem("packageId", packageId.toString());
 
     // Redirect to /submit-brief
-    router.push('/submit-brief');
+    router.push("/submit-brief");
   };
 
   return (
@@ -60,7 +54,11 @@ const Card = ({
           </p>
           <p className="text-grey800 font-normal text-base">{description}</p>
         </div>
-        <Button label="Talk to sales" classNames="!py-2 !text-xs" onClick={handleTalkToSales} />
+        <Button
+          label="Talk to sales"
+          classNames="!py-2 !text-xs"
+          onClick={handleTalkToSales}
+        />
       </section>
 
       <div className="space-y-3 flex flex-col justify-start flex-grow">

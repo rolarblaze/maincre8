@@ -12,13 +12,8 @@ const ShopSections = () => {
   const shopState = useAppSelector((state: RootState) => state.shop);
 
   useEffect(() => {
-    // console.log("Dispatching getServices...");
     dispatch(getServices());
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   console.log("Services state updated:", shopState.services);
-  // }, [shopState.services]);
 
   if (shopState.isLoading) {
     return (

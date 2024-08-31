@@ -61,7 +61,6 @@ const BookOffboardingCall = () => {
     try {
       const actionResult = await dispatch(bookOffBoardingCall(Number(transId)));
       if (bookOffBoardingCall.fulfilled.match(actionResult)) {
-        console.log(actionResult);
         const { detail, booking_link } = actionResult.payload;
         window.open(booking_link, "_blank");
         dispatch(
