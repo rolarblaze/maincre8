@@ -6,11 +6,14 @@ import { AuthSlice } from "./auth";
 import { briefReducer } from "./brief";
 import { fileUploadReducer } from "./file";
 import { getPackageReducer } from "./getPackage";
-import newsletterReducer from "./newsletter";
 import { shopReducer } from "./shop";
 import { OrderSlice } from "./order";
 import servicesSlice from "./servicesTracker";
 import { trackerReducer } from "./servicesTracker/tracker";
+import {
+  contactFormReducer,
+  newsletterReducer,
+} from "./newsletter_n_contactform";
 
 // configure the store with all reducers
 export const store = configureStore({
@@ -26,6 +29,7 @@ export const store = configureStore({
     order: OrderSlice.reducer,
     services: servicesSlice,
     tracker: trackerReducer,
+    contactForm: contactFormReducer,
   },
 });
 

@@ -47,3 +47,4 @@ export { default as ErrorIcon } from "./ErrorIcon";
 export { default as TryAgainIcon } from "./TryAgain";
 export { default as SuccessIcon } from "./SuccessIcon";
 export { default as ModalThrashIcon } from "./ModalThrash";
+export { default as ContentServiceIcon } from "./ContentServiceIcon";

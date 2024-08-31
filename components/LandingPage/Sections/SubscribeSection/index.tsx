@@ -5,7 +5,7 @@ import Button from "@/components/Button";
 import InputField from "@/components/Forms/InputField";
 import computer from "@/public/imgs/computer.png";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { subscribeToNewsletter } from "@/redux/newsletter/features";
+import { subscribeToNewsletter } from "@/redux/newsletter_n_contactform/features";
 import { addAlert } from "@/redux/alerts";
 
 const SubscribeSection = () => {
