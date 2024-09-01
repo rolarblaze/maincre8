@@ -80,8 +80,8 @@ const HowWeDeliver = () => {
         />
 
         <div className="flex flex-col gap-11 mb-2 text-grey900 font-semibold ">
-          {DeliveriesSteps.map((p) => (
-            <p className="mb-1.5 text-sm md:text-lg">{p}</p>
+          {DeliveriesSteps.map((p, idx) => (
+            <p key={`delivery-step-${idx}`} className="mb-1.5 text-sm md:text-lg">{p}</p>
           ))}
         </div>
       </div>
