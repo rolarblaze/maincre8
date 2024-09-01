@@ -1,5 +1,5 @@
 "use client";
-import { Button, FullLoader, TabsToggle } from "@/components";
+import { Button, Loader, TabsToggle } from "@/components";
 import { ArrowBackIcon } from "@/public/icons";
 import { addAlert } from "@/redux/alerts";
 import { getPackageDetails } from "@/redux/getPackage/getPkg";
@@ -45,7 +45,11 @@ const PackageDetails = () => {
   }: { status: string; pkgDetails: Package; error: string | null } =
     useAppSelector((state) => state.getPackageDetails);
 
-  if (status !== "succeeded") return <FullLoader />;
+  if (status !== "succeeded") return (
+    <div className="flex items-center justify-center">
+      <Loader />
+    </div>
+  );
   if (error) return <div>Error: {error}</div>;
 
   // if package is paid for not

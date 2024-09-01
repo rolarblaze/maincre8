@@ -30,7 +30,7 @@ const initialState: OrderSliceState = {
   isLoading: false,
   isApointmentLoading: false,
   error: null,
-  appointments: null,
+  appointments: [],
   recommendationHistory: null,
   isSubmittingBrief: false,
   isUploadingDocument: false,

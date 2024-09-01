@@ -13,9 +13,9 @@ export default function Settings() {
     {
       name: "Password",
     },
-    {
-      name: "Payment",
-    },
+    // {
+    //   name: "Payment",
+    // },
   ];
   return (
     <div className="container mx-auto space-y-8">

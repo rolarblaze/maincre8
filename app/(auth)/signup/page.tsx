@@ -1,5 +1,7 @@
 "use client";
-import { Fragment, useState } from "react";
+import { Fragment, useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { setUserTokenCookie } from "@/utils/helpers/auth/cookieUtility";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
@@ -13,8 +15,8 @@ import {
   validatePassword,
   passwordCriteria,
 } from "@/utils/helpers/auth/passwordValidation";
-import { useRouter } from "next/navigation";
-// import { type } from '../../../.history/components/LandingPage/AboutUs/Team/teamData_20240723003307';
+
+
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string().test(
@@ -53,6 +55,16 @@ export default function Signup() {
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((state) => state.auth);
   const router = useRouter();
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const accessToken = urlParams.get("access_token");
+
+    if (accessToken) {
+      setUserTokenCookie(accessToken);
+      router.push("/dashboard");
+    }
+  }, [router]);
 
   const formik = useFormik<SignUpFormValues>({
     initialValues: {
@@ -240,7 +252,7 @@ export default function Signup() {
             classNames="mt-4"
           />
         </form>
-        <SocialSignUp />
+        <SocialSignUp isLogin={false} activeTab={activeTab} />
       </section>
     </Fragment>
   );

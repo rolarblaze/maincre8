@@ -88,15 +88,15 @@ const Services = () => {
   }
 
   return (
-    <div className="container mx-auto space-y-8">
+    <div className="container mx-auto">
       <Tabs
         tabs={tabs}
-        showSortBy={true}
+        showSortBy={false}
         activeTab={activeTab}
         onTabClick={setActiveTab}
       />
-      <section className="flex flex-col gap-10">
-        <div className="max-w-[548px] w-full">
+      <section className="w-full mx-auto pt-6 px-3 md:px-0">
+        {/* <div className="max-w-[548px] w-full">
           <InputField
             type="text"
             placeholder=""
@@ -104,10 +104,10 @@ const Services = () => {
             name="search"
             icon={<SearchIcon className="w-5 h-5" />}
           />
-        </div>
-        <div className="grid grids-cols-1 md:grids-cols-3 lg:grid-cols-3 gap-6 overflow-y-auto place-items-center">
+        </div> */}
+        <div className="w-full grid grids-cols-2 md:grids-cols-2 lg:grid-cols-3 gap-6 overflow-y-auto place-items-center">
           {isLoading ? (
-            <div>
+            <div className="w-full h-full flex items-center justify-center">
               <Loader />
             </div>
           ) : (

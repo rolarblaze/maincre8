@@ -7,10 +7,11 @@ import { useAppDispatch } from "@/redux/store";
 interface SupportItemProps {
     type: string;
     content: string;
+    description: string;
     isLink?: boolean;
 }
 
-const SupportItem: React.FC<SupportItemProps> = ({ type, content, isLink }) => {
+const SupportItem: React.FC<SupportItemProps> = ({ type, content, description, isLink }) => {
     const dispatch = useAppDispatch();
 
     const handleCopy = () => {
@@ -40,16 +41,12 @@ const SupportItem: React.FC<SupportItemProps> = ({ type, content, isLink }) => {
     };
 
     return (
-        <div className="flex items-center gap-2">
-            <div className="max-w-14 px-2 py-1 bg-grey200 text-sm text-grey700 font-semibold rounded-sm">
-                {type}
-            </div>
-            <div className="flex items-center gap-1 text-base text-grey900 font-semibold">
-                <p>{content}</p>
-                <div
-                    onClick={isLink ? undefined : handleCopy}
-                    className="cursor-pointer"
-                >
+        <div className="flex flex-col items-start p-4 border rounded-lg shadow-sm w-full">
+            <h3 className="text-lg font-semibold text-grey900 mb-2">{type}</h3>
+            <p className="text-sm text-grey600 mb-4">{description}</p>
+            <div className="flex items-center gap-2 text-primary600 font-medium cursor-pointer">
+                <span>{content}</span>
+                <div onClick={isLink ? undefined : handleCopy}>
                     {isLink ? <LinkIcon /> : <Copy />}
                 </div>
             </div>

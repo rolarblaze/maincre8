@@ -1,5 +1,5 @@
 "use client";
-import { EmptyState, FullLoader, ServiceCard } from "@/components";
+import { EmptyState, Loader, ServiceCard } from "@/components";
 import { getUserOrderHistory } from "@/redux/servicesTracker/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import React, { useEffect } from "react";
@@ -15,7 +15,11 @@ const MyServices = () => {
 
   const bundleColors: { [key: string]: string } = {};
 
-  if (loading) return <FullLoader />;
+  if (loading) return (
+    <div className="flex items-center justify-center">
+    <Loader />
+  </div>
+  );
 
   return (
     <>

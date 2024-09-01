@@ -1,7 +1,7 @@
 import { AttachIcon } from "@/public/icons";
 
 interface IUploadFile {
-  fileName: string | null; // File name as a string or null
+  fileName: string | null; 
   errors: string | undefined;
   setFieldValue: (field: string, value: File | null) => void;
 }

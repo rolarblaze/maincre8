@@ -86,3 +86,4 @@ export { default as ArrowRight } from "./arrow-right.svg";
 export { default as SubmittedIcon } from "./submitted.svg";
 export { default as ClockIcon } from "./clock.svg";
 export { default as CalenderIcon } from "./calender.svg";
+export { default as CameraIcon } from "./camera.svg";

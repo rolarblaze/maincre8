@@ -15,6 +15,12 @@ import {
   verifyUser,
   getUserProfile,
   renewRefreshToken,
+  signUpIndividualByGoogle,
+  signUpBusinessByGoogle,
+  loginWithGoogle,
+  uploadProfilePhoto,
+  fetchActivityStatistics,
+  updatePassword,
 } from "./features";
 import { User } from "./interface";
 import { Transaction } from "../shop/interface";
@@ -186,6 +192,20 @@ export const AuthSlice = createSlice({
         state.isLoading = false;
       })
 
+      // update password
+      .addCase(updatePassword.pending, (state: AuthSliceState) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        updatePassword.fulfilled,
+        (state: AuthSliceState, action: PayloadAction<any>) => {
+          state.isLoading = false;
+        }
+      )
+      .addCase(updatePassword.rejected, (state: AuthSliceState) => {
+        state.isLoading = false;
+      })
+
       // Renew refresh token
       .addCase(renewRefreshToken.pending, (state: AuthSliceState) => {
         state.isLoading = true;
@@ -217,6 +237,58 @@ export const AuthSlice = createSlice({
         };
       })
 
+
+      // Google Signup individual
+      .addCase(signUpIndividualByGoogle.pending, (state: AuthSliceState) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        signUpIndividualByGoogle.fulfilled,
+        (state: AuthSliceState, action: PayloadAction<any>) => {
+          const { access_token } = action.payload;
+          setUserTokenCookie(access_token);
+          state.isAuthenticated = true;
+          state.isLoading = false;
+        }
+      )
+      .addCase(signUpIndividualByGoogle.rejected, (state: AuthSliceState) => {
+        state.isLoading = false;
+      })
+
+      // Google Signup business
+      .addCase(signUpBusinessByGoogle.pending, (state: AuthSliceState) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        signUpBusinessByGoogle.fulfilled,
+        (state: AuthSliceState, action: PayloadAction<any>) => {
+          const { access_token } = action.payload;
+          setUserTokenCookie(access_token);
+          state.isAuthenticated = true;
+          state.isLoading = false;
+        }
+      )
+      .addCase(signUpBusinessByGoogle.rejected, (state: AuthSliceState) => {
+        state.isLoading = false;
+      })
+
+      // Google Login
+      .addCase(loginWithGoogle.pending, (state: AuthSliceState) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        loginWithGoogle.fulfilled,
+        (state: AuthSliceState, action: PayloadAction<any>) => {
+          const user = action.payload;
+          state.user = user;
+          state.isAuthenticated = true;
+          state.isLoading = false;
+        }
+      )
+      .addCase(loginWithGoogle.rejected, (state: AuthSliceState) => {
+        state.isLoading = false;
+      })
+
       // Update user info
       .addCase(updateInfo.pending, (state: AuthSliceState) => {
         state.isLoading = true;
@@ -229,6 +301,20 @@ export const AuthSlice = createSlice({
         }
       )
       .addCase(updateInfo.rejected, (state: AuthSliceState) => {
+        state.isLoading = false;
+      })
+
+      //upload user profile photo
+      .addCase(uploadProfilePhoto.fulfilled, (state, action: PayloadAction<any>) => {
+        if (state.profile && state.profile.user.profile) {
+          state.profile.user.profile.profile_image_link = action.payload.file_link;
+        }
+        state.isLoading = false;
+      })
+      .addCase(uploadProfilePhoto.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(uploadProfilePhoto.rejected, (state) => {
         state.isLoading = false;
       })
 
@@ -259,6 +345,21 @@ export const AuthSlice = createSlice({
             transactions: [],
           },
         };
+      })
+
+      // Fetch activity statistics
+      .addCase(fetchActivityStatistics.pending, (state: AuthSliceState) => {
+        state.isLoading = true;
+      })
+      .addCase(
+        fetchActivityStatistics.fulfilled,
+        (state: AuthSliceState, action: PayloadAction<any>) => {
+          state.profile.user.activityStatistics = action.payload;
+          state.isLoading = false;
+        }
+      )
+      .addCase(fetchActivityStatistics.rejected, (state: AuthSliceState) => {
+        state.isLoading = false;
       });
   },
 });

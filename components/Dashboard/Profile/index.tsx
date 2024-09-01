@@ -7,7 +7,7 @@ import {
   InputField,
   PhoneNumberInput,
 } from "@/components";
-import { UserProfilePhoto } from "@/public/icons";
+import UserProfilePhoto from "@/components/Dashboard/Profile/UserProfilePhoto";
 import { addAlert } from "@/redux/alerts";
 import { updateInfo } from "@/redux/auth/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
@@ -15,6 +15,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/store";
 export default function Profile() {
   const dispatch = useAppDispatch();
   const { isLoading, profile } = useAppSelector((state) => state.auth);
+ 
 
   // Validate and set default values
   const getValidatedProfileValue = (value: any, defaultValue: string) => {
