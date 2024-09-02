@@ -55,7 +55,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
 
   return (
     <Middleware>
-      <div className="flex h-screen pt-10 md:pt-0 bg-dashboard-bg">
+      <div className="flex h-screen pt-10 md:pt-0 bg-white">
         {/* Desktop sidebar */}
         <Sidebar setActiveTab={setActiveTab} />
         {/* Mobile sidebar */}
@@ -72,7 +72,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
               />
             </div>
           )}
-          <main className="flex-1 p-6 overflow-y-auto">
+          <main className="flex-1 p-6 overflow-y-auto bg-white noScrollbar">
             {children}
           </main>
         </div>

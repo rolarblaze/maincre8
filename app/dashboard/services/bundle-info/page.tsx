@@ -83,8 +83,8 @@ const BundleInfo = () => {
               <InfoIcon className="size-5" />
             </div>
 
-            {stat.package.map((item) => (
-              <div className="flex justify-start items-center gap-3">
+            {stat.package.map((item, j) => (
+              <div key={j} className="flex justify-start items-center gap-3">
                 {item.included ? (
                   <CheckFill className="min-w-5" />
                 ) : (

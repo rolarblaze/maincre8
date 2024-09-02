@@ -26,7 +26,7 @@ const WatchDemo = () => {
           <p>
             Curious about how SellCrea8 can revolutionize your creative and
             digital projects? Our demo gives you an in-depth look at our
-            platform's features and capabilities. Watch as we walk you through
+            platform&apos;s features and capabilities. Watch as we walk you through
             the seamless process of booking services, managing projects, and
             accessing personalized recommendations.
           </p>

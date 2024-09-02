@@ -12,6 +12,7 @@ import { BulbIcon } from "@/public/icons";
 import { getUserOrderHistory } from "@/redux/servicesTracker/features";
 import { fetchLatestAppointments } from "@/redux/order/features";
 import { getServices } from "@/redux/shop/features";
+import { fetchActivityStatistics } from "@/redux/auth/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -30,13 +31,26 @@ const Overview = () => {
     dispatch(getServices());
     dispatch(getUserOrderHistory());
     dispatch(fetchLatestAppointments());
+    dispatch(fetchActivityStatistics());
   }, [dispatch]);
 
-  // Dummy data, waiting for api
+
+  // Extract the activity statistics from the profile
+  const { active_services, completed_services, total_services_bought } =
+    profile.user.activityStatistics || {
+      active_services: 0,
+      completed_services: 0,
+      total_services_bought: 0,
+    };
+
+  // Updated BarChart data using fetched activity statistics
   const barChartData = {
     labels: ["Active Services", "Completed Services", "Total Services Bought"],
-    dataValues: [5.8, 3, 7],
+    dataValues: [active_services, completed_services, total_services_bought],
   };
+
+  // Logging for debugging purposes
+  console.log("Bar Chart Data: ", barChartData);
 
   const bundleColors: { [key: string]: string } = {};
   const colors = ["#620FA3", "#006AA5", "#A30F44"];
@@ -53,7 +67,11 @@ const Overview = () => {
   }
 
   if (isLoadingProfile) {
-    return <FullLoader />;
+    return (
+      <div className="flex items-center justify-center">
+        <Loader />
+      </div>
+    );
   }
 
   const profileIncomplete =
@@ -65,7 +83,7 @@ const Overview = () => {
   const hasTransactions = orderHistory && orderHistory?.length > 0;
 
   return (
-    <div className="container mx-auto pt-6 md:pt-0 flex flex-col gap-8 bg-dashboard-bg overflow-y-scroll">
+    <div className="container mx-auto py-6 px-4 md:pt-0 flex flex-col gap-8 overflow-y-scroll noScrollbar">
       <div>
         <h4>Welcome, {profile.first_name}</h4>
         <p className="text-grey500">Select a service to get started</p>
@@ -106,7 +124,7 @@ const Overview = () => {
       </div>
 
       <section className="flex flex-col gap-10">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 place-items-center md:place-items-start gap-6 overflow-y-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 place-items-center md:place-items-start gap-6 overflow-y-auto noScrollbar">
           {/* Show only the first three cards */}
           {hasTransactions ? (
             orderHistory
@@ -155,12 +173,12 @@ const Overview = () => {
         </div>
 
         {/* Activity Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
           <h3 className="text-2xl font-bold text-grey900 col-span-2">
             Activity
           </h3>
           {/* Chart Section*/}
-          <div className="flex flex-col justify-between rounded-lg bg-white px-6 py-4">
+          <div className="flex flex-col justify-between rounded-lg bg-white px-6 py-4 shadow-lg">
             <h4 className="text-lg font-semibold text-grey900 border-b border-grey200 pb-4">
               My Services
             </h4>
@@ -174,7 +192,7 @@ const Overview = () => {
           </div>
 
           {/* Upcoming Appointments */}
-          <div className="rounded-lg bg-white px-6 py-4 flex flex-col gap-4">
+          <div className="rounded-lg bg-white px-6 py-4 flex flex-col gap-4 shadow-lg">
             <h4 className="text-lg font-semibold text-grey900 border-b border-grey200 pb-4">
               Upcoming Appointments
             </h4>
@@ -183,8 +201,8 @@ const Overview = () => {
                 <div className="flex items-center justify-center">
                   <Loader />
                 </div>
-              ) : appointments?.length === 0 ? (
-                <p className="flex items-center justify-center">
+              ) : !appointments || appointments.length === 0 ? (
+                <p className="flex items-center justify-center py-10">
                   No upcoming appointments
                 </p>
               ) : (

@@ -56,6 +56,58 @@ export const signUpBusiness = createAsyncThunk(
   }
 );
 
+// Signup individual users with Google
+export const signUpIndividualByGoogle = createAsyncThunk(
+  
+  "auth/signUpIndividualByGoogle",
+  async (_, { rejectWithValue }) => {
+    console.log("calling signUpIndividualByGoogle...")
+    try {
+      const response = await api.get("api/users/signup-individual/google");
+      setUserTokenCookie(response.data.access_token); // Set the user token cookie
+      console.log("Google sign-up (Individual) successful:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error in Google sign-up (Individual):", error);
+      return rejectWithValue(handleAxiosError(error));
+    }
+  }
+);
+
+// Signup business users with Google
+export const signUpBusinessByGoogle = createAsyncThunk(
+  "auth/signUpBusinessByGoogle",
+  async (_, { rejectWithValue }) => {
+    try {
+      console.log("calling signUpBusinessByGoogle...")
+      const response = await api.get("api/users/signup-business/google");
+      setUserTokenCookie(response.data.access_token); // Set the user token cookie
+      console.log("Google sign-up (Business) successful:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error in Google sign-up (Business):", error);
+      return rejectWithValue(handleAxiosError(error));
+    }
+  }
+);
+
+// Login with Google
+export const loginWithGoogle = createAsyncThunk(
+  "auth/loginWithGoogle",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.get("api/login/google");
+      setUserTokenCookie(response.data.access_token); // Set the user token cookie
+      console.log("Google login successful:", response.data);
+      return response.data;
+    } catch (error) {
+      console.error("Error in Google login:", error);
+      return rejectWithValue(handleAxiosError(error));
+    }
+  }
+);
+
+
 export const renewRefreshToken = createAsyncThunk(
   "auth/renewRefreshToken",
   async (_, { rejectWithValue }) => {
@@ -185,6 +237,36 @@ export const updatePassword = createAsyncThunk(
       });
 
       return response.data;
+    } catch (error) {
+      return rejectWithValue(handleAxiosError(error));
+    }
+  }
+);
+
+// Upload profile photo
+export const uploadProfilePhoto = createAsyncThunk(
+  "auth/uploadProfilePhoto",
+  async (formData: FormData, { rejectWithValue }) => {
+    try {
+      const response = await api.post("user/upload-profile-picture/profile_image", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      return response.data; // Return the uploaded image data
+    } catch (error) {
+      return rejectWithValue(handleAxiosError(error));
+    }
+  }
+);
+
+// Action to fetch activity statistics
+export const fetchActivityStatistics = createAsyncThunk(
+  "auth/fetchActivityStatistics",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.get("/user/get-activity-statistics");
+      return response.data.statistics;
     } catch (error) {
       return rejectWithValue(handleAxiosError(error));
     }

@@ -22,7 +22,7 @@ export const fetchLatestAppointments = createAsyncThunk<AppointmentResponse, voi
   async (_, { rejectWithValue }) => {
     try {
       const response = await api.get("user/get-latest-appointments");
-      return response.data;
+      return response.data.upcoming_appointments;
     } catch (error) {
       return rejectWithValue(handleAxiosError(error));
     }

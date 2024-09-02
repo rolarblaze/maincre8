@@ -27,7 +27,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 
   return (
     <Link
-      className="max-w-[388px] w-full rounded-lg border border-grey300"
+      className="w-full rounded-lg border border-grey300"
       href={linkUrl}
     >
       <div className="relative">
