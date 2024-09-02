@@ -22,7 +22,7 @@ const Tabs: React.FC<TabsProps> = ({
   onTabClick,
 }) => {
   return (
-    <div className="flex items-center gap-3 md:justify-between md:px-6 overflow-x-auto ">
+    <div className="flex items-center gap-3 md:justify-between md:px-6 overflow-x-auto w-screen md:w-auto">
       <div className="flex items-center gap-1 border-b border-grey200 overflow-x-auto noScrollbar">
         {tabs.map((tab) => (
           <div

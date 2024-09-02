@@ -26,7 +26,7 @@ const MyServices = () => {
     <>
       {orderHistory && orderHistory?.length < 1 ? (
         <EmptyState
-          imgSrc="myservices-empty.png"
+          imgSrc="/images/myservices-empty.png"
           text="Buy a package to get started"
           link="Shop now"
           to="/dashboard/services"
