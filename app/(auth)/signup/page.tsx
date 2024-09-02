@@ -252,7 +252,7 @@ export default function Signup() {
             classNames="mt-4"
           />
         </form>
-        <SocialSignUp isLogin={false} activeTab={activeTab} />
+        {/* <SocialSignUp isLogin={false} activeTab={activeTab} /> */}
       </section>
     </Fragment>
   );
