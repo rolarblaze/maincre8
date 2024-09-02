@@ -20,6 +20,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { submitContactForm } from "@/redux/newsletter_n_contactform/features";
 import { addAlert } from "@/redux/alerts";
 import Button from "@/components/Button";
+import Link from "next/link";
 
 function Contact({
   title,
@@ -54,7 +55,7 @@ function ContactForm() {
       message: "",
     },
     validationSchema: validationSchema,
-    onSubmit: async (values) => {
+    onSubmit: async (values, { resetForm }) => {
       // handle form submission
       if (values) {
         const actionResult = await dispatch(submitContactForm(values));
@@ -83,6 +84,7 @@ function ContactForm() {
       } else {
         console.error("Missing payload");
       }
+      resetForm();
     },
   });
 
@@ -141,7 +143,7 @@ function ContactSection() {
         <div>
           For technical aassistance or support-related queries, please contact
           our dedicated support team at
-          <p> hello@sellmedia.africa</p>
+          <Link href="hello@sellmedia.africa"> hello@sellmedia.africa</Link>
         </div>
       ),
     },
@@ -155,10 +157,10 @@ function ContactSection() {
       title: "Social Media",
       body: (
         <div className="flex gap-[13px]">
-          <XIcon />
-          <LinkedInIcon />
-          <FacebookIcon />
-          <InstagramIcon />
+          <XIcon href="https://x.com/SellMediaInc" />
+          <LinkedInIcon href="https://www.linkedin.com/company/sellmedia-inc/" />
+          <FacebookIcon href="https://web.facebook.com/sellmediagroup?_rdc=1&_rdr" />
+          <InstagramIcon href="https://www.instagram.com/sellmediainc/" />
         </div>
       ),
     },
