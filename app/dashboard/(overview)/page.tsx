@@ -34,14 +34,13 @@ const Overview = () => {
     dispatch(fetchActivityStatistics());
   }, [dispatch]);
 
-
   // Extract the activity statistics from the profile
-  const { active_services, completed_services, total_services_bought } =
-    profile.user.activityStatistics || {
-      active_services: 0,
-      completed_services: 0,
-      total_services_bought: 0,
-    };
+  const { active_services, completed_services, total_services_bought } = profile
+    .user.activityStatistics || {
+    active_services: 0,
+    completed_services: 0,
+    total_services_bought: 0,
+  };
 
   // Updated BarChart data using fetched activity statistics
   const barChartData = {
@@ -50,7 +49,7 @@ const Overview = () => {
   };
 
   // Logging for debugging purposes
-  console.log("Bar Chart Data: ", barChartData);
+  // console.log("Bar Chart Data: ", barChartData);
 
   const bundleColors: { [key: string]: string } = {};
   const colors = ["#620FA3", "#006AA5", "#A30F44"];

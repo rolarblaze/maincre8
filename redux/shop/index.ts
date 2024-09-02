@@ -1,21 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getServices } from "./features";
-import { ServicesState, Service } from "./interface";
-
-export interface AuthSliceState {
-    services: Service,
-    isLoading: boolean,
-    error?: null,
-}
+import { getServices, getPackages } from "./features";
+import { ServicesState, Service, Package, Packages } from "./interface";
 
 // Initial state
 const initialState: ServicesState = {
   services: [],
+  packages: [],
   isLoading: false,
   error: null,
 };
 
-// Create the slice
 export const ShopSlice = createSlice({
   name: "shop",
   initialState,
@@ -27,11 +21,31 @@ export const ShopSlice = createSlice({
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(getServices.fulfilled, (state, action: PayloadAction<Service[]>) => {
-        state.services = action.payload;
+      .addCase(
+        getServices.fulfilled,
+        (state, action: PayloadAction<Service[]>) => {
+          state.services = action.payload;
+          state.isLoading = false;
+        }
+      )
+      .addCase(getServices.rejected, (state, action) => {
+        state.error = action.payload as string;
         state.isLoading = false;
       })
-      .addCase(getServices.rejected, (state, action) => {
+
+      // Fetch packages
+      .addCase(getPackages.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(
+        getPackages.fulfilled,
+        (state, action: PayloadAction<Package[]>) => {
+          state.packages = action.payload;
+          state.isLoading = false;
+        }
+      )
+      .addCase(getPackages.rejected, (state, action) => {
         state.error = action.payload as string;
         state.isLoading = false;
       });
