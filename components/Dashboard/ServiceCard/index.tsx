@@ -27,7 +27,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 
   return (
     <Link
-      className="w-full rounded-lg border border-grey300"
+      className="w-full rounded-lg"
       href={linkUrl}
     >
       <div className="relative">
@@ -50,7 +50,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
         </div>
       </div>
       <div className="p-4">
-        <h4 className="text-lg font-semibold text-grey900">{title}</h4>
+        <h4 className="text-base font-semibold text-grey900">{title}</h4>
         <p className="text-sm text-grey500 mb-4">{description}</p>
         {isPaid && (
           <span className="font-semibold text-primary500 text-sm">

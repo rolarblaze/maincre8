@@ -1,5 +1,5 @@
 "use client";
-import { Loader, ServiceCard } from "@/components";
+import { Spinner, ServiceCard } from "@/components";
 import Tabs from "@/components/Dashboard/Tabs";
 import {
   AllIcon,
@@ -147,8 +147,8 @@ const Services = () => {
             </div>
           ))}
           {isLoading && (
-            <div className="w-full h-full flex items-center justify-center col-span-full">
-              <Loader />
+            <div className="w-full flex items-center justify-center col-span-full">
+              <Spinner className="border-primary500" />
             </div>
           )}
         </div>

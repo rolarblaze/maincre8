@@ -170,7 +170,7 @@ export default function Login() {
             classNames="mt-4"
           />
         </form>
-        <SocialSignUp isLogin={true} />
+        {/* <SocialSignUp isLogin={true} /> */}
       </section>
     </Fragment>
   );
