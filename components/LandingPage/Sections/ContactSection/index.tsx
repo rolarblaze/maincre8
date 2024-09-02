@@ -55,7 +55,7 @@ function ContactForm() {
       message: "",
     },
     validationSchema: validationSchema,
-    onSubmit: async (values, { resetForm }) => {
+    onSubmit: async (values) => {
       // handle form submission
       if (values) {
         const actionResult = await dispatch(submitContactForm(values));
@@ -68,6 +68,15 @@ function ContactForm() {
               type: "success",
             })
           );
+          formik.resetForm({
+            values: {
+              first_name: "",
+              last_name: "",
+              phone_number: "",
+              email: "",
+              message: "",
+            },
+          });
         } else if (submitContactForm.rejected.match(actionResult)) {
           const errorMessage =
             actionResult.payload?.errorMessage ||
@@ -84,7 +93,6 @@ function ContactForm() {
       } else {
         console.error("Missing payload");
       }
-      resetForm();
     },
   });
 
