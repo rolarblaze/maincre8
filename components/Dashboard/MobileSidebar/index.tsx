@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Tab from "../Sidebar/types";
 import { usePathname, useRouter } from "next/navigation";
 import { useAppSelector } from "@/redux/store";
-import { CancelIcon, LogoBlue, Logout } from "@/public/icons";
+import { CameraIcon, CancelIcon, LogoBlue, Logout } from "@/public/icons";
 import {
   BulbIcon,
   CalendarIcon,
@@ -18,6 +18,8 @@ import Link from "next/link";
 import UserImage from "@/public/images/user-image.svg";
 import MyServicesIcon from "@/public/svgs/MyServicesIcon";
 import ArrowUp from "@/public/icons/arrow-up.svg";
+import Image from "next/image";
+import assetLibrary from "@/library";
 
 type MobileSidebarProps = {
   setActiveTab: (tab: Tab) => void;
@@ -45,7 +47,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
 
   return (
     <aside
-      className={`md:hidden h-full flex flex-col gap-7 px-6 border-r border-grey200 fixed z-40 bg-white inset-x-0 top-0 overflow-y-auto py-8 overflow-x-hidden box-border`}
+      className={`md:hidden h-full flex flex-col gap-7 px-6 border-r border-grey200 fixed z-50 bg-white inset-x-0 top-0 overflow-y-auto py-8 overflow-x-hidden box-border`}
     >
       {/* Logo section */}
       <section className="flex flex-col gap-14 ">
@@ -138,7 +140,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
           </Link>
 
           {/* CUSTOM RECOMMENDATIONS */}
-          <Link href="/dashboard/custom-recommendation">
+          <Link href="/dashboard/custom-recommendation" onClick={onClick}>
             <div
               className={`flex items-center gap-3 py-3 px-4 ${
                 isActive("/dashboard/custom-recommendation")
@@ -250,7 +252,9 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
               <div className="flex flex-col gap-2 fadeInDown">
                 <Link
                   href="/dashboard/support"
-                  onClick={() => setActiveTab("Support")}
+                  onClick={() => {
+                    setActiveTab("Support");
+                  }}
                 >
                   <div
                     className={`py-2 pl-4 pr-2 text-sm rounded-sm cursor-pointer ${
@@ -337,14 +341,19 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
       {/* Profile */}
       <div className="flex items-center flex-wrap gap-8 px-6">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-full relative">
-            {/* <Image
-              src={UserImage}
+          <div className="w-14 h-14 rounded-full relative">
+            <Image
+              src={assetLibrary.defaultAvatar}
               alt="User Image"
               objectFit="cover"
-              className="rounded-full"
-            /> */}
-            <UserImage />
+              width={56}
+              height={56}
+              className="rounded-full w-full h-full"
+            />
+            <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full p-0.5">
+              {" "}
+            </div>
+            {/* <UserImage /> */}
           </div>
           <div>
             <p className="text-grey900 text-sm font-bold">

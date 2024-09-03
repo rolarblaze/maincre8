@@ -16,7 +16,7 @@ const MobileNav: React.FC<MobileNavprops> = ({ title, onClick }) => {
   const isPackageInfo = pathname.startsWith("/dashboard/services/");
 
   return (
-    <nav className="fixed inset-x-0 top-0 z-20 md:hidden lg:hidden py-4 px-[22px] bg-primary50">
+    <nav className="fixed inset-x-0 top-0 z-40 md:hidden lg:hidden py-4 px-[22px] bg-primary50">
       {isPackageInfo ? (
         // For Services package info header
         <div>

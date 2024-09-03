@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { useEffect } from "react";
 import { Button, Loader, EmptyState } from "@/components";
 import { PlusIcon } from "@/public/svgs";
@@ -8,7 +8,9 @@ import assetLibrary from "@/library";
 
 const CustomRecommendation = () => {
   const dispatch = useAppDispatch();
-  const { recommendationHistory, isLoading } = useAppSelector((state) => state.order);
+  const { recommendationHistory, isLoading } = useAppSelector(
+    (state) => state.order
+  );
 
   useEffect(() => {
     dispatch(fetchRecommendationHistory());
@@ -23,7 +25,7 @@ const CustomRecommendation = () => {
   }
 
   return (
-    <div className="space-y-12">
+    <div className="space-y-12 pt-10">
       <Button
         link="/dashboard/custom-recommendation/form"
         label={
@@ -48,11 +50,15 @@ const CustomRecommendation = () => {
                 className="max-w-[28.3125rem] text-sm leading-6 flex justify-between gap-4 items-center p-4 rounded-lg bg-grey100 text-grey800"
               >
                 <p className="font-semibold">{item.preferred_solutions}</p>
-                <p>{item.created_at ? new Date(item.created_at).toLocaleDateString('en-US', {
-                  day: 'numeric',
-                  month: 'long',
-                  year: 'numeric'
-                }) : "Date not available"}</p>
+                <p>
+                  {item.created_at
+                    ? new Date(item.created_at).toLocaleDateString("en-US", {
+                        day: "numeric",
+                        month: "long",
+                        year: "numeric",
+                      })
+                    : "Date not available"}
+                </p>
               </div>
             ))
           ) : (
