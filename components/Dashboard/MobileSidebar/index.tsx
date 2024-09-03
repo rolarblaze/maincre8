@@ -47,7 +47,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
 
   return (
     <aside
-      className={`md:hidden h-full flex flex-col gap-7 px-6 border-r border-grey200 fixed z-50 bg-white inset-x-0 top-0 overflow-y-auto py-8 overflow-x-hidden box-border`}
+      className={`md:hidden h-full flex flex-col gap-7 px-6 border-r w-[100vw] border-grey200 fixed z-50 bg-white inset-x-0 top-0 overflow-y-auto py-8 overflow-x-hidden box-border`}
     >
       {/* Logo section */}
       <section className="flex flex-col gap-14 ">
