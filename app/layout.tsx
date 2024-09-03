@@ -36,11 +36,11 @@ export default function RootLayout({
     ? metadata.keywords.join(", ")
     : metadata.keywords;
 
-    // Convert metadata.title to a string to avoid type issues
+  // Convert metadata.title to a string to avoid type issues
   const pageTitle = metadata.title?.toString() || "SellCrea8";
 
   return (
-    <html lang="en" className="scroll-smooth antialiased">
+    <html lang="en" className="scroll-smooth antialiased overflow-x-hidden">
       <head>
         <meta name="description" content={metadata.description ?? ""} />
         <meta name="keywords" content={keywords ?? ""} />

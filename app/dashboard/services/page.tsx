@@ -121,7 +121,7 @@ const Services = () => {
   }
 
   return (
-    <div className="container mx-auto">
+    <div className="container mx-auto w-full">
       <Tabs
         tabs={tabs}
         showSortBy={false}

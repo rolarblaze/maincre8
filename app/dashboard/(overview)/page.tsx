@@ -177,7 +177,7 @@ const Overview = () => {
             Activity
           </h3>
           {/* Chart Section*/}
-          <div className="flex flex-col justify-between rounded-lg bg-white px-6 py-4 shadow-lg">
+          <div className="flex flex-col justify-between rounded-lg bg-white px-6 py-4 shadow-lg col-span-2 md:col-span-1">
             <h4 className="text-lg font-semibold text-grey900 border-b border-grey200 pb-4">
               My Services
             </h4>

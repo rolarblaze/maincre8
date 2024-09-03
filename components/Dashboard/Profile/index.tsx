@@ -15,7 +15,6 @@ import { useAppDispatch, useAppSelector } from "@/redux/store";
 export default function Profile() {
   const dispatch = useAppDispatch();
   const { isLoading, profile } = useAppSelector((state) => state.auth);
- 
 
   // Validate and set default values
   const getValidatedProfileValue = (value: any, defaultValue: string) => {
@@ -146,7 +145,7 @@ export default function Profile() {
   };
 
   return (
-    <form className="md:border border-grey200 md:p-6 rounded-lg flex flex-col gap-6 max-w-[740px]">
+    <form className="md:border border-grey200 md:p-6 rounded-lg flex flex-col gap-6 w-full max-w-[740px]">
       <p className="text-lg font-semibold">Basic information</p>
       <UserProfilePhoto />
 

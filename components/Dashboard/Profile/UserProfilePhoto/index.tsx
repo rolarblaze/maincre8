@@ -4,6 +4,8 @@ import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { uploadProfilePhoto } from "@/redux/auth/features";
 import { addAlert } from "@/redux/alerts";
 import { CameraIcon } from "@/public/icons";
+import Image from "next/image";
+import assetLibrary from "@/library";
 
 export default function UserProfilePhoto() {
   const dispatch = useAppDispatch();
@@ -56,9 +58,11 @@ export default function UserProfilePhoto() {
   return (
     <div className="relative w-14 h-14 rounded-full ">
       <label htmlFor="profilePicUpload" className="cursor-pointer">
-        <img
-          src={imagePreview || "/default-avatar.png"}
+        <Image
+          src={imagePreview || assetLibrary.defaultAvatar}
           alt="Profile"
+          width={56}
+          height={56}
           className="w-full h-full rounded-full object-cover"
         />
         <div className="absolute bottom-0 right-0 bg-white rounded-full p-0.5">

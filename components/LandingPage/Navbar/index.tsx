@@ -96,7 +96,7 @@ const Navbar: React.FC = () => {
           navScroll ? "-translate-y-28 opacity-0" : "translate-x-0 opacity-100"
         } 
         ${isHome ? "bg-transparent " : "bg-white"}
-        fixed top-0 w-full border-b border-transparent z-50  transition-all ease-in-out duration-500 border-box
+        fixed top-0 w-[99vw] border-b border-transparent z-50 transition-all ease-in-out duration-500 border-box
       `}
     >
       <nav
