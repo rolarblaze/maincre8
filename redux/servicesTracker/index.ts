@@ -7,6 +7,8 @@ import {
   bookDiscoveryCall,
   getCalendlyLink,
   bookOffBoardingCall,
+  payForPackage,
+  testPayForPackage,
 } from "./features";
 import {
   TrackingDetails,
@@ -16,9 +18,12 @@ import {
   BookOffBoardingCall,
   OrderHistoryResponse,
   SubmitBriefForPackage,
+  PackagePayment,
 } from "./interface";
 
 interface InitialState {
+  testPayForPackage: PackagePayment | null;
+  payForPackage: PackagePayment | null;
   trackingDetails: TrackingDetails | null;
   orderHistory: OrderHistoryResponse[] | null;
   uploadBrief: SubmitBriefForPackage | null;
@@ -31,6 +36,8 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
+  testPayForPackage: null,
+  payForPackage: null,
   trackingDetails: null,
   orderHistory: null,
   uploadBrief: null,
@@ -48,6 +55,32 @@ export const servicesSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
+      //test pay for package
+      .addCase(testPayForPackage.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(testPayForPackage.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.trackingDetails = payload;
+      })
+      .addCase(testPayForPackage.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload as string;
+      })
+      //pay for package
+      .addCase(payForPackage.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(payForPackage.fulfilled, (state, { payload }) => {
+        state.loading = false;
+        state.trackingDetails = payload;
+      })
+      .addCase(payForPackage.rejected, (state, { payload }) => {
+        state.loading = false;
+        state.error = payload as string;
+      })
       // trackUserOrder cases
       .addCase(trackUserOrder.pending, (state) => {
         state.loading = true;

@@ -5,16 +5,96 @@ import {
   CheckBoxField,
   DropdownSelect,
   InputField,
+  PhoneNumberInput,
   UploadFile,
 } from "@/components";
 import {
+  budgetProjectionOptions,
+  companySizeOptions,
+  customerPersonaOptions,
+  digitalSolutionOptions,
+  genderOptions,
   INITIAL_VALUES,
-  optionHolder,
+  typeOfIndustryOptions,
+  updateOptions,
   USEFUL_DIGITAL_SERVICES,
 } from "./constants";
 import { validationSchema } from "./schema";
+import { addAlert } from "@/redux/alerts";
+import { useState } from "react";
+import { useAppDispatch } from "@/redux/store";
+import {
+  uploadRelevantDocument,
+  submitRecommendationBrief,
+} from "@/redux/order/features";
 
 const BusinessBriefForm = () => {
+  const dispatch = useAppDispatch();
+  const [phone, setPhone] = useState<string>();
+  const [uploadedDocumentLink, setUploadedDocumentLink] = useState<
+    string | null
+  >(null);
+
+  const formik = useFormik<FormValues>({
+    initialValues: INITIAL_VALUES,
+
+    onSubmit: async (values, { resetForm }: FormikHelpers<FormValues>) => {
+      try {
+        const finalValues = {
+          company_name: values.companyName,
+          type_of_industry: values.industry,
+          company_size: values.companySize,
+          website_url: values.websiteURL,
+          contact_person_name: values.contactPersonName,
+          contact_email: values.contactEmail,
+          contact_phone_number: phone || "",
+          current_specific_business_challenges: values.challenges,
+          previously_implemented_digital_solutions: values.digitalSolution,
+          solution_and_outcome_description: values.solutionOutcomes,
+          target_audience: values.audience,
+          target_audience_age_group: values.ageGroup,
+          target_audience_gender: values.gender || undefined,
+          target_audience_location: values.location,
+          target_audience_interest: values.interestBehaviours,
+          existing_audience_persona_available:
+            values.customerPersonas === "Yes",
+          existing_audience_persona_description: values.personaDescribe,
+          budget_projection_range: values.budget || values.budgetProjection,
+          preferred_solutions: values.usefulDigitalServices.join(", "),
+          main_competitors: values.mainCompetitor,
+          competitor_website_links: values.mainCompetitorWebsite,
+          competitor_like_and_dislike: values.dislikeDigitalPrescence,
+          additional_context: values.additionalInformation,
+          relevant_document_link:
+            uploadedDocumentLink || values.relevant_document_link,
+          news_letter_subscription: values.receiveUpdates === "Yes",
+        };
+
+        await dispatch(submitRecommendationBrief(finalValues));
+
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Success",
+            subText: "Brief submitted successfully",
+            type: "success",
+          })
+        );
+        resetForm();
+      } catch (error) {
+        console.error("Error submitting form:", error);
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Error",
+            subText: "Error submitting brief, please try again later",
+            type: "error",
+          })
+        );
+      }
+    },
+  });
+
   const {
     values,
     errors,
@@ -24,29 +104,46 @@ const BusinessBriefForm = () => {
     handleChange,
     handleSubmit,
     setFieldValue,
-  } = useFormik({
-    initialValues: INITIAL_VALUES,
-    validationSchema: validationSchema,
-    onSubmit: (values, { resetForm }: FormikHelpers<FormValues>) => {
-      formSubmit(values, resetForm);
-    },
-  });
+  } = formik;
 
-  const formSubmit = async (values: FormValues, resetForm: () => void) => {
-    console.log(values);
-    // resetForm();
+  const handlePhoneChange = (value: string) => {
+    setPhone(value);
+    setFieldValue("contactPhoneNumber", value); // Ensure the form field is updated
   };
 
-  console.log(values);
+  const handleFileUpload = async (file: File | null) => {
+    if (file && file.size > 5000000) {
+      setFieldValue("document", null);
+      formik.setFieldError("document", "Max file size exceeded.");
+      return;
+    }
+
+    try {
+      if (file) {
+        const formData = new FormData();
+        formData.append("file", file);
+        const response = await dispatch(
+          uploadRelevantDocument(formData)
+        ).unwrap();
+        const file_link = response.file_link;
+
+        setUploadedDocumentLink(file_link); // Store the file link for later use
+        setFieldValue("document", file.name); // Store the file name as a string
+        formik.setFieldError("document", ""); // Clear any existing file errors
+      }
+    } catch (error) {
+      console.error("Error uploading file:", error);
+      formik.setFieldError("document", "File upload failed.");
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8 w-full max-w-[50rem]">
       {/* BUSINESS INFORMATION */}
       <div className="space-y-6">
         <h3 className="text-lg font-semibold text-grey900 leading-6">
-          Business Informaion
+          Business Information
         </h3>
-
         <div className="space-y-6 rounded-bl-lg">
           {/* COMPANY NAME */}
           <InputField
@@ -67,7 +164,7 @@ const BusinessBriefForm = () => {
             name="industry"
             label="Type of Industry"
             placeholder="Select type"
-            options={optionHolder}
+            options={typeOfIndustryOptions}
             value={values.industry}
             onChange={handleChange}
           />
@@ -78,7 +175,7 @@ const BusinessBriefForm = () => {
             name="companySize"
             label="Company Size"
             placeholder="Number of employees"
-            options={optionHolder}
+            options={companySizeOptions}
             value={values.companySize}
             onChange={handleChange}
           />
@@ -123,17 +220,13 @@ const BusinessBriefForm = () => {
           />
 
           {/* CONTACT PHONE NUMBER */}
-          <InputField
-            type="text"
-            name="contactPhoneNumber"
-            label="Contact Phone Number"
-            placeholder="Contact Person's Name"
-            classNames="bg-white"
-            value={values.contactPhoneNumber}
-            error={touched.contactPhoneNumber && errors.contactPhoneNumber}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
+          <div>
+            <PhoneNumberInput
+              value={phone as string}
+              onChange={handlePhoneChange}
+              label="Contact Phone number"
+            />
+          </div>
         </div>
       </div>
 
@@ -164,7 +257,7 @@ const BusinessBriefForm = () => {
             name="digitalSolution"
             label="Have you previously implemented any digital solutions?"
             placeholder="Select Type"
-            options={optionHolder}
+            options={digitalSolutionOptions}
             value={values.digitalSolution}
             onChange={handleChange}
           />
@@ -191,7 +284,7 @@ const BusinessBriefForm = () => {
         </legend>
 
         <div className="space-y-6">
-          {/* BUSINESS CHALLENGES */}
+          {/* TARGET AUDIENCE */}
           <InputField
             type="text"
             name="audience"
@@ -199,7 +292,7 @@ const BusinessBriefForm = () => {
             placeholder="Describe your target audience?"
             classNames="bg-white"
             value={values.audience}
-            error={touched.solutionOutcomes && errors.solutionOutcomes}
+            error={touched.audience && errors.audience}
             onChange={handleChange}
             onBlur={handleBlur}
           />
@@ -223,9 +316,10 @@ const BusinessBriefForm = () => {
             name="gender"
             label="Gender"
             placeholder="Select Gender"
-            options={optionHolder}
+            options={genderOptions}
             value={values.gender || undefined}
             onChange={handleChange}
+            // onBlur={handleBlur}
           />
 
           {/* LOCATION */}
@@ -260,7 +354,7 @@ const BusinessBriefForm = () => {
             name="customerPersonas"
             label="Do you have existing customer personas?"
             placeholder="Yes/No"
-            options={optionHolder}
+            options={customerPersonaOptions}
             value={values.customerPersonas || undefined}
             onChange={handleChange}
           />
@@ -283,7 +377,7 @@ const BusinessBriefForm = () => {
       {/* DESIRED OUTCOMES */}
       <div className="space-y-6">
         <legend className="text-lg font-semibold text-grey900 leading-6">
-          Target Audience
+          Desired Outcomes
         </legend>
 
         <div className="space-y-6">
@@ -307,7 +401,7 @@ const BusinessBriefForm = () => {
         <h3 className="text-lg font-semibold text-grey900 leading-6">Budget</h3>
 
         <div className="space-y-6">
-          <InputField
+          {/* <InputField
             type="text"
             name="budgetProjection"
             label="What is your budget projection for this solution?"
@@ -318,7 +412,18 @@ const BusinessBriefForm = () => {
             error={touched.budgetProjection && errors.budgetProjection}
             onChange={handleChange}
             onBlur={handleBlur}
-          />
+          /> */}
+          <div>
+            <DropdownSelect
+              id="budget"
+              name="budget"
+              label="What is your budget projection for this solution?" //..................................
+              placeholder="Choose Range"
+              options={budgetProjectionOptions}
+              value={values.budget || undefined}
+              onChange={handleChange}
+            />
+          </div>
         </div>
       </div>
 
@@ -428,10 +533,11 @@ const BusinessBriefForm = () => {
             </label>
 
             <UploadFile
-              data={values.document}
+              //@ts-ignore
+              fileName={values.document || null}
               errors={errors.document || ""}
               setFieldValue={(field: string, value: File | null) =>
-                setFieldValue(field, value)
+                handleFileUpload(value)
               }
             />
           </div>
@@ -451,7 +557,7 @@ const BusinessBriefForm = () => {
             name="industry"
             label="Would you like to receive updates and newsletters from us?"
             placeholder="Yes/No"
-            options={optionHolder}
+            options={updateOptions}
             value={values.receiveUpdates || undefined}
             onChange={handleChange}
           />
@@ -467,4 +573,5 @@ const BusinessBriefForm = () => {
     </form>
   );
 };
+
 export default BusinessBriefForm;

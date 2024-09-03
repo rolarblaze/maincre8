@@ -70,7 +70,7 @@ export default function OrderHistory() {
       ) : filteredOrders?.length === 0 ? (
         <div className="w-full mx-auto flex items-center justify-center">
           <EmptyState
-            imgSrc="order-empty"
+            imgSrc="/images/order-empty.png"
             text="You have not bought any service. Buy a package to get started"
             link="Browse packages"
             to="/dashboard/services"

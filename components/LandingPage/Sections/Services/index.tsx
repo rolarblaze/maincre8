@@ -106,4 +106,7 @@ const Service = forwardRef<HTMLDivElement>((_, ref) => {
   );
 });
 
+// Set the display name to avoid the ESLint error
+Service.displayName = "Service";
+
 export default Service;

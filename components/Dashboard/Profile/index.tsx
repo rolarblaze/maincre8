@@ -7,7 +7,7 @@ import {
   InputField,
   PhoneNumberInput,
 } from "@/components";
-import { UserProfilePhoto } from "@/public/icons";
+import UserProfilePhoto from "@/components/Dashboard/Profile/UserProfilePhoto";
 import { addAlert } from "@/redux/alerts";
 import { updateInfo } from "@/redux/auth/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
@@ -145,7 +145,7 @@ export default function Profile() {
   };
 
   return (
-    <form className="md:border border-grey200 md:p-6 rounded-lg flex flex-col gap-6 max-w-[740px]">
+    <form className="md:border border-grey200 md:p-6 rounded-lg flex flex-col gap-6 w-full max-w-[740px]">
       <p className="text-lg font-semibold">Basic information</p>
       <UserProfilePhoto />
 

@@ -1,25 +1,50 @@
 "use client";
-import { InputField, Loader, ServiceCard } from "@/components";
+import { Spinner, ServiceCard } from "@/components";
 import Tabs from "@/components/Dashboard/Tabs";
-import { SearchIcon } from "@/public/icons";
 import {
   AllIcon,
   ContentCopywritingIcon,
   CreativeDesignIcon,
   DigitalMarketingIcon,
 } from "@/public/svgs";
-import { getServices } from "@/redux/shop/features";
+import { getPackages } from "@/redux/shop/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 
 const Services = () => {
   const dispatch = useAppDispatch();
-  const { services, isLoading, error } = useAppSelector((state) => state.shop);
+  const { services, isLoading, error, packages } = useAppSelector(
+    (state) => state.shop
+  );
+
+  const [limit, setLimit] = useState<number>(1);
+  const [offset, setOffset] = useState<number>(0);
   const [activeTab, setActiveTab] = useState<string>("All");
+  const [hasMore, setHasMore] = useState<boolean>(true);
+
+  const observer = useRef<IntersectionObserver | null>(null);
+  const lastPackageElementRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (isLoading) return;
+      if (observer.current) observer.current.disconnect();
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setLimit((prevLimit) => prevLimit + 1);
+          setOffset((prevOffset) => prevOffset + 1);
+        }
+      });
+      if (node) observer.current.observe(node);
+    },
+    [isLoading, hasMore]
+  );
 
   useEffect(() => {
-    dispatch(getServices());
-  }, [dispatch]);
+    dispatch(getPackages({ limit, offset })).then((action) => {
+      if (getPackages.fulfilled.match(action) && action.payload.length === 0) {
+        setHasMore(false);
+      }
+    });
+  }, [dispatch, limit, offset]);
 
   const tabs = [
     {
@@ -74,69 +99,57 @@ const Services = () => {
     });
   });
 
-  const filteredServices =
+  const filteredPackages =
     activeTab === "All"
-      ? services
-      : services.filter((service) => service.service_name === activeTab);
+      ? packages
+      : packages.filter((pkg) =>
+          pkg.provisions.some((prov) => prov.tags.includes(activeTab))
+        );
 
-  // if (isLoading) {
-  //   return <div>Loading...</div>;
-  // }
+  const packageCards = filteredPackages.flatMap((pkg) =>
+    pkg.provisions.map((provision) => ({
+      category: pkg.package_name,
+      title: pkg.description || "No Description Available",
+      description: provision.description,
+      color: bundleColors[pkg.bundle.bundle_name] || "#000000",
+      id: pkg.package_id,
+    }))
+  );
 
   if (error) {
     return <div>Error: {error}</div>;
   }
 
   return (
-    <div className="container mx-auto space-y-8">
+    <div className="container mx-auto w-full">
       <Tabs
         tabs={tabs}
-        showSortBy={true}
+        showSortBy={false}
         activeTab={activeTab}
         onTabClick={setActiveTab}
       />
-      <section className="flex flex-col gap-10">
-        <div className="max-w-[548px] w-full">
-          <InputField
-            type="text"
-            placeholder=""
-            value=""
-            name="search"
-            icon={<SearchIcon className="w-5 h-5" />}
-          />
-        </div>
-        <div className="grid grids-cols-1 md:grids-cols-3 lg:grid-cols-3 gap-6 overflow-y-auto place-items-center">
-          {isLoading ? (
-            <div>
-              <Loader />
+      <section className="w-full mx-auto pt-6 px-3 md:px-0">
+        <div className="w-full grid grids-cols-2 md:grids-cols-2 lg:grid-cols-3 gap-6 overflow-y-auto place-items-center">
+          {packageCards.map((card, index) => (
+            <div
+              key={index}
+              ref={
+                index === packageCards.length - 1 ? lastPackageElementRef : null
+              }
+            >
+              <ServiceCard
+                category={card.category}
+                title={card.title}
+                description={card.description}
+                color={card.color}
+                id={card.id}
+              />
             </div>
-          ) : (
-            <>
-              {filteredServices
-                .flatMap((service) =>
-                  service.bundles.flatMap((bundle) =>
-                    bundle.packages.flatMap((pkg) =>
-                      pkg.provisions.map((provision) => ({
-                        category: bundle.bundle_name,
-                        title: pkg.package_name,
-                        description: provision.description,
-                        color: bundleColors[bundle.bundle_name],
-                        id: pkg.package_id,
-                      }))
-                    )
-                  )
-                )
-                .map((card, index) => (
-                  <ServiceCard
-                    key={index}
-                    category={card.category}
-                    title={card.title}
-                    description={card.description}
-                    color={card.color}
-                    id={card.id}
-                  />
-                ))}
-            </>
+          ))}
+          {isLoading && (
+            <div className="w-full flex items-center justify-center col-span-full">
+              <Spinner className="border-primary500" />
+            </div>
           )}
         </div>
       </section>

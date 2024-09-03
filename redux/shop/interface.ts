@@ -40,9 +40,16 @@ export interface Service {
   service_id: number;
   bundles: Bundle[];
 }
+export interface Packages {
+  limit: number;
+  offset: number;
+  packages: Package[];
+  total_count: number;
+}
 
 export interface ServicesState {
   services: Service[];
+  packages: Package[];
   isLoading: boolean;
   error: string | null;
 }

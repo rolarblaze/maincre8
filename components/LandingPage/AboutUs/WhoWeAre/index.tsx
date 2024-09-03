@@ -9,7 +9,7 @@ const WhoWeAre = () => {
   return (
     <section className="w-full pt-10 bg-white md:pt-20 md:mb-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-6 lg:flex-row items-center md:justify-between">
-        <div className="w-full space-y-2 md:space-y-6 mb-6">
+        <div className="w-full space-y-6 md:space-y-6 mb-6">
           <h2 className="text-2xl font-bold mb-4 md:text-5xl">
             Who are{" "}
             <span className="text-2xl text-primary500 md:text-5xl">we?</span>
@@ -31,23 +31,28 @@ const WhoWeAre = () => {
         </div>
         <div className="w-full h-auto m-auto">
           <div className="flex justify-center items-center">
-            <div className="hidden w-full rounded-lg overflow-hidden md:flex">
-              {/* <TeamImage className="w-fit m-auto  h-full rounded-lg" /> */}
+            <div className="hidden md:block w-full h-full max-w-[592px] max-h-[384px]">
               <Image
                 alt={"arrow drawing"}
-                src={assetLibrary.teamGroup}
-                width={400}
-                height={300}
+                src={assetLibrary.teamGroupRecent}
+                width={592}
+                height={384}
                 quality={100}
-                className="size-full m-auto  h-full object-cover"
+                // className="size-full m-auto  h-full object-cover"
               />
             </div>
-            {/* <div className="w-full rounded-lg overflow-hidden md:hidden">
-              <TeamImageMobile className="w-fit m-auto  h-full rounded-lg" />
-            </div> */}
-          </div>
+            <div className="md:hidden w-full h-full max-w-[335px] max-h-[210px]">
+              <Image
+                alt={"arrow drawing"}
+                src={assetLibrary.teamGroupMobile}
+                width={335}
+                height={210}
+                quality={100}
+                layout="responsive"
+              />
+            </div>
 
-          {/* <div className="max-w-[486px] w-full h-auto rounded-lg overflow-hidden">
+            {/* <div className="max-w-[486px] w-full h-auto rounded-lg overflow-hidden">
             <TeamImage1 className="w-full h-full rounded-lg" />
           </div>
 
@@ -61,6 +66,7 @@ const WhoWeAre = () => {
           <div className="absolute left-[16%] bottom-[-30%] ">
             <ArrowIcon className="w-[76px] h-[76px] rotate-180" />
           </div> */}
+          </div>
         </div>
       </div>
     </section>

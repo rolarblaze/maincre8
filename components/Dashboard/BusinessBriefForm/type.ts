@@ -27,6 +27,7 @@ interface FormValues {
 
   // BUDGET
   budgetProjection: string;
+  budget: string;
 
   // PREFERRED SOLUTIONS
   usefulDigitalServices: string[];
@@ -38,9 +39,10 @@ interface FormValues {
 
   // ADDITIONAL INFORMATION
   additionalInformation: string;
+  relevant_document_link: string;
 
   // ATTACH A FILE
-  document: File | null 
+  document: File | null;
 
   // CONSENT
   receiveUpdates: "Yes" | "No" | null;

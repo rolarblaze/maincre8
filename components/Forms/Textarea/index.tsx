@@ -1,16 +1,16 @@
 "use client";
 import { ToolTipIcon } from "@/public/icons";
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 
 interface ControlledTextareaProps {
-  label: string;
-  placeholder: string;
-  value: string;
-  onChange: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  id: string;
+  label?: string;
+  placeholder?: string;
+  value?: string;
+  onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
+  id?: string;
   name: string;
-
   tooltipText?: string;
+  error?: string | ReactNode | null;
 }
 
 const Textarea: React.FC<ControlledTextareaProps> = ({
@@ -21,6 +21,7 @@ const Textarea: React.FC<ControlledTextareaProps> = ({
   id,
   tooltipText,
   name,
+  error = null,
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
@@ -47,7 +48,6 @@ const Textarea: React.FC<ControlledTextareaProps> = ({
         )}
       </div>
       <textarea
-        required
         id={id}
         name={name}
         className="block w-full border border-gray-300 rounded-lg p-4 placeholder-grey400 text-base focus:outline-none focus:none"
@@ -56,6 +56,7 @@ const Textarea: React.FC<ControlledTextareaProps> = ({
         value={value}
         onChange={onChange}
       ></textarea>
+      {error && <p className="text-red-500 text-xs">{error}</p>}
     </div>
   );
 };

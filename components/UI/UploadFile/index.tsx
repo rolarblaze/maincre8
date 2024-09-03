@@ -1,13 +1,12 @@
 import { AttachIcon } from "@/public/icons";
-import { FormikErrors } from "formik";
 
 interface IUploadFile {
-  data: File | null;
-  errors: string | undefined; // Adjust to match your form error type
+  fileName: string | null; 
+  errors: string | undefined;
   setFieldValue: (field: string, value: File | null) => void;
 }
 
-const UploadFile: React.FC<IUploadFile> = ({ data, setFieldValue, errors }) => {
+const UploadFile: React.FC<IUploadFile> = ({ fileName, setFieldValue, errors }) => {
   return (
     <div>
       <div className="flex justify-normal items-center gap-4">
@@ -32,7 +31,10 @@ const UploadFile: React.FC<IUploadFile> = ({ data, setFieldValue, errors }) => {
           }}
         />
 
-        <span className="text-grey500 block">PDF or DOC (max. 5mb)</span>
+        <div className="space-y-1">
+          <span className="text-grey500 block">PDF or DOC (max. 5mb)</span>
+          {fileName && <span className="text-sm text-green-600">Uploaded file: {fileName}</span>}
+        </div>
       </div>
 
       {errors && <div id="error">{errors}</div>}

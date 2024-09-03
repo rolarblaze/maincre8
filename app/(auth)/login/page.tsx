@@ -1,15 +1,15 @@
 "use client";
-import { Button, InputField, SocialSignUp } from "@/components";
-import { Checked, EyeIcon, Unchecked } from "@/public/icons";
+import { Fragment, useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import { AppDispatch, useAppDispatch, useAppSelector } from "@/redux/store";
 import { addAlert } from "@/redux/alerts";
 import { loginUser } from "@/redux/auth/features";
-import { AppDispatch, useAppDispatch, useAppSelector } from "@/redux/store";
 import { validatePassword } from "@/utils/helpers/auth/passwordValidation";
-import { useFormik } from "formik";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { Fragment, useState } from "react";
-import * as Yup from "yup";
+import { Button, InputField, SocialSignUp } from "@/components";
+import { Checked, EyeIcon, Unchecked } from "@/public/icons";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
@@ -24,6 +24,16 @@ export default function Login() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+
+  useEffect(() => {
+    // Check if there's any stored login details in localStorage
+    const savedLoginDetails = localStorage.getItem("loginDetails");
+    if (savedLoginDetails) {
+      const { email, password } = JSON.parse(savedLoginDetails);
+      formik.setValues({ email, password });
+      setRememberMe(true);
+    }
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -53,9 +63,18 @@ export default function Login() {
   ) => {
     const actionResult = await dispatch(loginUser(payload));
 
-    console.log(actionResult);
-
     if (loginUser.fulfilled.match(actionResult)) {
+      if (rememberMe) {
+        // Store the login details in localStorage
+        localStorage.setItem(
+          "loginDetails",
+          JSON.stringify({ email: payload.email, password: payload.password })
+        );
+      } else {
+        // Clear login details from localStorage if "Remember Me" is not checked
+        localStorage.removeItem("loginDetails");
+      }
+
       dispatch(
         addAlert({
           id: "",
@@ -67,7 +86,6 @@ export default function Login() {
       router.push("/dashboard");
     } else if (loginUser.rejected.match(actionResult)) {
       if (actionResult.error) {
-        console.log(actionResult.error.message);
         const errorMessage =
           actionResult.error?.message ||
           "An error occurred during login. Please try again.";
@@ -152,7 +170,7 @@ export default function Login() {
             classNames="mt-4"
           />
         </form>
-        <SocialSignUp isLogin />
+        {/* <SocialSignUp isLogin={true} /> */}
       </section>
     </Fragment>
   );

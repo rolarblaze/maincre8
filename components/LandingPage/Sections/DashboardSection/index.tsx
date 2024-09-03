@@ -49,7 +49,14 @@ const DashboardSection = () => {
 
         {/* BIG BLUE DIV */}
         <div className="w-full bg-primary800 rounded-xl lg:rounded-5xl pt-4 px-2.5 lg:pt-10 lg:px-6 ">
-          <Image src={dashboardImage} alt="Dashboard display" />
+          <Image
+            src={assetLibrary.dashboardOverviewImg}
+            alt="Dashboard display"
+            layout="responsive"
+            width={1216}
+            height={696}
+            className="w-full max-w-[335px] h-full max-h-[120px] md:w-full md:h-full md:max-w-[1216px] md:max-h-[696px] lg:max-w-[1216px] lg:max-h-[696px]"
+          />
         </div>
       </div>
     </section>

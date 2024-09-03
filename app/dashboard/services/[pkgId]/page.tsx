@@ -1,19 +1,21 @@
 "use client";
-import { Button, FullLoader, TabsToggle } from "@/components";
+import { Button, Loader, TabsToggle } from "@/components";
 import { ArrowBackIcon } from "@/public/icons";
+import { addAlert } from "@/redux/alerts";
 import { getPackageDetails } from "@/redux/getPackage/getPkg";
-import { trackUserOrder } from "@/redux/servicesTracker/features";
+import {
+  getUserOrderHistory,
+  payForPackage,
+  trackUserOrder,
+} from "@/redux/servicesTracker/features";
 import { Package } from "@/redux/shop/interface";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
-
 import Link from "next/link";
 import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const PackageDetails = () => {
-  const { trackingDetails, loading } = useAppSelector(
-    (state) => state.services
-  );
+  const [isBuying, setIsBuying] = useState(false);
   const { pkgId } = useParams();
   const searchParams = useSearchParams();
   const [activeTab, setActiveTab] = useState("package info");
@@ -23,6 +25,10 @@ const PackageDetails = () => {
   const id = Array.isArray(pkgId) ? pkgId[0] : pkgId;
 
   useEffect(() => {
+    dispatch(getUserOrderHistory());
+  }, []);
+
+  useEffect(() => {
     if (id) {
       dispatch(getPackageDetails({ id }));
     }
@@ -30,7 +36,8 @@ const PackageDetails = () => {
       dispatch(trackUserOrder(Number(transId)));
     }
   }, [id, transId, dispatch]);
-
+  //
+  const { orderHistory } = useAppSelector((state) => state.services);
   const {
     status,
     pkgDetails,
@@ -38,12 +45,51 @@ const PackageDetails = () => {
   }: { status: string; pkgDetails: Package; error: string | null } =
     useAppSelector((state) => state.getPackageDetails);
 
-  if (status !== "succeeded" || loading) return <FullLoader />;
+  if (status !== "succeeded") return (
+    <div className="flex items-center justify-center">
+      <Loader />
+    </div>
+  );
   if (error) return <div>Error: {error}</div>;
 
-  if (trackingDetails) {
-    console.log(trackingDetails);
-  }
+  // if package is paid for not
+  const checkForPackage = orderHistory?.find(
+    (orders) => orders.package.package_id === pkgDetails.package_id
+  );
+
+  const disableMyPackageTab = checkForPackage ? false : true;
+
+  const buyPackage = async () => {
+    if (pkgId && id) {
+      setIsBuying(true);
+      try {
+        const resultAction = await dispatch(
+          payForPackage({ package_id: Number(id), currency: "NGN" })
+        );
+
+        if (payForPackage.fulfilled.match(resultAction)) {
+          window.open(resultAction.payload.data.link, "_blank");
+          dispatch(
+            addAlert({
+              id: "",
+              headText: "Success",
+              subText: resultAction.payload.status,
+              type: "success",
+            })
+          );
+        } else {
+          console.error(
+            "Failed to purchase the package.",
+            resultAction.payload
+          );
+        }
+      } catch (err) {
+        console.error("Error purchasing the package:", err);
+      } finally {
+        setIsBuying(false);
+      }
+    }
+  };
 
   return (
     <div className="pt-[22px] md:pt-0">
@@ -60,21 +106,31 @@ const PackageDetails = () => {
           <p>{pkgDetails?.description}</p>
         </div>
 
-        <div className="flex gap-6 items-center">
-          <h4 className="hidden md:block">{pkgDetails?.price || "$499"}</h4>
-          <Button
-            label={`Buy for ${pkgDetails?.price || "$499"}`}
-            classNames="self-start"
-          />
-        </div>
+        {checkForPackage ? (
+          <p className="py-1 px-3 bg-[#0F973D] text-white rounded-xl text-sm">
+            Active{" "}
+          </p>
+        ) : (
+          <>
+            <div className="flex gap-6 items-center">
+              <h4 className="hidden md:block">{pkgDetails?.price || "N499"}</h4>
+              <Button
+                label={`Buy for ${pkgDetails?.price || "N499"}`}
+                classNames="self-start"
+                onClick={buyPackage}
+                isLoading={isBuying}
+              />
+            </div>
+          </>
+        )}
       </div>
 
       {/* ------------------------------------------------ */}
       {/* ------------------------------------------------ */}
-      <div className="border-l border-t border-grey200 py-4 px-6 mt-4 md:mt-6 h-full ">
+      <div className="border-l border-t border-grey200 py-4 md:px-6 mt-4 md:mt-6 h-full ">
         <TabsToggle
           onTabClick={setActiveTab}
-          disableMyPackage={false}
+          disableMyPackage={disableMyPackageTab}
           provisions={pkgDetails?.provisions}
         />
       </div>

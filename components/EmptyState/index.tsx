@@ -19,11 +19,12 @@ const EmptyState = ({
     <div className="grid place-items-center h-full">
       <div className="flex flex-col max-w-max justify-center items-center ">
         <Image
-          src={imgSrc} 
+          src={`${imgSrc}`}
           alt={alt}
-          width={190}
-          height={160}
-          className="mb-5"
+          width={178}
+          height={184}
+          layout="responsive"
+          className="mb-10"
         />
 
         <p className="text-grey600 font-semibold text-lg mb-2">{text}</p>

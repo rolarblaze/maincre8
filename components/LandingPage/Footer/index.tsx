@@ -1,6 +1,5 @@
 import React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { footerData } from "./footerData";
 import Logo from "../../../public/icons/footer-logo.svg";
 
@@ -54,7 +53,7 @@ const Footer: React.FC = () => {
         </section>
       </div>
       <div className="mx-auto w-full max-w-[76rem]">
-        <p>© {currentYear} Rayna. All rights reserved.</p>
+        <p>© {currentYear} SMG. All rights reserved.</p>
       </div>
     </footer>
   );

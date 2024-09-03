@@ -20,9 +20,9 @@ const FilterComp = () => {
       <span>Filter By:</span>
       <div className="flex flex-wrap justify-center items-center gap-2">
         {filters.map((filter, idx) => (
-          <div className="relative">
+          <div className="relative"  key={`filter-${idx}`}>
             <button
-              key={`filter-${idx}`}
+             
               onClick={() => handleFilter(filter)}
               className={`flex justify-center items-center gap-2 py-1.5 px-2 pl-3 text-grey500 font-medium text-sm border-2 border-ash rounded-lg`}
             >
@@ -36,8 +36,8 @@ const FilterComp = () => {
                   if (filter === selectedFilters[0]) {
                     return (
                       <div key={id} className="space-y-5 text-grey600">
-                        {nav.map((pop) => (
-                          <p className="cursor-pointer">{pop}</p>
+                        {nav.map((pop, popIdx) => (
+                          <p key={`pop-${popIdx}`} className="cursor-pointer">{pop}</p>
                         ))}
                       </div>
                     );

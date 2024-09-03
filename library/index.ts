@@ -4,7 +4,21 @@ const assetLibrary = {
   deliverSteps: "/optimised/deliver-steps.webp",
   seoImage: "/optimised/seo-image.webp",
   teamGroup: "/optimised/team-group.webp",
+  teamGroupRecent: "/optimised/team-group-recent.webp",
+  teamGroupMobile: "/optimised/team-group-mobile.webp",
   recomEmpty: "/optimised/empty-state.webp",
+  integrationOne: "/optimised/integration-1.webp",
+  integrationTwo: "/optimised/integration-2.webp",
+  organizeOne: "/optimised/organize-1.webp",
+  organizeTwo: "/optimised/organize-2.webp",
+  readyToUseOne: "/optimised/ready-to-use-1.webp",
+  readyToUseTwo: "/optimised/ready-to-use-2.webp",
+  readyToUseThree: "/optimised/ready-to-use-3.webp",
+  unlimitedRevisionsTwo: "/optimised/unlimited-revisions-2.webp",
+  unlimitedRevisionsThree: "/optimised/unlimited-revisions-3.webp",
+  notFound: "/optimised/not-found.webp",
+  dashboardOverviewImg: "/optimised/dashboard-overview-img.webp",
+  defaultAvatar: "/optimised/default-avatar.webp",
 
   // SVGS
   highlight: "/optimised/highlight.webp",
@@ -16,6 +30,11 @@ const assetLibrary = {
   curvedArrow: "/optimised/curved-arrow.webp",
   arrowDrawing: "/optimised/arrow-drawing.webp",
   bulbIcon: "/icons/bulb-icon.svg",
+  logoBlueTwo: "/optimised/logo-blue-two.webp",
+  sellMerchLogoWhite: "/optimised/sell-merch-logo-white.webp",
+  sellplannerLogoWhite: "/optimised/sellplanner-logo-white.webp",
+  devsealLogoWhite: "/optimised/devseal-logo-white.webp",
+  piazzaLogoWhite: "/optimised/piazza-logo-white.webp",
 };
 
 export default assetLibrary;

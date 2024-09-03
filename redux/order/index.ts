@@ -1,6 +1,9 @@
 
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { fetchUserOrderHistory, fetchLatestAppointments, fetchRecommendationHistory } from "./features";
+import {
+  fetchUserOrderHistory, fetchLatestAppointments, fetchRecommendationHistory, submitRecommendationBrief,
+  uploadRelevantDocument,
+} from "./features";
 import {
   OrderHistoryResponse,
   AppointmentResponse,
@@ -16,6 +19,10 @@ export interface OrderSliceState {
   error: string | null;
   appointments: Appointment[] | null;
   recommendationHistory: Brief[] | null;
+  isSubmittingBrief: boolean;
+  isUploadingDocument: boolean;
+  documentUploadError: string | null;
+  briefSubmissionError: string | null;
 }
 
 const initialState: OrderSliceState = {
@@ -23,8 +30,12 @@ const initialState: OrderSliceState = {
   isLoading: false,
   isApointmentLoading: false,
   error: null,
-  appointments: null,
+  appointments: [],
   recommendationHistory: null,
+  isSubmittingBrief: false,
+  isUploadingDocument: false,
+  documentUploadError: null,
+  briefSubmissionError: null,
 };
 
 export const OrderSlice = createSlice({
@@ -81,6 +92,34 @@ export const OrderSlice = createSlice({
       .addCase(fetchRecommendationHistory.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload as string;
+      })
+
+    // Handle recommendation brief submission
+    builder
+      .addCase(submitRecommendationBrief.pending, (state) => {
+        state.isSubmittingBrief = true;
+        state.briefSubmissionError = null;
+      })
+      .addCase(submitRecommendationBrief.fulfilled, (state) => {
+        state.isSubmittingBrief = false;
+      })
+      .addCase(submitRecommendationBrief.rejected, (state, action) => {
+        state.isSubmittingBrief = false;
+        state.briefSubmissionError = action.payload as string;
+      });
+
+    // Handle document upload
+    builder
+      .addCase(uploadRelevantDocument.pending, (state) => {
+        state.isUploadingDocument = true;
+        state.documentUploadError = null;
+      })
+      .addCase(uploadRelevantDocument.fulfilled, (state) => {
+        state.isUploadingDocument = false;
+      })
+      .addCase(uploadRelevantDocument.rejected, (state, action) => {
+        state.isUploadingDocument = false;
+        state.documentUploadError = action.payload as string;
       });
   },
 });

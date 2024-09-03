@@ -9,6 +9,7 @@ import { addAlert } from "@/redux/alerts";
 import FileUploadModal from "@/components/FileUploadModal";
 import { submitBriefForTracking } from "@/redux/servicesTracker/features";
 import { useSearchParams } from "next/navigation";
+import { SubmittedIcon } from "@/public/icons";
 
 const SubmittedBrief = () => {
   const searchParams = useSearchParams();
@@ -46,7 +47,7 @@ const SubmittedBrief = () => {
     if (status === "completed") {
       dispatch(updateProgress({ BookDiscoveryCallInProgress: true }));
     }
-  }, [dispatch, hasSubmittedBrief]);
+  }, [dispatch, status]);
 
   const handleUploadedBrief = () => {
     setIsModalOpen(true);
@@ -98,6 +99,18 @@ const SubmittedBrief = () => {
         buttonLabel="Upload a brief"
         buttonClassNames=""
         showDate={true}
+        completedState={
+          <a
+            href={trackingDetails?.brief_attachment_link}
+            target="_blank"
+            rel="noopener noreferrer"
+            download
+            className="flex gap-2"
+          >
+            <p className="text-primary500 text-sm">Brief submitted</p>{" "}
+            <SubmittedIcon />
+          </a>
+        }
         dateBought={dateSubmitted}
         onClick={handleUploadedBrief}
       />

@@ -1,3 +1,5 @@
+import assetLibrary from "@/library";
+
 export const Services = [
   {
     tab: "Brand Consistency",
@@ -52,13 +54,13 @@ export const Services = [
         heading: "Create Drafts for Later",
         description:
           "Prepare draft projects in advance to streamline your workflow. When ready, seamlessly integrate them into your project queue",
-        imgSrc: "/images/servicesImages/placeholder.svg",
+        imgSrc: assetLibrary.organizeOne,
       },
       {
         heading: "Sort, Filter, and Organize",
         description:
           "Attach your own images or we can choose from our library of licensed stock images. We can alternatively, generate unique visuals directly within your brief to inspire your teamArrange and reorganize projects by dragging and dropping them as priorities evolve, ensuring optimal project management",
-        imgSrc: "/images/servicesImages/placeholder.svg",
+        imgSrc: assetLibrary.organizeTwo,
       },
     ],
   },
@@ -77,13 +79,13 @@ export const Services = [
         heading: "Tag Changes Directly on Images",
         description:
           "Save time by tagging specific areas you will like revised within every image or illustration. See updates in real time and gain insight into when your project will be finalized",
-        imgSrc: "/images/servicesImages/placeholder.svg",
+        imgSrc: assetLibrary.unlimitedRevisionsTwo,
       },
       {
         heading: "Communicate Easily with Video Feedback",
         description:
           "Quickly provide direct video feedback using Zoho Meeting. Share your screen and record what you will like changed or created directly to the project manager assigned to you",
-        imgSrc: "/imgs/service-8.png",
+        imgSrc: assetLibrary.unlimitedRevisionsThree,
       },
     ],
   },
@@ -96,19 +98,19 @@ export const Services = [
         heading: "Streamline your workday",
         description:
           "If you need changes to a project, reach out through your dedicated project manager, the support desk, or use the Zoho project tool. Your team member will revise anything based on your feedback, ensuring you get results you love every time",
-        imgSrc: "/images/servicesImages/placeholder.svg",
+        imgSrc: assetLibrary.readyToUseOne,
       },
       {
         heading: "Ready to use files with every update",
         description:
           "Even if your project is not finalized yet, every posted version includes ready-to-use files, ensuring you can get started immediately with your new materials",
-        imgSrc: "/images/servicesImages/placeholder.svg",
+        imgSrc: assetLibrary.readyToUseTwo,
       },
       {
         heading: "Projects start Instantly",
         description:
           "Quickly provide direct video feedback using Zoho Meeting. Share your screen and record what you will like changed or created directly to the project manager assigned to you",
-        imgSrc: "/images/servicesImages/placeholder.svg",
+        imgSrc: assetLibrary.readyToUseThree,
       },
     ],
   },
@@ -122,13 +124,13 @@ export const Services = [
         heading: "Streamline your project",
         description:
           "Streamline your  project  with our seamless solution designed to optimize productivity and efficiency.",
-        imgSrc: "/images/servicesImages/placeholder.svg",
+        imgSrc: assetLibrary.integrationOne,
       },
       {
         heading: "Payment support",
         description:
           "Discover effortless transactions with our tailored payment integration solutions. From seamless  checkout experiences to optimizing payment processing",
-        imgSrc: "/images/servicesImages/placeholder.svg",
+        imgSrc: assetLibrary.integrationTwo,
       },
     ],
   },

@@ -21,6 +21,11 @@ export interface User {
   is_verified?: boolean;
   profile?: UserProfile;
   transactions: Transaction[];
+  activityStatistics?: {
+    active_services: number;
+    completed_services: number;
+    total_services_bought: number;
+  };
 }
 
 export interface SignUpFormValues {

@@ -71,7 +71,9 @@ const InputField: React.FC<InputFieldProps> = ({
             <ToolTipIcon />
             {showTooltip && (
               <div className="tooltip">
-                <span className="tooltip-text text-grey500 leading-[1.3125rem]">{tooltipText}</span>
+                <span className="tooltip-text text-grey500 leading-[1.3125rem]">
+                  {tooltipText}
+                </span>
                 <div className="tooltip-arrow"></div>
               </div>
             )}

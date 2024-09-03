@@ -24,10 +24,8 @@ export const uploadFiles = createAsyncThunk(
         }
       );
 
-      // console.log("file upload response", response.data);
       return response.data;
     } catch (error) {
-      // console.log("file upload error", error);
       return rejectWithValue(handleAxiosError(error));
     }
   }
