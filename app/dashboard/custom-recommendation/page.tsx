@@ -25,7 +25,7 @@ const CustomRecommendation = () => {
   }
 
   return (
-    <div className="space-y-12 pt-10">
+    <div className="space-y-12 pt-10 md:pt-0">
       <Button
         link="/dashboard/custom-recommendation/form"
         label={
@@ -64,9 +64,10 @@ const CustomRecommendation = () => {
           ) : (
             <EmptyState
               imgSrc={assetLibrary.recomEmpty}
-              text="No recommendations found"
-              link="Get a new recommendation"
+              text="No recommendations requested yet"
+              // link="Get a new recommendation"
               to="/dashboard/custom-recommendation/form"
+              imgStyle="!w-[300px]!h-[300px]"
             />
           )}
         </div>

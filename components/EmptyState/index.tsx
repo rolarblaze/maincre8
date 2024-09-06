@@ -8,12 +8,14 @@ const EmptyState = ({
   link,
   to,
   alt = "Empty state",
+  imgStyle,
 }: {
   imgSrc: string;
   alt?: string;
   text: string;
   link?: string;
   to?: string;
+  imgStyle?: string;
 }) => {
   return (
     <div className="grid place-items-center h-full">
@@ -23,8 +25,7 @@ const EmptyState = ({
           alt={alt}
           width={178}
           height={184}
-          layout="responsive"
-          className="mb-10"
+          className={`mb-10 ${imgStyle}`}
         />
 
         <p className="text-grey600 font-semibold text-lg mb-2">{text}</p>
