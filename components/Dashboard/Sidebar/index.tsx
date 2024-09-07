@@ -22,6 +22,8 @@ import {
 } from "@/public/svgs";
 import MyServicesIcon from "@/public/svgs/MyServicesIcon";
 import NewLogo from "@/public/optimised/NewLogo";
+import Image from "next/image";
+import assetLibrary from "@/library";
 
 type SidebarProps = {
   setActiveTab: (tab: Tab) => void;
@@ -342,10 +344,24 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
 
       {/* Profile */}
       <div className="flex gap-5 py-5 pl-3">
-        <div className="flex gap-3">
+        <div className="flex items-center gap-3">
+          {/* Profile Avatar */}
           <div className="w-10 h-10 rounded-full relative">
-            <UserImage />
+            <Image
+              src={assetLibrary.defaultAvatar}
+              alt="User Image"
+              objectFit="cover"
+              width={40}
+              height={40}
+              className="rounded-full w-full h-full"
+            />
+            <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full p-0.5">
+              {" "}
+            </div>
           </div>
+          {/* <div className="w-10 h-10 rounded-full relative">
+            <UserImage />
+          </div> */}
           {isLoading || !isProfileLoaded ? (
             <p>Loading...</p>
           ) : (
