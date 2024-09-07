@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LogoBlack } from "@/public/icons";
 import { Wave } from "@/public/imgs";
+import NewLogo from "@/public/optimised/NewLogo";
 
 interface Props {
   children: React.ReactNode;
@@ -43,7 +44,8 @@ const AuthPageLayout: FC<Props> = ({ children }) => {
       <div className="w-full mx-auto flex flex-col gap-5 p-4 md:py-8 md:px-28 md:gap-10">
         <div className="flex items-center justify-between">
           <Link href={"/"}>
-            <LogoBlack />
+            {/* <LogoBlack /> */}
+            <NewLogo />
           </Link>
           {text}
         </div>

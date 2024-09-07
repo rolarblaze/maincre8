@@ -1,7 +1,7 @@
 import NotFoundButton from "@/components/NotFoundPage/NotFoundButton";
 import assetLibrary from "@/library";
-import { LogoBlue } from "@/public/icons";
-import { HamburgerIcon, MobileBlueLogo } from "@/public/svgs";
+import NewLogo from "@/public/optimised/NewLogo";
+import { HamburgerIcon } from "@/public/svgs";
 import Image from "next/image";
 import React from "react";
 
@@ -9,15 +9,8 @@ const NotFound = () => {
   return (
     <div className="w-full h-full flex flex-col">
       <header className="w-full px-5 md:pl-24 lg:pl-32 py-4 md:py-5 lg:py-6 flex justify-between ">
-        <div className="max-w-[112px] max-h-[28px] md:max-w-[171px] md:max-h-[40px]">
-          <Image
-            src={assetLibrary.logoBlueTwo}
-            alt="Logo"
-            width={171}
-            height={40}
-            layout="responsive"
-          />
-        </div>
+        {/* Logo */}
+        <NewLogo />
         <div className="md:hidden">
           <HamburgerIcon stroke="#1574E5" />
         </div>
@@ -29,7 +22,6 @@ const NotFound = () => {
             alt="Not found"
             width={300}
             height={300}
-            layout="responsive"
           />
         </div>
         <div className="flex flex-col gap-8 w-full items-center">

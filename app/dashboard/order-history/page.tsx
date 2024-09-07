@@ -74,7 +74,7 @@ export default function OrderHistory() {
             text="You have not bought any service. Buy a package to get started"
             link="Browse packages"
             to="/dashboard/services"
-            imgStyle="!w-[300px] !h-[300px]"
+            imgStyle="!w-[246px] !h-[197px]"
           />
         </div>
       ) : (

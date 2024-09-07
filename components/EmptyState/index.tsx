@@ -25,7 +25,7 @@ const EmptyState = ({
           alt={alt}
           width={178}
           height={184}
-          className={`mb-10 ${imgStyle}`}
+          className={`${imgStyle}`}
         />
 
         <p className="text-grey600 font-semibold text-lg mb-2">{text}</p>
