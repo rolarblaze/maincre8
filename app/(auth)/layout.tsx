@@ -44,7 +44,6 @@ const AuthPageLayout: FC<Props> = ({ children }) => {
       <div className="w-full mx-auto flex flex-col gap-5 p-4 md:py-8 md:px-28 md:gap-10">
         <div className="flex items-center justify-between">
           <Link href={"/"}>
-            {/* <LogoBlack /> */}
             <NewLogo />
           </Link>
           {text}

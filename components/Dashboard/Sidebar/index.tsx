@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { Tab } from "./types";
 import { useAppSelector, useAppDispatch } from "@/redux/store";
-import { signOut } from "@/redux/auth/index"
+import { signOut } from "@/redux/auth/index";
 import UserImage from "@/public/images/user-image.svg";
 import ArrowUp from "@/public/icons/arrow-up.svg";
 import { CancelIcon, LogoBlue, Logout } from "@/public/icons";
@@ -21,6 +21,7 @@ import {
   SupportIcon,
 } from "@/public/svgs";
 import MyServicesIcon from "@/public/svgs/MyServicesIcon";
+import NewLogo from "@/public/optimised/NewLogo";
 
 type SidebarProps = {
   setActiveTab: (tab: Tab) => void;
@@ -64,26 +65,29 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
       {/* Upper section */}
       <section className="flex flex-col gap-3 ">
         <Link href="/">
-          <LogoBlue className="w-full h-full px-2 py-6" />
+          {/* <LogoBlue className="w-full h-full px-2 py-6" /> */}
+          <NewLogo className="my-6 mx-2" />
         </Link>
 
         <nav className="flex flex-col gap-1 pb-4 border-b border-grey200">
           <Link href="/dashboard">
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${isActive("/dashboard")
+              className={`flex items-center gap-3 py-3 px-4 ${
+                isActive("/dashboard")
                   ? "bg-primary50 rounded-sm text-primary600 "
                   : ""
-                }`}
+              }`}
               onClick={() => setActiveTab("Overview")}
             >
               <OverviewIcon
                 fillColor={isActive("/dashboard") ? "#136AD0" : "#667185"}
               />
               <span
-                className={`text-sm ${isActive("/dashboard")
+                className={`text-sm ${
+                  isActive("/dashboard")
                     ? "text-primary600 text-medium"
                     : "grey700"
-                  }`}
+                }`}
               >
                 Overview
               </span>
@@ -92,10 +96,11 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
 
           <Link href="/dashboard/services">
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${isActive("/dashboard/services")
+              className={`flex items-center gap-3 py-3 px-4 ${
+                isActive("/dashboard/services")
                   ? "bg-primary50 rounded-sm text-primary600"
                   : ""
-                }`}
+              }`}
               onClick={() => setActiveTab("Services")}
             >
               <ServicesIcon
@@ -104,10 +109,11 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
                 }
               />
               <span
-                className={`text-sm ${isActive("/dashboard/services")
+                className={`text-sm ${
+                  isActive("/dashboard/services")
                     ? "text-primary600 text-medium"
                     : "grey700"
-                  }`}
+                }`}
               >
                 Services
               </span>
@@ -116,10 +122,11 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
 
           <Link href="/dashboard/my-services">
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${isActive("/dashboard/my-services")
+              className={`flex items-center gap-3 py-3 px-4 ${
+                isActive("/dashboard/my-services")
                   ? "bg-primary50 rounded-sm text-primary600"
                   : ""
-                }`}
+              }`}
               onClick={() => setActiveTab("MyServices")}
             >
               <MyServicesIcon
@@ -128,10 +135,11 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
                 }
               />
               <span
-                className={`text-sm ${isActive("/dashboard/my-services")
+                className={`text-sm ${
+                  isActive("/dashboard/my-services")
                     ? "text-primary600 text-medium"
                     : "grey700"
-                  }`}
+                }`}
               >
                 My Services
               </span>
@@ -141,10 +149,11 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
           {/* CUSTOM RECOMMENDATIONS */}
           <Link href="/dashboard/custom-recommendation">
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${isActive("/dashboard/custom-recommendation")
+              className={`flex items-center gap-3 py-3 px-4 ${
+                isActive("/dashboard/custom-recommendation")
                   ? "bg-primary50 rounded-sm text-primary600"
                   : ""
-                }`}
+              }`}
               onClick={() => setActiveTab("Services")}
             >
               <BulbIcon
@@ -153,10 +162,11 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
                 }
               />
               <span
-                className={`text-sm ${isActive("/dashboard/custom-recommendation")
+                className={`text-sm ${
+                  isActive("/dashboard/custom-recommendation")
                     ? "text-primary600 text-medium"
                     : "grey700"
-                  }`}
+                }`}
               >
                 Custom Recommendation
               </span>
@@ -191,10 +201,11 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
 
           <Link href="/dashboard/order-history">
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${isActive("/dashboard/order-history")
+              className={`flex items-center gap-3 py-3 px-4 ${
+                isActive("/dashboard/order-history")
                   ? "bg-primary50 rounded-sm text-primary600"
                   : ""
-                }`}
+              }`}
               onClick={() => setActiveTab("History")}
             >
               <HistoryIcon
@@ -203,10 +214,11 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
                 }
               />
               <span
-                className={`text-sm ${isActive("/dashboard/order-history")
+                className={`text-sm ${
+                  isActive("/dashboard/order-history")
                     ? "text-primary600 text-medium"
                     : "grey700"
-                  }`}
+                }`}
               >
                 History
               </span>
@@ -215,8 +227,9 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
 
           <div onClick={toggleSupport}>
             <div
-              className={`flex items-center justify-between gap-3 py-3 px-4 cursor-pointer ${isActive("/dashboard/support") ? " text-primary600" : ""
-                }`}
+              className={`flex items-center justify-between gap-3 py-3 px-4 cursor-pointer ${
+                isActive("/dashboard/support") ? " text-primary600" : ""
+              }`}
             >
               <div className="flex items-center gap-3">
                 <SupportIcon
@@ -225,17 +238,19 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
                   }
                 />
                 <span
-                  className={`text-sm ${isActive("/dashboard/support")
+                  className={`text-sm ${
+                    isActive("/dashboard/support")
                       ? "text-primary600 text-medium"
                       : "grey700"
-                    }`}
+                  }`}
                 >
                   Support
                 </span>
               </div>
               <div
-                className={`transition-transform duration-300 ${isSupportOpen ? "rotate-180" : ""
-                  }`}
+                className={`transition-transform duration-300 ${
+                  isSupportOpen ? "rotate-180" : ""
+                }`}
               >
                 <ArrowUp />
               </div>
@@ -247,10 +262,11 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
                   onClick={() => setActiveTab("Support")}
                 >
                   <div
-                    className={`py-2 pl-4 pr-2 text-sm rounded-sm cursor-pointer ${isActive("/dashboard/support")
+                    className={`py-2 pl-4 pr-2 text-sm rounded-sm cursor-pointer ${
+                      isActive("/dashboard/support")
                         ? "bg-primary50 text-grey900"
                         : "text-grey700"
-                      }`}
+                    }`}
                   >
                     Support Info
                   </div>
@@ -298,10 +314,11 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
 
           <Link href="/dashboard/settings">
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${isActive("/dashboard/settings")
+              className={`flex items-center gap-3 py-3 px-4 ${
+                isActive("/dashboard/settings")
                   ? "bg-primary50 rounded-sm text-primary600"
                   : ""
-                }`}
+              }`}
               onClick={() => setActiveTab("Settings")}
             >
               <SettingsIcon
@@ -310,10 +327,11 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
                 }
               />
               <span
-                className={`text-sm ${isActive("/dashboard/settings")
+                className={`text-sm ${
+                  isActive("/dashboard/settings")
                     ? "text-primary600 text-medium"
                     : "grey700"
-                  }`}
+                }`}
               >
                 Settings
               </span>
@@ -328,10 +346,9 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
           <div className="w-10 h-10 rounded-full relative">
             <UserImage />
           </div>
-          {(isLoading || !isProfileLoaded) ? (
+          {isLoading || !isProfileLoaded ? (
             <p>Loading...</p>
           ) : (
-
             <div>
               <p className="text-grey900 text-sm font-bold">
                 {" "}
