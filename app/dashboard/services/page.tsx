@@ -11,6 +11,10 @@ import { getPackages } from "@/redux/shop/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { useEffect, useState, useCallback, useRef } from "react";
 
+const cleanServiceName = (name: string) => {
+  return name.replace(" Services", "").toLowerCase();
+};
+
 const Services = () => {
   const dispatch = useAppDispatch();
   const { services, isLoading, error, packages } = useAppSelector(
@@ -46,49 +50,7 @@ const Services = () => {
     });
   }, [dispatch, limit, offset]);
 
-  const tabs = [
-    {
-      name: "All",
-      icon: <AllIcon fillColor={activeTab === "All" ? "#1574E5" : "#98A2B3"} />,
-      count: services.length,
-    },
-    {
-      name: "Digital marketing",
-      icon: (
-        <DigitalMarketingIcon
-          fillColor={activeTab === "Digital marketing" ? "#1574E5" : "#98A2B3"}
-        />
-      ),
-      count: services.filter(
-        (service) => service.service_name === "Digital Marketing Services"
-      ).length,
-    },
-    {
-      name: "Creative design",
-      icon: (
-        <CreativeDesignIcon
-          strokeColor={activeTab === "Creative design" ? "#1574E5" : "#98A2B3"}
-        />
-      ),
-      count: services.filter(
-        (service) => service.service_name === "Creative Design Services"
-      ).length,
-    },
-    {
-      name: "Content/copywriting",
-      icon: (
-        <ContentCopywritingIcon
-          fillColor={
-            activeTab === "Content/copywriting" ? "#1574E5" : "#98A2B3"
-          }
-        />
-      ),
-      count: services.filter(
-        (service) => service.service_name === "Content/Copywriting Services"
-      ).length,
-    },
-  ];
-
+  // Define and populate bundleColors before using it
   const bundleColors: { [key: string]: string } = {};
   const colors = ["#620FA3", "#006AA5", "#A30F44"];
   services.forEach((service, index) => {
@@ -99,22 +61,80 @@ const Services = () => {
     });
   });
 
-  const filteredPackages =
-    activeTab === "All"
-      ? packages
-      : packages.filter((pkg) =>
-          pkg.provisions.some((prov) => prov.tags.includes(activeTab))
-        );
+  // Function to get filtered provisions for a given tab
+  const getFilteredProvisions = (tabName: string) => {
+    return services
+      .filter(
+        (service) =>
+          tabName === "All" ||
+          cleanServiceName(service.service_name) === tabName.toLowerCase()
+      )
+      .flatMap((service) =>
+        service.bundles.flatMap((bundle) =>
+          bundle.packages.flatMap((pkg) =>
+            pkg.provisions.map((provision) => ({
+              category: pkg.package_name,
+              title: provision.tags || "No Description Available",
+              description: provision.description,
+              color: bundleColors[bundle.bundle_name] || "#000000",
+              id: pkg.package_id,
+            }))
+          )
+        )
+      );
+  };
+  const tabs = [
+    {
+      name: "All",
+      icon: <AllIcon fillColor={activeTab === "All" ? "#1574E5" : "#98A2B3"} />,
+      count: getFilteredProvisions("All").length,
+    },
+    {
+      name: "Digital marketing",
+      icon: (
+        <DigitalMarketingIcon
+          fillColor={activeTab === "Digital marketing" ? "#1574E5" : "#98A2B3"}
+        />
+      ),
+      count: getFilteredProvisions("Digital marketing").length,
+    },
+    {
+      name: "Creative design",
+      icon: (
+        <CreativeDesignIcon
+          strokeColor={activeTab === "Creative design" ? "#1574E5" : "#98A2B3"}
+        />
+      ),
+      count: getFilteredProvisions("Creative design").length,
+    },
+    {
+      name: "Content/copywriting",
+      icon: (
+        <ContentCopywritingIcon
+          fillColor={
+            activeTab === "Content/copywriting" ? "#1574E5" : "#98A2B3"
+          }
+        />
+      ),
+      count: getFilteredProvisions("Content/copywriting").length,
+    },
+  ];
 
-  const packageCards = filteredPackages.flatMap((pkg) =>
-    pkg.provisions.map((provision) => ({
-      category: pkg.package_name,
-      title: pkg.description || "No Description Available",
-      description: provision.description,
-      color: bundleColors[pkg.bundle.bundle_name] || "#000000",
-      id: pkg.package_id,
-    }))
-  );
+  const filteredProvisions = getFilteredProvisions(activeTab);
+
+  const packageCards = filteredProvisions;
+  useEffect(() => {
+    console.log(services);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="w-full flex items-center justify-center col-span-full">
+        <Spinner className="border-primary500" />
+      </div>
+    );
+  }
+  console.log(packages);
 
   if (error) {
     return <div>Error: {error}</div>;
