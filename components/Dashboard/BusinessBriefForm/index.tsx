@@ -225,7 +225,6 @@ const BusinessBriefForm = () => {
               value={phone as string}
               onChange={handlePhoneChange}
               label="Contact Phone number"
-              requiredLength={10} //For Nigeria
             />
           </div>
         </div>
