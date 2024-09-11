@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
-import { countryLocalPhoneLengths } from "./utils/countryCodes";
+import { countryLocalPhoneLengths } from "./utils/countryCodesLength";
 
 interface PhoneNumberInputProps {
   value: string;
