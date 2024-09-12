@@ -27,6 +27,7 @@ import {
   uploadRelevantDocument,
   submitRecommendationBrief,
 } from "@/redux/order/features";
+import CountryCurrencyInput from "./CountryCurrencyInput";
 
 const BusinessBriefForm = () => {
   const dispatch = useAppDispatch();
@@ -400,19 +401,7 @@ const BusinessBriefForm = () => {
       <div className="space-y-6">
         <h3 className="text-lg font-semibold text-grey900 leading-6">Budget</h3>
 
-        <div className="space-y-6">
-          {/* <InputField
-            type="text"
-            name="budgetProjection"
-            label="What is your budget projection for this solution?"
-            placeholder="Budget"
-            classNames="bg-white"
-            tooltipText="Please provide a range"
-            value={values.budgetProjection}
-            error={touched.budgetProjection && errors.budgetProjection}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          /> */}
+        {/* <div className="space-y-6">
           <div>
             <DropdownSelect
               id="budget"
@@ -424,7 +413,16 @@ const BusinessBriefForm = () => {
               onChange={handleChange}
             />
           </div>
-        </div>
+        </div> */}
+        <CountryCurrencyInput
+          formik={formik}
+          id="budget"
+          name="budget"
+          label="What is your budget projection for this solution?"
+          placeholder="Choose Range"
+          currencyValueOptions={budgetProjectionOptions}
+          value={values.budget || undefined}
+        />
       </div>
 
       {/* PREFERRED SOLUTIONS */}

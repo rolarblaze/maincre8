@@ -171,10 +171,6 @@ export const genderOptions = [
     label: "Female",
     value: "female",
   },
-  {
-    label: "Other",
-    value: "other",
-  },
 ];
 
 // CUSTOMER PERSONA OPTION

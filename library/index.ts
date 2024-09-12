@@ -30,7 +30,7 @@ const assetLibrary = {
   curvedArrow: "/optimised/curved-arrow.webp",
   arrowDrawing: "/optimised/arrow-drawing.webp",
   bulbIcon: "/icons/bulb-icon.svg",
-  logoBlueTwo: "/optimised/logo-blue-two.webp",
+  newLogo: "/optimised/logo-blue-two.webp",
   sellMerchLogoWhite: "/optimised/sell-merch-logo-white.webp",
   sellplannerLogoWhite: "/optimised/sellplanner-logo-white.webp",
   devsealLogoWhite: "/optimised/devseal-logo-white.webp",

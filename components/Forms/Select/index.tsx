@@ -4,11 +4,11 @@ import { twMerge } from "tailwind-merge";
 
 interface Option {
   label: string;
-  value: string;
+  value: string | number;
 }
 
 interface ControlledSelectProps {
-  label: string;
+  label?: string;
   options: Option[];
   value: string | undefined;
   error?: string;
@@ -32,12 +32,14 @@ const ControlledSelect: React.FC<ControlledSelectProps> = ({
 }) => {
   return (
     <div>
-      <label
-        htmlFor={id}
-        className="block text-sm text-gray-900 font-medium mb-2"
-      >
-        {label}
-      </label>
+      {label && (
+        <label
+          htmlFor={id}
+          className="block text-sm text-gray-900 font-medium mb-2"
+        >
+          {label}
+        </label>
+      )}
       <div className={twMerge("relative", className)}>
         <select
           required

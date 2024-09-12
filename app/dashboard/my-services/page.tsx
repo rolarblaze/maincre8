@@ -30,6 +30,7 @@ const MyServices = () => {
           text="Buy a package to get started"
           link="Shop now"
           to="/dashboard/services"
+          imgStyle=""
         />
       ) : (
         <div className="grid md:grid-cols-3 gap-6 overflow-y-auto">

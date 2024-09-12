@@ -6,7 +6,7 @@ const BusinessForm = () => {
   return (
     <div className="relative">
       {/* NAVIGATE BACK */}
-      <Link href={`/dashboard/custom-recommendation`} className="fixed top-0 pt-8 pb-4 bg-gray-100 z-10 w-full mb-8 flex justify-start items-center gap-2">
+      <Link href={`/dashboard/custom-recommendation`} className="fixed top-0 pt-8 pb-4 bg-white z-10 w-full mb-8 flex justify-start items-center gap-2">
         <ArrowBackIcon />
         <p className="font-medium leading-6 text-grey600">
           Back to Custom recommendation
