@@ -42,7 +42,7 @@ const ControlledSelect: React.FC<ControlledSelectProps> = ({
       )}
       <div className={twMerge("relative", className)}>
         <select
-          required
+          // required
           id={id}
           name={name}
           value={value}

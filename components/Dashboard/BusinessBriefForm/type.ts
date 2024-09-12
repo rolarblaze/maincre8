@@ -28,6 +28,8 @@ interface FormValues {
   // BUDGET
   budgetProjection: string;
   budget: string;
+  currencyCode: string;
+  countryCode: string;
 
   // PREFERRED SOLUTIONS
   usefulDigitalServices: string[];

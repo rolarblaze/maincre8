@@ -38,7 +38,7 @@ const BusinessBriefForm = () => {
 
   const formik = useFormik<FormValues>({
     initialValues: INITIAL_VALUES,
-
+    validationSchema: validationSchema,
     onSubmit: async (values, { resetForm }: FormikHelpers<FormValues>) => {
       try {
         const finalValues = {
@@ -60,7 +60,9 @@ const BusinessBriefForm = () => {
           existing_audience_persona_available:
             values.customerPersonas === "Yes",
           existing_audience_persona_description: values.personaDescribe,
-          budget_projection_range: values.budget || values.budgetProjection,
+          budget_projection_range:
+            `${values.currencyCode}${values.budget}` ||
+            `${values.currencyCode}${values.budgetProjection}`,
           preferred_solutions: values.usefulDigitalServices.join(", "),
           main_competitors: values.mainCompetitor,
           competitor_website_links: values.mainCompetitorWebsite,
