@@ -168,8 +168,9 @@ const BusinessBriefForm = () => {
             label="Type of Industry"
             placeholder="Select type"
             options={typeOfIndustryOptions}
-            value={values.industry}
+            value={values.industry || ""}
             onChange={handleChange}
+            error={touched.industry && errors.industry}
           />
 
           {/* COMPANY SIZE */}
@@ -179,8 +180,9 @@ const BusinessBriefForm = () => {
             label="Company Size"
             placeholder="Number of employees"
             options={companySizeOptions}
-            value={values.companySize}
+            value={values.companySize || ""}
             onChange={handleChange}
+            error={touched.companySize && errors.companySize}
           />
 
           {/* WEBSITE URL */}
@@ -226,8 +228,13 @@ const BusinessBriefForm = () => {
           <div>
             <PhoneNumberInput
               value={phone as string}
-              onChange={handlePhoneChange}
+              form={formik}
+              name="contactPhoneNumber"
+              // onChange={handlePhoneChange}
               label="Contact Phone number"
+              formError={
+                touched.contactPhoneNumber && errors.contactPhoneNumber
+              }
             />
           </div>
         </div>
@@ -259,24 +266,26 @@ const BusinessBriefForm = () => {
             id="digitalSolution"
             name="digitalSolution"
             label="Have you previously implemented any digital solutions?"
-            placeholder="Select Type"
+            placeholder="Yes/No"
             options={digitalSolutionOptions}
             value={values.digitalSolution}
             onChange={handleChange}
           />
 
           {/* SOLUTION OUTCOMES */}
-          <InputField
-            type="text"
-            name="solutionOutcomes"
-            label="If yes, please describe the solutions and their outcomes."
-            placeholder="Enter brief objectives"
-            classNames="bg-white"
-            value={values.solutionOutcomes}
-            error={touched.solutionOutcomes && errors.solutionOutcomes}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
+          {values.digitalSolution === "Yes" && (
+            <InputField
+              type="text"
+              name="solutionOutcomes"
+              label="If yes, please describe the solutions and their outcomes."
+              placeholder="Enter brief objectives"
+              classNames="bg-white"
+              value={values.solutionOutcomes}
+              error={touched.solutionOutcomes && errors.solutionOutcomes}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          )}
         </div>
       </div>
 
@@ -320,8 +329,9 @@ const BusinessBriefForm = () => {
             label="Gender"
             placeholder="Select Gender"
             options={genderOptions}
-            value={values.gender || undefined}
+            value={values.gender || ""}
             onChange={handleChange}
+            error={touched.gender && errors.gender}
             // onBlur={handleBlur}
           />
 
@@ -358,22 +368,24 @@ const BusinessBriefForm = () => {
             label="Do you have existing customer personas?"
             placeholder="Yes/No"
             options={customerPersonaOptions}
-            value={values.customerPersonas || undefined}
+            value={values.customerPersonas || "" || undefined}
             onChange={handleChange}
           />
 
           {/* YES/NO | CUSTOMER PERSONA */}
-          <InputField
-            type="text"
-            name="personaDescribe"
-            label="If yes, please describe them."
-            placeholder="Enter customer personas description"
-            classNames="bg-white"
-            value={values.personaDescribe}
-            error={touched.personaDescribe && errors.personaDescribe}
-            onChange={handleChange}
-            onBlur={handleBlur}
-          />
+          {values.customerPersonas === "Yes" && (
+            <InputField
+              type="text"
+              name="personaDescribe"
+              label="If yes, please describe them."
+              placeholder="Enter customer personas description"
+              classNames="bg-white"
+              value={values.personaDescribe}
+              error={touched.personaDescribe && errors.personaDescribe}
+              onChange={handleChange}
+              onBlur={handleBlur}
+            />
+          )}
         </div>
       </div>
 
@@ -402,28 +414,15 @@ const BusinessBriefForm = () => {
       {/* BUDGET */}
       <div className="space-y-6">
         <h3 className="text-lg font-semibold text-grey900 leading-6">Budget</h3>
-
-        {/* <div className="space-y-6">
-          <div>
-            <DropdownSelect
-              id="budget"
-              name="budget"
-              label="What is your budget projection for this solution?" //..................................
-              placeholder="Choose Range"
-              options={budgetProjectionOptions}
-              value={values.budget || undefined}
-              onChange={handleChange}
-            />
-          </div>
-        </div> */}
         <CountryCurrencyInput
-          formik={formik}
+          form={formik}
           id="budget"
           name="budget"
           label="What is your budget projection for this solution?"
           placeholder="Choose Range"
           currencyValueOptions={budgetProjectionOptions}
-          value={values.budget || undefined}
+          value={values.budget || "" || undefined}
+          flagInputName="currencyCode"
         />
       </div>
 
@@ -558,7 +557,7 @@ const BusinessBriefForm = () => {
             label="Would you like to receive updates and newsletters from us?"
             placeholder="Yes/No"
             options={updateOptions}
-            value={values.receiveUpdates || undefined}
+            value={values.receiveUpdates || "" || undefined}
             onChange={handleChange}
           />
         </div>

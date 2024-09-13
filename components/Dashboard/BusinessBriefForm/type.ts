@@ -16,7 +16,7 @@ interface FormValues {
   // TARGET AUDIENCE
   audience: string;
   ageGroup: string;
-  gender: "male" | "female" | null;
+  gender: "male" | "female";
   location: string;
   interestBehaviours: string;
   customerPersonas: string;

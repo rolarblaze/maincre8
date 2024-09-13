@@ -11,7 +11,7 @@ interface ControlledSelectProps {
   label?: string;
   options: Option[];
   value: string | undefined;
-  error?: string;
+  error?: string | boolean;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   id: string;
   name: string;
@@ -69,7 +69,7 @@ const ControlledSelect: React.FC<ControlledSelectProps> = ({
           <AshArrowDown />
         </div>
       </div>
-      {error && <p className="text-red-500 text-xs">{error}</p>}
+      {error && <p className="text-red-500 mt-1 text-xs">{error}</p>}
     </div>
   );
 };
