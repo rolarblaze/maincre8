@@ -1,15 +1,16 @@
 import React from "react";
 import { solutionsData } from "../SolutionsMenu/solutionsData";
 import { CircleCancel } from "@/public/svgs";
+import Link from "next/link";
 
 interface MobileSolutionsMenuProps {
   onClick: () => void;
-  className?: string
+  className?: string;
 }
 
 const MobileSolutionsMenu: React.FC<MobileSolutionsMenuProps> = ({
   onClick,
-  className
+  className,
 }) => {
   return (
     <div className={`flex flex-col bg-grey50 ${className}`}>
@@ -23,22 +24,24 @@ const MobileSolutionsMenu: React.FC<MobileSolutionsMenuProps> = ({
         {solutionsData.map((solu, soluIdx) => {
           const Icon = solu.icon;
           return (
-            <div
-              key={soluIdx}
-              className="group hover:text-primary500 flex flex-col gap-3 py-4 border-b border-t border-grey100 px-3"
-            >
-              <div className="flex gap-4">
-                <div className="w-[13px] h-[13px]">
-                  <Icon />
+            <Link href={solu.link} key={soluIdx}>
+              <div
+                key={soluIdx}
+                className="group hover:text-primary500 flex flex-col gap-3 py-4 border-b border-t border-grey100 px-3"
+              >
+                <div className="flex gap-4">
+                  <div className="w-[13px] h-[13px]">
+                    <Icon />
+                  </div>
+                  <span className="text-grey900 group-hover:text-primary500 font-semibold">
+                    {solu.title}
+                  </span>
                 </div>
-                <span className="text-grey900 group-hover:text-primary500 font-semibold">
-                  {solu.title}
-                </span>
+                <p className="text-sm group-hover:text-primary500 text-grey600">
+                  {solu.description}
+                </p>
               </div>
-              <p className="text-sm group-hover:text-primary500 text-grey600">
-                {solu.description}
-              </p>
-            </div>
+            </Link>
           );
         })}
       </div>
