@@ -35,7 +35,8 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
     Overview: "",
     Services: "Select a service to get started",
     MyServices: "Select a service to track fulfilment",
-    CustomRecommendation: "Fill out a brief and get recommended services to suit your needs",
+    CustomRecommendation:
+      "Fill out a brief and get recommended services to suit your needs",
     Calendar: "",
     History: "",
     Support: "",
@@ -47,6 +48,8 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
 
   // Check if the current route is dynamic
   const isDynamicRoute = pathname.split("/").length > 3;
+
+  const isOverview = pathname.split("/").length === 2;
 
   const openSidebar = () => {
     setSidebarOpen(true);
@@ -68,16 +71,19 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
           <MobileNav onClick={openSidebar} title={headerTitles[activeTab]} />
           {!isDynamicRoute && (
             <div>
-              {
-                headerTitles[activeTab] &&
+              {headerTitles[activeTab] && (
                 <Header
                   title={headerTitles[activeTab]}
                   subtitle={headerSubtitles[activeTab]}
                 />
-              }
+              )}
             </div>
           )}
-          <main className="flex-1 p-6 overflow-y-auto noScrollbar">
+          <main
+            className={`flex-1 p-6 overflow-y-auto noScrollbar ${
+              isOverview ? "bg-dashboard-bg" : "bg-white"
+            }`}
+          >
             {children}
           </main>
         </div>

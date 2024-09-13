@@ -82,7 +82,7 @@ const Overview = () => {
   const hasTransactions = orderHistory && orderHistory?.length > 0;
 
   return (
-    <div className="container mx-auto py-6 px-4 md:p-6 md:-m-6 flex flex-col gap-6 md:gap-6 overflow-y-scroll noScrollbar bg-dashboard-bg">
+    <div className="container mx-auto py-6 px-4 md:p-6 md:-m-6 flex flex-col gap-6 md:gap-6 overflow-y-scroll noScrollbar">
       <div>
         <h4>Welcome, {profile.first_name}</h4>
         <p className="text-grey500">Select a service to get started</p>

@@ -552,8 +552,8 @@ const BusinessBriefForm = () => {
         <div className="space-y-6">
           {/* CONSENT */}
           <DropdownSelect
-            id="industry"
-            name="industry"
+            id="receiveUpdates"
+            name="receiveUpdates"
             label="Would you like to receive updates and newsletters from us?"
             placeholder="Yes/No"
             options={updateOptions}
