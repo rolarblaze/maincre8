@@ -17,8 +17,23 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const headerTitles: Record<Tab, string> = {
-    Overview: "",
+    Overview: isMobile ? "Overview" : "",
     Services: "Explore Services",
     MyServices: "My services",
     CustomRecommendation: "Custom Recommendation",
@@ -32,7 +47,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
   };
 
   const headerSubtitles: Record<Tab, string> = {
-    Overview: "",
+    Overview: isMobile ? "" : "",
     Services: "Select a service to get started",
     MyServices: "Select a service to track fulfilment",
     CustomRecommendation:
