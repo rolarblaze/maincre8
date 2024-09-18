@@ -17,10 +17,26 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
 
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   const headerTitles: Record<Tab, string> = {
-    Overview: "Overview",
+    Overview: isMobile ? "Overview" : "",
     Services: "Explore Services",
     MyServices: "My services",
+    CustomRecommendation: "Custom Recommendation",
     Calendar: "Calendar",
     History: "Order History",
     Support: "Support",
@@ -31,9 +47,11 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
   };
 
   const headerSubtitles: Record<Tab, string> = {
-    Overview: "",
+    Overview: isMobile ? "" : "",
     Services: "Select a service to get started",
     MyServices: "Select a service to track fulfilment",
+    CustomRecommendation:
+      "Fill out a brief and get recommended services to suit your needs",
     Calendar: "",
     History: "",
     Support: "",
@@ -46,6 +64,8 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
   // Check if the current route is dynamic
   const isDynamicRoute = pathname.split("/").length > 3;
 
+  const isOverview = pathname.split("/").length === 2;
+
   const openSidebar = () => {
     setSidebarOpen(true);
   };
@@ -55,7 +75,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
 
   return (
     <Middleware>
-      <div className="flex h-screen pt-10 md:pt-0 bg-white">
+      <div className="flex h-screen pt-10 md:pt-0">
         {/* Desktop sidebar */}
         <Sidebar setActiveTab={setActiveTab} />
         {/* Mobile sidebar */}
@@ -66,13 +86,19 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
           <MobileNav onClick={openSidebar} title={headerTitles[activeTab]} />
           {!isDynamicRoute && (
             <div>
-              <Header
-                title={headerTitles[activeTab]}
-                subtitle={headerSubtitles[activeTab]}
-              />
+              {headerTitles[activeTab] && (
+                <Header
+                  title={headerTitles[activeTab]}
+                  subtitle={headerSubtitles[activeTab]}
+                />
+              )}
             </div>
           )}
-          <main className="flex-1 p-6 overflow-y-auto bg-white noScrollbar">
+          <main
+            className={`flex-1 p-6 overflow-y-auto noScrollbar ${
+              isOverview ? "bg-dashboard-bg" : "bg-white"
+            }`}
+          >
             {children}
           </main>
         </div>
@@ -81,4 +107,4 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
   );
 };
 
-export default DashboardLayout; 
+export default DashboardLayout;

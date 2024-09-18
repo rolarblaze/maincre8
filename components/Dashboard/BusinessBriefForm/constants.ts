@@ -29,6 +29,8 @@ export const INITIAL_VALUES: FormValues = {
   // BUDGET
   budgetProjection: "",
   budget: "",
+  currencyCode: "",
+  countryCode: "",
 
   // PREFERRED SOLUTIONS
   usefulDigitalServices: [],

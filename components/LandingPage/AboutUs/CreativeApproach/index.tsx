@@ -21,12 +21,14 @@ export default function Approach() {
           {approachData.map((item, index) => (
             <div
               key={index}
-              className="flex justify-center items-center gap-4 px-5 py-6 md:p-8 bg-white border rounded-lg shadow-sm md:gap-8"
+              className="flex justify-center items-center gap-4 px-5 py-6 md:p-8 bg-white group hover:bg-primary800 border rounded-lg shadow-sm md:gap-8"
             >
               <div className="">
                 <CheckCircleIcon className="max-md:size-8" />
               </div>
-              <p className="text-gray-700 text-left text-sm md:text-base">{item}</p>
+              <p className="text-gray-700 text-left text-sm md:text-base group-hover:text-primary50">
+                {item}
+              </p>
             </div>
           ))}
         </div>

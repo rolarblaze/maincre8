@@ -32,7 +32,6 @@ export const footerData = {
         { name: "Sell Merch", href: null },
         { name: "Sell Talk", href: null },
         { name: "Piazza", href: null },
-        { name: "Boss Global", href: null },
       ],
     },
   ],

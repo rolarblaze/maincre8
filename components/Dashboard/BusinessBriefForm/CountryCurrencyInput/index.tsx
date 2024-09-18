@@ -12,7 +12,7 @@ type Option = {
 };
 
 type CountryCurrencyInputProps = {
-  formik: any;
+  form: any;
   currencyValueOptions: Option[];
   label: string;
   value: string | undefined;
@@ -24,10 +24,11 @@ type CountryCurrencyInputProps = {
   className?: string;
   currencyTypeStyles?: string;
   currencyValueStyles?: string;
+  flagInputName?: string;
 };
 
 const CountryCurrencyInput = ({
-  formik,
+  form,
   currencyValueOptions,
   label,
   error,
@@ -38,19 +39,20 @@ const CountryCurrencyInput = ({
   currencyValueStyles,
   currencyTypeStyles,
   placeholder = "Select type",
+  flagInputName,
 }: CountryCurrencyInputProps) => {
   const handleCountryChange = (countryCode: string) => {
     const currencyCode =
       currencyLabels[countryCode as keyof typeof currencyLabels];
-    formik.setFieldValue("countryCode", countryCode);
-    formik.setFieldValue("currencyCode", currencyCode);
+    // form.setFieldValue("countryCode", countryCode);
+    form.setFieldValue(flagInputName, currencyCode);
   };
 
   const handleValueChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const { value } = e.target;
 
     // Update the Formik field value
-    formik.setFieldValue(name, value);
+    form.setFieldValue(name, value);
 
     // Call the onChange prop if it's provided
     if (onChange) {
@@ -68,14 +70,12 @@ const CountryCurrencyInput = ({
       </label>
       <div className={`flex space-x-4`}>
         {/* Country and Currency Dropdown with Flags */}
-        <div
-          className={`max-w-[200px] rounded-lg ${currencyTypeStyles}`}
-        >
+        <div className={`max-w-[200px] rounded-lg ${currencyTypeStyles}`}>
           <ReactFlagsSelect
             countries={Object.keys(currencyLabels)} // Limit to relevant countries
             customLabels={currencyLabels} // Add custom labels for currencies
             onSelect={handleCountryChange}
-            selected={formik.values.countryCode} // Bind Formik values
+            selected={form.values.countryCode} // Bind Formik values
             placeholder="NGN"
             searchable
             selectButtonClassName="h-14 rounded-lg"
@@ -90,7 +90,7 @@ const CountryCurrencyInput = ({
             name={name}
             placeholder={placeholder}
             options={currencyValueOptions}
-            value={formik.values[name] || ""} // Ensure it's bound to Formik
+            value={form.values[name] || ""} // Ensure it's bound to Formik
             onChange={handleValueChange}
             error={error}
             className={currencyValueStyles}

@@ -82,10 +82,18 @@ const Overview = () => {
   const hasTransactions = orderHistory && orderHistory?.length > 0;
 
   return (
-    <div className="container mx-auto py-6 px-4 md:pt-0 flex flex-col gap-8 overflow-y-scroll noScrollbar">
+    <div className="container mx-auto py-6 px-4 md:p-6 md:-m-6 flex flex-col gap-6 md:gap-6 overflow-y-scroll noScrollbar">
       <div>
         <h4>Welcome, {profile.first_name}</h4>
         <p className="text-grey500">Select a service to get started</p>
+      </div>
+
+      <div
+        className="ml-auto hidden md:flex gap-2 items-center w-fit border-none bg-primary500 text-white !py-2 !px-3 rounded-lg cursor-pointer mt-8"
+        onClick={() => router.push("/dashboard/custom-recommendation")}
+      >
+        <BulbIcon />
+        <span>Custom recommendations</span>
       </div>
 
       {profileIncomplete && (
@@ -98,14 +106,6 @@ const Overview = () => {
           />
         </div>
       )}
-
-      <div
-        className="ml-auto hidden md:flex gap-2 items-center w-fit border-none bg-primary500 text-white py-2 px-3 rounded-lg cursor-pointer mt-8"
-        onClick={() => router.push("/dashboard/custom-recommendation")}
-      >
-        <BulbIcon />
-        <span>Custom recommendations</span>
-      </div>
 
       <div className="py-4 flex items-center justify-between">
         <h4 className="text-black text-[18px] md:text-[24px] font-medium md:font-bold">
