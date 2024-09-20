@@ -15,7 +15,9 @@ function WhyCard({
   className?: string;
 }) {
   return (
-    <div className={`md:py-5 space-y-8 ${className}`}>
+    <div
+      className={`w-full max-w-full md:max-w-[281px] min-h-[386px] md:py-5 space-y-8 ${className}`}
+    >
       <Image
         src={iconSrc}
         alt={iconAlt}
