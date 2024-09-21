@@ -26,6 +26,10 @@ const assetLibrary = {
   expert2: "/optimised/expert_2.webp",
   expert3: "/optimised/expert_3.webp",
   expert4: "/optimised/expert_4.webp",
+  nextBrandImage: "/optimised/next_brand_image.webp",
+  pastworkCard1: "/optimised/pastwork_card_1.webp",
+  pastworkCard2: "/optimised/pastwork_card_2.webp",
+  pastworkCard3: "/optimised/pastwork_card_3.webp",
 
   // SVGS
   highlight: "/optimised/highlight.webp",
