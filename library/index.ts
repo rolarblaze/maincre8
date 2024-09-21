@@ -22,6 +22,10 @@ const assetLibrary = {
   learnMoreImage: "/optimised/learn_more_img.png",
   learnMoreLines: "/optimised/learn_more_lines.svg",
   learnMorePaper: "/optimised/learn_more_paper.svg",
+  expert1: "/optimised/expert_1.webp",
+  expert2: "/optimised/expert_2.webp",
+  expert3: "/optimised/expert_3.webp",
+  expert4: "/optimised/expert_4.webp",
 
   // SVGS
   highlight: "/optimised/highlight.webp",
