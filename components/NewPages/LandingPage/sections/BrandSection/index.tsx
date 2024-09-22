@@ -1,4 +1,4 @@
-import { Marquee } from "@/components";
+// import { Marquee } from "@/components";
 
 const BrandSection = () => {
   return (
