@@ -3,7 +3,7 @@ const NewNavbar = () => {
     <header className="py-6">
       <nav className="flex justify-between items-center text-grey500 font-semibold text-sm">
         {/* LINKS */}
-        <ul className="flex justify-start items-center gap-11">
+        <ul className="flex justify-start items-center gap-11 max-sm:hidden">
           <li>Pricing</li>
           <li>FAQs</li>
         </ul>
@@ -17,12 +17,15 @@ const NewNavbar = () => {
         </div>
 
         {/* BUTTONS */}
-        <div className="space-x-6">
+        <div className="space-x-6  max-sm:hidden">
           <button>Login</button>
           <button className="py-2.5 px-4 text-grey50 bg-grey800 rounded-lg">
             Get Started
           </button>
         </div>
+
+        {/* MOBILE: TOGGLE NAV */}
+        <div className="sm:hidden bg-black size-5  rounded-md" />
       </nav>
     </header>
   );
