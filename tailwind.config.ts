@@ -8,6 +8,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        manrope: ["Manrope", "system-ui"],
+        schibsted: ["Schibsted Grotesk", "sans-serif"],
+      },
       lineHeight: {
         loosest: "6rem",
       },
