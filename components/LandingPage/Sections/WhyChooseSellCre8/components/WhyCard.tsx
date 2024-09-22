@@ -16,7 +16,7 @@ function WhyCard({
 }) {
   return (
     <div
-      className={`w-full max-w-full md:max-w-[281px] min-h-[386px] md:py-5 space-y-8 ${className}`}
+      className={`min-h-[298px] w-[281px] md:min-h-[386px] md:max-h-none md:py-5 space-y-8 flex-shrink-0 ${className}`}
     >
       <Image
         src={iconSrc}
@@ -26,8 +26,10 @@ function WhyCard({
         className="w-[90px] h-[90px]"
       />
       <div className="space-y-4">
-        <h4 className="text-grey900 font-semibold">{title}</h4>
-        <p className="text-grey500">{body}</p>
+        <h4 className="text-grey900 font-semibold text-lg md:text-2xl">
+          {title}
+        </h4>
+        <p className="text-grey500 text-base">{body}</p>
       </div>
     </div>
   );

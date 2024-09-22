@@ -22,8 +22,8 @@ function IndustryLeadingExperts() {
     },
   ];
   return (
-    <section className="w-full px-[100px] mb-10">
-      <div className="w-full flex flex-col md:flex-row justify-between gap-[56px] bg-primary50 rounded-3xl pl-16 py-16">
+    <section className="w-full px-5 md:px-20 lg:px-[100px] mb-10">
+      <div className="w-full flex flex-col md:flex-row justify-between gap-[56px] bg-primary50 rounded-[20px] md:rounded-3xl lg:rounded-3xl px-[13px] md:px-0 md:pl-10 lg:pl-16 py-5 md:py-10 lg:py-16">
         <div className="space-y-6 w-full max-w-full md:max-w-[410px]">
           <h4>Work with Industry-Leading Experts</h4>
           <p className="text-grey900">
@@ -40,7 +40,7 @@ function IndustryLeadingExperts() {
             your brand and help you grow.
           </p>
         </div>
-        <div className="flex gap-8 self-center">
+        <div className="flex justify-between md:justify-start md:gap-8 md:self-center">
           {imageData.map((image, imageIdx) => (
             <Image
               key={imageIdx}
@@ -48,7 +48,7 @@ function IndustryLeadingExperts() {
               alt={image.imgAlt}
               width={130}
               height={200}
-              className="w-[130px] h-[200px]"
+              className="w-[63.7px] h-[98px] md:w-[130px] md:h-[200px]"
             />
           ))}
         </div>

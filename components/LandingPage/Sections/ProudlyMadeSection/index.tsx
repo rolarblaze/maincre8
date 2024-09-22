@@ -37,7 +37,7 @@ function ProudlyMadeSection() {
       </h3>
       {/* Cards */}
       <motion.div
-        className="flex gap-10"
+        className="flex gap-10 scroll-pl-5"
         initial={{ x: 0 }}
         animate={{ x: xValue }}
         transition={{ repeat: Infinity, duration: 10, ease: "linear" }}

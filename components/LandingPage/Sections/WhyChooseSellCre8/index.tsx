@@ -13,7 +13,7 @@ function WhyChooseSellCre8() {
         </span>
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[38.67px]">
+      <div className="flex w-full overflow-x-auto md:overflow-x-visible gap-5 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-[38.67px]">
         {ChooseSellCre8Data.map((data, dataIdx) => {
           return (
             <WhyCard
