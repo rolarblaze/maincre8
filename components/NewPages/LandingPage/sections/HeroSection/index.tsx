@@ -24,22 +24,22 @@ const HeroSection = () => {
         </div>
       </div>
 
-      <div className="flex flex-wrap justify-between items-start gap-8">
+      <div className="flex flex-wrap justify-center lg:justify-between items-start gap-4 sm:gap-8">
         {components.map(({ title }) => (
           <div
             key={title}
             className={`
-              size-fit space-y-5 px-2.5 pt-5 pb-2.5 border rounded-2xl
+              size-fit space-y-5 px-2 pt-3.5 pb-2 sm:px-2.5 sm:pt-5 sm:pb-2.5 border rounded-2xl
               ${getBorderClass(title)}
             `}
           >
-            <h3 className="font-bold text-xl text-grey900 leading-[1.6875rem] px-2.5">
+            <h3 className="font-bold text-sm sm:text-xl text-grey900 leading-[1.6875rem] px-2.5">
               {title}
             </h3>
 
             <div
               className={`
-              h-40 w-[12.25rem] bg-error-50 rounded-[0.625rem] 
+              h-[7.5rem] w-36 sm:h-40 sm:w-[12.25rem] bg-error-50 rounded-[0.625rem] 
               ${getBackgroundClass(title)}
             `}
             ></div>
