@@ -12,7 +12,7 @@ const CtaSection = () => {
           Expertly done, in One Seamless Subscription.
         </p>
 
-        <p className="sm:text-lg md:text-2xl text-pretty text-primary100">
+        <p className="max-w-[43rem] sm:text-lg md:text-2xl text-pretty text-primary100">
           Say goodbye to the hassle of juggling content, design, and marketing.
           Get solutions that perfectly align with your goals
         </p>
