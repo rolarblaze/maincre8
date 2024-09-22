@@ -1,10 +1,3 @@
-import { Schibsted_Grotesk } from "next/font/google";
-
-const schibstedGrotesk = Schibsted_Grotesk({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-});
-
 const NewNavbar = () => {
   return (
     <header className="py-6">
