@@ -1,4 +1,4 @@
-import PageLayout from "@/components/Layout";
+import PageLayout from "@/components/NewLayout";
 import {
   BrandSection,
   CtaSection,
