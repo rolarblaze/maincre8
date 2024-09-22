@@ -52,7 +52,7 @@ h4 {
 
 /* GRID LAYOUT */
 .content-grid {
-  --padding-inline: 1rem;
+  --padding-inline: 1.25rem;
   --content-max-width: 1240px;
   --layout-max-width: 1440px;
 
