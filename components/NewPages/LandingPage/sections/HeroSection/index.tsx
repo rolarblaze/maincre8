@@ -24,8 +24,81 @@ const HeroSection = () => {
         </div>
       </div>
 
-      <div>Compnents</div>
+      <div className="flex flex-wrap justify-between items-start gap-8">
+        {components.map(({ title }) => (
+          <div
+            key={title}
+            className={`
+              size-fit space-y-5 px-2.5 pt-5 pb-2.5 border rounded-2xl
+              ${getBorderClass(title)}
+            `}
+          >
+            <h3 className="font-bold text-xl text-grey900 leading-[1.6875rem] px-2.5">
+              {title}
+            </h3>
+
+            <div
+              className={`
+              h-40 w-[12.25rem] bg-error-50 rounded-[0.625rem] 
+              ${getBackgroundClass(title)}
+            `}
+            ></div>
+          </div>
+        ))}
+      </div>
     </section>
   );
 };
 export default HeroSection;
+
+const components = [
+  {
+    title: "Brand Design",
+  },
+  {
+    title: "Graphic Designs",
+  },
+  {
+    title: "Digital Marketing",
+  },
+  {
+    title: "Content Creation",
+  },
+  {
+    title: "All-In-One Bundle",
+  },
+];
+
+const getBorderClass = (title: string) => {
+  switch (title) {
+    case "Brand Design":
+      return "border-error-50";
+    case "Graphic Designs":
+      return "border-warning-50";
+    case "Digital Marketing":
+      return "border-success-50";
+    case "Content Creation":
+      return "border-brown-50";
+    case "All-In-One Bundle":
+      return "border-primary50";
+    default:
+      return "";
+  }
+};
+
+const getBackgroundClass = (title: string) => {
+  switch (title) {
+    case "Brand Design":
+      return "bg-error-50";
+    case "Graphic Designs":
+      return "bg-warning-50";
+    case "Digital Marketing":
+      return "bg-success-50";
+    case "Content Creation":
+      return "bg-brown-50";
+    case "All-In-One Bundle":
+      return "bg-primary50";
+    default:
+      return "";
+  }
+};
