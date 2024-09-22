@@ -13,7 +13,7 @@ import {
 const LandingPage = () => {
   return (
     <PageLayout>
-      <main className="min-h-[calc(100dvh-4rem)]">
+      <main className="full-width content-grid min-h-[calc(100dvh-4rem)]">
         <HeroSection />
         <ProofSection />
         <FeatureSection />
