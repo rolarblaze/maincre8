@@ -1,8 +1,10 @@
+import { LogoFadeIcon, PlayIcon } from "@/public/svgs";
+
 const CtaSection = () => {
   return (
     <section className="full-width content-grid relative pt-[6.25rem]">
       <div className="bg-primary600 py-20 px-12 min-h-60 sm:min-h-[40rem] text-center flex flex-col justify-center items-center gap-4 sm:gap-6 rounded-[2rem]">
-        <div className="w-[3.875rem] h-16 bg-primary200 rounded-md"></div>
+        <LogoFadeIcon />
 
         <h2 className="max-w-[46rem] max-sm:max-w-64 font-bold text-white text-xl sm:text-[2.5rem] sm:leading-[3rem]">
           The Smarter Way to Manage Your Design, Branding, and Marketing.{" "}
@@ -22,9 +24,12 @@ const CtaSection = () => {
             Get Started
           </button>
 
-          <button className="py-4 px-6 border bg-white text-grey900 text-lg font-medium flex justify-center items-center gap-2.5 rounded-lg">
-            <span>Watch demo video</span>
-            <span className="size-5 block bg-grey900 rounded-md"></span>
+          <button className="py-4 px-6 border bg-white flex justify-center items-center gap-2 rounded-lg">
+            <span className="text-grey900 text-lg font-medium ">
+              Watch demo video
+            </span>
+
+            <PlayIcon className="mt-1" />
           </button>
         </div>
       </div>

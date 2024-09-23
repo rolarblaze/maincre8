@@ -19,6 +19,9 @@ const assetLibrary = {
   notFound: "/optimised/not-found.webp",
   dashboardOverviewImg: "/optimised/dashboard-overview-img.webp",
   defaultAvatar: "/optimised/default-avatar.webp",
+  learnMoreImage: "/optimised/learn_more_img.png",
+  learnMoreLines: "/optimised/learn_more_lines.svg",
+  learnMorePaper: "/optimised/learn_more_paper.svg",
 
   // SVGS
   highlight: "/optimised/highlight.webp",

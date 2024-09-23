@@ -1,31 +1,56 @@
+import Image from "next/image";
+import assetLibrary from "@/library";
+import { PlayIcon } from "@/public/svgs";
+import {
+  AllInOneBundleSVG,
+  BrandDesignSVG,
+  ContentCreationSVG,
+  DigitalMarketingSVG,
+  GraphicDesignsSVG,
+} from "@/public/icons";
+
 const HeroSection = () => {
   return (
     <section className="py-5 lg:py-[3.75rem] space-y-10">
-      <div className="h-fit text-center bg-gradient-to-tr from-[#4490EA] to-[#0C407E] px-4 pt-14 pb-10 md:pb-16 md:px-10 lg:px-28 lg:pt-28 lg:pb-20 flex flex-col justify-center items-center gap-4 rounded-[1.25rem]">
-        <h1 className="max-w-80 text-primary50 text-[2rem] sm:text-5xl lg:text-[3.5rem] font-bold leading-10 md:leading-[3.5rem] lg:leading-[4rem] sm:max-w-[50rem]">
+      <div className="relative h-fit text-center bg-gradient-to-tr from-[#4490EA] to-[#0C407E] to-70% px-4 pt-14 pb-10 md:pb-16 md:px-10 lg:px-28 lg:pt-28 lg:pb-20 flex flex-col justify-center items-center gap-4 rounded-[1.25rem]">
+        <h1 className="z-[2] max-w-80 text-primary50 text-[2rem] sm:text-5xl lg:text-[3.5rem] font-bold leading-10 md:leading-[3.5rem] lg:leading-[4rem] sm:max-w-[50rem]">
           Elevate Your Brand with Subscription-Based Creativity
         </h1>
 
-        <p className="max-w-80 font-light text-pretty text-base sm:text-xl text-white leading-6 sm:leading-8 sm:max-w-[45rem] ">
+        <p className="z-[2] max-w-80 font-light text-pretty text-base sm:text-xl text-white leading-6 sm:leading-8 sm:max-w-[45rem] ">
           SellCrea8 is a productized eCommerce platform designed by SMG to
           deliver affordable, high-quality, and personalized creative and
           digital services.
         </p>
 
-        <div className="mt-4 font-medium text-lg flex justify-center items-center gap-6">
-          <button className="py-3.5 px-12 text-base bg-white text-grey800 rounded-lg">
+        <div className="z-[2] mt-4 flex justify-center items-center gap-6">
+          <button className="py-3.5 px-12 text-base font-semibold bg-white text-grey800 rounded-lg">
             Get Started
           </button>
 
           <button className="py-4 px-6 border border-white text-white flex justify-center items-center gap-2.5 rounded-lg max-md:hidden">
-            <span>Watch demo video</span>
-            <span className="size-5 block bg-white rounded-md "></span>
+            <span className="font-medium text-lg">Watch demo video</span>
+            <PlayIcon fillColor="white" className="mt-0.5" />
           </button>
         </div>
+
+        {/* BG EFFECTS */}
+        <Image
+          src={assetLibrary.learnMoreLines}
+          fill
+          alt="Lines"
+          className="absolute z-[1] object-cover"
+        />
+        <Image
+          src={assetLibrary.learnMorePaper}
+          fill
+          alt="Lines"
+          className="absolute object-cover"
+        />
       </div>
 
       <div className="flex flex-wrap justify-center lg:justify-between items-start gap-4 sm:gap-8">
-        {components.map(({ title }) => (
+        {components.map(({ title, icon }) => (
           <div
             key={title}
             className={`
@@ -39,10 +64,12 @@ const HeroSection = () => {
 
             <div
               className={`
-              h-[7.5rem] w-36 sm:h-40 sm:w-[12.25rem] bg-error-50 rounded-[0.625rem] 
+              h-[7.5rem] w-36 sm:h-40 sm:w-[12.25rem] bg-error-50 rounded-[0.625rem] flex justify-center items-center overflow-hidden 
               ${getBackgroundClass(title)}
             `}
-            ></div>
+            >
+              {icon}
+            </div>
           </div>
         ))}
       </div>
@@ -54,18 +81,23 @@ export default HeroSection;
 const components = [
   {
     title: "Brand Design",
+    icon: <BrandDesignSVG />,
   },
   {
     title: "Graphic Designs",
+    icon: <GraphicDesignsSVG className="size-full" />,
   },
   {
     title: "Digital Marketing",
+    icon: <DigitalMarketingSVG className="size-full" />,
   },
   {
     title: "Content Creation",
+    icon: <ContentCreationSVG className="size-full" />,
   },
   {
     title: "All-In-One Bundle",
+    icon: <AllInOneBundleSVG />,
   },
 ];
 

@@ -1,3 +1,11 @@
+import {
+  FacebookLogo,
+  InstagramLogo,
+  LinkedinLogo,
+  XLogo,
+} from "@/public/icons";
+import { LogoWhiteIcon, SMGIcon } from "@/public/svgs";
+
 const NewFooter = () => {
   return (
     <footer className="full-width content-grid bg-primary900 py-10 md:py-[6.25rem] ">
@@ -5,7 +13,8 @@ const NewFooter = () => {
         <section className="flex max-md:flex-col justify-between items-center gap-5">
           {/* LOGO */}
           <div className={`flex items-center gap-2.5`}>
-            <div className="size-8 bg-white rounded-lg" />
+            <LogoWhiteIcon />
+
             <span className="font-schibsted font-bold text-2xl text-white ">
               SellCrea8
             </span>
@@ -22,8 +31,8 @@ const NewFooter = () => {
 
           {/* SOCIALS */}
           <div className="flex justify-center items-center gap-6">
-            {[1, 2, 3, 4].map((item) => (
-              <div key={item} className="size-8 bg-white rounded-lg" />
+            {socials.map(({ id, icon }) => (
+              <span key={id}>{icon}</span>
             ))}
           </div>
         </section>
@@ -32,8 +41,8 @@ const NewFooter = () => {
           <p className="max-md:hidden">Copyright © 2024. All rights reserved</p>
 
           <div className="flex justify-center items-center gap-3.5">
-            <span>Powered by</span>
-            <div className="w-24 h-8 bg-white rounded-lg" />
+            <p className="mt-1">Powered by</p>
+            <SMGIcon />
           </div>
 
           <ul className="flex justify-center gap-12 items-center">
@@ -50,3 +59,22 @@ const NewFooter = () => {
   );
 };
 export default NewFooter;
+
+const socials = [
+  {
+    id: 1,
+    icon: <FacebookLogo />,
+  },
+  {
+    id: 2,
+    icon: <XLogo />,
+  },
+  {
+    id: 3,
+    icon: <InstagramLogo />,
+  },
+  {
+    id: 4,
+    icon: <LinkedinLogo />,
+  },
+];

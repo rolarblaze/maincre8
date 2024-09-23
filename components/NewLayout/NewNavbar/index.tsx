@@ -1,3 +1,5 @@
+import { LogoIcon } from "@/public/svgs";
+
 const NewNavbar = () => {
   return (
     <header className="py-6">
@@ -9,11 +11,11 @@ const NewNavbar = () => {
         </ul>
 
         {/* LOGO */}
-        <div
-          className={`font-schibsted font-bold text-2xl text-black flex items-center gap-2.5`}
-        >
-          <div className="size-8 bg-primary500 rounded-lg" />
-          <span>SellCrea8</span>
+        <div className={`flex items-center gap-2.5`}>
+          <LogoIcon />
+          <span className="font-schibsted font-bold text-black text-2xl">
+            SellCrea8
+          </span>
         </div>
 
         {/* BUTTONS */}
