@@ -5,7 +5,7 @@ import { GlobalProvider } from "@/redux/provider";
 import { useAppSelector } from "@/redux/store";
 import { RootState } from "@/redux/store";
 import NextTopLoader from "nextjs-toploader";
-import { AlertWrapper } from "@/components";
+import { AlertWrapper, Navbar } from "@/components";
 
 const inter = Inter({ subsets: ["latin"] });
 

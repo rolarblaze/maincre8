@@ -48,3 +48,10 @@ export { default as TryAgainIcon } from "./TryAgain";
 export { default as SuccessIcon } from "./SuccessIcon";
 export { default as ModalThrashIcon } from "./ModalThrash";
 export { default as ContentServiceIcon } from "./ContentServiceIcon";
+
+// ICON COMPONENTS
+export { default as LogoIcon } from "./LogoIcon";
+export { default as LogoFadeIcon } from "./LogoFadeIcon";
+export { default as LogoWhiteIcon } from "./LogoWhiteIcon";
+export { default as SMGIcon } from "./SMGIcon";
+export { default as PlayIcon } from "./PlayIcon";

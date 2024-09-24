@@ -87,3 +87,23 @@ export { default as SubmittedIcon } from "./submitted.svg";
 export { default as ClockIcon } from "./clock.svg";
 export { default as CalenderIcon } from "./calender.svg";
 export { default as CameraIcon } from "./camera.svg";
+
+// SOCIAL ICONS
+export { default as XLogo } from "./x_icon.svg";
+export { default as FacebookLogo } from "./facebook_icon.svg";
+export { default as LinkedinLogo } from "./linkedin_icon.svg";
+export { default as InstagramLogo } from "./instagram_icon.svg";
+
+// BRAND ICONS
+export { default as OppoLogo } from "./oppo_logo.svg";
+export { default as GtBankLogo } from "./guaranty_trust_bank_logo.svg";
+export { default as MtnLogo } from "./mtn_nigeria_logo.svg";
+export { default as UbaBankLogo } from "./uba_bank.svg";
+export { default as AirpeaceLogo } from "./air-peace.svg";
+
+// DISPLAY ICONS
+export { default as BrandDesignSVG } from "./brand_design_bulb.svg";
+export { default as GraphicDesignsSVG } from "./graphic_designs_board.svg";
+export { default as DigitalMarketingSVG } from "./digital_marketing_blocks.svg";
+export { default as ContentCreationSVG } from "./content_creation_pad.svg";
+export { default as AllInOneBundleSVG } from "./all_in_one_bundle_ship.svg";
