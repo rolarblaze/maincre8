@@ -31,6 +31,11 @@ const assetLibrary = {
   pastworkCard1: "/optimised/pastwork_card_1.webp",
   pastworkCard2: "/optimised/pastwork_card_2.webp",
   pastworkCard3: "/optimised/pastwork_card_3.webp",
+  pastworkCard4: "/optimised/pastwork_card_4.webp",
+  pastworkCard5: "/optimised/pastwork_card_5.webp",
+  pastworkCard6: "/optimised/pastwork_card_6.webp",
+  pastworkCard7: "/optimised/pastwork_card_7.webp",
+  pastworkCard8: "/optimised/pastwork_card_8.webp",
 
   // SVGS
   highlight: "/optimised/highlight.webp",

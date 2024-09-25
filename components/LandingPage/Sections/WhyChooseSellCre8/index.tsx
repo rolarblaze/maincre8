@@ -4,7 +4,7 @@ import WhyCard from "./components/WhyCard";
 
 function WhyChooseSellCre8() {
   return (
-    <section className="w-full space-y-12 px-5 md:px-20 lg:px-[100px] pt-[60px] pb-[100px]">
+    <section className="w-full space-y-12 pt-[60px] pb-0 md:pb-12 lg:pb-[100px] ">
       <h2 className="text-2xl md:text-4xl lg:text-5.5xl">
         Why Choose{" "}
         <span className="text-2xl md:text-4xl lg:text-5.5xl text-primary500">

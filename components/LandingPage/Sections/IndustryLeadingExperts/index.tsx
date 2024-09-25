@@ -22,7 +22,7 @@ function IndustryLeadingExperts() {
     },
   ];
   return (
-    <section className="w-full px-5 md:px-20 lg:px-[100px] mb-10">
+    <section className="w-full mb-10 md:mb-0">
       <div className="w-full flex flex-col md:flex-row justify-between gap-[56px] bg-primary50 rounded-[20px] md:rounded-3xl lg:rounded-3xl px-[13px] md:px-0 md:pl-10 lg:pl-16 py-5 md:py-10 lg:py-16">
         <div className="space-y-6 w-full max-w-full md:max-w-[410px]">
           <h4>Work with Industry-Leading Experts</h4>

@@ -1,3 +1,4 @@
+"use client";
 import assetLibrary from "@/library";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -20,7 +21,7 @@ function ProudlyMadeSection() {
         setXValue(-2000);
       } else {
         // For large screens (desktop)
-        setXValue(-2800);
+        setXValue(-2500);
       }
     };
 
@@ -30,7 +31,7 @@ function ProudlyMadeSection() {
     return () => window.removeEventListener("resize", handleResize); // Cleanup
   }, []);
   return (
-    <section className="space-y-8 py-5 px-5 md:py-20 md:pr-0 md:pl-[100px] w-full">
+    <section className="space-y-8 py-5 md:py-20 w-full">
       <h3 className="text-[2rem]">
         Proudly Made by{" "}
         <span className="text-primary500 text-[2rem]">SellCrea8</span>
@@ -40,7 +41,7 @@ function ProudlyMadeSection() {
         className="flex gap-10 scroll-pl-5"
         initial={{ x: 0 }}
         animate={{ x: xValue }}
-        transition={{ repeat: Infinity, duration: 10, ease: "linear" }}
+        transition={{ repeat: Infinity, duration: 5, ease: "linear" }}
         style={{ whiteSpace: "nowrap" }}
       >
         {proudlyMadeData.map((card, cardIdx) => (

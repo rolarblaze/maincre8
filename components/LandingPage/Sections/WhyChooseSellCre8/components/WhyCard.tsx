@@ -16,7 +16,7 @@ function WhyCard({
 }) {
   return (
     <div
-      className={`min-h-[298px] w-[281px] md:min-h-[386px] md:max-h-none md:py-5 space-y-8 flex-shrink-0 ${className}`}
+      className={`min-h-[298px] w-[16rem] md:min-h-[386px] md:max-h-none md:py-5 space-y-8 flex-shrink-0 ${className}`}
     >
       <Image
         src={iconSrc}
