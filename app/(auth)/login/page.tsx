@@ -9,7 +9,8 @@ import { addAlert } from "@/redux/alerts";
 import { loginUser } from "@/redux/auth/features";
 import { validatePassword } from "@/utils/helpers/auth/passwordValidation";
 import { Button, InputField, SocialSignUp } from "@/components";
-import { Checked, EyeIcon, Unchecked } from "@/public/icons";
+import { Checked, EmailAddressIcon, EmailFieldIcon, EyeIcon, Unchecked } from "@/public/icons";
+import CheckboxField from "@/components/Forms/Checkbox";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
@@ -103,75 +104,62 @@ export default function Login() {
 
   return (
     <Fragment>
-      <h3>Login to your account</h3>
-
-      <section className="w-full flex flex-col gap-4 border border-grey200 rounded-lg p-5 md:gap-8 md:p-10">
-        <form className="w-full flex flex-col" onSubmit={formik.handleSubmit}>
-          <InputField
-            label="Email address"
-            type="text"
-            placeholder="Enter email address"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            name="email"
-            error={
-              formik.touched.email && formik.errors.email
-                ? formik.errors.email
-                : ""
-            }
-            classNames="mb-6"
+      <h3 className="font-semibold text-[32px] leading-7 text-[#101928]">
+        Dive back in
+      </h3>
+      <form onSubmit={formik.handleSubmit} className="mt-5 space-y-7">
+        <InputField
+          label="Email address"
+          type="text"
+          placeholder="Enter email address"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          name="email"
+          icon={<EmailFieldIcon />}
+          error={
+            formik.touched.email && formik.errors.email
+              ? formik.errors.email
+              : ""
+          }
+        />
+        <InputField
+          label="Password"
+          type={showPassword ? "text" : "password"}
+          placeholder="Enter password"
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          name="password"
+          icon={<EyeIcon className="w-5 h-5" />}
+          onInputIconClick={togglePasswordVisibility}
+          error={
+            formik.touched.password && formik.errors.password
+              ? formik.errors.password
+              : ""
+          }
+        />
+        <div className="flex items-center justify-between">
+          <CheckboxField
+            checked={rememberMe}
+            onChange={handleRememberMeChange}
+            label="Remember me"
+            className="text-xs"
           />
-
-          <InputField
-            label="Password"
-            type={showPassword ? "text" : "password"}
-            placeholder="Enter password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            name="password"
-            icon={<EyeIcon className="w-5 h-5" />}
-            onInputIconClick={togglePasswordVisibility}
-            error={
-              formik.touched.password && formik.errors.password
-                ? formik.errors.password
-                : ""
-            }
-            classNames="mb-2"
-          />
-
           <Link
             href="/forgot-password"
-            className="text-grey500 text-base text-right"
+            className="p-0 w-auto text-xs bg-transparent font-medium text-[#1574E5]"
           >
-            Forgot password?
+            Forgot Password?
           </Link>
-          <div className="flex items-center gap-3 mb-3.5">
-            <input
-              type="checkbox"
-              id="rememberMe"
-              checked={rememberMe}
-              onChange={handleRememberMeChange}
-              className="hidden"
-            />
-            <label
-              htmlFor="rememberMe"
-              className="flex items-center gap-2 cursor-pointer"
-            >
-              {rememberMe ? <Checked /> : <Unchecked />}
-              <span className="text-sm text-grey500">Remember me</span>
-            </label>
-          </div>
-          <Button
-            label="Login"
-            isLoading={isLoading}
-            type="submit"
-            classNames="mt-4"
-          />
-        </form>
-        {/* <SocialSignUp isLogin={true} /> */}
-      </section>
+        </div>
+        <Button
+          isLoading={isLoading}
+          type="submit"
+          label="Login to Dashboard"
+          classNames="text-white font-semibold"
+        />
+      </form>
     </Fragment>
   );
 }
