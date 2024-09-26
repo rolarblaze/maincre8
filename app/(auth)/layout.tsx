@@ -25,7 +25,7 @@ const SingleSignOnSection = () => {
           { label: "LinkedIn", icon: "/images/linkedin.png" },
         ].map((sso) => {
           return (
-            <div key={sso.label} className="inline-block">
+            <div key={sso.label} className="inline-block ">
               <Link
                 href="/"
                 className="center gap-1 bg-[#F7F9FC] border border-[#D0D5DD] rounded-md p-4"
