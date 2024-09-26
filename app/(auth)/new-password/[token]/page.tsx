@@ -1,11 +1,15 @@
 "use client";
 import { Button, InputField } from "@/components";
-import { Checked, EyeIcon, Unchecked } from "@/public/icons";
+import {
+  EyeIcon,
+  PasswordMatchIcon,
+  PasswordNoMatchIcon,
+} from "@/public/icons";
 import {
   passwordCriteria,
   validatePassword,
 } from "@/utils/helpers/auth/passwordValidation";
-import React, { useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { useFormik } from "formik";
 import * as Yup from "yup";
@@ -108,68 +112,97 @@ const NewPassword = () => {
   };
 
   return (
-    <>
-      <div className=" flex flex-col gap-4 md:gap-8">
-        <h1>Set your new password</h1>
-        <section className=" border border-grey200 rounded-lg  p-5 md:p-10">
-          <form
-            className="w-full flex flex-col gap-4 md:gap-10"
-            onSubmit={formik.handleSubmit}
-          >
-            <div className="flex flex-col gap-3">
-
-            <InputField
-              label="New password"
-              type={showPassword ? "text" : "password"}
-              placeholder="Enter your new password"
-              value={formik.values.password}
-              onChange={handlePasswordChange}
-              icon={<EyeIcon className="w-5 h-5" />}
-              onInputIconClick={togglePasswordVisibility}
-              onEnterPressed={formik.handleSubmit}
-              error={
-                formik.touched.password && formik.errors.password
-                  ? formik.errors.password
-                  : ""
-              }
-            />
-             <div className="grid grid-cols-2 gap-2">
-                {passwordCriteria.map((criterion, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-2 py-1 px-2 rounded-full border border-grey300 text-xs  text-grey500 font-medium"
-                  >
-                    <div className="transition-transform duration-500 ease-in-out">
-                      {passwordValidation.some((v) => v.label === criterion.label && v.isValid) ? (
-                        <Checked className="w-5 h-5" />
-                      ) : (
-                        <Unchecked className="w-5 h-5" />
-                      )}
+    <Fragment>
+      <h3 className="font-semibold text-[32px] leading-7 text-[#101928]">
+        Set your new password
+      </h3>
+      <form onSubmit={formik.handleSubmit} className="mt-5 space-y-5">
+        <InputField
+          label="New password"
+          type={showPassword ? "text" : "password"}
+          placeholder="Enter new password"
+          value={formik.values.password}
+          onChange={handlePasswordChange}
+          icon={
+            showPassword ? (
+              <EyeIcon className="w-5 h-5" />
+            ) : (
+              <div className="size-5 bg-green-500"></div>
+            )
+          }
+          onInputIconClick={togglePasswordVisibility}
+          onEnterPressed={formik.handleSubmit}
+          error={
+            formik.touched.password && formik.errors.password
+              ? formik.errors.password
+              : ""
+          }
+        />
+        <div className="-mt-5 center gap-2">
+          {passwordCriteria.map((criterion, index) => {
+            return (
+              <div
+                key={criterion.label}
+                className="px-2 py-1 center gap-1 bg-[#F0F2F5] rounded-lg border border-[#D0D5DD]"
+              >
+                <div className="size-3">
+                  {passwordValidation.some(
+                    (v) => v.label === criterion.label && v.isValid
+                  ) ? (
+                    <div className="size-3 center">
+                      <PasswordMatchIcon />
                     </div>
-                    <p>{criterion.label}</p>
-                  </div>
-                ))}
+                  ) : (
+                    <div className="size-3 center">
+                      <PasswordNoMatchIcon />
+                    </div>
+                  )}
+                </div>
+
+                {/* <div className="size-3 bg-slate-300"></div> */}
+                <p className="font-medium text-sm leading-5 text-[#98A2B3]">
+                  {criterion.label}
+                </p>
               </div>
-            </div>
-            <InputField
-              label="Confirm new password"
-              type={showPassword ? "text" : "password"}
-              placeholder="Confirm your new password"
-              value={formik.values.confirmPassword}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              name="confirmPassword"
-              error={
-                formik.touched.confirmPassword && formik.errors.confirmPassword
-                  ? formik.errors.confirmPassword
-                  : ""
-              }
-            />
-            <Button label="Submit" isLoading={isLoading} type="submit" />
-          </form>
-        </section>
-      </div>
-    </>
+            );
+          })}
+        </div>
+
+        <InputField
+          label="Confirm new password"
+          type={showPassword ? "text" : "password"}
+          placeholder="Confirm your new password"
+          value={formik.values.confirmPassword}
+          icon={
+            showPassword ? (
+              <EyeIcon className="w-5 h-5" />
+            ) : (
+              <div className="size-5 bg-green-500"></div>
+            )
+          }
+          onInputIconClick={togglePasswordVisibility}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          name="confirmPassword"
+          error={
+            formik.touched.confirmPassword && formik.errors.confirmPassword
+              ? formik.errors.confirmPassword
+              : ""
+          }
+        />
+        <Button
+          label="Confirm password"
+          isLoading={isLoading}
+          type="submit"
+          classNames="text-white font-semibold"
+        />
+      </form>
+
+      <Button
+        label="Resend code"
+        classNames="p-2 w-auto text-xs bg-transparent font-medium text-[#1574E5]"
+      />
+    </Fragment>
   );
 };
 

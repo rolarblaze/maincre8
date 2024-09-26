@@ -5,8 +5,15 @@ import { setUserTokenCookie } from "@/utils/helpers/auth/cookieUtility";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { Tabs, InputField, Button } from "@/components";
-import { Checked, EyeIcon, Unchecked } from "@/public/icons";
+import { Tabs, InputField, Button, SocialSignUp } from "@/components";
+import {
+  Checked,
+  EyeIcon,
+  Unchecked,
+  PasswordMatchIcon,
+  PasswordNoMatchIcon,
+  EmailFieldIcon,
+} from "@/public/icons";
 import { signUpIndividual, signUpBusiness } from "@/redux/auth/features";
 import { addAlert } from "@/redux/alerts";
 import { AppDispatch, useAppDispatch, useAppSelector } from "@/redux/store";
@@ -15,6 +22,8 @@ import {
   validatePassword,
   passwordCriteria,
 } from "@/utils/helpers/auth/passwordValidation";
+import CheckboxField from "@/components/Forms/Checkbox";
+import Link from "next/link";
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string().test(
@@ -157,122 +166,120 @@ export default function Signup() {
 
   return (
     <Fragment>
-      <h3>Create your account</h3>
-      <section className="w-full flex flex-col gap-4 border border-grey200 rounded-lg p-5 md:gap-8 md:p-10">
-        <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
-        <form
-          className="w-full flex flex-col gap-8"
-          onSubmit={formik.handleSubmit}
-        >
-          <section className="flex flex-col gap-4 md:gap-6">
-            {activeTab === "individual" && (
-              <div className="flex items-center gap-2">
-                <InputField
-                  label="First name"
-                  type="text"
-                  placeholder="Enter first name"
-                  value={formik.values.firstName}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  name="firstName"
-                  error={
-                    formik.touched.firstName && formik.errors.firstName
-                      ? formik.errors.firstName
-                      : ""
-                  }
-                />
-                <InputField
-                  label="Last name"
-                  type="text"
-                  placeholder="Enter last name"
-                  value={formik.values.lastName}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  name="lastName"
-                  error={
-                    formik.touched.lastName && formik.errors.lastName
-                      ? formik.errors.lastName
-                      : ""
-                  }
-                />
-              </div>
-            )}
-            {activeTab === "business" && (
-              <InputField
-                label="Business name"
-                type="text"
-                placeholder="Enter business name"
-                value={formik.values.businessName}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                name="businessName"
-                error={
-                  formik.touched.businessName && formik.errors.businessName
-                    ? formik.errors.businessName
-                    : ""
-                }
-              />
-            )}
-            <InputField
-              label="Email address"
-              type="text"
-              placeholder="Enter email address"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              name="email"
-              error={
-                formik.touched.email && formik.errors.email
-                  ? formik.errors.email
-                  : ""
-              }
-            />
-            <div className="flex flex-col gap-4">
-              <InputField
-                label="Password"
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                name="password"
-                icon={<EyeIcon className="w-5 h-5" />}
-                onInputIconClick={togglePasswordVisibility}
-                error={
-                  formik.touched.password && formik.errors.password
-                    ? formik.errors.password
-                    : ""
-                }
-              />
-              <div className="grid grid-cols-2 gap-2">
-                {passwordCriteria.map((criterion, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-2 py-1 px-2 rounded-full border border-grey300 text-xs  text-grey500 font-medium"
-                  >
-                    <div className="transition-transform duration-500 ease-in-out">
-                      {passwordValidation.some(
-                        (v) => v.label === criterion.label && v.isValid
-                      ) ? (
-                        <Checked className="w-5 h-5" />
-                      ) : (
-                        <Unchecked className="w-5 h-5" />
-                      )}
-                    </div>
-                    <p>{criterion.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-          <Button
-            label="Create account"
-            isLoading={isLoading}
-            type="submit"
-            classNames="mt-4"
+      <h3 className="font-semibold text-[32px] leading-7 text-[#101928]">
+        Step into your creative hub
+      </h3>
+
+      <form onSubmit={formik.handleSubmit} className="mt-5 space-y-5">
+        <div className="flex gap-5">
+          <InputField
+            label="First name"
+            type="text"
+            placeholder="Enter first name"
+            value={formik.values.firstName}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            name="firstName"
+            error={
+              formik.touched.firstName && formik.errors.firstName
+                ? formik.errors.firstName
+                : ""
+            }
           />
-        </form>
-      </section>
+          <InputField
+            label="Last name"
+            type="text"
+            placeholder="Enter last name"
+            value={formik.values.lastName}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            name="lastName"
+            error={
+              formik.touched.lastName && formik.errors.lastName
+                ? formik.errors.lastName
+                : ""
+            }
+          />
+        </div>
+        <InputField
+          label="Email address"
+          type="text"
+          placeholder="Enter email address"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          name="email"
+          icon={<EmailFieldIcon />}
+          error={
+            formik.touched.email && formik.errors.email
+              ? formik.errors.email
+              : ""
+          }
+        />
+
+        <InputField
+          label="Password"
+          type={showPassword ? "text" : "password"}
+          placeholder="Enter password"
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          name="password"
+          icon={ showPassword ? <EyeIcon className="w-5 h-5" /> : <div className="size-5 bg-green-500"></div>}
+          onInputIconClick={togglePasswordVisibility}
+          error={
+            formik.touched.password && formik.errors.password
+              ? formik.errors.password
+              : ""
+          }
+        />
+
+        <div className="-mt-5 center gap-2">
+          {passwordCriteria.map((criterion, index) => {
+            return (
+              <div
+                key={criterion.label}
+                className="px-2 py-1 center gap-1 bg-[#F0F2F5] rounded-lg border border-[#D0D5DD]"
+              >
+                <div className="size-3">
+                  {passwordValidation.some(
+                    (v) => v.label === criterion.label && v.isValid
+                  ) ? (
+                    <div className="size-3 center">
+                      <PasswordMatchIcon />
+                    </div>
+                  ) : (
+                    <div className="size-3 center">
+                      <PasswordNoMatchIcon />
+                    </div>
+                  )}
+                </div>
+
+                {/* <div className="size-3 bg-slate-300"></div> */}
+                <p className="font-medium text-sm leading-5 text-[#98A2B3]">
+                  {criterion.label}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* <div className="flex items-center justify-between">
+        <CheckboxField label="Remember me" className="text-xs" />
+        <Link
+          href="/forgot-password"
+          className="p-0 w-auto text-xs bg-transparent font-medium text-[#1574E5]"
+        >
+          Forgot Password
+        </Link>
+      </div> */}
+        <Button
+          label="Create account"
+          isLoading={isLoading}
+          type="submit"
+          classNames="text-white font-semibold"
+        />
+      </form>
     </Fragment>
   );
 }

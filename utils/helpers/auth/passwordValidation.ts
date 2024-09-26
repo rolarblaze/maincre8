@@ -9,22 +9,22 @@ interface PasswordCriteria {
 export const passwordCriteria: PasswordCriteria[] = [
   {
     // Criterion to check if the password is at least 8 characters long.
-    label: "8 or more characters",
+    label: "Length",
     isValid: (password) => password.length >= 8,
   },
   {
     // Criterion to check if the password contains at least one lowercase letter.
-    label: "At least 1 lower case",
+    label: "lower",
     isValid: (password) => /[a-z]/.test(password),
   },
   {
     // Criterion to check if the password contains at least one uppercase letter.
-    label: "At least 1 upper case",
+    label: "UPPER",
     isValid: (password) => /[A-Z]/.test(password),
   },
   {
     // Criterion to check if the password contains at least one special character.
-    label: "At least 1 special character",
+    label: '!@#$%^&*(),.?":{}|<>',
     isValid: (password) => /[!@#$%^&*(),.?":{}|<>]/.test(password),
   },
 ];
