@@ -5,7 +5,7 @@ import { setUserTokenCookie } from "@/utils/helpers/auth/cookieUtility";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch } from "react-redux";
-import { Tabs, InputField, Button, SocialSignUp } from "@/components";
+import { Tabs, InputField, Button } from "@/components";
 import { Checked, EyeIcon, Unchecked } from "@/public/icons";
 import { signUpIndividual, signUpBusiness } from "@/redux/auth/features";
 import { addAlert } from "@/redux/alerts";
@@ -15,8 +15,6 @@ import {
   validatePassword,
   passwordCriteria,
 } from "@/utils/helpers/auth/passwordValidation";
-
-
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string().test(
@@ -77,7 +75,11 @@ export default function Signup() {
     },
     validationSchema: SignupSchema,
     onSubmit: async (values) => {
-      await handleSignUp(values, dispatch);
+      if (activeTab === "individual") {
+        await handleIndividualSignUp(values, dispatch);
+      } else {
+        await handleBusinessSignUp(values, dispatch);
+      }
     },
   });
 
@@ -88,50 +90,68 @@ export default function Signup() {
     setShowPassword(!showPassword);
   };
 
-  // Signup function
-  const handleSignUp = async (
+  // Separate function for individual signup logic
+  const handleIndividualSignUp = async (
     payload: SignUpFormValues,
     dispatch: AppDispatch
   ) => {
-    const action =
-      activeTab === "individual" ? signUpIndividual : signUpBusiness;
-    const actionResult = await dispatch(action(payload));
+    const actionResult = await dispatch(signUpIndividual(payload));
 
-    if (
-      signUpIndividual.fulfilled.match(actionResult) ||
-      signUpBusiness.fulfilled.match(actionResult)
-    ) {
-      const { data } = actionResult.payload;
-      sessionStorage.setItem("userEmail", payload.email); // Store email in session storage
+    if (signUpIndividual.fulfilled.match(actionResult)) {
+      sessionStorage.setItem("userEmail", payload.email);
       dispatch(
         addAlert({
           id: "",
           headText: "Success",
           subText:
-            activeTab === "individual"
-              ? "Successfully registered as an individual. Please check your email for verification."
-              : "Successfully registered as a business. Please check your email for verification.",
+            "Successfully registered as an individual. Please check your email for verification.",
           type: "success",
         })
       );
       router.push("/email-verify");
-    } else if (
-      signUpIndividual.rejected.match(actionResult) ||
-      signUpBusiness.rejected.match(actionResult)
-    ) {
-      if (actionResult.error) {
-        const errorMessage =
-          actionResult.error?.message ||
-          "An error occurred during registration. Please try again.";
-        dispatch(
-          addAlert({
-            id: "",
-            headText: "Error",
-            subText: errorMessage,
-            type: "error",
-          })
-        );
-      }
+    } else {
+      handleSignUpError(actionResult, dispatch);
+    }
+  };
+
+  // Separate function for business signup logic
+  const handleBusinessSignUp = async (
+    payload: SignUpFormValues,
+    dispatch: AppDispatch
+  ) => {
+    const actionResult = await dispatch(signUpBusiness(payload));
+
+    if (signUpBusiness.fulfilled.match(actionResult)) {
+      sessionStorage.setItem("userEmail", payload.email);
+      dispatch(
+        addAlert({
+          id: "",
+          headText: "Success",
+          subText:
+            "Successfully registered as a business. Please check your email for verification.",
+          type: "success",
+        })
+      );
+      router.push("/email-verify");
+    } else {
+      handleSignUpError(actionResult, dispatch);
+    }
+  };
+
+  // Handle errors for both individual and business signups
+  const handleSignUpError = (actionResult: any, dispatch: AppDispatch) => {
+    if (actionResult.error) {
+      const errorMessage =
+        actionResult.error?.message ||
+        "An error occurred during registration. Please try again.";
+      dispatch(
+        addAlert({
+          id: "",
+          headText: "Error",
+          subText: errorMessage,
+          type: "error",
+        })
+      );
     }
   };
 
@@ -252,7 +272,6 @@ export default function Signup() {
             classNames="mt-4"
           />
         </form>
-        {/* <SocialSignUp isLogin={false} activeTab={activeTab} /> */}
       </section>
     </Fragment>
   );

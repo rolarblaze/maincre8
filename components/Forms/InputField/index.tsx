@@ -43,6 +43,7 @@ const InputField: React.FC<InputFieldProps> = ({
   tooltipText,
   name,
 }) => {
+  const [inputValue, setInputValue] = useState(value || "");
   const [showTooltip, setShowTooltip] = useState(false);
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -51,6 +52,30 @@ const InputField: React.FC<InputFieldProps> = ({
     }
     if (onKeyDown) {
       onKeyDown(e);
+    }
+  };
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    let input = e.target.value.trim();
+
+    // Only handle custom URL logic for the "url" input type
+    if (type === "url") {
+      const urlPattern = /^(https?:\/\/)?([a-zA-Z0-9-]+\.[a-zA-Z]{2,})(\/.*)?$/;
+
+      if (urlPattern.test(input)) {
+        // If the input doesn't start with 'http' or 'https', prepend 'https://'
+        if (!/^https?:\/\//.test(input)) {
+          input = "https://" + input;
+        }
+      }
+    }
+
+    setInputValue(input);
+
+    // Call external onChange if provided
+    if (onChange) {
+      e.target.value = input; // Adjust the value before passing it to onChange
+      onChange(e);
     }
   };
 
@@ -88,7 +113,7 @@ const InputField: React.FC<InputFieldProps> = ({
           placeholder={placeholder}
           value={value}
           name={name}
-          onChange={onChange}
+          onChange={handleChange}
           onBlur={onBlur}
           onKeyDown={handleKeyDown}
           onClick={onClick}
@@ -104,7 +129,7 @@ const InputField: React.FC<InputFieldProps> = ({
           </div>
         )}
       </div>
-      {error && <p className="text-red-500 text-xs">{error}</p>}
+      {error && <p className="text-red-500 mt-1 text-xs">{error}</p>}
     </div>
   );
 };

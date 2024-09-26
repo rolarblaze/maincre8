@@ -20,9 +20,11 @@ const FAQ = () => {
       >
         <h2 className="text-2xl md:text-4xl lg:text-5.5xl">
           Frequently Asked{" "}
-          <span className="text-2xl md:text-4xl lg:text-5.5xl text-primary500">Questions</span>
+          <span className="text-2xl md:text-4xl lg:text-5.5xl text-primary500">
+            Questions
+          </span>
         </h2>
-        <p className="">Customer Reviews</p>
+        {/* <p className="">Customer Reviews</p> */}
       </motion.div>
 
       <div className="max-w-[1008px] w-full grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">

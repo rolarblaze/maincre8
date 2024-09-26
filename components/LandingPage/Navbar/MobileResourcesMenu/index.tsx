@@ -20,11 +20,11 @@ const MobileResourcesMenu: React.FC<MobileResourcesMenuProps> = ({
 }) => {
   const resourcesData = [
     {
-      title: "Book a Demo",
+      title: "Watch a Demo",
       description:
         "Learn how we create synergies and mutually beneficial relationships with team members.",
       icon: DemoIcon,
-      link: "#",
+      link: "/watch-demo",
     },
     {
       title: "Free Resource",

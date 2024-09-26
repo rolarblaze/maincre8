@@ -4,14 +4,14 @@ import { twMerge } from "tailwind-merge";
 
 interface Option {
   label: string;
-  value: string;
+  value: string | number;
 }
 
 interface ControlledSelectProps {
-  label: string;
+  label?: string;
   options: Option[];
   value: string | undefined;
-  error?: string;
+  error?: string | boolean;
   onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
   id: string;
   name: string;
@@ -32,15 +32,17 @@ const ControlledSelect: React.FC<ControlledSelectProps> = ({
 }) => {
   return (
     <div>
-      <label
-        htmlFor={id}
-        className="block text-sm text-gray-900 font-medium mb-2"
-      >
-        {label}
-      </label>
+      {label && (
+        <label
+          htmlFor={id}
+          className="block text-sm text-gray-900 font-medium mb-2"
+        >
+          {label}
+        </label>
+      )}
       <div className={twMerge("relative", className)}>
         <select
-          required
+          // required
           id={id}
           name={name}
           value={value}
@@ -67,7 +69,7 @@ const ControlledSelect: React.FC<ControlledSelectProps> = ({
           <AshArrowDown />
         </div>
       </div>
-      {error && <p className="text-red-500 text-xs">{error}</p>}
+      {error && <p className="text-red-500 mt-1 text-xs">{error}</p>}
     </div>
   );
 };

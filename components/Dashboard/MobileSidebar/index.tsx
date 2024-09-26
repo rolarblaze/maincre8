@@ -20,6 +20,7 @@ import MyServicesIcon from "@/public/svgs/MyServicesIcon";
 import ArrowUp from "@/public/icons/arrow-up.svg";
 import Image from "next/image";
 import assetLibrary from "@/library";
+import NewLogo from "@/public/optimised/NewLogo";
 
 type MobileSidebarProps = {
   setActiveTab: (tab: Tab) => void;
@@ -54,7 +55,8 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
         {/* Mobile Logo */}
         <div className=" flex justify-between w-full md:hidden">
           <Link href={"/"} className="">
-            <MobileBlueLogo />
+            {/* <MobileBlueLogo /> */}
+            <NewLogo />
           </Link>
           <button className="w-fit h-fit" onClick={onClick}>
             <CancelIcon />
@@ -341,6 +343,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
       {/* Profile */}
       <div className="flex items-center flex-wrap gap-8 px-6">
         <div className="flex items-center gap-3">
+          {/* Profile Avatar */}
           <div className="w-14 h-14 rounded-full relative">
             <Image
               src={assetLibrary.defaultAvatar}

@@ -29,6 +29,8 @@ export const INITIAL_VALUES: FormValues = {
   // BUDGET
   budgetProjection: "",
   budget: "",
+  currencyCode: "",
+  countryCode: "",
 
   // PREFERRED SOLUTIONS
   usefulDigitalServices: [],
@@ -170,10 +172,6 @@ export const genderOptions = [
   {
     label: "Female",
     value: "female",
-  },
-  {
-    label: "Other",
-    value: "other",
   },
 ];
 
