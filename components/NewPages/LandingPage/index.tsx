@@ -6,6 +6,7 @@ import {
   FeatureSection,
   HeroSection,
   LearnMoreSection,
+  PackagesSection,
   ProofSection,
   TestimonialSection,
 } from "./sections";
@@ -19,6 +20,7 @@ const LandingPage = () => {
     <PageLayout>
       <main className="full-width content-grid min-h-[calc(100dvh-4rem)]">
         <HeroSection />
+        <PackagesSection />
         <ProudlyMadeSection />
         {/* <ProofSection /> */}
         <WhyChooseSellCre8 />

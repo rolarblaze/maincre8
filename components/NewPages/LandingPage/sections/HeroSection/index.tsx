@@ -1,13 +1,6 @@
 import Image from "next/image";
 import assetLibrary from "@/library";
 import { PlayIcon } from "@/public/svgs";
-import {
-  AllInOneBundleSVG,
-  BrandDesignSVG,
-  ContentCreationSVG,
-  DigitalMarketingSVG,
-  GraphicDesignsSVG,
-} from "@/public/icons";
 
 const HeroSection = () => {
   return (
@@ -48,83 +41,7 @@ const HeroSection = () => {
           className="absolute object-cover"
         />
       </div>
-
-      <div className="flex flex-wrap items-start justify-center gap-4 sm:gap-8 lg:justify-between">
-        {components.map(({ title, icon }) => (
-          <div
-            key={title}
-            className={`size-fit space-y-5 rounded-2xl border px-2 pb-2 pt-3.5 sm:px-2.5 sm:pb-2.5 sm:pt-5 ${getBorderClass(title)} `}
-          >
-            <h3 className="px-2.5 text-sm font-bold leading-[1.6875rem] text-grey900 sm:text-xl">
-              {title}
-            </h3>
-
-            <div
-              className={`flex h-[7.5rem] w-36 items-center justify-center overflow-hidden rounded-[0.625rem] bg-error-50 sm:h-40 sm:w-[12.25rem] ${getBackgroundClass(title)} `}
-            >
-              {icon}
-            </div>
-          </div>
-        ))}
-      </div>
     </section>
   );
 };
 export default HeroSection;
-
-const components = [
-  {
-    title: "Brand Design",
-    icon: <BrandDesignSVG />,
-  },
-  {
-    title: "Graphic Designs",
-    icon: <GraphicDesignsSVG className="size-full" />,
-  },
-  {
-    title: "Digital Marketing",
-    icon: <DigitalMarketingSVG className="size-full" />,
-  },
-  {
-    title: "Content Creation",
-    icon: <ContentCreationSVG className="size-full" />,
-  },
-  {
-    title: "All-In-One Bundle",
-    icon: <AllInOneBundleSVG />,
-  },
-];
-
-const getBorderClass = (title: string) => {
-  switch (title) {
-    case "Brand Design":
-      return "border-error-50";
-    case "Graphic Designs":
-      return "border-warning-50";
-    case "Digital Marketing":
-      return "border-success-50";
-    case "Content Creation":
-      return "border-brown-50";
-    case "All-In-One Bundle":
-      return "border-primary50";
-    default:
-      return "";
-  }
-};
-
-const getBackgroundClass = (title: string) => {
-  switch (title) {
-    case "Brand Design":
-      return "bg-error-50";
-    case "Graphic Designs":
-      return "bg-warning-50";
-    case "Digital Marketing":
-      return "bg-success-50";
-    case "Content Creation":
-      return "bg-brown-50";
-    case "All-In-One Bundle":
-      return "bg-primary50";
-    default:
-      return "";
-  }
-};

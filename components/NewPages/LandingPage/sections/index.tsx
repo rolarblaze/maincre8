@@ -1,4 +1,5 @@
 export { default as HeroSection } from "./HeroSection";
+export { default as PackagesSection } from "./PackagesSection";
 export { default as ProofSection } from "./ProofSection";
 export { default as FeatureSection } from "./FeatureSection";
 export { default as LearnMoreSection } from "./LearnMoreSection";
