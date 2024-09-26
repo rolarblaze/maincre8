@@ -6,9 +6,9 @@ import { AuthSlice } from "./auth";
 import { briefReducer } from "./brief";
 import { fileUploadReducer } from "./file";
 import { getPackageReducer } from "./getPackage";
-import { shopReducer } from "./shop";
 import { OrderSlice } from "./order";
 import servicesSlice from "./servicesTracker";
+import { shopReducer } from "./shop";
 import { trackerReducer } from "./servicesTracker/tracker";
 import {
   contactFormReducer,

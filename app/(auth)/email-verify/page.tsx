@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { Button } from "@/components";
@@ -86,49 +86,46 @@ const VerifyEmail = () => {
     }
   };
 
+
+  const dispatchAlert = () => {
+    dispatch(
+      addAlert({
+        id: "",
+        headText: "Error",
+        subText: "Olajghsagjkhajhjewhjkhfejhfkhefnkhenkhafkherjkh.akj.rmkfhk.renhekrhk.rh",
+        type: "error",
+      })
+    );
+  }
+
   return (
-    <div className="max-w-[37rem] size-full mt-12 flex flex-col gap-10">
-      {/* FORM LEGEND */}
-      <h3 className="text-grey900 text-center text-4.5xl font-bold">
-        Verify your email address
+    <Fragment>
+      <h3 className="font-semibold text-[32px] leading-7 text-[#101928]">
+        We emailed you a code
       </h3>
-
-      {/* FORM ELEMENT */}
-      <div className="flex flex-col gap-4 border rounded-lg border-grey200 bg-white p-10">
-        <form className=" space-y-10 text-left" onSubmit={handleVerifyEmail}>
-          <legend className="space-y-1">
-            <h3 className="text-grey600 text-2xl font-bold tracking-[-0.03rem]">
-              We emailed you a code
-            </h3>
-            <p className="text-grey500 tracking-[-0.01rem]">Check {email}</p>
-          </legend>
-
-          {/* FORM INPUT ELEMENT */}
-          <fieldset>
-            <InputField
-              label="Code"
-              type="text"
-              placeholder="Enter verification code"
-              classNames="p-4"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
-            />
-          </fieldset>
-
-          {/* FORM BUTTONS */}
-          <div className="flex flex-col size-full font-semibold">
-            <Button label="Verify email address" type="submit" isLoading={isLoading} />
-          </div>
-          <button
-            className="text-primary600 py-4 border-none"
-            onClick={handleResendCode}
-
-          >
-            Resend code
-          </button>
-        </form>
+      <p className="font-normal text-base leading-6 text-[#667185]">
+        We sent a 6 digit code to jt@sellmedia.africa. Enter it below.
+      </p>
+      <div className="mt-5">
+      <InputField type="text" label="Code" placeholder="Enter code" />
       </div>
-    </div>
+      <div className="mt-5">
+      <Button
+      onClick={dispatchAlert}
+        label="Login to Dashboard"
+        classNames="text-sm text-white font-semibold"
+      />
+      </div>
+      
+     
+      <div className="center -mt-2">
+        <Button
+          onClick={handleResendCode}
+          label="Resend code"
+          classNames="p-2 w-auto text-xs bg-transparent font-medium text-[#1574E5]"
+        />
+      </div>
+    </Fragment>
   );
 };
 export default VerifyEmail;
