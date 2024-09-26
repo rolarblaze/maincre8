@@ -12,7 +12,7 @@ import {
 const HeroSection = () => {
   return (
     <section className="py-5 lg:py-[3.75rem] space-y-10">
-      <div className="relative h-fit text-center bg-gradient-to-tr from-[#4490EA] to-[#0C407E] to-70% px-4 pt-14 pb-10 md:pb-16 md:px-10 lg:px-28 lg:pt-28 lg:pb-20 flex flex-col justify-center items-center gap-4 rounded-[1.25rem]">
+      <div className="relative h-fit text-center bg-gradient-to-tr from-[#4490EA] to-[#0C407E] to-70% px-5 md:px-20 lg:px-[100px] pt-14 pb-10 md:pb-16 lg:pt-28 lg:pb-20 flex flex-col justify-center items-center gap-4 rounded-[1.25rem]">
         <h1 className="z-[2] max-w-80 text-primary50 text-[2rem] sm:text-5xl lg:text-[3.5rem] font-bold leading-10 md:leading-[3.5rem] lg:leading-[4rem] sm:max-w-[50rem]">
           Elevate Your Brand with Subscription-Based Creativity
         </h1>
