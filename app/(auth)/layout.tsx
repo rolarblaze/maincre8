@@ -2,12 +2,9 @@
 import { FC, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-<<<<<<< HEAD
-=======
 import { GoogleIcon, LogoBlack } from "@/public/icons";
 import { Wave } from "@/public/imgs";
 import path from "path";
->>>>>>> c6edd5ed73e2617965852cca6aad4774baa40364
 import Image from "next/image";
 
 interface Props {
