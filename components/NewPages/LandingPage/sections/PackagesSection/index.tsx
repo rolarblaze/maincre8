@@ -1,13 +1,19 @@
+"use client";
+import { useState } from "react";
 import { packages } from "./constants";
-import { getBorderClass, getBackgroundClass } from "./helperFunc";
+import { getTabClass, getBackgroundClass, getUnderClass } from "./helperFunc";
 
 const PackagesSection = () => {
+  const [hovered, setHovered] = useState<string | null>(null);
+
   return (
-    <div className="flex flex-wrap items-start justify-center gap-4 sm:gap-8 lg:justify-between">
-      {packages.map(({ title, icon }) => (
+    <div className="flex min-h-72 flex-wrap items-start justify-center gap-4 sm:gap-8 lg:justify-between">
+      {packages.map(({ title, icon, under }) => (
         <div
           key={title}
-          className={`group size-fit space-y-5 rounded-2xl border px-2 pb-2 pt-3.5 transition-colors duration-700 ease-in-out sm:px-2.5 sm:pb-2.5 sm:pt-5 ${getBorderClass(title)} `}
+          onMouseEnter={() => setHovered(title)}
+          onMouseLeave={() => setHovered(null)}
+          className={`group size-fit space-y-5 rounded-2xl border px-2 pb-2 pt-3.5 transition-colors duration-700 ease-in-out sm:px-2.5 sm:pb-2.5 sm:pt-5 ${getTabClass(title)} `}
         >
           <h3 className="px-2.5 text-sm font-bold leading-[1.6875rem] text-grey900 sm:text-xl">
             {title}
@@ -18,6 +24,14 @@ const PackagesSection = () => {
           >
             {icon}
           </div>
+
+          {hovered === title && (
+            <p
+              className={`pb-2 text-xs font-semibold sm:text-sm ${getUnderClass(title)}`}
+            >
+              {under}
+            </p>
+          )}
         </div>
       ))}
     </div>
