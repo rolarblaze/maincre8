@@ -49,6 +49,7 @@ export { default as AvatarIcon } from "./UI/AvatarIcon";
 export { default as PillDiv } from "./UI/PillDiv";
 export { default as UploadFile } from "./UI/UploadFile";
 export { default as Marquee } from "./UI/Marquee";
+export { default as ResizablePanel } from "./UI/ResizablePanel";
 
 // SHOP PAGE SECTION IMPORTS
 export { default as ServicesSection } from "./Shop";
