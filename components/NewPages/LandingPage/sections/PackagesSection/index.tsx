@@ -7,14 +7,14 @@ const PackagesSection = () => {
       {packages.map(({ title, icon }) => (
         <div
           key={title}
-          className={`size-fit space-y-5 rounded-2xl border px-2 pb-2 pt-3.5 sm:px-2.5 sm:pb-2.5 sm:pt-5 ${getBorderClass(title)} `}
+          className={`group size-fit space-y-5 rounded-2xl border px-2 pb-2 pt-3.5 transition-colors duration-700 ease-in-out sm:px-2.5 sm:pb-2.5 sm:pt-5 ${getBorderClass(title)} `}
         >
           <h3 className="px-2.5 text-sm font-bold leading-[1.6875rem] text-grey900 sm:text-xl">
             {title}
           </h3>
 
           <div
-            className={`flex h-[7.5rem] w-36 items-center justify-center overflow-hidden rounded-[0.625rem] bg-error-50 sm:h-40 sm:w-[12.25rem] ${getBackgroundClass(title)} `}
+            className={`flex h-[7.5rem] w-36 items-center justify-center overflow-hidden rounded-[0.625rem] bg-error-50 transition-colors duration-700 ease-in-out sm:h-40 sm:w-[12.25rem] ${getBackgroundClass(title)} `}
           >
             {icon}
           </div>
