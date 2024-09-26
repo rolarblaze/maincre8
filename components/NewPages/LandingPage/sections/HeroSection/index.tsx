@@ -11,25 +11,25 @@ import {
 
 const HeroSection = () => {
   return (
-    <section className="py-5 lg:py-[3.75rem] space-y-10">
-      <div className="relative h-fit text-center bg-gradient-to-tr from-[#4490EA] to-[#0C407E] to-70% px-5 md:px-20 lg:px-[100px] pt-14 pb-10 md:pb-16 lg:pt-28 lg:pb-20 flex flex-col justify-center items-center gap-4 rounded-[1.25rem]">
-        <h1 className="z-[2] max-w-80 text-primary50 text-[2rem] sm:text-5xl lg:text-[3.5rem] font-bold leading-10 md:leading-[3.5rem] lg:leading-[4rem] sm:max-w-[50rem]">
+    <section className="space-y-10 py-5 lg:py-[3.75rem]">
+      <div className="relative flex h-fit flex-col items-center justify-center gap-4 rounded-[1.25rem] bg-gradient-to-tr from-[#4490EA] to-[#0C407E] to-70% px-5 pb-10 pt-14 text-center md:px-20 md:pb-16 lg:px-[100px] lg:pb-20 lg:pt-28">
+        <h1 className="z-[2] max-w-80 text-[2rem] font-bold leading-10 text-primary50 sm:max-w-[50rem] sm:text-5xl md:leading-[3.5rem] lg:text-[3.5rem] lg:leading-[4rem]">
           Elevate Your Brand with Subscription-Based Creativity
         </h1>
 
-        <p className="z-[2] max-w-80 font-light text-pretty text-base sm:text-xl text-white leading-6 sm:leading-8 sm:max-w-[45rem] ">
+        <p className="z-[2] max-w-80 text-pretty text-base font-light leading-6 text-white sm:max-w-[45rem] sm:text-xl sm:leading-8">
           SellCrea8 is a productized eCommerce platform designed by SMG to
           deliver affordable, high-quality, and personalized creative and
           digital services.
         </p>
 
-        <div className="z-[2] mt-4 flex justify-center items-center gap-6">
-          <button className="py-3.5 px-12 text-base font-semibold bg-white text-grey800 rounded-lg">
+        <div className="z-[2] mt-4 flex items-center justify-center gap-6">
+          <button className="rounded-lg bg-white px-12 py-3.5 text-base font-semibold text-grey800">
             Get Started
           </button>
 
-          <button className="py-4 px-6 border border-white text-white flex justify-center items-center gap-2.5 rounded-lg max-md:hidden">
-            <span className="font-medium text-lg">Watch demo video</span>
+          <button className="flex items-center justify-center gap-2.5 rounded-lg border border-white px-6 py-4 text-white max-md:hidden">
+            <span className="text-lg font-medium">Watch demo video</span>
             <PlayIcon fillColor="white" className="mt-0.5" />
           </button>
         </div>
@@ -49,24 +49,18 @@ const HeroSection = () => {
         />
       </div>
 
-      <div className="flex flex-wrap justify-center lg:justify-between items-start gap-4 sm:gap-8">
+      <div className="flex flex-wrap items-start justify-center gap-4 sm:gap-8 lg:justify-between">
         {components.map(({ title, icon }) => (
           <div
             key={title}
-            className={`
-              size-fit space-y-5 px-2 pt-3.5 pb-2 sm:px-2.5 sm:pt-5 sm:pb-2.5 border rounded-2xl
-              ${getBorderClass(title)}
-            `}
+            className={`size-fit space-y-5 rounded-2xl border px-2 pb-2 pt-3.5 sm:px-2.5 sm:pb-2.5 sm:pt-5 ${getBorderClass(title)} `}
           >
-            <h3 className="font-bold text-sm sm:text-xl text-grey900 leading-[1.6875rem] px-2.5">
+            <h3 className="px-2.5 text-sm font-bold leading-[1.6875rem] text-grey900 sm:text-xl">
               {title}
             </h3>
 
             <div
-              className={`
-              h-[7.5rem] w-36 sm:h-40 sm:w-[12.25rem] bg-error-50 rounded-[0.625rem] flex justify-center items-center overflow-hidden 
-              ${getBackgroundClass(title)}
-            `}
+              className={`flex h-[7.5rem] w-36 items-center justify-center overflow-hidden rounded-[0.625rem] bg-error-50 sm:h-40 sm:w-[12.25rem] ${getBackgroundClass(title)} `}
             >
               {icon}
             </div>
