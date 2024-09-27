@@ -1,9 +1,10 @@
-import { PageLayout } from "@/components";
+import { ContentSection, HeaderTabSection, PageLayout } from "@/components";
 
 const TermsConditionPage = () => {
   return (
     <PageLayout>
-      <div>TermsConditionPage</div>
+      <HeaderTabSection />
+      <ContentSection />
     </PageLayout>
   );
 };

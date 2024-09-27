@@ -1,9 +1,10 @@
-import { PageLayout } from "@/components";
+import { ContentSection, HeaderTabSection, PageLayout } from "@/components";
 
 const PrivacyPolicyPage = () => {
   return (
     <PageLayout>
-      <div>PrivacyPolicyPage</div>
+      <HeaderTabSection />
+      <ContentSection />
     </PageLayout>
   );
 };
