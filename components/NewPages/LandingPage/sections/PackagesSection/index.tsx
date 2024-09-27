@@ -8,7 +8,7 @@ const PackagesSection = () => {
   const [hovered, setHovered] = useState<string | null>(null);
 
   return (
-    <div className="flex min-h-96 flex-wrap items-start justify-center gap-4 sm:gap-8 lg:min-h-72 lg:justify-between">
+    <div className="flex min-h-[500px] flex-wrap items-start justify-center gap-4 sm:gap-8 lg:min-h-72 lg:justify-between">
       {packages.map(({ title, icon, under }) => (
         <div
           key={title}

@@ -1,10 +1,9 @@
-"use client"
+"use client";
 import useMeasure from "react-use-measure";
 import { motion, AnimatePresence } from "framer-motion";
-import { ignoreCircularReferences } from "./helperFunc";
 
 function ResizablePanel({ children }: { children: React.ReactNode }) {
-  let duration = 0.5;
+  let duration = 0.75;
   let [ref, { height }] = useMeasure();
 
   return (
@@ -14,23 +13,27 @@ function ResizablePanel({ children }: { children: React.ReactNode }) {
     >
       <AnimatePresence initial={false}>
         <motion.div
-          key={JSON.stringify(children, ignoreCircularReferences())}
+          ref={ref}
           initial={{
             opacity: 0,
+            y: "-10px",
           }}
           animate={{
             opacity: 1,
-            transition: { duration: duration / 2, delay: duration / 2 },
+            y: "4px",
+            transition: {
+              duration: duration,
+              delay: duration / 0.5,
+            },
           }}
           exit={{
             opacity: 0,
+            y: "-10px",
             transition: { duration: duration / 2 },
           }}
-          className={height ? "absolute" : "relative"}
+          className="absolute"
         >
-          <div ref={ref}>
-            {children}
-          </div>
+          {children}
         </motion.div>
       </AnimatePresence>
     </motion.div>

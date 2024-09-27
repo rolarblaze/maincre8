@@ -1,4 +1,4 @@
 const ProofSection = () => {
-  return <section>ProofSection</section>;
+  return <section className="py-20">ProofSection</section>;
 };
 export default ProofSection;
