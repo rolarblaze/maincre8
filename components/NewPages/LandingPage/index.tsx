@@ -18,21 +18,19 @@ import IndustryLeadingExperts from "@/components/LandingPage/Sections/IndustryLe
 const LandingPage = () => {
   return (
     <PageLayout>
-      <main className="full-width content-grid min-h-[calc(100dvh-4rem)]">
-        <HeroSection />
-        <PackagesSection />
-        <ProudlyMadeSection />
-        {/* <ProofSection /> */}
-        <WhyChooseSellCre8 />
-        {/* <FeatureSection /> */}
-        <LearnMoreSection />
-        <BrandSection />
-        {/* <TestimonialSection /> */}
-        <CustomerReviews />
-        {/* <ExpertSection /> */}
-        <IndustryLeadingExperts />
-        <CtaSection />
-      </main>
+      <HeroSection />
+      <PackagesSection />
+      <ProudlyMadeSection />
+      {/* <ProofSection /> */}
+      <WhyChooseSellCre8 />
+      {/* <FeatureSection /> */}
+      <LearnMoreSection />
+      <BrandSection />
+      {/* <TestimonialSection /> */}
+      <CustomerReviews />
+      {/* <ExpertSection /> */}
+      <IndustryLeadingExperts />
+      <CtaSection />
     </PageLayout>
   );
 };

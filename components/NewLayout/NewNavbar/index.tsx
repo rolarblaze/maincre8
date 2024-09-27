@@ -3,15 +3,14 @@ import Link from "next/link";
 import { useState } from "react";
 import { LogoIcon } from "@/public/svgs";
 import CartButton from "./CartButton";
-import { AuthSlice } from "@/redux/auth";
 
 const NewNavbar = () => {
   const [click, setClick] = useState(false);
 
-
   return (
-    <header className="py-6">
-      <nav className="flex items-center justify-between text-sm font-semibold text-grey500">
+    <header className="full-width content-grid fixed z-10 w-full overflow-hidden">
+      <div className="full-width absolute size-full bg-white/30 backdrop-blur-md"></div>
+      <nav className="z-20 flex items-center justify-between py-6 text-sm font-semibold text-grey500">
         {/* LINKS */}
         <ul className="flex items-center justify-start gap-11 max-sm:hidden">
           <li>Pricing</li>

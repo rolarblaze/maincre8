@@ -3,9 +3,11 @@ import NewFooter from "./NewFooter";
 
 const PageLayout = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div className="content-grid font-manrope place-content-start">
+    <div className="full-width content-grid place-content-start font-manrope">
       <NewNavbar />
-      {children}
+      <main className="full-width content-grid mt-[5.5rem] min-h-[calc(100dvh-4rem)]">
+        {children}
+      </main>
       <NewFooter />
     </div>
   );
