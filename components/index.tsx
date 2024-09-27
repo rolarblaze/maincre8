@@ -61,9 +61,15 @@ export {
 
 // PRIVACY POLICY PAGE SECTION COMPONENTS
 export {
-  HeaderTabSection,
-  ContentSection,
-} from "./NewPages/LegalPage/sections";
+  PPHeaderTabSection,
+  PPContentSection,
+} from "./NewPages/PrivacyPolicyPage/sections";
+
+// TERMS & CONDITIONS PAGE SECTION COMPONENTS
+export {
+  TCHeaderTabSection,
+  TCContentSection,
+} from "./NewPages/TermsConditionPage/sections";
 
 // UI COMPONENTS
 export { default as AvatarIcon } from "./UI/AvatarIcon";

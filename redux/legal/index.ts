@@ -1,11 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { tabs } from "./constants";
 
-interface Tab {
+export interface Tab {
   id: string;
   label: string;
 }
 
+export const tabs: Tab[] = [
+  {
+    id: "summarised",
+    label: "Summarised version",
+  },
+  {
+    id: "full",
+    label: "Legal version",
+  },
+];
 export interface TabsState {
   activeTab: string;
   tabs: Tab[];
@@ -13,7 +22,7 @@ export interface TabsState {
 
 const initialState: TabsState = {
   activeTab: "summarised",
-  tabs: tabs
+  tabs: tabs,
 };
 
 export const tabsSlice = createSlice({

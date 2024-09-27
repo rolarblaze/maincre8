@@ -16,7 +16,7 @@ const NewFooter = () => {
     },
     {
       name: "Terms & Conditions",
-      link: "terms-conditions",
+      link: "terms-and-conditions",
     },
   ];
 

@@ -12,9 +12,9 @@ const HeaderTabSection = () => {
   return (
     <section className="flex h-fit flex-col items-center justify-center gap-10 pb-20 pt-[6.25rem]">
       <h1
-        className={`${inter.variable} font-inter text-3.5xl font-bold -tracking-[0.01rem] text-[#111827]`}
+        className={`${inter.variable} font-inter text-3.5xl font-bold leading-[2.2rem] -tracking-[0.01rem] text-[#111827]`}
       >
-        Privacy Policy
+        Terms & Conditions
       </h1>
 
       <TabButtons />

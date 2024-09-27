@@ -1,10 +1,10 @@
-import { ContentSection, HeaderTabSection, PageLayout } from "@/components";
+import { PPContentSection, PPHeaderTabSection, PageLayout } from "@/components";
 
 const PrivacyPolicyPage = () => {
   return (
     <PageLayout>
-      <HeaderTabSection />
-      <ContentSection />
+      <PPHeaderTabSection />
+      <PPContentSection />
     </PageLayout>
   );
 };
