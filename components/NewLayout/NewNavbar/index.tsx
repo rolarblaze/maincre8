@@ -8,7 +8,7 @@ const NewNavbar = () => {
   const [click, setClick] = useState(false);
 
   return (
-    <header className="full-width content-grid fixed z-10 w-full overflow-hidden">
+    <header className="full-width content-grid fixed z-50 w-full overflow-hidden">
       <div className="full-width absolute size-full bg-white/30 backdrop-blur-md"></div>
       <nav className="z-20 flex items-center justify-between py-6 text-sm font-semibold text-grey500">
         {/* LINKS */}
