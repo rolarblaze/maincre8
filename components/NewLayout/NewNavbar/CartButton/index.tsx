@@ -30,7 +30,7 @@ const CartButton: React.FC<CartButtonProps> = ({ click, onClick }) => {
   return (
     <button
       onClick={onClick}
-      className={`relative rounded-lg bg-grey300 p-2 transition-all duration-200 ease-linear ${click && "bg-primary600"}`}
+      className={`relative rounded-lg bg-grey300 p-2 transition-all duration-200 ease-linear ${click && "bg-primary500"}`}
     >
       <AnimatePresence initial={false}>
         {click && (
@@ -38,7 +38,7 @@ const CartButton: React.FC<CartButtonProps> = ({ click, onClick }) => {
             variants={pingVariants}
             className="absolute -right-1.5 -top-1.5 flex size-4 items-center justify-center rounded-full bg-white"
           >
-            <motion.div className="size-2.5 rounded-full bg-warning-200" />
+            <motion.div className="size-2.5 rounded-full bg-warning-400" />
           </motion.div>
         )}
       </AnimatePresence>

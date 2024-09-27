@@ -58,22 +58,26 @@ const config: Config = {
         error: {
           50: "#FBEAE9",
           100: "#EB9B98",
+          300: "#DD524D"
         },
         warning: {
           50: "#FEF6E7",
           75: "#FBE2B7",
           200: "#F7C164",
+          400: "#F3A218",
         },
         success: {
           50: "#E7F6EC",
           75: "#B5E3C4",
           100: "#91D6A8",
           200: "#5FC381",
+          300: "#40B869"
         },
         brown: {
           50: "#FBF1F1",
           75: "#F0E6E6",
           200: "#CDC4C4",
+          300: "#B7AFAF"
         },
         ash: "#D0D5DD",
         ash10: "#5D5D5D",
