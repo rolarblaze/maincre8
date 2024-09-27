@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import Modal from "../Modals/CustomModal";
+import Modal from "../UI/Modals/CustomModal";
 import {
   FileUploadIcon,
   PDFIcon,
@@ -59,14 +59,14 @@ const FileUploadContent: React.FC<FileUploadContentProps> = ({ onUpload }) => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-4 rounded-2xl border border-grey300 border-dashed py-7 px-6 max-w-[400px]">
+    <div className="flex max-w-[400px] flex-col items-center gap-4 rounded-2xl border border-dashed border-grey300 px-6 py-7">
       <FileUploadIcon />
       <div onClick={handleClick} className="cursor-pointer">
-        <p className="flex gap-1 text-sm justify-center">
+        <p className="flex justify-center gap-1 text-sm">
           <span className="text-primary500">Click to upload</span>
           <span className="text-grey600">or drag and drop</span>
         </p>
-        <p className="text-grey400 text-xs text-center">
+        <p className="text-center text-xs text-grey400">
           PDF OR DOCX (max. 5MB)
         </p>
       </div>
@@ -78,7 +78,7 @@ const FileUploadContent: React.FC<FileUploadContentProps> = ({ onUpload }) => {
         onChange={handleFileChange}
       />
       <button
-        className="text-white bg-[#EB5017] rounded-md px-4 py-2"
+        className="rounded-md bg-[#EB5017] px-4 py-2 text-white"
         onClick={handleClick}
       >
         Browse Files
@@ -88,13 +88,13 @@ const FileUploadContent: React.FC<FileUploadContentProps> = ({ onUpload }) => {
 };
 
 const ErrorMessage = () => (
-  <div className="flex flex-col items-center gap-4 rounded-2xl border border-errorRed border-dashed py-12 px-6 max-w-[400px]">
+  <div className="border-errorRed flex max-w-[400px] flex-col items-center gap-4 rounded-2xl border border-dashed px-6 py-12">
     <ErrorIcon />
-    <div className="flex flex-col gap-1 items-center">
-      <p className="text-grey800 text-xs text-center font-semibold">
+    <div className="flex flex-col items-center gap-1">
+      <p className="text-center text-xs font-semibold text-grey800">
         PDF OR DOCX (max. 5MB)
       </p>
-      <p className="text-grey400 text-xs">Error Message</p>
+      <p className="text-xs text-grey400">Error Message</p>
     </div>
     <button className="flex gap-2 bg-transparent px-4 py-2">
       <TryAgainIcon />
@@ -114,18 +114,18 @@ const ProgressMessage: React.FC<ProgressMessageProps> = ({
   progress,
   fileName,
 }) => (
-  <div className="flex flex-col items-center gap-4 rounded-2xl border border-progressPurple border-dashed py-12 px-6 max-w-[400px]">
+  <div className="border-progressPurple flex max-w-[400px] flex-col items-center gap-4 rounded-2xl border border-dashed px-6 py-12">
     <PDFIcon />
     <div>
-      <p className="text-grey400 font-semibold flex flex-col gap-2">
+      <p className="flex flex-col gap-2 font-semibold text-grey400">
         {progress}%
       </p>
     </div>
-    <div className="flex flex-col gap-1 items-center">
-      <p className="text-grey800 text-xs text-center font-semibold">
+    <div className="flex flex-col items-center gap-1">
+      <p className="text-center text-xs font-semibold text-grey800">
         PDF OR DOCX (max. 5MB)
       </p>
-      <p className="text-grey400 text-xs">{fileName}</p>
+      <p className="text-xs text-grey400">{fileName}</p>
     </div>
   </div>
 );
@@ -135,17 +135,17 @@ interface SuccessMessageProps {
 }
 
 const SuccessMessage: React.FC<SuccessMessageProps> = ({ fileName }) => (
-  <div className="flex flex-col items-center gap-4 rounded-2xl border border-successGreen border-dashed py-12 px-6 max-w-[400px]">
+  <div className="border-successGreen flex max-w-[400px] flex-col items-center gap-4 rounded-2xl border border-dashed px-6 py-12">
     <SuccessIcon />
-    <div className="flex flex-col gap-1 items-center">
-      <p className="text-grey800 text-xs text-center font-semibold">
+    <div className="flex flex-col items-center gap-1">
+      <p className="text-center text-xs font-semibold text-grey800">
         PDF OR DOCX (max. 5MB)
       </p>
-      <p className="text-grey400 text-xs">{fileName}</p>
+      <p className="text-xs text-grey400">{fileName}</p>
     </div>
     <button className="flex gap-2 bg-transparent px-4 py-2">
       <ModalTrashIcon />
-      <span className="text-grey400 text-sm font-semibold">Clear Upload</span>
+      <span className="text-sm font-semibold text-grey400">Clear Upload</span>
     </button>
   </div>
 );

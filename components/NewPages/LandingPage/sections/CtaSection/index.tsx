@@ -1,9 +1,14 @@
-import assetLibrary from "@/library";
-import { LogoFadeIcon, PlayIcon } from "@/public/svgs";
-import Image from "next/image";
+"use client";
 import Link from "next/link";
+import Image from "next/image";
+import { useState } from "react";
+import assetLibrary from "@/library";
+import { DemoVideo, Modal } from "@/components";
+import { LogoFadeIcon, PlayIcon } from "@/public/svgs";
 
 const CtaSection = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <section className="full-width content-grid relative pt-[6.25rem]">
       <div className="relative flex items-center justify-center overflow-hidden rounded-[2rem] bg-primary600 px-12 pb-20 pt-16 text-center sm:min-h-[40rem] sm:gap-6">
@@ -31,7 +36,10 @@ const CtaSection = () => {
               Get Started
             </Link>
 
-            <button className="flex items-center justify-center gap-2 rounded-lg border bg-white px-6 py-4">
+            <button
+              onClick={() => setIsOpen(true)}
+              className="flex items-center justify-center gap-2 rounded-lg border bg-white px-6 py-4"
+            >
               <span className="text-lg font-medium text-grey900">
                 Watch demo video
               </span>
@@ -48,6 +56,10 @@ const CtaSection = () => {
           className="not-sr-only top-0 m-auto max-w-2xl object-cover"
         />
       </div>
+
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <DemoVideo />
+      </Modal>
 
       <div className="full-width absolute bottom-0 -z-[1] h-[7.5rem] w-full bg-primary900 sm:h-80" />
     </section>
