@@ -105,5 +105,5 @@ export { default as AirpeaceLogo } from "./air_peace_logo.svg";
 export { default as BrandDesignSVG } from "./brand_design_bulb.svg";
 export { default as GraphicDesignsSVG } from "./graphic_designs_board.svg";
 export { default as DigitalMarketingSVG } from "./digital_marketing_blocks.svg";
-export { default as ContentCreationSVG } from "./content_creation_pad.svg";
+export { default as ContentWritingSVG } from "./content_writing_pad.svg";
 export { default as AllInOneBundleSVG } from "./all_in_one_bundle_ship.svg";

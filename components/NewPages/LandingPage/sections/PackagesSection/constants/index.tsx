@@ -2,8 +2,8 @@ import {
   BrandDesignSVG,
   GraphicDesignsSVG,
   DigitalMarketingSVG,
-  ContentCreationSVG,
   AllInOneBundleSVG,
+  ContentWritingSVG,
 } from "@/public/icons";
 
 export const packages = [
@@ -24,7 +24,7 @@ export const packages = [
   },
   {
     title: "Content Writing",
-    icon: <ContentCreationSVG className="size-full" />,
+    icon: <ContentWritingSVG className="size-full" />,
     under: "Craft Your Message",
   },
   {
