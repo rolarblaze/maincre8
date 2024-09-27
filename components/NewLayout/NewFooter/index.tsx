@@ -1,13 +1,24 @@
+import Link from "next/link";
+import { LogoWhiteIcon, SMGIcon } from "@/public/svgs";
 import {
   FacebookLogo,
   InstagramLogo,
   LinkedinLogo,
   XLogo,
 } from "@/public/icons";
-import { LogoWhiteIcon, SMGIcon } from "@/public/svgs";
 
 const NewFooter = () => {
   const navlinks = ["Help", "Pricing", "FAQs"];
+  const navlinks2 = [
+    {
+      name: "Privacy Policy",
+      link: "/privacy-policy",
+    },
+    {
+      name: "Terms & Conditions",
+      link: "terms-conditions",
+    },
+  ];
 
   return (
     <footer className="full-width content-grid bg-primary900 py-10 md:py-[6.25rem]">
@@ -26,7 +37,7 @@ const NewFooter = () => {
           <nav className="lg:ml-12">
             <ul className="flex items-center justify-center gap-[2.75rem] text-sm text-grey200">
               {navlinks.map((item) => (
-                <li>{item}</li>
+                <li key={item}>{item}</li>
               ))}
             </ul>
           </nav>
@@ -50,8 +61,11 @@ const NewFooter = () => {
           </div>
 
           <ul className="flex items-center justify-center gap-12">
-            <li>Privacy Policy</li>
-            <li>Terms & Conditions</li>
+            {navlinks2.map(({ name, link }) => (
+              <li key={name}>
+                <Link href={link}>{name}</Link>
+              </li>
+            ))}
           </ul>
 
           <p className="text-xs text-grey300 sm:max-lg:mt-4 lg:hidden">

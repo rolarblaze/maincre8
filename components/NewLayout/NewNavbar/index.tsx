@@ -18,12 +18,12 @@ const NewNavbar = () => {
         </ul>
 
         {/* LOGO */}
-        <div className={`flex items-center gap-2.5`}>
+        <Link href={"/"} className={`flex items-center gap-2.5 sm:ml-24`}>
           <LogoIcon />
           <span className="font-schibsted text-2xl font-bold text-black">
             SellCrea8
           </span>
-        </div>
+        </Link>
 
         {/* BUTTONS */}
         <div className="flex items-center justify-center gap-6 max-sm:hidden">
