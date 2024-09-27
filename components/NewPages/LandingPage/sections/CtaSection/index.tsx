@@ -1,6 +1,7 @@
 import assetLibrary from "@/library";
 import { LogoFadeIcon, PlayIcon } from "@/public/svgs";
 import Image from "next/image";
+import Link from "next/link";
 
 const CtaSection = () => {
   return (
@@ -23,9 +24,12 @@ const CtaSection = () => {
           </p>
 
           <div className="mt-4 flex gap-4 max-sm:flex-col">
-            <button className="rounded-lg bg-primary900 px-12 py-4 text-lg font-medium text-white">
+            <Link
+              href={"/signup"}
+              className="block w-fit rounded-lg bg-primary900 px-12 py-4 text-lg font-medium text-white"
+            >
               Get Started
-            </button>
+            </Link>
 
             <button className="flex items-center justify-center gap-2 rounded-lg border bg-white px-6 py-4">
               <span className="text-lg font-medium text-grey900">
