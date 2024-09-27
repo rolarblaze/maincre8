@@ -1,7 +1,14 @@
-import { LogoIcon } from "@/public/svgs";
+"use client";
 import Link from "next/link";
+import { useState } from "react";
+import { LogoIcon } from "@/public/svgs";
+import CartButton from "./CartButton";
+import { AuthSlice } from "@/redux/auth";
 
 const NewNavbar = () => {
+  const [click, setClick] = useState(false);
+
+
   return (
     <header className="py-6">
       <nav className="flex items-center justify-between text-sm font-semibold text-grey500">
@@ -30,6 +37,8 @@ const NewNavbar = () => {
           >
             Get Started
           </Link>
+
+          <CartButton click={click} onClick={() => setClick((prev) => !prev)} />
         </div>
 
         {/* MOBILE: TOGGLE NAV */}
