@@ -45,6 +45,26 @@ export { default as CTASection } from "./LandingPage/Sections/CTASection";
 export { default as HelpCenter } from "./LandingPage/HelpCenter";
 export { default as BreadCrumb } from "./BreadCrumb";
 
+// NEW PAGES SECTION COMPONENTS
+// LANDING PAGE SECTION COMPONENTS
+export {
+  HeroSection,
+  PackagesSection,
+  ProofSection,
+  FeatureSection,
+  LearnMoreSection,
+  BrandSection,
+  TestimonialSection,
+  ExpertSection,
+  CtaSection,
+} from "./NewPages/LandingPage/sections";
+
+// PRIVACY POLICY PAGE SECTION COMPONENTS
+export {
+  HeaderTabSection,
+  ContentSection,
+} from "./NewPages/LegalPage/sections";
+
 // UI COMPONENTS
 export { default as AvatarIcon } from "./UI/AvatarIcon";
 export { default as PillDiv } from "./UI/PillDiv";
