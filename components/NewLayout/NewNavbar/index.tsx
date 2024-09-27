@@ -1,11 +1,12 @@
 import { LogoIcon } from "@/public/svgs";
+import Link from "next/link";
 
 const NewNavbar = () => {
   return (
     <header className="py-6">
-      <nav className="flex justify-between items-center text-grey500 font-semibold text-sm">
+      <nav className="flex items-center justify-between text-sm font-semibold text-grey500">
         {/* LINKS */}
-        <ul className="flex justify-start items-center gap-11 max-sm:hidden">
+        <ul className="flex items-center justify-start gap-11 max-sm:hidden">
           <li>Pricing</li>
           <li>FAQs</li>
         </ul>
@@ -13,21 +14,26 @@ const NewNavbar = () => {
         {/* LOGO */}
         <div className={`flex items-center gap-2.5`}>
           <LogoIcon />
-          <span className="font-schibsted font-bold text-black text-2xl">
+          <span className="font-schibsted text-2xl font-bold text-black">
             SellCrea8
           </span>
         </div>
 
         {/* BUTTONS */}
-        <div className="space-x-6  max-sm:hidden">
-          <button>Login</button>
-          <button className="py-2.5 px-4 text-grey50 bg-grey800 rounded-lg">
+        <div className="flex items-center justify-center gap-6 max-sm:hidden">
+          <Link href={"/login"} className="block w-fit">
+            Login
+          </Link>
+          <Link
+            href={"/signup"}
+            className="block w-fit rounded-lg bg-grey800 px-4 py-2.5 text-grey50"
+          >
             Get Started
-          </button>
+          </Link>
         </div>
 
         {/* MOBILE: TOGGLE NAV */}
-        <div className="sm:hidden bg-black size-5  rounded-md" />
+        <div className="size-5 rounded-md bg-black sm:hidden" />
       </nav>
     </header>
   );

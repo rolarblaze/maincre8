@@ -23,7 +23,7 @@ export const packages = [
     under: "Boost Your Reach",
   },
   {
-    title: "Content Creation",
+    title: "Content Writing",
     icon: <ContentCreationSVG className="size-full" />,
     under: "Craft Your Message",
   },
