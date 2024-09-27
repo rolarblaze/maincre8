@@ -2,6 +2,7 @@
 // NEW LAYOUT COMPONENTS
 export { default as Navbar } from "./NewLayout/NewNavbar";
 export { default as Footer } from "./NewLayout/NewFooter";
+export { default as PageLayout } from "./NewLayout";
 
 // GLOBAL COMPONENTS
 export { default as SocialSignUp } from "./Auth/SocialSignUp";
