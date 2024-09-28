@@ -48,7 +48,7 @@ const NewNavbar = () => {
         <div className="size-5 rounded-md bg-black sm:hidden" />
       </nav>
 
-      <Modal isOpen={true} onClose={() => setCartOpen(false)}>
+      <Modal isOpen={cartOpen} onClose={() => setCartOpen(false)}>
         <CartPage />
       </Modal>
     </header>
