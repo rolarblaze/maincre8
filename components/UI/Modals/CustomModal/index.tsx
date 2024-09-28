@@ -3,8 +3,8 @@ import { AnimatePresence, motion } from "framer-motion";
 import { CancelIcon } from "@/public/icons";
 
 interface ModalProps {
-  isOpen?: boolean;
-  onClose?: () => void;
+  isOpen: boolean;
+  onClose: () => void;
   children: React.ReactNode;
   className?: string;
   showCancelIcon?: boolean;

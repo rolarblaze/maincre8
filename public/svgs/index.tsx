@@ -56,3 +56,4 @@ export { default as LogoWhiteIcon } from "./LogoWhiteIcon";
 export { default as SMGIcon } from "./SMGIcon";
 export { default as PlayIcon } from "./PlayIcon";
 export { default as BagIcon } from "./BagIcon";
+export { default as TrashIcon } from "./TrashIcon";

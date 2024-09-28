@@ -2,10 +2,11 @@
 import Link from "next/link";
 import { useState } from "react";
 import { LogoIcon } from "@/public/svgs";
+import { CartPage, Modal } from "@/components";
 import CartButton from "./CartButton";
 
 const NewNavbar = () => {
-  const [click, setClick] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
 
   return (
     <header className="full-width content-grid fixed z-50 w-full overflow-hidden">
@@ -37,12 +38,19 @@ const NewNavbar = () => {
             Get Started
           </Link>
 
-          <CartButton click={click} onClick={() => setClick((prev) => !prev)} />
+          <CartButton
+            click={cartOpen}
+            onClick={() => setCartOpen((prev) => !prev)}
+          />
         </div>
 
         {/* MOBILE: TOGGLE NAV */}
         <div className="size-5 rounded-md bg-black sm:hidden" />
       </nav>
+
+      <Modal isOpen={true} onClose={() => setCartOpen(false)}>
+        <CartPage />
+      </Modal>
     </header>
   );
 };

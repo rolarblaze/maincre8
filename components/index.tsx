@@ -71,6 +71,9 @@ export {
   TCContentSection,
 } from "./NewPages/TermsConditionPage/sections";
 
+// CART PAGE COMPONENT
+export { default as CartPage } from "./NewPages/CartPage";
+
 // UI COMPONENTS
 export { default as AvatarIcon } from "./UI/AvatarIcon";
 export { default as PillDiv } from "./UI/PillDiv";
