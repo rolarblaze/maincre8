@@ -12,7 +12,7 @@ import {
 } from "./sections";
 import ProudlyMadeSection from "@/components/LandingPage/Sections/ProudlyMadeSection";
 import WhyChooseSellCre8 from "@/components/LandingPage/Sections/WhyChooseSellCre8";
-import CustomerReviews from "@/components/LandingPage/Sections/CustomerReviews";
+import CustomerReviews from "@/components/NewPages/LandingPage/sections/CustomerReviews";
 import IndustryLeadingExperts from "@/components/LandingPage/Sections/IndustryLeadingExperts";
 
 const LandingPage = () => {
