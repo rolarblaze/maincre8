@@ -10,9 +10,9 @@ const inter = Inter({
 
 const HeaderTabSection = () => {
   return (
-    <section className="flex h-fit flex-col items-center justify-center gap-10 pb-20 pt-[6.25rem]">
+    <section className="flex h-fit flex-col items-center justify-center gap-4 pb-10 pt-6 md:gap-10 md:pb-20 md:pt-[6.25rem]">
       <h1
-        className={`${inter.variable} font-inter text-3.5xl font-bold leading-[2.2rem] -tracking-[0.01rem] text-[#111827]`}
+        className={`${inter.variable} font-inter text-2xl font-bold leading-[2.2rem] -tracking-[0.01rem] text-[#111827] md:text-3.5xl`}
       >
         Terms & Conditions
       </h1>
