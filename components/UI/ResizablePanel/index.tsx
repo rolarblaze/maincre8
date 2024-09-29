@@ -1,8 +1,14 @@
 "use client";
 import useMeasure from "react-use-measure";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, animate } from "framer-motion";
 
-function ResizablePanel({ children }: { children: React.ReactNode }) {
+function ResizablePanel({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className: string;
+}) {
   let duration = 0.75;
   let [ref, { height }] = useMeasure();
 
@@ -31,7 +37,7 @@ function ResizablePanel({ children }: { children: React.ReactNode }) {
             y: "-10px",
             transition: { duration: duration / 2 },
           }}
-          className="absolute"
+          className={`absolute ${className}`}
         >
           {children}
         </motion.div>

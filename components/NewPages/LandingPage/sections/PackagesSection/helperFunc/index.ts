@@ -48,3 +48,20 @@ export const getUnderClass = (title: string) => {
       return "";
   }
 };
+
+export const getArrowClass = (title: string) => {
+  switch (title) {
+    case "Brand Design":
+      return "#F2BCBA";
+    case "Graphic Designs":
+      return "#FBE2B7";
+    case "Digital Marketing":
+      return "#B5E3C4";
+    case "Content Writing":
+      return "#F0E6E6";
+    case "All-In-One Bundle":
+      return "#B6D4F7";
+    default:
+      return "";
+  }
+};

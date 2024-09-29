@@ -1,8 +1,14 @@
 "use client";
 import { useState } from "react";
 import { packages } from "./constants";
-import { getTabClass, getBackgroundClass, getUnderClass } from "./helperFunc";
+import {
+  getTabClass,
+  getBackgroundClass,
+  getUnderClass,
+  getArrowClass,
+} from "./helperFunc";
 import { ResizablePanel } from "@/components";
+import { FillArrowIcon } from "@/public/svgs";
 
 const PackagesSection = () => {
   const [hovered, setHovered] = useState<string | null>(null);
@@ -26,13 +32,17 @@ const PackagesSection = () => {
             {icon}
           </div>
 
-          <ResizablePanel>
+          <ResizablePanel className="w-full">
             {hovered === title && (
-              <p
-                className={`mt-2 pb-2 text-xs font-semibold sm:text-sm ${getUnderClass(title)}`}
-              >
-                {under}
-              </p>
+              <div className="mt-2 flex w-full items-center justify-between px-2 pb-2">
+                <p
+                  className={`text-xs font-semibold sm:text-sm ${getUnderClass(title)}`}
+                >
+                  {under}
+                </p>
+
+                <FillArrowIcon fillColor={getArrowClass(title)} />
+              </div>
             )}
           </ResizablePanel>
         </div>
