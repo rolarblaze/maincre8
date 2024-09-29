@@ -19,11 +19,11 @@ const ContentSection = () => {
     <section className="full-width content-grid h-full min-h-[calc(100dvh-22rem)] bg-grey50  py-10 md:py-[6.25rem]">
       <div className="mx-auto w-full max-w-3xl space-y-8 lg:p-6">
         {activeContent ? (
-          <div>
+          <>
             <h2 className="text-lg font-medium leading-[150%] text-grey800">
               {activeContent.content.title || activeContent.content.headline}
             </h2>
-            <p className="text-lg font-medium leading-[150%] text-grey800">
+            <p className="text-lg my-8 font-medium leading-[150%] text-grey800">
               {activeContent.content.paragraph}
             </p>
 
@@ -76,7 +76,7 @@ const ContentSection = () => {
             <p className="font-medium leading-6 text-primary600">
               {activeContent.content.under}
             </p>
-          </div>
+          </>
         ) : (
           <p>No content available for this tab.</p>
         )}
