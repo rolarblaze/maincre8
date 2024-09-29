@@ -9,7 +9,10 @@ const CartPage = () => {
       </h2>
       <CartSection />
       <AddOnSection />
-      <Button label="Checkout" classNames="font-manrope" />
+      <Button
+        label="Checkout"
+        classNames="font-manrope w-fit mx-auto py-4 px-32 rounded-lg"
+      />
     </div>
   );
 };
