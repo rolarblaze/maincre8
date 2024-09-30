@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   PageLayout,
   BrandSection,
@@ -13,7 +14,7 @@ import IndustryLeadingExperts from "@/components/LandingPage/Sections/IndustryLe
 
 const Home = () => {
   return (
-    <PageLayout>
+    <>
       <HeroSection />
       <PackagesSection />
       <ProudlyMadeSection />
@@ -27,7 +28,7 @@ const Home = () => {
       {/* <ExpertSection /> */}
       <IndustryLeadingExperts />
       <CtaSection />
-    </PageLayout>
+    </>
   );
 };
 export default Home;
