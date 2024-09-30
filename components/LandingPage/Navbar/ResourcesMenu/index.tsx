@@ -1,6 +1,6 @@
 import React from "react";
 import { leftResourcesData, rightResourcesData } from "./resourcesData";
-import DropdownWrapper from "@/components/Modals/DropdownWrapper";
+import DropdownWrapper from "@/components/UI/Modals/DropdownWrapper";
 import Link from "next/link";
 
 interface ResourcesMenuProps {
@@ -19,13 +19,13 @@ const ResourcesMenu: React.FC<ResourcesMenuProps> = ({
       isVisible={isVisible}
       onClose={onClose}
     >
-      <div className="max-w-[745px] w-full flex item-start gap-16">
-        <div className="max-w-[276px] w-full flex flex-col gap-7">
+      <div className="item-start flex w-full max-w-[745px] gap-16">
+        <div className="flex w-full max-w-[276px] flex-col gap-7">
           {leftResourcesData.map((resource, index) => {
             const Icon = resource.icon;
             return (
               <Link href={resource.link} key={index}>
-                <div className="flex items-start gap-3 group hover:text-primary500">
+                <div className="group flex items-start gap-3 hover:text-primary500">
                   <div>
                     <Icon />
                   </div>
@@ -42,14 +42,14 @@ const ResourcesMenu: React.FC<ResourcesMenuProps> = ({
             );
           })}
         </div>
-        <div className="max-w-[276px] w-full flex flex-col gap-7">
+        <div className="flex w-full max-w-[276px] flex-col gap-7">
           {rightResourcesData.map((resource, index) => {
             const Icon = resource.icon;
             return (
               <Link href={resource.link} key={index}>
                 <div
                   key={index}
-                  className="flex items-start gap-3 group hover:text-primary500"
+                  className="group flex items-start gap-3 hover:text-primary500"
                 >
                   <div>
                     <Icon />

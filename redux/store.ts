@@ -8,6 +8,7 @@ import { fileUploadReducer } from "./file";
 import { getPackageReducer } from "./getPackage";
 import { shopReducer } from "./shop";
 import { OrderSlice } from "./order";
+import { tabsSlice } from "./legal";
 import servicesSlice from "./servicesTracker";
 import { trackerReducer } from "./servicesTracker/tracker";
 import {
@@ -30,6 +31,7 @@ export const store = configureStore({
     services: servicesSlice,
     tracker: trackerReducer,
     contactForm: contactFormReducer,
+    tabs: tabsSlice.reducer,
   },
 });
 
