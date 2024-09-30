@@ -1,56 +1,74 @@
+import Link from "next/link";
+import { LogoWhiteIcon, SMGIcon } from "@/public/svgs";
 import {
   FacebookLogo,
   InstagramLogo,
   LinkedinLogo,
   XLogo,
 } from "@/public/icons";
-import { LogoWhiteIcon, SMGIcon } from "@/public/svgs";
 
 const NewFooter = () => {
+  const navlinks = ["Help", "Pricing", "FAQs"];
+  const navlinks2 = [
+    {
+      name: "Privacy Policy",
+      link: "/privacy-policy",
+    },
+    {
+      name: "Terms & Conditions",
+      link: "terms-and-conditions",
+    },
+  ];
+
   return (
-    <footer className="full-width content-grid bg-primary900 py-10 md:py-[6.25rem] ">
+    <footer className="full-width content-grid bg-primary900 py-10 md:py-[6.25rem]">
       <div className="space-y-5 sm:space-y-16">
-        <section className="flex max-md:flex-col justify-between items-center gap-5">
+        <section className="flex items-center justify-between gap-5 max-md:flex-col">
           {/* LOGO */}
           <div className={`flex items-center gap-2.5`}>
             <LogoWhiteIcon />
 
-            <span className="font-schibsted font-bold text-2xl text-white ">
+            <span className="font-schibsted text-2xl font-bold text-white">
               SellCrea8
             </span>
           </div>
 
           {/* NAVLINKS */}
-          <nav>
-            <ul className="flex justify-center items-center text-grey200 text-sm gap-[2.75rem]">
-              <li>Home</li>
-              <li>Pricing</li>
-              <li>FAQs</li>
+          <nav className="lg:ml-12">
+            <ul className="flex items-center justify-center gap-[2.75rem] text-sm text-grey200">
+              {navlinks.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
             </ul>
           </nav>
 
           {/* SOCIALS */}
-          <div className="flex justify-center items-center gap-6">
+          <div className="flex items-center justify-center gap-6">
             {socials.map(({ id, icon }) => (
               <span key={id}>{icon}</span>
             ))}
           </div>
         </section>
 
-        <section className="text-grey500 text-sm flex justify-between items-center max-md:flex-col gap-5">
-          <p className="max-md:hidden">Copyright © 2024. All rights reserved</p>
+        <section className="flex items-center justify-between gap-5 text-sm text-grey500 max-lg:flex-col">
+          <p className="max-lg:hidden">
+            Copyright © 2024. All rights reserved
+          </p>
 
-          <div className="flex justify-center items-center gap-3.5">
+          <div className="flex items-center justify-center gap-3.5">
             <p className="mt-1">Powered by</p>
             <SMGIcon />
           </div>
 
-          <ul className="flex justify-center gap-12 items-center">
-            <li>Privacy Policy</li>
-            <li>Terms & Service</li>
+          <ul className="flex items-center justify-center gap-12">
+            {navlinks2.map(({ name, link }) => (
+              <li key={name}>
+                <Link href={link}>{name}</Link>
+              </li>
+            ))}
           </ul>
 
-          <p className="text-grey100 text-xs md:hidden">
+          <p className="text-xs text-grey300 sm:max-lg:mt-4 lg:hidden">
             ©2024 SellMedia, BOSS Global. All rights reserved.
           </p>
         </section>

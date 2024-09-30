@@ -14,7 +14,7 @@ import {
   FAQ,
   Modal,
 } from "@/components";
-import RecommendPopOut from "@/components/Modals/RecommendPopOut";
+import RecommendPopOut from "@/components/UI/Modals/RecommendPopOut";
 
 export default function HomeOld() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -31,7 +31,7 @@ export default function HomeOld() {
           setIsModalOpen(true);
         }
       },
-      { threshold: 0.5 } // Adjust this value to control when the modal pops up
+      { threshold: 0.5 }, // Adjust this value to control when the modal pops up
     );
 
     if (servicesRef.current) {
@@ -77,7 +77,7 @@ export default function HomeOld() {
         className="!px-4 !py-4"
         showCancelIcon={false}
       >
-      <RecommendPopOut
+        <RecommendPopOut
           getRecommend={handleCloseModal}
           keepExploring={handleCloseModal}
         />

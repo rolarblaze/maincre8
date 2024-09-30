@@ -98,12 +98,12 @@ export { default as InstagramLogo } from "./instagram_icon.svg";
 export { default as OppoLogo } from "./oppo_logo.svg";
 export { default as GtBankLogo } from "./guaranty_trust_bank_logo.svg";
 export { default as MtnLogo } from "./mtn_nigeria_logo.svg";
-export { default as UbaBankLogo } from "./uba_bank.svg";
-export { default as AirpeaceLogo } from "./air-peace.svg";
+export { default as UbaBankLogo } from "./uba_bank_logo.svg";
+export { default as AirpeaceLogo } from "./air_peace_logo.svg";
 
 // DISPLAY ICONS
 export { default as BrandDesignSVG } from "./brand_design_bulb.svg";
 export { default as GraphicDesignsSVG } from "./graphic_designs_board.svg";
 export { default as DigitalMarketingSVG } from "./digital_marketing_blocks.svg";
-export { default as ContentCreationSVG } from "./content_creation_pad.svg";
+export { default as ContentWritingSVG } from "./content_writing_pad.svg";
 export { default as AllInOneBundleSVG } from "./all_in_one_bundle_ship.svg";
