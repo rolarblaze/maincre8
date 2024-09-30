@@ -8,7 +8,7 @@ type bundleCardsDetailsType = {
   hover: string;
 };
 
-type BundleListCardOptionsPropTypes = {
+type BundleListCardOptionsPropsType = {
   bundleCardsDetails: bundleCardsDetailsType[];
   pageViewDataTitle: string;
   updatePageViewData: (title: string) => void;
@@ -18,7 +18,7 @@ const BundleListCardOptions = ({
   bundleCardsDetails,
   pageViewDataTitle,
   updatePageViewData,
-}: BundleListCardOptionsPropTypes) => {
+}: BundleListCardOptionsPropsType) => {
   return (
     <section>
       <ul className="flex w-full gap-5">
