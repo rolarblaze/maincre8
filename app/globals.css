@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -109,8 +109,8 @@ h4 {
   }
   h3,
   .h3 {
-    font-size: 2.5rem;
-    line-height: 3rem;
+    font-size: 2rem;
+    line-height: 2.5rem;
     letter-spacing: -0.02em;
   }
 
@@ -236,7 +236,8 @@ h4 {
   height: 4px;
   border-radius: 50%;
   color: #98a2b3;
-  box-shadow: calc(1 * var(--d)) calc(0 * var(--d)) 0 0,
+  box-shadow:
+    calc(1 * var(--d)) calc(0 * var(--d)) 0 0,
     calc(0.707 * var(--d)) calc(0.707 * var(--d)) 0 1px,
     calc(0 * var(--d)) calc(1 * var(--d)) 0 2px,
     calc(-0.707 * var(--d)) calc(0.707 * var(--d)) 0 3px,

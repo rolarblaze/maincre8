@@ -182,7 +182,7 @@ function MainContactSection() {
     },
   ];
   return (
-    <section className="flex w-full flex-col gap-[52px] px-5 py-12 md:px-10 lg:px-28">
+    <section className="flex w-full flex-col gap-[52px] bg-grey50 px-5 py-[6.25rem] md:px-10 lg:px-[6.25rem]">
       <div className="flex flex-col justify-between gap-8 md:flex-row">
         {/* Contact */}
         <div className="order-2 space-y-6 md:order-1">
