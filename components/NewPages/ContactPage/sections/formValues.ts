@@ -17,7 +17,7 @@ export const contactFormData = [
     name: "phone_number",
     type: "text",
     label: "Phone Number",
-    placeholder: "Enter phone number",
+    placeholder: "+1...",
   },
   {
     name: "email",

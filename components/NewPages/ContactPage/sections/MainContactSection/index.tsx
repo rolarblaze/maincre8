@@ -1,3 +1,4 @@
+"use client";
 import { addAlert } from "@/redux/alerts";
 import { submitContactForm } from "@/redux/newsletter_n_contactform/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
@@ -97,10 +98,16 @@ function ContactForm() {
 
   return (
     <div className="w-full rounded-lg border border-transparent px-5 py-8 md:border-grey200 md:px-8">
-      <form onSubmit={formik.handleSubmit} className="space-y-8">
+      <form
+        onSubmit={formik.handleSubmit}
+        className="grid grid-cols-1 gap-8 md:grid-cols-2"
+      >
         {contactFormData.map((entity, idx) => {
           return (
-            <div key={idx}>
+            <div
+              key={idx}
+              className={`${entity.type === "textArea" ? "col-span-1 md:col-span-2" : ""}`}
+            >
               {entity.type === "textArea" && (
                 <Textarea
                   name={entity.name}
@@ -133,8 +140,8 @@ function ContactForm() {
         <Button
           type="submit"
           isLoading={isLoading}
-          label="Send us a message"
-          classNames="!rounded-[20px] !bg-primary900 py-3 md:px-6 md:py-3 w-auto"
+          label="Submit"
+          classNames="!rounded-lg !bg-primary500 py-3 md:px-[6.13rem] md:py-4 w-auto"
         />
       </form>
     </div>
@@ -145,29 +152,31 @@ function MainContactSection() {
   const contactData = [
     {
       icon: <BlueMessageIcon />,
-      title: "Contact Us",
+      title: "Send Us an Email",
       body: (
-        <div>
-          For technical aassistance or support-related queries, please contact
-          our dedicated support team at
-          <Link href="hello@sellmedia.africa"> hello@sellmedia.africa</Link>
+        <div className="flex flex-col gap-[0.88rem]">
+          <span>For technical aassistance or support-related queries</span>
+          <Link href="hello@sellmedia.africa" className="font-semibold">
+            {" "}
+            hello@sellmedia.africa
+          </Link>
         </div>
       ),
     },
     {
       icon: <BluePhoneIcon />,
-      title: "Phone Number",
+      title: "Give us a call",
       body: "+234 706 419 1282",
     },
     {
       icon: <BlueSocialMediaIcon />,
       title: "Social Media",
       body: (
-        <div className="flex gap-[13px]">
-          <XIcon href="https://x.com/SellMediaInc" />
-          <LinkedInIcon href="https://www.linkedin.com/company/sellmedia-inc/" />
+        <div className="flex gap-[13px] rounded-lg bg-primary50 px-4 py-4">
           <FacebookIcon href="https://web.facebook.com/sellmediagroup?_rdc=1&_rdr" />
+          <XIcon href="https://x.com/SellMediaInc" />
           <InstagramIcon href="https://www.instagram.com/sellmediainc/" />
+          <LinkedInIcon href="https://www.linkedin.com/company/sellmedia-inc/" />
         </div>
       ),
     },
