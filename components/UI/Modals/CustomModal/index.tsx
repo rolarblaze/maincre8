@@ -40,7 +40,7 @@ const Modal: React.FC<ModalProps> = ({
               },
             }}
             exit={{ opacity: 0, scale: 0, translateY: 100 }}
-            className={`z-10 size-fit min-w-80 ${className}`}
+            className={`no-scrollbar z-10 size-fit max-h-dvh min-w-80 overflow-y-scroll py-20 ${className}`}
           >
             {showCancelIcon && (
               <div
