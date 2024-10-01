@@ -17,14 +17,10 @@ const Home = () => {
       <HeroSection />
       <PackagesSection />
       <ProudlyMadeSection />
-      {/* <ProofSection /> */}
       <WhyChooseSellCre8 />
-      {/* <FeatureSection /> */}
       <LearnMoreSection />
       <BrandSection />
-      {/* <TestimonialSection /> */}
       <CustomerReviews />
-      {/* <ExpertSection /> */}
       <IndustryLeadingExperts />
       <CtaSection />
     </PageLayout>
