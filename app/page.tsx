@@ -5,11 +5,11 @@ import {
   HeroSection,
   LearnMoreSection,
   PackagesSection,
+  CustomerReviews,
 } from "@/components";
-import ProudlyMadeSection from "@/components/LandingPage/Sections/ProudlyMadeSection";
 import WhyChooseSellCre8 from "@/components/LandingPage/Sections/WhyChooseSellCre8";
-import CustomerReviews from "@/components/LandingPage/Sections/CustomerReviews";
-import IndustryLeadingExperts from "@/components/LandingPage/Sections/IndustryLeadingExperts";
+import IndustryLeadingExperts from "@/components/NewPages/LandingPage/sections/IndustryLeadingExperts";
+import ProudlyMadeSection from "@/components/NewPages/LandingPage/sections/ProudlyMadeSection";
 
 const Home = () => {
   return (

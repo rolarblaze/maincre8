@@ -1,28 +1,27 @@
-"use client";
-import InputField from "@/components/Forms/InputField";
-import Textarea from "@/components/Forms/Textarea";
-import BlueMessageIcon from "@/public/svgs/BlueMessageIcon";
-import BluePhoneIcon from "@/public/svgs/BluePhoneIcon";
-import BlueSocialMediaIcon from "@/public/svgs/BlueSocialMediaIcon";
-import FacebookIcon from "@/public/svgs/FacebookIcon";
-import InstagramIcon from "@/public/svgs/InstagramIcon";
-import LinkedInIcon from "@/public/svgs/LinkedInIcon";
-import XIcon from "@/public/svgs/XIcon";
-import React, { ReactNode } from "react";
+import { addAlert } from "@/redux/alerts";
+import { submitContactForm } from "@/redux/newsletter_n_contactform/features";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { useFormik } from "formik";
+import React, { ReactNode } from "react";
 import {
   contactFormData,
   ContactFormValues,
   contactValidationSchema,
   FieldName,
-} from "../../../NewPages/ContactPage/sections/formValues";
-import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { submitContactForm } from "@/redux/newsletter_n_contactform/features";
-import { addAlert } from "@/redux/alerts";
+} from "../formValues";
+import Textarea from "@/components/Forms/Textarea";
+import InputField from "@/components/Forms/InputField";
 import Button from "@/components/Button";
+import BlueMessageIcon from "@/public/svgs/BlueMessageIcon";
 import Link from "next/link";
+import BluePhoneIcon from "@/public/svgs/BluePhoneIcon";
+import BlueSocialMediaIcon from "@/public/svgs/BlueSocialMediaIcon";
+import XIcon from "@/public/svgs/XIcon";
+import LinkedInIcon from "@/public/svgs/LinkedInIcon";
+import FacebookIcon from "@/public/svgs/FacebookIcon";
+import InstagramIcon from "@/public/svgs/InstagramIcon";
 
-function Contact({
+function ContactCard({
   title,
   body,
   icon,
@@ -32,7 +31,7 @@ function Contact({
   icon: ReactNode;
 }) {
   return (
-    <div className="px-6 py-6 flex gap-6 border border-grey300 max-w-[488px] rounded-lg">
+    <div className="flex max-w-[488px] gap-6 rounded-lg border border-grey300 px-6 py-6">
       <div>{icon}</div>
       <div className="space-y-2">
         <h3 className="text-lg font-semibold text-primary600">{title}</h3>
@@ -66,7 +65,7 @@ function ContactForm() {
               headText: "Success",
               subText: `Message successfully sent`,
               type: "success",
-            })
+            }),
           );
           formik.resetForm({
             values: {
@@ -87,7 +86,7 @@ function ContactForm() {
               headText: "Error",
               subText: errorMessage,
               type: "error",
-            })
+            }),
           );
         }
       } else {
@@ -97,7 +96,7 @@ function ContactForm() {
   });
 
   return (
-    <div className="px-5 md:px-8 py-8 w-full border border-transparent md:border-grey200 rounded-lg">
+    <div className="w-full rounded-lg border border-transparent px-5 py-8 md:border-grey200 md:px-8">
       <form onSubmit={formik.handleSubmit} className="space-y-8">
         {contactFormData.map((entity, idx) => {
           return (
@@ -142,7 +141,7 @@ function ContactForm() {
   );
 }
 
-function ContactSection() {
+function MainContactSection() {
   const contactData = [
     {
       icon: <BlueMessageIcon />,
@@ -174,18 +173,13 @@ function ContactSection() {
     },
   ];
   return (
-    <section className="py-12 px-5 md:px-10 lg:px-28 flex flex-col gap-[52px] w-full">
-      <p className="max-w-[593px]">
-        We appreciate your interest in SellCrea8. For any inquiries, please use
-        the contact information below or fill out the form, and our team will
-        get back to you promptly.
-      </p>
-      <div className="flex flex-col md:flex-row gap-8 justify-between">
+    <section className="flex w-full flex-col gap-[52px] px-5 py-12 md:px-10 lg:px-28">
+      <div className="flex flex-col justify-between gap-8 md:flex-row">
         {/* Contact */}
-        <div className="space-y-6 order-2 md:order-1">
+        <div className="order-2 space-y-6 md:order-1">
           {contactData.map((contact, contactIdx) => {
             return (
-              <Contact
+              <ContactCard
                 key={contactIdx}
                 icon={contact.icon}
                 title={contact.title}
@@ -196,7 +190,7 @@ function ContactSection() {
         </div>
 
         {/* Conatct Form */}
-        <div className="max-w-[696px] w-full order-1 md:order-2">
+        <div className="order-1 w-full max-w-[696px] md:order-2">
           <ContactForm />
         </div>
       </div>
@@ -204,4 +198,4 @@ function ContactSection() {
   );
 }
 
-export default ContactSection;
+export default MainContactSection;

@@ -43,7 +43,7 @@ export interface ContactFormValues {
 
 export type FieldName = keyof ContactFormValues;
 
-export const validationSchema = Yup.object({
+export const contactValidationSchema = Yup.object({
   first_name: Yup.string().required("First name is required"),
   last_name: Yup.string().required("Last name is required"),
   phone_number: Yup.string().required("Phone number is required"),
