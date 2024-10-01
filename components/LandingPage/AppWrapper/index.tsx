@@ -3,6 +3,7 @@ import Navbar from "../Navbar";
 import Footer from "../Footer";
 
 import React, { ReactNode } from "react";
+import NewNavbar from "@/components/NewLayout/NewNavbar";
 
 const AppWrapper = ({
   children,
@@ -14,10 +15,11 @@ const AppWrapper = ({
   return (
     <main className="mx-auto flex flex-col min-h-screen w-full">
       {/* hiding overflow on x axis always disrupts interactions */}
-      <Navbar />
+      {/* <Navbar /> */}
+      {/* <NewNavbar /> */}
       {/* pt to prevent content running into the navbar */}
       <div className="flex-grow pt-24">{children}</div>
-      <Footer />
+      {/* <Footer /> */}
     </main>
   );
 };
