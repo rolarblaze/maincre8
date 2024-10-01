@@ -1,27 +1,73 @@
+"use client";
+
+import { AppWrapper } from "@/components";
+import bundleCardsDetails from "@/components/Shop/data/bundleCardsDetails";
+import ShopWhyChooseSellCre8Data from "@/components/Shop/data/whyChooseUs";
+import { useState } from "react";
+import BundleListCardOptions from "@/components/Shop/section/BundleListCardOptions";
+import BundlePreviewBanner from "@/components/Shop/section/BundlePreviewBanner";
+import BundlePackagesPlan from "@/components/Shop/section/BundlePackagesPlan";
+import NotSureBanner from "@/components/Shop/section/NotSureBanner";
+import WhyChooseUs from "@/components/Shop/section/WhyChooseUs";
+import BundleAddOns from "@/components/Shop/section/BundleAddOns";
 import {
-  AppWrapper,
-  HomepageCTA,
-  HomepageSubscribe,
-  SearchFilterSection,
-  ShopSections,
-} from "@/components";
+  BrandDesign,
+  GraphicDesigns,
+  DigitalMarketing,
+  ContentWriting,
+  AllInOneBundle,
+} from "@/components/Shop/data/bundle-pricing-data";
 
 const Shop = () => {
+  const [pageViewData, setPageViewData] = useState(BrandDesign);
+  const updatePageViewData = (title: string) => {
+    switch (title) {
+      case "Brand Design":
+        setPageViewData(BrandDesign);
+        break;
+      case "Graphic Designs":
+        setPageViewData(GraphicDesigns);
+        break;
+      case "Digital Marketing":
+        setPageViewData(DigitalMarketing);
+        break;
+      case "Content Writing":
+        setPageViewData(ContentWriting);
+        break;
+      case "All-In-One Bundle":
+        setPageViewData(AllInOneBundle);
+        break;
+      default:
+        break;
+    }
+  };
+
   return (
     <AppWrapper type="">
-      <div className="mt-20 space-y-10 max-w-[76rem] mx-auto">
-        {/* SEARCH AND FILTER SECTION */}
+      <main className="px-24 space-y-20">
+        <h1 className="font-semibold text-3xl leading-9 text-center">
+          Choose the Right Plan for Your Business
+        </h1>
 
-        <SearchFilterSection />
+        {/* Bundles Card-List Options To Choose From */}
+       <BundleListCardOptions bundleCardsDetails={bundleCardsDetails} pageViewDataTitle={pageViewData.title} updatePageViewData={updatePageViewData} />
 
-        {/* DIGITAL MARKETING SERVICES */}
+        {/* Selected Bundle Banner Preview */}
+        <BundlePreviewBanner title={pageViewData.title} message={pageViewData.message} body={pageViewData.body} icon={pageViewData.icon} />
 
-        <ShopSections />
-      </div>
+        {/* Selected Bundle Packages Plan */}
+        <BundlePackagesPlan packagesPlans={pageViewData.packagePlans} />
 
-      {/* EXTRA SECTIONS */}
-      <HomepageCTA />
-      <HomepageSubscribe />
+        {/* Not sure of the right plan banner */}
+        <NotSureBanner />
+
+        {/* Why choose us section */}
+       <WhyChooseUs reasons={ShopWhyChooseSellCre8Data} />
+
+        {/* Selected Bundle Addons Section */}
+       <BundleAddOns title={pageViewData.title} addOns={pageViewData.addons} />
+
+      </main>
     </AppWrapper>
   );
 };

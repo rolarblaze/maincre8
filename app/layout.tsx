@@ -5,7 +5,7 @@ import { GlobalProvider } from "@/redux/provider";
 import { useAppSelector } from "@/redux/store";
 import { RootState } from "@/redux/store";
 import NextTopLoader from "nextjs-toploader";
-import { AlertWrapper, Navbar } from "@/components";
+import { AlertWrapper, Navbar, PageLayout } from "@/components";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -40,7 +40,7 @@ export default function RootLayout({
   const pageTitle = metadata.title?.toString() || "SellCrea8";
 
   return (
-    <html lang="en" className="scroll-smooth antialiased overflow-x-hidden">
+    <html lang="en" className="overflow-x-hidden scroll-smooth antialiased">
       <head>
         <meta name="description" content={metadata.description ?? ""} />
         <meta name="keywords" content={keywords ?? ""} />
@@ -51,7 +51,7 @@ export default function RootLayout({
         <GlobalProvider>
           <AlertWrapper />
           <NextTopLoader />
-          {children}
+          <PageLayout>{children}</PageLayout>
         </GlobalProvider>
       </body>
     </html>

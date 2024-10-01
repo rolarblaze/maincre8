@@ -2,6 +2,7 @@
 // NEW LAYOUT COMPONENTS
 export { default as Navbar } from "./NewLayout/NewNavbar";
 export { default as Footer } from "./NewLayout/NewFooter";
+export { default as PageLayout } from "./NewLayout";
 
 // GLOBAL COMPONENTS
 export { default as SocialSignUp } from "./Auth/SocialSignUp";
@@ -25,8 +26,8 @@ export { default as EmptyState } from "./EmptyState";
 export { default as FormatDate } from "./FormatDates";
 
 // MODALS
-export { default as DropdownWrapper } from "./Modals/DropdownWrapper";
-export { default as Modal } from "./Modals/CustomModal";
+export { default as DropdownWrapper } from "./UI/Modals/DropdownWrapper";
+export { default as Modal } from "./UI/Modals/CustomModal";
 
 // LANDING PAGE SECTION IMPORTS
 export { default as AppWrapper } from "./LandingPage/AppWrapper";
@@ -44,11 +45,42 @@ export { default as CTASection } from "./LandingPage/Sections/CTASection";
 export { default as HelpCenter } from "./LandingPage/HelpCenter";
 export { default as BreadCrumb } from "./BreadCrumb";
 
+// NEW PAGES SECTION COMPONENTS
+// LANDING PAGE SECTION COMPONENTS
+export {
+  HeroSection,
+  PackagesSection,
+  ProofSection,
+  FeatureSection,
+  LearnMoreSection,
+  BrandSection,
+  TestimonialSection,
+  ExpertSection,
+  CtaSection,
+} from "./NewPages/LandingPage/sections";
+
+// PRIVACY POLICY PAGE SECTION COMPONENTS
+export {
+  PPHeaderTabSection,
+  PPContentSection,
+} from "./NewPages/PrivacyPolicyPage/sections";
+
+// TERMS & CONDITIONS PAGE SECTION COMPONENTS
+export {
+  TCHeaderTabSection,
+  TCContentSection,
+} from "./NewPages/TermsConditionPage/sections";
+
+// CART PAGE COMPONENT
+export { default as CartPage } from "./NewPages/CartPage";
+
 // UI COMPONENTS
 export { default as AvatarIcon } from "./UI/AvatarIcon";
 export { default as PillDiv } from "./UI/PillDiv";
 export { default as UploadFile } from "./UI/UploadFile";
 export { default as Marquee } from "./UI/Marquee";
+export { default as ResizablePanel } from "./UI/ResizablePanel";
+export { default as DemoVideo } from "./UI/DemoVideo";
 
 // SHOP PAGE SECTION IMPORTS
 export { default as ServicesSection } from "./Shop";

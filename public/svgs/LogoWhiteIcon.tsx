@@ -8,7 +8,7 @@ const LogoWhiteIcon: React.FC<IconProps> = ({ className }) => {
       className={className}
       xmlns="http://www.w3.org/2000/svg"
     >
-      <g clip-path="url(#clip0_7017_17633)">
+      <g clipPath="url(#clip0_7017_17633)">
         <path
           fillRule="evenodd"
           clipRule="evenodd"

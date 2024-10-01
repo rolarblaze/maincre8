@@ -25,6 +25,7 @@ export { default as Crea8Star } from "./crea8-star.svg";
 // export { default as CurvedArrow } from "./curved-arrow.svg";
 export { default as DownloadIcon } from "./download.svg";
 export { default as EmailAddressIcon } from "./email-address.svg";
+export { default as EmailFieldIcon } from './email-field.svg';
 export { default as EyeIcon } from "./eye.svg";
 export { default as FacebookIcon } from "./facebook.svg";
 export { default as GoogleIcon } from "./google.svg";
@@ -64,6 +65,9 @@ export { default as Logout } from "./logout.svg";
 export { default as SortIcon } from "./ash-arrow-down.svg";
 export { default as CheckCircleIcon } from "./check-circle.svg";
 export { default as Icon } from "./vision-icon.svg";
+export { default as PasswordNoMatchIcon } from "./password-no-match.svg";
+export { default as PasswordMatchIcon } from "./password-match.svg";
+
 // export { default as ArrowDrawing } from "./arrow-drawing.svg";
 // export { default as ArrowDrawingMobile } from "./arrow-drawing-mobile.svg";
 export { default as TwitterIcon } from "./team-x.svg";
@@ -98,12 +102,12 @@ export { default as InstagramLogo } from "./instagram_icon.svg";
 export { default as OppoLogo } from "./oppo_logo.svg";
 export { default as GtBankLogo } from "./guaranty_trust_bank_logo.svg";
 export { default as MtnLogo } from "./mtn_nigeria_logo.svg";
-export { default as UbaBankLogo } from "./uba_bank.svg";
-export { default as AirpeaceLogo } from "./air-peace.svg";
+export { default as UbaBankLogo } from "./uba_bank_logo.svg";
+export { default as AirpeaceLogo } from "./air_peace_logo.svg";
 
 // DISPLAY ICONS
 export { default as BrandDesignSVG } from "./brand_design_bulb.svg";
 export { default as GraphicDesignsSVG } from "./graphic_designs_board.svg";
 export { default as DigitalMarketingSVG } from "./digital_marketing_blocks.svg";
-export { default as ContentCreationSVG } from "./content_creation_pad.svg";
+export { default as ContentWritingSVG } from "./content_writing_pad.svg";
 export { default as AllInOneBundleSVG } from "./all_in_one_bundle_ship.svg";
