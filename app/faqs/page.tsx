@@ -1,4 +1,3 @@
-import { PageLayout } from "@/components";
 import ComprehensiveSupport from "@/components/NewPages/FAQPage/sections/ComprehensiveSupport";
 import DeliverySteps from "@/components/NewPages/FAQPage/sections/DeliverySteps";
 import FaqSection from "@/components/NewPages/FAQPage/sections/FaqSection";
@@ -7,7 +6,7 @@ import React from "react";
 
 function FAQS() {
   return (
-    <PageLayout>
+    <main>
       <WhiteHeroSection
         title="Frequently Asked Questions"
         paragraph="ALL YOUR QUESTIONS, ANSWERED"
@@ -17,7 +16,7 @@ function FAQS() {
       <FaqSection />
       <DeliverySteps />
       <ComprehensiveSupport />
-    </PageLayout>
+    </main>
   );
 }
 
