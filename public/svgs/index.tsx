@@ -39,6 +39,7 @@ export { default as MyServicesIcon } from "./MyServicesIcon";
 export { default as CheckCircleIcon } from "./CheckCircleIcon";
 export { default as BulbIcon } from "./BulbIcon";
 export { default as PlusIcon } from "./PlusIcon";
+export { default as MinusIcon } from "./MinusIcon";
 export { default as MobileMenu } from "./MobileMenu";
 export { default as MobileBlueLogo } from "./MobileBlueLogo";
 export { default as FileUploadIcon } from "./FileUploadIcon";
@@ -58,3 +59,4 @@ export { default as PlayIcon } from "./PlayIcon";
 export { default as BagIcon } from "./BagIcon";
 export { default as TrashIcon } from "./TrashIcon";
 export { default as FillArrowIcon } from "./FilledArrowIcon";
+
