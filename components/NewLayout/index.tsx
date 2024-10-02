@@ -1,9 +1,9 @@
+"use client";
 import NewNavbar from "./NewNavbar";
 import NewFooter from "./NewFooter";
 
 const PageLayout = ({
   children,
-  showFooter = true,
 }: {
   children: React.ReactNode;
   showFooter?: boolean;
@@ -14,7 +14,7 @@ const PageLayout = ({
       <main className="full-width content-grid mt-[5.5rem] min-h-[calc(100dvh-4rem)] place-content-start">
         {children}
       </main>
-      {showFooter && <NewFooter />}
+      <NewFooter />
     </div>
   );
 };
