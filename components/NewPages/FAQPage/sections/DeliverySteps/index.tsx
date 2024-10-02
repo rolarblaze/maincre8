@@ -43,14 +43,17 @@ function DeliverySteps() {
         {/* Desktop */}
         <div className="relative hidden lg:block">
           <div className="absolute top-12 flex w-full items-center justify-between text-lg font-semibold text-grey900">
-            {TopDeliveries.map((p) => (
-              <p className="max-w-[204px] text-center" key={p}>
+            {TopDeliveries.map((p, i) => (
+              <p
+                className={`max-w-[204px] text-center ${i === 1 ? "ml-4" : ""}`}
+                key={p}
+              >
                 {p}
               </p>
             ))}
           </div>
 
-          <div className="relative left-7 top-[9.2rem] mx-auto flex w-full max-w-[700px] justify-between !text-lg font-semibold text-grey900 px-16">
+          <div className="relative left-7 top-[9.2rem] mx-auto flex w-full max-w-[700px] justify-between px-16 !text-lg font-semibold text-grey900">
             {SecondTopDeliveries.map((p) => (
               <p className="max-w-[204px] text-center" key={p}>
                 {p}
@@ -65,17 +68,17 @@ function DeliverySteps() {
             height={"100%"}
           />
 
-          <div className="absolute bottom-[6.5rem] right-20 flex w-full max-w-[550px] items-center justify-between text-lg font-semibold text-grey900">
+          <div className="absolute bottom-[6.5rem] right-20 flex w-full max-w-[580px] items-center justify-between text-lg font-semibold text-grey900">
             {FirstBottomDeliveries.map((p) => (
-              <p className="max-w-[204px] text-center" key={p}>
+              <p className="max-w-[180px] text-center" key={p}>
                 {p}
               </p>
             ))}
           </div>
 
-          <div className="relative bottom-0 mt-2 right-28 mx-auto flex w-full max-w-[650px] pl-9 justify-between !text-lg font-semibold text-grey900">
+          <div className="relative bottom-0 right-28 mx-auto mt-2 flex w-full max-w-[650px] justify-between pl-9 !text-lg font-semibold text-grey900">
             {SecondBottomDeliveries.map((p) => (
-              <p className="max-w-[204px] text-center" key={p}>
+              <p className="max-w-[200px] text-center" key={p}>
                 {p}
               </p>
             ))}
