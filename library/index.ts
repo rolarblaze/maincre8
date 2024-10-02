@@ -17,6 +17,7 @@ const assetLibrary = {
   unlimitedRevisionsTwo: "/optimised/unlimited-revisions-2.webp",
   unlimitedRevisionsThree: "/optimised/unlimited-revisions-3.webp",
   notFound: "/optimised/not-found.webp",
+  notFoundImg: "/optimised/not_found_img.svg",
   dashboardOverviewImg: "/optimised/dashboard-overview-img.webp",
   defaultAvatar: "/optimised/default-avatar.webp",
   learnMoreImage: "/optimised/learn_more_img.png",
@@ -37,6 +38,8 @@ const assetLibrary = {
   pastworkCard6: "/optimised/pastwork_card_6.webp",
   pastworkCard7: "/optimised/pastwork_card_7.webp",
   pastworkCard8: "/optimised/pastwork_card_8.webp",
+  roadmapImg: "/optimised/roadmap_img.webp",
+  packageImg: "/optimised/package_img.webp",
 
   // SVGS
   highlight: "/optimised/highlight.webp",

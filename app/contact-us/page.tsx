@@ -1,23 +1,19 @@
-import { AppWrapper, HomepageCTA, HomepageSubscribe } from "@/components";
-import ContactSection from "@/components/LandingPage/Sections/ContactSection";
-import HeroSection from "@/components/LandingPage/Sections/HeroSection";
+import { PageLayout } from "@/components";
+import MainContactSection from "@/components/NewPages/ContactPage/sections/MainContactSection";
+import WhiteHeroSection from "@/components/NewPages/sharedSections/WhiteHeroSection";
 import React from "react";
 
 function ContactUs() {
   return (
-    <AppWrapper type="">
+    <PageLayout>
       <main className="">
-        <HeroSection
+        <WhiteHeroSection
           title="Contact Us"
-          showGifs={false}
-          showPillText={false}
-          applyTitleStyles={true}
+          paragraph="FOR ANY INQUIRIES, REACH OUT TO US, OUR TEAM WILL GET BACK TO YOU PROMPTLY"
         />
-        <ContactSection />
-        <HomepageCTA />
-        <HomepageSubscribe />
+        <MainContactSection />
       </main>
-    </AppWrapper>
+    </PageLayout>
   );
 }
 

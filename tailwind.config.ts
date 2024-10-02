@@ -56,6 +56,7 @@ const config: Config = {
         primary700: "#0D5EBA",
         primary800: "#083160",
         primary900: "#093160",
+        textMain: "#111827",
         error: {
           50: "#FBEAE9",
           100: "#EB9B98",
