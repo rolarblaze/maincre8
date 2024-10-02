@@ -1,50 +1,42 @@
+import { PageLayout } from "@/components";
+import NewNavbar from "@/components/NewLayout/NewNavbar";
 import NotFoundButton from "@/components/NotFoundPage/NotFoundButton";
 import assetLibrary from "@/library";
-import NewLogo from "@/public/optimised/NewLogo";
-import { HamburgerIcon } from "@/public/svgs";
 import Image from "next/image";
 import React from "react";
 
 const NotFound = () => {
   return (
-    <div className="w-full h-full flex flex-col">
-      <header className="w-full px-5 md:pl-24 lg:pl-32 py-4 md:py-5 lg:py-6 flex justify-between ">
-        {/* Logo */}
-        <NewLogo />
-        <div className="md:hidden">
-          <HamburgerIcon stroke="#1574E5" />
-        </div>
-      </header>
-      <main className="w-full h-full flex flex-col justify-center items-center px-5">
-        <div className=" max-w-[150px] max-h-[150px] md:max-w-[300px] md:max-h-[300px]">
+    <PageLayout showFooter={false}>
+      <main className="flex h-full w-full flex-col items-center justify-center gap-10 px-5 md:mt-5">
+        <div className="max-h-[150px] max-w-[150px] md:max-h-[300px] md:max-w-[300px]">
           <Image
-            src={assetLibrary.notFound}
+            src={assetLibrary.notFoundImg}
             alt="Not found"
-            width={300}
-            height={300}
+            width={170}
+            height={173}
           />
         </div>
-        <div className="flex flex-col gap-8 w-full items-center">
-          <div className="flex flex-col gap-3">
-            <p className="font-bold text-2xl md:text-5xl text-grey900 text-center">
-              Oops! Page not found
-            </p>
-            <p className="font-normal text-grey600 text-sm md:text-base text-center max-w-[570px]">
-              We are sorry! It looks like you have stumbled upon a page that
-              doesn’t exist. Let’s get you back on track.
+        <div className="flex w-full flex-col items-center gap-10 text-grey900">
+          <p className="text-center text-sm">ERROR 404</p>
+          <div className="flex flex-col gap-[0.88rem] text-center">
+            <h3 className="max-w-[420px] font-semibold">
+              Oops! Looks like you’re lost in the creative cloud.
+            </h3>
+            <p className="text-sm font-medium md:text-base">
+              Don’t worry, even the best ideas need a little redirection.
             </p>
           </div>
-          <div className="flex gap-4 md:gap-8 w-full justify-center flex-wrap">
+          <div className="flex w-full flex-wrap justify-center gap-4 md:gap-8">
             <NotFoundButton
               content="Go to Homepage"
               href="/"
-              className="!text-white bg-primary500  !border-none"
+              className="!border-none bg-primary500 !text-white"
             />
-            <NotFoundButton content="Contact Us" href="/contact-us" />
           </div>
         </div>
       </main>
-    </div>
+    </PageLayout>
   );
 };
 

@@ -35,7 +35,7 @@ export { default as HomepageBenefits } from "./LandingPage/Sections/Benefits";
 export { default as HomepageBrand } from "./LandingPage/Sections/BrandSection";
 export { default as HomepageBundles } from "./LandingPage/Sections/Bundles";
 export { default as HomepageCTA } from "./LandingPage/Sections/CTASection";
-export { default as CustomerReviews } from "./LandingPage/Sections/CustomerReviews";
+export { default as CustomerReviews } from "./NewPages/LandingPage/sections/CustomerReviews";
 export { default as HomepageDashboard } from "./LandingPage/Sections/DashboardSection";
 export { default as FAQ } from "./LandingPage/Sections/FAQ/index";
 export { default as HomepageHero } from "./LandingPage/Sections/HeroSection";
