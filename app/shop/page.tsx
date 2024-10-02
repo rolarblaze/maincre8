@@ -44,8 +44,8 @@ const Shop = () => {
 
   return (
     <AppWrapper type="">
-      <main className="px-24 space-y-20">
-        <h1 className="font-semibold text-3xl leading-9 text-center">
+      <main className="px-10 pb-20 xs:max-md:px-0 space-y-20 xs:max-md:space-y-10 bg-red-40">
+        <h1 className="font-semibold text-3xl xs:max-md:text-3xl w-full leading-9 text-center">
           Choose the Right Plan for Your Business
         </h1>
 

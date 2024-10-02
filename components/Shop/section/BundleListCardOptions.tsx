@@ -21,10 +21,10 @@ const BundleListCardOptions = ({
 }: BundleListCardOptionsPropsType) => {
   return (
     <section>
-      <ul className="flex w-full gap-5">
+      <ul className="flex w-full justify-between xs:max-md:gap-5 xs:max-md:overflow-auto xs:max-md:sticky xs:max-md:top-60">
         {bundleCardsDetails.map((bundleCard) => {
           return (
-            <li key={bundleCard.title} className="w-[20%] h-24">
+            <li key={bundleCard.title} className="w-[19%] xs:max-md:min-w-[50vw] h-24">
               <button
                 onClick={() => updatePageViewData(bundleCard.title)}
                 className={`${bundleCard.hover} ${
