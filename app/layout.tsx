@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import { GlobalProvider } from "@/redux/provider";
-import { useAppSelector } from "@/redux/store";
-import { RootState } from "@/redux/store";
+import { AlertWrapper, PageLayout } from "@/components";
 import NextTopLoader from "nextjs-toploader";
-import { AlertWrapper, Navbar, PageLayout } from "@/components";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
