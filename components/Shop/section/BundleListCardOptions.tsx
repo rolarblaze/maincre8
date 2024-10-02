@@ -5,6 +5,7 @@ type bundleCardsDetailsType = {
   icon: string;
   bgColor: string;
   borderColor: string;
+  activeBorderColor: string,
   hover: string;
 };
 
@@ -27,15 +28,15 @@ const BundleListCardOptions = ({
             <li key={bundleCard.title} className="w-[19%] xs:max-md:min-w-[50vw] h-24">
               <button
                 onClick={() => updatePageViewData(bundleCard.title)}
-                className={`${bundleCard.hover} ${
+                className={`${bundleCard.hover} ${bundleCard.borderColor} ${
                   pageViewDataTitle === bundleCard.title
-                    ? "border-slate-500"
-                    : bundleCard.borderColor
+                    ? `border-2 ${bundleCard.activeBorderColor}`
+                    : "border"
                 } ${
                   pageViewDataTitle === bundleCard.title
                     ? bundleCard.bgColor
                     : "bg-white"
-                } group size-full p-2 flex items-center justify-between rounded-2xl border transition-all`}
+                } group size-full p-2 flex items-center justify-between rounded-2xl transition-all`}
               >
                 <ul
                   className={`${
