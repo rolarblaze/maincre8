@@ -87,22 +87,8 @@ const AuthPageLayout: FC<Props> = ({ children }) => {
     pathname === "/forgot-password" ? "max-w-3xl" : "max-w-[592px]";
 
   return (
-    <main className="min-h-screen relative bg-[#F7F9FC]">
-      {/* auth layout header */}
-      <div className="center bg-white border border-b-[#93BFF3] py-3">
-        <Link href="/" className="center gap-2">
-          <figure className="relative size-8 center">
-            <Image
-              fill={true}
-              src="/images/logo-icon.png"
-              alt="SellCrea8 Logo"
-            />
-          </figure>
-          <p className="font-bold text-lg leading-6 text-black">SellCrea8</p>
-        </Link>
-      </div>
-
-      <div className="w-full mx-auto flex flex-col gap-5 p-4 md:py-8 md:px-28 md:gap-10">
+    <main className="min-h-screen w-full relative bg-[#F7F9FC] py-10">
+      <div className="w-full mx-auto flex flex-col gap-5">
         <div
           className={`min-w-[40%] mx-auto bg-white py-8 px-7 rounded-[10px] border border-[#D0D5DD]`}
         >
