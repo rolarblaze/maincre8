@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   PageLayout,
   BrandSection,
@@ -13,7 +14,7 @@ import ProudlyMadeSection from "@/components/NewPages/LandingPage/sections/Proud
 
 const Home = () => {
   return (
-    <PageLayout>
+    <>
       <HeroSection />
       <PackagesSection />
       <ProudlyMadeSection />
@@ -23,7 +24,7 @@ const Home = () => {
       <CustomerReviews />
       <IndustryLeadingExperts />
       <CtaSection />
-    </PageLayout>
+    </>
   );
 };
 export default Home;

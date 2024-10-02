@@ -2,36 +2,83 @@
 import { FC, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LogoBlack } from "@/public/icons";
-import { Wave } from "@/public/imgs";
-import NewLogo from "@/public/optimised/NewLogo";
+import Image from "next/image";
 
 interface Props {
   children: React.ReactNode;
 }
 
+// responsible for the SSO with Google, Facebook, LinkedIn
+const SingleSignOnSection = () => {
+  return (
+    <section className="mt-5">
+      <div className="relative h-4 center">
+        <hr className="bg-[#F0F2F5] w-full" />
+        <p className="absolute bg-white text-xs py-1 px-2 font-normal text-[#667185]">
+          Or Continue with
+        </p>
+      </div>
+      <div className="center gap-5 mt-5">
+        {[
+          { label: "Google", icon: "/images/google.png" },
+          { label: "Facebook", icon: "/images/facebook.png" },
+          { label: "LinkedIn", icon: "/images/linkedin.png" },
+        ].map((sso) => {
+          return (
+            <div key={sso.label} className="inline-block ">
+              <Link
+                href="/"
+                className="center gap-1 bg-[#F7F9FC] border border-[#D0D5DD] rounded-md p-4"
+              >
+                <figure className="relative size-5 center">
+                  <Image fill={true} src={sso.icon} alt={`${sso.label} Icon`} />
+                </figure>
+                <p className="font-semibold text-[16px] text-[#344054]">
+                  {sso.label}
+                </p>
+              </Link>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
+};
+
 const AuthPageLayout: FC<Props> = ({ children }) => {
   const pathname = usePathname();
-  const [text, setText] = useState<JSX.Element | null>(null);
+  const [isNewMemberText, setIsNewMemberText] = useState<JSX.Element | null>(
+    null
+  );
 
   useEffect(() => {
-    if (pathname === "/signup" || pathname === "/email-verify") {
-      setText(
-        <p className="flex items-center gap-2 self-center text-grey500 md:self-end">
-          Already have an account?{" "}
-          <Link href="/login">
-            <p className="text-primary500">Login</p>
+    if (pathname === "/signup") {
+      setIsNewMemberText(
+        <div className="center mt-5">
+          <p className="text-xs font-normal text-[#667185]">
+            Already have an account?
+          </p>
+          <Link
+            href="/login"
+            className="p-2 w-auto text-xs bg-transparent font-medium text-[#1574E5]"
+          >
+            Log in
           </Link>
-        </p>
+        </div>
       );
-    } else if (pathname === "/login" || pathname === "/reset-password") {
-      setText(
-        <p className="flex items-center gap-2 self-center text-grey500 md:self-end">
-          No account?{" "}
-          <Link href="/signup">
-            <p className="text-primary500">Sign up</p>
+    } else if (pathname === "/login") {
+      setIsNewMemberText(
+        <div className="center mt-5">
+          <p className="text-xs font-normal text-[#667185]">
+            Are you new here?
+          </p>
+          <Link
+            href="/signup"
+            className="p-2 w-auto text-xs bg-transparent font-medium text-[#1574E5]"
+          >
+            Create Account
           </Link>
-        </p>
+        </div>
       );
     }
   }, [pathname]);
@@ -40,28 +87,23 @@ const AuthPageLayout: FC<Props> = ({ children }) => {
     pathname === "/forgot-password" ? "max-w-3xl" : "max-w-[592px]";
 
   return (
-    <main className="min-h-screen relative">
-      <div className="w-full mx-auto flex flex-col gap-5 p-4 md:py-8 md:px-28 md:gap-10">
-        <div className="flex items-center justify-between">
-          <Link href={"/"}>
-            <NewLogo />
-          </Link>
-          {text}
-        </div>
-
+    <main className="min-h-screen w-full relative bg-[#F7F9FC] py-10">
+      <div className="w-full mx-auto flex flex-col gap-5">
         <div
-          className={`w-full h-full mx-auto self-center bg-white relative overflow-y-auto z-50 ${maxWClass}`}
+          className={`min-w-[40%] mx-auto bg-white py-8 px-7 rounded-[10px] border border-[#D0D5DD]`}
         >
-          <div className="flex flex-col gap-4 md:gap-8 text-center">
-            {children}
+          <div className="flex flex-col gap-4 text-center">{children}</div>
+
+          <div className="">
+            {/* Only show SSO if the pathname is among the paths in the list */}
+            {["/login", "/signup"].includes(pathname) && (
+              <SingleSignOnSection />
+            )}
+
+            {["/login", "/signup"].includes(pathname) && isNewMemberText}
           </div>
         </div>
       </div>
-      <img
-        src={Wave.src}
-        alt="wave"
-        className="absolute bottom-0 w-full h-64"
-      />
     </main>
   );
 };

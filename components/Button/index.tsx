@@ -29,7 +29,7 @@ const Button: React.FC<ButtonProps> = ({
         href={link}
         passHref
         className={twMerge(
-          `w-full flex justify-center items-center gap-2 py-4 px-6 md:px-8 rounded-lg bg-primary500 text-white font-semibold text-center text-sm md:text-base `,
+          `w-full flex justify-center items-center gap-2 py-4 px-6 md:px-8 rounded-lg bg-primary500 text-white font-semibold text-center`,
           classNames
         )}
         onClick={onClick}
@@ -43,7 +43,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       type={type}
       className={twMerge(
-        `w-full flex justify-center items-center gap-2 py-4 px-8 rounded-lg bg-primary500 text-white font-semibold text-center text-sm md:text-base`,
+        `w-full flex justify-center items-center gap-2 py-4 px-8 rounded-lg bg-primary500 text-white font-semibold text-center `,
         classNames
       )}
       onClick={onClick}
