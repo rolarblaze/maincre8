@@ -7,6 +7,16 @@ import CartButton from "./CartButton";
 
 const NewNavbar = () => {
   const [cartOpen, setCartOpen] = useState(false);
+  const navlink = [
+    {
+      name: "Pricing",
+      link: "/shop",
+    },
+    {
+      name: "FAQs",
+      link: "/faqs",
+    },
+  ];
 
   return (
     <header className="full-width content-grid fixed z-50 w-full overflow-hidden">
@@ -14,8 +24,11 @@ const NewNavbar = () => {
       <nav className="z-20 flex items-center justify-between py-6 text-sm font-semibold text-grey500">
         {/* LINKS */}
         <ul className="flex items-center justify-start gap-11 max-sm:hidden">
-          <li>Pricing</li>
-          <li><Link href={"/faqs"}>FAQs</Link></li>
+          {navlink.map(({ name, link }) => (
+            <li key={name}>
+              <Link href={link}>{name}</Link>
+            </li>
+          ))}
         </ul>
 
         {/* LOGO */}
