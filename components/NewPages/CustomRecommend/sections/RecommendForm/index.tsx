@@ -6,11 +6,13 @@ import {
   DropdownSelect,
   InputField,
   PhoneNumberInput,
+  Textarea,
   UploadFile,
 } from "@/components";
 import {
   INITIAL_VALUES,
   RECOMMEND_INITIAL_VALUES,
+  recommendContactFormData,
   typeOfIndustryOptions,
   USEFUL_DIGITAL_SERVICES,
 } from "./constants";
@@ -111,7 +113,7 @@ const RecommendForm = () => {
       formik.setFieldError("document", "File upload failed.");
     }
   };
-
+  type RecommendFormType = "number" | "email" | "text" | "password" | "url";
   return (
     <section className="full-width flex justify-center bg-grey50 px-5 pb-[6.3rem] pt-10">
       <form
@@ -121,46 +123,17 @@ const RecommendForm = () => {
         <h3 className="text-center">Get a Personalised Recommendation</h3>
         {/* BUSINESS INFORMATION */}
         <div className="space-y-6">
-          <div className="space-y-6 rounded-bl-lg">
-            {/* TYPE OF INDUSTRY */}
-            <DropdownSelect
-              id="industry"
-              name="industry"
-              label="Type of Industry"
-              placeholder="Select type"
-              options={typeOfIndustryOptions}
-              value={values.industry || ""}
-              onChange={handleChange}
-              error={touched.industry && errors.industry}
-            />
-
-            {/* CONTACT EMAIL */}
-            <InputField
-              type="email"
-              name="contactEmail"
-              label="Contact Email"
-              placeholder="Enter Contact Email"
-              classNames="bg-white"
-              value={values.contactEmail}
-              error={touched.contactEmail && errors.contactEmail}
-              onChange={handleChange}
-              onBlur={handleBlur}
-            />
-
-            {/* CONTACT PHONE NUMBER */}
-            <div>
-              <PhoneNumberInput
-                value={phone as string}
-                form={formik}
-                name="contactPhoneNumber"
-                // onChange={handlePhoneChange}
-                label="Contact Phone number"
-                formError={
-                  touched.contactPhoneNumber && errors.contactPhoneNumber
-                }
-              />
-            </div>
-          </div>
+          {/* TYPE OF INDUSTRY */}
+          <DropdownSelect
+            id="industry"
+            name="industry"
+            label="Type of Industry"
+            placeholder="Select type"
+            options={typeOfIndustryOptions}
+            value={values.industry || ""}
+            onChange={handleChange}
+            error={touched.industry && errors.industry}
+          />
         </div>
 
         {/* PREFERRED SOLUTIONS */}
@@ -185,6 +158,44 @@ const RecommendForm = () => {
               />
             ))}
           </div>
+        </div>
+
+        {/* ADDITIONAL INFO */}
+        <div>
+          <Textarea
+            id="additionalInfo"
+            name="additionalInfo"
+            label="Please share any additional information that will help us recommend the best service for you."
+            placeholder="Type"
+            value={values.additionalInfo}
+            error={touched.additionalInfo && errors.additionalInfo}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            textAreaStyle="placeholder:!text-grey900"
+          />
+        </div>
+
+        {/* PHONE AND EMAIL */}
+        <div className="flex w-full justify-between gap-9">
+          {recommendContactFormData.map((contact, idx) => {
+            return (
+              <InputField
+                key={idx}
+                type={contact.type as RecommendFormType}
+                name={contact.name}
+                label={contact.label}
+                placeholder={contact.placeholder}
+                classNames="bg-white"
+                value={values[contact.name as keyof RecommendFormValues]}
+                error={
+                  touched[contact.name as keyof RecommendFormValues] &&
+                  errors[contact.name as keyof RecommendFormValues]
+                }
+                onChange={handleChange}
+                onBlur={handleBlur}
+              />
+            );
+          })}
         </div>
 
         <Button

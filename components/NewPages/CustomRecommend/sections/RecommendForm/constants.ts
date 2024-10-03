@@ -1,14 +1,17 @@
 import { RecommendFormValues } from "./type";
 
 export const RECOMMEND_INITIAL_VALUES: RecommendFormValues = {
-  // BUSINESS INFORMATION
+  // ADDITIONAL INFO
+  additionalInfo: "",
+
+  // CONTACT INFO
   contactEmail: "",
   contactPhoneNumber: "",
-  industry: [],
+  // industry: [],
   // PREFERRED SOLUTIONS
-  usefulDigitalServices: [],
+  // usefulDigitalServices: [],
 
-  document: null as File | null,
+  // document: null as File | null,
 };
 
 export const optionHolder = [
@@ -101,3 +104,65 @@ export const USEFUL_DIGITAL_SERVICES = [
   { key: "emailMarketing", value: "Email Marketing" },
   { key: "others", value: "Others (please specify)" },
 ];
+
+export const recommendContactFormData = [
+  {
+    name: "contactPhoneNumber",
+    type: "text",
+    label: "Phone Number",
+    placeholder: "+1...",
+  },
+  {
+    name: "contactEmail",
+    type: "email",
+    label: "Email",
+    placeholder: "Enter email",
+  },
+];
+
+`SUBMIT A BRIEF FORM
+1. service kinds.
+
+OPTIONS
+Brand Design, Digital Marketing, Graphic Design, Content Writing, Social Media Management, I'm not sure yet.
+
+LABEL: What kind of services are you interested in?
+
+2. service goal.
+OPTIONS
+Build Brand Awareness, Increase Sales/Conversions, improve Online Presence, Launch a New Product/Service, Social Media Management, I'm not sure yet 
+
+LABEL: What is your primary goal for this service?
+
+3. monthly budget.
+OPTIONS
+Less than $500
+500 -1,000
+1,000 - 2,500
+2,500 and above
+We haven't set a budget.
+
+LABEL: What is your estimated monthly budget for this service?
+
+4. anticipation duration.
+OPTIONS 
+One-time project
+1-3 months
+3-6 months
+6-12 months
+Ongoing
+
+LABEL: How long do you anticipate needing these services?
+
+5. business type.
+
+OPTIONS
+Startup
+Small Business
+Medium-Sized Business
+Enterprise
+
+LABEL: What type of business do you operate?
+
+7. additionalInfo.
+LABEL: Please share any additional information that will help us recommend the best service for you.`;
