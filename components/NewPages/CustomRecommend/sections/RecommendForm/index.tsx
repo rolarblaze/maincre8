@@ -1,20 +1,10 @@
 "use client";
 import { Field, FormikHelpers, useFormik } from "formik";
+import { Button, InputField, Textarea } from "@/components";
 import {
-  Button,
-  CheckBoxField,
-  DropdownSelect,
-  InputField,
-  PhoneNumberInput,
-  Textarea,
-  UploadFile,
-} from "@/components";
-import {
-  INITIAL_VALUES,
   RECOMMEND_INITIAL_VALUES,
   recommendContactFormData,
-  typeOfIndustryOptions,
-  USEFUL_DIGITAL_SERVICES,
+  serviceKindsOptions,
 } from "./constants";
 import { validationSchema } from "./schema";
 import { addAlert } from "@/redux/alerts";
@@ -25,10 +15,10 @@ import {
   submitRecommendationBrief,
 } from "@/redux/order/features";
 import { RecommendFormValues } from "./type";
+import CustomDropdown from "@/components/Forms/CustomSelect";
 
 const RecommendForm = () => {
   const dispatch = useAppDispatch();
-  const [phone, setPhone] = useState<string>();
   const [uploadedDocumentLink, setUploadedDocumentLink] = useState<
     string | null
   >(null);
@@ -43,13 +33,10 @@ const RecommendForm = () => {
       try {
         const finalValues = {
           contact_email: values.contactEmail,
-          contact_phone_number: phone || "",
-          previously_implemented_digital_solutions: values.digitalSolution,
-          solution_and_outcome_description: values.solutionOutcomes,
+          contact_phone_number: values.contactPhoneNumber,
 
-          competitor_like_and_dislike: values.dislikeDigitalPrescence,
-          relevant_document_link:
-            uploadedDocumentLink || values.relevant_document_link,
+          //   relevant_document_link:
+          //     uploadedDocumentLink || values.relevant_document_link,
         };
 
         await dispatch(submitRecommendationBrief(finalValues));
@@ -122,43 +109,15 @@ const RecommendForm = () => {
       >
         <h3 className="text-center">Get a Personalised Recommendation</h3>
         {/* BUSINESS INFORMATION */}
-        <div className="space-y-6">
-          {/* TYPE OF INDUSTRY */}
-          <DropdownSelect
-            id="industry"
-            name="industry"
-            label="Type of Industry"
-            placeholder="Select type"
-            options={typeOfIndustryOptions}
-            value={values.industry || ""}
-            onChange={handleChange}
-            error={touched.industry && errors.industry}
-          />
-        </div>
 
-        {/* PREFERRED SOLUTIONS */}
-        <div className="space-y-6">
-          <legend className="text-lg font-semibold leading-6 text-grey900">
-            Preferred Solutions
-          </legend>
-
-          <div className="space-y-6">
-            <label htmlFor="usefulDigitalSolutions" className="font-medium">
-              Which of the following digital services do you think might be
-              useful? (Select all that apply)
-            </label>
-
-            {USEFUL_DIGITAL_SERVICES.map((item) => (
-              <CheckBoxField
-                key={item.key}
-                name="usefulDigitalServices"
-                label={item.value}
-                value={item.value}
-                onChange={handleChange}
-              />
-            ))}
-          </div>
-        </div>
+        <CustomDropdown
+          name="serviceKinds"
+          label="Kinds of Service"
+          placeholder="Select types"
+          options={serviceKindsOptions}
+          isCheckbox={true} // Enable checkbox mode
+          optionStyles="w-1/2"
+        />
 
         {/* ADDITIONAL INFO */}
         <div>

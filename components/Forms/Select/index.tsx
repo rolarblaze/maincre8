@@ -35,7 +35,7 @@ const ControlledSelect: React.FC<ControlledSelectProps> = ({
       {label && (
         <label
           htmlFor={id}
-          className="block text-sm text-gray-900 font-medium mb-2"
+          className="mb-2 block text-sm font-medium text-gray-900"
         >
           {label}
         </label>
@@ -47,14 +47,14 @@ const ControlledSelect: React.FC<ControlledSelectProps> = ({
           name={name}
           value={value}
           onChange={onChange}
-          className="block w-full border border-gray-300 rounded-lg h-14 pl-4 pr-10 appearance-none focus:outline-none  custom-select"
+          className="custom-select block h-14 w-full appearance-none rounded-lg border border-gray-300 pl-4 pr-10 focus:outline-none"
         >
           {placeholder && (
             <option
               disabled
               hidden
               value=""
-              className="text-sm bg-red-500 text-grey400"
+              className="bg-red-500 text-sm text-grey400"
             >
               {placeholder}
             </option>
@@ -69,7 +69,7 @@ const ControlledSelect: React.FC<ControlledSelectProps> = ({
           <AshArrowDown />
         </div>
       </div>
-      {error && <p className="text-red-500 mt-1 text-xs">{error}</p>}
+      {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
     </div>
   );
 };

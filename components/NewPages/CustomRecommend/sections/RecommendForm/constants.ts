@@ -7,6 +7,7 @@ export const RECOMMEND_INITIAL_VALUES: RecommendFormValues = {
   // CONTACT INFO
   contactEmail: "",
   contactPhoneNumber: "",
+  serviceKinds: "",
   // industry: [],
   // PREFERRED SOLUTIONS
   // usefulDigitalServices: [],
@@ -21,88 +22,123 @@ export const optionHolder = [
   },
 ];
 
-// TYPE OF INDUSTRY
-export const typeOfIndustryOptions = [
+// SELECT FIELD OPTIONS
+
+export const serviceKindsOptions = [
   {
-    label: "Agriculture",
-    value: "Agriculture",
+    label: "Brand Design",
+    value: "Brand Design",
   },
   {
-    label: "Automobiles and Components",
-    value: "Automobiles and Components",
+    label: "Digital Marketing",
+    value: "Digital Marketing",
   },
   {
-    label: "Commercial and Professional Service",
-    value: "Commercial and Professional Service",
+    label: "Graphic Design",
+    value: "Graphic Design",
   },
   {
-    label: "Constructions and Real Estate",
-    value: "Constructions and Real Estate",
+    label: "Content Writing",
+    value: "Content Writing",
   },
   {
-    label: "Consumer Services",
-    value: "Consumer Services",
+    label: "Social Media Management",
+    value: "Social Media Management",
   },
   {
-    label: "Education",
-    value: "Education",
+    label: "I'm not sure yet",
+    value: "I'm not sure yet",
+  },
+];
+export const serviceGoalOptions = [
+  {
+    label: "Build Brand Awareness",
+    value: "Build Brand Awareness",
   },
   {
-    label: "Energy and Utilities",
-    value: "Energy and Utilities",
+    label: "Increase Sales/Conversions",
+    value: "Increase Sales/Conversions",
   },
   {
-    label: "Financial Institution",
-    value: "Financial Institution",
+    label: "improve Online Presence",
+    value: "improve Online Presence",
   },
   {
-    label: "Food, Beverage, and Tobacco",
-    value: "Food, Beverage, and Tobacco",
+    label: "Launch a New Product/Service",
+    value: "Launch a New Product/Service",
   },
   {
-    label: "Healthcare",
-    value: "Healthcare",
+    label: "Social Media Management",
+    value: "Social Media Management",
   },
   {
-    label: "Hospitality",
-    value: "Hospitality",
+    label: "I'm not sure yet",
+    value: "I'm not sure yet",
+  },
+];
+export const monthlyBudgetOptions = [
+  {
+    label: "Less than $500",
+    value: "Less than $500",
   },
   {
-    label: "Insurance",
-    value: "Insurance",
+    label: "500 - 1,000",
+    value: "500 - 1,000",
   },
   {
-    label: "Media and Entertainment",
-    value: "Media and Entertainment",
+    label: "1,000 - 2,500",
+    value: "1,000 - 2,500",
   },
   {
-    label: "Non-Governmental Organization",
-    value: "Non-Governmental Organization",
+    label: "2,500 and above",
+    value: "2,500 and above",
   },
   {
-    label: "Oil and Gas",
-    value: "Oil and Gas",
-  },
-  {
-    label: "Retail",
-    value: "Retail",
+    label: "We haven't set a budget.",
+    value: "We haven't set a budget.",
   },
 ];
 
-export const USEFUL_DIGITAL_SERVICES = [
+export const businessTypeOptions = [
   {
-    key: "digitalMarketing",
-    value: "Digital Marketing (SEO, PPC, Social Media Marketing)",
+    label: "One-time project",
+    value: "One-time project",
   },
   {
-    key: "contentCreation",
-    value: "Content Creation (Blogs, Videos, Graphics)",
+    label: "1-3 months",
+    value: "1-3 months",
   },
-  { key: "webDevandDesign", value: "Website Development and Design" },
-  { key: "eCommerce", value: "E-commerce Solutions" },
-  { key: "dataAnalyticsandReporting", value: "Data Analytics and Reporting" },
-  { key: "emailMarketing", value: "Email Marketing" },
-  { key: "others", value: "Others (please specify)" },
+  {
+    label: "3-6 months",
+    value: "3-6 months",
+  },
+  {
+    label: "6-12 months",
+    value: "6-12 months",
+  },
+  {
+    label: "Ongoing",
+    value: "Ongoing",
+  },
+];
+
+export const anticipationDurationOptions = [
+  {
+    label: "Startup",
+    value: "Startup",
+  },
+  {
+    label: "Small Business",
+    value: "Small Business",
+  },
+  {
+    label: "Medium-Sized Business",
+    value: "Medium-Sized Business",
+  },
+  {
+    label: "Enterprise",
+    value: "Enterprise",
+  },
 ];
 
 export const recommendContactFormData = [
@@ -137,7 +173,7 @@ LABEL: What is your primary goal for this service?
 3. monthly budget.
 OPTIONS
 Less than $500
-500 -1,000
+500 - 1,000
 1,000 - 2,500
 2,500 and above
 We haven't set a budget.

@@ -6,6 +6,8 @@ export interface RecommendFormValues {
   contactEmail: string;
   contactPhoneNumber: string;
 
+  // SELECT FIELDS
+  serviceKinds: string;
   // industry: string[];
 
   // PREFERRED SOLUTIONS
