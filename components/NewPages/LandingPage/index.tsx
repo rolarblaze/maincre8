@@ -10,10 +10,10 @@ import {
   ProofSection,
   TestimonialSection,
 } from "./sections";
-import ProudlyMadeSection from "@/components/LandingPage/Sections/ProudlyMadeSection";
 import WhyChooseSellCre8 from "@/components/LandingPage/Sections/WhyChooseSellCre8";
-import CustomerReviews from "@/components/LandingPage/Sections/CustomerReviews";
-import IndustryLeadingExperts from "@/components/LandingPage/Sections/IndustryLeadingExperts";
+import CustomerReviews from "@/components/NewPages/LandingPage/sections/CustomerReviews";
+import IndustryLeadingExperts from "@/components/NewPages/LandingPage/sections/IndustryLeadingExperts";
+import ProudlyMadeSection from "./sections/ProudlyMadeSection";
 
 const LandingPage = () => {
   return (

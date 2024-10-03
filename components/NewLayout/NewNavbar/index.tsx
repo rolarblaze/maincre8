@@ -15,7 +15,7 @@ const NewNavbar = () => {
         {/* LINKS */}
         <ul className="flex items-center justify-start gap-11 max-sm:hidden">
           <li>Pricing</li>
-          <li>FAQs</li>
+          <li><Link href={"/faqs"}>FAQs</Link></li>
         </ul>
 
         {/* LOGO */}
