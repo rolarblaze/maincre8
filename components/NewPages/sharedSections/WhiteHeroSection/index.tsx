@@ -21,7 +21,7 @@ function WhiteHeroSection({
     <section
       className={`flex w-full flex-col items-center gap-10 bg-white px-5 pb-[5rem] pt-[6.25rem] ${className}`}
     >
-      <h3 className="text-textMain">{title}</h3>
+      <h3 className="text-textMain max-w-[24.7rem] text-center">{title}</h3>
       <p className="text-sm text-gray-500">{paragraph}</p>
       <div className="flex flex-col gap-y-6 items-center">
         {showSearchbar && (
