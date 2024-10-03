@@ -189,9 +189,9 @@ const RecommendForm = () => {
 
         <Button
           type="submit"
-          label="Submit a brief"
+          label="Submit"
           isLoading={isSubmitting}
-          classNames="w-fit text-sm px-4 py-2 active:scale-[0.98] rounded-bl-2xl"
+          classNames="active:scale-[0.98]"
         />
       </form>
     </section>
