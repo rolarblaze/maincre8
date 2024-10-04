@@ -7,7 +7,7 @@ function ResizablePanel({
   className,
 }: {
   children: React.ReactNode;
-  className: string;
+  className?: string;
 }) {
   let duration = 0.75;
   let [ref, { height }] = useMeasure();
