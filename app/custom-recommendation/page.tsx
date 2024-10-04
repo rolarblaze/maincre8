@@ -5,7 +5,7 @@ const BusinessForm = () => {
   return (
     <>
       <WhiteHeroSection
-        title="Let Us Help You Choose the Perfect Package"
+        title="Let Us Help You Choose the Perfect Package!"
         paragraph="Answer a few questions, and we’ll recommend the best options tailored to your needs."
       />
       <RecommendForm />

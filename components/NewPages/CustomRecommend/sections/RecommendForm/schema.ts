@@ -1,27 +1,38 @@
 import * as Yup from "yup";
 
-export const validationSchema = Yup.object({
-  // SELECT FIELD (Optional)
-  serviceKinds: Yup.array().of(Yup.string()).optional(),
-  serviceGoal: Yup.array().of(Yup.string()).optional(),
-  monthlyBudget: Yup.array().of(Yup.string()).optional(),
-  anticipationDuration: Yup.array().of(Yup.string()).optional(),
-  businessType: Yup.array().of(Yup.string()).optional(),
+// Define the validation schema for your form
+export const recommendFormSchema = Yup.object().shape({
+  // SELECT FIELDS
+  serviceKinds: Yup.array()
+    .of(Yup.string().required())
+    .min(1, "At least one service kind is required")
+    .required("Please select a service kind"),
+  serviceGoal: Yup.array()
+    .of(Yup.string().required())
+    .min(1, "At least one service goal is required")
+    .required("Please select a service goal"),
+  monthlyBudget: Yup.array()
+    .of(Yup.string().required())
+    .min(1, "At least one monthly budget option is required")
+    .required("Please select a monthly budget"),
+  anticipationDuration: Yup.array()
+    .of(Yup.string().required())
+    .min(1, "At least one anticipation duration is required")
+    .required("Please select an anticipation duration"),
+  businessType: Yup.array()
+    .of(Yup.string().required())
+    .min(1, "At least one business type is required")
+    .required("Please select a business type"),
 
-  // ADDITINAL INFO
+  // ADDITIONAL INFO
   additionalInfo: Yup.string().optional(),
 
-  // ATTACH FILE (Optional)
-  document: Yup.mixed()
-    .nullable()
-    .test("fileSize", "Max file size exceeded.", (value) => {
-      if (!value) return true; // Skip validation if no file is provided
-      return value instanceof File && value.size <= 5000000;
-    }),
+  // ATTACH A FILE
+  document: Yup.mixed().nullable().optional(),
 
   // CONTACT INFO
   contactEmail: Yup.string()
     .email("Invalid email format")
-    .required("Contact Email is required"),
-  contactPhoneNumber: Yup.string().required("Contact Phone Number is required"),
+    .required("Contact email is required"),
+  contactPhoneNumber: Yup.string().required("Contact phone number is required"),
 });

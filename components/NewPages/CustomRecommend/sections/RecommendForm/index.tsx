@@ -7,7 +7,6 @@ import {
   recommendSelectFormData,
   serviceKindsOptions,
 } from "./constants";
-import { validationSchema } from "./schema";
 import { addAlert } from "@/redux/alerts";
 import { useState } from "react";
 import { useAppDispatch } from "@/redux/store";
@@ -19,6 +18,7 @@ import { RecommendFormValues } from "./type";
 import CustomDropdown from "@/components/Forms/CustomSelect";
 import InputFile from "@/components/Forms/InputFile";
 import { AttachIcon, FileUploadIcon } from "@/public/svgs";
+import { recommendFormSchema } from "./schema";
 
 const RecommendForm = () => {
   const dispatch = useAppDispatch();
@@ -28,7 +28,7 @@ const RecommendForm = () => {
 
   const formik = useFormik<RecommendFormValues>({
     initialValues: RECOMMEND_INITIAL_VALUES,
-    validationSchema: validationSchema,
+    validationSchema: recommendFormSchema,
     onSubmit: async (
       values,
       { resetForm }: FormikHelpers<RecommendFormValues>,
@@ -48,17 +48,19 @@ const RecommendForm = () => {
           contact_phone_number: values.contactPhoneNumber,
         };
 
-        await dispatch(submitRecommendationBrief(finalValues));
+        console.log(finalValues, "ooo");
 
-        dispatch(
-          addAlert({
-            id: "",
-            headText: "Success",
-            subText: "Brief submitted successfully",
-            type: "success",
-          }),
-        );
-        resetForm();
+        // await dispatch(submitRecommendationBrief(finalValues));
+
+        // dispatch(
+        //   addAlert({
+        //     id: "",
+        //     headText: "Success",
+        //     subText: "Brief submitted successfully",
+        //     type: "success",
+        //   }),
+        // );
+        // resetForm();
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(
@@ -85,7 +87,10 @@ const RecommendForm = () => {
   } = formik;
 
   const handleFileUpload = async (file: File | null) => {
-    if (file && file.size > 5000000) {
+    if (!file) {
+      formik.setFieldError("document", "Please attach a document.");
+      return;
+    } else if (file && file.size > 5000000) {
       setFieldValue("document", null);
       formik.setFieldError("document", "Max file size exceeded.");
       return;
@@ -114,7 +119,7 @@ const RecommendForm = () => {
     <section className="full-width flex justify-center bg-grey50 px-5 pb-[6.3rem] pt-10">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-[43rem] space-y-10 rounded-[10px] bg-white px-[3.4rem] py-8"
+        className="w-full max-w-[43rem] space-y-10 rounded-[10px] bg-white px-4 py-8 md:px-[3.4rem]"
       >
         <h3 className="text-center">Get a Personalised Recommendation</h3>
         <main className="space-y-8">
@@ -126,7 +131,7 @@ const RecommendForm = () => {
                   key={dataIdx}
                   name={data.name}
                   label={data.label}
-                  // placeholder="Select"
+                  placeholder="Select"
                   options={data.options}
                   isCheckbox={true} // Enable checkbox mode
                   optionStyles="w-1/2"
@@ -168,11 +173,12 @@ const RecommendForm = () => {
               name="document"
               icon={<FileUploadIcon />}
               handleUpload={(value: File | null) => handleFileUpload(value)}
+              error={errors.document}
             />
           </div>
 
           {/* PHONE AND EMAIL */}
-          <div className="flex w-full justify-between gap-9">
+          <div className="grid grid-cols-1 gap-9 md:grid-cols-2">
             {recommendContactFormData.map((contact, idx) => {
               return (
                 <InputField

@@ -19,7 +19,7 @@ function WhiteHeroSection({
 }: WhiteHeroSectionProps) {
   return (
     <section
-      className={`flex w-full flex-col items-center gap-10 bg-white px-5 pb-[5rem] pt-[6.25rem] ${className}`}
+      className={`flex w-full flex-col items-center gap-10 bg-white px-5 py-8  md:pb-[5rem] md:pt-[6.25rem] ${className}`}
     >
       <h3 className="text-textMain max-w-[24.7rem] text-center">{title}</h3>
       <p className="text-sm text-gray-500">{paragraph}</p>
