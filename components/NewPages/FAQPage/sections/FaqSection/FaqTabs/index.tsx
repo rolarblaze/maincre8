@@ -1,5 +1,7 @@
-"use client"
+"use client";
 import React, { useState } from "react";
+import FaqSection from "..";
+import { newFAQData } from "../faqData";
 
 function FaqTabs() {
   const Tabs = [
@@ -17,13 +19,9 @@ function FaqTabs() {
     setActiveTab(tab);
   };
 
-  //   const activeFaq = Faqs.find(
-  //     (faq) => faq.tab === activeTab,
-  //   ) || {
-  //     title: "",
-  //     subTitle: "",
-  //     content: [],
-  //   };
+  const activeFaqData = newFAQData.filter((faq) =>
+    faq.labels.includes(activeTab),
+  );
   return (
     <section className="relative">
       <div className="no-scrollbar sticky top-0 z-10 mx-auto flex max-w-[1216px] items-center gap-2 py-7 max-lg:overflow-x-auto lg:gap-7">
@@ -44,6 +42,9 @@ function FaqTabs() {
       {/* <div className="mx-auto mt-[120px] max-w-[1219px] text-center max-xl:px-6">
         <Section {...activeService} />
       </div> */}
+      <div>
+        <FaqSection activeFAQData={activeFaqData}  />
+      </div>
     </section>
   );
 }

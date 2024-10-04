@@ -8,7 +8,8 @@ import { useDispatch } from "react-redux";
 import { Tabs, InputField, Button, SocialSignUp } from "@/components";
 import {
   Checked,
-  EyeIcon,
+  EyeOpenIcon,
+  EyeCloseIcon,
   Unchecked,
   PasswordMatchIcon,
   PasswordNoMatchIcon,
@@ -225,7 +226,7 @@ export default function Signup() {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           name="password"
-          icon={ showPassword ? <EyeIcon className="w-5 h-5" /> : <div className="size-5 bg-green-500"></div>}
+          icon={ showPassword ? <EyeOpenIcon className="w-5 h-5" /> : <EyeCloseIcon className="w-5 h-5" />}
           onInputIconClick={togglePasswordVisibility}
           error={
             formik.touched.password && formik.errors.password

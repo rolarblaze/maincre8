@@ -29,6 +29,7 @@ const HowWeDeliver = () => {
     <div className="max-w-[1216px] mx-auto py-20 pl-5 lg:pl-0">
       <h2 className="mb-6">How we deliver</h2>
 
+      {/* Desktop */}
       <div className="relative hidden lg:block">
         <div className="w-full text-grey900 flex items-center justify-between absolute top-12 text-lg font-semibold">
           {TopDeliveries.map((p) => (
@@ -69,7 +70,8 @@ const HowWeDeliver = () => {
           ))}
         </div>
       </div>
-
+        
+      {/* Mobile */}
       <div className="relative flex gap-4 lg:hidden">
         <img
           src={"/images/deliver-steps-mob.svg"}

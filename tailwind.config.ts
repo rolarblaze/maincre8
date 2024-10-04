@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        xs: "300px"
+      },
       fontFamily: {
         manrope: ["Manrope", "system-ui"],
         schibsted: ["Schibsted Grotesk", "sans-serif"],

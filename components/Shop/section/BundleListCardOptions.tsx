@@ -5,6 +5,7 @@ type bundleCardsDetailsType = {
   icon: string;
   bgColor: string;
   borderColor: string;
+  activeBorderColor: string;
   hover: string;
 };
 
@@ -21,21 +22,24 @@ const BundleListCardOptions = ({
 }: BundleListCardOptionsPropsType) => {
   return (
     <section>
-      <ul className="flex w-full gap-5">
+      <ul className="flex w-full justify-between xs:max-md:sticky xs:max-md:top-60 xs:max-md:gap-5 xs:max-md:overflow-auto no-scrollbar">
         {bundleCardsDetails.map((bundleCard) => {
           return (
-            <li key={bundleCard.title} className="w-[20%] h-24">
+            <li
+              key={bundleCard.title}
+              className="h-24 w-[19%] xs:max-md:min-w-[50vw]"
+            >
               <button
                 onClick={() => updatePageViewData(bundleCard.title)}
                 className={`${bundleCard.hover} ${
                   pageViewDataTitle === bundleCard.title
-                    ? "border-slate-500"
-                    : bundleCard.borderColor
+                    ? `border-2 ${bundleCard.activeBorderColor}`
+                    : `border ${bundleCard.borderColor} `
                 } ${
                   pageViewDataTitle === bundleCard.title
                     ? bundleCard.bgColor
                     : "bg-white"
-                } group size-full p-2 flex items-center justify-between rounded-2xl border transition-all`}
+                } group flex size-full items-center justify-between rounded-2xl p-2 transition-all`}
               >
                 <ul
                   className={`${
@@ -55,7 +59,7 @@ const BundleListCardOptions = ({
                     pageViewDataTitle === bundleCard.title
                       ? "bg-white"
                       : bundleCard.bgColor
-                  } group-hover:bg-white relative w-[40%] h-full rounded-lg transition-all`}
+                  } relative h-full w-[40%] rounded-lg transition-all group-hover:bg-white`}
                 >
                   <Image
                     fill={true}

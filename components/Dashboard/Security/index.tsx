@@ -1,6 +1,6 @@
 "use client";
 import { Button, InputField } from "@/components";
-import { EyeIcon, Checked, Unchecked } from "@/public/icons";
+import { EyeCloseIcon, Checked, Unchecked } from "@/public/icons";
 import { addAlert } from "@/redux/alerts";
 import { updatePassword } from "@/redux/auth/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
@@ -119,7 +119,7 @@ export default function Security() {
           value={formik.values.newPassword}
           onChange={handleNewPasswordChange}
           name="newPassword"
-          icon={<EyeIcon className="w-5 h-5" />}
+          icon={<EyeCloseIcon className="w-5 h-5" />}
           onInputIconClick={togglePasswordVisibility}
           error={
             formik.touched.newPassword && formik.errors.newPassword

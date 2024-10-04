@@ -14,21 +14,23 @@ const BundlePreviewBanner = ({
   icon,
 }: BundlePreviewBannerPropsType) => {
   return (
-    <section className="rounded-3xl bg-[#FAFAFA] flex justify-between">
-      <div className="p-12 w-[60%] space-y-6">
-        <p className="font-bold text-4xl leading-10">{title} Packages</p>
-        <p className="font-semibold text-sm leading-5 uppercase tracking-wider">
+    <section className="flex justify-between rounded-3xl bg-[#FAFAFA] xs:max-md:flex-col">
+      <div className="w-[60%] space-y-6 p-12 xs:max-md:w-full xs:max-md:px-4 xs:max-md:py-5">
+        <p className="text-4xl font-bold leading-10 xs:max-md:text-3xl">
+          {title} Packages
+        </p>
+        <p className="text-sm font-semibold uppercase leading-5 tracking-wider xs:max-md:text-base">
           {message}
         </p>
-        <p className="font-light text-lg leading-7 text-[#718096]">{body}</p>
+        <p className="text-lg font-light leading-7 text-[#718096]">{body}</p>
       </div>
-      <div className="w-[40%]">
-        <figure className="relative size-full">
+      <div className="w-[40%] xs:max-md:w-full">
+        <figure className="relative size-full xs:max-md:h-[30vh]">
           <Image
             fill={true}
             src={icon}
             alt={message}
-            className="object-cover"
+            className="object-cover xs:max-md:object-contain"
           />
         </figure>
       </div>
