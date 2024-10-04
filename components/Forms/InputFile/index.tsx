@@ -1,9 +1,10 @@
 "use client";
+import Button from "@/components/Button";
 import React, { ChangeEvent, KeyboardEvent, ReactNode, useState } from "react";
 
 interface InputFileProps {
-  label?: string;
-  type: "file";
+  label?: string | React.ReactNode;
+  // type?: "file";
   onBlur?: (e: ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
   onClick?: () => void;
@@ -18,13 +19,13 @@ interface InputFileProps {
   error?: string | boolean | ReactNode;
   name?: string;
   id: string;
-  setFieldValue: (field: string, value: File | null) => void;
+  handleUpload: (value: File | null) => void;
   // touched?: boolean;
 }
 
 function InputFile({
   label,
-  type,
+  // type,
   onBlur,
   onKeyDown,
   onClick,
@@ -37,51 +38,59 @@ function InputFile({
   error,
   name,
   id,
-  setFieldValue,
+  handleUpload,
 }: InputFileProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-  const handleFileChange = (
-    event: ChangeEvent<HTMLInputElement>,
-    name: string
-  ) => {
+  const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
     setSelectedFile(file);
-    setFieldValue(name, file);
     onFileChange?.(file);
   };
   return (
-    <div className="flex gap-2">
-      {/* Hidden file input */}
-      <input
-        id={id}
-        type={type}
-        name={name}
-        onChange={(e) => handleFileChange(e, name as string)}
-        className="hidden"
-        onBlur={onBlur}
-        onKeyDown={onKeyDown}
-        onClick={onClick}
-        readOnly={readOnly}
-        disabled={disabled}
+    <div className="flex flex-col justify-between gap-4 md:flex-row">
+      <div className="flex gap-2">
+        {/* Hidden file input */}
+        <input
+          id={id}
+          type={"file"}
+          name={name}
+          onChange={(e) => handleFileChange(e)}
+          className="hidden"
+          onBlur={onBlur}
+          onKeyDown={onKeyDown}
+          onClick={onClick}
+          readOnly={readOnly}
+          disabled={disabled}
+        />
+
+        {/* Custom styled button */}
+        <label
+          htmlFor={id}
+          className={`flex cursor-pointer items-center justify-center gap-4 ${classNames}`}
+        >
+          {icon}
+          <span className="font-semibold text-grey900">
+            {selectedFile ? "Change File" : label}
+          </span>
+        </label>
+
+        {/* Display file name */}
+        {selectedFile && (
+          <p className="self-center text-sm text-gray-500">
+            {selectedFile.name}
+          </p>
+        )}
+        {error && <p className="text-xs text-red-500">{error}</p>}
+      </div>
+
+      {/* Button */}
+      <Button
+        type="button"
+        label="Upload"
+        classNames="!text-white !bg-grey500 !w-auto !py-2 !px-8 !self-center"
+        onClick={() => handleUpload(selectedFile)}
       />
-
-      {/* Custom styled button */}
-      <label
-        htmlFor={id}
-        className={`cursor-pointer px-4 py-[10px] text-white bg-grey200 rounded-xl flex gap-1 justify-center items-center ${classNames}`}
-      >
-        {icon}
-        <span className="text-grey900 font-semibold">
-          {selectedFile ? "Change File" : `${label}`}
-        </span>
-      </label>
-
-      {/* Display file name */}
-      {selectedFile && (
-        <p className="mt-2 text-sm text-gray-500">{selectedFile.name}</p>
-      )}
-      {error && <p className="text-red-500 text-xs">{error}</p>}
     </div>
   );
 }

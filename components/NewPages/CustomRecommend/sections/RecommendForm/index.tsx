@@ -17,6 +17,8 @@ import {
 } from "@/redux/order/features";
 import { RecommendFormValues } from "./type";
 import CustomDropdown from "@/components/Forms/CustomSelect";
+import InputFile from "@/components/Forms/InputFile";
+import { AttachIcon, FileUploadIcon } from "@/public/svgs";
 
 const RecommendForm = () => {
   const dispatch = useAppDispatch();
@@ -143,6 +145,26 @@ const RecommendForm = () => {
             />
           </div>
 
+          {/* INPUT FILE */}
+          <div>
+            <InputFile
+              label={
+                <div className="flex flex-col gap-2">
+                  <p className="text-base text-black">
+                    Upload a brief document
+                  </p>
+                  <p className="text-sm font-normal text-grey400">
+                    Optional &bull; MAX. 50MB
+                  </p>
+                </div>
+              }
+              id="document"
+              name="document"
+              icon={<FileUploadIcon />}
+              handleUpload={(value: File | null) => handleFileUpload(value)}
+            />
+          </div>
+
           {/* PHONE AND EMAIL */}
           <div className="flex w-full justify-between gap-9">
             {recommendContactFormData.map((contact, idx) => {
@@ -157,7 +179,9 @@ const RecommendForm = () => {
                   value={values[contact.name as keyof RecommendFormValues]}
                   error={
                     touched[contact.name as keyof RecommendFormValues] &&
-                    errors[contact.name as keyof RecommendFormValues]
+                    (errors[contact.name as keyof RecommendFormValues] as
+                      | string
+                      | undefined)
                   }
                   onChange={handleChange}
                   onBlur={handleBlur}
