@@ -2,11 +2,11 @@ import { RecommendFormValues } from "./type";
 
 export const RECOMMEND_INITIAL_VALUES: RecommendFormValues = {
   // SELECT FIELDS
-  serviceKinds: [""],
-  serviceGoal: [""],
-  monthlyBudget: [""],
-  anticipationDuration: [""],
-  businessType: [""],
+  serviceKinds: [],
+  serviceGoal: [],
+  monthlyBudget: [],
+  anticipationDuration: [],
+  businessType: [],
 
   // ADDITIONAL INFO
   additionalInfo: "",

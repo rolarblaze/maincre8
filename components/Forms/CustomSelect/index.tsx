@@ -78,6 +78,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
           {label}
         </label>
       )}
+      {/* Select field */}
       <div className={twMerge("relative", className)}>
         <div
           className="flex h-14 w-full cursor-pointer items-center justify-between rounded-lg border border-gray-300 pl-4 pr-10 text-sm"
@@ -92,14 +93,15 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
             ) : (
               <span className="text-sm text-grey400">{placeholder}</span>
             )
+          ) : getSelectedValue() && getSelectedValue() !== "" ? (
+            getSelectedValue()
           ) : (
-            getSelectedValue() || (
-              <span className="text-sm text-grey400">{placeholder}</span>
-            )
+            <span className="text-sm text-grey400">{placeholder}</span>
           )}
           <AshArrowDown />
         </div>
 
+        {/* Display select field options */}
         {isOpen && (
           <ul
             className={twMerge(
@@ -110,7 +112,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
             {options.map((option) => (
               <li
                 key={option.value}
-                className="flex cursor-pointer gap-1 items-center p-2 hover:bg-gray-100"
+                className="flex cursor-pointer items-center gap-1 p-2 hover:bg-gray-100"
               >
                 {isCheckbox ? (
                   <>
@@ -119,7 +121,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
                       id={option.value.toString()}
                       checked={getSelectedValue()?.includes(option.value)}
                       onChange={() => handleCheckboxChange(option.value)}
-                      className="mr-2 cursor-pointer w-[18px] h-[18px] border border-grey400"
+                      className="mr-2 h-[18px] w-[18px] cursor-pointer border border-grey400"
                     />
                     <label htmlFor={option.value.toString()}>
                       {option.label}
@@ -139,6 +141,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
         )}
       </div>
 
+      {/* Display errors */}
       {formik?.errors[name] && formik?.touched[name] && (
         <p className="mt-1 text-xs text-red-500">
           {formik.errors[name] as string}

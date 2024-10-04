@@ -126,7 +126,7 @@ const RecommendForm = () => {
                   key={dataIdx}
                   name={data.name}
                   label={data.label}
-                  placeholder="Select"
+                  // placeholder="Select"
                   options={data.options}
                   isCheckbox={true} // Enable checkbox mode
                   optionStyles="w-1/2"
@@ -182,7 +182,11 @@ const RecommendForm = () => {
                   label={contact.label}
                   placeholder={contact.placeholder}
                   classNames="bg-white"
-                  value={values[contact.name as keyof RecommendFormValues]}
+                  value={
+                    (values[
+                      contact.name as keyof RecommendFormValues
+                    ] as string) || ""
+                  }
                   error={
                     touched[contact.name as keyof RecommendFormValues] &&
                     (errors[contact.name as keyof RecommendFormValues] as
