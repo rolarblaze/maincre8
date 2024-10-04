@@ -34,7 +34,7 @@ const FeaturesList = ({ feature, isPackagePopular }: FeaturesListPropsType) => {
     <li className="flex w-full items-center gap-3">
       {/* chnage the size-* to chnage the size of the checkmark logo */}
       <div className="w-[5%]">
-        <figure className="relative size-4 center">
+        <figure className="center relative size-4">
           <Image
             fill={true}
             src={
@@ -47,7 +47,7 @@ const FeaturesList = ({ feature, isPackagePopular }: FeaturesListPropsType) => {
           />
         </figure>
       </div>
-      <p className="font-medium text-base leading-6 w-[95%]">{feature}</p>
+      <p className="w-[95%] text-base font-medium leading-6">{feature}</p>
     </li>
   );
 };
@@ -65,11 +65,11 @@ const PackagePlanCard = ({
     <li
       className={`${
         isPackagePopular ? "bg-[#1574E5]" : "bg-white"
-      } relative w-1/3 rounded-3xl p-8 border border-[#EEEFF2] flex flex-col justify-between gap-40`}
+      } relative flex w-1/3 flex-col justify-between gap-40 rounded-3xl border border-[#EEEFF2] p-8 xs:max-md:min-w-[90%]`}
     >
       {isPackagePopular && (
-        <div className="absolute -top-1 -right-1 rounded-bl-2xl px-6 py-3 bg-white">
-          <p className="text-[#1574e5] font-semibold text-lg leading-5">
+        <div className="absolute -right-1 -top-1 rounded-bl-2xl bg-white px-6 py-3">
+          <p className="text-lg font-semibold leading-5 text-[#1574e5]">
             Popular
           </p>
         </div>
@@ -78,20 +78,20 @@ const PackagePlanCard = ({
         <div
           className={`${
             isPackagePopular ? "border-[#93BFF3]" : "border-[#EEEFF2]"
-          } pb-6 border-b text-left space-y-5`}
+          } space-y-5 border-b pb-6 text-left`}
         >
           <div className="space-y-2">
             <p
               className={`${
                 isPackagePopular ? "text-white" : "text-[#111827]"
-              } font-semibold text-2xl leading-7`}
+              } text-2xl font-semibold leading-7`}
             >
               {title}
             </p>
             <p
               className={`${
                 isPackagePopular ? "text-[#B6D4F7]" : "text-[#111827]"
-              } font-normal text-base leading-6 text-[#718096]`}
+              } text-base font-normal leading-6 text-[#718096]`}
             >
               {description}
             </p>
@@ -100,14 +100,14 @@ const PackagePlanCard = ({
             <span
               className={`${
                 isPackagePopular ? "text-white" : "text-[#111827]"
-              } font-semibold text-3xl leading-9`}
+              } text-3xl font-semibold leading-9`}
             >
               {pricePerMonth}
             </span>
             <span
               className={`${
                 isPackagePopular ? "text-[#B6D4F7]" : "text-[#111827]"
-              } ml-2 font-normal text-base leading-6 text-[#718096]`}
+              } ml-2 text-base font-normal leading-6 text-[#718096]`}
             >
               / month
             </span>
@@ -146,7 +146,7 @@ const BundlePackagesPlan = ({
 }: BundlePackagesPlansPropsType) => {
   return (
     <section>
-      <ul className="flex gap-6 w-full justify-between">
+      <ul className="flex w-full justify-between gap-6 xs:max-md:gap-3 xs:max-md:overflow-auto no-scrollbar">
         {packagesPlans.map((plan) => (
           <PackagePlanCard
             key={plan.title}

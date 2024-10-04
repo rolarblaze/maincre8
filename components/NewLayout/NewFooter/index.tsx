@@ -8,7 +8,21 @@ import {
 } from "@/public/icons";
 
 const NewFooter = () => {
-  const navlinks = ["Help", "Pricing", "FAQs"];
+  const navlinks = [
+    {
+      name: "Help",
+      link: "/contact-us",
+    },
+    {
+      name: "Pricing",
+      link: "/shop",
+    },
+    {
+      name: "FAQs",
+      link: "/faqs",
+    },
+  ];
+
   const navlinks2 = [
     {
       name: "Privacy Policy",
@@ -25,19 +39,21 @@ const NewFooter = () => {
       <div className="space-y-5 sm:space-y-16">
         <section className="flex items-center justify-between gap-5 max-md:flex-col">
           {/* LOGO */}
-          <div className={`flex items-center gap-2.5`}>
+          <Link href={"/"} className={`flex items-center gap-2.5`}>
             <LogoWhiteIcon />
 
             <span className="font-schibsted text-2xl font-bold text-white">
               SellCrea8
             </span>
-          </div>
+          </Link>
 
           {/* NAVLINKS */}
           <nav className="lg:ml-12">
             <ul className="flex items-center justify-center gap-[2.75rem] text-sm text-grey200">
-              {navlinks.map((item) => (
-                <li key={item}>{item}</li>
+              {navlinks.map(({ name, link }) => (
+                <li key={name}>
+                  <Link href={link}>{name}</Link>
+                </li>
               ))}
             </ul>
           </nav>

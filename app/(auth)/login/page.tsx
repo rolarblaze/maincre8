@@ -9,7 +9,7 @@ import { addAlert } from "@/redux/alerts";
 import { loginUser } from "@/redux/auth/features";
 import { validatePassword } from "@/utils/helpers/auth/passwordValidation";
 import { Button, InputField, SocialSignUp } from "@/components";
-import { Checked, EmailAddressIcon, EmailFieldIcon, EyeIcon, Unchecked } from "@/public/icons";
+import { Checked, EmailAddressIcon, EmailFieldIcon, EyeCloseIcon, EyeOpenIcon } from "@/public/icons";
 import CheckboxField from "@/components/Forms/Checkbox";
 
 const LoginSchema = Yup.object().shape({
@@ -131,7 +131,7 @@ export default function Login() {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           name="password"
-          icon={<EyeIcon className="w-5 h-5" />}
+          icon={showPassword ? <EyeCloseIcon className="w-5 h-5" /> : <EyeOpenIcon className="w-5 h-5" />}
           onInputIconClick={togglePasswordVisibility}
           error={
             formik.touched.password && formik.errors.password

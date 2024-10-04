@@ -40,14 +40,14 @@ const Modal: React.FC<ModalProps> = ({
               },
             }}
             exit={{ opacity: 0, scale: 0, translateY: 100 }}
-            className={`no-scrollbar z-10 size-fit max-h-dvh min-w-80 overflow-y-scroll py-20 ${className}`}
+            className={`no-scrollbar relative z-10 size-fit max-h-dvh min-w-80 overflow-y-scroll ${className}`}
           >
             {showCancelIcon && (
               <div
                 onClick={onClose}
-                className="z-20 mb-4 ml-auto w-fit cursor-pointer rounded-lg bg-grey300 p-2"
+                className="absolute right-5 top-5 z-20 mb-4 ml-auto w-fit cursor-pointer rounded-full border border-grey300 p-2"
               >
-                <CancelIcon />
+                <CancelIcon className="stroke-grey200" />
               </div>
             )}
             {children}

@@ -1,8 +1,18 @@
 "use client";
 import { useState } from "react";
-import { newFAQData } from "./faqData";
+interface ActiveFAQProps {
+  question: string;
+  answer: string;
+  labels: string[];
+}
 
-const FaqSection = () => {
+type ActiveFAQDataProps = ActiveFAQProps[];
+
+const FaqSection = ({
+  activeFAQData,
+}: {
+  activeFAQData: ActiveFAQDataProps;
+}) => {
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
   const toggleAnswer = (index: number) => {
@@ -10,10 +20,10 @@ const FaqSection = () => {
   };
 
   return (
-    <section className="z-20 flex w-full flex-col items-center gap-8 bg-grey50 py-10 max-xl:px-5">
+    <section className="full-width z-20 flex flex-col items-center gap-8 bg-grey50 py-10 max-xl:px-5">
       <div className="text-textMain flex w-full max-w-[818px] flex-col gap-4 md:gap-8">
         {/* Each faq cards */}
-        {newFAQData.map((faq, index) => (
+        {activeFAQData.map((faq, index) => (
           <div
             key={index}
             className={`rounded-lg border border-grey300 bg-white py-6 transition-all duration-300 ${

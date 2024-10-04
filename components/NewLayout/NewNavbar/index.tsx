@@ -9,6 +9,16 @@ const NewNavbar = () => {
   const router = useRouter();
   const pathname = usePathname();
   const [cartOpen, setCartOpen] = useState(false);
+  const navlink = [
+    {
+      name: "Pricing",
+      link: "/shop",
+    },
+    {
+      name: "FAQs",
+      link: "/faqs",
+    },
+  ];
 
   const hide =
     pathname === "/cart" ||
@@ -31,10 +41,11 @@ const NewNavbar = () => {
         {/* LINKS */}
         {!hide && (
           <ul className="flex items-center justify-start gap-11 max-sm:hidden">
-            <li>Pricing</li>
-            <li>
-              <Link href={"/faqs"}>FAQs</Link>
-            </li>
+            {navlink.map(({ name, link }) => (
+              <li key={name}>
+                <Link href={link}>{name}</Link>
+              </li>
+            ))}
           </ul>
         )}
 
