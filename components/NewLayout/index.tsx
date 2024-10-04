@@ -10,8 +10,7 @@ const PageLayout = ({ children }: { children: React.ReactNode }) => {
   const hide =
     pathname === "/cart" ||
     pathname === "/signup" ||
-    pathname === "/email-verify";
-
+    pathname === "/email-verify"
   return (
     <div className="full-width content-grid place-content-start font-manrope">
       <NewNavbar />

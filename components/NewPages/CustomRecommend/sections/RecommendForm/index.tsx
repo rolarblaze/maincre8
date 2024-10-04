@@ -15,7 +15,7 @@ import {
   submitRecommendationBrief,
 } from "@/redux/order/features";
 import { RecommendFormValues } from "./type";
-import CustomDropdown from "@/components/Forms/CustomSelect";
+import CustomDropdown from "@/components/Forms/CustomDropdown";
 import InputFile from "@/components/Forms/InputFile";
 import { AttachIcon, FileUploadIcon } from "@/public/svgs";
 import { recommendFormSchema } from "./schema";
