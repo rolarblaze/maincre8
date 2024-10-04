@@ -44,16 +44,25 @@ const Shop = () => {
 
   return (
     <AppWrapper type="">
-      <main className="px-24 space-y-20">
-        <h1 className="font-semibold text-3xl leading-9 text-center">
+      <main className="space-y-20 px-10 pb-20 xs:max-md:space-y-10 xs:max-md:px-0 xs:max-md:pb-10">
+        <h1 className="w-full text-center text-3xl font-semibold leading-9 xs:max-md:text-2xl">
           Choose the Right Plan for Your Business
         </h1>
 
         {/* Bundles Card-List Options To Choose From */}
-       <BundleListCardOptions bundleCardsDetails={bundleCardsDetails} pageViewDataTitle={pageViewData.title} updatePageViewData={updatePageViewData} />
+        <BundleListCardOptions
+          bundleCardsDetails={bundleCardsDetails}
+          pageViewDataTitle={pageViewData.title}
+          updatePageViewData={updatePageViewData}
+        />
 
         {/* Selected Bundle Banner Preview */}
-        <BundlePreviewBanner title={pageViewData.title} message={pageViewData.message} body={pageViewData.body} icon={pageViewData.icon} />
+        <BundlePreviewBanner
+          title={pageViewData.title}
+          message={pageViewData.message}
+          body={pageViewData.body}
+          icon={pageViewData.icon}
+        />
 
         {/* Selected Bundle Packages Plan */}
         <BundlePackagesPlan packagesPlans={pageViewData.packagePlans} />
@@ -62,11 +71,10 @@ const Shop = () => {
         <NotSureBanner />
 
         {/* Why choose us section */}
-       <WhyChooseUs reasons={ShopWhyChooseSellCre8Data} />
+        <WhyChooseUs reasons={ShopWhyChooseSellCre8Data} />
 
         {/* Selected Bundle Addons Section */}
-       <BundleAddOns title={pageViewData.title} addOns={pageViewData.addons} />
-
+        <BundleAddOns title={pageViewData.title} addOns={pageViewData.addons} />
       </main>
     </AppWrapper>
   );
