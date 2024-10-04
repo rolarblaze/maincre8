@@ -35,11 +35,17 @@ const RecommendForm = () => {
     ) => {
       try {
         const finalValues = {
+          // SELECT FIELDS
+          service_kinds: values.serviceKinds,
+          service_goal: values.serviceGoal,
+          monthly_budget: values.monthlyBudget,
+          anticipation_duration: values.anticipationDuration,
+          business_type: values.businessType,
+
+          // ADDITIONAL INFO
+          additional_info: values.additionalInfo,
           contact_email: values.contactEmail,
           contact_phone_number: values.contactPhoneNumber,
-
-          //   relevant_document_link:
-          //     uploadedDocumentLink || values.relevant_document_link,
         };
 
         await dispatch(submitRecommendationBrief(finalValues));

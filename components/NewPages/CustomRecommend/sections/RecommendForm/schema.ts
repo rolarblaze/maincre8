@@ -16,7 +16,7 @@ export const validationSchema = Yup.object({
     .nullable()
     .test("fileSize", "Max file size exceeded.", (value) => {
       if (!value) return true; // Skip validation if no file is provided
-      return value instanceof File && value.size <= 1000000;
+      return value instanceof File && value.size <= 5000000;
     }),
 
   // CONTACT INFO
