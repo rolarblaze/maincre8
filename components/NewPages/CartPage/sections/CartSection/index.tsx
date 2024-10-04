@@ -1,5 +1,5 @@
-import { ArrowDown } from "@/public/icons";
 import { PlusIcon, TrashIcon } from "@/public/svgs";
+import { CartItem } from "./components";
 
 const CartSection = () => {
   return (
@@ -9,25 +9,8 @@ const CartSection = () => {
       </h3>
 
       <div className="divide-y rounded-[1.25rem] border border-grey100 px-6 py-2.5">
-        {[1, 2].map((item) => (
-          <div
-            key={item}
-            className="flex w-full items-center justify-between gap-8 py-5"
-          >
-            <div className="h-[3.75rem] w-40 rounded-2xl bg-primary200"></div>
-
-            <div className="flex items-center justify-center gap-6">
-              <div className="flex items-center justify-center gap-2 rounded-lg border border-grey100 px-4 py-2 text-sm font-semibold text-grey400 shadow-sm">
-                <span>Switch Package</span>
-
-                <ArrowDown className="fill-grey300" />
-              </div>
-
-              <button className="rounded-lg bg-grey100 p-2">
-                <TrashIcon />
-              </button>
-            </div>
-          </div>
+        {cartItems.map((item) => (
+          <CartItem key={item.id} {...item} />
         ))}
       </div>
 
@@ -45,3 +28,31 @@ const CartSection = () => {
   );
 };
 export default CartSection;
+
+const cartItems = [
+  {
+    id: "bd",
+    name: "Brand Design",
+    type: "Standard Package",
+  },
+  {
+    id: "gd",
+    name: "Graphic Design",
+    type: "Standard Package",
+  },
+  {
+    id: "dm",
+    name: "Digital Marketing",
+    type: "Standard Package",
+  },
+  {
+    id: "cm",
+    name: "Content Writing",
+    type: "Standard Package",
+  },
+  {
+    id: "cm",
+    name: "All-In-One Bundle",
+    type: "Standard Package",
+  },
+];

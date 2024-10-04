@@ -1,6 +1,4 @@
-// "use client";
-// import { useState } from "react";
-// import { PlusIcon } from "@/public/svgs";
+import { AddOnItem } from "./components";
 
 const AddOnSection = () => {
   return (
@@ -9,39 +7,15 @@ const AddOnSection = () => {
         Recommended Add-ons
       </h2>
 
-      {["Brand Designs", "Graphic Designs"].map((addOn) => (
-        <div key={addOn} className="space-y-2.5">
+      {addOns.map(({ type, recommendations }) => (
+        <div key={type} className="space-y-2.5">
           <h3 className="text-xs font-semibold uppercase text-grey400">
-            {addOn}
+            {type}
           </h3>
 
           <div className="flex flex-wrap gap-6">
-            {[1, 2, 3, 4].map((item) => (
-              <div
-                key={item}
-                id={`item-${item}`}
-                className={`h-fit rounded-[0.875rem] border-2 border-grey100 p-6`}
-              >
-                <div className="flex min-w-28 flex-col items-center justify-center gap-3">
-                  <h4 className="text-xs font-semibold uppercase">Title</h4>
-                  <p className="leading-[165%] text-grey600">2 revisions</p>
-                  <p className="text-lg font-semibold text-[#111827]">$ 10</p>
-                </div>
-
-                {/* <div className="flex items-center justify-center gap-3.5 pt-6">
-                    <button className="rounded-lg bg-white p-2">
-                      <PlusIcon fillColor="#98A2B3" />
-                    </button>
-
-                    <span className="block text-lg font-semibold text-[#111827]">
-                      1
-                    </span>
-
-                    <button className="rounded-lg bg-white p-2">
-                      <PlusIcon fillColor="#98A2B3" />
-                    </button>
-                  </div> */}
-              </div>
+            {recommendations.map((item) => (
+              <AddOnItem key={item.id} type={type} {...item} />
             ))}
           </div>
         </div>
@@ -50,3 +24,58 @@ const AddOnSection = () => {
   );
 };
 export default AddOnSection;
+
+const addOns = [
+  {
+    type: "brand designs",
+    recommendations: [
+      {
+        id: "bd-1",
+        name: "additional revisions",
+        feature: "2 revisions",
+        price: 10,
+      },
+      {
+        id: "bd-2",
+        name: "brand material design",
+        feature: "1 extra design",
+        price: 10,
+      },
+      {
+        id: "bd-3",
+        name: "marketing designs",
+        feature: "5 extra designs",
+        price: 10,
+      },
+      {
+        id: "bd-4",
+        name: "presentations & slides",
+        feature: "5 extra slides",
+        price: 10,
+      },
+    ],
+  },
+  {
+    type: "graphic designs",
+    recommendations: [
+      {
+        id: "gd-1",
+        name: "additional revisions",
+        feature: "2 revisions",
+        price: 10,
+      },
+      {
+        id: "gd-2",
+        name: "marketing designs",
+        feature: "5 extra designs",
+        price: 10,
+      },
+      {
+        id: "gd-3",
+        name: "presentations & slides",
+        feature: "5 extra slides",
+        price: 10,
+      },
+    ],
+  },
+];

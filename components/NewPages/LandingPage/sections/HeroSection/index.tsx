@@ -11,7 +11,7 @@ const HeroSection = () => {
 
   return (
     <section className="py-5 lg:py-[3.75rem]">
-      <div className="relative flex h-fit flex-col items-center justify-center gap-4 rounded-[1.25rem] bg-gradient-to-tr from-[#4490EA] to-[#0C407E] to-70% px-5 pb-16 pt-14 text-center md:px-20 md:pb-16 lg:px-[100px] lg:py-28">
+      <div className="relative overflow-hidden flex h-fit flex-col items-center justify-center gap-4 rounded-[1.25rem] bg-gradient-to-tr from-[#4490EA] to-[#0C407E] to-70% px-5 pb-16 pt-14 text-center md:px-20 md:pb-16 lg:px-[100px] lg:py-28">
         <h1 className="z-[2] max-w-72 text-4xl font-bold leading-10 text-primary50 max-sm:tracking-tight sm:max-w-[56.75rem] sm:text-5xl md:leading-[3.5rem] lg:text-[3.5rem] lg:leading-[4rem]">
           The Smarter Way to Manage Your Design, Branding, and Marketing.
         </h1>
