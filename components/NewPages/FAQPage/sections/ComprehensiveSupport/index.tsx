@@ -7,7 +7,7 @@ function ComprehensiveSupport() {
   return (
     <section className="flex w-full px-16 md:px-[6.25rem] md:py-[6.25rem]">
       <div className="flex flex-col justify-between gap-5 rounded-3xl bg-grey50 px-8 md:px-12 md:flex-row">
-        <div className="w-full max-w-[500px] space-y-4 py-12">
+        <div className="w-full max-w-[500px] flex flex-col gap-y-4 py-12">
           <h2 className="text-textMain text-[2rem] leading-[2.5rem] md:text-[2.5rem] md:leading-[3rem]">
             Comprehensive Support on Every Package
           </h2>
@@ -17,7 +17,7 @@ function ComprehensiveSupport() {
             seamless collaboration, timely deliverables, and tailored solutions
             to meet your creative needs.
           </p>
-          <Button label="Contact Us" classNames="self-start !w-auto" />
+          <Button label="Contact Us" classNames="self-start !w-auto" link="/contact-us" />
         </div>
         <Image
           src={assetLibrary.packageImg}
