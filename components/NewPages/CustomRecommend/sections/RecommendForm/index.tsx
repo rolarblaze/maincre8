@@ -4,6 +4,7 @@ import { Button, InputField, Textarea } from "@/components";
 import {
   RECOMMEND_INITIAL_VALUES,
   recommendContactFormData,
+  recommendSelectFormData,
   serviceKindsOptions,
 } from "./constants";
 import { validationSchema } from "./schema";
@@ -105,64 +106,73 @@ const RecommendForm = () => {
     <section className="full-width flex justify-center bg-grey50 px-5 pb-[6.3rem] pt-10">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-[43rem] space-y-8 rounded-[10px] bg-white px-[3.4rem] py-8"
+        className="w-full max-w-[43rem] space-y-10 rounded-[10px] bg-white px-[3.4rem] py-8"
       >
         <h3 className="text-center">Get a Personalised Recommendation</h3>
-        {/* BUSINESS INFORMATION */}
+        <main className="space-y-8">
+          {/* SELECT OPTIONS */}
+          <div className="space-y-8">
+            {recommendSelectFormData.map((data, dataIdx) => {
+              return (
+                <CustomDropdown
+                  key={dataIdx}
+                  name={data.name}
+                  label={data.label}
+                  placeholder="Select"
+                  options={data.options}
+                  isCheckbox={true} // Enable checkbox mode
+                  optionStyles="w-1/2"
+                  formik={formik}
+                />
+              );
+            })}
+          </div>
 
-        <CustomDropdown
-          name="serviceKinds"
-          label="Kinds of Service"
-          placeholder="Select types"
-          options={serviceKindsOptions}
-          isCheckbox={true} // Enable checkbox mode
-          optionStyles="w-1/2"
-        />
+          {/* ADDITIONAL INFO */}
+          <div>
+            <Textarea
+              id="additionalInfo"
+              name="additionalInfo"
+              label="Please share any additional information that will help us recommend the best service for you."
+              placeholder="Type"
+              value={values.additionalInfo}
+              error={touched.additionalInfo && errors.additionalInfo}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              textAreaStyle="placeholder:!text-grey900"
+            />
+          </div>
 
-        {/* ADDITIONAL INFO */}
-        <div>
-          <Textarea
-            id="additionalInfo"
-            name="additionalInfo"
-            label="Please share any additional information that will help us recommend the best service for you."
-            placeholder="Type"
-            value={values.additionalInfo}
-            error={touched.additionalInfo && errors.additionalInfo}
-            onChange={handleChange}
-            onBlur={handleBlur}
-            textAreaStyle="placeholder:!text-grey900"
+          {/* PHONE AND EMAIL */}
+          <div className="flex w-full justify-between gap-9">
+            {recommendContactFormData.map((contact, idx) => {
+              return (
+                <InputField
+                  key={idx}
+                  type={contact.type as RecommendFormType}
+                  name={contact.name}
+                  label={contact.label}
+                  placeholder={contact.placeholder}
+                  classNames="bg-white"
+                  value={values[contact.name as keyof RecommendFormValues]}
+                  error={
+                    touched[contact.name as keyof RecommendFormValues] &&
+                    errors[contact.name as keyof RecommendFormValues]
+                  }
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                />
+              );
+            })}
+          </div>
+
+          <Button
+            type="submit"
+            label="Submit"
+            isLoading={isSubmitting}
+            classNames="active:scale-[0.98]"
           />
-        </div>
-
-        {/* PHONE AND EMAIL */}
-        <div className="flex w-full justify-between gap-9">
-          {recommendContactFormData.map((contact, idx) => {
-            return (
-              <InputField
-                key={idx}
-                type={contact.type as RecommendFormType}
-                name={contact.name}
-                label={contact.label}
-                placeholder={contact.placeholder}
-                classNames="bg-white"
-                value={values[contact.name as keyof RecommendFormValues]}
-                error={
-                  touched[contact.name as keyof RecommendFormValues] &&
-                  errors[contact.name as keyof RecommendFormValues]
-                }
-                onChange={handleChange}
-                onBlur={handleBlur}
-              />
-            );
-          })}
-        </div>
-
-        <Button
-          type="submit"
-          label="Submit"
-          isLoading={isSubmitting}
-          classNames="active:scale-[0.98]"
-        />
+        </main>
       </form>
     </section>
   );

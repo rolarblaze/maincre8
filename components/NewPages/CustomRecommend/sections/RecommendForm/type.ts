@@ -1,18 +1,15 @@
 export interface RecommendFormValues {
+  // SELECT FIELDS
+  serviceKinds: string[];
+  serviceGoal: string[];
+  monthlyBudget: string[];
+  anticipationDuration: string[];
+  businessType: string[];
+
   // ADDITIONAL INFO
   additionalInfo: string;
 
   // CONTACT INFO
   contactEmail: string;
   contactPhoneNumber: string;
-
-  // SELECT FIELDS
-  serviceKinds: string;
-  // industry: string[];
-
-  // PREFERRED SOLUTIONS
-  // usefulDigitalServices: string[];
-
-  // ATTACH A FILE
-  // document: File | null;
 }

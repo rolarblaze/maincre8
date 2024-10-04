@@ -1,20 +1,24 @@
 import { RecommendFormValues } from "./type";
 
 export const RECOMMEND_INITIAL_VALUES: RecommendFormValues = {
+  // SELECT FIELDS
+  serviceKinds: [""],
+  serviceGoal: [""],
+  monthlyBudget: [""],
+  anticipationDuration: [""],
+  businessType: [""],
+
   // ADDITIONAL INFO
   additionalInfo: "",
+
+  // document: null as File | null,
 
   // CONTACT INFO
   contactEmail: "",
   contactPhoneNumber: "",
-  serviceKinds: "",
-  // industry: [],
-  // PREFERRED SOLUTIONS
-  // usefulDigitalServices: [],
-
-  // document: null as File | null,
 };
 
+// DEFAULT OPTION HOLDER
 export const optionHolder = [
   {
     label: "default",
@@ -153,6 +157,34 @@ export const recommendContactFormData = [
     type: "email",
     label: "Email",
     placeholder: "Enter email",
+  },
+];
+
+export const recommendSelectFormData = [
+  {
+    name: "serviceKinds",
+    label: "Kinds of Services",
+    options: serviceKindsOptions,
+  },
+  {
+    name: "serviceGoal",
+    label: "What is your primary goal for this service?",
+    options: serviceGoalOptions,
+  },
+  {
+    name: "monthlyBudget",
+    label: "What is your estimated monthly budget for this service?",
+    options: monthlyBudgetOptions,
+  },
+  {
+    name: "anticipationDuration",
+    label: "How long do you anticipate needing these services?",
+    options: anticipationDurationOptions,
+  },
+  {
+    name: "businessType",
+    label: "What type of business do you operate?",
+    options: businessTypeOptions,
   },
 ];
 
