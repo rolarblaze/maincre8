@@ -48,8 +48,6 @@ const RecommendForm = () => {
           contact_phone_number: values.contactPhoneNumber,
         };
 
-        console.log(finalValues, "ooo");
-
         // await dispatch(submitRecommendationBrief(finalValues));
 
         // dispatch(

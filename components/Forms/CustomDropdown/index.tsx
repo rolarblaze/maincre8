@@ -112,25 +112,25 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
             {options.map((option) => (
               <li
                 key={option.value}
-                className="flex cursor-pointer items-center gap-1 p-2 hover:bg-gray-100"
+                className="flex cursor-pointer items-center gap-1 px-6 py-[1.22rem] hover:bg-gray-100 text-grey900 font-medium"
               >
                 {isCheckbox ? (
-                  <>
+                  <div className="flex gap-3 cursor-pointer">
                     <input
                       type="checkbox"
                       id={option.value.toString()}
                       checked={getSelectedValue()?.includes(option.value)}
                       onChange={() => handleCheckboxChange(option.value)}
-                      className="mr-2 h-[18px] w-[18px] cursor-pointer border border-grey400"
+                      className="mr-2 h-5 w-5 cursor-pointer rounded-[3.33px] border-[1.25px] border-grey300 shadow-md shadow-white self-center"
                     />
-                    <label htmlFor={option.value.toString()}>
+                    <label htmlFor={option.value.toString()} className="cursor-pointer">
                       {option.label}
                     </label>
-                  </>
+                  </div>
                 ) : (
                   <span
                     onClick={() => handleOptionSelect(option.value)}
-                    className="block w-full"
+                    className="block w-full cursor-pointer"
                   >
                     {option.label}
                   </span>
