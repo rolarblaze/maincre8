@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { LogoIcon } from "@/public/svgs";
 import CartButton from "./CartButton";
+import { AvatarProfile } from "@/public/icons";
 
 const NewNavbar = () => {
   const router = useRouter();
@@ -23,7 +24,10 @@ const NewNavbar = () => {
   const hide =
     pathname === "/cart" ||
     pathname === "/signup" ||
+    pathname === "/checkout" ||
     pathname === "/email-verify";
+
+  const authenticated = pathname === "/checkout";
 
   const handleCart = () => {
     setCartOpen((prev) => !prev);
@@ -36,7 +40,7 @@ const NewNavbar = () => {
     >
       <div className="full-width absolute size-full bg-white/30 backdrop-blur-md"></div>
       <nav
-        className={`z-20 flex items-center py-6 text-sm font-semibold text-grey500 ${hide ? "justify-center" : "justify-between"}`}
+        className={`z-20 flex items-center py-6 text-sm font-semibold text-grey500 ${hide && !authenticated ? "justify-center" : "justify-between"}`}
       >
         {/* LINKS */}
         {!hide && (
@@ -74,6 +78,13 @@ const NewNavbar = () => {
             </Link>
 
             <CartButton click={cartOpen} onClick={handleCart} />
+          </div>
+        )}
+
+        {authenticated && (
+          <div className="flex items-center justify-end gap-3">
+            <p className="font-normal leading-6">Welcome, Bola</p>
+            <AvatarProfile />
           </div>
         )}
 

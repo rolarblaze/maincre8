@@ -80,10 +80,10 @@ const InputField: React.FC<InputFieldProps> = ({
   };
 
   return (
-    <div className="w-full flex flex-col gap-1 text-left">
-      <div className="flex gap-2 items-center">
+    <div className="flex w-full flex-col gap-1 text-left">
+      <div className="flex items-center gap-2">
         {label && (
-          <label className="text-sm text-grey900 font-medium">
+          <label className="text-sm font-medium text-grey900">
             {label} {isRequired && <span className="text-primary400">*</span>}{" "}
           </label>
         )}
@@ -96,7 +96,7 @@ const InputField: React.FC<InputFieldProps> = ({
             <ToolTipIcon />
             {showTooltip && (
               <div className="tooltip">
-                <span className="tooltip-text text-grey500 leading-[1.3125rem]">
+                <span className="tooltip-text leading-[1.3125rem] text-grey500">
                   {tooltipText}
                 </span>
                 <div className="tooltip-arrow"></div>
@@ -106,7 +106,7 @@ const InputField: React.FC<InputFieldProps> = ({
         )}
       </div>
       <div
-        className={`flex items-center gap-3 border border-grey300 rounded-md p-4 ${classNames}`}
+        className={`flex items-center gap-3 rounded-md border border-grey300 p-4 ${classNames}`}
       >
         <input
           type={type}
@@ -119,7 +119,7 @@ const InputField: React.FC<InputFieldProps> = ({
           onClick={onClick}
           readOnly={readOnly}
           disabled={disabled}
-          className={`w-full outline-none text-grey900 text-sm ${
+          className={`w-full text-sm text-grey900 outline-none ${
             readOnly ? "bg-grey200" : "bg-transparent"
           } ${disabled ? "cursor-not-allowed" : ""}`}
         />
@@ -129,7 +129,7 @@ const InputField: React.FC<InputFieldProps> = ({
           </div>
         )}
       </div>
-      {error && <p className="text-red-500 mt-1 text-xs">{error}</p>}
+      {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
     </div>
   );
 };

@@ -1,7 +1,11 @@
+"use client";
+
+import { useState } from "react";
+import { Modal } from "@/components";
 import { ArrowDown } from "@/public/icons";
 import { TrashIcon } from "@/public/svgs";
-import React from "react";
 import { getBackgroundClass, getImage } from "../../helperFunc";
+import SwitchPackageSection from "../SwitchPackageSection";
 
 interface Props {
   name: string;
@@ -9,6 +13,8 @@ interface Props {
 }
 
 const CartItem: React.FC<Props> = ({ name, type }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="flex w-full items-center justify-between gap-8 py-5">
       <div
@@ -25,16 +31,23 @@ const CartItem: React.FC<Props> = ({ name, type }) => {
       </div>
 
       <div className="flex items-center justify-center gap-6">
-        <div className="flex items-center justify-center gap-2 rounded-lg border border-grey100 px-4 py-2 text-sm font-semibold text-grey400 shadow-sm">
+        <button
+          onClick={() => setIsOpen(true)}
+          className="flex items-center justify-center gap-2 rounded-lg border border-grey100 px-4 py-2 text-sm font-semibold text-grey400 shadow-sm"
+        >
           <span>Switch Package</span>
 
           <ArrowDown className="fill-grey300" />
-        </div>
+        </button>
 
         <button className="rounded-lg bg-grey100 p-2">
           <TrashIcon />
         </button>
       </div>
+
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <SwitchPackageSection />
+      </Modal>
     </div>
   );
 };

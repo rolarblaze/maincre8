@@ -40,6 +40,7 @@ const assetLibrary = {
   pastworkCard8: "/optimised/pastwork_card_8.webp",
   roadmapImg: "/optimised/roadmap_img.webp",
   packageImg: "/optimised/package_img.webp",
+  celebrateImg: "/optimised/celebrate.png",
 
   // SVGS
   highlight: "/optimised/highlight.webp",

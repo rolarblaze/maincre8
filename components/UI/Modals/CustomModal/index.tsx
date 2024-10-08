@@ -45,7 +45,7 @@ const Modal: React.FC<ModalProps> = ({
             {showCancelIcon && (
               <div
                 onClick={onClose}
-                className="absolute right-5 top-5 z-20 mb-4 ml-auto w-fit cursor-pointer rounded-full border border-grey300 p-2"
+                className="absolute right-8 top-8 z-20 mb-4 ml-auto w-fit cursor-pointer rounded-full border border-grey300 p-2"
               >
                 <CancelIcon className="stroke-grey200" />
               </div>

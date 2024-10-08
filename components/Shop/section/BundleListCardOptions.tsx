@@ -22,12 +22,12 @@ const BundleListCardOptions = ({
 }: BundleListCardOptionsPropsType) => {
   return (
     <section>
-      <ul className="flex w-full justify-between xs:max-md:sticky xs:max-md:top-60 xs:max-md:gap-5 xs:max-md:overflow-auto no-scrollbar">
+      <ul className="no-scrollbar flex w-full flex-wrap justify-between gap-4 xs:max-md:sticky xs:max-md:top-60 xs:max-md:gap-5 xs:max-md:overflow-auto">
         {bundleCardsDetails.map((bundleCard) => {
           return (
             <li
               key={bundleCard.title}
-              className="h-24 w-[19%] xs:max-md:min-w-[50vw]"
+              className="h-24 min-w-[12rem] xl:min-w-[13.5rem]"
             >
               <button
                 onClick={() => updatePageViewData(bundleCard.title)}

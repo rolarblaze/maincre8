@@ -74,6 +74,12 @@ export {
 // CART PAGE SECTION COMPONENTS
 export { CartSection, AddOnSection } from "./NewPages/CartPage/sections";
 
+// CHECKOUT PAGE SECTION COMPONENTS
+export {
+  CPCartSection,
+  SummarySection,
+} from "./NewPages/CheckoutPage/sections";
+
 // UI COMPONENTS
 export { default as AvatarIcon } from "./UI/AvatarIcon";
 export { default as PillDiv } from "./UI/PillDiv";

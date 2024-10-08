@@ -10,8 +10,9 @@ const CartPage = () => {
         <CartSection />
         <AddOnSection />
         <Button
+          link="/checkout"
           label="Checkout"
-          classNames="font-manrope w-fit mx-auto py-4 px-32 rounded-lg"
+          classNames="font-manrope block max-w-[22rem] mx-auto py-4 rounded-lg"
         />
       </div>
     </div>
