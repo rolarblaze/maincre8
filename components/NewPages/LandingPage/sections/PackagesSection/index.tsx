@@ -9,6 +9,7 @@ import {
 } from "./helperFunc";
 import { ResizablePanel } from "@/components";
 import { FillArrowIcon } from "@/public/svgs";
+import Link from "next/link";
 
 const PackagesSection = () => {
   const [hovered, setHovered] = useState<string | null>(null);
@@ -16,8 +17,10 @@ const PackagesSection = () => {
   return (
     <div className="flex min-h-[500px] flex-wrap items-start justify-center gap-4 sm:gap-8 lg:min-h-72 lg:justify-between">
       {packages.map(({ title, icon, under }) => (
-        <div
+        <Link
+        href={`/shop/${title}`}
           key={title}
+          onFocus={() => setHovered(title)}
           onMouseEnter={() => setHovered(title)}
           onMouseLeave={() => setHovered(null)}
           className={`group size-fit cursor-pointer rounded-2xl border px-2 pb-2 pt-3.5 transition-colors duration-700 ease-out sm:px-2.5 sm:pb-2.5 sm:pt-5 ${getTabClass(title)} `}
@@ -45,7 +48,7 @@ const PackagesSection = () => {
               </div>
             )}
           </ResizablePanel>
-        </div>
+        </Link>
       ))}
     </div>
   );

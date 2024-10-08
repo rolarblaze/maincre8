@@ -42,14 +42,14 @@ const Alert: React.FC<AlertProps> = ({
   };
 
   const iconColors = {
-    success: "#04802E",
-    error: "#CB1A14",
-    warning: "#F59E0B",
+    success: "#04802E", //green
+    error: "#CB1A14", //red
+    warning: "#F59E0B", //yellow
   };
 
   return (
     <div
-      className={`max-w-96 w-full h-auto mb-4 ${alertStyles[type]} flex items-start justify-between rounded z-50`}
+      className={`relative top-10 max-w-96 w-full h-auto mb-4 ${alertStyles[type]} flex items-start justify-between rounded z-50`}
     >
       <div className="w-full  flex items-start gap-3 border-r border-grey100 py-3 px-4">
         <div>

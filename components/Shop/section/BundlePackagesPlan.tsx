@@ -1,5 +1,8 @@
 import Image from "next/image";
 import Button from "@/components/Button";
+import Image from "next/image";
+import { useAppDispatch } from "@/redux/store";
+import { addAlert } from "@/redux/alerts";
 
 type PackagesPlansType = {
   title: string;
@@ -27,6 +30,14 @@ type PackagePlanCardPropsType = {
   features: string[];
   link: string;
 };
+
+// type AlertPropsType = (
+//   id: string;
+//   headText: string;
+//   subText: string;
+//   type: "error" | "warning" | "success";
+//   autoClose: boolean;
+// );
 
 // Sub Component of Sub-Component-1
 const FeaturesList = ({ feature, isPackagePopular }: FeaturesListPropsType) => {
@@ -59,8 +70,25 @@ const PackagePlanCard = ({
   description,
   pricePerMonth,
   features,
-  link,
 }: PackagePlanCardPropsType) => {
+  const dispatch = useAppDispatch();
+
+  function alert(
+    id: string,
+    headText: string,
+    subText: string,
+    type: "error" | "warning" | "success",
+    autoClose: boolean,
+  ) {
+    return {
+      id: id,
+      headText: headText,
+      subText: subText,
+      type: type,
+      autoClose: autoClose,
+    };
+  }
+
   return (
     <li
       className={`${
@@ -128,7 +156,19 @@ const PackagePlanCard = ({
         </ul>
       </div>
       <Button
-        link={link}
+        onClick={() =>
+          dispatch(
+            addAlert(
+              alert(
+                `Added ${title} to cart`,
+                "Added to cart",
+                "Open your Cart to checkout",
+                "success",
+                true,
+              ),
+            ),
+          )
+        }
         label="Add to Cart"
         classNames={` bg-[#FAFAFA] text-[#111827] h-14 ${
           isPackagePopular
@@ -146,6 +186,7 @@ const BundlePackagesPlan = ({
 }: BundlePackagesPlansPropsType) => {
   return (
     <section>
+      <ul className="no-scrollbar flex w-full justify-between gap-6 xs:max-md:gap-3 xs:max-md:overflow-auto">
       <ul className="no-scrollbar flex w-full justify-between gap-6 xs:max-md:gap-3 xs:max-md:overflow-auto">
         {packagesPlans.map((plan) => (
           <PackagePlanCard
