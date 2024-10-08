@@ -77,7 +77,7 @@ export { CartSection, AddOnSection } from "./NewPages/CartPage/sections";
 // UI COMPONENTS
 export { default as AvatarIcon } from "./UI/AvatarIcon";
 export { default as PillDiv } from "./UI/PillDiv";
-export { default as UploadFile } from "./UI/UploadFile";
+export { default as UploadFile } from "./Forms/UploadFile";
 export { default as Marquee } from "./UI/Marquee";
 export { default as ResizablePanel } from "./UI/ResizablePanel";
 export { default as DemoVideo } from "./UI/DemoVideo";

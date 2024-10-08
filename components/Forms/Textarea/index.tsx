@@ -6,11 +6,13 @@ interface ControlledTextareaProps {
   label?: string;
   placeholder?: string;
   value?: string;
+  onBlur?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   onChange?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
   id?: string;
   name: string;
   tooltipText?: string;
   error?: string | ReactNode | null;
+  textAreaStyle?: string;
 }
 
 const Textarea: React.FC<ControlledTextareaProps> = ({
@@ -18,17 +20,19 @@ const Textarea: React.FC<ControlledTextareaProps> = ({
   placeholder,
   value,
   onChange,
+  onBlur,
   id,
   tooltipText,
   name,
   error = null,
+  textAreaStyle,
 }) => {
   const [showTooltip, setShowTooltip] = useState(false);
 
   return (
     <div className="relative">
-      <div className="flex gap-2 items-center mb-1">
-        <label htmlFor={id} className="block text-sm text-grey900 ">
+      <div className="mb-1 flex items-center gap-2">
+        <label htmlFor={id} className="block text-sm text-grey900">
           {label}
         </label>
         {tooltipText && (
@@ -50,13 +54,14 @@ const Textarea: React.FC<ControlledTextareaProps> = ({
       <textarea
         id={id}
         name={name}
-        className="block w-full border border-gray-300 rounded-lg p-4 placeholder-grey400 text-base focus:outline-none focus:none"
+        className={`focus:none block w-full rounded-lg border border-gray-300 p-4 text-base placeholder-grey400 focus:outline-none ${textAreaStyle}`}
         placeholder={placeholder}
         rows={8}
         value={value}
         onChange={onChange}
+        onBlur={onBlur}
       ></textarea>
-      {error && <p className="text-red-500 text-xs">{error}</p>}
+      {error && <p className="text-xs text-red-500">{error}</p>}
     </div>
   );
 };
