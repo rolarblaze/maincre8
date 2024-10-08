@@ -89,7 +89,7 @@ const NewNavbar = () => {
         )}
 
         {/* MOBILE: TOGGLE NAV */}
-        <div className="size-5 rounded-md bg-black sm:hidden" />
+        {!hide && <div className="size-5 rounded-md bg-black sm:hidden" />}
       </nav>
     </header>
   );
