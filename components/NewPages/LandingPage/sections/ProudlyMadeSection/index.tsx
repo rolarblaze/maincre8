@@ -17,9 +17,9 @@ function ProudlyMadeSection() {
 
       // Dynamically set the distance to move based on screen size
       if (screenWidth < 768) {
-        setXValue(-800); // For small screens (mobile)
+        setXValue(-3000); // For small screens (mobile)
       } else if (screenWidth < 1024) {
-        setXValue(-1000); // For medium screens (tablets)
+        setXValue(-3000); // For medium screens (tablets)
       } else {
         setXValue(-3000); // For large screens (desktop)
       }
