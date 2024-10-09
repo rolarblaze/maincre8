@@ -22,9 +22,9 @@ function IndustryLeadingExperts() {
     },
   ];
   return (
-    <section className="w-full mb-10 md:mb-0">
-      <div className="w-full flex flex-col md:flex-row justify-between gap-[56px] bg-primary50 rounded-[20px] md:rounded-3xl lg:rounded-3xl px-[13px] md:px-0 md:pl-10 lg:pl-16 py-5 md:py-10 lg:py-16">
-        <div className="space-y-6 w-full max-w-full md:max-w-[410px]">
+    <section className="mb-10 w-full md:mb-0">
+      <div className="flex w-full flex-col justify-between gap-[56px] rounded-[20px] bg-primary50 px-[13px] py-5 md:flex-row md:rounded-3xl md:px-0 md:py-10 md:pl-10 lg:rounded-3xl lg:py-16 lg:pl-16">
+        <div className="w-full max-w-full space-y-6 md:max-w-[410px]">
           <h4>Work with Industry-Leading Experts</h4>
           <p className="text-grey900">
             At SellCrea8, our team of seasoned industry experts brings years of
@@ -41,14 +41,14 @@ function IndustryLeadingExperts() {
           </p>
         </div>
         <div className="flex justify-between md:justify-start md:gap-8 md:self-center">
-          {imageData.map((image, imageIdx) => (
+          {imageData.map((image, imageIdx, imageArr) => (
             <Image
               key={imageIdx}
               src={image.imgSrc}
               alt={image.imgAlt}
               width={130}
               height={200}
-              className="w-[63.7px] h-[98px] md:w-[130px] md:h-[200px]"
+              className={`h-[98px] w-[63.7px] md:h-[200px] md:w-[130px] ${imageIdx === imageArr.length - 1 ? "rounded-full" : ""}`}
             />
           ))}
         </div>
