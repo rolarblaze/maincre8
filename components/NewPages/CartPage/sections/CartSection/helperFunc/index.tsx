@@ -26,15 +26,17 @@ export const getBackgroundClass = (title: string) => {
 export const getImage = (title: string) => {
   switch (title) {
     case "Brand Design":
-      return <BrandDesignSVG className="-ml-10 -mt-20 object-left-bottom" />;
+      return (
+        <BrandDesignSVG className="-ml-16 -mt-16 object-left-bottom sm:-ml-10 sm:-mt-20" />
+      );
     case "Graphic Design":
       return <GraphicDesignsSVG className="object-left-bottom" />;
     case "Digital Marketing":
       return <DigitalMarketingSVG className="-ml-2 -mt-8" />;
     case "Content Writing":
-      return <ContentWritingSVG className="-mt-10" />;
+      return <ContentWritingSVG className="-mt-12 sm:-mt-10" />;
     case "All-In-One Bundle":
-      return <AllInOneBundleSVG className="-ml-2 -mt-8" />;
+      return <AllInOneBundleSVG className="-ml-8 -mt-8 sm:-ml-2" />;
     default:
       return "";
   }
