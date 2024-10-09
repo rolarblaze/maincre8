@@ -6,6 +6,7 @@ import {
   getBackgroundClass,
   getUnderClass,
   getArrowClass,
+  getFocusClass,
 } from "./helperFunc";
 import { ResizablePanel } from "@/components";
 import { FillArrowIcon } from "@/public/svgs";
@@ -23,7 +24,7 @@ const PackagesSection = () => {
           onFocus={() => setHovered(title)}
           onMouseEnter={() => setHovered(title)}
           onMouseLeave={() => setHovered(null)}
-          className={`group size-fit cursor-pointer rounded-2xl border px-2 pb-2 pt-3.5 transition-colors duration-700 ease-out sm:px-2.5 sm:pb-2.5 sm:pt-5 ${getTabClass(title)} `}
+          className={`group size-fit cursor-pointer rounded-2xl border px-2 pb-2 pt-3.5 transition-colors duration-700 ease-out sm:px-2.5 sm:pb-2.5 sm:pt-5 ${getFocusClass(title)} ${getTabClass(title)}  `}
         >
           <h3 className="mb-5 px-2.5 text-sm font-bold leading-[1.6875rem] text-grey900 sm:text-xl">
             {title}

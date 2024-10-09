@@ -65,3 +65,21 @@ export const getArrowClass = (title: string) => {
       return "";
   }
 };
+
+
+export const getFocusClass = (title: string) => {
+  switch (title) {
+    case "Brand Design":
+      return "outline-[#E26E6A] focus:bg-error-50";
+    case "Graphic Designs":
+      return "outline-[#F7C164] focus:bg-warning-50";
+    case "Digital Marketing":
+      return "outline-[#5FC381] focus:bg-success-50";
+    case "Content Writing":
+      return "outline-[#B7AFAF] focus:bg-brown-50";
+    case "All-In-One Bundle":
+      return "outline-[#62A2EE] focus:bg-primary50";
+    default:
+      return "";
+  }
+};

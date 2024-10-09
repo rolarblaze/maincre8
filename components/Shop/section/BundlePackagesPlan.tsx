@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Button from "@/components/Button";
-import Image from "next/image";
 import { useAppDispatch } from "@/redux/store";
 import { addAlert } from "@/redux/alerts";
 
@@ -186,7 +185,6 @@ const BundlePackagesPlan = ({
 }: BundlePackagesPlansPropsType) => {
   return (
     <section>
-      <ul className="no-scrollbar flex w-full justify-between gap-6 xs:max-md:gap-3 xs:max-md:overflow-auto">
       <ul className="no-scrollbar flex w-full justify-between gap-6 xs:max-md:gap-3 xs:max-md:overflow-auto">
         {packagesPlans.map((plan) => (
           <PackagePlanCard
