@@ -2,27 +2,26 @@
 import assetLibrary from "@/library";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { proudlyMadeData } from "./components/proudlyMadeData";
 
 function ProudlyMadeSection() {
-  const [xValue, setXValue] = useState(0); // State to store the `x` animation value
-  const [animationSpeed, setAnimationSpeed] = useState(20); // Control speed of animation
+  const controls = useAnimation(); // Control animation manually
+  const [xValue, setXValue] = useState(-1000); // Initial animation distance
+  const [animationSpeed, setAnimationSpeed] = useState(8); // Faster initial speed
 
   useEffect(() => {
     // Function to calculate the `x` value based on screen size
     const handleResize = () => {
       const screenWidth = window.innerWidth;
 
+      // Dynamically set the distance to move based on screen size
       if (screenWidth < 768) {
-        // For small screens (mobile), shorter scroll distance
-        setXValue(-800);
+        setXValue(-800); // For small screens (mobile)
       } else if (screenWidth < 1024) {
-        // For medium screens (tablets)
-        setXValue(-1000);
+        setXValue(-1000); // For medium screens (tablets)
       } else {
-        // For large screens (desktop)
-        setXValue(-1500);
+        setXValue(-3000); // For large screens (desktop)
       }
     };
 
@@ -31,30 +30,42 @@ function ProudlyMadeSection() {
 
     return () => window.removeEventListener("resize", handleResize); // Cleanup
   }, []);
+
   // Function to slow down animation on hover
   const handleHover = () => {
-    setAnimationSpeed(40); // Slow down animation speed on hover
+    controls.start({
+      x: xValue,
+      transition: { ease: "linear", duration: 40, repeat: Infinity },
+    });
   };
 
   // Function to restore speed when hover ends
   const handleMouseLeave = () => {
-    setAnimationSpeed(20); // Restore original speed when hover ends
+    controls.start({
+      x: xValue,
+      transition: { ease: "linear", duration: 10, repeat: Infinity },
+    });
   };
+
   return (
     <section className="w-full space-y-8 py-5 md:py-20">
       <h3 className="text-[2rem]">
         Proudly Made by{" "}
         <span className="text-[2rem] text-primary500">SellCrea8</span>
       </h3>
-      {/* Cards */}
+      {/* Moving Cards */}
       <motion.div
         className="flex scroll-pl-5 gap-10"
-        initial={{ x: 0 }}
-        animate={{ x: xValue }}
-        transition={{ repeat: Infinity, duration: animationSpeed, ease: "linear" }}
+        animate={controls} // Animating using the controls
+        initial={{ x: 0 }} // Starting position
+        transition={{
+          repeat: Infinity,
+          duration: animationSpeed,
+          ease: "linear",
+        }}
         style={{ whiteSpace: "nowrap" }}
-        onMouseEnter={handleHover}
-        onMouseLeave={handleMouseLeave}
+        onMouseEnter={handleHover} // Slow down on hover
+        onMouseLeave={handleMouseLeave} // Restore speed when hover ends
       >
         {proudlyMadeData.map((card, cardIdx) => (
           <Image
@@ -67,6 +78,8 @@ function ProudlyMadeSection() {
           />
         ))}
       </motion.div>
+
+      {/* Band image */}
       <Image
         src={assetLibrary.nextBrandImage}
         alt="Next Brand Image"
