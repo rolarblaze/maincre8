@@ -13,7 +13,7 @@ const AddOnSection = () => {
             {type}
           </h3>
 
-          <div className="flex flex-wrap gap-6">
+          <div className="flex w-full flex-wrap gap-6">
             {recommendations.map((item) => (
               <AddOnItem key={item.id} type={type} {...item} />
             ))}

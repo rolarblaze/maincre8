@@ -61,11 +61,13 @@ const AddOnItem: React.FC<Props> = ({ type, id, price, name, feature }) => {
   return (
     <div
       onClick={handleAddToCart}
-      className={`h-fit cursor-pointer rounded-[0.875rem] border-2 border-grey100 p-6 transition-all duration-300 ${isSelected && "border-success-200 bg-success-50"}`}
+      className={`h-fit min-w-40 cursor-pointer rounded-[0.875rem] border-2 border-grey100 p-6 transition-all duration-300 ${isSelected && "border-success-200 bg-success-50"}`}
     >
       <div className="flex max-w-28 flex-col items-center justify-center gap-3">
-        <h4 className="text-center text-sm font-semibold uppercase">{name}</h4>
-        <p className="leading-[165%] text-grey600">{feature}</p>
+        <h4 className="text-center text-xs font-semibold uppercase lg:text-sm">
+          {name}
+        </h4>
+        <p className="leading-[165%] text-grey600 max-lg:text-sm">{feature}</p>
         <p className="text-lg font-semibold leading-4 text-[#111827]">
           $ {price}
         </p>

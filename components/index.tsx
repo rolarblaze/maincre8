@@ -76,7 +76,7 @@ export { CartSection, AddOnSection } from "./NewPages/CartPage/sections";
 
 // CHECKOUT PAGE SECTION COMPONENTS
 export {
-  CPCartSection,
+  CheckoutSection,
   SummarySection,
 } from "./NewPages/CheckoutPage/sections";
 

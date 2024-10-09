@@ -7,8 +7,8 @@ const SummarySection = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <section className="w-full max-w-[27rem] space-y-6 rounded-2xl border border-grey200 bg-white p-8">
-      <div className="flex items-center justify-between gap-4">
+    <section className="w-full sm:max-w-[27rem] space-y-6 border-grey200 bg-white p-8 sm:rounded-2xl sm:border">
+      <div className="flex items-center justify-between gap-4 max-sm:flex-col">
         <InputField
           type="text"
           placeholder="Enter Discount Code"
@@ -16,7 +16,7 @@ const SummarySection = () => {
         />
         <Button
           label="Add"
-          classNames="max-w-[7rem] text-sm font-medium py-4"
+          classNames="sm:max-w-[7rem] text-sm font-medium py-4"
         />
       </div>
 
@@ -51,7 +51,7 @@ const SummarySection = () => {
         onClose={() => setIsOpen(false)}
         showCancelIcon={false}
       >
-       <SuccessModal />
+        <SuccessModal />
       </Modal>
     </section>
   );

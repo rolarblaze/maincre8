@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const SuccessModal = () => {
   return (
-    <div className="relative w-[34.25rem] overflow-hidden rounded-[1.25rem] bg-white px-10 py-8">
+    <div className="relative mx-auto w-full overflow-hidden rounded-[1.25rem] bg-white px-8 py-8 sm:w-[34.25rem] sm:px-10">
       <Image
         src={assetLibrary.celebrateImg}
         alt="successful payment"
@@ -12,8 +12,8 @@ const SuccessModal = () => {
         className="absolute my-auto max-h-[30rem] opacity-10"
       />
 
-      <div className="relative z-[5] space-y-8">
-        <CheckCircleIcon2 className="-mb-4 -ml-2 mt-2" />
+      <div className="relative z-[5] space-y-4 sm:space-y-8">
+        <CheckCircleIcon2 className="-ml-2 mt-2 sm:-mb-4" />
         <div>
           <h3 className="text-2xl font-bold leading-8 text-grey900">
             Thank you for your order
@@ -26,9 +26,9 @@ const SuccessModal = () => {
         <div className="space-y-6">
           <h4 className="text-lg font-semibold text-grey900">Order details</h4>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid gap-4 sm:grid-cols-2">
             {data.map(({ title, data }) => (
-              <div key={title} className="font-semibold first:col-span-2">
+              <div key={title} className="font-semibold sm:first:col-span-2">
                 <h4 className="text-sm uppercase leading-5 text-grey500">
                   {title}
                 </h4>
