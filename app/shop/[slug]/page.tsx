@@ -20,12 +20,18 @@ import {
 import { useParams } from "next/navigation";
 
 const Shop = () => {
-  const bundleParam = useParams<{slug: string}>()
+  const bundleParam = useParams<{ slug: string }>();
   const [pageViewData, setPageViewData] = useState(BrandDesign);
-  const bundleOptions = ["Brand Design", "Graphic Designs","Digital Marketing", "Content Writing","All-In-One Bundle"];
+  const bundleOptions = [
+    "Brand Design",
+    "Graphic Designs",
+    "Digital Marketing",
+    "Content Writing",
+    "All-In-One Bundle",
+  ];
   const updatePageViewData = (title: string) => {
     switch (title) {
-      case bundleOptions[0] :
+      case bundleOptions[0]:
         setPageViewData(BrandDesign);
         break;
       case bundleOptions[1]:
@@ -45,15 +51,14 @@ const Shop = () => {
     }
   };
 
-
   useEffect(() => {
     let bundleName = bundleParam.slug.replaceAll("%20", " ");
     if (bundleOptions.includes(bundleName)) {
-      updatePageViewData(bundleName)
+      updatePageViewData(bundleName);
     } else {
       window.location.href = "/shop/Brand Design";
     }
-  }, [])
+  }, []);
 
   return (
     <AppWrapper type="">

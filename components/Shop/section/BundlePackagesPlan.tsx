@@ -30,20 +30,13 @@ type PackagePlanCardPropsType = {
   link: string;
 };
 
-// type AlertPropsType = (
-//   id: string;
-//   headText: string;
-//   subText: string;
-//   type: "error" | "warning" | "success";
-//   autoClose: boolean;
-// );
-
 // Sub Component of Sub-Component-1
 const FeaturesList = ({ feature, isPackagePopular }: FeaturesListPropsType) => {
   return (
     <li className="flex w-full items-center gap-3">
-      {/* chnage the size-* to chnage the size of the checkmark logo */}
+      
       <div className="w-[5%]">
+        {/* change the size-*, to chnage the size of the checkmark logo */}
         <figure className="center relative size-4">
           <Image
             fill={true}
