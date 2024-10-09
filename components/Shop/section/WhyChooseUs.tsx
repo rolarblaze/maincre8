@@ -14,7 +14,7 @@ type WhyChooseUsPropsType = {
 const WhyChooseUs = ({ reasons }: WhyChooseUsPropsType) => {
   return (
     <section className="p-5 xs:max-md:p-0">
-      <ul className="flex flex-wrap justify-between gap-y-16 xs:max-md:flex-nowrap xs:max-md:gap-5 xs:max-md:overflow-scroll no-scrollbar">
+      <ul className="no-scrollbar flex flex-wrap justify-between gap-y-16 xs:max-md:flex-nowrap xs:max-md:gap-5 xs:max-md:overflow-scroll">
         {reasons.map((reason) => {
           return (
             <li

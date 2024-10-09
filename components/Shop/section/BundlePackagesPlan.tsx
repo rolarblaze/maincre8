@@ -30,14 +30,6 @@ type PackagePlanCardPropsType = {
   link: string;
 };
 
-// type AlertPropsType = (
-//   id: string;
-//   headText: string;
-//   subText: string;
-//   type: "error" | "warning" | "success";
-//   autoClose: boolean;
-// );
-
 // Sub Component of Sub-Component-1
 const FeaturesList = ({ feature, isPackagePopular }: FeaturesListPropsType) => {
   return (
