@@ -38,7 +38,7 @@ const PackagesSection = () => {
 
           <ResizablePanel className="w-full">
             {hovered === title && (
-              <div className="mt-2 flex w-full items-center justify-between px-2 pb-2">
+              <div className="mt-2 flex w-full items-center justify-between px-2 pb-2 ">
                 <p
                   className={`text-xs font-semibold sm:text-sm ${getUnderClass(title)}`}
                 >
