@@ -36,7 +36,7 @@ const NewNavbar = () => {
 
   return (
     <header
-      className={`full-width content-grid fixed z-50 w-full overflow-hidden ${hide && "border-b border-primary200"}`}
+      className={`full-width content-grid fixed z-40 w-full overflow-hidden ${hide && "border-b border-primary200"}`}
     >
       <div className="full-width absolute size-full bg-white/30 backdrop-blur-md"></div>
       <nav

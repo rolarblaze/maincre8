@@ -12,28 +12,28 @@ interface Props {
 const SingleSignOnSection = () => {
   return (
     <section className="mt-5">
-      <div className="relative h-4 center">
-        <hr className="bg-[#F0F2F5] w-full" />
-        <p className="absolute bg-white text-xs py-1 px-2 font-normal text-[#667185]">
+      <div className="center relative h-4">
+        <hr className="w-full bg-[#F0F2F5]" />
+        <p className="absolute bg-white px-2 py-1 text-xs font-normal text-[#667185]">
           Or Continue with
         </p>
       </div>
-      <div className="center gap-5 mt-5">
+      <div className="center mt-5 gap-5">
         {[
           { label: "Google", icon: "/images/google.png" },
           { label: "Facebook", icon: "/images/facebook.png" },
           { label: "LinkedIn", icon: "/images/linkedin.png" },
         ].map((sso) => {
           return (
-            <div key={sso.label} className="inline-block ">
+            <div key={sso.label} className="inline-block">
               <Link
                 href="/"
-                className="center gap-1 bg-[#F7F9FC] border border-[#D0D5DD] rounded-md p-4"
+                className="center gap-1 rounded-md border border-[#D0D5DD] bg-[#F7F9FC] p-4"
               >
-                <figure className="relative size-5 center">
+                <figure className="center relative size-5">
                   <Image fill={true} src={sso.icon} alt={`${sso.label} Icon`} />
                 </figure>
-                <p className="font-semibold text-[16px] text-[#344054]">
+                <p className="text-[16px] font-semibold text-[#344054]">
                   {sso.label}
                 </p>
               </Link>
@@ -48,7 +48,7 @@ const SingleSignOnSection = () => {
 const AuthPageLayout: FC<Props> = ({ children }) => {
   const pathname = usePathname();
   const [isNewMemberText, setIsNewMemberText] = useState<JSX.Element | null>(
-    null
+    null,
   );
 
   useEffect(() => {
@@ -60,11 +60,11 @@ const AuthPageLayout: FC<Props> = ({ children }) => {
           </p>
           <Link
             href="/login"
-            className="p-2 w-auto text-xs bg-transparent font-medium text-[#1574E5]"
+            className="w-auto bg-transparent p-2 text-xs font-medium text-[#1574E5]"
           >
             Log in
           </Link>
-        </div>
+        </div>,
       );
     } else if (pathname === "/login") {
       setIsNewMemberText(
@@ -74,11 +74,11 @@ const AuthPageLayout: FC<Props> = ({ children }) => {
           </p>
           <Link
             href="/signup"
-            className="p-2 w-auto text-xs bg-transparent font-medium text-[#1574E5]"
+            className="w-auto bg-transparent p-2 text-xs font-medium text-[#1574E5]"
           >
             Create Account
           </Link>
-        </div>
+        </div>,
       );
     }
   }, [pathname]);
@@ -87,10 +87,10 @@ const AuthPageLayout: FC<Props> = ({ children }) => {
     pathname === "/forgot-password" ? "max-w-3xl" : "max-w-[592px]";
 
   return (
-    <main className="min-h-screen w-full relative bg-[#F7F9FC] py-10">
-      <div className="w-full mx-auto flex flex-col gap-5">
+    <main className="relative min-h-screen w-full bg-[#F7F9FC] py-10">
+      <div className="mx-auto flex w-full flex-col gap-5">
         <div
-          className={`min-w-[40%] mx-auto bg-white py-8 px-7 rounded-[10px] border border-[#D0D5DD]`}
+          className={`mx-auto min-w-[40%] rounded-[10px] border border-[#D0D5DD] bg-white px-7 py-8`}
         >
           <div className="flex flex-col gap-4 text-center">{children}</div>
 
