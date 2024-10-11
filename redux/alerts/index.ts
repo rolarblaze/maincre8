@@ -40,7 +40,7 @@ export const AlertsSlice = createSlice({
     removeAlert: (state: AlertsState, action: PayloadAction<string>) => {
       // action payload is the id of the alert
       state.messages = state.messages.filter(
-        (alert) => alert.id !== action.payload
+        (alert) => alert.id !== action.payload,
       );
     },
   },

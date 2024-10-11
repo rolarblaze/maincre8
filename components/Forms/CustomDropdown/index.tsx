@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AshArrowDown } from "@/public/icons";
 import { twMerge } from "tailwind-merge";
 import { FormikProps } from "formik"; // Import FormikProps for typing
@@ -30,6 +30,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
   formik, // Optional Formik prop
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null); // Add ref for the dropdown
 
   // Adjust the state to handle either a single value or an array of values
   const [localValue, setLocalValue] = useState<string | Array<string | number>>(
@@ -68,6 +69,29 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
     setIsOpen(false);
   };
 
+  // Close dropdown if clicked outside
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setIsOpen(false); // Close dropdown if clicked outside
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    // Cleanup event listener
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
     <div className="text-grey900">
       {label && (
@@ -79,11 +103,8 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
         </label>
       )}
       {/* Select field */}
-      <div className={twMerge("relative", className)}>
-        <div
-          className="flex h-14 w-full cursor-pointer items-center justify-between rounded-lg border border-gray-300 pl-4 pr-10 text-sm"
-          onClick={handleToggle}
-        >
+      <div ref={dropdownRef} className={twMerge("relative", className)}>
+        <div className="flex h-14 w-full items-center justify-between rounded-lg border border-gray-300 pl-4 pr-10 text-sm">
           {isCheckbox ? (
             getSelectedValue()?.length > 0 ? (
               options
@@ -98,7 +119,13 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
           ) : (
             <span className="text-sm text-grey400">{placeholder}</span>
           )}
-          <AshArrowDown />
+          <button
+            className="w-fit border border-none p-0"
+            onClick={handleToggle}
+            type="button"
+          >
+            <AshArrowDown />
+          </button>
         </div>
 
         {/* Display select field options */}
@@ -112,25 +139,28 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
             {options.map((option) => (
               <li
                 key={option.value}
-                className="flex cursor-pointer items-center gap-1 p-2 hover:bg-gray-100"
+                className="flex cursor-pointer items-center gap-1 px-6 py-[1.22rem] font-medium text-grey900 hover:bg-gray-100"
               >
                 {isCheckbox ? (
-                  <>
+                  <div className="flex cursor-pointer gap-3">
                     <input
                       type="checkbox"
                       id={option.value.toString()}
                       checked={getSelectedValue()?.includes(option.value)}
                       onChange={() => handleCheckboxChange(option.value)}
-                      className="mr-2 h-[18px] w-[18px] cursor-pointer border border-grey400"
+                      className="mr-2 h-5 w-5 cursor-pointer self-center rounded-[3.33px] border-[1.25px] border-grey300 shadow-md shadow-white"
                     />
-                    <label htmlFor={option.value.toString()}>
+                    <label
+                      htmlFor={option.value.toString()}
+                      className="cursor-pointer text-sm"
+                    >
                       {option.label}
                     </label>
-                  </>
+                  </div>
                 ) : (
                   <span
                     onClick={() => handleOptionSelect(option.value)}
-                    className="block w-full"
+                    className="block w-full cursor-pointer"
                   >
                     {option.label}
                   </span>

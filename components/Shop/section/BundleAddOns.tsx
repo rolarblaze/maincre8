@@ -81,7 +81,7 @@ const BundleAddOns = ({ title, addOns }: BundleAddOnsPropsType) => {
               fill={true}
               src="/imgs/gridbg.png"
               alt="gridlines background"
-              className="object-cover rounded-2xl"
+              className="rounded-2xl object-cover"
             />
           </figure>
           <figure className="absolute h-full w-full">

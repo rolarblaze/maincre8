@@ -82,18 +82,18 @@ export const serviceGoalOptions = [
 export const monthlyBudgetOptions = [
   {
     label: "Less than $500",
-    value: "Less than $500",
+    value: "Less than 500",
   },
   {
-    label: "500 - 1,000",
+    label: "$500 - $1,000",
     value: "500 - 1,000",
   },
   {
-    label: "1,000 - 2,500",
+    label: "$1,000 - $2,500",
     value: "1,000 - 2,500",
   },
   {
-    label: "2,500 and above",
+    label: "$2,500 and above",
     value: "2,500 and above",
   },
   {
@@ -102,7 +102,7 @@ export const monthlyBudgetOptions = [
   },
 ];
 
-export const businessTypeOptions = [
+export const anticipationDurationOptions = [
   {
     label: "One-time project",
     value: "One-time project",
@@ -125,7 +125,7 @@ export const businessTypeOptions = [
   },
 ];
 
-export const anticipationDurationOptions = [
+export const businessTypeOptions = [
   {
     label: "Startup",
     value: "Startup",
@@ -163,7 +163,7 @@ export const recommendContactFormData = [
 export const recommendSelectFormData = [
   {
     name: "serviceKinds",
-    label: "Kinds of Services",
+    label: "What kind of services are you interested in?",
     options: serviceKindsOptions,
   },
   {

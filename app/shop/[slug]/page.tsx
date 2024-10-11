@@ -3,7 +3,7 @@
 import { AppWrapper } from "@/components";
 import bundleCardsDetails from "@/components/Shop/data/bundleCardsDetails";
 import ShopWhyChooseSellCre8Data from "@/components/Shop/data/whyChooseUs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BundleListCardOptions from "@/components/Shop/section/BundleListCardOptions";
 import BundlePreviewBanner from "@/components/Shop/section/BundlePreviewBanner";
 import BundlePackagesPlan from "@/components/Shop/section/BundlePackagesPlan";
@@ -17,30 +17,48 @@ import {
   ContentWriting,
   AllInOneBundle,
 } from "@/components/Shop/data/bundle-pricing-data";
+import { useParams } from "next/navigation";
 
 const Shop = () => {
+  const bundleParam = useParams<{ slug: string }>();
   const [pageViewData, setPageViewData] = useState(BrandDesign);
+  const bundleOptions = [
+    "Brand Design",
+    "Graphic Designs",
+    "Digital Marketing",
+    "Content Writing",
+    "All-In-One Bundle",
+  ];
   const updatePageViewData = (title: string) => {
     switch (title) {
-      case "Brand Design":
+      case bundleOptions[0]:
         setPageViewData(BrandDesign);
         break;
-      case "Graphic Designs":
+      case bundleOptions[1]:
         setPageViewData(GraphicDesigns);
         break;
-      case "Digital Marketing":
+      case bundleOptions[2]:
         setPageViewData(DigitalMarketing);
         break;
-      case "Content Writing":
+      case bundleOptions[3]:
         setPageViewData(ContentWriting);
         break;
-      case "All-In-One Bundle":
+      case bundleOptions[4]:
         setPageViewData(AllInOneBundle);
         break;
       default:
         break;
     }
   };
+
+  useEffect(() => {
+    let bundleName = bundleParam.slug.replaceAll("%20", " ");
+    if (bundleOptions.includes(bundleName)) {
+      updatePageViewData(bundleName);
+    } else {
+      window.location.href = "/shop/Brand Design";
+    }
+  }, []);
 
   return (
     <AppWrapper type="">

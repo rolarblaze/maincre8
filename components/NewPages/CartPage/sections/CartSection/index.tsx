@@ -3,18 +3,18 @@ import { CartItem } from "./components";
 
 const CartSection = () => {
   return (
-    <section className="flex flex-col gap-6">
+    <section className="flex flex-col gap-4 sm:gap-6">
       <h3 className="text-sm font-medium leading-[150%] text-grey900">
         Your Cart
       </h3>
 
-      <div className="divide-y rounded-[1.25rem] border border-grey100 px-6 py-2.5">
+      <div className="divide-y border-grey100 sm:rounded-[1.25rem] md:border md:px-6 md:py-2.5">
         {cartItems.map((item) => (
           <CartItem key={item.id} {...item} />
         ))}
       </div>
 
-      <div className="ml-auto flex items-center justify-center gap-6 text-sm font-semibold text-grey400">
+      <div className="ml-auto flex items-center justify-center gap-4 text-sm font-semibold text-grey400 sm:gap-6">
         <button className="flex items-center justify-center gap-2 rounded-lg bg-grey100 px-5 py-2">
           Add New Bundle <PlusIcon fillColor="#667185" />
         </button>

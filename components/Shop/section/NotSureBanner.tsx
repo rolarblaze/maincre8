@@ -28,7 +28,7 @@ const NotSureBanner = () => {
           <div className="z-10 flex size-full items-center justify-start p-8 xs:max-md:p-0 lg:hidden">
             <div className="inline-block">
               <Button
-                link="/recommend"
+                link="/custom-recommendation"
                 label="Get a Recommendation"
                 classNames="bg-white p-4 text-[#1D2739]"
               />
@@ -56,7 +56,7 @@ const NotSureBanner = () => {
         <div className="absolute z-10 flex size-full items-center justify-end p-8">
           <div className="inline-block">
             <Button
-              link="/recommend"
+              link="/custom-recommendation"
               label="Get a Recommendation"
               classNames="bg-white p-4 text-[#1D2739]"
             />

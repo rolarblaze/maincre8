@@ -1,5 +1,7 @@
 import Button from "@/components/Button";
 import Image from "next/image";
+import { useAppDispatch } from "@/redux/store";
+import { addAlert } from "@/redux/alerts";
 
 type PackagesPlansType = {
   title: string;
@@ -32,8 +34,8 @@ type PackagePlanCardPropsType = {
 const FeaturesList = ({ feature, isPackagePopular }: FeaturesListPropsType) => {
   return (
     <li className="flex w-full items-center gap-3">
-      {/* chnage the size-* to chnage the size of the checkmark logo */}
       <div className="w-[5%]">
+        {/* change the size-*, to chnage the size of the checkmark logo */}
         <figure className="center relative size-4">
           <Image
             fill={true}
@@ -59,13 +61,30 @@ const PackagePlanCard = ({
   description,
   pricePerMonth,
   features,
-  link,
 }: PackagePlanCardPropsType) => {
+  const dispatch = useAppDispatch();
+
+  function alert(
+    id: string,
+    headText: string,
+    subText: string,
+    type: "error" | "warning" | "success",
+    autoClose: boolean,
+  ) {
+    return {
+      id: id,
+      headText: headText,
+      subText: subText,
+      type: type,
+      autoClose: autoClose,
+    };
+  }
+
   return (
     <li
       className={`${
         isPackagePopular ? "bg-[#1574E5]" : "bg-white"
-      } relative flex w-1/3 flex-col justify-between gap-40 rounded-3xl border border-[#EEEFF2] p-8 xs:max-md:min-w-[90%]`}
+      } relative flex w-1/3 max-w-[25rem] flex-col justify-between gap-40 rounded-3xl border border-[#EEEFF2] p-8 xs:max-md:min-w-[90%]`}
     >
       {isPackagePopular && (
         <div className="absolute -right-1 -top-1 rounded-bl-2xl bg-white px-6 py-3">
@@ -128,7 +147,19 @@ const PackagePlanCard = ({
         </ul>
       </div>
       <Button
-        link={link}
+        onClick={() =>
+          dispatch(
+            addAlert(
+              alert(
+                `Added ${title} to cart`,
+                "Added to cart",
+                "Open your Cart to checkout",
+                "success",
+                true,
+              ),
+            ),
+          )
+        }
         label="Add to Cart"
         classNames={` bg-[#FAFAFA] text-[#111827] h-14 ${
           isPackagePopular
@@ -146,7 +177,7 @@ const BundlePackagesPlan = ({
 }: BundlePackagesPlansPropsType) => {
   return (
     <section>
-      <ul className="flex w-full justify-between gap-6 xs:max-md:gap-3 xs:max-md:overflow-auto no-scrollbar">
+      <ul className="no-scrollbar flex w-full justify-between gap-6 xs:max-md:gap-3 xs:max-md:overflow-auto">
         {packagesPlans.map((plan) => (
           <PackagePlanCard
             key={plan.title}
