@@ -3,14 +3,14 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
 import assetLibrary from "@/library";
-import { DemoVideo, Modal } from "@/components";
+import { DemoVideo, FadeUpDiv, Modal } from "@/components";
 import { LogoFadeIcon, PlayIcon } from "@/public/svgs";
 
 const CtaSection = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <section className="full-width content-grid relative pt-[6.25rem]">
+    <FadeUpDiv className="full-width content-grid relative pt-[6.25rem]">
       <div className="relative flex items-center justify-center overflow-hidden rounded-[2rem] bg-primary600 px-12 pb-20 pt-16 text-center sm:min-h-[40rem] sm:gap-6">
         <div className="z-[2] flex min-h-60 flex-col items-center justify-center gap-4">
           <LogoFadeIcon className="mb-8" />
@@ -62,7 +62,7 @@ const CtaSection = () => {
       </Modal>
 
       <div className="full-width absolute bottom-0 -z-[1] h-[7.5rem] w-full bg-primary900 sm:h-80" />
-    </section>
+    </FadeUpDiv>
   );
 };
 export default CtaSection;

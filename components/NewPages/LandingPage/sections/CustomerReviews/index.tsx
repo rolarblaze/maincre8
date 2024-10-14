@@ -1,9 +1,9 @@
-import { AvatarIcon } from "@/components";
+import { AvatarIcon, FadeUpDiv } from "@/components";
 import { Card, Reviews } from "./Components";
 
 const CustomerReviews = () => {
   return (
-    <section className="w-full py-5 md:py-14 lg:py-20 max-xl:px-5 text-center bg-white z-20">
+    <FadeUpDiv className="w-full py-5 md:py-14 lg:py-20 max-xl:px-5 text-center bg-white z-20">
       <div className="max-w-[1216px] text-2xl md:text-4xl lg:text-5.5xl mx-auto">
         <h2 className="text-2xl md:text-4xl lg:text-5.5xl">
           What Our{" "}
@@ -30,7 +30,7 @@ const CustomerReviews = () => {
           ))}
         </div>
       </div>
-    </section>
+    </FadeUpDiv>
   );
 };
 

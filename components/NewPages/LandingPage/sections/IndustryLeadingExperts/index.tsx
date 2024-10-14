@@ -1,6 +1,7 @@
-import assetLibrary from "@/library";
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
+import assetLibrary from "@/library";
+import FadeUpDiv from "@/components/UI/FadeUpDiv";
 
 function IndustryLeadingExperts() {
   const imageData = [
@@ -22,7 +23,7 @@ function IndustryLeadingExperts() {
     },
   ];
   return (
-    <section className="mb-10 w-full md:mb-0">
+    <FadeUpDiv className="mb-10 w-full md:mb-0">
       <div className="flex w-full flex-col justify-between gap-[56px] rounded-[20px] bg-primary50 px-[13px] py-5 md:flex-row md:rounded-3xl md:px-0 md:py-10 md:pl-10 lg:rounded-3xl lg:py-16 lg:pl-16">
         <div className="w-full max-w-full space-y-6 md:max-w-[410px]">
           <h4>Work with Industry-Leading Experts</h4>
@@ -53,7 +54,7 @@ function IndustryLeadingExperts() {
           ))}
         </div>
       </div>
-    </section>
+    </FadeUpDiv>
   );
 }
 

@@ -87,6 +87,7 @@ export { default as UploadFile } from "./Forms/UploadFile";
 export { default as Marquee } from "./UI/Marquee";
 export { default as ResizablePanel } from "./UI/ResizablePanel";
 export { default as DemoVideo } from "./UI/DemoVideo";
+export { default as FadeUpDiv } from "./UI/FadeUpDiv";
 
 // SHOP PAGE SECTION IMPORTS
 export { default as ServicesSection } from "./Shop";
