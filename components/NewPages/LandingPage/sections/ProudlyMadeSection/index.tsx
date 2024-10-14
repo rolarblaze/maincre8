@@ -6,46 +6,57 @@ import { motion, useAnimation } from "framer-motion";
 import { proudlyMadeData } from "./components/proudlyMadeData";
 
 function ProudlyMadeSection() {
-  const controls = useAnimation(); // Control animation manually
-  const [xValue, setXValue] = useState(-1000); // Initial animation distance
-  const [animationSpeed, setAnimationSpeed] = useState(8); // Faster initial speed
+  const controls = useAnimation();
+  const [xValue, setXValue] = useState(-1000);
+  const [animationSpeed, setAnimationSpeed] = useState(8); // Initial speed
 
   useEffect(() => {
-    // Function to calculate the `x` value based on screen size
     const handleResize = () => {
       const screenWidth = window.innerWidth;
 
-      // Dynamically set the distance to move based on screen size
       if (screenWidth < 768) {
-        setXValue(-3000); // For small screens (mobile)
+        setXValue(-3000);
       } else if (screenWidth < 1024) {
-        setXValue(-3000); // For medium screens (tablets)
+        setXValue(-3000);
       } else {
-        setXValue(-3000); // For large screens (desktop)
+        setXValue(-3000);
       }
     };
 
-    handleResize(); // Set initial value on mount
-    window.addEventListener("resize", handleResize); // Update on window resize
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener("resize", handleResize); // Cleanup
-  }, []);
+    controls.start({
+      x: xValue,
+      transition: {
+        ease: "linear",
+        duration: animationSpeed,
+        repeat: Infinity,
+      },
+    });
 
-  // Function to slow down animation on hover
+    return () => window.removeEventListener("resize", handleResize);
+  }, [xValue, animationSpeed, controls]);
+
   const handleHover = () => {
-    controls.start({
-      x: xValue,
-      transition: { ease: "linear", duration: 40, repeat: Infinity },
-    });
+    setAnimationSpeed(40); // Slow down on hover
   };
 
-  // Function to restore speed when hover ends
   const handleMouseLeave = () => {
+    setAnimationSpeed(8); // Restore original speed
+  };
+
+  // Trigger the animation when speed changes
+  useEffect(() => {
     controls.start({
       x: xValue,
-      transition: { ease: "linear", duration: 10, repeat: Infinity },
+      transition: {
+        ease: "linear",
+        duration: animationSpeed,
+        repeat: Infinity,
+      },
     });
-  };
+  }, [animationSpeed, xValue, controls]);
 
   return (
     <section className="w-full space-y-8 py-5 md:py-20">
@@ -53,19 +64,18 @@ function ProudlyMadeSection() {
         Proudly Made by{" "}
         <span className="text-[2rem] text-primary500">SellCrea8</span>
       </h3>
-      {/* Moving Cards */}
       <motion.div
         className="flex scroll-pl-5 gap-10"
-        animate={controls} // Animating using the controls
-        initial={{ x: 0 }} // Starting position
+        animate={controls}
+        initial={{ x: 0 }}
         transition={{
           repeat: Infinity,
           duration: animationSpeed,
           ease: "linear",
         }}
         style={{ whiteSpace: "nowrap" }}
-        onMouseEnter={handleHover} // Slow down on hover
-        onMouseLeave={handleMouseLeave} // Restore speed when hover ends
+        onMouseEnter={handleHover}
+        onMouseLeave={handleMouseLeave}
       >
         {proudlyMadeData.map((card, cardIdx) => (
           <Image
