@@ -1,6 +1,6 @@
-import assetLibrary from "@/library";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
+import assetLibrary from "@/library";
 
 const LearnMoreSection = () => {
   return (

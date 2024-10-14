@@ -1,10 +1,10 @@
 "use client";
-import { useState } from "react";
 import Link from "next/link";
+import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { LogoIcon } from "@/public/svgs";
-import CartButton from "./CartButton";
 import { AvatarProfile } from "@/public/icons";
+import CartButton from "./CartButton";
 
 const NewNavbar = () => {
   const router = useRouter();
@@ -67,7 +67,7 @@ const NewNavbar = () => {
         {/* BUTTONS */}
         {!hide && (
           <div className="flex items-center justify-center gap-6 max-sm:hidden">
-            <Link href={"/login"} className="block w-fit">
+            <Link href={"/login"} className="block w-fit hover:text-primary500">
               Login
             </Link>
             <Link

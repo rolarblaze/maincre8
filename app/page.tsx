@@ -1,6 +1,4 @@
-import React from "react";
 import {
-  PageLayout,
   BrandSection,
   CtaSection,
   HeroSection,
