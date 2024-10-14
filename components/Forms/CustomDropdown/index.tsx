@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { AshArrowDown } from "@/public/icons";
 import { twMerge } from "tailwind-merge";
 import { FormikProps } from "formik"; // Import FormikProps for typing
+import { motion } from "framer-motion"; // Import motion from framer-motion
 
 interface Option {
   label: string;
@@ -129,13 +130,18 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
         </div>
 
         {/* Display select field options */}
-        {isOpen && (
-          <ul
-            className={twMerge(
-              "absolute left-0 z-10 w-full rounded-lg border border-gray-300 bg-white",
-              optionStyles,
-            )}
-          >
+        <motion.div
+          initial={{ height: 0, opacity: 0 }}
+          animate={{ height: isOpen ? "auto" : 0, opacity: isOpen ? 1 : 0 }}
+          exit={{ height: 0, opacity: 0 }}
+          transition={{ duration: 0.4, ease: "easeInOut" }}
+          className={twMerge(
+            `absolute left-0 z-10 w-full overflow-hidden rounded-lg border border-gray-300 bg-white shadow-lg`,
+            optionStyles,
+          )}
+          style={{ overflow: "hidden" }}
+        >
+          <ul>
             {options.map((option) => (
               <li
                 key={option.value}
@@ -168,7 +174,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
               </li>
             ))}
           </ul>
-        )}
+        </motion.div>
       </div>
 
       {/* Display errors */}
