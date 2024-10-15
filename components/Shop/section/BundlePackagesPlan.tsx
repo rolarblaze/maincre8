@@ -2,6 +2,8 @@ import Button from "@/components/Button";
 import Image from "next/image";
 import { useAppDispatch } from "@/redux/store";
 import { addAlert } from "@/redux/alerts";
+import { parse } from "path/posix";
+import { useEffect, useState } from "react";
 
 type PackagesPlansType = {
   title: string;
@@ -54,6 +56,14 @@ const FeaturesList = ({ feature, isPackagePopular }: FeaturesListPropsType) => {
   );
 };
 
+const PricingSpinner = () => {
+  return (
+    <div
+      className={`size-5 animate-spin rounded-full border-2 border-b-transparent border-l-transparent border-r-transparent border-t-[#B6D4F7]`}
+    ></div>
+  );
+};
+
 // Sub-Component-1 of Main-Compoent
 const PackagePlanCard = ({
   isPackagePopular,
@@ -63,8 +73,12 @@ const PackagePlanCard = ({
   features,
 }: PackagePlanCardPropsType) => {
   const dispatch = useAppDispatch();
+  const [pricing, setPricing] = useState({
+    price: 0,
+    code: "$",
+  });
 
-  function alert(
+  function alertMsg(
     id: string,
     headText: string,
     subText: string,
@@ -79,6 +93,39 @@ const PackagePlanCard = ({
       autoClose: autoClose,
     };
   }
+
+  // convert the pricing to base currency on component load
+  useEffect(() => {
+    async function currencyConverter(amount: string) {
+      try {
+        const parsedAmount = parseFloat(amount);
+        const response = await fetch(
+          `https://v6.exchangerate-api.com/v6/${process.env.NEXT_PUBLIC_EXCHANGE_RATE_API_KEY}/pair/USD/NGN/${parsedAmount}`,
+        );
+
+        if (!response.ok) {
+          setPricing({
+            price: parseFloat(amount),
+            code: "$",
+          });
+        }
+
+        const data = await response.json();
+        const rate = data.conversion_rate;
+        setPricing({
+          price: Math.round(parsedAmount * rate),
+          code: data.target_code,
+        });
+      } catch (err) {
+        console.error(err);
+        setPricing({
+          price: parseFloat(amount),
+          code: "$",
+        });
+      }
+    }
+    currencyConverter(pricePerMonth.slice(1));
+  }, []);
 
   return (
     <li
@@ -115,14 +162,25 @@ const PackagePlanCard = ({
               {description}
             </p>
           </div>
-          <p>
-            <span
+          <div className="flex items-end text-3xl">
+            <div
               className={`${
                 isPackagePopular ? "text-white" : "text-[#111827]"
-              } text-3xl font-semibold leading-9`}
+              } flex gap-1 font-semibold leading-9`}
             >
-              {pricePerMonth}
-            </span>
+              <p className="text-3xl">
+                {" "}
+                {pricing.price === 0 ? <PricingSpinner /> : pricing.code}{" "}
+              </p>
+              <p className="text-3xl">
+                {" "}
+                {pricing.price === 0 ? (
+                  <PricingSpinner />
+                ) : (
+                  pricing.price.toLocaleString()
+                )}
+              </p>
+            </div>
             <span
               className={`${
                 isPackagePopular ? "text-[#B6D4F7]" : "text-[#111827]"
@@ -130,7 +188,7 @@ const PackagePlanCard = ({
             >
               / month
             </span>
-          </p>
+          </div>
         </div>
         <ul
           className={`${
@@ -150,7 +208,7 @@ const PackagePlanCard = ({
         onClick={() =>
           dispatch(
             addAlert(
-              alert(
+              alertMsg(
                 `Added ${title} to cart`,
                 "Added to cart",
                 "Open your Cart to checkout",
