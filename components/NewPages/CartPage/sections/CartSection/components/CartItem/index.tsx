@@ -47,7 +47,7 @@ const CartItem: React.FC<Props> = ({ name, type }) => {
         </button>
       </div>
 
-      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} className="">
         <SwitchPackageSection />
       </Modal>
     </div>

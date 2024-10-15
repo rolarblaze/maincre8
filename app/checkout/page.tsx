@@ -1,13 +1,13 @@
-import { CheckoutSection, SummarySection } from "@/components";
+import { CheckoutSection, PageLayout, SummarySection } from "@/components";
 
 const CheckoutPage = () => {
   return (
-    <div className="full-width content-grid min-h-[calc(100dvh-4rem)] justify-items-center bg-[#F7F9FC] sm:py-10">
-      <div className="full-width flex size-full max-w-[84rem] items-start justify-between sm:gap-10 max-xl:flex-col sm:px-8">
+    <PageLayout className="bg-[#F7F9FC]">
+      <div className="full-width mx-auto flex size-full min-h-[calc(100dvh-4rem)] max-w-[84rem] items-start justify-between max-xl:flex-col sm:gap-10 sm:px-8 sm:py-10">
         <CheckoutSection />
         <SummarySection />
       </div>
-    </div>
+    </PageLayout>
   );
 };
 

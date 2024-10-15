@@ -1,9 +1,10 @@
 "use client";
 
-import { AppWrapper } from "@/components";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { PageLayout } from "@/components";
 import bundleCardsDetails from "@/components/Shop/data/bundleCardsDetails";
 import ShopWhyChooseSellCre8Data from "@/components/Shop/data/whyChooseUs";
-import { useEffect, useState } from "react";
 import BundleListCardOptions from "@/components/Shop/section/BundleListCardOptions";
 import BundlePreviewBanner from "@/components/Shop/section/BundlePreviewBanner";
 import BundlePackagesPlan from "@/components/Shop/section/BundlePackagesPlan";
@@ -17,7 +18,6 @@ import {
   ContentWriting,
   AllInOneBundle,
 } from "@/components/Shop/data/bundle-pricing-data";
-import { useParams } from "next/navigation";
 
 const Shop = () => {
   const bundleParam = useParams<{ slug: string }>();
@@ -61,7 +61,7 @@ const Shop = () => {
   }, []);
 
   return (
-    <AppWrapper type="">
+    <PageLayout>
       <main className="space-y-20 px-10 pb-20 xs:max-md:space-y-10 xs:max-md:px-0 xs:max-md:pb-10">
         <h1 className="w-full text-center text-3xl font-semibold leading-9 xs:max-md:text-2xl">
           Choose the Right Plan for Your Business
@@ -94,7 +94,7 @@ const Shop = () => {
         {/* Selected Bundle Addons Section */}
         <BundleAddOns title={pageViewData.title} addOns={pageViewData.addons} />
       </main>
-    </AppWrapper>
+    </PageLayout>
   );
 };
 export default Shop;

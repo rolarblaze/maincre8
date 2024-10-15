@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { GlobalProvider } from "@/redux/provider";
-import { AlertWrapper, PageLayout } from "@/components";
+import { AlertWrapper } from "@/components";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
 
@@ -49,7 +49,7 @@ export default function RootLayout({
         <GlobalProvider>
           <AlertWrapper />
           <NextTopLoader />
-          <PageLayout>{children}</PageLayout>
+          {children}
         </GlobalProvider>
       </body>
     </html>

@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useState } from "react";
 import { packages } from "./constants";
 import {
@@ -10,7 +11,6 @@ import {
 } from "./helperFunc";
 import { ResizablePanel } from "@/components";
 import { FillArrowIcon } from "@/public/svgs";
-import Link from "next/link";
 
 const PackagesSection = () => {
   const [hovered, setHovered] = useState<string | null>(null);

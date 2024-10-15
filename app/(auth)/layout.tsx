@@ -3,6 +3,7 @@ import { FC, useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
+import { PageLayout } from "@/components";
 
 interface Props {
   children: React.ReactNode;
@@ -87,7 +88,7 @@ const AuthPageLayout: FC<Props> = ({ children }) => {
     pathname === "/forgot-password" ? "max-w-3xl" : "max-w-[592px]";
 
   return (
-    <main className="relative min-h-screen w-full bg-[#F7F9FC] py-10">
+    <PageLayout className="relative w-full bg-[#F7F9FC] pt-10">
       <div className="mx-auto flex w-full flex-col gap-5">
         <div
           className={`mx-auto min-w-[40%] rounded-[10px] border border-[#D0D5DD] bg-white px-7 py-8`}
@@ -104,7 +105,7 @@ const AuthPageLayout: FC<Props> = ({ children }) => {
           </div>
         </div>
       </div>
-    </main>
+    </PageLayout>
   );
 };
 
