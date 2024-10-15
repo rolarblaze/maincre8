@@ -105,15 +105,16 @@ const PackagePlanCard = ({
 
         if (!response.ok) {
           setPricing({
-            price: parseFloat(amount),
+            price: isNaN(parseFloat(amount)) ? 0 : parseFloat(amount),
             code: "$",
           });
+          return
         }
 
         const data = await response.json();
         const rate = data.conversion_rate;
         setPricing({
-          price: Math.round(parsedAmount * rate),
+          price: isNaN(Math.round(parsedAmount * rate)) ? 0 : Math.round(parsedAmount * rate),
           code: data.target_code,
         });
       } catch (err) {
