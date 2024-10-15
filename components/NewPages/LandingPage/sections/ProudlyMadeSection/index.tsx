@@ -89,21 +89,19 @@ function ProudlyMadeSection() {
         ))}
       </motion.div>
 
-      {/* Band image */}
-      <Image
-        src={assetLibrary.nextBrandImage}
-        alt="Next Brand Image"
-        width={1240}
-        height={168}
-        className="hidden md:block md:h-[168px] md:max-w-[1240px]"
-      />
-      <Image
-        src={assetLibrary.mobileNextBrandImage}
-        alt="Next Brand Image"
-        width={339}
-        height={104}
-        className="h-[150px] w-full md:hidden"
-      />
+      <div className="flex w-full justify-between rounded-lg bg-gradient-to-tr from-[#E8F1FC] to-[#93BFF3]">
+        <Image
+          src={assetLibrary.brandImg}
+          alt="Brand Image"
+          width={225.02}
+          height={222.78}
+          className="h-full max-h-[9rem] w-full max-w-[9rem] md:max-h-[12rem] md:max-w-[12rem]"
+        />
+        <p className="flex max-w-[25rem] flex-col justify-center gap-5 py-5 pr-10 text-end font-bold text-primary50 md:gap-10">
+          <span className="text-xl md:text-[3.5rem]">Your brand is</span>
+          <span className="text-xl md:text-[3.5rem]">next.</span>
+        </p>
+      </div>
     </section>
   );
 }

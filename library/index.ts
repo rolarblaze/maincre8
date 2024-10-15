@@ -41,6 +41,7 @@ const assetLibrary = {
   roadmapImg: "/optimised/roadmap_img.webp",
   packageImg: "/optimised/package_img.webp",
   celebrateImg: "/optimised/celebrate.png",
+  brandImg: "/optimised/brand_img.webp",
 
   // SVGS
   highlight: "/optimised/highlight.webp",
