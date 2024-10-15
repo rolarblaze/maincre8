@@ -1,5 +1,8 @@
 "use client";
+import { AshArrowDown, AshArrowUp } from "@/public/icons";
 import { useState } from "react";
+import { AnimatePresence, motion } from "framer-motion"; // Import AnimatePresence for smooth transitions
+
 interface ActiveFAQProps {
   question: string;
   answer: string;
@@ -21,64 +24,62 @@ const FaqSection = ({
 
   return (
     <section className="full-width z-20 flex flex-col items-center gap-8 bg-grey50 py-10 max-xl:px-5">
-      <div className="text-textMain flex w-full max-w-[818px] flex-col gap-4 md:gap-8">
-        {/* Each faq cards */}
+      <div className="flex w-full max-w-[818px] flex-col gap-4 text-textMain md:gap-8">
         {activeFAQData.map((faq, index) => (
-          <div
+          <motion.div
             key={index}
-            className={`rounded-lg border border-grey300 bg-white py-6 transition-all duration-300 ${
-              activeIndex === index ? "" : ""
-            }`}
-            style={{
-              gridRow: activeIndex === index ? "span 3" : "span 1",
-            }}
+            layout // Animate layout changes smoothly without explicit height animation
+            initial={false} // Prevent animation on first render
+            className={`overflow-hidden rounded-lg border border-grey300 bg-white`} // Use overflow-hidden to ensure smoothness
           >
-            {/* Question plus icon */}
+            {/* Question section */}
             <div
-              className="flex cursor-pointer items-center justify-between px-4"
+              className="flex cursor-pointer items-center justify-between px-4 py-6"
               onClick={() => toggleAnswer(index)}
             >
-              {/* Question */}
               <p
-                className={`font-medium ${
-                  activeIndex === index ? "" : "text-text-main"
-                }`}
+                className={`font-medium ${activeIndex === index ? "" : "text-text-main"}`}
               >
                 {faq.question}
               </p>
-              {/* icon drop down and drop up */}
               <span
-                className={`text-2xl ${
-                  activeIndex === index ? "" : "mb-3 text-grey700"
-                }`}
+                className={`text-2xl ${activeIndex === index ? "" : "mb-3 text-grey700"}`}
               >
-                {activeIndex === index ? "^" : "⌄"}
+                {activeIndex === index ? <AshArrowUp /> : <AshArrowDown />}
               </span>
             </div>
 
-            {/* Answer content */}
-            {activeIndex === index && (
-              <div className="border-t border-white px-4 py-5 pb-8">
-                <p className="text-sm">{faq.answer}</p>
-              </div>
-            )}
+            {/* Animate answer content and labels */}
+            <AnimatePresence>
+              {activeIndex === index && (
+                <motion.div
+                  key="content"
+                  initial={{ opacity: 0, y: -10 }} // Start slightly shifted up
+                  animate={{ opacity: 1, y: 0 }} // Fade in and slide down
+                  exit={{ opacity: 0, y: -10 }} // Fade out and slide up on collapse
+                  transition={{ duration: 0.3, ease: "easeInOut" }} // Smooth transition
+                  className="px-4"
+                >
+                  {/* Answer content */}
+                  <motion.div className="py-4">
+                    <p className="text-sm">{faq.answer}</p>
+                  </motion.div>
 
-            {/* Labels */}
-            {activeIndex === index && (
-              <div className="flex gap-[10px] px-4">
-                {faq.labels.map((label, labelIdx) => {
-                  return (
-                    <span
-                      key={labelIdx}
-                      className="flex w-auto items-center justify-center rounded-lg bg-primary50 px-[6px] py-[6px] text-primary500"
-                    >
-                      {label}
-                    </span>
-                  );
-                })}
-              </div>
-            )}
-          </div>
+                  {/* Labels */}
+                  <motion.div className="flex gap-[10px] pb-6">
+                    {faq.labels.map((label, labelIdx) => (
+                      <span
+                        key={labelIdx}
+                        className="flex w-auto items-center justify-center rounded-lg bg-primary50 px-[6px] py-[6px] text-primary500"
+                      >
+                        {label}
+                      </span>
+                    ))}
+                  </motion.div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.div>
         ))}
       </div>
     </section>
