@@ -1,16 +1,13 @@
 "use client";
-import { Fragment, useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { useRouter } from "next/navigation";
 import { setUserTokenCookie } from "@/utils/helpers/auth/cookieUtility";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
-import { Tabs, InputField, Button, SocialSignUp } from "@/components";
+import { InputField, Button } from "@/components";
 import {
-  Checked,
   EyeOpenIcon,
   EyeCloseIcon,
-  Unchecked,
   PasswordMatchIcon,
   PasswordNoMatchIcon,
   EmailFieldIcon,
@@ -23,8 +20,6 @@ import {
   validatePassword,
   passwordCriteria,
 } from "@/utils/helpers/auth/passwordValidation";
-import CheckboxField from "@/components/Forms/Checkbox";
-import Link from "next/link";
 
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string().test(
@@ -33,7 +28,7 @@ const SignupSchema = Yup.object().shape({
     function (value) {
       const { isBusiness } = this.parent;
       return isBusiness ? true : !!value;
-    }
+    },
   ),
   lastName: Yup.string().test(
     "required-last-name",
@@ -41,7 +36,7 @@ const SignupSchema = Yup.object().shape({
     function (value) {
       const { isBusiness } = this.parent;
       return isBusiness ? true : !!value;
-    }
+    },
   ),
   businessName: Yup.string().test(
     "required-business-name",
@@ -49,7 +44,7 @@ const SignupSchema = Yup.object().shape({
     function (value) {
       const { isBusiness } = this.parent;
       return isBusiness ? !!value : true;
-    }
+    },
   ),
   email: Yup.string()
     .email("Invalid email")
@@ -103,7 +98,7 @@ export default function Signup() {
   // Separate function for individual signup logic
   const handleIndividualSignUp = async (
     payload: SignUpFormValues,
-    dispatch: AppDispatch
+    dispatch: AppDispatch,
   ) => {
     const actionResult = await dispatch(signUpIndividual(payload));
 
@@ -116,7 +111,7 @@ export default function Signup() {
           subText:
             "Successfully registered as an individual. Please check your email for verification.",
           type: "success",
-        })
+        }),
       );
       router.push("/email-verify");
     } else {
@@ -127,7 +122,7 @@ export default function Signup() {
   // Separate function for business signup logic
   const handleBusinessSignUp = async (
     payload: SignUpFormValues,
-    dispatch: AppDispatch
+    dispatch: AppDispatch,
   ) => {
     const actionResult = await dispatch(signUpBusiness(payload));
 
@@ -140,7 +135,7 @@ export default function Signup() {
           subText:
             "Successfully registered as a business. Please check your email for verification.",
           type: "success",
-        })
+        }),
       );
       router.push("/email-verify");
     } else {
@@ -160,14 +155,14 @@ export default function Signup() {
           headText: "Error",
           subText: errorMessage,
           type: "error",
-        })
+        }),
       );
     }
   };
 
   return (
     <Fragment>
-      <h3 className="font-semibold text-[32px] leading-7 text-[#101928]">
+      <h3 className="text-[32px] font-semibold leading-7 text-[#101928]">
         Step into your creative hub
       </h3>
 
@@ -226,7 +221,13 @@ export default function Signup() {
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
           name="password"
-          icon={ showPassword ? <EyeOpenIcon className="w-5 h-5" /> : <EyeCloseIcon className="w-5 h-5" />}
+          icon={
+            showPassword ? (
+              <EyeOpenIcon className="h-5 w-5" />
+            ) : (
+              <EyeCloseIcon className="h-5 w-5" />
+            )
+          }
           onInputIconClick={togglePasswordVisibility}
           error={
             formik.touched.password && formik.errors.password
@@ -235,29 +236,29 @@ export default function Signup() {
           }
         />
 
-        <div className="-mt-5 center gap-2">
+        <div className="center -mt-5 gap-2">
           {passwordCriteria.map((criterion, index) => {
             return (
               <div
                 key={criterion.label}
-                className="px-2 py-1 center gap-1 bg-[#F0F2F5] rounded-lg border border-[#D0D5DD]"
+                className="center gap-1 rounded-lg border border-[#D0D5DD] bg-[#F0F2F5] px-2 py-1"
               >
                 <div className="size-3">
                   {passwordValidation.some(
-                    (v) => v.label === criterion.label && v.isValid
+                    (v) => v.label === criterion.label && v.isValid,
                   ) ? (
-                    <div className="size-3 center">
+                    <div className="center size-3">
                       <PasswordMatchIcon />
                     </div>
                   ) : (
-                    <div className="size-3 center">
+                    <div className="center size-3">
                       <PasswordNoMatchIcon />
                     </div>
                   )}
                 </div>
 
                 {/* <div className="size-3 bg-slate-300"></div> */}
-                <p className="font-medium text-sm leading-5 text-[#98A2B3]">
+                <p className="text-sm font-medium leading-5 text-[#98A2B3]">
                   {criterion.label}
                 </p>
               </div>

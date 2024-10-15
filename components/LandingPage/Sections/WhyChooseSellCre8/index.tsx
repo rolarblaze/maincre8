@@ -10,11 +10,11 @@ function WhyChooseSellCre8() {
         Why Choose{" "}
         <span className="text-2xl text-primary500 md:text-4xl lg:text-5.5xl">
           {" "}
-          SellCre8
+          SellCre8?
         </span>
       </h2>
 
-      <div className="flex w-full gap-5 overflow-x-auto md:grid md:grid-cols-2 md:gap-[38.67px] md:overflow-x-visible lg:grid-cols-4">
+      <div className="grid grid-cols-1 place-items-center gap-5 md:grid-cols-2 md:place-items-start md:gap-[38.67px] md:overflow-x-visible lg:grid-cols-4">
         {ChooseSellCre8Data.map((data, dataIdx) => {
           return (
             <WhyCard
