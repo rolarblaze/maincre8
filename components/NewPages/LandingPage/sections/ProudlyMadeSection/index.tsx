@@ -4,6 +4,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { proudlyMadeData } from "./components/proudlyMadeData";
+import { FadeUpDiv } from "@/components";
 
 function ProudlyMadeSection() {
   const controls = useAnimation();
@@ -59,7 +60,7 @@ function ProudlyMadeSection() {
   }, [animationSpeed, xValue, controls]);
 
   return (
-    <section className="w-full space-y-8 py-5 md:py-20">
+    <FadeUpDiv className="w-full space-y-8 py-5 md:py-20">
       <h3 className="text-[2rem]">
         Proudly Made by{" "}
         <span className="text-[2rem] text-primary500">SellCrea8</span>
@@ -102,7 +103,7 @@ function ProudlyMadeSection() {
           <span className="text-2xl md:text-[3.5rem]">next.</span>
         </p>
       </div>
-    </section>
+    </FadeUpDiv>
   );
 }
 

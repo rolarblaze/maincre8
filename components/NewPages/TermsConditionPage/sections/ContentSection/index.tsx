@@ -1,7 +1,8 @@
 "use client";
-import React from 'react';
+import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import { FadeUpDiv } from "@/components";
 import { termConditionsData } from "./constants";
 
 const ContentSection = () => {
@@ -19,7 +20,10 @@ const ContentSection = () => {
   };
 
   return (
-    <section className="full-width content-grid h-full min-h-[calc(100dvh-22rem)] bg-grey50 py-[6.25rem]">
+    <FadeUpDiv
+      up={false}
+      className="full-width content-grid h-full min-h-[calc(100dvh-22rem)] bg-grey50 py-[6.25rem]"
+    >
       <div className="mx-auto w-full max-w-3xl space-y-8 lg:p-6">
         {activeContent ? (
           <>
@@ -84,7 +88,7 @@ const ContentSection = () => {
           <p>No content available for this tab.</p>
         )}
       </div>
-    </section>
+    </FadeUpDiv>
   );
 };
 

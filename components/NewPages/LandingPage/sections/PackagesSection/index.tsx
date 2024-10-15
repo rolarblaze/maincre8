@@ -9,14 +9,14 @@ import {
   getArrowClass,
   getFocusClass,
 } from "./helperFunc";
-import { ResizablePanel } from "@/components";
+import { FadeUpDiv, ResizablePanel } from "@/components";
 import { FillArrowIcon } from "@/public/svgs";
 
 const PackagesSection = () => {
   const [hovered, setHovered] = useState<string | null>(null);
 
   return (
-    <div className="flex min-h-[500px] flex-wrap items-start justify-center gap-4 sm:gap-8 lg:min-h-72 lg:justify-between">
+    <FadeUpDiv className="flex min-h-[500px] flex-wrap items-start justify-center gap-4 sm:gap-8 lg:min-h-72 lg:justify-between">
       {packages.map(({ title, icon, under }) => (
         <Link
           href={`/shop/${title}`}
@@ -38,7 +38,7 @@ const PackagesSection = () => {
 
           <ResizablePanel className="w-full">
             {hovered === title && (
-              <div className="mt-2 flex w-full items-center justify-between px-2 pb-2 ">
+              <div className="mt-2 flex w-full items-center justify-between px-2 pb-2">
                 <p
                   className={`text-xs font-semibold sm:text-sm ${getUnderClass(title)}`}
                 >
@@ -51,7 +51,7 @@ const PackagesSection = () => {
           </ResizablePanel>
         </Link>
       ))}
-    </div>
+    </FadeUpDiv>
   );
 };
 export default PackagesSection;

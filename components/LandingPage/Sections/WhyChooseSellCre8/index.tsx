@@ -1,10 +1,11 @@
 import React from "react";
 import { ChooseSellCre8Data } from "./components/ChooseSellCre8Data";
 import WhyCard from "./components/WhyCard";
+import { FadeUpDiv } from "@/components";
 
 function WhyChooseSellCre8() {
   return (
-    <section className="w-full space-y-12 pb-0 pt-[60px] md:pb-12 lg:pb-[100px]">
+    <FadeUpDiv className="w-full space-y-12 pb-0 pt-[60px] md:pb-12 lg:pb-[100px]">
       <h2 className="text-2xl md:text-4xl lg:text-5.5xl">
         Why Choose{" "}
         <span className="text-2xl text-primary500 md:text-4xl lg:text-5.5xl">
@@ -26,7 +27,7 @@ function WhyChooseSellCre8() {
           );
         })}
       </div>
-    </section>
+    </FadeUpDiv>
   );
 }
 
