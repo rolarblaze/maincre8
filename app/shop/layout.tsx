@@ -54,7 +54,7 @@ export default function ShopLayout({
         dispatch(changePageData(AllInOneBundle));
         break;
       default:
-        router.push(`/shop/brand-design`);
+        router.push(`/shop/graphic-designs`);
         break;
     }
     router.push(`/shop/${title}`);
