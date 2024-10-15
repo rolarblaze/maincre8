@@ -1,13 +1,13 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { LogoIcon } from "@/public/svgs";
 import { AvatarProfile } from "@/public/icons";
+import { hideComponent } from "@/hooks";
 import CartButton from "./CartButton";
 
 const NewNavbar = () => {
-  const router = useRouter();
   const pathname = usePathname();
   const [cartOpen, setCartOpen] = useState(false);
   const navlink = [
@@ -21,18 +21,8 @@ const NewNavbar = () => {
     },
   ];
 
-  const hide =
-    pathname === "/cart" ||
-    pathname === "/signup" ||
-    pathname === "/checkout" ||
-    pathname === "/email-verify";
-
+  const hide = hideComponent(pathname);
   const authenticated = pathname === "/checkout";
-
-  const handleCart = () => {
-    setCartOpen((prev) => !prev);
-    router.push("/cart");
-  };
 
   return (
     <header
@@ -77,7 +67,12 @@ const NewNavbar = () => {
               Get Started
             </Link>
 
-            <CartButton click={cartOpen} onClick={handleCart} />
+            <Link href={"/cart"} className="block">
+              <CartButton
+                click={cartOpen}
+                onClick={() => setCartOpen((prev) => !prev)}
+              />
+            </Link>
           </div>
         )}
 

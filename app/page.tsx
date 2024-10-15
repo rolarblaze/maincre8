@@ -5,6 +5,7 @@ import {
   LearnMoreSection,
   PackagesSection,
   CustomerReviews,
+  PageLayout,
 } from "@/components";
 import WhyChooseSellCre8 from "@/components/LandingPage/Sections/WhyChooseSellCre8";
 import IndustryLeadingExperts from "@/components/NewPages/LandingPage/sections/IndustryLeadingExperts";
@@ -12,7 +13,7 @@ import ProudlyMadeSection from "@/components/NewPages/LandingPage/sections/Proud
 
 const Home = () => {
   return (
-    <>
+    <PageLayout>
       <HeroSection />
       <PackagesSection />
       <ProudlyMadeSection />
@@ -22,7 +23,7 @@ const Home = () => {
       <CustomerReviews />
       <IndustryLeadingExperts />
       <CtaSection />
-    </>
+    </PageLayout>
   );
 };
 export default Home;
