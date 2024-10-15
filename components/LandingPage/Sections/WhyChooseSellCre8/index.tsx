@@ -4,16 +4,16 @@ import WhyCard from "./components/WhyCard";
 
 function WhyChooseSellCre8() {
   return (
-    <section className="w-full space-y-12 pt-[60px] pb-0 md:pb-12 lg:pb-[100px] ">
+    <section className="w-full space-y-12 pb-0 pt-[60px] md:pb-12 lg:pb-[100px]">
       <h2 className="text-2xl md:text-4xl lg:text-5.5xl">
         Why Choose{" "}
-        <span className="text-2xl md:text-4xl lg:text-5.5xl text-primary500">
+        <span className="text-2xl text-primary500 md:text-4xl lg:text-5.5xl">
           {" "}
-          SellCre8
+          SellCre8?
         </span>
       </h2>
 
-      <div className="flex w-full overflow-x-auto md:overflow-x-visible gap-5 md:grid md:grid-cols-2 lg:grid-cols-4 md:gap-[38.67px]">
+      <div className="grid grid-cols-1 place-items-center gap-5 md:grid-cols-2 md:place-items-start md:gap-[38.67px] md:overflow-x-visible lg:grid-cols-4">
         {ChooseSellCre8Data.map((data, dataIdx) => {
           return (
             <WhyCard

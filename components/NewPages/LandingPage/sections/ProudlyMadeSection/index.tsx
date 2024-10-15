@@ -97,9 +97,9 @@ function ProudlyMadeSection() {
           height={222.78}
           className="h-full max-h-[9rem] w-full max-w-[9rem] md:max-h-[12rem] md:max-w-[12rem]"
         />
-        <p className="flex max-w-[25rem] flex-col justify-center gap-5 py-5 pr-10 text-end font-bold text-primary50 md:gap-10">
-          <span className="text-xl md:text-[3.5rem]">Your brand is</span>
-          <span className="text-xl md:text-[3.5rem]">next.</span>
+        <p className="flex max-w-[25rem] flex-col justify-center gap-4 py-5 pr-10 text-end font-bold text-primary50 md:gap-10">
+          <span className="text-2xl md:text-[3.5rem]">Your brand is</span>
+          <span className="text-2xl md:text-[3.5rem]">next.</span>
         </p>
       </div>
     </section>
