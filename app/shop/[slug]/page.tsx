@@ -1,15 +1,16 @@
 "use client";
 
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { PageLayout } from "@/components";
+import bundleCardsDetails from "@/components/Shop/data/bundleCardsDetails";
 import ShopWhyChooseSellCre8Data from "@/components/Shop/data/whyChooseUs";
-import { useEffect } from "react";
+import BundleListCardOptions from "@/components/Shop/section/BundleListCardOptions";
 import BundlePreviewBanner from "@/components/Shop/section/BundlePreviewBanner";
 import BundlePackagesPlan from "@/components/Shop/section/BundlePackagesPlan";
 import NotSureBanner from "@/components/Shop/section/NotSureBanner";
 import WhyChooseUs from "@/components/Shop/section/WhyChooseUs";
 import BundleAddOns from "@/components/Shop/section/BundleAddOns";
-import { useParams } from "next/navigation";
-import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
-import { changePageData } from "@/redux/shop";
 import {
   BrandDesign,
   GraphicDesigns,
@@ -17,12 +18,16 @@ import {
   ContentWriting,
   AllInOneBundle,
 } from "@/components/Shop/data/bundle-pricing-data";
+import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
+import { changePageData } from "@/redux/shop";
+
+type BundlesType = "brand-design" | "graphic-designs" | "digital-marketing" | "content-writing" | "all-in-one-bundle"
 
 const Shop = () => {
   const dispatch = useAppDispatch();
   const bundleParam = useParams<{ slug: string }>();
+  const pageViewData = useAppSelector((state: RootState) => state.pageViewData).data;
 
-  // values to check against whether the route is available or not
   const bundleOptions = [
     "brand-design",
     "graphic-designs",
@@ -30,67 +35,51 @@ const Shop = () => {
     "content-writing",
     "all-in-one-bundle",
   ];
+  const mapBundles = {
+    "brand-design": BrandDesign,
+    "graphic-designs": GraphicDesigns,
+    "digital-marketing": DigitalMarketing,
+    "content-writing": ContentWriting,
+    "all-in-one-bundle": AllInOneBundle,
+  }
 
-  // gets the current page view data
-  const pageViewData = useAppSelector(
-    (state: RootState) => state.pageViewData,
-  ).data;
-
-  // function to handle updating the page data view
   const updatePageViewData = (title: string) => {
-    switch (title) {
-      case bundleOptions[0]:
-        dispatch(changePageData(BrandDesign));
-        break;
-      case bundleOptions[1]:
-        dispatch(changePageData(GraphicDesigns));
-        break;
-      case bundleOptions[2]:
-        dispatch(changePageData(DigitalMarketing));
-        break;
-      case bundleOptions[3]:
-        dispatch(changePageData(ContentWriting));
-        break;
-      case bundleOptions[4]:
-        dispatch(changePageData(AllInOneBundle));
-        break;
-      default:
-        break;
-    }
+    let bundle = mapBundles[title as BundlesType]
+    dispatch(changePageData(bundle));
   };
 
-  // loads up the first page data view
   useEffect(() => {
     let bundleName = bundleParam.slug;
     if (bundleOptions.includes(bundleName)) {
       updatePageViewData(bundleName);
     } else {
-      window.location.href = "/shop/Brand-Design";
+      window.location.href = "/shop/brand-design";
     }
   }, []);
 
   return (
-    <main className="space-y-20 xs:max-md:space-y-10">
-      {/* Selected Bundle Banner Preview */}
-      <BundlePreviewBanner
-        title={pageViewData.title}
-        message={pageViewData.message}
-        body={pageViewData.body}
-        icon={pageViewData.icon}
-      />
+      <main className="space-y-20 xs:max-md:space-y-10">
 
-      {/* Selected Bundle Packages Plan */}
-      <BundlePackagesPlan packagesPlans={pageViewData.packagePlans} />
+        {/* Selected Bundle Banner Preview */}
+        <BundlePreviewBanner
+          title={pageViewData.title}
+          message={pageViewData.message}
+          body={pageViewData.body}
+          icon={pageViewData.icon}
+        />
 
-      {/* Not sure of the right plan banner */}
-      <NotSureBanner />
+        {/* Selected Bundle Packages Plan */}
+        <BundlePackagesPlan packagesPlans={pageViewData.packagePlans} />
 
-      {/* Why choose us section */}
-      <WhyChooseUs reasons={ShopWhyChooseSellCre8Data} />
+        {/* Not sure of the right plan banner */}
+        <NotSureBanner />
 
-      {/* Selected Bundle Addons Section */}
-      <BundleAddOns title={pageViewData.title} addOns={pageViewData.addons} />
-    </main>
+        {/* Why choose us section */}
+        <WhyChooseUs reasons={ShopWhyChooseSellCre8Data} />
+
+        {/* Selected Bundle Addons Section */}
+        <BundleAddOns title={pageViewData.title} addOns={pageViewData.addons} />
+      </main>
   );
 };
 export default Shop;

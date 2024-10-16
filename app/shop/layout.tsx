@@ -14,17 +14,17 @@ import {
 } from "@/components/Shop/data/bundle-pricing-data";
 import { PageLayout } from "@/components";
 
+type BundlesType = "brand-design" | "graphic-designs" | "digital-marketing" | "content-writing" | "all-in-one-bundle"
+
 export default function ShopLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+
   const router = useRouter();
   const dispatch = useAppDispatch();
-  const bundleParam = useParams<{ slug: string }>();
-  const pageViewData = useAppSelector(
-    (state: RootState) => state.pageViewData,
-  ).data;
+  const pageViewData = useAppSelector((state: RootState) => state.pageViewData).data;
 
   // values to check against whether the route is available or not
   const bundleOptions = [
@@ -34,30 +34,19 @@ export default function ShopLayout({
     "content-writing",
     "all-in-one-bundle",
   ];
+  const mapBundles = {
+    "brand-design": BrandDesign,
+    "graphic-designs": GraphicDesigns,
+    "digital-marketing": DigitalMarketing,
+    "content-writing": ContentWriting,
+    "all-in-one-bundle": AllInOneBundle,
+  }
 
   // function to handle updating the page data view
   const updatePageViewData = (title: string) => {
     title = title.toLowerCase().replaceAll(" ", "-");
-    switch (title) {
-      case bundleOptions[0]:
-        dispatch(changePageData(BrandDesign));
-        break;
-      case bundleOptions[1]:
-        dispatch(changePageData(GraphicDesigns));
-        break;
-      case bundleOptions[2]:
-        dispatch(changePageData(DigitalMarketing));
-        break;
-      case bundleOptions[3]:
-        dispatch(changePageData(ContentWriting));
-        break;
-      case bundleOptions[4]:
-        dispatch(changePageData(AllInOneBundle));
-        break;
-      default:
-        router.push(`/shop/graphic-designs`);
-        break;
-    }
+    let bundle = mapBundles[title as BundlesType]
+    dispatch(changePageData(bundle));
     router.push(`/shop/${title}`);
   };
 
