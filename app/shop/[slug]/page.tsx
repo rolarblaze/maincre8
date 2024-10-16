@@ -18,61 +18,47 @@ import {
   ContentWriting,
   AllInOneBundle,
 } from "@/components/Shop/data/bundle-pricing-data";
+import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
+import { changePageData } from "@/redux/shop";
+
+type BundlesType = "brand-design" | "graphic-designs" | "digital-marketing" | "content-writing" | "all-in-one-bundle"
 
 const Shop = () => {
+  const dispatch = useAppDispatch();
   const bundleParam = useParams<{ slug: string }>();
-  const [pageViewData, setPageViewData] = useState(BrandDesign);
+  const pageViewData = useAppSelector((state: RootState) => state.pageViewData).data;
+
   const bundleOptions = [
-    "Brand Design",
-    "Graphic Designs",
-    "Digital Marketing",
-    "Content Writing",
-    "All-In-One Bundle",
+    "brand-design",
+    "graphic-designs",
+    "digital-marketing",
+    "content-writing",
+    "all-in-one-bundle",
   ];
+  const mapBundles = {
+    "brand-design": BrandDesign,
+    "graphic-designs": GraphicDesigns,
+    "digital-marketing": DigitalMarketing,
+    "content-writing": ContentWriting,
+    "all-in-one-bundle": AllInOneBundle,
+  }
+
   const updatePageViewData = (title: string) => {
-    switch (title) {
-      case bundleOptions[0]:
-        setPageViewData(BrandDesign);
-        break;
-      case bundleOptions[1]:
-        setPageViewData(GraphicDesigns);
-        break;
-      case bundleOptions[2]:
-        setPageViewData(DigitalMarketing);
-        break;
-      case bundleOptions[3]:
-        setPageViewData(ContentWriting);
-        break;
-      case bundleOptions[4]:
-        setPageViewData(AllInOneBundle);
-        break;
-      default:
-        break;
-    }
+    let bundle = mapBundles[title as BundlesType]
+    dispatch(changePageData(bundle));
   };
 
   useEffect(() => {
-    let bundleName = bundleParam.slug.replaceAll("%20", " ");
+    let bundleName = bundleParam.slug;
     if (bundleOptions.includes(bundleName)) {
       updatePageViewData(bundleName);
     } else {
-      window.location.href = "/shop/Brand Design";
+      window.location.href = "/shop/brand-design";
     }
   }, []);
 
   return (
-    <PageLayout>
-      <main className="space-y-20 px-10 pb-20 xs:max-md:space-y-10 xs:max-md:px-0 xs:max-md:pb-10">
-        <h1 className="w-full text-center text-3xl font-semibold leading-9 xs:max-md:text-2xl">
-          Choose the Right Plan for Your Business
-        </h1>
-
-        {/* Bundles Card-List Options To Choose From */}
-        <BundleListCardOptions
-          bundleCardsDetails={bundleCardsDetails}
-          pageViewDataTitle={pageViewData.title}
-          updatePageViewData={updatePageViewData}
-        />
+      <main className="space-y-20 xs:max-md:space-y-10">
 
         {/* Selected Bundle Banner Preview */}
         <BundlePreviewBanner
@@ -94,7 +80,6 @@ const Shop = () => {
         {/* Selected Bundle Addons Section */}
         <BundleAddOns title={pageViewData.title} addOns={pageViewData.addons} />
       </main>
-    </PageLayout>
   );
 };
 export default Shop;

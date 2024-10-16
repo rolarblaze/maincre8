@@ -44,6 +44,7 @@ export default function RootLayout({
         <meta name="keywords" content={keywords ?? ""} />
         <title>{pageTitle}</title>
         <link rel="icon" href="/favicon.ico" />
+        <script async src="https://openexchangerates.github.io/money.js/money.min.js"></script>
       </head>
       <body className={inter.className}>
         <GlobalProvider>

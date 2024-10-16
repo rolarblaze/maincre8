@@ -8,7 +8,7 @@ import { fileUploadReducer } from "./file";
 import { getPackageReducer } from "./getPackage";
 import { OrderSlice } from "./order";
 import { tabsSlice } from "./legal";
-import { shopReducer } from "./shop";
+import { PageDataSlice } from "./shop";
 import { cartSlice } from "./cart";
 import { trackerReducer } from "./servicesTracker/tracker";
 import servicesSlice from "./servicesTracker";
@@ -23,7 +23,7 @@ export const store = configureStore({
     // all your slice reducers goes here
     auth: AuthSlice.reducer,
     alerts: AlertsSlice.reducer,
-    shop: shopReducer,
+    pageViewData: PageDataSlice.reducer,
     newsletter: newsletterReducer,
     fileUpload: fileUploadReducer,
     brief: briefReducer,

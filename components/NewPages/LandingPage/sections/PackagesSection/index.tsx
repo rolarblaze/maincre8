@@ -19,7 +19,7 @@ const PackagesSection = () => {
     <FadeUpDiv className="flex min-h-[500px] flex-wrap items-start justify-center gap-4 sm:gap-8 lg:min-h-72 lg:justify-between">
       {packages.map(({ title, icon, under }) => (
         <Link
-          href={`/shop/${title}`}
+          href={`/shop/${title.toLowerCase().replaceAll(" ","-")}`}
           key={title}
           onFocus={() => setHovered(title)}
           onMouseEnter={() => setHovered(title)}

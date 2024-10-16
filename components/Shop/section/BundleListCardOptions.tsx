@@ -22,7 +22,7 @@ const BundleListCardOptions = ({
 }: BundleListCardOptionsPropsType) => {
   return (
     <section>
-      <ul className="no-scrollbar flex w-full flex-wrap justify-between gap-4 xs:max-md:sticky xs:max-md:top-60 xs:max-md:gap-5 xs:max-md:overflow-auto">
+      <ul className="sticky top-0 no-scrollbar flex w-full flex-wrap justify-between gap-4 xs:max-md:sticky xs:max-md:top-60 xs:max-md:gap-5 xs:max-md:overflow-auto">
         {bundleCardsDetails.map((bundleCard) => {
           return (
             <li

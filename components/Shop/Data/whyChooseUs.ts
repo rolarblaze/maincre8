@@ -34,7 +34,7 @@ const ShopWhyChooseSellCre8Data = [
   {
     iconSrc: `${rootPath}/package_icon.svg`,
     iconAlt: "Support Icon",
-    title: " Custom Illustrations",
+    title: " Custom Support Illustrations",
     body: " Stand out with unique, tailor-made visuals for your brand.",
   },
 ];
