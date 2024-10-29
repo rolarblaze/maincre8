@@ -7,6 +7,9 @@ import InputField from "@/components/Forms/InputField";
 import { useAppSelector, useAppDispatch } from "@/redux/store";
 import { resendVerificationCode, verifyUser } from "@/redux/auth/features";
 import { addAlert } from "@/redux/alerts";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
 
 const VerifyEmail = () => {
   const [email, setEmail] = useState<string>("");
@@ -54,10 +57,9 @@ const VerifyEmail = () => {
     }
   };
 
-  const handleVerifyEmail = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleVerifyEmail = async (values: { otp: string }) => {
     try {
-      const actionResult = await dispatch(verifyUser({ otp, email }));
+      const actionResult = await dispatch(verifyUser({ otp: values.otp, email }));
       if (verifyUser.fulfilled.match(actionResult)) {
         dispatch(
           addAlert({
@@ -86,17 +88,13 @@ const VerifyEmail = () => {
     }
   };
 
+  // Yup schema for validation
+  const validationSchema = Yup.object().shape({
+    otp: Yup.string()
+      .required("OTP is required")
+      .matches(/^\d{6}$/, "OTP must be a 6-digit number"),
+  });
 
-  const dispatchAlert = () => {
-    dispatch(
-      addAlert({
-        id: "",
-        headText: "Error",
-        subText: "Olajghsagjkhajhjewhjkhfejhfkhefnkhenkhafkherjkh.akj.rmkfhk.renhekrhk.rh",
-        type: "error",
-      })
-    );
-  }
 
   return (
     <Fragment>
@@ -106,18 +104,33 @@ const VerifyEmail = () => {
       <p className="font-normal text-base leading-6 text-[#667185]">
         We sent a 6 digit code to jt@sellmedia.africa. Enter it below.
       </p>
-      <div className="mt-5">
-      <InputField type="text" label="Code" placeholder="Enter code" />
-      </div>
-      <div className="mt-5">
-      <Button
-      onClick={dispatchAlert}
-        label="Login to Dashboard"
-        classNames="text-sm text-white font-semibold"
-      />
-      </div>
-      
-     
+      <Formik
+        initialValues={{ otp: "" }}
+        validationSchema={validationSchema}
+        onSubmit={handleVerifyEmail}
+      >
+        {({ errors, touched }) => (
+          <Form className="mt-5 flex flex-col gap-5">
+            <Field
+              name="otp"
+              as={InputField} // Render InputField as a Formik Field
+              type="text"
+              label="Code"
+              placeholder="Enter code"
+              error={touched.otp && errors.otp} // Display error if touched and invalid
+            />
+
+
+            <Button
+              type="submit"
+              label="Login to Dashboard"
+              classNames="text-sm text-white font-semibold"
+            />
+          </Form>
+        )}
+      </Formik>
+
+
       <div className="center -mt-2">
         <Button
           onClick={handleResendCode}

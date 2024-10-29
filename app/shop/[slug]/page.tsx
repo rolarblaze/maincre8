@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import { useParams} from "next/navigation";
-import ShopWhyChooseSellCre8Data from "@/components/Shop/data/whyChooseUs";
+import ShopWhyChooseSellCre8Data from "@/components/Shop/Data/whyChooseUs";
 import BundlePreviewBanner from "@/components/Shop/section/BundlePreviewBanner";
 import BundlePackagesPlan from "@/components/Shop/section/BundlePackagesPlan";
 import NotSureBanner from "@/components/Shop/section/NotSureBanner";
@@ -14,7 +14,7 @@ import {
   DigitalMarketing,
   ContentWriting,
   AllInOneBundle,
-} from "@/components/Shop/data/bundle-pricing-data";
+} from "@/components/Shop/Data/bundle-pricing-data";
 import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { changePageData } from "@/redux/shop";
 

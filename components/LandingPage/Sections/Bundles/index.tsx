@@ -11,11 +11,11 @@ import { TabButton, Card, serviceBundles } from "./Components";
 import { useAppDispatch, useAppSelector, RootState } from "@/redux/store";
 import { getServices } from "@/redux/shop/features";
 import Loader from "@/components/Spinner/Loader";
-import { mapServicesToProps } from "@/components/Shop/data/shopData";
+import { mapServicesToProps } from "@/components/Shop/Data/shopData";
 
 const Bundles = () => {
   const dispatch = useAppDispatch();
-  const shopState = useAppSelector((state: RootState) => state.shop);
+  const shopState = useAppSelector((state: RootState) => state.service);
   const [activeTab, setActiveTab] = useState<
     "digital" | "creative" | "content"
   >("digital");

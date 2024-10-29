@@ -17,9 +17,12 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
 
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    // Set initial mobile state based on window width
+    setIsMobile(window.innerWidth < 768);
+
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
@@ -95,9 +98,8 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
             </div>
           )}
           <main
-            className={`flex-1 p-6 overflow-y-auto noScrollbar ${
-              isOverview ? "bg-dashboard-bg" : "bg-white"
-            }`}
+            className={`flex-1 p-6 overflow-y-auto noScrollbar ${isOverview ? "bg-dashboard-bg" : "bg-white"
+              }`}
           >
             {children}
           </main>

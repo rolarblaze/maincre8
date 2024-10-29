@@ -18,7 +18,7 @@ const cleanServiceName = (name: string) => {
 const Services = () => {
   const dispatch = useAppDispatch();
   const { services, isLoading, error, packages } = useAppSelector(
-    (state) => state.shop
+    (state) => state.service
   );
 
   const [limit, setLimit] = useState<number>(1);

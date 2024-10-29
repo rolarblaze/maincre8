@@ -11,7 +11,7 @@ import UpcomingAppointment from "@/components/Dashboard/UpcomingAppointment";
 import { BulbIcon } from "@/public/icons";
 import { getUserOrderHistory } from "@/redux/servicesTracker/features";
 import { fetchLatestAppointments } from "@/redux/order/features";
-import { getServices } from "@/redux/shop/features";
+import { getServices } from "@/redux/services/features";
 import { fetchActivityStatistics } from "@/redux/auth/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { useRouter } from "next/navigation";
@@ -20,7 +20,7 @@ import { useEffect } from "react";
 const Overview = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const { services, isLoading, error } = useAppSelector((state) => state.shop);
+  const { services, isLoading, error } = useAppSelector((state) => state.service);
   const { orderHistory } = useAppSelector((state) => state.services);
   const { isLoadingProfile, profile } = useAppSelector((state) => state.auth);
   const { appointments, isApointmentLoading } = useAppSelector(

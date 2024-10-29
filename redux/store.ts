@@ -12,6 +12,7 @@ import { PageDataSlice } from "./shop";
 import { cartSlice } from "./cart";
 import { trackerReducer } from "./servicesTracker/tracker";
 import servicesSlice from "./servicesTracker";
+import serviceSlice from "./services";
 import {
   contactFormReducer,
   newsletterReducer,
@@ -34,6 +35,7 @@ export const store = configureStore({
     contactForm: contactFormReducer,
     tabs: tabsSlice.reducer,
     cart: cartSlice.reducer,
+    service: serviceSlice,
   },
 });
 

@@ -4,12 +4,12 @@ import { useAppDispatch, useAppSelector } from "@/redux/store";
 import Section from "./Sections";
 import { getServices } from "../../redux/shop/features";
 import { RootState } from "@/redux/store";
-import { mapServicesToProps } from "./data/shopData";
+import { mapServicesToProps } from "./Data/shopData";
 import Loader from "../Spinner/Loader";
 
 const ShopSections = () => {
   const dispatch = useAppDispatch();
-  const shopState = useAppSelector((state: RootState) => state.shop);
+  const shopState = useAppSelector((state: RootState) => state.service);
 
   useEffect(() => {
     dispatch(getServices());
