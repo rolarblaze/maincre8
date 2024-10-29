@@ -1,3 +1,4 @@
+import { Metadata } from "next";
 import {
   AppWrapper,
   HomepageCTA,
@@ -9,6 +10,19 @@ import {
   WhoWeAre,
   HomepageHero,
 } from "@/components";
+
+export const metadata: Metadata = {
+  title: "About SellCrea8 | Innovating Marketing for Businesses",
+  description:
+    "Learn more about SellCrea8, your trusted partner in branding, content, and marketing. We provide businesses with the tools and expertise to thrive in the digital space.",
+  keywords: [
+    "SellCrea8",
+    "Innovative Marketing",
+    "Business Branding",
+    "Digital Expertise",
+    "Content and Branding Solutions",
+  ],
+};
 
 export default function AboutUs() {
   return (

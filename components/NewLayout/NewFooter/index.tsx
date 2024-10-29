@@ -78,7 +78,7 @@ const NewFooter = () => {
 
           <ul className="flex items-center justify-center gap-12">
             {navlinks2.map(({ name, link }) => (
-              <li key={name}>
+              <li key={name} className="hover:text-grey300">
                 <Link href={link}>{name}</Link>
               </li>
             ))}

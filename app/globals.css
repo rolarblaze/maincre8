@@ -4,8 +4,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
 @layer components {
   .center {
     @apply flex items-center justify-center;
@@ -25,8 +23,6 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
-
-
 
 body {
   margin: 0 auto;
@@ -58,46 +54,6 @@ h2 {
 h3,
 h4 {
   font-size: 1.25rem;
-}
-
-/* GRID LAYOUT */
-.content-grid {
-  --padding-inline: 1.25rem;
-  --content-max-width: 1240px;
-  --layout-max-width: 1440px;
-
-  --breakout-size: calc(
-    (var(--breakout-max-width) - var(--content-max-width)) / 2
-  );
-
-  display: grid;
-  grid-template-columns:
-    [full-width-start]
-    minmax(var(--padding-inline), 1fr)
-    [content-start]
-    min(100% - (var(--padding-inline) * 2), var(--content-max-width))
-    [content-end]
-    minmax(var(--padding-inline), 1fr)
-    [full-width-end];
-}
-
-.content-grid > :not(.full-width) {
-  grid-column: content;
-}
-
-.content-grid > .full-width {
-  grid-column: full-width;
-}
-
-/* Hide scrollbar for Chrome, Safari, and Opera */
-.no-scrollbar::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge, and Firefox */
-.no-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
 }
 
 @media screen and (min-width: 768px) {
@@ -147,117 +103,159 @@ h4 {
   }
 }
 
-.noScrollbar {
-  -ms-overflow-style: none !important; /* Internet Explorer 10+ */
-  scrollbar-width: none !important; /* Firefox */
-}
+@layer utilities {
+  /* GRID LAYOUT */
+  .content-grid {
+    --padding-inline: 1.25rem;
+    --content-max-width: 1240px;
+    --layout-max-width: 1440px;
 
-.noScrollbar::-webkit-scrollbar {
-  display: none !important; /* Safari and Chrome */
-}
+    --breakout-size: calc(
+      (var(--breakout-max-width) - var(--content-max-width)) / 2
+    );
 
-/* ----- tooltip---- */
-.relative {
-  position: relative;
-}
+    display: grid;
+    grid-template-columns:
+      [full-width-start]
+      minmax(var(--padding-inline), 1fr)
+      [content-start]
+      min(100% - (var(--padding-inline) * 2), var(--content-max-width))
+      [content-end]
+      minmax(var(--padding-inline), 1fr)
+      [full-width-end];
+  }
 
-.tooltip {
-  position: absolute;
-  top: 50%;
-  left: 100%;
-  transform: translateY(-50%);
-  /* background-color: #101928; */
-  background-color: #fff;
-  border: 1px solid #f0f2f5;
-  padding: 16px;
-  width: 330px;
-  border-radius: 8px;
-  z-index: 10;
-  white-space: pre-wrap;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  -ms-border-radius: 8px;
-  -o-border-radius: 8px;
-}
+  .content-grid > :not(.full-width) {
+    grid-column: content;
+  }
 
-.tooltip-arrow {
-  position: absolute;
-  top: 50%;
-  left: -10px;
-  width: 0;
-  height: 0;
-  border-top: 15px solid transparent;
-  border-bottom: 15px solid transparent;
-  border-right: 15px solid #fff;
-  transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-}
+  .content-grid > .full-width {
+    grid-column: full-width;
+  }
 
-.tooltip-text {
-  display: block;
-}
+  /* Hide scrollbar for Chrome, Safari, and Opera */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
 
-/* styles/global.css */
-.phone-input-container {
-  display: flex;
-  flex-direction: column;
-  font-family: inherit !important;
-}
+  /* Hide scrollbar for IE, Edge, and Firefox */
+  .no-scrollbar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
 
-.react-tel-input .form-control {
-  width: 100% !important;
-  height: 56px !important;
-  border: 1px solid #d0d5dd !important;
-  border-radius: 6px !important;
-  -webkit-border-radius: 6px;
-  -moz-border-radius: 6px;
-  -ms-border-radius: 6px;
-  -o-border-radius: 6px;
-}
+  /* ----- tooltip---- */
+  .relative {
+    position: relative;
+  }
 
-.react-tel-input .flag-dropdown {
-  border: none !important;
-  background-color: transparent !important;
-}
+  .tooltip {
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translateY(-50%);
+    /* background-color: #101928; */
+    background-color: #fff;
+    border: 1px solid #f0f2f5;
+    padding: 16px;
+    width: 330px;
+    border-radius: 8px;
+    z-index: 10;
+    white-space: pre-wrap;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+  }
 
-.phone-input {
-  width: 100%;
-  padding: 8px;
-  margin-top: 8px;
-  font-size: 16px;
-}
+  .tooltip-arrow {
+    position: absolute;
+    top: 50%;
+    left: -10px;
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-right: 15px solid #fff;
+    transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+  }
 
-.phone-input-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
+  .tooltip-text {
+    display: block;
+  }
 
-.phone-input-dropdown {
-  overflow-y: auto;
-}
+  /* styles/global.css */
+  .phone-input-container {
+    display: flex;
+    flex-direction: column;
+    font-family: inherit !important;
+  }
 
-.loader {
-  --d: 22px;
-  width: 4px;
-  height: 4px;
-  border-radius: 50%;
-  color: #98a2b3;
-  box-shadow:
-    calc(1 * var(--d)) calc(0 * var(--d)) 0 0,
-    calc(0.707 * var(--d)) calc(0.707 * var(--d)) 0 1px,
-    calc(0 * var(--d)) calc(1 * var(--d)) 0 2px,
-    calc(-0.707 * var(--d)) calc(0.707 * var(--d)) 0 3px,
-    calc(-1 * var(--d)) calc(0 * var(--d)) 0 4px,
-    calc(-0.707 * var(--d)) calc(-0.707 * var(--d)) 0 5px,
-    calc(0 * var(--d)) calc(-1 * var(--d)) 0 6px;
-  animation: l27 1s infinite steps(8);
-}
-@keyframes l27 {
-  100% {
-    transform: rotate(1turn);
+  .react-tel-input .form-control {
+    width: 100% !important;
+    height: 56px !important;
+    border: 1px solid #d0d5dd !important;
+    border-radius: 6px !important;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    -ms-border-radius: 6px;
+    -o-border-radius: 6px;
+  }
+
+  .react-tel-input .flag-dropdown {
+    border: none !important;
+    background-color: transparent !important;
+  }
+
+  .phone-input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 8px;
+    font-size: 16px;
+  }
+
+  .phone-input-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .phone-input-dropdown {
+    overflow-y: auto;
+  }
+
+  .noScrollbar {
+    -ms-overflow-style: none !important; /* Internet Explorer 10+ */
+    scrollbar-width: none !important; /* Firefox */
+  }
+
+  .noScrollbar::-webkit-scrollbar {
+    display: none !important; /* Safari and Chrome */
+  }
+
+  .loader {
+    --d: 22px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    color: #98a2b3;
+    box-shadow:
+      calc(1 * var(--d)) calc(0 * var(--d)) 0 0,
+      calc(0.707 * var(--d)) calc(0.707 * var(--d)) 0 1px,
+      calc(0 * var(--d)) calc(1 * var(--d)) 0 2px,
+      calc(-0.707 * var(--d)) calc(0.707 * var(--d)) 0 3px,
+      calc(-1 * var(--d)) calc(0 * var(--d)) 0 4px,
+      calc(-0.707 * var(--d)) calc(-0.707 * var(--d)) 0 5px,
+      calc(0 * var(--d)) calc(-1 * var(--d)) 0 6px;
+    animation: l27 1s infinite steps(8);
+  }
+  @keyframes l27 {
+    100% {
+      transform: rotate(1turn);
+    }
   }
 }

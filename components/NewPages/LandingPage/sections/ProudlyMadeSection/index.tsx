@@ -4,68 +4,79 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { proudlyMadeData } from "./components/proudlyMadeData";
+import { FadeUpDiv } from "@/components";
 
 function ProudlyMadeSection() {
-  const controls = useAnimation(); // Control animation manually
-  const [xValue, setXValue] = useState(-1000); // Initial animation distance
-  const [animationSpeed, setAnimationSpeed] = useState(8); // Faster initial speed
+  const controls = useAnimation();
+  const [xValue, setXValue] = useState(-1000);
+  const [animationSpeed, setAnimationSpeed] = useState(8); // Initial speed
 
   useEffect(() => {
-    // Function to calculate the `x` value based on screen size
     const handleResize = () => {
       const screenWidth = window.innerWidth;
 
-      // Dynamically set the distance to move based on screen size
       if (screenWidth < 768) {
-        setXValue(-3000); // For small screens (mobile)
+        setXValue(-3000);
       } else if (screenWidth < 1024) {
-        setXValue(-3000); // For medium screens (tablets)
+        setXValue(-3000);
       } else {
-        setXValue(-3000); // For large screens (desktop)
+        setXValue(-3000);
       }
     };
 
-    handleResize(); // Set initial value on mount
-    window.addEventListener("resize", handleResize); // Update on window resize
+    handleResize();
+    window.addEventListener("resize", handleResize);
 
-    return () => window.removeEventListener("resize", handleResize); // Cleanup
-  }, []);
+    controls.start({
+      x: xValue,
+      transition: {
+        ease: "linear",
+        duration: animationSpeed,
+        repeat: Infinity,
+      },
+    });
 
-  // Function to slow down animation on hover
+    return () => window.removeEventListener("resize", handleResize);
+  }, [xValue, animationSpeed, controls]);
+
   const handleHover = () => {
-    controls.start({
-      x: xValue,
-      transition: { ease: "linear", duration: 40, repeat: Infinity },
-    });
+    setAnimationSpeed(40); // Slow down on hover
   };
 
-  // Function to restore speed when hover ends
   const handleMouseLeave = () => {
+    setAnimationSpeed(8); // Restore original speed
+  };
+
+  // Trigger the animation when speed changes
+  useEffect(() => {
     controls.start({
       x: xValue,
-      transition: { ease: "linear", duration: 10, repeat: Infinity },
+      transition: {
+        ease: "linear",
+        duration: animationSpeed,
+        repeat: Infinity,
+      },
     });
-  };
+  }, [animationSpeed, xValue, controls]);
 
   return (
-    <section className="w-full space-y-8 py-5 md:py-20">
+    <FadeUpDiv className="w-full space-y-8 py-5 md:py-20">
       <h3 className="text-[2rem]">
         Proudly Made by{" "}
         <span className="text-[2rem] text-primary500">SellCrea8</span>
       </h3>
-      {/* Moving Cards */}
       <motion.div
         className="flex scroll-pl-5 gap-10"
-        animate={controls} // Animating using the controls
-        initial={{ x: 0 }} // Starting position
+        animate={controls}
+        initial={{ x: 0 }}
         transition={{
           repeat: Infinity,
           duration: animationSpeed,
           ease: "linear",
         }}
         style={{ whiteSpace: "nowrap" }}
-        onMouseEnter={handleHover} // Slow down on hover
-        onMouseLeave={handleMouseLeave} // Restore speed when hover ends
+        onMouseEnter={handleHover}
+        onMouseLeave={handleMouseLeave}
       >
         {proudlyMadeData.map((card, cardIdx) => (
           <Image
@@ -79,22 +90,20 @@ function ProudlyMadeSection() {
         ))}
       </motion.div>
 
-      {/* Band image */}
-      <Image
-        src={assetLibrary.nextBrandImage}
-        alt="Next Brand Image"
-        width={1240}
-        height={168}
-        className="hidden md:block md:h-[168px] md:max-w-[1240px]"
-      />
-      <Image
-        src={assetLibrary.mobileNextBrandImage}
-        alt="Next Brand Image"
-        width={339}
-        height={104}
-        className="h-[150px] w-full md:hidden"
-      />
-    </section>
+      <div className="flex w-full justify-between rounded-lg bg-gradient-to-tr from-[#E8F1FC] to-[#93BFF3]">
+        <Image
+          src={assetLibrary.brandImg}
+          alt="Brand Image"
+          width={225.02}
+          height={222.78}
+          className="h-full max-h-[9rem] w-full max-w-[9rem] md:max-h-[12rem] md:max-w-[12rem]"
+        />
+        <p className="flex max-w-[25rem] flex-col justify-center gap-4 py-5 pr-10 text-end font-bold text-primary50 md:gap-10">
+          <span className="text-2xl md:text-[3.5rem]">Your brand is</span>
+          <span className="text-2xl md:text-[3.5rem]">next.</span>
+        </p>
+      </div>
+    </FadeUpDiv>
   );
 }
 

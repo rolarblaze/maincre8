@@ -1,10 +1,11 @@
-import assetLibrary from "@/library";
-import Image from "next/image";
 import Link from "next/link";
+import Image from "next/image";
+import assetLibrary from "@/library";
+import { FadeUpDiv } from "@/components";
 
 const LearnMoreSection = () => {
   return (
-    <section className="relative mb-[6.25rem] flex justify-start overflow-hidden rounded-3xl bg-gradient-to-tr from-[#4490EA] to-[#0C407E] to-70% px-4 pb-8 pt-10 max-lg:flex-col sm:rounded-[1.875rem] sm:py-[6.25rem] sm:pl-[3.75rem]">
+    <FadeUpDiv className="relative mb-[6.25rem] flex justify-start overflow-hidden rounded-3xl bg-gradient-to-tr from-[#4490EA] to-[#0C407E] to-70% px-4 pb-8 pt-10 max-lg:flex-col sm:rounded-[1.875rem] sm:py-[6.25rem] sm:pl-[3.75rem]">
       <div className="z-[2] max-w-[30rem]">
         <h2 className="text-pretty text-2xl font-semibold leading-8 text-white sm:text-[2.375rem] sm:leading-[2.85rem]">
           The Best <br /> Partner You’ll <br /> Ever Have
@@ -51,7 +52,7 @@ const LearnMoreSection = () => {
         alt="Lines"
         className="absolute object-cover"
       />
-    </section>
+    </FadeUpDiv>
   );
 };
 export default LearnMoreSection;

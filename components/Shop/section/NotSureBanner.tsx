@@ -14,14 +14,14 @@ const NotSureBanner = () => {
           />
         </figure>
         <div className="space-y-3">
-          <h2 className="text-5xl font-medium leading-10 text-white xs:max-md:text-2xl">
+          <h2 className="text-5xl font-medium leading-10 text-white xs:max-md:text-3xl">
             Not sure of the{" "}
-            <span className="text-5xl font-medium leading-10 text-orange-400 xs:max-md:text-2xl">
+            <span className="text-5xl font-medium leading-10 text-orange-400 xs:max-md:text-3xl">
               right plan
             </span>{" "}
             for you?
           </h2>
-          <p className="text-lg font-light leading-7 text-[#B6D4F7] xs:max-md:text-sm">
+          <p className="text-lg font-light leading-7 text-[#B6D4F7] xs:max-md:text-base">
             Fill a brief and we&apos;ll get back to you with a recommended
             custom package.
           </p>

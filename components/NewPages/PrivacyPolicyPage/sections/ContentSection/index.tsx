@@ -2,6 +2,7 @@
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { privacyPolicyData } from "./constants";
+import { FadeUpDiv } from "@/components";
 
 const ContentSection = () => {
   const { activeTab } = useSelector((state: RootState) => state.tabs);
@@ -16,14 +17,17 @@ const ContentSection = () => {
   };
 
   return (
-    <section className="full-width content-grid h-full min-h-[calc(100dvh-22rem)] bg-grey50  py-10 md:py-[6.25rem]">
+    <FadeUpDiv
+      up={false}
+      className="full-width content-grid h-full min-h-[calc(100dvh-22rem)] bg-grey50 py-10 md:py-[6.25rem]"
+    >
       <div className="mx-auto w-full max-w-3xl space-y-8 lg:p-6">
         {activeContent ? (
           <>
             <h2 className="text-lg font-medium leading-[150%] text-grey800">
               {activeContent.content.title || activeContent.content.headline}
             </h2>
-            <p className="text-lg my-8 font-medium leading-[150%] text-grey800">
+            <p className="my-8 text-lg font-medium leading-[150%] text-grey800">
               {activeContent.content.paragraph}
             </p>
 
@@ -81,7 +85,7 @@ const ContentSection = () => {
           <p>No content available for this tab.</p>
         )}
       </div>
-    </section>
+    </FadeUpDiv>
   );
 };
 

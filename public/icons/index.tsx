@@ -3,6 +3,7 @@ export { default as AvatarProfile } from "./avatar_profile.svg";
 export { default as ArrowBackIcon } from "./arrow-back-desktop.svg";
 export { default as ArrowDown } from "./ash-arrow-down.svg";
 export { default as AshArrowDown } from "./ash-arrow-down.svg";
+export { default as AshArrowUp } from "./ash-arrow-up.svg";
 export { default as AttachIcon } from "./attach.svg";
 export { default as AvailableIcon } from "./available.svg";
 // export { default as AvatarIcon } from "./avatar.svg"; // pending
