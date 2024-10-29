@@ -1,4 +1,15 @@
+"use client";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { changePageData } from "@/redux/shop";
+import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
+import {
+  BrandDesign,
+  GraphicDesigns,
+  DigitalMarketing,
+  ContentWriting,
+  AllInOneBundle,
+} from "@/components/Shop/data/bundle-pricing-data";
 
 type bundleCardsDetailsType = {
   title: string;
@@ -11,18 +22,53 @@ type bundleCardsDetailsType = {
 
 type BundleListCardOptionsPropsType = {
   bundleCardsDetails: bundleCardsDetailsType[];
-  pageViewDataTitle: string;
-  updatePageViewData: (title: string) => void;
 };
+
+type BundlesType =
+  | "brand-design"
+  | "graphic-designs"
+  | "digital-marketing"
+  | "content-writing"
+  | "all-in-one-bundle";
 
 const BundleListCardOptions = ({
   bundleCardsDetails,
-  pageViewDataTitle,
-  updatePageViewData,
 }: BundleListCardOptionsPropsType) => {
+  const router = useRouter();
+  const dispatch = useAppDispatch();
+  const pageViewData = useAppSelector(
+    (state: RootState) => state.pageViewData,
+  ).data;
+
+  const pageViewDataTitle = pageViewData.title;
+
+  // const bundleOptions = [
+  //   "brand-design",
+  //   "graphic-designs",
+  //   "digital-marketing",
+  //   "content-writing",
+  //   "all-in-one-bundle",
+  // ];
+
+  const mapBundles = {
+    "brand-design": BrandDesign,
+    "graphic-designs": GraphicDesigns,
+    "digital-marketing": DigitalMarketing,
+    "content-writing": ContentWriting,
+    "all-in-one-bundle": AllInOneBundle,
+  };
+
+  // function to handle updating the page data view
+  const updatePageViewData = (title: string) => {
+    title = title.toLowerCase().replaceAll(" ", "-");
+    let bundle = mapBundles[title as BundlesType];
+    dispatch(changePageData(bundle));
+    router.push(`/shop/${title}`);
+  };
+
   return (
     <section>
-      <ul className="sticky top-0 no-scrollbar flex w-full flex-wrap justify-between gap-4 xs:max-md:sticky xs:max-md:top-60 xs:max-md:gap-5 xs:max-md:overflow-auto">
+      <ul className="no-scrollbar sticky top-0 flex w-full flex-wrap justify-between gap-4 xs:max-md:sticky xs:max-md:top-60 xs:max-md:gap-5 xs:max-md:overflow-auto">
         {bundleCardsDetails.map((bundleCard) => {
           return (
             <li

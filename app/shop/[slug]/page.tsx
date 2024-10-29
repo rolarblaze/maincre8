@@ -1,11 +1,8 @@
 "use client";
 
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { PageLayout } from "@/components";
-import bundleCardsDetails from "@/components/Shop/data/bundleCardsDetails";
+import { useEffect } from "react";
+import { useParams} from "next/navigation";
 import ShopWhyChooseSellCre8Data from "@/components/Shop/data/whyChooseUs";
-import BundleListCardOptions from "@/components/Shop/section/BundleListCardOptions";
 import BundlePreviewBanner from "@/components/Shop/section/BundlePreviewBanner";
 import BundlePackagesPlan from "@/components/Shop/section/BundlePackagesPlan";
 import NotSureBanner from "@/components/Shop/section/NotSureBanner";
@@ -21,12 +18,20 @@ import {
 import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { changePageData } from "@/redux/shop";
 
-type BundlesType = "brand-design" | "graphic-designs" | "digital-marketing" | "content-writing" | "all-in-one-bundle"
+type BundlesType =
+  | "brand-design"
+  | "graphic-designs"
+  | "digital-marketing"
+  | "content-writing"
+  | "all-in-one-bundle";
+
 
 const Shop = () => {
   const dispatch = useAppDispatch();
   const bundleParam = useParams<{ slug: string }>();
-  const pageViewData = useAppSelector((state: RootState) => state.pageViewData).data;
+  const pageViewData = useAppSelector(
+    (state: RootState) => state.pageViewData,
+  ).data;
 
   const bundleOptions = [
     "brand-design",
@@ -41,10 +46,10 @@ const Shop = () => {
     "digital-marketing": DigitalMarketing,
     "content-writing": ContentWriting,
     "all-in-one-bundle": AllInOneBundle,
-  }
+  };
 
   const updatePageViewData = (title: string) => {
-    let bundle = mapBundles[title as BundlesType]
+    let bundle = mapBundles[title as BundlesType];
     dispatch(changePageData(bundle));
   };
 
@@ -58,28 +63,27 @@ const Shop = () => {
   }, []);
 
   return (
-      <main className="space-y-20 xs:max-md:space-y-10">
+    <main className="space-y-20 xs:max-md:space-y-10">
+      {/* Selected Bundle Banner Preview */}
+      <BundlePreviewBanner
+        title={pageViewData.title}
+        message={pageViewData.message}
+        body={pageViewData.body}
+        icon={pageViewData.icon}
+      />
 
-        {/* Selected Bundle Banner Preview */}
-        <BundlePreviewBanner
-          title={pageViewData.title}
-          message={pageViewData.message}
-          body={pageViewData.body}
-          icon={pageViewData.icon}
-        />
+      {/* Selected Bundle Packages Plan */}
+      <BundlePackagesPlan packagesPlans={pageViewData.packagePlans} />
 
-        {/* Selected Bundle Packages Plan */}
-        <BundlePackagesPlan packagesPlans={pageViewData.packagePlans} />
+      {/* Not sure of the right plan banner */}
+      <NotSureBanner />
 
-        {/* Not sure of the right plan banner */}
-        <NotSureBanner />
+      {/* Why choose us section */}
+      <WhyChooseUs reasons={ShopWhyChooseSellCre8Data} />
 
-        {/* Why choose us section */}
-        <WhyChooseUs reasons={ShopWhyChooseSellCre8Data} />
-
-        {/* Selected Bundle Addons Section */}
-        <BundleAddOns title={pageViewData.title} addOns={pageViewData.addons} />
-      </main>
+      {/* Selected Bundle Addons Section */}
+      <BundleAddOns title={pageViewData.title} addOns={pageViewData.addons} />
+    </main>
   );
 };
 export default Shop;
