@@ -12,7 +12,7 @@ import {
   PasswordNoMatchIcon,
   EmailFieldIcon,
 } from "@/public/icons";
-import { signUpIndividual, signUpBusiness } from "@/redux/auth/features";
+import { signUpIndividual } from "@/redux/auth/features";
 import { addAlert } from "@/redux/alerts";
 import { AppDispatch, useAppDispatch, useAppSelector } from "@/redux/store";
 import { SignUpFormValues } from "@/redux/auth/interface";
@@ -22,38 +22,25 @@ import {
 } from "@/utils/helpers/auth/passwordValidation";
 
 const SignupSchema = Yup.object().shape({
-  firstName: Yup.string().test(
-    "required-first-name",
-    "First name is required",
-    function (value) {
-      const { isBusiness } = this.parent;
-      return isBusiness ? true : !!value;
-    },
-  ),
-  lastName: Yup.string().test(
-    "required-last-name",
-    "Last name is required",
-    function (value) {
-      const { isBusiness } = this.parent;
-      return isBusiness ? true : !!value;
-    },
-  ),
-  businessName: Yup.string().test(
-    "required-business-name",
-    "Business name is required",
-    function (value) {
-      const { isBusiness } = this.parent;
-      return isBusiness ? !!value : true;
-    },
-  ),
+  firstName: Yup.string().required("First name is required"),
+  lastName: Yup.string().required("Last name is required"),
   email: Yup.string()
     .email("Invalid email")
     .required("Email address is required"),
-  password: Yup.string().required("Password is required"),
+  password: Yup.string()
+    .test(
+      "is-password-matching",
+      "Password doesn't match criteria",
+      (value) => {
+        validatePassword(value as string).some(
+          (criterion) => criterion.isValid === false,
+        );
+      },
+    )
+    .required("Password is required"),
 });
 
 export default function Signup() {
-  const [activeTab, setActiveTab] = useState<string>("individual");
   const [showPassword, setShowPassword] = useState(false);
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((state) => state.auth);
@@ -73,18 +60,12 @@ export default function Signup() {
     initialValues: {
       firstName: "",
       lastName: "",
-      businessName: "",
       email: "",
       password: "",
-      isBusiness: activeTab === "business",
     },
     validationSchema: SignupSchema,
     onSubmit: async (values) => {
-      if (activeTab === "individual") {
-        await handleIndividualSignUp(values, dispatch);
-      } else {
-        await handleBusinessSignUp(values, dispatch);
-      }
+      await handleIndividualSignUp(values, dispatch);
     },
   });
 
@@ -110,30 +91,6 @@ export default function Signup() {
           headText: "Success",
           subText:
             "Successfully registered as an individual. Please check your email for verification.",
-          type: "success",
-        }),
-      );
-      router.push("/email-verify");
-    } else {
-      handleSignUpError(actionResult, dispatch);
-    }
-  };
-
-  // Separate function for business signup logic
-  const handleBusinessSignUp = async (
-    payload: SignUpFormValues,
-    dispatch: AppDispatch,
-  ) => {
-    const actionResult = await dispatch(signUpBusiness(payload));
-
-    if (signUpBusiness.fulfilled.match(actionResult)) {
-      sessionStorage.setItem("userEmail", payload.email);
-      dispatch(
-        addAlert({
-          id: "",
-          headText: "Success",
-          subText:
-            "Successfully registered as a business. Please check your email for verification.",
           type: "success",
         }),
       );
@@ -236,6 +193,7 @@ export default function Signup() {
           }
         />
 
+        {/* Password Match Criteria */}
         <div className="center -mt-5 gap-2">
           {passwordCriteria.map((criterion, index) => {
             return (
@@ -257,7 +215,6 @@ export default function Signup() {
                   )}
                 </div>
 
-                {/* <div className="size-3 bg-slate-300"></div> */}
                 <p className="text-sm font-medium leading-5 text-[#98A2B3]">
                   {criterion.label}
                 </p>
@@ -266,15 +223,6 @@ export default function Signup() {
           })}
         </div>
 
-        {/* <div className="flex items-center justify-between">
-        <CheckboxField label="Remember me" className="text-xs" />
-        <Link
-          href="/forgot-password"
-          className="p-0 w-auto text-xs bg-transparent font-medium text-[#1574E5]"
-        >
-          Forgot Password
-        </Link>
-      </div> */}
         <Button
           label="Create account"
           isLoading={isLoading}

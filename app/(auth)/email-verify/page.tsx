@@ -102,7 +102,7 @@ const VerifyEmail = () => {
         We emailed you a code
       </h3>
       <p className="font-normal text-base leading-6 text-[#667185]">
-        We sent a 6 digit code to jt@sellmedia.africa. Enter it below.
+        We sent a 6 digit code to {email}. Enter it below.
       </p>
       <Formik
         initialValues={{ otp: "" }}
