@@ -1,13 +1,13 @@
 "use client"
 import Button from "@/components/Button";
 import React from "react";
-import RecommendFormInputs from "../sections/RecommendFormInputs";
+import RecommendFormInputs from "../shared/RecommendFormInputs";
 import { addAlert } from "@/redux/alerts";
 import { useAppDispatch } from "@/redux/store";
 import { FormikHelpers, useFormik } from "formik";
-import { RecommendFormValues } from "../sections/RecommendForm/type";
-import { RECOMMEND_INITIAL_VALUES } from "../sections/RecommendForm/constants";
-import { recommendFormSchema } from "../sections/RecommendForm/schema";
+import { RecommendFormValues } from "../shared/type";
+import { RECOMMEND_INITIAL_VALUES } from "../shared/constants";
+import { recommendFormSchema } from "../shared/schema";
 
 function WebsiteRecommendForm() {
   const dispatch = useAppDispatch();

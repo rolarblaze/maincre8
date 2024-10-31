@@ -1,5 +1,4 @@
-import RecommendForm from "@/components/NewPages/CustomRecommend/sections/RecommendForm";
-import WebsiteRecommendForm from "@/components/NewPages/CustomRecommend/WebsiteRecommendForm";
+import WebsiteRecommendForm from "@/components/NewPages/CustomRecommend/sections/WebsiteRecommendForm";
 import WhiteHeroSection from "@/components/NewPages/sharedSections/WhiteHeroSection";
 
 const BusinessForm = () => {

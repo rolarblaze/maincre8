@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import {
   recommendContactFormData,
   recommendSelectFormData,
-} from "../RecommendForm/constants";
+} from "../constants";
 import CustomDropdown from "@/components/Forms/CustomDropdown";
 import Textarea from "@/components/Forms/Textarea";
 import InputFile from "@/components/Forms/InputFile";
 import { FileUploadIcon } from "@/public/svgs";
 import InputField from "@/components/Forms/InputField";
-import { RecommendFormValues } from "../RecommendForm/type";
+import { RecommendFormValues } from "../type";
 import { FormikProps } from "formik";
 import { uploadRelevantDocument } from "@/redux/order/features";
 import { useAppDispatch } from "@/redux/store";

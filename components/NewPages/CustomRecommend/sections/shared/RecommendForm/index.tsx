@@ -6,7 +6,7 @@ import {
   recommendContactFormData,
   recommendSelectFormData,
   serviceKindsOptions,
-} from "./constants";
+} from "../constants";
 import { addAlert } from "@/redux/alerts";
 import { useState } from "react";
 import { useAppDispatch } from "@/redux/store";
@@ -14,11 +14,11 @@ import {
   uploadRelevantDocument,
   submitRecommendationBrief,
 } from "@/redux/order/features";
-import { RecommendFormValues } from "./type";
+import { RecommendFormValues } from "../type";
 import CustomDropdown from "@/components/Forms/CustomDropdown";
 import InputFile from "@/components/Forms/InputFile";
 import { AttachIcon, FileUploadIcon } from "@/public/svgs";
-import { recommendFormSchema } from "./schema";
+import { recommendFormSchema } from "../schema";
 
 const RecommendForm = () => {
   const dispatch = useAppDispatch();
