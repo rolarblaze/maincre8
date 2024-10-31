@@ -20,11 +20,13 @@ import { useEffect } from "react";
 const Overview = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const { services, isLoading, error } = useAppSelector((state) => state.service);
+  const { services, isLoading, error } = useAppSelector(
+    (state) => state.service,
+  );
   const { orderHistory } = useAppSelector((state) => state.services);
   const { isLoadingProfile, profile } = useAppSelector((state) => state.auth);
   const { appointments, isApointmentLoading } = useAppSelector(
-    (state) => state.order
+    (state) => state.order,
   );
 
   useEffect(() => {
@@ -82,22 +84,26 @@ const Overview = () => {
   const hasTransactions = orderHistory && orderHistory?.length > 0;
 
   return (
-    <div className="container mx-auto py-6 px-4 md:p-6 md:-m-6 flex flex-col gap-6 md:gap-6 overflow-y-scroll noScrollbar">
+    <div className="noScrollbar container mx-auto flex flex-col gap-6 overflow-y-scroll px-4 py-6 font-manrope md:-m-6 md:gap-6 md:p-6">
       <div>
-        <h4>Welcome, {profile.first_name}</h4>
-        <p className="text-grey500">Select a service to get started</p>
+        <h4 className="text-2xl font-semibold leading-8">
+          Welcome, {profile.first_name}
+        </h4>
+        <p className="text-grey500">How can we assist you today?</p>
       </div>
 
-      <div
-        className="ml-auto hidden md:flex gap-2 items-center w-fit border-none bg-primary500 text-white !py-2 !px-3 rounded-lg cursor-pointer mt-8"
+      <hr />
+
+      {/* <div
+        className="ml-auto mt-8 hidden w-fit cursor-pointer items-center gap-2 rounded-lg border-none bg-primary500 !px-3 !py-2 text-white md:flex"
         onClick={() => router.push("/dashboard/custom-recommendation")}
       >
         <BulbIcon />
         <span>Custom recommendations</span>
-      </div>
+      </div> */}
 
-      {profileIncomplete && (
-        <div className="mt-8 mb-10 bg-white py-4 px-6 flex items-center justify-between flex-wrap gap-6 md:gap-0 rounded-lg">
+      {/* {profileIncomplete && (
+        <div className="mb-10 mt-8 flex flex-wrap items-center justify-between gap-6 rounded-lg bg-white px-6 py-4 md:gap-0">
           <p className="text-black">Complete your profile setup</p>
           <Button
             label="Setup profile"
@@ -105,10 +111,10 @@ const Overview = () => {
             onClick={() => router.push("/dashboard/settings")}
           />
         </div>
-      )}
+      )} */}
 
-      <div className="py-4 flex items-center justify-between">
-        <h4 className="text-black text-[18px] md:text-[24px] font-medium md:font-bold">
+      {/* <div className="flex items-center justify-between py-4">
+        <h4 className="text-[18px] font-medium text-black md:text-[24px] md:font-bold">
           Popular services
         </h4>
         {hasTransactions &&
@@ -120,11 +126,10 @@ const Overview = () => {
               onClick={() => router.push("/dashboard/services")}
             />
           )}
-      </div>
+      </div> */}
 
-      <section className="flex flex-col gap-10">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 place-items-center md:place-items-start gap-6 overflow-y-auto noScrollbar">
-          {/* Show only the first three cards */}
+      {/* <section className="flex flex-col gap-10">
+        <div className="noScrollbar grid place-items-center gap-6 overflow-y-auto md:grid-cols-2 md:place-items-start lg:grid-cols-3">
           {hasTransactions ? (
             orderHistory
               ?.slice(0, 3)
@@ -153,9 +158,9 @@ const Overview = () => {
                       description: provision.description,
                       color: bundleColors[bundle.bundle_name],
                       id: pkg.package_id,
-                    }))
-                  )
-                )
+                    })),
+                  ),
+                ),
               )
               .slice(0, 3)
               .map((card, index) => (
@@ -171,17 +176,14 @@ const Overview = () => {
           )}
         </div>
 
-        {/* Activity Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-          <h3 className="text-2xl font-bold text-grey900 col-span-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <h3 className="col-span-2 text-2xl font-bold text-grey900">
             Activity
           </h3>
-          {/* Chart Section*/}
-          <div className="flex flex-col justify-between rounded-lg bg-white px-6 py-4 shadow-lg col-span-2 md:col-span-1">
-            <h4 className="text-lg font-semibold text-grey900 border-b border-grey200 pb-4">
+          <div className="col-span-2 flex flex-col justify-between rounded-lg bg-white px-6 py-4 shadow-lg md:col-span-1">
+            <h4 className="border-b border-grey200 pb-4 text-lg font-semibold text-grey900">
               My Services
             </h4>
-            {/* Chart */}
             <div>
               <BarChart
                 labels={barChartData.labels}
@@ -190,9 +192,8 @@ const Overview = () => {
             </div>
           </div>
 
-          {/* Upcoming Appointments */}
-          <div className="rounded-lg bg-white px-6 py-4 flex flex-col gap-4 shadow-lg">
-            <h4 className="text-lg font-semibold text-grey900 border-b border-grey200 pb-4">
+          <div className="flex flex-col gap-4 rounded-lg bg-white px-6 py-4 shadow-lg">
+            <h4 className="border-b border-grey200 pb-4 text-lg font-semibold text-grey900">
               Upcoming Appointments
             </h4>
             <div className="flex flex-col">
@@ -221,7 +222,7 @@ const Overview = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

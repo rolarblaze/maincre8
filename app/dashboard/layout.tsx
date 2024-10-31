@@ -81,6 +81,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
       <div className="flex h-screen pt-10 md:pt-0">
         {/* Desktop sidebar */}
         <Sidebar setActiveTab={setActiveTab} />
+
         {/* Mobile sidebar */}
         {sidebarOpen && (
           <MobileSidebar setActiveTab={setActiveTab} onClick={closeSidebar} />
@@ -97,9 +98,9 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
               )}
             </div>
           )}
+
           <main
-            className={`flex-1 p-6 overflow-y-auto noScrollbar ${isOverview ? "bg-dashboard-bg" : "bg-white"
-              }`}
+            className={`flex-1 p-6 size-full overflow-y-auto noScrollbar `}
           >
             {children}
           </main>
