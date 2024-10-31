@@ -59,7 +59,9 @@ const config: Config = {
         primary700: "#0D5EBA",
         primary800: "#083160",
         primary900: "#093160",
-        textMain: "#111827",
+        secondary: {
+          500: "#0D5EBA",
+        },
         error: {
           50: "#FBEAE9",
           100: "#EB9B98",
@@ -86,6 +88,7 @@ const config: Config = {
         },
         ash: "#D0D5DD",
         ash10: "#5D5D5D",
+        textMain: "#111827",
         "dashboard-bg": "#F5F5F5",
         "dark-cyan-blue": "#030E1C",
         "alert-green": "#04802E",
