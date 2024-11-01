@@ -1,7 +1,9 @@
 export { default as Arrow } from "./ash-arrow-down.svg";
+export { default as AvatarProfile } from "./avatar_profile.svg";
 export { default as ArrowBackIcon } from "./arrow-back-desktop.svg";
 export { default as ArrowDown } from "./ash-arrow-down.svg";
 export { default as AshArrowDown } from "./ash-arrow-down.svg";
+export { default as AshArrowUp } from "./ash-arrow-up.svg";
 export { default as AttachIcon } from "./attach.svg";
 export { default as AvailableIcon } from "./available.svg";
 // export { default as AvatarIcon } from "./avatar.svg"; // pending
@@ -25,7 +27,9 @@ export { default as Crea8Star } from "./crea8-star.svg";
 // export { default as CurvedArrow } from "./curved-arrow.svg";
 export { default as DownloadIcon } from "./download.svg";
 export { default as EmailAddressIcon } from "./email-address.svg";
-export { default as EyeIcon } from "./eye.svg";
+export { default as EmailFieldIcon } from "./email-field.svg";
+export { default as EyeCloseIcon } from "./eye-close.svg";
+export { default as EyeOpenIcon } from "./eye-open.svg";
 export { default as FacebookIcon } from "./facebook.svg";
 export { default as GoogleIcon } from "./google.svg";
 export { default as MobileToggle } from "./hamburger.svg";
@@ -63,7 +67,11 @@ export { default as Close } from "./multiply.svg";
 export { default as Logout } from "./logout.svg";
 export { default as SortIcon } from "./ash-arrow-down.svg";
 export { default as CheckCircleIcon } from "./check-circle.svg";
+export { default as CheckCircleIcon2 } from "./check-circle2.svg";
 export { default as Icon } from "./vision-icon.svg";
+export { default as PasswordNoMatchIcon } from "./password-no-match.svg";
+export { default as PasswordMatchIcon } from "./password-match.svg";
+
 // export { default as ArrowDrawing } from "./arrow-drawing.svg";
 // export { default as ArrowDrawingMobile } from "./arrow-drawing-mobile.svg";
 export { default as TwitterIcon } from "./team-x.svg";
@@ -87,3 +95,23 @@ export { default as SubmittedIcon } from "./submitted.svg";
 export { default as ClockIcon } from "./clock.svg";
 export { default as CalenderIcon } from "./calender.svg";
 export { default as CameraIcon } from "./camera.svg";
+
+// SOCIAL ICONS
+export { default as XLogo } from "./x_icon.svg";
+export { default as FacebookLogo } from "./facebook_icon.svg";
+export { default as LinkedinLogo } from "./linkedin_icon.svg";
+export { default as InstagramLogo } from "./instagram_icon.svg";
+
+// BRAND ICONS
+export { default as OppoLogo } from "./oppo_logo.svg";
+export { default as GtBankLogo } from "./guaranty_trust_bank_logo.svg";
+export { default as MtnLogo } from "./mtn_nigeria_logo.svg";
+export { default as UbaBankLogo } from "./uba_bank_logo.svg";
+export { default as AirpeaceLogo } from "./air_peace_logo.svg";
+
+// DISPLAY ICONS
+export { default as BrandDesignSVG } from "./brand_design_bulb.svg";
+export { default as GraphicDesignsSVG } from "./graphic_designs_board.svg";
+export { default as DigitalMarketingSVG } from "./digital_marketing_blocks.svg";
+export { default as ContentWritingSVG } from "./content_writing_pad.svg";
+export { default as AllInOneBundleSVG } from "./all_in_one_bundle_ship.svg";

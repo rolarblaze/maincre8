@@ -7,10 +7,12 @@ import { ConfirmIcon } from "@/public/icons";
 import { AppDispatch, useAppDispatch, useAppSelector } from "@/redux/store";
 import { forgotPassword } from "@/redux/auth/features";
 import { addAlert } from "@/redux/alerts";
-
+import Link from "next/link";
 
 const ForgotPasswordSchema = Yup.object().shape({
-  email: Yup.string().email("Invalid email").required("Email address is required"),
+  email: Yup.string()
+    .email("Invalid email")
+    .required("Email address is required"),
 });
 
 function ConfirmForgotPassword() {
@@ -54,7 +56,9 @@ export default function ForgotPassword() {
       callback_url += "/";
     }
     callback_url += "new-password/";
-    const actionResult = await dispatch(forgotPassword({ email, callback_url }));
+    const actionResult = await dispatch(
+      forgotPassword({ email, callback_url })
+    );
     if (forgotPassword.fulfilled.match(actionResult)) {
       dispatch(
         addAlert({
@@ -67,7 +71,8 @@ export default function ForgotPassword() {
       setIsSubmitted(true);
     } else if (forgotPassword.rejected.match(actionResult)) {
       if (actionResult.error) {
-        const errorMessage = actionResult.error?.message || "An error occurred. Please try again.";
+        const errorMessage =
+          actionResult.error?.message || "An error occurred. Please try again.";
         dispatch(
           addAlert({
             id: "",
@@ -80,38 +85,51 @@ export default function ForgotPassword() {
     }
   };
 
-
-
   return (
-    <main className="flex flex-col gap-4 md:gap-8 text-center">
+    <Fragment>
       {isSubmitted ? (
         <ConfirmForgotPassword />
       ) : (
-        <div className=" flex flex-col gap-4 md:gap-8 max-w-[592px] mx-auto">
-          <h3>Reset your account password</h3>
-          <section className="w-full flex flex-col gap-4 border border-grey200 rounded-lg p-5 md:gap-8 md:p-10">
-            <form className="w-full flex flex-col" onSubmit={formik.handleSubmit}>
-              <InputField
-                label="Email address"
-                type="text"
-                placeholder="Enter email address"
-                value={formik.values.email}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                name="email"
-                error={formik.touched.email && formik.errors.email ? formik.errors.email : ""}
-                classNames="mb-6"
-              />
-              <Button
-                label="Reset password"
-                isLoading={isLoading}
-                type="submit"
-                classNames="mt-4"
-              />
-            </form>
-          </section>
-        </div>
+        <Fragment>
+          {" "}
+          <h3 className="font-semibold text-[32px] leading-7 text-[#101928]">
+            Reset your password
+          </h3>
+          <p className="font-normal text-base leading-6 text-[#667185]">
+            We will send you a link to set a new password
+          </p>
+          <form className="mt-5 space-y-5" onSubmit={formik.handleSubmit}>
+            <InputField
+              label="Email address"
+              type="text"
+              placeholder="Enter email address"
+              value={formik.values.email}
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              name="email"
+              error={
+                formik.touched.email && formik.errors.email
+                  ? formik.errors.email
+                  : ""
+              }
+            />
+            <Button
+              label="Reset password"
+              isLoading={isLoading}
+              type="submit"
+              classNames="text-sm text-white font-semibold"
+            />
+          </form>
+          <div className="center -mt-2">
+            <Link
+              href="/login"
+              className="p-2 w-auto text-xs bg-transparent font-medium text-[#1574E5]"
+            >
+              Back to Login
+            </Link>
+          </div>{" "}
+        </Fragment>
       )}
-    </main>
+    </Fragment>
   );
 }

@@ -15,7 +15,7 @@ import { mapServicesToProps } from "@/components/Shop/Data/shopData";
 
 const Bundles = () => {
   const dispatch = useAppDispatch();
-  const shopState = useAppSelector((state: RootState) => state.shop);
+  const shopState = useAppSelector((state: RootState) => state.service);
   const [activeTab, setActiveTab] = useState<
     "digital" | "creative" | "content"
   >("digital");

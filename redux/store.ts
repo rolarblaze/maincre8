@@ -6,10 +6,13 @@ import { AuthSlice } from "./auth";
 import { briefReducer } from "./brief";
 import { fileUploadReducer } from "./file";
 import { getPackageReducer } from "./getPackage";
-import { shopReducer } from "./shop";
 import { OrderSlice } from "./order";
-import servicesSlice from "./servicesTracker";
+import { tabsSlice } from "./legal";
+import { PageDataSlice } from "./shop";
+import { cartSlice } from "./cart";
 import { trackerReducer } from "./servicesTracker/tracker";
+import servicesSlice from "./servicesTracker";
+import serviceSlice from "./services";
 import {
   contactFormReducer,
   newsletterReducer,
@@ -21,7 +24,7 @@ export const store = configureStore({
     // all your slice reducers goes here
     auth: AuthSlice.reducer,
     alerts: AlertsSlice.reducer,
-    shop: shopReducer,
+    pageViewData: PageDataSlice.reducer,
     newsletter: newsletterReducer,
     fileUpload: fileUploadReducer,
     brief: briefReducer,
@@ -30,6 +33,9 @@ export const store = configureStore({
     services: servicesSlice,
     tracker: trackerReducer,
     contactForm: contactFormReducer,
+    tabs: tabsSlice.reducer,
+    cart: cartSlice.reducer,
+    service: serviceSlice,
   },
 });
 

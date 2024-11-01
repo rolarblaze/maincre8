@@ -9,7 +9,7 @@ import Loader from "../Spinner/Loader";
 
 const ShopSections = () => {
   const dispatch = useAppDispatch();
-  const shopState = useAppSelector((state: RootState) => state.shop);
+  const shopState = useAppSelector((state: RootState) => state.service);
 
   useEffect(() => {
     dispatch(getServices());

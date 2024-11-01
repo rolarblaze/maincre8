@@ -1,55 +1,55 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getServices, getPackages } from "./features";
-import { ServicesState, Service, Package, Packages } from "./interface";
 
-// Initial state
-const initialState: ServicesState = {
-  services: [],
-  packages: [],
-  isLoading: false,
-  error: null,
+
+interface PageViewData {
+  title: string;
+  icon: string;
+  message: string;
+  body: string;
+  packagePlans: {
+    title: string;
+    description: string;
+    pricePerMonth: string;
+    features: string[];
+    link: string;
+    isPackagePopular: boolean;
+  }[];
+  addons: {
+    title: string;
+    description: string;
+    price: string;
+  }[];
+}
+
+type PageViewDataType = {
+  data: PageViewData
+}
+
+// Define the initial state with default values
+const initialPageViewData: PageViewDataType = {
+  data: {
+  title: '',
+  icon: '',
+  message: '',
+  body: '',
+  packagePlans: [],
+  addons: [], }
 };
 
-export const ShopSlice = createSlice({
-  name: "shop",
-  initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      // Fetch services
-      .addCase(getServices.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
-      })
-      .addCase(
-        getServices.fulfilled,
-        (state, action: PayloadAction<Service[]>) => {
-          state.services = action.payload;
-          state.isLoading = false;
-        }
-      )
-      .addCase(getServices.rejected, (state, action) => {
-        state.error = action.payload as string;
-        state.isLoading = false;
-      })
-
-      // Fetch packages
-      .addCase(getPackages.pending, (state) => {
-        state.isLoading = true;
-        state.error = null;
-      })
-      .addCase(
-        getPackages.fulfilled,
-        (state, action: PayloadAction<Package[]>) => {
-          state.packages = action.payload;
-          state.isLoading = false;
-        }
-      )
-      .addCase(getPackages.rejected, (state, action) => {
-        state.error = action.payload as string;
-        state.isLoading = false;
-      });
+export const PageDataSlice = createSlice({
+  name: "pageViewData",
+  initialState: initialPageViewData, // Corrected to use initialState
+  reducers: {
+    changePageData: (state, action: PayloadAction<PageViewData>) => {
+      // alert(JSON.stringify(action.payload))
+      // Update the state with the new page data
+      state.data = action.payload
+    },
   },
 });
 
-export const shopReducer = ShopSlice.reducer;
+// Export the actions
+export const { changePageData } = PageDataSlice.actions;
+
+// Export the reducer
+export default PageDataSlice.reducer;

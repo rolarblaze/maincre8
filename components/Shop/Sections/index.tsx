@@ -7,11 +7,16 @@ import React, {
   ReactElement,
 } from "react";
 import { twMerge } from "tailwind-merge";
-import { BasicIcon, BlueArrowLeft, BlueArrowRight, PremiumIcon, StandardIcon } from "@/public/icons";
+import {
+  BasicIcon,
+  BlueArrowLeft,
+  BlueArrowRight,
+  PremiumIcon,
+  StandardIcon,
+} from "@/public/icons";
 import Card from "../SectionCard";
-import Modal from "@/components/Modals/CustomModal";
+import Modal from "@/components/UI/Modals/CustomModal";
 import SalesPopUp from "@/components/SalesPopUp";
-
 
 interface SideScrollItem {
   name: string;
@@ -20,7 +25,7 @@ interface SideScrollItem {
 }
 
 interface Package {
-  packageId: number; 
+  packageId: number;
   packageName: string;
   icon: ReactElement;
   description: string;
@@ -73,7 +78,7 @@ const Section: React.FC<SectionProps> = ({
       const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
       setLeftArrowBg(slider.scrollLeft > 0 ? "bg-primary50" : "transparent");
       setRightArrowBg(
-        slider.scrollLeft < maxScrollLeft ? "bg-primary50" : "transparent"
+        slider.scrollLeft < maxScrollLeft ? "bg-primary50" : "transparent",
       );
     }
   };
@@ -114,35 +119,35 @@ const Section: React.FC<SectionProps> = ({
       {pageTitle && <h3>{pageTitle}</h3>}
 
       {/* Sideways Scroll */}
-      <div className="rounded-[10px] shadow-dark-blue flex items-center p-4 gap-4 justify-between mt-6 mb-10">
+      <div className="mb-10 mt-6 flex items-center justify-between gap-4 rounded-[10px] p-4 shadow-dark-blue">
         <div
           className={twMerge(
-            "border border-primary500 rounded-full p-4 w-fit cursor-pointer",
-            leftArrowBg
+            "w-fit cursor-pointer rounded-full border border-primary500 p-4",
+            leftArrowBg,
           )}
           onClick={scrollLeft}
         >
           <BlueArrowLeft />
         </div>
 
-        <div className="flex overflow-x-auto noScrollbar" ref={sliderRef}>
+        <div className="noScrollbar flex overflow-x-auto" ref={sliderRef}>
           {sideScrollItems?.map((item, index) => (
             <p
               key={index}
               onClick={() => handleItemClick(index, item)}
               className={twMerge(
-                "span flex-none border border-grey600 py-1.5 px-2 mr-2 rounded-lg cursor-pointer",
-                activeTab === index ? "bg-black text-white" : ""
+                "span mr-2 flex-none cursor-pointer rounded-lg border border-grey600 px-2 py-1.5",
+                activeTab === index ? "bg-black text-white" : "",
               )}
             >
               {item?.name}
               {item["talk-to-sales"] && (
-                <span className="text-primary900 bg-primary50 rounded-[10px] ml-2 py-0.5 px-2">
+                <span className="ml-2 rounded-[10px] bg-primary50 px-2 py-0.5 text-primary900">
                   talk to sales
                 </span>
               )}
               {item.coming_soon && (
-                <span className="text-primary900 bg-primary50 rounded-[10px] ml-2 py-0.5 px-2">
+                <span className="ml-2 rounded-[10px] bg-primary50 px-2 py-0.5 text-primary900">
                   coming soon
                 </span>
               )}
@@ -152,8 +157,8 @@ const Section: React.FC<SectionProps> = ({
 
         <div
           className={twMerge(
-            "border border-primary500 rounded-full p-4 w-fit cursor-pointer",
-            rightArrowBg
+            "w-fit cursor-pointer rounded-full border border-primary500 p-4",
+            rightArrowBg,
           )}
           onClick={scrollRight}
         >
@@ -162,7 +167,7 @@ const Section: React.FC<SectionProps> = ({
       </div>
 
       {/* Bundles */}
-      <div className="w-full flex gap-8">
+      <div className="flex w-full gap-8">
         {bundles[activeTab]?.packages.map((pkg, index) => {
           const Icon =
             packageIcons[pkg.packageName as keyof typeof packageIcons] ||
@@ -177,8 +182,8 @@ const Section: React.FC<SectionProps> = ({
               features={pkg?.features}
               showAll={showAllStates[index]}
               onShowAllToggle={() => handleShowAllToggle(index)}
-              bundleId={bundles[activeTab].bundleId} 
-              packageId={pkg.packageId} 
+              bundleId={bundles[activeTab].bundleId}
+              packageId={pkg.packageId}
             />
           );
         })}

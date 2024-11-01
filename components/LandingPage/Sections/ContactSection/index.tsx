@@ -13,9 +13,9 @@ import { useFormik } from "formik";
 import {
   contactFormData,
   ContactFormValues,
+  contactValidationSchema,
   FieldName,
-  validationSchema,
-} from "./formValues";
+} from "../../../NewPages/ContactPage/sections/formValues";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { submitContactForm } from "@/redux/newsletter_n_contactform/features";
 import { addAlert } from "@/redux/alerts";
@@ -54,7 +54,7 @@ function ContactForm() {
       email: "",
       message: "",
     },
-    validationSchema: validationSchema,
+    validationSchema: contactValidationSchema,
     onSubmit: async (values) => {
       // handle form submission
       if (values) {

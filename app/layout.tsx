@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
 import { GlobalProvider } from "@/redux/provider";
-import { useAppSelector } from "@/redux/store";
-import { RootState } from "@/redux/store";
-import NextTopLoader from "nextjs-toploader";
 import { AlertWrapper } from "@/components";
+import NextTopLoader from "nextjs-toploader";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Sell Crea8",
+  title:
+    "SellCrea8 | Your All-in-One Content, Design, Branding and Marketing Solution.",
   description:
-    "SellCrea8 is your one-stop shop for tailored creative and digital marketing solutions. From innovative design to strategic digital campaigns, we empower businesses to achieve their goals with customized, results-driven strategies.",
+    "SellCrea8 provides solutions to streamline your content, design, marketing and branding needs. Let us help you transform your business.",
   keywords: [
     "Creative Solutions",
     "Digital Marketing Services",
@@ -40,12 +39,16 @@ export default function RootLayout({
   const pageTitle = metadata.title?.toString() || "SellCrea8";
 
   return (
-    <html lang="en" className="scroll-smooth antialiased overflow-x-hidden">
+    <html lang="en" className="overflow-x-hidden scroll-smooth antialiased">
       <head>
         <meta name="description" content={metadata.description ?? ""} />
         <meta name="keywords" content={keywords ?? ""} />
         <title>{pageTitle}</title>
         <link rel="icon" href="/favicon.ico" />
+        <script
+          async
+          src="https://openexchangerates.github.io/money.js/money.min.js"
+        ></script>
       </head>
       <body className={inter.className}>
         <GlobalProvider>

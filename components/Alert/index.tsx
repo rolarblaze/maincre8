@@ -22,14 +22,14 @@ const Alert: React.FC<AlertProps> = ({
 }) => {
   const dispatch = useDispatch();
 
-    useEffect(() => {
-      if (autoClose) {
-        const timer = setTimeout(() => {
-          dispatch(removeAlert(id));
-        }, 5000);
-        return () => clearTimeout(timer);
-      }
-    }, [autoClose, dispatch, id]);
+  useEffect(() => {
+    if (autoClose) {
+      const timer = setTimeout(() => {
+        dispatch(removeAlert(id));
+      }, 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [autoClose, dispatch, id]);
 
   const handleClose = () => {
     dispatch(removeAlert(id));
@@ -42,16 +42,16 @@ const Alert: React.FC<AlertProps> = ({
   };
 
   const iconColors = {
-    success: "#04802E",
-    error: "#CB1A14",
-    warning: "#F59E0B",
+    success: "#04802E", //green
+    error: "#CB1A14", //red
+    warning: "#F59E0B", //yellow
   };
 
   return (
     <div
-      className={`max-w-96 w-full h-auto mb-4 ${alertStyles[type]} flex items-start justify-between rounded z-50`}
+      className={`relative top-10 mb-4 h-auto w-full max-w-96 ${alertStyles[type]} z-50 flex items-start justify-between rounded`}
     >
-      <div className="w-full  flex items-start gap-3 border-r border-grey100 py-3 px-4">
+      <div className="flex w-full items-start gap-3 border-r border-grey100 px-4 py-3">
         <div>
           <Tick color={iconColors[type]} />
         </div>
@@ -60,7 +60,7 @@ const Alert: React.FC<AlertProps> = ({
           <p className="text-grey600">{subText}</p>
         </div>
       </div>
-      <button onClick={handleClose} className="pl-4 pt-2 pr-2 ">
+      <button onClick={handleClose} className="pl-4 pr-2 pt-2">
         <Close />
       </button>
     </div>

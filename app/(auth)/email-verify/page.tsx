@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useDispatch } from "react-redux";
 import { Button } from "@/components";
@@ -7,6 +7,9 @@ import InputField from "@/components/Forms/InputField";
 import { useAppSelector, useAppDispatch } from "@/redux/store";
 import { resendVerificationCode, verifyUser } from "@/redux/auth/features";
 import { addAlert } from "@/redux/alerts";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import * as Yup from "yup";
+
 
 const VerifyEmail = () => {
   const [email, setEmail] = useState<string>("");
@@ -54,10 +57,9 @@ const VerifyEmail = () => {
     }
   };
 
-  const handleVerifyEmail = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleVerifyEmail = async (values: { otp: string }) => {
     try {
-      const actionResult = await dispatch(verifyUser({ otp, email }));
+      const actionResult = await dispatch(verifyUser({ otp: values.otp, email }));
       if (verifyUser.fulfilled.match(actionResult)) {
         dispatch(
           addAlert({
@@ -86,49 +88,57 @@ const VerifyEmail = () => {
     }
   };
 
+  // Yup schema for validation
+  const validationSchema = Yup.object().shape({
+    otp: Yup.string()
+      .required("OTP is required")
+      .matches(/^\d{6}$/, "OTP must be a 6-digit number"),
+  });
+
+
   return (
-    <div className="max-w-[37rem] size-full mt-12 flex flex-col gap-10">
-      {/* FORM LEGEND */}
-      <h3 className="text-grey900 text-center text-4.5xl font-bold">
-        Verify your email address
+    <Fragment>
+      <h3 className="font-semibold text-[32px] leading-7 text-[#101928]">
+        We emailed you a code
       </h3>
-
-      {/* FORM ELEMENT */}
-      <div className="flex flex-col gap-4 border rounded-lg border-grey200 bg-white p-10">
-        <form className=" space-y-10 text-left" onSubmit={handleVerifyEmail}>
-          <legend className="space-y-1">
-            <h3 className="text-grey600 text-2xl font-bold tracking-[-0.03rem]">
-              We emailed you a code
-            </h3>
-            <p className="text-grey500 tracking-[-0.01rem]">Check {email}</p>
-          </legend>
-
-          {/* FORM INPUT ELEMENT */}
-          <fieldset>
-            <InputField
-              label="Code"
+      <p className="font-normal text-base leading-6 text-[#667185]">
+        We sent a 6 digit code to jt@sellmedia.africa. Enter it below.
+      </p>
+      <Formik
+        initialValues={{ otp: "" }}
+        validationSchema={validationSchema}
+        onSubmit={handleVerifyEmail}
+      >
+        {({ errors, touched }) => (
+          <Form className="mt-5 flex flex-col gap-5">
+            <Field
+              name="otp"
+              as={InputField} // Render InputField as a Formik Field
               type="text"
-              placeholder="Enter verification code"
-              classNames="p-4"
-              value={otp}
-              onChange={(e) => setOtp(e.target.value)}
+              label="Code"
+              placeholder="Enter code"
+              error={touched.otp && errors.otp} // Display error if touched and invalid
             />
-          </fieldset>
 
-          {/* FORM BUTTONS */}
-          <div className="flex flex-col size-full font-semibold">
-            <Button label="Verify email address" type="submit" isLoading={isLoading} />
-          </div>
-          <button
-            className="text-primary600 py-4 border-none"
-            onClick={handleResendCode}
 
-          >
-            Resend code
-          </button>
-        </form>
+            <Button
+              type="submit"
+              label="Login to Dashboard"
+              classNames="text-sm text-white font-semibold"
+            />
+          </Form>
+        )}
+      </Formik>
+
+
+      <div className="center -mt-2">
+        <Button
+          onClick={handleResendCode}
+          label="Resend code"
+          classNames="p-2 w-auto text-xs bg-transparent font-medium text-[#1574E5]"
+        />
       </div>
-    </div>
+    </Fragment>
   );
 };
 export default VerifyEmail;

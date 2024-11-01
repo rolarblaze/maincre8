@@ -6,15 +6,16 @@ export const validationSchema = Yup.object({
   industry: Yup.string().required("Industry is required"),
   companySize: Yup.string().required("Company Size is required"),
   websiteURL: Yup.string()
-    .url("Invalid URL format")
+    .matches(
+      /^(https?:\/\/|www\.)[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+.*$/,
+      "Invalid URL format"
+    )
     .required("Website URL is required"),
   contactPersonName: Yup.string().required("Contact Person Name is required"),
   contactEmail: Yup.string()
     .email("Invalid email format")
     .required("Contact Email is required"),
-  contactPhoneNumber: Yup.string()
-    .matches(/^[0-9]{10,11}$/, "Phone number must be 10 or 11 digits")
-    .required("Contact Phone Number is required"),
+  contactPhoneNumber: Yup.string().required("Contact Phone Number is required"),
 
   // BUSINESS CHALLENGES (Optional)
   challenges: Yup.string().optional(),
@@ -24,7 +25,9 @@ export const validationSchema = Yup.object({
   // TARGET AUDIENCE (Optional)
   audience: Yup.string().optional(),
   ageGroup: Yup.string().optional(),
-  gender: Yup.string().oneOf(["male", "female", "other"]).optional(),
+  gender: Yup.string()
+    .oneOf(["male", "female"])
+    .required("Please select a gender"),
   location: Yup.string().optional(),
   interestBehaviours: Yup.string().optional(),
   customerPersonas: Yup.string().optional(),
@@ -42,18 +45,24 @@ export const validationSchema = Yup.object({
 
   // COMPETITOR ANALYSIS (Optional)
   mainCompetitor: Yup.string().optional(),
-  mainCompetitorWebsite: Yup.string().url("Invalid URL format").optional(),
+  mainCompetitorWebsite: Yup.string()
+    .matches(
+      /^(https?:\/\/|www\.)[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+.*$/,
+      "Invalid URL format"
+    )
+    .optional(),
   dislikeDigitalPrescence: Yup.string().optional(),
 
   // ADDITIONAL INFORMATION (Optional)
   additionalInformation: Yup.string().optional(),
 
   // ATTACH FILE (Optional)
-  document: Yup.mixed().nullable().test("fileSize", "Max file size exceeded.", (value) => {
-    if (!value) return true; // Skip validation if no file is provided
-    return value instanceof File && value.size <= 5000000;
-  }),
-
+  document: Yup.mixed()
+    .nullable()
+    .test("fileSize", "Max file size exceeded.", (value) => {
+      if (!value) return true; // Skip validation if no file is provided
+      return value instanceof File && value.size <= 5000000;
+    }),
 
   // CONSENT (Optional)
   receiveUpdates: Yup.boolean().nullable().optional(),

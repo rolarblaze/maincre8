@@ -2,6 +2,7 @@ export type Tab =
   | "Overview"
   | "Services"
   | "MyServices"
+  | "CustomRecommendation"
   | "Calendar"
   | "History"
   | "Support"

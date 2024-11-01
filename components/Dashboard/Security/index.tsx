@@ -1,6 +1,6 @@
 "use client";
 import { Button, InputField } from "@/components";
-import { EyeIcon, Checked, Unchecked } from "@/public/icons";
+import { EyeCloseIcon, Checked, Unchecked } from "@/public/icons";
 import { addAlert } from "@/redux/alerts";
 import { updatePassword } from "@/redux/auth/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
@@ -28,7 +28,7 @@ export default function Security() {
     passwordCriteria.map((criterion) => ({
       label: criterion.label,
       isValid: false,
-    }))
+    })),
   );
 
   const formik = useFormik({
@@ -52,7 +52,7 @@ export default function Security() {
             headText: "Success",
             subText: "Password updated successfully",
             type: "success",
-          })
+          }),
         );
       } else if (updatePassword.rejected.match(actionResult)) {
         const errorMessage =
@@ -64,7 +64,7 @@ export default function Security() {
             headText: "Error",
             subText: errorMessage,
             type: "error",
-          })
+          }),
         );
       }
     },
@@ -86,14 +86,14 @@ export default function Security() {
       passwordCriteria.map((criterion) => ({
         label: criterion.label,
         isValid: false,
-      }))
+      })),
     );
   };
 
   return (
-    <div className="md:border border-grey200 md:p-6 rounded-lg max-w-[740px]">
+    <div className="max-w-[740px] rounded-lg border-grey200 md:border md:p-6">
       <p className="text-lg font-semibold">Change password</p>
-      <span className="text-grey500 mt-2 md:mt-1">
+      <span className="mt-2 text-grey500 md:mt-1">
         Try changing your password regularly to make your account safer
       </span>
       <form onSubmit={formik.handleSubmit} className="mt-6">
@@ -119,7 +119,7 @@ export default function Security() {
           value={formik.values.newPassword}
           onChange={handleNewPasswordChange}
           name="newPassword"
-          icon={<EyeIcon className="w-5 h-5" />}
+          icon={<EyeCloseIcon className="h-5 w-5" />}
           onInputIconClick={togglePasswordVisibility}
           error={
             formik.touched.newPassword && formik.errors.newPassword
@@ -127,19 +127,19 @@ export default function Security() {
               : ""
           }
         />
-        <div className=" flex flex-wrap  md:grid grid-cols-3 gap-2 mt-4 mb-6">
+        <div className="mb-6 mt-4 flex grid-cols-3 flex-wrap gap-2 md:grid">
           {passwordCriteria.map((criterion, index) => (
             <div
               key={index}
-              className="flex items-center gap-2 py-1 md:px-2 rounded-full md:border border-grey300 text-xs text-grey500 font-medium"
+              className="flex items-center gap-2 rounded-full border-grey300 py-1 text-xs font-medium text-grey500 md:border md:px-2"
             >
               <div className="transition-transform duration-500 ease-in-out">
                 {passwordValidation.some(
-                  (v) => v.label === criterion.label && v.isValid
+                  (v) => v.label === criterion.label && v.isValid,
                 ) ? (
-                  <Checked className="w-5 h-5" />
+                  <Checked className="h-5 w-5" />
                 ) : (
-                  <Unchecked className="w-5 h-5" />
+                  <Unchecked className="h-5 w-5" />
                 )}
               </div>
               <span>{criterion.label}</span>
@@ -162,7 +162,7 @@ export default function Security() {
           classNames="mb-6 p-4"
         />
 
-        <div className="flex flex-col md:flex-row gap-4">
+        <div className="flex flex-col gap-4 md:flex-row">
           <Button
             label="Save changes"
             classNames="md:w-fit py-4 md:py-3 px-4"

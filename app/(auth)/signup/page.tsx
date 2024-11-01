@@ -1,12 +1,17 @@
 "use client";
-import { Fragment, useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { useRouter } from "next/navigation";
 import { setUserTokenCookie } from "@/utils/helpers/auth/cookieUtility";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useDispatch } from "react-redux";
-import { Tabs, InputField, Button, SocialSignUp } from "@/components";
-import { Checked, EyeIcon, Unchecked } from "@/public/icons";
+import { InputField, Button } from "@/components";
+import {
+  EyeOpenIcon,
+  EyeCloseIcon,
+  PasswordMatchIcon,
+  PasswordNoMatchIcon,
+  EmailFieldIcon,
+} from "@/public/icons";
 import { signUpIndividual, signUpBusiness } from "@/redux/auth/features";
 import { addAlert } from "@/redux/alerts";
 import { AppDispatch, useAppDispatch, useAppSelector } from "@/redux/store";
@@ -16,8 +21,6 @@ import {
   passwordCriteria,
 } from "@/utils/helpers/auth/passwordValidation";
 
-
-
 const SignupSchema = Yup.object().shape({
   firstName: Yup.string().test(
     "required-first-name",
@@ -25,7 +28,7 @@ const SignupSchema = Yup.object().shape({
     function (value) {
       const { isBusiness } = this.parent;
       return isBusiness ? true : !!value;
-    }
+    },
   ),
   lastName: Yup.string().test(
     "required-last-name",
@@ -33,7 +36,7 @@ const SignupSchema = Yup.object().shape({
     function (value) {
       const { isBusiness } = this.parent;
       return isBusiness ? true : !!value;
-    }
+    },
   ),
   businessName: Yup.string().test(
     "required-business-name",
@@ -41,7 +44,7 @@ const SignupSchema = Yup.object().shape({
     function (value) {
       const { isBusiness } = this.parent;
       return isBusiness ? !!value : true;
-    }
+    },
   ),
   email: Yup.string()
     .email("Invalid email")
@@ -77,7 +80,11 @@ export default function Signup() {
     },
     validationSchema: SignupSchema,
     onSubmit: async (values) => {
-      await handleSignUp(values, dispatch);
+      if (activeTab === "individual") {
+        await handleIndividualSignUp(values, dispatch);
+      } else {
+        await handleBusinessSignUp(values, dispatch);
+      }
     },
   });
 
@@ -88,172 +95,193 @@ export default function Signup() {
     setShowPassword(!showPassword);
   };
 
-  // Signup function
-  const handleSignUp = async (
+  // Separate function for individual signup logic
+  const handleIndividualSignUp = async (
     payload: SignUpFormValues,
-    dispatch: AppDispatch
+    dispatch: AppDispatch,
   ) => {
-    const action =
-      activeTab === "individual" ? signUpIndividual : signUpBusiness;
-    const actionResult = await dispatch(action(payload));
+    const actionResult = await dispatch(signUpIndividual(payload));
 
-    if (
-      signUpIndividual.fulfilled.match(actionResult) ||
-      signUpBusiness.fulfilled.match(actionResult)
-    ) {
-      const { data } = actionResult.payload;
-      sessionStorage.setItem("userEmail", payload.email); // Store email in session storage
+    if (signUpIndividual.fulfilled.match(actionResult)) {
+      sessionStorage.setItem("userEmail", payload.email);
       dispatch(
         addAlert({
           id: "",
           headText: "Success",
           subText:
-            activeTab === "individual"
-              ? "Successfully registered as an individual. Please check your email for verification."
-              : "Successfully registered as a business. Please check your email for verification.",
+            "Successfully registered as an individual. Please check your email for verification.",
           type: "success",
-        })
+        }),
       );
       router.push("/email-verify");
-    } else if (
-      signUpIndividual.rejected.match(actionResult) ||
-      signUpBusiness.rejected.match(actionResult)
-    ) {
-      if (actionResult.error) {
-        const errorMessage =
-          actionResult.error?.message ||
-          "An error occurred during registration. Please try again.";
-        dispatch(
-          addAlert({
-            id: "",
-            headText: "Error",
-            subText: errorMessage,
-            type: "error",
-          })
-        );
-      }
+    } else {
+      handleSignUpError(actionResult, dispatch);
+    }
+  };
+
+  // Separate function for business signup logic
+  const handleBusinessSignUp = async (
+    payload: SignUpFormValues,
+    dispatch: AppDispatch,
+  ) => {
+    const actionResult = await dispatch(signUpBusiness(payload));
+
+    if (signUpBusiness.fulfilled.match(actionResult)) {
+      sessionStorage.setItem("userEmail", payload.email);
+      dispatch(
+        addAlert({
+          id: "",
+          headText: "Success",
+          subText:
+            "Successfully registered as a business. Please check your email for verification.",
+          type: "success",
+        }),
+      );
+      router.push("/email-verify");
+    } else {
+      handleSignUpError(actionResult, dispatch);
+    }
+  };
+
+  // Handle errors for both individual and business signups
+  const handleSignUpError = (actionResult: any, dispatch: AppDispatch) => {
+    if (actionResult.error) {
+      const errorMessage =
+        actionResult.error?.message ||
+        "An error occurred during registration. Please try again.";
+      dispatch(
+        addAlert({
+          id: "",
+          headText: "Error",
+          subText: errorMessage,
+          type: "error",
+        }),
+      );
     }
   };
 
   return (
     <Fragment>
-      <h3>Create your account</h3>
-      <section className="w-full flex flex-col gap-4 border border-grey200 rounded-lg p-5 md:gap-8 md:p-10">
-        <Tabs activeTab={activeTab} setActiveTab={setActiveTab} />
-        <form
-          className="w-full flex flex-col gap-8"
-          onSubmit={formik.handleSubmit}
-        >
-          <section className="flex flex-col gap-4 md:gap-6">
-            {activeTab === "individual" && (
-              <div className="flex items-center gap-2">
-                <InputField
-                  label="First name"
-                  type="text"
-                  placeholder="Enter first name"
-                  value={formik.values.firstName}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  name="firstName"
-                  error={
-                    formik.touched.firstName && formik.errors.firstName
-                      ? formik.errors.firstName
-                      : ""
-                  }
-                />
-                <InputField
-                  label="Last name"
-                  type="text"
-                  placeholder="Enter last name"
-                  value={formik.values.lastName}
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  name="lastName"
-                  error={
-                    formik.touched.lastName && formik.errors.lastName
-                      ? formik.errors.lastName
-                      : ""
-                  }
-                />
-              </div>
-            )}
-            {activeTab === "business" && (
-              <InputField
-                label="Business name"
-                type="text"
-                placeholder="Enter business name"
-                value={formik.values.businessName}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                name="businessName"
-                error={
-                  formik.touched.businessName && formik.errors.businessName
-                    ? formik.errors.businessName
-                    : ""
-                }
-              />
-            )}
-            <InputField
-              label="Email address"
-              type="text"
-              placeholder="Enter email address"
-              value={formik.values.email}
-              onChange={formik.handleChange}
-              onBlur={formik.handleBlur}
-              name="email"
-              error={
-                formik.touched.email && formik.errors.email
-                  ? formik.errors.email
-                  : ""
-              }
-            />
-            <div className="flex flex-col gap-4">
-              <InputField
-                label="Password"
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                onBlur={formik.handleBlur}
-                name="password"
-                icon={<EyeIcon className="w-5 h-5" />}
-                onInputIconClick={togglePasswordVisibility}
-                error={
-                  formik.touched.password && formik.errors.password
-                    ? formik.errors.password
-                    : ""
-                }
-              />
-              <div className="grid grid-cols-2 gap-2">
-                {passwordCriteria.map((criterion, index) => (
-                  <div
-                    key={index}
-                    className="flex items-center gap-2 py-1 px-2 rounded-full border border-grey300 text-xs  text-grey500 font-medium"
-                  >
-                    <div className="transition-transform duration-500 ease-in-out">
-                      {passwordValidation.some(
-                        (v) => v.label === criterion.label && v.isValid
-                      ) ? (
-                        <Checked className="w-5 h-5" />
-                      ) : (
-                        <Unchecked className="w-5 h-5" />
-                      )}
-                    </div>
-                    <p>{criterion.label}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-          <Button
-            label="Create account"
-            isLoading={isLoading}
-            type="submit"
-            classNames="mt-4"
+      <h3 className="text-[32px] font-semibold leading-7 text-[#101928]">
+        Step into your creative hub
+      </h3>
+
+      <form onSubmit={formik.handleSubmit} className="mt-5 space-y-5">
+        <div className="flex gap-5">
+          <InputField
+            label="First name"
+            type="text"
+            placeholder="Enter first name"
+            value={formik.values.firstName}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            name="firstName"
+            error={
+              formik.touched.firstName && formik.errors.firstName
+                ? formik.errors.firstName
+                : ""
+            }
           />
-        </form>
-        {/* <SocialSignUp isLogin={false} activeTab={activeTab} /> */}
-      </section>
+          <InputField
+            label="Last name"
+            type="text"
+            placeholder="Enter last name"
+            value={formik.values.lastName}
+            onChange={formik.handleChange}
+            onBlur={formik.handleBlur}
+            name="lastName"
+            error={
+              formik.touched.lastName && formik.errors.lastName
+                ? formik.errors.lastName
+                : ""
+            }
+          />
+        </div>
+        <InputField
+          label="Email address"
+          type="text"
+          placeholder="Enter email address"
+          value={formik.values.email}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          name="email"
+          icon={<EmailFieldIcon />}
+          error={
+            formik.touched.email && formik.errors.email
+              ? formik.errors.email
+              : ""
+          }
+        />
+
+        <InputField
+          label="Password"
+          type={showPassword ? "text" : "password"}
+          placeholder="Enter password"
+          value={formik.values.password}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          name="password"
+          icon={
+            showPassword ? (
+              <EyeOpenIcon className="h-5 w-5" />
+            ) : (
+              <EyeCloseIcon className="h-5 w-5" />
+            )
+          }
+          onInputIconClick={togglePasswordVisibility}
+          error={
+            formik.touched.password && formik.errors.password
+              ? formik.errors.password
+              : ""
+          }
+        />
+
+        <div className="center -mt-5 gap-2">
+          {passwordCriteria.map((criterion, index) => {
+            return (
+              <div
+                key={criterion.label}
+                className="center gap-1 rounded-lg border border-[#D0D5DD] bg-[#F0F2F5] px-2 py-1"
+              >
+                <div className="size-3">
+                  {passwordValidation.some(
+                    (v) => v.label === criterion.label && v.isValid,
+                  ) ? (
+                    <div className="center size-3">
+                      <PasswordMatchIcon />
+                    </div>
+                  ) : (
+                    <div className="center size-3">
+                      <PasswordNoMatchIcon />
+                    </div>
+                  )}
+                </div>
+
+                {/* <div className="size-3 bg-slate-300"></div> */}
+                <p className="text-sm font-medium leading-5 text-[#98A2B3]">
+                  {criterion.label}
+                </p>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* <div className="flex items-center justify-between">
+        <CheckboxField label="Remember me" className="text-xs" />
+        <Link
+          href="/forgot-password"
+          className="p-0 w-auto text-xs bg-transparent font-medium text-[#1574E5]"
+        >
+          Forgot Password
+        </Link>
+      </div> */}
+        <Button
+          label="Create account"
+          isLoading={isLoading}
+          type="submit"
+          classNames="text-white font-semibold"
+        />
+      </form>
     </Fragment>
   );
 }
