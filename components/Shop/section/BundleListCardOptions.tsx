@@ -9,7 +9,7 @@ import {
   DigitalMarketing,
   ContentWriting,
   AllInOneBundle,
-} from "@/components/Shop/data/bundle-pricing-data";
+} from "@/components/Shop/Data/bundle-pricing-data";
 
 type bundleCardsDetailsType = {
   title: string;
@@ -22,7 +22,10 @@ type bundleCardsDetailsType = {
 
 type BundleListCardOptionsPropsType = {
   bundleCardsDetails: bundleCardsDetailsType[];
+  pageViewDataTitle?: string;
+  updatePageViewData?: (title: string) => void;
 };
+
 
 type BundlesType =
   | "brand-design"
@@ -33,6 +36,7 @@ type BundlesType =
 
 const BundleListCardOptions = ({
   bundleCardsDetails,
+
 }: BundleListCardOptionsPropsType) => {
   const router = useRouter();
   const dispatch = useAppDispatch();

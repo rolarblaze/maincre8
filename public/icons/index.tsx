@@ -71,6 +71,7 @@ export { default as CheckCircleIcon2 } from "./check-circle2.svg";
 export { default as Icon } from "./vision-icon.svg";
 export { default as PasswordNoMatchIcon } from "./password-no-match.svg";
 export { default as PasswordMatchIcon } from "./password-match.svg";
+export { default as EyeIcon } from "./eye-close.svg";
 
 // export { default as ArrowDrawing } from "./arrow-drawing.svg";
 // export { default as ArrowDrawingMobile } from "./arrow-drawing-mobile.svg";

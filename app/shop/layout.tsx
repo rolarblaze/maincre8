@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { PageLayout } from "@/components";
-import bundleCardsDetails from "@/components/Shop/data/bundleCardsDetails";
+import bundleCardsDetails from "@/components/Shop/Data/bundle-cards-details";
 import BundleListCardOptions from "@/components/Shop/section/BundleListCardOptions";
 
 export const metadata: Metadata = {

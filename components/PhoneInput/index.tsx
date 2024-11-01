@@ -5,8 +5,8 @@ import "react-phone-input-2/lib/style.css";
 import { countryLocalPhoneLengths } from "./utils/countryCodesLength";
 
 interface PhoneNumberInputProps {
-  form: any;
-  name: string;
+  form?: any;
+  name?: string;
   value: string;
   onChange?: (value: string) => void;
   label: string;
