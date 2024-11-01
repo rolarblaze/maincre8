@@ -13,7 +13,8 @@ const NewNavbar = () => {
   const navlink = [
     {
       name: "Pricing",
-      link: "/shop",
+      // link: "/shop",
+      link: "/",
     },
     {
       name: "FAQs",
@@ -57,17 +58,17 @@ const NewNavbar = () => {
         {/* BUTTONS */}
         {!hide && (
           <div className="flex items-center justify-center gap-6 max-sm:hidden">
-            <Link href={"/login"} className="block w-fit hover:text-primary500">
+            <Link href={"/"} className="block w-fit hover:text-primary500">
               Login
             </Link>
             <Link
-              href={"/signup"}
+              href={"/"}
               className="block w-fit rounded-lg bg-grey800 px-4 py-2.5 text-grey50"
             >
               Get Started
             </Link>
 
-            <Link href={"/cart"} className="block">
+            <Link href={"/"} className="block">
               <CartButton
                 click={cartOpen}
                 onClick={() => setCartOpen((prev) => !prev)}
