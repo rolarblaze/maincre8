@@ -7,6 +7,7 @@ import { fetchRecommendationHistory } from "@/redux/order/features";
 import assetLibrary from "@/library";
 import DashboardPopoutWrapper from "@/components/UI/Modals/DashboardPopoutWrapper";
 import RecommendFormInputs from "@/components/NewPages/CustomRecommend/shared/RecommendFormInputs";
+import DashboardRecommendForm from "@/components/NewPages/CustomRecommend/DasboardRecommendForm";
 
 const CustomRecommendation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -45,16 +46,16 @@ const CustomRecommendation = () => {
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         showCancelIcon={true}
+        cancelBtnStyles="border-none mb-6"
+        cancelIconStyles="stroke-grey400 w-6 h-6"
+        className="!items-start"
       >
         <DashboardPopoutWrapper
           title="Business Brief Submission Form"
           subtitle="Fill out this form to get custom service recommendations"
-          footerContent={
-            <Button label="Checkout" classNames="active:scale-[0.98]" />
-          }
+          classNames=""
         >
-          {/* <RecommendFormInputs /> */}
-          <p >Coming soon...</p>
+          <DashboardRecommendForm />
         </DashboardPopoutWrapper>
         {/* <SuccessModal /> */}
       </Modal>
