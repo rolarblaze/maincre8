@@ -100,30 +100,6 @@ export default function Signup() {
     }
   };
 
-  // Separate function for business signup logic
-  // const handleBusinessSignUp = async (
-  //   payload: SignUpFormValues,
-  //   dispatch: AppDispatch,
-  // ) => {
-  //   const actionResult = await dispatch(signUpBusiness(payload));
-
-  //   if (signUpBusiness.fulfilled.match(actionResult)) {
-  //     sessionStorage.setItem("userEmail", payload.email);
-  //     dispatch(
-  //       addAlert({
-  //         id: "",
-  //         headText: "Success",
-  //         subText:
-  //           "Successfully registered as a business. Please check your email for verification.",
-  //         type: "success",
-  //       }),
-  //     );
-  //     router.push("/email-verify");
-  //   } else {
-  //     handleSignUpError(actionResult, dispatch);
-  //   }
-  // };
-
   // Handle errors for both individual and business signups
   const handleSignUpError = (actionResult: any, dispatch: AppDispatch) => {
     if (actionResult.error) {
