@@ -89,42 +89,25 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
         {sidebarOpen && (
           <MobileSidebar setActiveTab={setActiveTab} onClick={closeSidebar} />
         )}
-        <div className="relative flex flex-1 flex-col">
+
+        {/* Main section */}
+        <div className="flex flex-1 flex-col">
           <MobileNav onClick={openSidebar} title={headerTitles[activeTab]} />
-          <div className="flex justify-between">
+          {!isDynamicRoute && (
             <div>
-              {!isDynamicRoute && (
-                <div>
-                  {headerTitles[activeTab] && (
-                    <Header
-                      title={headerTitles[activeTab]}
-                      subtitle={headerSubtitles[activeTab]}
-                    />
-                  )}
-                </div>
+              {headerTitles[activeTab] && (
+                <Header
+                  title={headerTitles[activeTab]}
+                  subtitle={headerSubtitles[activeTab]}
+                />
               )}
             </div>
-
-            <div className="absolute inset-y-10 right-8 flex gap-4">
-              <button className="flex size-10 items-center justify-center rounded-2xl bg-grey100">
-                <BellIcon />
-              </button>
-
-              <button
-                onClick={() => setCartOpen((prev) => !prev)}
-                className={`flex size-10 items-center justify-center rounded-2xl ${cartOpen ? "bg-primary50" : "bg-grey100"}`}
-              >
-                <CartIcon
-                  className="-ml-0.5"
-                  fillColor={cartOpen ? "#4490EA" : "#667185"}
-                />
-              </button>
-            </div>
-          </div>
-
-          <hr />
-
-          <main className={`noScrollbar size-full flex-1 overflow-y-auto`}>
+          )}
+          <main
+            className={`noScrollbar flex-1 overflow-y-auto p-6 ${
+              isOverview ? "bg-dashboard-bg" : "bg-white"
+            }`}
+          >
             {children}
           </main>
         </div>
