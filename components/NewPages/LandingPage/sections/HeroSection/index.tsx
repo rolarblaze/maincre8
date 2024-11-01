@@ -22,7 +22,7 @@ const HeroSection = () => {
 
         <div className="z-[2] mt-4 flex items-center justify-center gap-6">
           <Link
-            href={"/signup"}
+            href={"/"}
             className="block w-fit rounded-lg bg-white px-12 py-3.5 text-base font-semibold text-grey800"
           >
             Get Started

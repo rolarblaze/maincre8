@@ -15,7 +15,8 @@ const NewFooter = () => {
     },
     {
       name: "Pricing",
-      link: "/shop",
+      // link: "/shop",
+      link: "/",
     },
     {
       name: "FAQs",
