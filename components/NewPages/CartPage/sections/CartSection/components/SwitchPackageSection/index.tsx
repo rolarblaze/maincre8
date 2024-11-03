@@ -6,9 +6,9 @@ import {
   DigitalMarketing,
   ContentWriting,
   AllInOneBundle,
-} from "@/components/Shop/data/bundle-pricing-data";
+} from "@/components/Shop/Data/bundle-pricing-data";
 import BundleListCardOptions from "@/components/Shop/section/BundleListCardOptions";
-import bundleCardsDetails from "@/components/Shop/data/bundleCardsDetails";
+import bundleCardsDetails from "@/components/Shop/Data/bundle-cards-details";
 import BundlePackagesPlan from "@/components/Shop/section/BundlePackagesPlan";
 
 const SwitchPackageSection = () => {

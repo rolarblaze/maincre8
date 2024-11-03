@@ -124,7 +124,7 @@ const InputField: React.FC<InputFieldProps> = ({
           } ${disabled ? "cursor-not-allowed" : ""}`}
         />
         {icon && (
-          <div className="cursor-pointer" onClick={onInputIconClick}>
+          <div className="cursor-pointer" onClick={ (e) => {e.stopPropagation(); onInputIconClick && onInputIconClick() }}>
             {icon}
           </div>
         )}

@@ -30,7 +30,7 @@ const CtaSection = () => {
 
           <div className="mt-4 flex gap-4 max-sm:flex-col">
             <Link
-              href={"/signup"}
+              href={"/"}
               className="block w-fit rounded-lg bg-primary900 px-12 py-4 text-lg font-medium text-white"
             >
               Get Started
