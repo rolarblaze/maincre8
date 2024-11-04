@@ -37,7 +37,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
 
   const headerTitles: Record<Tab, string> = {
     Overview: isMobile ? "Overview" : "",
-    Services: "Explore Services",
+    Services: "Services",
     MyServices: "My services",
     CustomRecommendation: "Custom Recommendation",
     Calendar: "Calendar",
@@ -66,6 +66,8 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
 
   // Check if the current route is dynamic
   const isDynamicRoute = pathname.split("/").length > 3;
+  console.log(isDynamicRoute);
+  
 
   const isOverview = pathname.split("/").length === 2;
 
@@ -86,7 +88,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
         {sidebarOpen && (
           <MobileSidebar setActiveTab={setActiveTab} onClick={closeSidebar} />
         )}
-        <div className="flex flex-col flex-1">
+        <div className="flex flex-1 flex-col">
           <MobileNav onClick={openSidebar} title={headerTitles[activeTab]} />
           {!isDynamicRoute && (
             <div>
@@ -99,9 +101,9 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
             </div>
           )}
 
-          <main
-            className={`flex-1 size-full overflow-y-auto noScrollbar `}
-          >
+          <hr />
+
+          <main className={`noScrollbar size-full flex-1 overflow-y-auto`}>
             {children}
           </main>
         </div>

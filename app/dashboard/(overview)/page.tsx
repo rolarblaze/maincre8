@@ -123,7 +123,7 @@ const Overview = () => {
                 />
               </figure>
 
-              <div className="p-4 *:leading-[150%]">
+              <div className="p-4 font-manrope *:leading-[150%]">
                 <h4 className="text-lg font-semibold text-grey900">{name}</h4>
                 <p className="text-sm font-medium text-grey500">{text}</p>
               </div>
