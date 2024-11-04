@@ -1,6 +1,9 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import SliderModal from "../UI/Modals/SliderModal";
+import DashboardPopoutWrapper from "../UI/Modals/DashboardPopoutWrapper";
 
 const EmptyState = ({
   imgSrc,
@@ -17,9 +20,26 @@ const EmptyState = ({
   to?: string;
   imgStyle?: string;
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  function handleClose() {
+    setIsOpen(false);
+  }
   return (
-    <div className="grid place-items-center h-full">
-      <div className="flex flex-col max-w-max justify-center items-center ">
+    <div className="grid h-full place-items-center">
+      <div className="flex max-w-max flex-col items-center justify-center">
+        <button className="bg-red-400 p-3" onClick={() => setIsOpen(true)}>
+          Click Me
+        </button>
+        <SliderModal isOpen={isOpen} onClose={handleClose} cancelBtnStyles="border-none top-10 right-10">
+          <DashboardPopoutWrapper
+            title="Digital Marketing Brief Submission Form"
+            showSubtitle={false}
+            childrenStyles="py-28"
+          >
+            Body
+          </DashboardPopoutWrapper>
+        </SliderModal>
         <Image
           src={`${imgSrc}`}
           alt={alt}
@@ -28,10 +48,13 @@ const EmptyState = ({
           className={`${imgStyle}`}
         />
 
-        <p className="text-grey600 font-semibold text-lg mb-2">{text}</p>
+        <p className="mb-2 text-lg font-semibold text-grey600">{text}</p>
 
         {link && to && (
-          <Link href={to} className="text-sm text-primary500">
+          <Link
+            href={to}
+            className="rounded-lg bg-primary500 px-4 py-2 text-sm text-white"
+          >
             {link}
           </Link>
         )}

@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { CancelIcon } from "@/public/icons";
 import { twMerge } from "tailwind-merge";
 
-interface ModalProps {
+interface SliderModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
@@ -13,7 +13,7 @@ interface ModalProps {
   showCancelIcon?: boolean;
 }
 
-const Modal: React.FC<ModalProps> = ({
+const SliderModal: React.FC<SliderModalProps> = ({
   isOpen,
   onClose,
   children,
@@ -22,12 +22,11 @@ const Modal: React.FC<ModalProps> = ({
   cancelIconStyles,
   showCancelIcon = true,
 }) => {
-  // if (!isOpen) return null;
-
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 flex items-center">
+          {/* Backdrop */}
           <motion.div
             onClick={onClose}
             initial={{ opacity: 0 }}
@@ -36,31 +35,38 @@ const Modal: React.FC<ModalProps> = ({
             className="fixed inset-0 bg-black/50"
           />
 
+          {/* Sliding Modal */}
           <motion.div
-            initial={{ scale: 0 }}
-            animate={{
-              scale: 1,
-              transition: {
-                duration: 0.3,
-              },
+            initial={{ x: "100%" }}
+            animate={{ x: "50%" }}
+            exit={{ x: "100%" }}
+            transition={{
+              type: "spring",
+              stiffness: 300,
+              damping: 25,
             }}
-            exit={{ opacity: 0, scale: 0, translateY: 100 }}
-            className={`no-scrollbar relative z-10 size-fit max-h-[calc(100dvh-2.5rem)] min-w-80 rounded-2xl ${className}`}
+            className={twMerge(
+              "fixed right-[35vw] z-10 h-full w-[70vw] overflow-y-auto bg-white shadow-lg",
+              className,
+            )}
           >
+            {/* Close Icon */}
             {showCancelIcon && (
               <div
                 onClick={onClose}
                 className={twMerge(
-                  "absolute right-8 top-8 z-20 mb-4 ml-auto w-fit cursor-pointer rounded-full border border-grey300 p-2",
+                  "absolute right-4 top-4 z-20 cursor-pointer rounded-full border border-gray-300 p-2",
                   cancelBtnStyles,
                 )}
               >
                 <CancelIcon
-                  className={twMerge("stroke-grey200", cancelIconStyles)}
+                  className={twMerge("stroke-gray-500", cancelIconStyles)}
                 />
               </div>
             )}
-            {children}
+
+            {/* Modal Content */}
+            <div className="h-full w-full p-6">{children}</div>
           </motion.div>
         </div>
       )}
@@ -68,4 +74,4 @@ const Modal: React.FC<ModalProps> = ({
   );
 };
 
-export default Modal;
+export default SliderModal;
