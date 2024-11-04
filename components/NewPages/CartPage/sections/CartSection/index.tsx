@@ -51,7 +51,7 @@ const cartItems = [
     type: "Standard Package",
   },
   {
-    id: "cm",
+    id: "aob",
     name: "All-In-One Bundle",
     type: "Standard Package",
   },
