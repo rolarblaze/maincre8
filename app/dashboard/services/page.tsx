@@ -8,7 +8,6 @@ const Services = () => {
     <div className="flex flex-wrap gap-6 px-6 py-10">
       {packages.map(({ id, name, text }) => {
         const packageRoute = name.toLowerCase().replace(/\s+/g, "-");
-
         return (
           <Link
             key={id}
@@ -27,7 +26,7 @@ const Services = () => {
               />
             </figure>
 
-            <div className="p-4 *:leading-[150%] font-manrope">
+            <div className="p-4 font-manrope *:leading-[150%]">
               <h4 className="text-lg font-semibold text-grey900">{name}</h4>
               <p className="text-sm font-medium text-grey500">{text}</p>
             </div>

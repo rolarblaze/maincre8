@@ -1,4 +1,10 @@
 import { Button } from "@/components";
+import {
+  CheckedCircleSVG,
+  PremiumPlanSVG,
+  StandardPlanSVG,
+  StarterPlanSVG,
+} from "@/public/icons";
 
 const addOns = [
   "Marketing Designs",
@@ -11,23 +17,33 @@ const ServicePackagePage = () => {
   return (
     <div className="[&>*]:px-6">
       {/* PLANS */}
-      <section className="grid grid-cols-3 gap-6 pt-10">
+      <section className="flex flex-wrap justify-start gap-6 pt-10">
         {["starter", "standard", "premium"].map((item) => {
           return (
             <div
               key={item}
-              className="min-w-80 space-y-4 rounded-lg border border-grey200 px-8 py-5 text-grey800"
+              className="min-w-[22rem] space-y-4 rounded-lg border border-grey200 px-8 py-5 text-grey800"
             >
               <div className="flex items-center justify-center gap-2 bg-grey50 p-1.5 capitalize">
-                <div className="size-[1.125rem] rounded bg-grey600" />
+                {item === "starter" ? (
+                  <StarterPlanSVG />
+                ) : item === "standard" ? (
+                  <StandardPlanSVG />
+                ) : (
+                  <PremiumPlanSVG />
+                )}
+
                 <p className="text-lg font-semibold leading-[150%] text-grey500">
-                  {item} plans
+                  {item} plan
                 </p>
               </div>
 
               <div className="space-y-2">
                 <p className="font-medium leading-6 text-grey900">
-                  <span className="text-3.5xl leading-10">$499</span>/per month
+                  <span className="text-3.5xl font-semibold leading-10">
+                    $499
+                  </span>
+                  /per month
                 </p>
                 <p className="leading-6">Perfect for solo entrepreneurs</p>
               </div>
@@ -40,9 +56,9 @@ const ServicePackagePage = () => {
                     return (
                       <div
                         key={item}
-                        className="flex items-center justify-start gap-2 py-4"
+                        className="flex items-center justify-start gap-2 py-4 text-sm"
                       >
-                        <div className="size-5 rounded-full bg-primary600" />
+                        <CheckedCircleSVG />
                         {item}
                       </div>
                     );

@@ -3,6 +3,11 @@ export const packages = [
     id: "gd",
     name: "Graphic Design Packages",
     text: "Designs that Engage and Convert",
+    plans: [
+      {
+        type:"starter"
+      }
+    ]
   },
   {
     id: "bd",
