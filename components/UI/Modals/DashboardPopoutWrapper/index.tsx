@@ -8,6 +8,7 @@ function DashboardPopoutWrapper({
   classNames,
   showSubtitle = true,
   childrenStyles,
+  headerStyles,
 }: {
   children: React.ReactNode;
   title: string;
@@ -15,6 +16,7 @@ function DashboardPopoutWrapper({
   classNames?: string;
   showSubtitle?: boolean;
   childrenStyles?: string;
+  headerStyles?: string;
 }) {
   return (
     <div
@@ -23,7 +25,12 @@ function DashboardPopoutWrapper({
         classNames,
       )}
     >
-      <header className="absolute inset-x-0 top-0 space-y-2 rounded-t-2xl border-b border-grey200 px-8 py-6">
+      <header
+        className={twMerge(
+          "absolute inset-x-0 top-0 space-y-2 rounded-t-2xl border-b border-grey200 px-8 py-6",
+          headerStyles,
+        )}
+      >
         <h4>{title}</h4>
         <p>{showSubtitle && subtitle}</p>
       </header>

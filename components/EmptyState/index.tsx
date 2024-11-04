@@ -4,6 +4,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import SliderModal from "../UI/Modals/SliderModal";
 import DashboardPopoutWrapper from "../UI/Modals/DashboardPopoutWrapper";
+import FormFooter from "../Dashboard/SubmitBrief/shared/FormFooter";
 
 const EmptyState = ({
   imgSrc,
@@ -31,14 +32,14 @@ const EmptyState = ({
         <button className="bg-red-400 p-3" onClick={() => setIsOpen(true)}>
           Click Me
         </button>
-        <SliderModal isOpen={isOpen} onClose={handleClose} cancelBtnStyles="border-none top-10 right-10">
-          <DashboardPopoutWrapper
-            title="Digital Marketing Brief Submission Form"
-            showSubtitle={false}
-            childrenStyles="py-28"
-          >
-            Body
-          </DashboardPopoutWrapper>
+        <SliderModal
+          isOpen={isOpen}
+          onClose={handleClose}
+          title="Digital Marketing Brief Submission Form"
+          cancelBtnStyles="border-none top-10 right-10"
+        >
+          Body
+          <FormFooter />
         </SliderModal>
         <Image
           src={`${imgSrc}`}

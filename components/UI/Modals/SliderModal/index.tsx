@@ -2,6 +2,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { CancelIcon } from "@/public/icons";
 import { twMerge } from "tailwind-merge";
+import DashboardPopoutWrapper from "../DashboardPopoutWrapper";
 
 interface SliderModalProps {
   isOpen: boolean;
@@ -10,6 +11,7 @@ interface SliderModalProps {
   className?: string;
   cancelBtnStyles?: string;
   cancelIconStyles?: string;
+  title: string;
   showCancelIcon?: boolean;
 }
 
@@ -20,6 +22,7 @@ const SliderModal: React.FC<SliderModalProps> = ({
   className,
   cancelBtnStyles,
   cancelIconStyles,
+  title,
   showCancelIcon = true,
 }) => {
   return (
@@ -39,7 +42,7 @@ const SliderModal: React.FC<SliderModalProps> = ({
           <motion.div
             initial={{ x: "100%" }}
             animate={{ x: "50%" }}
-            exit={{ x: "100%" }}
+            exit={{ x: "150%" }}
             transition={{
               type: "spring",
               stiffness: 300,
@@ -66,7 +69,17 @@ const SliderModal: React.FC<SliderModalProps> = ({
             )}
 
             {/* Modal Content */}
-            <div className="h-full w-full p-6">{children}</div>
+            <div className="h-full w-full">
+              <DashboardPopoutWrapper
+                title={title}
+                classNames="!rounded-none w-full h-full"
+                childrenStyles="!rounded-none"
+                headerStyles="!rounded-none"
+                showSubtitle={false}
+              >
+                {children}
+              </DashboardPopoutWrapper>
+            </div>
           </motion.div>
         </div>
       )}
