@@ -5,7 +5,7 @@ import { getBackgroundClass, getImage } from "./_helperFunc";
 
 const Services = () => {
   return (
-    <div className="flex flex-wrap gap-6 px-6 pt-10">
+    <div className="flex flex-wrap gap-6 px-6 py-10">
       {packages.map(({ id, name, text }) => {
         const packageRoute = name.toLowerCase().replace(/\s+/g, "-");
 

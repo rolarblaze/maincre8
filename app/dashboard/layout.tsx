@@ -67,7 +67,6 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
   // Check if the current route is dynamic
   const isDynamicRoute = pathname.split("/").length > 3;
   console.log(isDynamicRoute);
-  
 
   const isOverview = pathname.split("/").length === 2;
 
@@ -88,18 +87,27 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
         {sidebarOpen && (
           <MobileSidebar setActiveTab={setActiveTab} onClick={closeSidebar} />
         )}
-        <div className="flex flex-1 flex-col">
+        <div className="relative flex flex-1 flex-col">
           <MobileNav onClick={openSidebar} title={headerTitles[activeTab]} />
-          {!isDynamicRoute && (
+          <div className="flex justify-between">
             <div>
-              {headerTitles[activeTab] && (
-                <Header
-                  title={headerTitles[activeTab]}
-                  subtitle={headerSubtitles[activeTab]}
-                />
+              {!isDynamicRoute && (
+                <div>
+                  {headerTitles[activeTab] && (
+                    <Header
+                      title={headerTitles[activeTab]}
+                      subtitle={headerSubtitles[activeTab]}
+                    />
+                  )}
+                </div>
               )}
             </div>
-          )}
+
+            <div className="absolute inset-y-10 right-8 flex gap-4">
+              <div className="size-10 rounded-2xl bg-grey100" />
+              <div className="size-10 rounded-2xl bg-grey100" />
+            </div>
+          </div>
 
           <hr />
 
