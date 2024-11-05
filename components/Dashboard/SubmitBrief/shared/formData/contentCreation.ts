@@ -165,3 +165,85 @@ export const contentTimelineOptions = [
     value: "Flexible",
   },
 ];
+
+// FORM DATA
+export const contentCreationFormData = [
+  {
+    name: "contentType",
+    type: "select",
+    label: "What type of content do you need?",
+    subLabel: "Select all that apply",
+    options: contentTypeOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "contentGoal",
+    type: "select",
+    label: "What is the primary goal of this content?",
+    subLabel: "Select one",
+    options: contentGoalOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "contentAudience",
+    type: "select",
+    label: "Who is your target audience for this content?",
+    subLabel: "Select all that apply",
+    options: contentAudienceOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "contentTone",
+    type: "select",
+    label: "What tone or style should the content have?",
+    subLabel: "Select one",
+    options: contentToneOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "contentKeywords",
+    type: "textArea",
+    label: "Do you have specific keywords or topics to focus on?",
+    placeholder: "Type",
+  },
+  {
+    name: "contentLength",
+    type: "select",
+    label: "What is the desired length of the content?",
+    subLabel: "Select one",
+    options: contentLengthOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "contentSpecificGuidelines",
+    type: "textArea",
+    label:
+      "Are there any specific guidelines, research, or references we should follow?",
+    placeholder: "Type",
+  },
+  {
+    name: "contentCTA",
+    type: "select",
+    label: "What is the desired call to action (CTA) for this content?",
+    subLabel: "Select one",
+    options: contentCTAOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "contentKPI",
+    type: "select",
+    label: "What are your key performance indicators (KPIs) for this content?",
+    subLabel: "Select all that apply",
+    options: contentKPIOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "contentTimeline",
+    type: "select",
+    label: "What is your timeline for delivery?",
+    subLabel: "Select one",
+    options: contentTimelineOptions,
+    placeholder: "Select",
+  },
+
+];

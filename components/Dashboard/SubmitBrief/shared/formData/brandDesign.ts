@@ -100,3 +100,69 @@ export const brandKPIOptions = [
     value: "Other (Please specify)",
   },
 ];
+
+// FORM DATA
+
+export const brandDesignFormData = [
+  {
+    name: "brandCoreValue",
+    type: "textArea",
+    label: "What is the core value or mission of your brand?",
+    placeholder: "Type",
+  },
+  {
+    name: "brandMarket",
+    type: "select",
+    label: "Who is your target market?",
+    subLabel: "Select all that apply",
+    options: brandMarketOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "brandPersonality",
+    type: "select",
+    label: "What tone or personality should your brand have?",
+    subLabel: "Select one",
+    options: brandPersonalityOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "brandAsset",
+    type: "select",
+    label: "Do you already have any brand assets",
+    subLabel: "logo, color pallete, typography?Select one",
+    options: brandAssetOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "brandDeliverable",
+    type: "select",
+    label: "What are the key deliverables for this brand design?",
+    subLabel: "Select all that apply",
+    options: brandDeliverableOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "brandKPI",
+    type: "select",
+    label:
+      "What are your key performance indicators (KPIs) for the brand design?",
+    subLabel: "Select all that apply",
+    options: brandKPIOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "brandCompetitors",
+    type: "textArea",
+    label: "Are there any competitors or brands you admire?",
+    subLabel: "Free-text field or file upload option",
+    placeholder: "Type",
+  },
+  {
+    name: "brandGuidelines",
+    type: "textArea",
+    label:
+      "Do you have any specific guidelines or restrictions we should be aware of?",
+    placeholder: "Type",
+  },
+];

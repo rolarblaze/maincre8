@@ -351,7 +351,7 @@
 
 // 14. What are the main goals for email marketing (Select all that apply)
 
-// Dropdown (options of checkbox)—allInOneGoalOptions
+// Dropdown (options of checkbox)—allInOneMainGoalOptions
 // .....
 // -Nurturing Leads
 // -Driving Sales

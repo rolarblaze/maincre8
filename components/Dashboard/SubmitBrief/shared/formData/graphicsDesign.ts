@@ -87,16 +87,90 @@ export const graphicsDeliverableOptions = [
 ];
 
 export const graphicsTimelineOptions = [
-    {
-        label: "1-2 weeks",
-        value: "1-2 weeks",
-    },
-    {
-        label: "2-4 weeks",
-        value: "2-4 weeks",
-    },
-    {
-        label: "4-6 weeks",
-        value: "4-6 weeks",
-    },
-]
+  {
+    label: "1-2 weeks",
+    value: "1-2 weeks",
+  },
+  {
+    label: "2-4 weeks",
+    value: "2-4 weeks",
+  },
+  {
+    label: "4-6 weeks",
+    value: "4-6 weeks",
+  },
+];
+
+// FORM DATA
+export const graphicsDesignFormData = [
+  {
+    name: "graphicsType",
+    type: "select",
+    label: "What type of graphic design do you need?",
+    subLabel: "Select all that apply",
+    options: graphicsTypeOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "graphicsColorPalette",
+    type: "textArea",
+    label: "What is your brand's color palette and style preference?",
+    subLabel: "Free-text field or file upload option",
+    placeholder: "Type",
+  },
+  {
+    name: "graphicsTargetAud",
+    type: "select",
+    label: "Who is your target audience for this design",
+    subLabel: "Select all that apply",
+    options: graphicsTargetAudOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "graphicsPrimaryMessage",
+    type: "textArea",
+    label: "What is your brand's color palette and style preference?",
+    subLabel: "Free-text field or file upload option",
+    placeholder: "Type",
+  },
+  {
+    name: "graphicsTone",
+    type: "select",
+    label: "What tone or style should the design have?",
+    subLabel: "Select one",
+    options: graphicsToneOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "graphicsDeliverable",
+    type: "select",
+    label: "What are the key deliverables for this project?",
+    subLabel: "Select all that apply",
+    options: graphicsDeliverableOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "graphicsDeliverable",
+    type: "select",
+    label: "What are the key deliverables for this project?",
+    subLabel: "Select all that apply",
+    options: graphicsDeliverableOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "graphicsReferences",
+    type: "textArea",
+    label:
+      "Are there any design inspirations or references you want us to consider?",
+    subLabel: "Free-text field or file upload option",
+    placeholder: "Type",
+  },
+  {
+    name: "graphicsTimeline",
+    type: "select",
+    label: "What is the timeline for completing the design project?",
+    subLabel: "Select one",
+    options: graphicsTimelineOptions,
+    placeholder: "Select",
+  },
+];

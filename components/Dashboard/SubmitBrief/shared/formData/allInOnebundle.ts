@@ -134,3 +134,96 @@ export const allInOneMainGoalOptions = [
     value: "Other",
   },
 ];
+
+// FORM DATA
+export const allInOneFormData = [
+  {
+    name: "allInOneGoal",
+    type: "select",
+    label: "What are your goals for this project?",
+    subLabel: "Select all that apply",
+    options: allInOneGoalOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "allInOneAudience",
+    type: "select",
+    label: "Who is your target audience for this content?",
+    subLabel: "Select all that apply",
+    options: allInOneAudienceOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "allInOneKPI",
+    type: "select",
+    label:
+      "What Key Performance Indicators (KPIs) would you like us to focus on?",
+    subLabel: "Select all that apply",
+    options: allInOneKPIOption,
+    placeholder: "Select",
+  },
+  {
+    name: "allInOnePersonality",
+    type: "select",
+    label: "Describe your brand's personality and tone",
+    options: allInOnePersonalityOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "allInOneBrandColor",
+    type: "textArea",
+    label: "What is your brand's preferred Brand Color's or Style Guide",
+    subLabel: "Free-text field or file upload option",
+    placeholder: "Type",
+  },
+  {
+    name: "allInOneBrandAdmire",
+    type: "textArea",
+    label: "Are there any competitors or brands you admire?",
+    subLabel: "List any brands you admire or want to differentiate from",
+    placeholder: "Type",
+  },
+  {
+    name: "allInOnePlatform",
+    type: "select",
+    label: "Which social media platforms would you like us to manage?",
+    subLabel: "Select all that apply",
+    options: allInOnePlatformOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "allInOneExistingMarket",
+    type: "textArea",
+    label: "Describe any existing marketing challenges you are experiencing",
+    placeholder: "Type",
+  },
+  {
+    name: "allInOneKeywords",
+    type: "textArea",
+    label:
+      "List specific topics or keywords you want the blog posts to focus on",
+    placeholder: "Type",
+  },
+  {
+    name: "allInOneCompetitorsWebsite",
+    type: "textArea",
+    label: "List your main competitors' websites (for SEO research)",
+    placeholder: "Type",
+  },
+  {
+    name: "allInOneContentStyle",
+    type: "select",
+    label: "Are there any preferred content styles or tones?",
+    subLabel: "Select all that apply",
+    options: allInOneContentStyleOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "allInOneMainGoal",
+    type: "select",
+    label: "What are the main goals for email marketing",
+    subLabel: "Select all that apply",
+    options: allInOneMainGoalOptions,
+    placeholder: "Select",
+  },
+];

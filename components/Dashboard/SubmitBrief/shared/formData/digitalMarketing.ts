@@ -7,6 +7,7 @@
 -
 */
 
+// OPTIONS
 export const digitalMarketObjOptions = [
   {
     label: "Increase brand awareness ",
@@ -146,5 +147,71 @@ export const digitalCampaignDurOptions = [
   {
     label: "Ongoing",
     value: "Ongoing",
+  },
+];
+
+// FORM DATA
+export const digitalMarketFormData = [
+  {
+    name: "digitalmarketObj",
+    type: "select",
+    label: "What is your primary marketing objective?",
+    subLabel: "Select one.",
+    options: digitalMarketObjOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "digitalTargetAudience",
+    type: "select",
+    label: "Who is your target audience?",
+    subLabel: "Select all that apply",
+    options: digitalTargetAudienceOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "digitalKeyMessage",
+    type: "textArea",
+    label: "What is the key message you want to communicate?",
+    placeholder: "Type",
+  },
+  {
+    name: "digitalVoiceTone",
+    type: "select",
+    label: "What tone of voice would you prefer for your campaign?",
+    subLabel: "Select one",
+    options: digitalVoiceToneOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "digitalPlatform",
+    type: "select",
+    label: "Which digital platforms do you want to focus on?",
+    subLabel: "Select one",
+    options: digitalPlatformOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "digitalConsumer",
+    type: "select",
+    label: "What is the desired consumer action?",
+    subLabel: "Select one",
+    options: digitalConsumerOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "digitalCampaignDur",
+    type: "select",
+    label: "What is the duration of this campaign?",
+    subLabel: "Select one",
+    options: digitalCampaignDurOptions,
+    placeholder: "Select",
+  },
+  {
+    name: "digitalCampaignDur",
+    type: "select",
+    label: "What is the duration of this campaign?",
+    subLabel: "Select one",
+    options: digitalCampaignDurOptions,
+    placeholder: "Select",
   },
 ];
