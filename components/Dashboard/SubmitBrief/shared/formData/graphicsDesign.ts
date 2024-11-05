@@ -149,14 +149,7 @@ export const graphicsDesignFormData = [
     options: graphicsDeliverableOptions,
     placeholder: "Select",
   },
-  {
-    name: "graphicsDeliverable",
-    type: "select",
-    label: "What are the key deliverables for this project?",
-    subLabel: "Select all that apply",
-    options: graphicsDeliverableOptions,
-    placeholder: "Select",
-  },
+  
   {
     name: "graphicsReferences",
     type: "textArea",

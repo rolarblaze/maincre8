@@ -153,7 +153,7 @@ export const digitalCampaignDurOptions = [
 // FORM DATA
 export const digitalMarketFormData = [
   {
-    name: "digitalmarketObj",
+    name: "digitalMarketObj",
     type: "select",
     label: "What is your primary marketing objective?",
     subLabel: "Select one.",
@@ -196,14 +196,6 @@ export const digitalMarketFormData = [
     label: "What is the desired consumer action?",
     subLabel: "Select one",
     options: digitalConsumerOptions,
-    placeholder: "Select",
-  },
-  {
-    name: "digitalCampaignDur",
-    type: "select",
-    label: "What is the duration of this campaign?",
-    subLabel: "Select one",
-    options: digitalCampaignDurOptions,
     placeholder: "Select",
   },
   {
