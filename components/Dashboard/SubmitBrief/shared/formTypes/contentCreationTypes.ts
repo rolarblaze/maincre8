@@ -12,7 +12,7 @@ export interface ContentCreationValues {
   contentKPI: string[];
   contentTimeline: string[];
 }
-export const contentCreationValues = {
+export const contentCreationInitialValues = {
   contentType: [],
   contentGoal: [],
   contentAudience: [],

@@ -175,6 +175,8 @@ export const contentCreationFormData = [
     subLabel: "Select all that apply",
     options: contentTypeOptions,
     placeholder: "Select",
+    isRadio: false,
+    isCheckbox: true,
   },
   {
     name: "contentGoal",
@@ -183,6 +185,8 @@ export const contentCreationFormData = [
     subLabel: "Select one",
     options: contentGoalOptions,
     placeholder: "Select",
+    isRadio: true,
+    isCheckbox: false,
   },
   {
     name: "contentAudience",
@@ -191,6 +195,8 @@ export const contentCreationFormData = [
     subLabel: "Select all that apply",
     options: contentAudienceOptions,
     placeholder: "Select",
+    isRadio: false,
+    isCheckbox: true,
   },
   {
     name: "contentTone",
@@ -199,6 +205,8 @@ export const contentCreationFormData = [
     subLabel: "Select one",
     options: contentToneOptions,
     placeholder: "Select",
+    isRadio: true,
+    isCheckbox: false,
   },
   {
     name: "contentKeywords",
@@ -213,6 +221,8 @@ export const contentCreationFormData = [
     subLabel: "Select one",
     options: contentLengthOptions,
     placeholder: "Select",
+    isRadio: true,
+    isCheckbox: false,
   },
   {
     name: "contentSpecificGuidelines",
@@ -228,6 +238,8 @@ export const contentCreationFormData = [
     subLabel: "Select one",
     options: contentCTAOptions,
     placeholder: "Select",
+    isRadio: true,
+    isCheckbox: false,
   },
   {
     name: "contentKPI",
@@ -236,6 +248,8 @@ export const contentCreationFormData = [
     subLabel: "Select all that apply",
     options: contentKPIOptions,
     placeholder: "Select",
+    isRadio: false,
+    isCheckbox: true,
   },
   {
     name: "contentTimeline",
@@ -244,6 +258,8 @@ export const contentCreationFormData = [
     subLabel: "Select one",
     options: contentTimelineOptions,
     placeholder: "Select",
+    isRadio: true,
+    isCheckbox: false,
   },
 
 ];
