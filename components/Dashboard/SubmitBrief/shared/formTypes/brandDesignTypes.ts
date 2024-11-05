@@ -8,3 +8,14 @@ export interface BrandDesignValues {
   brandCompetitors: string;
   brandGuidelines: string;
 }
+
+export const brandDesignInitialValues = {
+  brandCoreValue: "",
+  brandMarket: [],
+  brandPersonality: [],
+  brandAsset: [],
+  brandDeliverable: [],
+  brandKPI: [],
+  brandCompetitors: "",
+  brandGuidelines: "",
+};
