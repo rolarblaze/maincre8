@@ -11,7 +11,7 @@ import { useState } from "react";
 
 export default function Test() {
   const [isOpen, setIsOpen] = useState(false);
-  const [currentServiceIndex, setCurrentServiceIndex] = useState(0);
+  const [currentServiceIndex, setCurrentServiceIndex] = useState(-1);
 
   function handleClose() {
     setIsOpen(false);
