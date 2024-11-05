@@ -35,13 +35,14 @@ function DashboardRecommendForm() {
     },
   });
   return (
-    <form
-      onSubmit={formik.handleSubmit}
-      className="noScrollbar h-full w-full overflow-y-auto pb-28"
-    >
+    <form onSubmit={formik.handleSubmit} className="noScrollbar w-full">
       <RecommendFormInputs formik={formik} />
-      <footer className="absolute inset-x-0 -bottom-2 bg-white px-8 py-6">
-        <Button label="Checkout" classNames="active:scale-[0.98]" />
+      <footer className="absolute inset-x-0 -bottom-2 rounded-b-2xl bg-white px-8 py-6">
+        <Button
+          label="Checkout"
+          type="submit"
+          classNames="active:scale-[0.98]"
+        />
       </footer>
     </form>
   );

@@ -46,18 +46,18 @@ const CustomRecommendation = () => {
         isOpen={isOpen}
         onClose={() => setIsOpen(false)}
         showCancelIcon={true}
-        cancelBtnStyles="border-none mb-6"
+        cancelBtnStyles="border-none mb-6 z-30"
         cancelIconStyles="stroke-grey400 w-6 h-6"
-        className="!items-start"
+        className="!max-h-screen h-full"
       >
         <DashboardPopoutWrapper
           title="Business Brief Submission Form"
           subtitle="Fill out this form to get custom service recommendations"
           classNames=""
+          headerStyles=""
         >
           <DashboardRecommendForm />
         </DashboardPopoutWrapper>
-        {/* <SuccessModal /> */}
       </Modal>
 
       <div className="space-y-6">

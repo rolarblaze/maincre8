@@ -34,7 +34,7 @@ function DashboardPopoutWrapper({
       />
       <main
         className={twMerge(
-          "noScrollbar h-full w-full overflow-y-auto rounded-2xl px-8 pb-[400px] pt-[5.5rem]",
+          "noScrollbar h-full w-full overflow-y-auto rounded-2xl bg-white px-8 pb-32 pt-[7.5rem]",
           childrenStyles,
         )}
       >
