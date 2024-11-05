@@ -10,6 +10,9 @@ import { addAlert } from "@/redux/alerts";
 import { allInOneFormData } from "../shared/formData/allInOnebundle";
 import CustomDropdown from "@/components/Forms/CustomDropdown";
 import Textarea from "@/components/Forms/Textarea";
+import InputFile from "@/components/Forms/InputFile";
+import CustomFileLabel from "@/components/Forms/CustomFileLabel";
+import { FileUploadIcon } from "@/public/svgs";
 
 function AllInOneBundleForm() {
   const dispatch = useAppDispatch();
@@ -73,20 +76,37 @@ function AllInOneBundleForm() {
                 />
               )}
               {data.type === "textArea" && (
-                <Textarea
-                  id={data.name}
-                  name={data.name}
-                  label={data.label}
-                  sublabel={data.sublabel}
-                  placeholder={data.placeholder}
-                  value={
-                    (values[data.name as keyof AllInOneValues] as string) || ""
-                  }
-                  error={errors[data.name as keyof AllInOneValues]}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  textAreaStyle="placeholder:!text-grey900"
-                />
+                <div className="space-y-2">
+                  <Textarea
+                    id={data.name}
+                    name={data.name}
+                    label={data.label}
+                    sublabel={data.sublabel}
+                    placeholder={data.placeholder}
+                    value={
+                      (values[data.name as keyof AllInOneValues] as string) ||
+                      ""
+                    }
+                    error={errors[data.name as keyof AllInOneValues]}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    textAreaStyle="placeholder:!text-grey900"
+                  />
+                  {data.isImage && (
+                    <InputFile
+                      label={<CustomFileLabel />}
+                      id={`document${data.name}`}
+                      name={`document${data.name}`}
+                      icon={<FileUploadIcon />}
+                      handleUpload={(value: File | null) =>
+                        handleFileUpload && handleFileUpload(value)
+                      }
+                      parentClassNames="md:!flex-col"
+                      buttonStyles="px-4"
+                      // error={errors}
+                    />
+                  )}
+                </div>
               )}
             </div>
           );

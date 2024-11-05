@@ -172,6 +172,7 @@ export const brandDesignFormData = [
     label: "Are there any competitors or brands you admire?",
     sublabel: "Free-text field or file upload option",
     placeholder: "Type",
+    isImage: true,
   },
   {
     name: "brandGuidelines",

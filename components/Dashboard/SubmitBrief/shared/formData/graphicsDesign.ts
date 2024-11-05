@@ -127,6 +127,7 @@ export const graphicsDesignFormData = [
     label: "What is your brand's color palette and style preference?",
     sublabel: "Free-text field or file upload option",
     placeholder: "Type",
+    isImage: true,
   },
   {
     name: "graphicsTargetAud",
@@ -144,6 +145,7 @@ export const graphicsDesignFormData = [
     label: "What is your brand's color palette and style preference?",
     sublabel: "Free-text field or file upload option",
     placeholder: "Type",
+    isImage: true,
   },
   {
     name: "graphicsTone",
@@ -173,6 +175,7 @@ export const graphicsDesignFormData = [
       "Are there any design inspirations or references you want us to consider?",
     sublabel: "Free-text field or file upload option",
     placeholder: "Type",
+    isImage: true,
   },
   {
     name: "graphicsTimeline",

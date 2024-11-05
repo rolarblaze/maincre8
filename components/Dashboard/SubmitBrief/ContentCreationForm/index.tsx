@@ -75,22 +75,24 @@ function ContentCreationForm() {
                 />
               )}
               {data.type === "textArea" && (
-                <Textarea
-                  id={data.name}
-                  name={data.name}
-                  label={data.label}
-                  sublabel={data.sublabel}
-                  placeholder={data.placeholder}
-                  value={
-                    (values[
-                      data.name as keyof ContentCreationValues
-                    ] as string) || ""
-                  }
-                  error={errors[data.name as keyof ContentCreationValues]}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  textAreaStyle="placeholder:!text-grey900"
-                />
+                <div className="">
+                  <Textarea
+                    id={data.name}
+                    name={data.name}
+                    label={data.label}
+                    sublabel={data.sublabel}
+                    placeholder={data.placeholder}
+                    value={
+                      (values[
+                        data.name as keyof ContentCreationValues
+                      ] as string) || ""
+                    }
+                    error={errors[data.name as keyof ContentCreationValues]}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    textAreaStyle="placeholder:!text-grey900"
+                  />
+                </div>
               )}
             </div>
           );

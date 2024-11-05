@@ -10,6 +10,9 @@ import { addAlert } from "@/redux/alerts";
 import { brandDesignFormData } from "../shared/formData/brandDesign";
 import CustomDropdown from "@/components/Forms/CustomDropdown";
 import Textarea from "@/components/Forms/Textarea";
+import InputFile from "@/components/Forms/InputFile";
+import CustomFileLabel from "@/components/Forms/CustomFileLabel";
+import { FileUploadIcon } from "@/public/svgs";
 
 function BrandDesignForm() {
   const dispatch = useAppDispatch();
@@ -75,21 +78,38 @@ function BrandDesignForm() {
                 />
               )}
               {data.type === "textArea" && (
-                <Textarea
-                  id={data.name}
-                  name={data.name}
-                  label={data.label}
-                  sublabel={data.sublabel}
-                  placeholder={data.placeholder}
-                  value={
-                    (values[data.name as keyof BrandDesignValues] as string) ||
-                    ""
-                  }
-                  error={errors[data.name as keyof BrandDesignValues]}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  textAreaStyle="placeholder:!text-grey900"
-                />
+                <div>
+                  <Textarea
+                    id={data.name}
+                    name={data.name}
+                    label={data.label}
+                    sublabel={data.sublabel}
+                    placeholder={data.placeholder}
+                    value={
+                      (values[
+                        data.name as keyof BrandDesignValues
+                      ] as string) || ""
+                    }
+                    error={errors[data.name as keyof BrandDesignValues]}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    textAreaStyle="placeholder:!text-grey900"
+                  />
+                  {data.isImage && (
+                    <InputFile
+                      label={<CustomFileLabel />}
+                      id={`document${data.name}`}
+                      name={`document${data.name}`}
+                      icon={<FileUploadIcon />}
+                      handleUpload={(value: File | null) =>
+                        handleFileUpload && handleFileUpload(value)
+                      }
+                      parentClassNames="md:!flex-col"
+                      buttonStyles="px-4"
+                      // error={errors}
+                    />
+                  )}
+                </div>
               )}
             </div>
           );

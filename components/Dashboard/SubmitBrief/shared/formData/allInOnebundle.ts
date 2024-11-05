@@ -190,6 +190,7 @@ export const allInOneFormData = [
     label: "What is your brand's preferred Brand Color's or Style Guide",
     sublabel: "Free-text field or file upload option",
     placeholder: "Type",
+    isImage: true,
   },
   {
     name: "allInOneBrandAdmire",

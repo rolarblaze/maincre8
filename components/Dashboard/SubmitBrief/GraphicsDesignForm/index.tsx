@@ -10,6 +10,10 @@ import { addAlert } from "@/redux/alerts";
 import { graphicsDesignFormData } from "../shared/formData/graphicsDesign";
 import CustomDropdown from "@/components/Forms/CustomDropdown";
 import Textarea from "@/components/Forms/Textarea";
+import FormFooter from "../shared/FormFooter";
+import InputFile from "@/components/Forms/InputFile";
+import CustomFileLabel from "@/components/Forms/CustomFileLabel";
+import { FileUploadIcon } from "@/public/svgs";
 
 function GraphicsDesignForm() {
   const dispatch = useAppDispatch();
@@ -76,28 +80,44 @@ function GraphicsDesignForm() {
                 />
               )}
               {data.type === "textArea" && (
-                <Textarea
-                  id={data.name}
-                  name={data.name}
-                  label={data.label}
-                  sublabel={data.sublabel}
-                  placeholder={data.placeholder}
-                  value={
-                    (values[
-                      data.name as keyof GraphicsDesignValues
-                    ] as string) || ""
-                  }
-                  error={errors[data.name as keyof GraphicsDesignValues]}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  textAreaStyle="placeholder:!text-grey900"
-                />
+                <div className="space-y-2">
+                  <Textarea
+                    id={data.name}
+                    name={data.name}
+                    label={data.label}
+                    sublabel={data.sublabel}
+                    placeholder={data.placeholder}
+                    value={
+                      (values[
+                        data.name as keyof GraphicsDesignValues
+                      ] as string) || ""
+                    }
+                    error={errors[data.name as keyof GraphicsDesignValues]}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    textAreaStyle="placeholder:!text-grey900"
+                  />
+                  {data.isImage && (
+                    <InputFile
+                      label={<CustomFileLabel />}
+                      id="document"
+                      name="document"
+                      icon={<FileUploadIcon />}
+                      handleUpload={(value: File | null) =>
+                        handleFileUpload && handleFileUpload(value)
+                      }
+                      parentClassNames="md:!flex-col"
+                      buttonStyles="px-4"
+                      // error={errors}
+                    />
+                  )}
+                </div>
               )}
             </div>
           );
         })}
       </main>
-      {/* <FormFooter /> */}
+      <FormFooter />
     </form>
   );
 }
