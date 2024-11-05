@@ -144,6 +144,8 @@ export const allInOneFormData = [
     subLabel: "Select all that apply",
     options: allInOneGoalOptions,
     placeholder: "Select",
+    isRadio: false,
+    isCheckbox: true,
   },
   {
     name: "allInOneAudience",
@@ -152,6 +154,8 @@ export const allInOneFormData = [
     subLabel: "Select all that apply",
     options: allInOneAudienceOptions,
     placeholder: "Select",
+    isRadio: false,
+    isCheckbox: true,
   },
   {
     name: "allInOneKPI",
@@ -161,6 +165,8 @@ export const allInOneFormData = [
     subLabel: "Select all that apply",
     options: allInOneKPIOption,
     placeholder: "Select",
+    isRadio: false,
+    isCheckbox: true,
   },
   {
     name: "allInOnePersonality",
@@ -168,6 +174,8 @@ export const allInOneFormData = [
     label: "Describe your brand's personality and tone",
     options: allInOnePersonalityOptions,
     placeholder: "Select",
+    isRadio: false,
+    isCheckbox: true,
   },
   {
     name: "allInOneBrandColor",
@@ -190,6 +198,8 @@ export const allInOneFormData = [
     subLabel: "Select all that apply",
     options: allInOnePlatformOptions,
     placeholder: "Select",
+    isRadio: false,
+    isCheckbox: true,
   },
   {
     name: "allInOneExistingMarket",
@@ -217,6 +227,8 @@ export const allInOneFormData = [
     subLabel: "Select all that apply",
     options: allInOneContentStyleOptions,
     placeholder: "Select",
+    isRadio: false,
+    isCheckbox: true,
   },
   {
     name: "allInOneMainGoal",
@@ -225,5 +237,7 @@ export const allInOneFormData = [
     subLabel: "Select all that apply",
     options: allInOneMainGoalOptions,
     placeholder: "Select",
+    isRadio: false,
+    isCheckbox: true,
   },
 ];
