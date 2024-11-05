@@ -19,33 +19,8 @@ function WebsiteRecommendForm() {
       { resetForm }: FormikHelpers<RecommendFormValues>,
     ) => {
       try {
-        const finalValues = {
-          // SELECT FIELDS
-          service_kinds: values.serviceKinds,
-          service_goal: values.serviceGoal,
-          monthly_budget: values.monthlyBudget,
-          anticipation_duration: values.anticipationDuration,
-          business_type: values.businessType,
-
-          // ADDITIONAL INFO
-          additional_info: values.additionalInfo,
-          contact_email: values.contactEmail,
-          contact_phone_number: values.contactPhoneNumber,
-        };
-
-        console.log(finalValues, "Final values");
-
-        // await dispatch(submitRecommendationBrief(finalValues));
-
-        // dispatch(
-        //   addAlert({
-        //     id: "",
-        //     headText: "Success",
-        //     subText: "Brief submitted successfully",
-        //     type: "success",
-        //   }),
-        // );
-        // resetForm();
+        console.log("Form submitted");
+        resetForm();
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(
