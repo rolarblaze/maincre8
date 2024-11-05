@@ -58,6 +58,13 @@ const assetLibrary = {
   sellplannerLogoWhite: "/optimised/sellplanner-logo-white.webp",
   devsealLogoWhite: "/optimised/devseal-logo-white.webp",
   piazzaLogoWhite: "/optimised/piazza-logo-white.webp",
+  
+  // PACKAGES
+  allInOneBundle: "/optimised/all-in-one-bundle.svg",
+  brandDesignPack: "/optimised/brand-design-pack.svg",
+  graphicDesignPack: "/optimised/graphic-design-pack.svg",
+  contentWritingPack: "/optimised/content-writing-pack.svg",
+  digitalMarketingPack: "/optimised/digital-marketing-pack.svg",
 };
 
 export default assetLibrary;

@@ -116,3 +116,9 @@ export { default as GraphicDesignsSVG } from "./graphic_designs_board.svg";
 export { default as DigitalMarketingSVG } from "./digital_marketing_blocks.svg";
 export { default as ContentWritingSVG } from "./content_writing_pad.svg";
 export { default as AllInOneBundleSVG } from "./all_in_one_bundle_ship.svg";
+
+// PLAN SVGS
+export { default as StarterPlanSVG } from "./starter-plan.svg";
+export { default as StandardPlanSVG } from "./standard-plan.svg";
+export { default as PremiumPlanSVG } from "./premium-plan.svg";
+export { default as CheckedCircleSVG } from "./checked-circle.svg";

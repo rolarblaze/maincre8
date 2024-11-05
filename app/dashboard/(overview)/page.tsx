@@ -1,69 +1,78 @@
 "use client";
-import {
-  Button,
-  FullLoader,
-  Loader,
-  ServiceCard,
-  EmptyState,
-} from "@/components";
-import BarChart from "@/components/Dashboard/BarChart";
-import UpcomingAppointment from "@/components/Dashboard/UpcomingAppointment";
-import { BulbIcon } from "@/public/icons";
-import { getUserOrderHistory } from "@/redux/servicesTracker/features";
-import { fetchLatestAppointments } from "@/redux/order/features";
-import { getServices } from "@/redux/services/features";
-import { fetchActivityStatistics } from "@/redux/auth/features";
-import { useAppDispatch, useAppSelector } from "@/redux/store";
+// import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import {
+  // Button,
+  // FullLoader,
+  Loader,
+  // ServiceCard,
+  // EmptyState,
+} from "@/components";
+// import BarChart from "@/components/Dashboard/BarChart";
+// import UpcomingAppointment from "@/components/Dashboard/UpcomingAppointment";
+// import { getUserOrderHistory } from "@/redux/servicesTracker/features";
+// import { fetchLatestAppointments } from "@/redux/order/features";
+// import { fetchActivityStatistics } from "@/redux/auth/features";
+// import { getServices } from "@/redux/services/features";
+// import { BulbIcon } from "@/public/icons";
+import {
+  // useAppDispatch,
+  useAppSelector,
+} from "@/redux/store";
+
+import { getBackgroundClass, getImage } from "./_helperFunc";
+import { packages } from "./_constants";
+import Image from "next/image";
 
 const Overview = () => {
-  const dispatch = useAppDispatch();
   const router = useRouter();
-  const { services, isLoading, error } = useAppSelector((state) => state.service);
-  const { orderHistory } = useAppSelector((state) => state.services);
+  // const dispatch = useAppDispatch();
+  // const { services, isLoading, error } = useAppSelector(
+  //   (state) => state.service,
+  // );
+  // const { orderHistory } = useAppSelector((state) => state.services);
   const { isLoadingProfile, profile } = useAppSelector((state) => state.auth);
-  const { appointments, isApointmentLoading } = useAppSelector(
-    (state) => state.order
-  );
+  // const { appointments, isApointmentLoading } = useAppSelector(
+  //   (state) => state.order,
+  // );
 
-  useEffect(() => {
-    dispatch(getServices());
-    dispatch(getUserOrderHistory());
-    dispatch(fetchLatestAppointments());
-    dispatch(fetchActivityStatistics());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(getServices());
+  //   dispatch(getUserOrderHistory());
+  //   dispatch(fetchLatestAppointments());
+  //   dispatch(fetchActivityStatistics());
+  // }, [dispatch]);
 
   // Extract the activity statistics from the profile
-  const { active_services, completed_services, total_services_bought } = profile
-    .user.activityStatistics || {
-    active_services: 0,
-    completed_services: 0,
-    total_services_bought: 0,
-  };
+  // const { active_services, completed_services, total_services_bought } = profile
+  //   .user.activityStatistics || {
+  //   active_services: 0,
+  //   completed_services: 0,
+  //   total_services_bought: 0,
+  // };
 
   // Updated BarChart data using fetched activity statistics
-  const barChartData = {
-    labels: ["Active Services", "Completed Services", "Total Services Bought"],
-    dataValues: [active_services, completed_services, total_services_bought],
-  };
+  // const barChartData = {
+  //   labels: ["Active Services", "Completed Services", "Total Services Bought"],
+  //   dataValues: [active_services, completed_services, total_services_bought],
+  // };
 
   // Logging for debugging purposes
   // console.log("Bar Chart Data: ", barChartData);
 
-  const bundleColors: { [key: string]: string } = {};
-  const colors = ["#620FA3", "#006AA5", "#A30F44"];
-  services.forEach((service, index) => {
-    service.bundles.forEach((bundle) => {
-      if (!bundleColors[bundle.bundle_name]) {
-        bundleColors[bundle.bundle_name] = colors[index % colors.length];
-      }
-    });
-  });
+  // const bundleColors: { [key: string]: string } = {};
+  // const colors = ["#620FA3", "#006AA5", "#A30F44"];
+  // services.forEach((service, index) => {
+  //   service.bundles.forEach((bundle) => {
+  //     if (!bundleColors[bundle.bundle_name]) {
+  //       bundleColors[bundle.bundle_name] = colors[index % colors.length];
+  //     }
+  //   });
+  // });
 
-  if (error) {
-    return <div>Error: {error}</div>;
-  }
+  // if (error) {
+  //   return <div>Error: {error}</div>;
+  // }
 
   if (isLoadingProfile) {
     return (
@@ -73,31 +82,66 @@ const Overview = () => {
     );
   }
 
-  const profileIncomplete =
-    !profile.user.profile?.address ||
-    !profile.user.profile?.country ||
-    !profile.user.profile?.state ||
-    !profile.user.profile?.phone_number;
+  // const profileIncomplete =
+  //   !profile.user.profile?.address ||
+  //   !profile.user.profile?.country ||
+  //   !profile.user.profile?.state ||
+  //   !profile.user.profile?.phone_number;
 
-  const hasTransactions = orderHistory && orderHistory?.length > 0;
+  // const hasTransactions = orderHistory && orderHistory?.length > 0;
 
   return (
-    <div className="container mx-auto py-6 px-4 md:p-6 md:-m-6 flex flex-col gap-6 md:gap-6 overflow-y-scroll noScrollbar">
-      <div>
-        <h4>Welcome, {profile.first_name}</h4>
-        <p className="text-grey500">Select a service to get started</p>
-      </div>
+    <div className="noScrollbar container mx-auto flex flex-col overflow-y-scroll pb-10 font-manrope [&>*]:px-6">
+      <header className="space-y-2 pb-4 pt-10">
+        <h2 className="text-2xl font-semibold leading-8 text-grey900">
+          Welcome, {profile.first_name}
+        </h2>
+        <p className="text-grey500">How can we assist you today?</p>
+      </header>
 
-      <div
-        className="ml-auto hidden md:flex gap-2 items-center w-fit border-none bg-primary500 text-white !py-2 !px-3 rounded-lg cursor-pointer mt-8"
+      <hr />
+
+      <section className="space-y-4 pt-10">
+        <h3 className="text-2xl font-bold leading-8 text-grey900">
+          Choose a Package to Get Started
+        </h3>
+
+        <div className="flex flex-wrap gap-6">
+          {packages.map(({ id, name, text }) => (
+            <div
+              key={id}
+              className="min-w-80 overflow-hidden rounded-lg border border-ash"
+            >
+              <figure
+                className={`relative min-h-60 w-full ${getBackgroundClass(name)}`}
+              >
+                <Image
+                  src={getImage(name)}
+                  alt={name}
+                  fill
+                  className={`${name === "Graphic Design Packages" && "px-4 pt-2"} ${name === "Content Writing Packages" && "pl-5"} ${name === "Digital Marketing Packages" && "pl-4"} ${name === "All In One Bundle" && "px-6"}`}
+                />
+              </figure>
+
+              <div className="p-4 font-manrope *:leading-[150%]">
+                <h4 className="text-lg font-semibold text-grey900">{name}</h4>
+                <p className="text-sm font-medium text-grey500">{text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* <div
+        className="ml-auto mt-8 hidden w-fit cursor-pointer items-center gap-2 rounded-lg border-none bg-primary500 !px-3 !py-2 text-white md:flex"
         onClick={() => router.push("/dashboard/custom-recommendation")}
       >
         <BulbIcon />
         <span>Custom recommendations</span>
-      </div>
+      </div> */}
 
-      {profileIncomplete && (
-        <div className="mt-8 mb-10 bg-white py-4 px-6 flex items-center justify-between flex-wrap gap-6 md:gap-0 rounded-lg">
+      {/* {profileIncomplete && (
+        <div className="mb-10 mt-8 flex flex-wrap items-center justify-between gap-6 rounded-lg bg-white px-6 py-4 md:gap-0">
           <p className="text-black">Complete your profile setup</p>
           <Button
             label="Setup profile"
@@ -105,10 +149,10 @@ const Overview = () => {
             onClick={() => router.push("/dashboard/settings")}
           />
         </div>
-      )}
+      )} */}
 
-      <div className="py-4 flex items-center justify-between">
-        <h4 className="text-black text-[18px] md:text-[24px] font-medium md:font-bold">
+      {/* <div className="flex items-center justify-between py-4">
+        <h4 className="text-[18px] font-medium text-black md:text-[24px] md:font-bold">
           Popular services
         </h4>
         {hasTransactions &&
@@ -120,11 +164,10 @@ const Overview = () => {
               onClick={() => router.push("/dashboard/services")}
             />
           )}
-      </div>
+      </div> */}
 
-      <section className="flex flex-col gap-10">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 place-items-center md:place-items-start gap-6 overflow-y-auto noScrollbar">
-          {/* Show only the first three cards */}
+      {/* <section className="flex flex-col gap-10">
+        <div className="noScrollbar grid place-items-center gap-6 overflow-y-auto md:grid-cols-2 md:place-items-start lg:grid-cols-3">
           {hasTransactions ? (
             orderHistory
               ?.slice(0, 3)
@@ -153,9 +196,9 @@ const Overview = () => {
                       description: provision.description,
                       color: bundleColors[bundle.bundle_name],
                       id: pkg.package_id,
-                    }))
-                  )
-                )
+                    })),
+                  ),
+                ),
               )
               .slice(0, 3)
               .map((card, index) => (
@@ -171,17 +214,14 @@ const Overview = () => {
           )}
         </div>
 
-        {/* Activity Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-          <h3 className="text-2xl font-bold text-grey900 col-span-2">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <h3 className="col-span-2 text-2xl font-bold text-grey900">
             Activity
           </h3>
-          {/* Chart Section*/}
-          <div className="flex flex-col justify-between rounded-lg bg-white px-6 py-4 shadow-lg col-span-2 md:col-span-1">
-            <h4 className="text-lg font-semibold text-grey900 border-b border-grey200 pb-4">
+          <div className="col-span-2 flex flex-col justify-between rounded-lg bg-white px-6 py-4 shadow-lg md:col-span-1">
+            <h4 className="border-b border-grey200 pb-4 text-lg font-semibold text-grey900">
               My Services
             </h4>
-            {/* Chart */}
             <div>
               <BarChart
                 labels={barChartData.labels}
@@ -190,9 +230,8 @@ const Overview = () => {
             </div>
           </div>
 
-          {/* Upcoming Appointments */}
-          <div className="rounded-lg bg-white px-6 py-4 flex flex-col gap-4 shadow-lg">
-            <h4 className="text-lg font-semibold text-grey900 border-b border-grey200 pb-4">
+          <div className="flex flex-col gap-4 rounded-lg bg-white px-6 py-4 shadow-lg">
+            <h4 className="border-b border-grey200 pb-4 text-lg font-semibold text-grey900">
               Upcoming Appointments
             </h4>
             <div className="flex flex-col">
@@ -221,7 +260,7 @@ const Overview = () => {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 };

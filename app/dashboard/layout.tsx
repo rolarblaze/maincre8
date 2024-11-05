@@ -1,14 +1,14 @@
 "use client";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 import Header from "@/components/Dashboard/Header";
 import MobileNav from "@/components/Dashboard/MobileNav";
 import MobileSidebar from "@/components/Dashboard/MobileSidebar";
 import Sidebar from "@/components/Dashboard/Sidebar";
 import { Tab } from "@/components/Dashboard/Sidebar/types";
+import { BellIcon, CartIcon } from "@/public/svgs";
 import Middleware from "@/utils/middleware";
-
-import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
 
 const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
   children,
@@ -37,7 +37,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
 
   const headerTitles: Record<Tab, string> = {
     Overview: isMobile ? "Overview" : "",
-    Services: "Explore Services",
+    Services: "Services",
     MyServices: "My services",
     CustomRecommendation: "Custom Recommendation",
     Calendar: "Calendar",
@@ -66,8 +66,9 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
 
   // Check if the current route is dynamic
   const isDynamicRoute = pathname.split("/").length > 3;
+  // console.log(isDynamicRoute);
 
-  const isOverview = pathname.split("/").length === 2;
+  // const isOverview = pathname.split("/").length === 2;
 
   const openSidebar = () => {
     setSidebarOpen(true);
@@ -76,31 +77,54 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
     setSidebarOpen(false);
   };
 
+  const [cartOpen, setCartOpen] = useState(false);
+
   return (
     <Middleware>
       <div className="flex h-screen pt-10 md:pt-0">
         {/* Desktop sidebar */}
         <Sidebar setActiveTab={setActiveTab} />
+
         {/* Mobile sidebar */}
         {sidebarOpen && (
           <MobileSidebar setActiveTab={setActiveTab} onClick={closeSidebar} />
         )}
-        <div className="flex flex-col flex-1">
+        <div className="relative flex flex-1 flex-col">
           <MobileNav onClick={openSidebar} title={headerTitles[activeTab]} />
-          {!isDynamicRoute && (
+          <div className="flex justify-between">
             <div>
-              {headerTitles[activeTab] && (
-                <Header
-                  title={headerTitles[activeTab]}
-                  subtitle={headerSubtitles[activeTab]}
-                />
+              {!isDynamicRoute && (
+                <div>
+                  {headerTitles[activeTab] && (
+                    <Header
+                      title={headerTitles[activeTab]}
+                      subtitle={headerSubtitles[activeTab]}
+                    />
+                  )}
+                </div>
               )}
             </div>
-          )}
-          <main
-            className={`flex-1 p-6 overflow-y-auto noScrollbar ${isOverview ? "bg-dashboard-bg" : "bg-white"
-              }`}
-          >
+
+            <div className="absolute inset-y-10 right-8 flex gap-4">
+              <button className="flex size-10 items-center justify-center rounded-2xl bg-grey100">
+                <BellIcon />
+              </button>
+
+              <button
+                onClick={() => setCartOpen((prev) => !prev)}
+                className={`flex size-10 items-center justify-center rounded-2xl ${cartOpen ? "bg-primary50" : "bg-grey100"}`}
+              >
+                <CartIcon
+                  className="-ml-0.5"
+                  fillColor={cartOpen ? "#4490EA" : "#667185"}
+                />
+              </button>
+            </div>
+          </div>
+
+          <hr />
+
+          <main className={`noScrollbar size-full flex-1 overflow-y-auto`}>
             {children}
           </main>
         </div>

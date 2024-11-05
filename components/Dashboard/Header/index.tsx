@@ -7,7 +7,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
   return (
-    <header className="hidden w-full py-5 px-6 md:flex flex-col items-start">
+    <header className="hidden w-full flex-col items-start space-y-1 px-6 pb-4 pt-10 font-manrope md:flex">
       <h3 className="text-2xl font-semibold text-grey900">{title}</h3>
       {subtitle && (
         <p className="text-base font-medium text-grey500">{subtitle}</p>

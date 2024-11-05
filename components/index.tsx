@@ -50,12 +50,8 @@ export { default as BreadCrumb } from "./BreadCrumb";
 export {
   HeroSection,
   PackagesSection,
-  ProofSection,
-  FeatureSection,
   LearnMoreSection,
   BrandSection,
-  TestimonialSection,
-  ExpertSection,
   CtaSection,
 } from "./NewPages/LandingPage/sections";
 
