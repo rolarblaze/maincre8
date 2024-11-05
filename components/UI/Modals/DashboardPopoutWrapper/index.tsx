@@ -1,3 +1,4 @@
+import BusinessBriefHeader from "@/components/Dashboard/SubmitBrief/shared/BusinessBriefHeader";
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
@@ -25,15 +26,12 @@ function DashboardPopoutWrapper({
         classNames,
       )}
     >
-      <header
-        className={twMerge(
-          "absolute z-30 inset-x-0 top-0 space-y-2 rounded-t-2xl border-b border-grey200 bg-white px-8 py-6",
-          headerStyles,
-        )}
-      >
-        <h4>{title}</h4>
-        <p>{showSubtitle && subtitle}</p>
-      </header>
+      <BusinessBriefHeader
+        title={title}
+        subtitle={subtitle}
+        showSubtitle={showSubtitle}
+        headerStyles={headerStyles}
+      />
       <main
         className={twMerge(
           "noScrollbar h-full w-full overflow-y-auto rounded-2xl px-8 pb-[400px] pt-[5.5rem]",

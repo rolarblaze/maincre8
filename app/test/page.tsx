@@ -1,5 +1,6 @@
 "use client";
 import DigitalMarketForm from "@/components/Dashboard/SubmitBrief/DigitalMarketForm";
+import BusinessBriefHeader from "@/components/Dashboard/SubmitBrief/shared/BusinessBriefHeader";
 import SliderModal from "@/components/UI/Modals/SliderModal";
 import { useState } from "react";
 
@@ -19,9 +20,11 @@ export default function Test() {
         isOpen={isOpen}
         onClose={handleClose}
         title="Digital Marketing Brief Submission Form"
-        cancelBtnStyles="border-none top-10 right-10"
+        cancelBtnStyles="border-none top-5 right-10"
       >
+        <BusinessBriefHeader title="Digital Marketing" />
         <DigitalMarketForm />
+        {/* <p className="mb-6">Body</p> */}
       </SliderModal>
     </main>
   );

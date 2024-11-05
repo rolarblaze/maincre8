@@ -56,8 +56,8 @@ function BrandDesignForm() {
     console.log("File gotten:", file);
   }
   return (
-    <form onSubmit={handleSubmit} className="noScrollbar h-full w-full pt-4">
-      <main className="h-full w-full space-y-8">
+    <form onSubmit={handleSubmit} className="noScrollbar w-full">
+      <main className="w-full space-y-8">
         {brandDesignFormData.map((data, dataIdx) => {
           return (
             <div key={dataIdx}>
@@ -80,9 +80,8 @@ function BrandDesignForm() {
                   label={data.label}
                   placeholder={data.placeholder}
                   value={
-                    (values[
-                      data.name as keyof BrandDesignValues
-                    ] as string) || ""
+                    (values[data.name as keyof BrandDesignValues] as string) ||
+                    ""
                   }
                   error={errors[data.name as keyof BrandDesignValues]}
                   onChange={handleChange}

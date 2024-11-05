@@ -2,7 +2,6 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { CancelIcon } from "@/public/icons";
 import { twMerge } from "tailwind-merge";
-import DashboardPopoutWrapper from "../DashboardPopoutWrapper";
 
 interface SliderModalProps {
   isOpen: boolean;
@@ -49,7 +48,7 @@ const SliderModal: React.FC<SliderModalProps> = ({
               damping: 25,
             }}
             className={twMerge(
-              "fixed right-[35vw] z-10 h-full w-[70vw] overflow-y-auto bg-white shadow-lg",
+              "noScrollbar fixed right-[35vw] z-10 h-screen w-[70vw] bg-white shadow-lg",
               className,
             )}
           >
@@ -58,7 +57,7 @@ const SliderModal: React.FC<SliderModalProps> = ({
               <div
                 onClick={onClose}
                 className={twMerge(
-                  "absolute right-4 top-4 z-20 cursor-pointer rounded-full border border-gray-300 p-2",
+                  "absolute right-4 top-4 z-40 cursor-pointer rounded-full border border-gray-300 p-2",
                   cancelBtnStyles,
                 )}
               >
@@ -69,16 +68,8 @@ const SliderModal: React.FC<SliderModalProps> = ({
             )}
 
             {/* Modal Content */}
-            <div className="h-full w-full">
-              <DashboardPopoutWrapper
-                title={title}
-                classNames="!rounded-none w-full !h-full"
-                childrenStyles="!rounded-none"
-                headerStyles="!rounded-none"
-                showSubtitle={false}
-              >
-                {children}
-              </DashboardPopoutWrapper>
+            <div className="noScrollbar h-full w-full overflow-y-auto px-8 pb-40 pt-[6.5rem]">
+              {children}
             </div>
           </motion.div>
         </div>

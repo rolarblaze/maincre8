@@ -58,11 +58,8 @@ function DigitalMarketForm() {
   }
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="noScrollbar h-full w-full pt-4"
-    >
-      <main className="h-full w-full space-y-8">
+    <form onSubmit={handleSubmit} className="noScrollbar w-full">
+      <main className="w-full space-y-8">
         {digitalMarketFormData.map((data, dataIdx) => {
           return (
             <div key={dataIdx}>
@@ -99,7 +96,7 @@ function DigitalMarketForm() {
           );
         })}
       </main>
-      {/* <FormFooter /> */}
+      <FormFooter />
     </form>
   );
 }
