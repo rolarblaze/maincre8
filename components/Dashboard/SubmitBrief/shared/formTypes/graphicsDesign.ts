@@ -31,7 +31,7 @@ export const graphicsDesignFormSchema = Yup.object().shape({
   graphicsColorPalette: Yup.string().required("Please input a color palette"),
   graphicsTargetAud: Yup.array()
     .of(Yup.string().required())
-    .min(1, "At least one target audience opion is required")
+    .min(1, "At least one target audience option is required")
     .required("Please select a target audience"),
   graphicsPrimaryMessage: Yup.string().required("Please input a content tone"),
   graphicsTone: Yup.array()
