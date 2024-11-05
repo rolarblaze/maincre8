@@ -22,7 +22,7 @@ export const brandDesignInitialValues = {
   brandGuidelines: "",
 };
 
-export const digitalMarketingFormSchema = Yup.object().shape({
+export const brandDesignFormSchema = Yup.object().shape({
   // SELECT FIELDS
   brandCoreValue: Yup.string().required("At Please input a core value"),
   brandMarket: Yup.array()
