@@ -110,6 +110,8 @@ export const graphicsDesignFormData = [
     subLabel: "Select all that apply",
     options: graphicsTypeOptions,
     placeholder: "Select",
+    isRadio: false,
+    isCheckbox: true,
   },
   {
     name: "graphicsColorPalette",
@@ -125,6 +127,8 @@ export const graphicsDesignFormData = [
     subLabel: "Select all that apply",
     options: graphicsTargetAudOptions,
     placeholder: "Select",
+    isRadio: false,
+    isCheckbox: true,
   },
   {
     name: "graphicsPrimaryMessage",
@@ -140,6 +144,8 @@ export const graphicsDesignFormData = [
     subLabel: "Select one",
     options: graphicsToneOptions,
     placeholder: "Select",
+    isRadio: true,
+    isCheckbox: false,
   },
   {
     name: "graphicsDeliverable",
@@ -148,6 +154,8 @@ export const graphicsDesignFormData = [
     subLabel: "Select all that apply",
     options: graphicsDeliverableOptions,
     placeholder: "Select",
+    isRadio: false,
+    isCheckbox: true,
   },
   
   {
@@ -165,5 +173,7 @@ export const graphicsDesignFormData = [
     subLabel: "Select one",
     options: graphicsTimelineOptions,
     placeholder: "Select",
+    isRadio: true,
+    isCheckbox: false,
   },
 ];

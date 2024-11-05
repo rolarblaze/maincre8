@@ -11,7 +11,7 @@ export interface GraphicsDesignValues {
   graphicsTimeline: string[];
 }
 
-export const graphicsDesignValues = {
+export const graphicsDesignInitialValues = {
   graphicsType: [],
   graphicsColorPalette: "",
   graphicsTargetAud: [],
