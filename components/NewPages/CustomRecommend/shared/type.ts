@@ -16,3 +16,10 @@ export interface RecommendFormValues {
   contactEmail: string;
   contactPhoneNumber: string;
 }
+
+export type RecommendFormType =
+  | "number"
+  | "email"
+  | "text"
+  | "password"
+  | "url";

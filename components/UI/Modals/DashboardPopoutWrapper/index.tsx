@@ -27,7 +27,7 @@ function DashboardPopoutWrapper({
     >
       <header
         className={twMerge(
-          "absolute inset-x-0 top-0 space-y-2 rounded-t-2xl border-b border-grey200 px-8 py-6",
+          "absolute z-30 inset-x-0 top-0 space-y-2 rounded-t-2xl border-b border-grey200 bg-white px-8 py-6",
           headerStyles,
         )}
       >
@@ -36,7 +36,7 @@ function DashboardPopoutWrapper({
       </header>
       <main
         className={twMerge(
-          "h-full w-full flex-grow rounded-2xl bg-white px-8 pt-32",
+          "noScrollbar h-full w-full overflow-y-auto rounded-2xl px-8 pb-[400px] pt-[5.5rem]",
           childrenStyles,
         )}
       >

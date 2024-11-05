@@ -72,7 +72,7 @@ const SliderModal: React.FC<SliderModalProps> = ({
             <div className="h-full w-full">
               <DashboardPopoutWrapper
                 title={title}
-                classNames="!rounded-none w-full h-full"
+                classNames="!rounded-none w-full !h-full"
                 childrenStyles="!rounded-none"
                 headerStyles="!rounded-none"
                 showSubtitle={false}

@@ -159,6 +159,8 @@ export const digitalMarketFormData = [
     subLabel: "Select one.",
     options: digitalMarketObjOptions,
     placeholder: "Select",
+    isRadio: true,
+    isCheckbox: false,
   },
   {
     name: "digitalTargetAudience",
@@ -167,6 +169,8 @@ export const digitalMarketFormData = [
     subLabel: "Select all that apply",
     options: digitalTargetAudienceOptions,
     placeholder: "Select",
+    isRadio: false,
+    isCheckbox: true,
   },
   {
     name: "digitalKeyMessage",
@@ -181,6 +185,8 @@ export const digitalMarketFormData = [
     subLabel: "Select one",
     options: digitalVoiceToneOptions,
     placeholder: "Select",
+    isRadio: true,
+    isCheckbox: false,
   },
   {
     name: "digitalPlatform",
@@ -189,6 +195,8 @@ export const digitalMarketFormData = [
     subLabel: "Select one",
     options: digitalPlatformOptions,
     placeholder: "Select",
+    isRadio: false,
+    isCheckbox: true,
   },
   {
     name: "digitalConsumer",
@@ -197,6 +205,8 @@ export const digitalMarketFormData = [
     subLabel: "Select one",
     options: digitalConsumerOptions,
     placeholder: "Select",
+    isRadio: true,
+    isCheckbox: false,
   },
   {
     name: "digitalCampaignDur",
@@ -205,5 +215,7 @@ export const digitalMarketFormData = [
     subLabel: "Select one",
     options: digitalCampaignDurOptions,
     placeholder: "Select",
+    isRadio: true,
+    isCheckbox: false,
   },
 ];

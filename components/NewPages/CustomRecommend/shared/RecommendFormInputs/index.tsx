@@ -8,10 +8,11 @@ import Textarea from "@/components/Forms/Textarea";
 import InputFile from "@/components/Forms/InputFile";
 import { FileUploadIcon } from "@/public/svgs";
 import InputField from "@/components/Forms/InputField";
-import { RecommendFormValues } from "../type";
+import { RecommendFormType, RecommendFormValues } from "../type";
 import { FormikProps } from "formik";
 import { uploadRelevantDocument } from "@/redux/order/features";
 import { useAppDispatch } from "@/redux/store";
+import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 
 function RecommendFormInputs({
   formik,
@@ -32,6 +33,7 @@ function RecommendFormInputs({
     handleChange,
     handleSubmit,
     setFieldValue,
+    setFieldError,
   } = formik;
 
   const handleFileUpload = async (file: File | null) => {
@@ -40,7 +42,7 @@ function RecommendFormInputs({
       return;
     } else if (file && file.size > 5000000) {
       setFieldValue("document", null);
-      formik.setFieldError("document", "Max file size exceeded.");
+      setFieldError("document", "Max file size exceeded.");
       return;
     }
 
@@ -62,7 +64,6 @@ function RecommendFormInputs({
       formik.setFieldError("document", "File upload failed.");
     }
   };
-  type RecommendFormType = "number" | "email" | "text" | "password" | "url";
 
   return (
     <main className="space-y-8">
@@ -102,14 +103,7 @@ function RecommendFormInputs({
       {/* INPUT FILE */}
       <div>
         <InputFile
-          label={
-            <div className="flex flex-col gap-2">
-              <p className="text-base text-black">Upload a brief document</p>
-              <p className="text-sm font-normal text-grey400">
-                Optional &bull; MAX. 50MB
-              </p>
-            </div>
-          }
+          label={<CustomFileLabel />}
           id="document"
           name="document"
           icon={<FileUploadIcon />}

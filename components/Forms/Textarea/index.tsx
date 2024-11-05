@@ -30,7 +30,7 @@ const Textarea: React.FC<ControlledTextareaProps> = ({
   const [showTooltip, setShowTooltip] = useState(false);
 
   return (
-    <div className="relative">
+    <div className="">
       <div className="mb-1 flex items-center gap-2">
         <label htmlFor={id} className="block text-sm text-grey900">
           {label}

@@ -1,36 +1,29 @@
+"use client";
+import DigitalMarketForm from "@/components/Dashboard/SubmitBrief/DigitalMarketForm";
+import SliderModal from "@/components/UI/Modals/SliderModal";
 import Link from "next/link";
+import { useState } from "react";
 
-export default function  Test() {
-    return (
-        <main className="bg-[#15202b]">
-            <header>
-                <nav>
-                    <ul className="flex items-center justify-between text-white p-5">
-                        <li>
-                            <button className="size-10 rounded-full bg-red-400"></button>
-                        </li>
-                        <li>
-                            X
-                        </li>
-                        <li className="flex items-center gap-2">
-                            <Link href="/upgrade">Upgrade</Link>
-                            <Link href="/more">+</Link>
-                        </li>
-                    </ul>
-                </nav>
-                <section>
-                    <ul className="flex items-center justify-between">
-                        {["For you", "Following", "THE BOYS", "Indie Game Devs"].map(tab => {
-                            return (
-                                <li key={tab}>
-                                    <Link href={`/${tab}`} className="text-slate-500 font-semibold">{tab}</Link>
-                                </li>
-                            )
-                        })}
-                    </ul>
-                </section>
-            </header>
+export default function Test() {
+  const [isOpen, setIsOpen] = useState(false);
 
-        </main>
-    )
+  function handleClose() {
+    setIsOpen(false);
+  }
+
+  return (
+    <main className="flex w-full justify-between">
+      <button className="bg-red-400 p-3" onClick={() => setIsOpen(true)}>
+        Click Me
+      </button>
+      <SliderModal
+        isOpen={isOpen}
+        onClose={handleClose}
+        title="Digital Marketing Brief Submission Form"
+        cancelBtnStyles="border-none top-10 right-10"
+      >
+        <DigitalMarketForm />
+      </SliderModal>
+    </main>
+  );
 }

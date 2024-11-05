@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import SliderModal from "../UI/Modals/SliderModal";
 import DashboardPopoutWrapper from "../UI/Modals/DashboardPopoutWrapper";
 import FormFooter from "../Dashboard/SubmitBrief/shared/FormFooter";
+import DigitalMarketForm from "../Dashboard/SubmitBrief/DigitalMarketForm";
 
 const EmptyState = ({
   imgSrc,
@@ -21,26 +22,9 @@ const EmptyState = ({
   to?: string;
   imgStyle?: string;
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  function handleClose() {
-    setIsOpen(false);
-  }
   return (
     <div className="grid h-full place-items-center">
       <div className="flex max-w-max flex-col items-center justify-center">
-        <button className="bg-red-400 p-3" onClick={() => setIsOpen(true)}>
-          Click Me
-        </button>
-        <SliderModal
-          isOpen={isOpen}
-          onClose={handleClose}
-          title="Digital Marketing Brief Submission Form"
-          cancelBtnStyles="border-none top-10 right-10"
-        >
-          Body
-          <FormFooter />
-        </SliderModal>
         <Image
           src={`${imgSrc}`}
           alt={alt}
