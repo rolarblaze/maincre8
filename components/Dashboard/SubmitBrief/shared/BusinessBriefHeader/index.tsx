@@ -15,7 +15,7 @@ function BusinessBriefHeader({
   return (
     <header
       className={twMerge(
-        "absolute z-20 inset-x-0 top-0 space-y-2 rounded-t-2xl border-b border-grey200 bg-white px-8 py-6",
+        "absolute z-20 inset-x-0 top-0 space-y-2 rounded-t-2xl border-b border-grey200 bg-white px-4 py-3 md:px-8 md:py-6",
         headerStyles,
       )}
     >

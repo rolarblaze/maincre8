@@ -10,6 +10,7 @@ import { addAlert } from "@/redux/alerts";
 import { contentCreationFormData } from "../shared/formData/contentCreation";
 import CustomDropdown from "@/components/Forms/CustomDropdown";
 import Textarea from "@/components/Forms/Textarea";
+import FormFooter from "../shared/FormFooter";
 
 function ContentCreationForm() {
   const dispatch = useAppDispatch();
@@ -98,7 +99,7 @@ function ContentCreationForm() {
           );
         })}
       </main>
-      {/* <FormFooter /> */}
+      <FormFooter />
     </form>
   );
 }

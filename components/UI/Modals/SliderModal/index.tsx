@@ -48,7 +48,7 @@ const SliderModal: React.FC<SliderModalProps> = ({
               damping: 25,
             }}
             className={twMerge(
-              "noScrollbar fixed right-[35vw] z-10 h-screen w-[70vw] bg-white shadow-lg",
+              "noScrollbar fixed right-[50dvw] z-10 h-screen w-screen bg-white shadow-lg md:right-[35vw] md:w-[70vw]",
               className,
             )}
           >
@@ -68,7 +68,7 @@ const SliderModal: React.FC<SliderModalProps> = ({
             )}
 
             {/* Modal Content */}
-            <div className="noScrollbar h-full w-full overflow-y-auto px-8 pb-40 pt-[6.5rem]">
+            <div className="noScrollbar h-full w-full overflow-y-auto px-4 pb-60 pt-[4.8rem] md:pt-[6.5rem] md:px-8 md:pb-40">
               {children}
             </div>
           </motion.div>

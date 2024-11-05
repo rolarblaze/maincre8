@@ -106,6 +106,7 @@ function GraphicsDesignForm() {
                       handleUpload={(value: File | null) =>
                         handleFileUpload && handleFileUpload(value)
                       }
+                      showUploadButton={false}
                       parentClassNames="md:!flex-col"
                       buttonStyles="px-4"
                       // error={errors}

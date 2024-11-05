@@ -13,6 +13,7 @@ import Textarea from "@/components/Forms/Textarea";
 import InputFile from "@/components/Forms/InputFile";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import { FileUploadIcon } from "@/public/svgs";
+import FormFooter from "../shared/FormFooter";
 
 function AllInOneBundleForm() {
   const dispatch = useAppDispatch();
@@ -101,6 +102,7 @@ function AllInOneBundleForm() {
                       handleUpload={(value: File | null) =>
                         handleFileUpload && handleFileUpload(value)
                       }
+                      showUploadButton={false}
                       parentClassNames="md:!flex-col"
                       buttonStyles="px-4"
                       // error={errors}
@@ -112,7 +114,7 @@ function AllInOneBundleForm() {
           );
         })}
       </main>
-      {/* <FormFooter /> */}
+      <FormFooter />
     </form>
   );
 }

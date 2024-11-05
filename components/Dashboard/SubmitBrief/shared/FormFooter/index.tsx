@@ -12,7 +12,7 @@ function FormFooter({
   handleFileUpload?: () => void;
 }) {
   return (
-    <div className="absolute inset-x-0 bottom-0 flex justify-between bg-white px-12 py-6">
+    <div className="absolute inset-x-0 bottom-0 flex flex-col justify-between gap-6 bg-white px-6 py-6 md:flex-row md:px-12">
       <InputFile
         label={<CustomFileLabel />}
         id="document"
@@ -28,7 +28,7 @@ function FormFooter({
       <Button
         label="Submit a brief"
         type="submit"
-        classNames="self-end w-auto py-2 px-4"
+        classNames="md:self-end w-auto py-2 px-4"
       />
     </div>
   );
