@@ -26,8 +26,9 @@ export const digitalMarketObjOptions = [
     value: "Improve engagement on social media",
   },
   {
-    label: "Other (Please specify)",
-    value: "Other (Please specify)",
+    label: "Other",
+    sublabel: "Please specify",
+    value: "Other",
   },
 ];
 
@@ -41,16 +42,19 @@ export const digitalTargetAudienceOptions = [
     value: "B2B clients",
   },
   {
-    label: "Millennials (24-40)",
-    value: "Millennials (24-40)",
+    label: "Millennials",
+    sublabel: "24-40",
+    value: "Millennials",
   },
   {
-    label: "Gen Z (18-24)",
-    value: "Gen Z (18-24)",
+    label: "Gen Z",
+    sublabel: "18-24",
+    value: "Gen Z",
   },
   {
-    label: "Other (Please specify)",
-    value: "Other (Please specify)",
+    label: "Other",
+    sublabel: "Please specify",
+    value: "Other",
   },
 ];
 
@@ -72,8 +76,9 @@ export const digitalVoiceToneOptions = [
     value: "Fun and playful",
   },
   {
-    label: "Other (Please specify)",
-    value: "Professional",
+    label: "Other",
+    sublabel: "Please specify",
+    value: "Other",
   },
 ];
 
@@ -99,12 +104,14 @@ export const digitalPlatformOptions = [
     value: "Youtube,",
   },
   {
-    label: "Twitter (X)",
-    value: "Twitter (X),",
+    label: "Twitter",
+    value: "Twitter,",
+    sublabel: "X",
   },
   {
-    label: "Other (please specify)",
-    value: "Other (please specify),",
+    label: "Other",
+    sublabel: "please specify",
+    value: "Other",
   },
 ];
 
@@ -126,8 +133,9 @@ export const digitalConsumerOptions = [
     value: "Follow/Engage on social media",
   },
   {
-    label: "Other (Please specify)",
-    value: "Other (Please specify)",
+    label: "Other",
+    value: "Other",
+    sublabel: "Please specify",
   },
 ];
 
@@ -156,7 +164,7 @@ export const digitalMarketFormData = [
     name: "digitalMarketObj",
     type: "select",
     label: "What is your primary marketing objective?",
-    subLabel: "Select one.",
+    sublabel: "Select one.",
     options: digitalMarketObjOptions,
     placeholder: "Select",
     isRadio: true,
@@ -166,7 +174,7 @@ export const digitalMarketFormData = [
     name: "digitalTargetAudience",
     type: "select",
     label: "Who is your target audience?",
-    subLabel: "Select all that apply",
+    sublabel: "Select all that apply",
     options: digitalTargetAudienceOptions,
     placeholder: "Select",
     isRadio: false,
@@ -182,7 +190,7 @@ export const digitalMarketFormData = [
     name: "digitalVoiceTone",
     type: "select",
     label: "What tone of voice would you prefer for your campaign?",
-    subLabel: "Select one",
+    sublabel: "Select one",
     options: digitalVoiceToneOptions,
     placeholder: "Select",
     isRadio: true,
@@ -192,7 +200,7 @@ export const digitalMarketFormData = [
     name: "digitalPlatform",
     type: "select",
     label: "Which digital platforms do you want to focus on?",
-    subLabel: "Select one",
+    sublabel: "Select one",
     options: digitalPlatformOptions,
     placeholder: "Select",
     isRadio: false,
@@ -202,7 +210,7 @@ export const digitalMarketFormData = [
     name: "digitalConsumer",
     type: "select",
     label: "What is the desired consumer action?",
-    subLabel: "Select one",
+    sublabel: "Select one",
     options: digitalConsumerOptions,
     placeholder: "Select",
     isRadio: true,
@@ -212,7 +220,7 @@ export const digitalMarketFormData = [
     name: "digitalCampaignDur",
     type: "select",
     label: "What is the duration of this campaign?",
-    subLabel: "Select one",
+    sublabel: "Select one",
     options: digitalCampaignDurOptions,
     placeholder: "Select",
     isRadio: true,

@@ -16,8 +16,9 @@ export const brandMarketOptions = [
     value: "Small to medium businesses",
   },
   {
-    label: "Other (Please specify)",
-    value: "Other (Please specify)",
+    label: "Other",
+    sublabel: "Please specify",
+    value: "Other",
   },
 ];
 
@@ -39,19 +40,21 @@ export const brandPersonalityOptions = [
     value: "Elegant and sophisticated",
   },
   {
-    label: "Other (Please specify)",
-    value: "Other (Please specify)",
+    label: "Other",
+    sublabel: "Please specify",
+    value: "Other",
   },
 ];
 
 export const brandAssetOptions = [
   {
-    label: "Yes (Please upload or provide links)",
-    value: "Yes (Please upload or provide links)",
+    label: "Yes",
+    sublabel: "Please upload or provide links",
+    value: "Yes",
   },
   {
-    label: "No, I need everything from scratch)",
-    value: "No, I need everything from scratch)",
+    label: "No, I need everything from scratch",
+    value: "No, I need everything from scratch",
   },
 ];
 
@@ -73,8 +76,9 @@ export const brandDeliverableOptions = [
     value: "Package design",
   },
   {
-    label: "Other (Please specify)",
-    value: "Other (Please specify)",
+    label: "Other",
+    sublabel: "Please specify",
+    value: "Other",
   },
 ];
 
@@ -96,8 +100,9 @@ export const brandKPIOptions = [
     value: "Sales growth",
   },
   {
-    label: "Other (Please specify)",
-    value: "Other (Please specify)",
+    label: "Other",
+    sublabel: "Please specify",
+    value: "Other",
   },
 ];
 
@@ -114,7 +119,7 @@ export const brandDesignFormData = [
     name: "brandMarket",
     type: "select",
     label: "Who is your target market?",
-    subLabel: "Select all that apply",
+    sublabel: "Select all that apply",
     options: brandMarketOptions,
     placeholder: "Select",
     isRadio: false,
@@ -124,7 +129,7 @@ export const brandDesignFormData = [
     name: "brandPersonality",
     type: "select",
     label: "What tone or personality should your brand have?",
-    subLabel: "Select one",
+    sublabel: "Select one",
     options: brandPersonalityOptions,
     placeholder: "Select",
     isRadio: true,
@@ -134,7 +139,7 @@ export const brandDesignFormData = [
     name: "brandAsset",
     type: "select",
     label: "Do you already have any brand assets",
-    subLabel: "logo, color pallete, typography?Select one",
+    sublabel: "logo, color pallete, typography?Select one",
     options: brandAssetOptions,
     placeholder: "Select",
     isRadio: true,
@@ -144,7 +149,7 @@ export const brandDesignFormData = [
     name: "brandDeliverable",
     type: "select",
     label: "What are the key deliverables for this brand design?",
-    subLabel: "Select all that apply",
+    sublabel: "Select all that apply",
     options: brandDeliverableOptions,
     placeholder: "Select",
     isRadio: false,
@@ -155,7 +160,7 @@ export const brandDesignFormData = [
     type: "select",
     label:
       "What are your key performance indicators (KPIs) for the brand design?",
-    subLabel: "Select all that apply",
+    sublabel: "Select all that apply",
     options: brandKPIOptions,
     placeholder: "Select",
     isRadio: false,
@@ -165,7 +170,7 @@ export const brandDesignFormData = [
     name: "brandCompetitors",
     type: "textArea",
     label: "Are there any competitors or brands you admire?",
-    subLabel: "Free-text field or file upload option",
+    sublabel: "Free-text field or file upload option",
     placeholder: "Type",
   },
   {

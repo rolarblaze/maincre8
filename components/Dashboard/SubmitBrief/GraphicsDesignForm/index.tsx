@@ -66,6 +66,7 @@ function GraphicsDesignForm() {
                 <CustomDropdown
                   name={data.name}
                   label={data.label}
+                  sublabel={data.sublabel}
                   placeholder={data.placeholder}
                   options={data.options || []}
                   isCheckbox={data.isCheckbox}
@@ -79,6 +80,7 @@ function GraphicsDesignForm() {
                   id={data.name}
                   name={data.name}
                   label={data.label}
+                  sublabel={data.sublabel}
                   placeholder={data.placeholder}
                   value={
                     (values[

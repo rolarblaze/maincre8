@@ -67,6 +67,7 @@ function DigitalMarketForm() {
                 <CustomDropdown
                   name={data.name}
                   label={data.label}
+                  sublabel={data.sublabel}
                   placeholder={data.placeholder}
                   options={data.options || []}
                   isCheckbox={data.isCheckbox}
@@ -80,6 +81,7 @@ function DigitalMarketForm() {
                   id={data.name}
                   name={data.name}
                   label={data.label}
+                  sublabel={data.sublabel}
                   placeholder={data.placeholder}
                   value={
                     (values[

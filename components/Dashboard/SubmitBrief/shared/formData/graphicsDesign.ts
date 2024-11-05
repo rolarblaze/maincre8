@@ -8,16 +8,18 @@ export const graphicsTypeOptions = [
     value: "Infographics",
   },
   {
-    label: "Print materials (flyers, posters, etc)",
-    value: "Print materials (flyers, posters, etc)",
+    label: "Print materials",
+    sublabel: "flyers, posters, etc",
+    value: "Print materials",
   },
   {
     label: "Digital ads",
     value: "Digital ads",
   },
   {
-    label: "Other (please specify)",
-    value: "Other (please specify)",
+    label: "Other",
+    sublabel: "Please specify",
+    value: "Other",
   },
 ];
 
@@ -31,16 +33,19 @@ export const graphicsTargetAudOptions = [
     value: "B2B clients",
   },
   {
-    label: "Millennials (25-40)",
-    value: "Millennials (25-40)",
+    label: "Millennials",
+    sublabel: "25-40",
+    value: "Millennials",
   },
   {
-    label: "Gen Z (18 -24)",
-    value: "Gen Z (18 -24)",
+    label: "Gen Z",
+    sublabel: "18 -24",
+    value: "Gen Z",
   },
   {
-    label: "Other (Please specify)",
-    value: "Other (Please specify)",
+    label: "Other",
+    sublabel: "Please specify",
+    value: "Other",
   },
 ];
 
@@ -62,19 +67,22 @@ export const graphicsToneOptions = [
     value: "Fun and playful",
   },
   {
-    label: "Other (Please specify)",
-    value: "Other (Please specify)",
+    label: "Other",
+    sublabel: "Please specify",
+    value: "Other",
   },
 ];
 
 export const graphicsDeliverableOptions = [
   {
-    label: "Final design files (JPG, PNG, PDF)",
-    value: "Final design files (JPG, PNG, PDF)",
+    label: "Final design files",
+    sublabel: "JPG, PNG, PDF",
+    value: "Final design files",
   },
   {
-    label: "Source files (AI, PSD)",
-    value: "Source files (AI, PSD)",
+    label: "Source files",
+    sublabel: "AI, PSD",
+    value: "Source files",
   },
   {
     label: "Mockups or proofs",
@@ -107,7 +115,7 @@ export const graphicsDesignFormData = [
     name: "graphicsType",
     type: "select",
     label: "What type of graphic design do you need?",
-    subLabel: "Select all that apply",
+    sublabel: "Select all that apply",
     options: graphicsTypeOptions,
     placeholder: "Select",
     isRadio: false,
@@ -117,14 +125,14 @@ export const graphicsDesignFormData = [
     name: "graphicsColorPalette",
     type: "textArea",
     label: "What is your brand's color palette and style preference?",
-    subLabel: "Free-text field or file upload option",
+    sublabel: "Free-text field or file upload option",
     placeholder: "Type",
   },
   {
     name: "graphicsTargetAud",
     type: "select",
     label: "Who is your target audience for this design",
-    subLabel: "Select all that apply",
+    sublabel: "Select all that apply",
     options: graphicsTargetAudOptions,
     placeholder: "Select",
     isRadio: false,
@@ -134,14 +142,14 @@ export const graphicsDesignFormData = [
     name: "graphicsPrimaryMessage",
     type: "textArea",
     label: "What is your brand's color palette and style preference?",
-    subLabel: "Free-text field or file upload option",
+    sublabel: "Free-text field or file upload option",
     placeholder: "Type",
   },
   {
     name: "graphicsTone",
     type: "select",
     label: "What tone or style should the design have?",
-    subLabel: "Select one",
+    sublabel: "Select one",
     options: graphicsToneOptions,
     placeholder: "Select",
     isRadio: true,
@@ -151,26 +159,26 @@ export const graphicsDesignFormData = [
     name: "graphicsDeliverable",
     type: "select",
     label: "What are the key deliverables for this project?",
-    subLabel: "Select all that apply",
+    sublabel: "Select all that apply",
     options: graphicsDeliverableOptions,
     placeholder: "Select",
     isRadio: false,
     isCheckbox: true,
   },
-  
+
   {
     name: "graphicsReferences",
     type: "textArea",
     label:
       "Are there any design inspirations or references you want us to consider?",
-    subLabel: "Free-text field or file upload option",
+    sublabel: "Free-text field or file upload option",
     placeholder: "Type",
   },
   {
     name: "graphicsTimeline",
     type: "select",
     label: "What is the timeline for completing the design project?",
-    subLabel: "Select one",
+    sublabel: "Select one",
     options: graphicsTimelineOptions,
     placeholder: "Select",
     isRadio: true,

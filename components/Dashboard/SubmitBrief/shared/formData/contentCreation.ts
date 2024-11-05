@@ -16,8 +16,9 @@ export const contentTypeOptions = [
     value: "Product descriptions",
   },
   {
-    label: "Other (Please specify)",
-    value: "Other (Please specify)",
+    label: "Other",
+    sublabel: "Please specify",
+    value: "Other",
   },
 ];
 
@@ -39,8 +40,9 @@ export const contentGoalOptions = [
     value: "Promote a product or service",
   },
   {
-    label: "Other (Please specify)",
-    value: "Other (Please specify)",
+    label: "Other",
+    sublabel: "Please specify",
+    value: "Other",
   },
 ];
 
@@ -54,16 +56,19 @@ export const contentAudienceOptions = [
     value: "B2B clients",
   },
   {
-    label: "Millennials (25-40)",
-    value: "Millennials (25-40)",
+    label: "Millennials",
+    sublabel: "25-40",
+    value: "Millennials",
   },
   {
-    label: "Gen Z (18 -24)",
-    value: "Gen Z (18 -24)",
+    label: "Gen Z",
+    sublabel: "18 -24",
+    value: "Gen Z",
   },
   {
-    label: "Other (Please specify)",
-    value: "Other (Please specify)",
+    label: "Other",
+    sublabel: "Please specify",
+    value: "Other",
   },
 ];
 
@@ -85,23 +90,27 @@ export const contentToneOptions = [
     value: "Bold and assertive",
   },
   {
-    label: "Other (Please specify)",
-    value: "Other (Please specify)",
+    label: "Other",
+    sublabel: "Please specify",
+    value: "Other",
   },
 ];
 
 export const contentLengthOptions = [
   {
-    label: "Short-form (300-500 words)",
-    value: "Short-form (300-500 words)",
+    label: "Short-form",
+    sublabel: "300-500 words",
+    value: "Short-form",
   },
   {
-    label: "Medium-form (500-1,000 words)",
-    value: "Medium-form (500-1,000 words)",
+    label: "Medium-form",
+    sublabel: "500-1,000 words",
+    value: "Medium-form",
   },
   {
-    label: "Long-form (1,000 + words)",
-    value: "Long-form (1,000 + words)",
+    label: "Long-form",
+    sublabel: "1,000 + words",
+    value: "Long-form",
   },
 ];
 
@@ -123,8 +132,9 @@ export const contentCTAOptions = [
     value: "Share on social media",
   },
   {
-    label: "Other (Please specify)",
-    value: "Other (Please specify)",
+    label: "Other",
+    sublabel: "Please specify",
+    value: "Other",
   },
 ];
 
@@ -146,8 +156,9 @@ export const contentKPIOptions = [
     value: "Lead generation",
   },
   {
-    label: "Other (Please specify)",
-    value: "Other (Please specify)",
+    label: "Other",
+    sublabel: "Please specify",
+    value: "Other",
   },
 ];
 
@@ -172,7 +183,7 @@ export const contentCreationFormData = [
     name: "contentType",
     type: "select",
     label: "What type of content do you need?",
-    subLabel: "Select all that apply",
+    sublabel: "Select all that apply",
     options: contentTypeOptions,
     placeholder: "Select",
     isRadio: false,
@@ -182,7 +193,7 @@ export const contentCreationFormData = [
     name: "contentGoal",
     type: "select",
     label: "What is the primary goal of this content?",
-    subLabel: "Select one",
+    sublabel: "Select one",
     options: contentGoalOptions,
     placeholder: "Select",
     isRadio: true,
@@ -192,7 +203,7 @@ export const contentCreationFormData = [
     name: "contentAudience",
     type: "select",
     label: "Who is your target audience for this content?",
-    subLabel: "Select all that apply",
+    sublabel: "Select all that apply",
     options: contentAudienceOptions,
     placeholder: "Select",
     isRadio: false,
@@ -202,7 +213,7 @@ export const contentCreationFormData = [
     name: "contentTone",
     type: "select",
     label: "What tone or style should the content have?",
-    subLabel: "Select one",
+    sublabel: "Select one",
     options: contentToneOptions,
     placeholder: "Select",
     isRadio: true,
@@ -218,7 +229,7 @@ export const contentCreationFormData = [
     name: "contentLength",
     type: "select",
     label: "What is the desired length of the content?",
-    subLabel: "Select one",
+    sublabel: "Select one",
     options: contentLengthOptions,
     placeholder: "Select",
     isRadio: true,
@@ -235,7 +246,7 @@ export const contentCreationFormData = [
     name: "contentCTA",
     type: "select",
     label: "What is the desired call to action (CTA) for this content?",
-    subLabel: "Select one",
+    sublabel: "Select one",
     options: contentCTAOptions,
     placeholder: "Select",
     isRadio: true,
@@ -245,7 +256,7 @@ export const contentCreationFormData = [
     name: "contentKPI",
     type: "select",
     label: "What are your key performance indicators (KPIs) for this content?",
-    subLabel: "Select all that apply",
+    sublabel: "Select all that apply",
     options: contentKPIOptions,
     placeholder: "Select",
     isRadio: false,
@@ -255,11 +266,10 @@ export const contentCreationFormData = [
     name: "contentTimeline",
     type: "select",
     label: "What is your timeline for delivery?",
-    subLabel: "Select one",
+    sublabel: "Select one",
     options: contentTimelineOptions,
     placeholder: "Select",
     isRadio: true,
     isCheckbox: false,
   },
-
 ];
