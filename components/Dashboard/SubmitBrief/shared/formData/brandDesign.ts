@@ -117,6 +117,8 @@ export const brandDesignFormData = [
     subLabel: "Select all that apply",
     options: brandMarketOptions,
     placeholder: "Select",
+    isRadio: false,
+    isCheckbox: true,
   },
   {
     name: "brandPersonality",
@@ -125,6 +127,8 @@ export const brandDesignFormData = [
     subLabel: "Select one",
     options: brandPersonalityOptions,
     placeholder: "Select",
+    isRadio: true,
+    isCheckbox: false,
   },
   {
     name: "brandAsset",
@@ -133,6 +137,8 @@ export const brandDesignFormData = [
     subLabel: "logo, color pallete, typography?Select one",
     options: brandAssetOptions,
     placeholder: "Select",
+    isRadio: true,
+    isCheckbox: false,
   },
   {
     name: "brandDeliverable",
@@ -141,6 +147,8 @@ export const brandDesignFormData = [
     subLabel: "Select all that apply",
     options: brandDeliverableOptions,
     placeholder: "Select",
+    isRadio: false,
+    isCheckbox: true,
   },
   {
     name: "brandKPI",
@@ -150,6 +158,8 @@ export const brandDesignFormData = [
     subLabel: "Select all that apply",
     options: brandKPIOptions,
     placeholder: "Select",
+    isRadio: false,
+    isCheckbox: true,
   },
   {
     name: "brandCompetitors",
