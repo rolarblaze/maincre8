@@ -24,6 +24,7 @@ interface InputFileProps {
   // touched?: boolean;
   parentClassNames?: string;
   buttonStyles?: string;
+  showUploadButton?: boolean;
 }
 
 function InputFile({
@@ -44,6 +45,7 @@ function InputFile({
   handleUpload,
   parentClassNames,
   buttonStyles,
+  showUploadButton = true,
 }: InputFileProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -98,15 +100,17 @@ function InputFile({
       </div>
 
       {/* Button */}
-      <Button
-        type="button"
-        label="Upload"
-        classNames={twMerge(
-          "!text-white !bg-grey500 !w-auto !py-2 !px-8",
-          buttonStyles,
-        )}
-        onClick={() => handleUpload(selectedFile)}
-      />
+      {showUploadButton && (
+        <Button
+          type="button"
+          label="Upload"
+          classNames={twMerge(
+            "!text-white !bg-grey500 !w-auto !py-2 !px-8",
+            buttonStyles,
+          )}
+          onClick={() => handleUpload(selectedFile)}
+        />
+      )}
     </div>
   );
 }

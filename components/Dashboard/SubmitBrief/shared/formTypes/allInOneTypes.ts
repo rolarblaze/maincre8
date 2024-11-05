@@ -30,7 +30,7 @@ export const allInOneInitialValues: AllInOneValues = {
   allInOneMainGoal: [],
 };
 
-export const graphicsDesignFormSchema = Yup.object().shape({
+export const allInOneFormSchema = Yup.object().shape({
   // SELECT FIELDS
   allInOneGoal: Yup.array()
     .of(Yup.string().required())
