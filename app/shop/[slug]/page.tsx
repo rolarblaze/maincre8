@@ -58,9 +58,7 @@ const Shop = () => {
       <BundlePreviewBanner
         title={typeCastPageViewData.bundle_name}
         message={typeCastPageViewData.description}
-        body={
-          "Apart from development and production environments, there is a 3rd option available: test. In the same way you can set defaults for development or production environments, you can do the same with a .env.test file for the testing environment (though this one is not as common as the previous two). Next.js will not load environment variables from .env.development or .env.production in the testing environment."
-        }
+        body={typeCastPageViewData.content}
         icon={typeCastPageViewData.bundle_image_link as string}
       />
 
