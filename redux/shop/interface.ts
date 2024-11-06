@@ -59,6 +59,7 @@ export interface PageViewData {
   bundle_name: string;
   bundle_id: number;
   description: string;
+  content: string;
   bundle_image_link: string | null;
   price: string | null;
   packages: PackagesType[];
