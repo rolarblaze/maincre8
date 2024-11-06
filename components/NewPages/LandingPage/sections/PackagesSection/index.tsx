@@ -21,41 +21,38 @@ const PackagesSection = () => {
   const [hovered, setHovered] = useState<string | null>(null);
   const [bundlesName, setBundlesName] = useState<string[]>([]);
   const dispatch = useAppDispatch();
-  const data = useAppSelector(
+  const bundlesData = useAppSelector(
     (state: RootState) => state.pageViewData.allShopBundles,
   );
 
   useEffect(() => {
-    // alert(JSON.stringify(data))
-    dispatch(getBundles());
-
-    // if (data as PageViewData[]) {
-    //   let names = data.map((bundle) => bundle.bundle_name);
-    //   alert(names)
-    //   setdata.map((bundle) => bundle.bundle_name)(names);
-    // }
-    // alert(JSON.stringify(data))
+    if (bundlesData.length === 0) {
+      dispatch(getBundles());
+    }
   }, []);
 
   return (
-    <FadeUpDiv className="flex flex-wrap items-start justify-center gap-4 sm:gap-8 lg:min-h-7 lg:justify-between">
+    // DESKTOP FIRST styling
+    <FadeUpDiv className="flex flex-wrap items-start justify-center xs:max-md:justify-between gap-4">
       {/* <p>p{JSON.stringify(data)}</p> */}
-      {data.map(({ bundle_name, bundle_image_link, description }) => (
+      {bundlesData.map(({ bundle_name, bundle_image_link, description }) => (
         <Link
           onClick={() =>
-           dispatch(changePageData(bundle_name.toLowerCase().replaceAll(" ", "-")))
+            dispatch(
+              changePageData(bundle_name.toLowerCase().replaceAll(" ", "-")),
+            )
           }
           href={`/shop/${bundle_name.toLowerCase().replaceAll(" ", "-")}`}
           key={bundle_name}
           onFocus={() => setHovered(bundle_name)}
           onMouseEnter={() => setHovered(bundle_name)}
           onMouseLeave={() => setHovered(null)}
-          className={`group flex size-fit max-w-[18%] cursor-pointer flex-col justify-start rounded-2xl border px-2 pb-2 pt-3.5 transition-colors duration-700 ease-out sm:px-2.5 sm:pb-2.5 sm:pt-5 ${getFocusClass(
+          className={`group flex size-fit w-[18%] xs:max-md:w-[47%] cursor-pointer flex-col justify-start rounded-2xl border px-2 pb-2 pt-3.5 transition-colors duration-700 ease-out sm:px-2.5 sm:pb-2.5 sm:pt-5 ${getFocusClass(
             bundle_name,
-            data.map((bundle) => bundle.bundle_name),
+            bundlesData.map((bundle) => bundle.bundle_name),
           )} ${getTabClass(
             bundle_name,
-            data.map((bundle) => bundle.bundle_name),
+            bundlesData.map((bundle) => bundle.bundle_name),
           )} `}
         >
           <h3 className="box-content h-12 text-wrap px-2.5 pb-5 text-sm font-bold leading-[1.6875rem] text-grey900 sm:text-xl">
@@ -64,9 +61,9 @@ const PackagesSection = () => {
 
           <div>
             <figure
-              className={`relative flex w-36 items-center justify-center overflow-hidden rounded-[0.625rem] transition-colors duration-700 ease-out sm:h-40 sm:w-[12.25rem] ${getBackgroundClass(
+              className={`relative flex w-36 items-center justify-center overflow-hidden rounded-[0.625rem] transition-colors duration-700 ease-out xs:max-md:h-40 ${getBackgroundClass(
                 bundle_name,
-                data.map((bundle) => bundle.bundle_name),
+                bundlesData.map((bundle) => bundle.bundle_name),
               )} `}
             >
               <Image
@@ -77,13 +74,13 @@ const PackagesSection = () => {
               />
             </figure>
 
-            <ResizablePanel className="w-full"> 
+            <ResizablePanel className="w-full">
               {hovered === bundle_name && (
                 <div className="mt-2 flex w-full items-center justify-between px-2 pb-2">
                   <p
                     className={`text-xs font-semibold sm:text-sm ${getUnderClass(
                       bundle_name,
-                      data.map((bundle) => bundle.bundle_name),
+                      bundlesData.map((bundle) => bundle.bundle_name),
                     )}`}
                   >
                     {description}
@@ -92,7 +89,7 @@ const PackagesSection = () => {
                   <FillArrowIcon
                     fillColor={getArrowClass(
                       bundle_name,
-                      data.map((bundle) => bundle.bundle_name),
+                      bundlesData.map((bundle) => bundle.bundle_name),
                     )}
                   />
                 </div>
