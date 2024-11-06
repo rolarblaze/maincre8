@@ -53,3 +53,45 @@ export interface ServicesState {
   isLoading: boolean;
   error: string | null;
 }
+
+// Bundles Type for Shop
+export interface PageViewData {
+  bundle_name: string;
+  bundle_id: number;
+  description: string;
+  bundle_image_link: string | null;
+  price: string | null;
+  packages: PackagesType[];
+  addons: AddOnsType[];
+}
+
+export interface PackagesType {
+  package_name: string;
+  package_id: number;
+  description: string;
+  price: number;
+  provisions: {
+    provision_id: number;
+    description: string;
+  }[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface AddOnsType {
+  add_ons_name: string;
+  add_ons_id: number;
+  description: string;
+  price: number;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface GetBundlesEndPoint {
+  bundles: PageViewData[];
+}
+
+export interface ShopReduxState {
+  allShopBundles: PageViewData[];
+  currentViewBundle: PageViewData | "";
+}

@@ -1,10 +1,6 @@
+import { AddOnsType } from "@/redux/shop/interface";
 import Image from "next/image";
 
-type AddOnsType = {
-  title: string;
-  description: string;
-  price: string;
-};
 
 type BundleAddOnsPropsType = {
   title: string;
@@ -46,7 +42,7 @@ const BundleAddOns = ({ title, addOns }: BundleAddOnsPropsType) => {
           {addOns.map((addon) => {
             return (
               <div
-                key={addon.title}
+                key={addon.add_ons_name}
                 className="flex aspect-square w-[23%] flex-col items-center justify-center gap-10 rounded-2xl bg-white xs:max-md:min-w-72 xs:max-md:first:ml-5 xs:max-md:last:mr-5"
               >
                 <div className="center mx-auto aspect-square w-1/3 rounded-full bg-[#E8F1FC]">
@@ -62,7 +58,7 @@ const BundleAddOns = ({ title, addOns }: BundleAddOnsPropsType) => {
                 </div>
                 <div className="space-y-2">
                   <p className="text-center text-xs font-semibold uppercase leading-4">
-                    {addon.title}
+                    {addon.add_ons_name}
                   </p>
                   <p className="text-center text-xs font-normal leading-7 text-[#718096]">
                     {addon.description}

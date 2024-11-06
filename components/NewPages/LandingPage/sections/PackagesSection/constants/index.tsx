@@ -1,3 +1,4 @@
+
 import {
   BrandDesignSVG,
   GraphicDesignsSVG,
@@ -5,30 +6,32 @@ import {
   AllInOneBundleSVG,
   ContentWritingSVG,
 } from "@/public/icons";
+import { RootState, useAppSelector } from "@/redux/store";
+
 
 export const packages = [
   {
-    title: "Brand Design",
+    title: "Ultimate Marketing",
     icon: <BrandDesignSVG />,
     under: "Move beyond just a logo",
   },
   {
-    title: "Graphic Designs",
+    title: "Brand Identity Development",
     icon: <GraphicDesignsSVG className="size-full" />,
     under: "Transform Your Visuals",
   },
   {
-    title: "Digital Marketing",
+    title: "Graphic Design",
     icon: <DigitalMarketingSVG className="size-full" />,
     under: "Boost Your Reach",
   },
   {
-    title: "Content Writing",
+    title: "Digital Marketing",
     icon: <ContentWritingSVG className="size-full" />,
     under: "Craft Your Message",
   },
   {
-    title: "All-In-One Bundle",
+    title: "Content Creation",
     icon: <AllInOneBundleSVG />,
     under: "Maximize Your Growth",
   },

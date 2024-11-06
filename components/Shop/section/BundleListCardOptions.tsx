@@ -1,15 +1,12 @@
 "use client";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { changePageData } from "@/redux/shop";
 import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
-import {
-  BrandDesign,
-  GraphicDesigns,
-  DigitalMarketing,
-  ContentWriting,
-  AllInOneBundle,
-} from "@/components/Shop/Data/bundle-pricing-data";
+import { getBundles } from "@/redux/shop/features";
+import { PageViewData } from "@/redux/shop/interface";
+import { useEffect } from "react";
+import bundleCardsDetails from "../data/bundleCardDetails";
 
 type bundleCardsDetailsType = {
   title: string;
@@ -20,85 +17,54 @@ type bundleCardsDetailsType = {
   hover: string;
 };
 
-type BundleListCardOptionsPropsType = {
-  bundleCardsDetails: bundleCardsDetailsType[];
-  pageViewDataTitle?: string;
-  updatePageViewData?: (title: string) => void;
-};
-
-
-type BundlesType =
-  | "brand-design"
-  | "graphic-designs"
-  | "digital-marketing"
-  | "content-writing"
-  | "all-in-one-bundle";
-
-const BundleListCardOptions = ({
-  bundleCardsDetails,
-
-}: BundleListCardOptionsPropsType) => {
+const BundleListCardOptions = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const bundlesData = useAppSelector(
+    (state: RootState) => state.pageViewData.allShopBundles,
+  );
   const pageViewData = useAppSelector(
-    (state: RootState) => state.pageViewData,
-  ).data;
+    (state: RootState) => state.pageViewData.currentViewBundle,
+  );
 
-  const pageViewDataTitle = pageViewData.title;
+  const pageViewDataTitle = (pageViewData as PageViewData).bundle_name;
 
-  // const bundleOptions = [
-  //   "brand-design",
-  //   "graphic-designs",
-  //   "digital-marketing",
-  //   "content-writing",
-  //   "all-in-one-bundle",
-  // ];
-
-  const mapBundles = {
-    "brand-design": BrandDesign,
-    "graphic-designs": GraphicDesigns,
-    "digital-marketing": DigitalMarketing,
-    "content-writing": ContentWriting,
-    "all-in-one-bundle": AllInOneBundle,
-  };
-
-  // function to handle updating the page data view
+  // function to handle updating the page bundle
   const updatePageViewData = (title: string) => {
     title = title.toLowerCase().replaceAll(" ", "-");
-    let bundle = mapBundles[title as BundlesType];
-    dispatch(changePageData(bundle));
+    dispatch(changePageData(title));
     router.push(`/shop/${title}`);
   };
 
   return (
     <section>
       <ul className="no-scrollbar sticky top-0 flex w-full flex-wrap justify-between gap-4 xs:max-md:sticky xs:max-md:top-60 xs:max-md:gap-5 xs:max-md:overflow-auto">
-        {bundleCardsDetails.map((bundleCard) => {
+        {bundlesData.map((bundle, index) => {
           return (
             <li
-              key={bundleCard.title}
+              key={bundle.bundle_name}
               className="h-24 min-w-[12rem] xl:min-w-[13.5rem]"
             >
               <button
-                onClick={() => updatePageViewData(bundleCard.title)}
-                className={`${bundleCard.hover} ${
-                  pageViewDataTitle === bundleCard.title
-                    ? `border-2 ${bundleCard.activeBorderColor}`
-                    : `border ${bundleCard.borderColor} `
+                onClick={() => updatePageViewData(bundle.bundle_name)}
+                className={`${bundleCardsDetails[index].hover} ${
+                  pageViewDataTitle === bundle.bundle_name
+                    ? `border-2 ${bundleCardsDetails[index].activeBorderColor}`
+                    : `border ${bundleCardsDetails[index].borderColor} `
                 } ${
-                  pageViewDataTitle === bundleCard.title
-                    ? bundleCard.bgColor
+                  pageViewDataTitle === bundle.bundle_name
+                    ? bundleCardsDetails[index].bgColor
                     : "bg-white"
                 } group flex size-full items-center justify-between rounded-2xl p-2 transition-all`}
               >
                 <ul
                   className={`${
-                    pageViewDataTitle === bundleCard.title
+                    pageViewDataTitle === bundle.bundle_name
                       ? "font-bold"
                       : "font-light"
                   } w-1/2 px-2 text-left text-base transition-all`}
                 >
-                  {bundleCard.title.split(" ").map((text) => (
+                  {bundle.bundle_name.split(" ").map((text) => (
                     <li key={text}>
                       <p>{text}</p>
                     </li>
@@ -106,18 +72,17 @@ const BundleListCardOptions = ({
                 </ul>
                 <figure
                   className={`${
-                    pageViewDataTitle === bundleCard.title
+                    pageViewDataTitle === bundle.bundle_name
                       ? "bg-white"
-                      : bundleCard.bgColor
+                      : bundleCardsDetails[index].bgColor
                   } relative h-full w-[40%] rounded-lg transition-all group-hover:bg-white`}
                 >
                   <Image
                     fill={true}
-                    src={bundleCard.icon}
-                    alt={bundleCard.title}
+                    src={bundle.bundle_image_link as string}
+                    alt={bundle.bundle_name}
                     className="object-cover"
                   />
-                  {/* {bundleCard.icon} */}
                 </figure>
               </button>
             </li>
