@@ -47,7 +47,7 @@ const PackagesSection = () => {
           onFocus={() => setHovered(bundle_name)}
           onMouseEnter={() => setHovered(bundle_name)}
           onMouseLeave={() => setHovered(null)}
-          className={`group flex size-fit w-[18%] xs:max-md:w-[47%] cursor-pointer flex-col justify-start rounded-2xl border px-2 pb-2 pt-3.5 transition-colors duration-700 ease-out sm:px-2.5 sm:pb-2.5 sm:pt-5 ${getFocusClass(
+          className={`group flex size-fit w-[18%] xs:max-md:w-[48%] cursor-pointer flex-col justify-start rounded-2xl border px-2 pb-2 pt-3.5 transition-colors duration-700 ease-out sm:px-2.5 sm:pb-2.5 sm:pt-5 ${getFocusClass(
             bundle_name,
             bundlesData.map((bundle) => bundle.bundle_name),
           )} ${getTabClass(
@@ -61,7 +61,7 @@ const PackagesSection = () => {
 
           <div>
             <figure
-              className={`relative flex w-36 items-center justify-center overflow-hidden rounded-[0.625rem] transition-colors duration-700 ease-out xs:max-md:h-40 ${getBackgroundClass(
+              className={`relative flex w-full h-40 items-center justify-center overflow-hidden rounded-[0.625rem] transition-colors duration-700 ease-out xs:max-md:h-40 ${getBackgroundClass(
                 bundle_name,
                 bundlesData.map((bundle) => bundle.bundle_name),
               )} `}
