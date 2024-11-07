@@ -190,7 +190,11 @@ const PackagePlanCard = ({
         >
           {provisions.map((provision) => (
             <FeaturesList
+<<<<<<< HEAD
               key={provision.provision_id}
+=======
+              key={provision.description}
+>>>>>>> e0185379865d9ffbc797e44bfd10a401fdfc5962
               feature={provision.description}
               isPackagePopular={isPackagePopular}
             />

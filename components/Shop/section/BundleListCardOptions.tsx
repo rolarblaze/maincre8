@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { changePageData } from "@/redux/shop";
 import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { PageViewData } from "@/redux/shop/interface";

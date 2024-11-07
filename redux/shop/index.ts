@@ -18,7 +18,7 @@ const filterBundle = (id: string, state: ShopReduxState) => {
   const selectedBundle = allShopBundles.find(
     (bundle) => bundle.bundle_id.toString() === id
   );
-
+  
   return selectedBundle || allShopBundles[0];
 };
 
