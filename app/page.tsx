@@ -19,11 +19,13 @@ import { useEffect } from "react";
 
 const Home = () => {
   const dispatch = useAppDispatch();
-  const data = useAppSelector(
+  const bundlesData = useAppSelector(
     (state: RootState) => state.pageViewData.allShopBundles,
   );
   useEffect(() => {
-    dispatch(getBundles());
+    if (bundlesData.length === 0) {
+      dispatch(getBundles());
+    }
   }, []);
   return (
     <PageLayout>

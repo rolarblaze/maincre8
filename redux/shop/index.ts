@@ -8,29 +8,27 @@ const initialPageViewData: ShopReduxState = {
   currentViewBundle: "",
 };
 
+const filterBundle = (id: string, state: ShopReduxState) => {
+  const allShopBundles = state.allShopBundles;
+
+  if (allShopBundles.length === 0) {
+    return "";
+  }
+
+  const selectedBundle = allShopBundles.find(
+    (bundle) => bundle.bundle_id.toString() === id
+  );
+
+  return selectedBundle || allShopBundles[0];
+};
+
 export const PageDataSlice = createSlice({
   name: "pageViewData",
   initialState: initialPageViewData,
   reducers: {
     changePageData: (state, action: PayloadAction<string>) => {
       // Update the state with the new page data
-      let allShopBundles = state.allShopBundles;
-      if (allShopBundles.length === 0) {
-        state.currentViewBundle = "";
-        return;
-      }
-      let selectedBundleName = action.payload;
-      let selectedBundle = allShopBundles.filter(
-        (bundle) =>
-          bundle.bundle_name.toLowerCase().replaceAll(" ", "-") ===
-          selectedBundleName,
-      );
-
-      if (selectedBundle.length === 0) {
-        state.currentViewBundle = allShopBundles[0];
-      } else {
-        state.currentViewBundle = selectedBundle[0];
-      }
+      state.currentViewBundle = filterBundle(action.payload, state);
     },
   },
   extraReducers: (builder) => {

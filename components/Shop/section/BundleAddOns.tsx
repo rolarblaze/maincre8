@@ -43,7 +43,7 @@ const BundleAddOns = ({ title, addOns }: BundleAddOnsPropsType) => {
             return (
               <div
                 key={addon.add_ons_name}
-                className="flex aspect-square w-[23%] flex-col items-center justify-center gap-10 rounded-2xl bg-white xs:max-md:min-w-72 xs:max-md:first:ml-5 xs:max-md:last:mr-5"
+                className="flex aspect-square w-[23%] flex-col items-center justify-center gap-10 rounded-2xl bg-white xs:max-md:min-w-[70vw] xs:max-md:first:ml-5 xs:max-md:last:mr-5"
               >
                 <div className="center mx-auto aspect-square w-1/3 rounded-full bg-[#E8F1FC]">
                   {/* control the size on the figure tag to control the size of the rendered image */}

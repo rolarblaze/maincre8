@@ -168,17 +168,10 @@ const PackagePlanCard = ({
               } flex gap-1 font-semibold leading-9`}
             >
               <div className="text-3xl">
-                {" "}
-                {/* {pricing.price === 0 ? <PricingSpinner /> : pricing.code}{" "} */}
                 {"$"}
               </div>
               <p className="text-3xl">
               {price}
-                {/* {pricing.price === 0 ? (
-                  <PricingSpinner />
-                ) : (
-                  pricing.price.toLocaleString()
-                )} */}
               </p>
             </div>
             <span
@@ -197,7 +190,7 @@ const PackagePlanCard = ({
         >
           {provisions.map((provision) => (
             <FeaturesList
-              key={provision.description}
+              key={provision.provision_id}
               feature={provision.description}
               isPackagePopular={isPackagePopular}
             />
@@ -238,7 +231,7 @@ const BundlePackagesPlan = ({
       <ul className="no-scrollbar flex w-full justify-between gap-6 xs:max-md:gap-3 xs:max-md:overflow-auto">
         {packagesPlans.map((plan) => (
           <PackagePlanCard
-            key={plan.package_name}
+            key={plan.package_id}
             isPackagePopular={false}
             title={plan.package_name}
             description={plan.description}
