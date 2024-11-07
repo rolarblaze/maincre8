@@ -4,6 +4,7 @@ import React, { ReactNode, useState } from "react";
 
 interface ControlledTextareaProps {
   label?: string;
+  sublabel?: string;
   placeholder?: string;
   value?: string;
   onBlur?: (event: React.ChangeEvent<HTMLTextAreaElement>) => void;
@@ -17,6 +18,7 @@ interface ControlledTextareaProps {
 
 const Textarea: React.FC<ControlledTextareaProps> = ({
   label,
+  sublabel,
   placeholder,
   value,
   onChange,
@@ -30,11 +32,21 @@ const Textarea: React.FC<ControlledTextareaProps> = ({
   const [showTooltip, setShowTooltip] = useState(false);
 
   return (
-    <div className="relative">
+    <div className="">
       <div className="mb-1 flex items-center gap-2">
-        <label htmlFor={id} className="block text-sm text-grey900">
-          {label}
-        </label>
+        {label && (
+          <div className="mb-2">
+            <label
+              htmlFor={name}
+              className="block text-sm font-medium text-grey900"
+            >
+              {label}
+            </label>
+            {sublabel && (
+              <span className="block text-xs text-gray-500">{sublabel}</span>
+            )}
+          </div>
+        )}
         {tooltipText && (
           <div
             className="relative max-w-max cursor-pointer"
