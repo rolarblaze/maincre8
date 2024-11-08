@@ -1,7 +1,8 @@
 import { Metadata } from "next";
 import { PageLayout } from "@/components";
-import bundleCardsDetails from "@/components/Shop/Data/bundle-cards-details";
+import bundleCardsDetails from "@/components/Shop/data/bundleCardDetails";
 import BundleListCardOptions from "@/components/Shop/section/BundleListCardOptions";
+
 
 export const metadata: Metadata = {
   title: `SellCrea8 | Flexible Content, Design, Branding & Marketing Packages`,
@@ -21,6 +22,7 @@ export default function ShopLayout({
 }: {
   children: React.ReactNode;
 }) {
+
   return (
     <PageLayout>
       <main className="space-y-20 px-5 pb-20 xs:max-md:space-y-10 xs:max-md:px-0 xs:max-md:pb-10">
@@ -29,7 +31,7 @@ export default function ShopLayout({
         </h1>
 
         {/* Bundles Card-List Options To Choose From */}
-        <BundleListCardOptions bundleCardsDetails={bundleCardsDetails} />
+        <BundleListCardOptions />
 
         <div>{children}</div>
       </main>

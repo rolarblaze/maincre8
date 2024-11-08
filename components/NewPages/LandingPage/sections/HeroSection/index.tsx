@@ -8,6 +8,7 @@ import assetLibrary from "@/library";
 
 const HeroSection = () => {
   const [isOpen, setIsOpen] = useState(false);
+  
 
   return (
     <FadeUpDiv duration={1.5} className="py-5 lg:py-[3.75rem]">

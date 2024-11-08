@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import ShopWhyChooseSellCre8Data from "@/components/Shop/data/whyChooseUs";
 import BundlePreviewBanner from "@/components/Shop/section/BundlePreviewBanner";
 import BundlePackagesPlan from "@/components/Shop/section/BundlePackagesPlan";
@@ -15,7 +15,8 @@ import { getBundles } from "@/redux/shop/features";
 
 const Shop = () => {
   const dispatch = useAppDispatch();
-  const bundleParam = useParams<{ slug: string }>();
+  const router = useRouter();
+  const bundleParam = useParams<{ bundleID: string }>();
   const bundlesData = useAppSelector(
     (state: RootState) => state.pageViewData.allShopBundles,
   );
@@ -25,26 +26,20 @@ const Shop = () => {
 
   const typeCastPageViewData = pageViewData as PageViewData;
 
-  const bundleOptions = [
-    "ultimate-marketing",
-    "brand-identity-development",
-    "graphic-design",
-    "digital-marketing",
-    "content-creation",
-  ];
+  const bundleIDOptions = ["1", "2", "3", "4", "5"];
 
   useEffect(() => {
     // if the redux store for all bundles data is empty, fetch from endpoint
     if (bundlesData.length === 0) {
       dispatch(getBundles());
-      return
+      return;
     }
 
-    let bundleName = bundleParam.slug;
-    if (bundleOptions.includes(bundleName)) {
-      dispatch(changePageData(bundleName));
+    let bundleID = bundleParam.bundleID;
+    if (bundleIDOptions.includes(bundleID)) {
+      dispatch(changePageData(bundleID));
     } else {
-      window.location.href = "/shop/ultimate-marketing";
+      router.push("/shop/1");
     }
   }, []);
 

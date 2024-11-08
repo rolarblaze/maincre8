@@ -2,21 +2,9 @@ import Button from "@/components/Button";
 import Image from "next/image";
 import { useAppDispatch } from "@/redux/store";
 import { addAlert } from "@/redux/alerts";
-import { parse } from "path/posix";
 import { useEffect, useState } from "react";
+import { PackagesType } from "@/redux/shop/interface";
 
-type PackagesPlansType = {
-  title: string;
-  description: string;
-  pricePerMonth: string;
-  features: string[];
-  link: string;
-  isPackagePopular: boolean;
-};
-
-type BundlePackagesPlansPropsType = {
-  packagesPlans: PackagesPlansType[];
-};
 
 type FeaturesListPropsType = {
   feature: string;
@@ -27,12 +15,15 @@ type PackagePlanCardPropsType = {
   isPackagePopular: boolean;
   title: string;
   description: string;
-  pricePerMonth: string;
-  features: string[];
+  price: number;
+  provisions:{
+    provision_id: number;
+    description: string;
+  }[];
   link: string;
 };
 
-// Sub Component of Sub-Component-1
+// 3rd: Sub Component of Sub-Component-1
 const FeaturesList = ({ feature, isPackagePopular }: FeaturesListPropsType) => {
   return (
     <li className="flex w-full items-center gap-3">
@@ -64,13 +55,13 @@ const PricingSpinner = () => {
   );
 };
 
-// Sub-Component-1 of Main-Compoent
+// 2nd: Sub-Component-1 of Main-Compoent
 const PackagePlanCard = ({
   isPackagePopular,
   title,
   description,
-  pricePerMonth,
-  features,
+  price,
+  provisions,
 }: PackagePlanCardPropsType) => {
   const dispatch = useAppDispatch();
   const [pricing, setPricing] = useState({
@@ -96,7 +87,14 @@ const PackagePlanCard = ({
 
   // convert the pricing to base currency on component load
   useEffect(() => {
-    async function currencyConverter(amount: string) {
+    async function currencyConverter(amount: number) {
+
+      // just return the amaount back from this function
+      return {
+        price: amount,
+        code: "$",
+      }
+      // ignore the rest of this code on the bottom now
       try {
         const parsedAmount = parseFloat(amount);
         const response = await fetch(
@@ -125,7 +123,7 @@ const PackagePlanCard = ({
         });
       }
     }
-    currencyConverter(pricePerMonth.slice(1));
+    currencyConverter(price);
   }, []);
 
   return (
@@ -169,17 +167,11 @@ const PackagePlanCard = ({
                 isPackagePopular ? "text-white" : "text-[#111827]"
               } flex gap-1 font-semibold leading-9`}
             >
+              <div className="text-3xl">
+                {"$"}
+              </div>
               <p className="text-3xl">
-                {" "}
-                {pricing.price === 0 ? <PricingSpinner /> : pricing.code}{" "}
-              </p>
-              <p className="text-3xl">
-                {" "}
-                {pricing.price === 0 ? (
-                  <PricingSpinner />
-                ) : (
-                  pricing.price.toLocaleString()
-                )}
+              {price}
               </p>
             </div>
             <span
@@ -196,10 +188,10 @@ const PackagePlanCard = ({
             isPackagePopular ? "text-white" : "text-[#111827]"
           } mt-5 space-y-2`}
         >
-          {features.map((feature) => (
+          {provisions.map((provision) => (
             <FeaturesList
-              key={feature}
-              feature={feature}
+              key={provision.provision_id} 
+              feature={provision.description}
               isPackagePopular={isPackagePopular}
             />
           ))}
@@ -230,22 +222,22 @@ const PackagePlanCard = ({
   );
 };
 
-// Main-Component
+// 1st: Main-Component
 const BundlePackagesPlan = ({
   packagesPlans,
-}: BundlePackagesPlansPropsType) => {
+}: {packagesPlans: PackagesType[] } ) => {
   return (
     <section>
       <ul className="no-scrollbar flex w-full justify-between gap-6 xs:max-md:gap-3 xs:max-md:overflow-auto">
         {packagesPlans.map((plan) => (
           <PackagePlanCard
-            key={plan.title}
-            isPackagePopular={plan.isPackagePopular}
-            title={plan.title}
+            key={plan.package_id}
+            isPackagePopular={false}
+            title={plan.package_name}
             description={plan.description}
-            pricePerMonth={plan.pricePerMonth}
-            features={plan.features}
-            link={plan.link}
+            price={plan.price}
+            provisions={plan.provisions}
+            link={""}
           />
         ))}
       </ul>
