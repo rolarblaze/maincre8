@@ -15,8 +15,7 @@ const NewFooter = () => {
     },
     {
       name: "Pricing",
-      // link: "/shop",
-      link: "/",
+      link: "/shop",
     },
     {
       name: "FAQs",
@@ -31,7 +30,7 @@ const NewFooter = () => {
     },
     {
       name: "Terms & Conditions",
-      link: "terms-and-conditions",
+      link: "/terms-and-conditions",
     },
   ];
 
