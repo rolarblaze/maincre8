@@ -6,6 +6,7 @@ export const getBundlesClass = [
     underClass: "text-primary300",
     arrowClass: "#B6D4F7",
     focusClass: "outline-[#62A2EE] focus:bg-primary50",
+    underText:   "Maximize your Growth"
   },
   // for bundle_id 2, regardless of its position on the array received from the backend
   {
@@ -14,6 +15,7 @@ export const getBundlesClass = [
     underClass: "text-error-300",
     arrowClass: "#F2BCBA",
     focusClass: "outline-[#E26E6A] focus:bg-error-50",
+    underText:  "Move beyond just a logo",
   },
   // for bundle_id 3, regardless of its position on the array received from the backend
   {
@@ -22,6 +24,7 @@ export const getBundlesClass = [
     underClass: "text-warning-400",
     arrowClass: "#FBE2B7",
     focusClass: "outline-[#F7C164] focus:bg-warning-50",
+    underText:  "Transform Your Visuals",
   },
   // for bundle_id 4, regardless of its position on the array received from the backend
   {
@@ -30,6 +33,7 @@ export const getBundlesClass = [
     underClass: "text-success-300",
     arrowClass: "#B5E3C4",
     focusClass: "outline-[#5FC381] focus:bg-success-50",
+    underText:   "Boost Your Reach",
   },
   // for bundle_id 5, regardless of its position on the array received from the backend
   {
@@ -38,5 +42,14 @@ export const getBundlesClass = [
     underClass: "text-brown-300",
     arrowClass: "#F0E6E6",
     focusClass: "outline-[#B7AFAF] focus:bg-brown-50",
+    underText:   "Craft Your Message",
   },
 ];
+
+// export const getUnderText = [
+//   "Move beyond just a logo",
+//   "Transform Your Visuals",
+//   "Boost Your Reach",
+//   "Craft Your Message",
+//   "Maximize your Growth"
+// ]

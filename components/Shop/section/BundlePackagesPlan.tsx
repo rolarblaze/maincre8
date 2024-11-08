@@ -5,7 +5,6 @@ import { addAlert } from "@/redux/alerts";
 import { useEffect, useState } from "react";
 import { PackagesType } from "@/redux/shop/interface";
 
-
 type FeaturesListPropsType = {
   feature: string;
   isPackagePopular: boolean;
@@ -16,7 +15,7 @@ type PackagePlanCardPropsType = {
   title: string;
   description: string;
   price: number;
-  provisions:{
+  provisions: {
     provision_id: number;
     description: string;
   }[];
@@ -88,12 +87,11 @@ const PackagePlanCard = ({
   // convert the pricing to base currency on component load
   useEffect(() => {
     async function currencyConverter(amount: number) {
-
       // just return the amaount back from this function
       return {
         price: amount,
         code: "$",
-      }
+      };
       // ignore the rest of this code on the bottom now
       try {
         const parsedAmount = parseFloat(amount);
@@ -106,13 +104,15 @@ const PackagePlanCard = ({
             price: isNaN(parseFloat(amount)) ? 0 : parseFloat(amount),
             code: "$",
           });
-          return
+          return;
         }
 
         const data = await response.json();
         const rate = data.conversion_rate;
         setPricing({
-          price: isNaN(Math.round(parsedAmount * rate)) ? 0 : Math.round(parsedAmount * rate),
+          price: isNaN(Math.round(parsedAmount * rate))
+            ? 0
+            : Math.round(parsedAmount * rate),
           code: data.target_code,
         });
       } catch (err) {
@@ -167,12 +167,8 @@ const PackagePlanCard = ({
                 isPackagePopular ? "text-white" : "text-[#111827]"
               } flex gap-1 font-semibold leading-9`}
             >
-              <div className="text-3xl">
-                {"$"}
-              </div>
-              <p className="text-3xl">
-              {price}
-              </p>
+              <div className="text-3xl">{"$"}</div>
+              <p className="text-3xl">{price}</p>
             </div>
             <span
               className={`${
@@ -190,7 +186,7 @@ const PackagePlanCard = ({
         >
           {provisions.map((provision) => (
             <FeaturesList
-              key={provision.provision_id} 
+              key={provision.provision_id}
               feature={provision.description}
               isPackagePopular={isPackagePopular}
             />
@@ -225,14 +221,16 @@ const PackagePlanCard = ({
 // 1st: Main-Component
 const BundlePackagesPlan = ({
   packagesPlans,
-}: {packagesPlans: PackagesType[] } ) => {
+}: {
+  packagesPlans: PackagesType[];
+}) => {
   return (
     <section>
       <ul className="no-scrollbar flex w-full justify-between gap-6 xs:max-md:gap-3 xs:max-md:overflow-auto">
         {packagesPlans.map((plan) => (
           <PackagePlanCard
             key={plan.package_id}
-            isPackagePopular={false}
+            isPackagePopular={plan.package_name === "Standard Package" ? true : false}
             title={plan.package_name}
             description={plan.description}
             price={plan.price}
