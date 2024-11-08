@@ -69,7 +69,7 @@ const BundleListCardOptions = () => {
                     fill={true}
                     src={bundle.bundle_image_link as string}
                     alt={bundle.bundle_name}
-                    className="object-contain"
+                    className="object-cover"
                   />
                 </figure>
               </button>

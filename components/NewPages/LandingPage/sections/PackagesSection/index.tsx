@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { getBundlesClass } from "./helperFunc";
+import { getBundlesClass, getUnderText } from "./helperFunc";
 import { FadeUpDiv, ResizablePanel } from "@/components";
 import { FillArrowIcon } from "@/public/svgs";
 import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
@@ -46,13 +46,13 @@ const PackagesSection = () => {
 
             <div>
               <figure
-                className={`relative flex h-40 w-full items-center justify-center overflow-hidden rounded-[0.625rem] transition-colors duration-700 ease-out xs:max-md:h-32  ${getBundlesClass[bundle_id - 1].bgClass} `}
+                className={`relative h-40 w-full overflow-hidden rounded-[0.625rem] transition-colors duration-700 ease-out xs:max-md:h-32  ${getBundlesClass[bundle_id - 1].bgClass} `}
               >
                 <Image
                   fill={true}
                   src={bundle_image_link as string}
                   alt={description}
-                  className="object-contain object-center xs:max-md:px-2"
+                  className="object-cover xs:max-md:px-2"
                 />
               </figure>
 
@@ -60,9 +60,9 @@ const PackagesSection = () => {
                 {hovered === bundle_name && (
                   <div className="mt-2 flex w-full items-center justify-between px-2 pb-2">
                     <p
-                      className={`text-xs font-semibold sm:text-sm ${getBundlesClass[bundle_id - 1].underClass}`}
+                      className={`text-xs font-semibold capitalize sm:text-sm ${getBundlesClass[bundle_id - 1].underClass}`}
                     >
-                      {description}
+                      {getBundlesClass[bundle_id - 1].underText}
                     </p>
 
                     <FillArrowIcon
