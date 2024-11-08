@@ -1,12 +1,15 @@
 "use client";
 import { AnimatePresence, motion } from "framer-motion";
 import { CancelIcon } from "@/public/icons";
+import { twMerge } from "tailwind-merge";
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
   className?: string;
+  cancelBtnStyles?: string;
+  cancelIconStyles?: string;
   showCancelIcon?: boolean;
 }
 
@@ -15,6 +18,8 @@ const Modal: React.FC<ModalProps> = ({
   onClose,
   children,
   className,
+  cancelBtnStyles,
+  cancelIconStyles,
   showCancelIcon = true,
 }) => {
   // if (!isOpen) return null;
@@ -22,7 +27,7 @@ const Modal: React.FC<ModalProps> = ({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 z-50 flex justify-center">
           <motion.div
             onClick={onClose}
             initial={{ opacity: 0 }}
@@ -40,14 +45,19 @@ const Modal: React.FC<ModalProps> = ({
               },
             }}
             exit={{ opacity: 0, scale: 0, translateY: 100 }}
-            className={`no-scrollbar relative z-10 size-fit max-h-[calc(100dvh-2.5rem)] rounded-2xl min-w-80 overflow-y-scroll ${className}`}
+            className={`no-scrollbar relative z-10 size-fit max-h-[calc(100dvh-2.5rem)] min-w-80 rounded-2xl ${className}`}
           >
             {showCancelIcon && (
               <div
                 onClick={onClose}
-                className="absolute right-8 top-8 z-20 mb-4 ml-auto w-fit cursor-pointer rounded-full border border-grey300 p-2"
+                className={twMerge(
+                  "absolute right-8 top-8 z-20 mb-4 ml-auto w-fit cursor-pointer rounded-full border border-grey300 p-2",
+                  cancelBtnStyles,
+                )}
               >
-                <CancelIcon className="stroke-grey200" />
+                <CancelIcon
+                  className={twMerge("stroke-grey200", cancelIconStyles)}
+                />
               </div>
             )}
             {children}

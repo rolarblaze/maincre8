@@ -1,6 +1,7 @@
 "use client";
 import Button from "@/components/Button";
 import React, { ChangeEvent, KeyboardEvent, ReactNode, useState } from "react";
+import { twMerge } from "tailwind-merge";
 
 interface InputFileProps {
   label?: string | React.ReactNode;
@@ -21,6 +22,9 @@ interface InputFileProps {
   id: string;
   handleUpload: (value: File | null) => void;
   // touched?: boolean;
+  parentClassNames?: string;
+  buttonStyles?: string;
+  showUploadButton?: boolean;
 }
 
 function InputFile({
@@ -39,6 +43,9 @@ function InputFile({
   name,
   id,
   handleUpload,
+  parentClassNames,
+  buttonStyles,
+  showUploadButton = true,
 }: InputFileProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -49,7 +56,12 @@ function InputFile({
     onFileChange?.(file);
   };
   return (
-    <div className="flex flex-col items-center justify-between gap-4 md:flex-row md:items-start">
+    <div
+      className={twMerge(
+        "flex flex-col items-center justify-between gap-4 md:flex-row md:items-start",
+        parentClassNames,
+      )}
+    >
       <div className="space-y-3">
         <div className="flex gap-2">
           {/* Hidden file input */}
@@ -88,12 +100,17 @@ function InputFile({
       </div>
 
       {/* Button */}
-      <Button
-        type="button"
-        label="Upload"
-        classNames="!text-white !bg-grey500 !w-auto !py-2 !px-8 !self-center"
-        onClick={() => handleUpload(selectedFile)}
-      />
+      {showUploadButton && (
+        <Button
+          type="button"
+          label="Upload"
+          classNames={twMerge(
+            "!text-white !bg-grey500 !w-auto !py-2 !px-8",
+            buttonStyles,
+          )}
+          onClick={() => handleUpload(selectedFile)}
+        />
+      )}
     </div>
   );
 }

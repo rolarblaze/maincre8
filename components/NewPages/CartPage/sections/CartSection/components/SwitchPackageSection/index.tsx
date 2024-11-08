@@ -8,7 +8,7 @@ import {
   AllInOneBundle,
 } from "@/components/Shop/Data/bundle-pricing-data";
 import BundleListCardOptions from "@/components/Shop/section/BundleListCardOptions";
-import bundleCardsDetails from "@/components/Shop/Data/bundle-cards-details";
+import bundleCardsDetails from "@/components/Shop/data/bundleCardDetails";
 import BundlePackagesPlan from "@/components/Shop/section/BundlePackagesPlan";
 
 const SwitchPackageSection = () => {

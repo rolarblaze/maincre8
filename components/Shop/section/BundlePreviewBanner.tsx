@@ -30,7 +30,7 @@ const BundlePreviewBanner = ({
             fill={true}
             src={icon}
             alt={message}
-            className="object-cover xs:max-md:object-contain"
+            className="object-contain object-center xs:max-md:object-contain"
           />
         </figure>
       </div>
