@@ -7,7 +7,7 @@ import { PageViewData } from "@/redux/shop/interface";
 import bundleCardsDetails from "../data/bundleCardDetails";
 import ShopBundleListLoadingState from "../components/ShopBundleListLoadingState";
 
-const BundleListCardOptions = () => {
+const BundleListCardOptions = ({redirect} : {redirect: boolean}) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const bundlesData = useAppSelector(
@@ -22,12 +22,12 @@ const BundleListCardOptions = () => {
   // function to handle updating the page bundle
   const updatePageViewData = (id: string) => {
     dispatch(changePageData(id));
-    router.push(`/shop/${id}`);
+    redirect && router.push(`/shop/${id}`)
   };
 
   return (
     // DESKTOP FIRST STYLING WAS USED HERE
-    <section className="sticky top-20">
+    <section className={`${redirect && "sticky top-20"}`}>
       <ul className="no-scrollbar flex w-full justify-between gap-4 xs:max-md:sticky xs:max-md:top-60 xs:max-md:gap-5 xs:max-md:overflow-auto bg-whit backdrop-blur-md">
         {bundlesData.length === 0 ? (
           <ShopBundleListLoadingState />

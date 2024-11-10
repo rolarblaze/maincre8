@@ -31,7 +31,7 @@ export default function ShopLayout({
         </h1>
 
         {/* Bundles Card-List Options To Choose From */}
-        <BundleListCardOptions />
+        <BundleListCardOptions redirect={true} />
 
         {/* <div className="xs:max-md:h-full no-scrollbar">{children}</div> */}
         <div className="">{children}</div>
