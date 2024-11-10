@@ -25,7 +25,7 @@ const BundlePreviewBanner = ({
         <p className="text-lg font-light leading-7 text-[#718096]">{body}</p>
       </div>
       <div className="w-[40%] xs:max-md:w-full">
-        <figure className="relative size-full xs:max-md:h-[30vh]">
+        <figure className="relative size-full xs:max-md:w-full xs:max-md:aspect-square">
           <Image
             fill={true}
             src={icon}

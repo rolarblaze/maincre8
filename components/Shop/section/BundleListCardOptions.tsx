@@ -60,7 +60,7 @@ const BundleListCardOptions = () => {
                     } w-1/2 px-2 text-left text-base transition-all`}
                   >
                     {bundle.bundle_name.split(" ").map((text) => (
-                      <li key={text}>
+                      <li key={text} className="xs:max-md:text-sm ">
                         <p>{text}</p>
                       </li>
                     ))}
