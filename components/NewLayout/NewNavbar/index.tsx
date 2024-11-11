@@ -13,7 +13,8 @@ const NewNavbar = () => {
   const navlink = [
     {
       name: "Pricing",
-      link: "/shop",
+      // link: "/shop",
+      link: "/shop/3",
     },
     {
       name: "FAQs",

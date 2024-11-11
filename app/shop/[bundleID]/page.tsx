@@ -50,7 +50,14 @@ const Shop = () => {
   }, [bundlesData, bundleParam]);
 
   if (pageViewData === "") {
-    return <p>No data</p>;
+    return (
+      <div className="space-y-4">
+        <p className="shimmer h-[40vh] w-full rounded-3xl"></p>
+        <p className="shimmer h-[40vh] w-full rounded-3xl"></p>
+        <p className="shimmer h-[40vh] w-full rounded-3xl"></p>
+        <p className="shimmer h-[40vh] w-full rounded-3xl"></p>
+      </div>
+    );
   }
 
   return (
