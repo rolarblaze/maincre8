@@ -6,7 +6,7 @@ import {
   DigitalMarketing,
   ContentWriting,
   AllInOneBundle,
-} from "@/components/Shop/Data/bundle-pricing-data";
+} from "@/components/Shop/data/bundle-pricing-data";
 import BundleListCardOptions from "@/components/Shop/section/BundleListCardOptions";
 import bundleCardsDetails from "@/components/Shop/data/bundleCardDetails";
 import BundlePackagesPlan from "@/components/Shop/section/BundlePackagesPlan";
