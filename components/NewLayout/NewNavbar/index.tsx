@@ -14,7 +14,7 @@ const NewNavbar = () => {
     {
       name: "Pricing",
       // link: "/shop",
-      link: "/",
+      link: "/shop/3",
     },
     {
       name: "FAQs",
@@ -68,7 +68,7 @@ const NewNavbar = () => {
               Get Started
             </Link>
 
-            <Link href={"/"} className="block">
+            <Link href={"/cart"} className="block">
               <CartButton
                 click={cartOpen}
                 onClick={() => setCartOpen((prev) => !prev)}
