@@ -27,7 +27,7 @@ const Modal: React.FC<ModalProps> = ({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex justify-center">
+        <div className="fixed inset-0 z-50 flex justify-center items-center">
           <motion.div
             onClick={onClose}
             initial={{ opacity: 0 }}
