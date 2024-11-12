@@ -2,25 +2,16 @@
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
-import { LogoIcon } from "@/public/svgs";
+import { LogoIcon, MobileMenu } from "@/public/svgs";
 import { AvatarProfile } from "@/public/icons";
 import { hideComponent } from "@/hooks";
-import CartButton from "./CartButton";
+import { CartButton, MobileNav } from "./components";
+import { navlinks } from "./constants";
 
 const NewNavbar = () => {
   const pathname = usePathname();
+  const [mobileOpen, setMobileOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
-  const navlink = [
-    {
-      name: "Pricing",
-      // link: "/shop",
-      link: "/",
-    },
-    {
-      name: "FAQs",
-      link: "/faqs",
-    },
-  ];
 
   const hide = hideComponent(pathname);
   const authenticated = pathname === "/checkout";
@@ -35,9 +26,9 @@ const NewNavbar = () => {
       >
         {/* LINKS */}
         {!hide && (
-          <ul className="flex items-center justify-start gap-11 max-sm:hidden">
-            {navlink.map(({ name, link }) => (
-              <li key={name}>
+          <ul className="flex items-center justify-start gap-11 max-lg:hidden">
+            {navlinks?.map(({ name, link }) => (
+              <li key={name} className="hover:text-primary700">
                 <Link href={link}>{name}</Link>
               </li>
             ))}
@@ -47,7 +38,7 @@ const NewNavbar = () => {
         {/* LOGO */}
         <Link
           href={"/"}
-          className={`flex items-center gap-2.5 ${!hide && "sm:ml-24"}`}
+          className={`flex items-center gap-2.5 ${!hide && "lg:ml-24"}`}
         >
           <LogoIcon />
           <span className="font-schibsted text-2xl font-bold text-black">
@@ -57,18 +48,18 @@ const NewNavbar = () => {
 
         {/* BUTTONS */}
         {!hide && (
-          <div className="flex items-center justify-center gap-6 max-sm:hidden">
-            <Link href={"/"} className="block w-fit hover:text-primary500">
+          <div className="flex items-center justify-center gap-6 max-lg:hidden">
+            <Link href={"/login"} className="block w-fit hover:text-primary500">
               Login
             </Link>
             <Link
-              href={"/"}
+              href={"/signup"}
               className="block w-fit rounded-lg bg-grey800 px-4 py-2.5 text-grey50"
             >
               Get Started
             </Link>
 
-            <Link href={"/"} className="block">
+            <Link href={"/cart"} className="block">
               <CartButton
                 click={cartOpen}
                 onClick={() => setCartOpen((prev) => !prev)}
@@ -85,8 +76,25 @@ const NewNavbar = () => {
         )}
 
         {/* MOBILE: TOGGLE NAV */}
-        {!hide && <div className="size-5 rounded-md bg-black sm:hidden" />}
+        {!hide && (
+          <div className="flex items-center justify-end gap-4 lg:hidden">
+            <Link href={"/cart"} className="block">
+              <CartButton
+                click={cartOpen}
+                onClick={() => setCartOpen((prev) => !prev)}
+              />
+            </Link>
+
+            <button onClick={() => setMobileOpen((prev) => !prev)}>
+              <MobileMenu />
+            </button>
+          </div>
+        )}
       </nav>
+
+      {mobileOpen && (
+        <MobileNav onClose={() => setMobileOpen((prev) => !prev)} />
+      )}
     </header>
   );
 };
