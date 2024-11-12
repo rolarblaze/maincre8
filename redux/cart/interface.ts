@@ -9,6 +9,6 @@ export interface AddItemToCartPayload {
 }
 
 export interface AddItemToCartResponse {
-    message: string;
+    detail: string;
     cart_id: number;
 }

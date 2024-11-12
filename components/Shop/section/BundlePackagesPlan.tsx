@@ -66,7 +66,7 @@ const PackagePlanCard = ({
   package_id,
 }: PackagePlanCardPropsType) => {
   const dispatch = useAppDispatch();
-  const { loading } = useAppSelector((state) => state.cart);
+  const [buttonLoading, setButtonLoading] = useState(false);
 
   // const [pricing, setPricing] = useState({
   //   price: 0,
@@ -133,21 +133,23 @@ const PackagePlanCard = ({
 
   const handleAddToCart = async () => {
     try {
+      setButtonLoading(true);
+
       // Initialize session
-      const initializeSessionResult = await dispatch(initializeSession()).unwrap();
+      await dispatch(initializeSession()).unwrap();
 
       // Add item to cart using the session ID
-      await dispatch(addItemToCart({ bundle_id: 1, package_id })).unwrap();
+      const result = await dispatch(addItemToCart({ bundle_id: 1, package_id })).unwrap();
 
-      // Dispatch success alert
+      // Dispatch success alert with the response message
       dispatch(
         addAlert({
           id: `Added ${title} to cart`,
-          headText: "Added to cart",
-          subText: "Open your Cart to checkout",
+          headText: "Success",
+          subText: result.detail,
           type: "success",
           autoClose: true,
-        }),
+        })
       );
     } catch (error) {
       // Dispatch error alert
@@ -161,6 +163,8 @@ const PackagePlanCard = ({
         }),
       );
       console.log(error);
+    } finally {
+      setButtonLoading(false);
     }
   };
 
@@ -231,7 +235,7 @@ const PackagePlanCard = ({
           ? "hover:bg-blue-400 hover:text-white"
           : "hover:bg-slate-200"
           } `}
-        isLoading={loading}
+        isLoading={buttonLoading}
       />
     </li>
   );

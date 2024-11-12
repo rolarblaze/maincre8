@@ -9,19 +9,17 @@ export const initializeSession = createAsyncThunk<InitializeSessionResponse>(
     "cart/initializeSession",
     async (_, { rejectWithValue }) => {
         try {
-            const response = await api.get("landingpage-cart/initialize-session",
-                {
-                    withCredentials: true,
-                }
-            );
+            const response = await api.get("landingpage-cart/initialize-session", {
+                withCredentials: true,
+            });
 
             const { refresh_token, session_id } = response.data;
 
+            // Store session_id in local storage
+            localStorage.setItem("session_id", session_id);
+
             // Set the refresh token as a cookie
             setUserTokenCookie(refresh_token);
-
-            console.log("Set-Cookie header:", response.headers['set-cookie']);
-            console.log("Cookies after initializeSession:", document.cookie);
 
             return { refresh_token, session_id };
         } catch (error) {
@@ -35,19 +33,21 @@ export const addItemToCart = createAsyncThunk<AddItemToCartResponse, AddItemToCa
     "cart/addItemToCart",
     async (payload, { rejectWithValue }) => {
         try {
-            console.log("Payload being sent to add-to-cart:", payload);
-            console.log("Cookies before addItemToCart:", document.cookie);
+            const sessionId = localStorage.getItem("session_id");
 
-            const response = await api.post("landingpage-cart/add-to-cart", payload, {
-                withCredentials: true,
+            if (!sessionId) {
+                throw new Error("Session ID not found. Please initialize the session first.");
+            }
 
+            const response = await api.post("landingpage-cart/add-to-cart", {
+                ...payload,
+                session_id: sessionId,
             });
 
-            console.log("Response from add-to-cart:", response.data);
             return response.data;
         } catch (error) {
-            console.error("Error in addItemToCart:", error);
             return rejectWithValue(handleAxiosError(error));
         }
     }
 );
+
