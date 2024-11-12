@@ -12,6 +12,7 @@ import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { changePageData } from "@/redux/shop";
 import { PageViewData } from "@/redux/shop/interface";
 import { getBundles } from "@/redux/shop/features";
+import { addAlert } from "@/redux/alerts";
 
 const Shop = () => {
   const dispatch = useAppDispatch();
@@ -35,13 +36,18 @@ const Shop = () => {
       return;
     }
 
-    let bundleID = bundleParam.bundleID;
-    if (bundleIDOptions.includes(bundleID)) {
+    const bundleID = bundleParam.bundleID;
+
+    const selectedBundle = bundlesData.find(
+      (bundle) => bundle.bundle_id.toString() === bundleID,
+    );
+
+    if (selectedBundle) {
       dispatch(changePageData(bundleID));
     } else {
       router.push("/shop/1");
     }
-  }, []);
+  }, [bundlesData, bundleParam]);
 
   if (pageViewData === "") {
     return (

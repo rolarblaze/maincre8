@@ -9,7 +9,7 @@ import { getPackageReducer } from "./getPackage";
 import { OrderSlice } from "./order";
 import { tabsSlice } from "./legal";
 import { PageDataSlice } from "./shop";
-import { cartSlice } from "./cart";
+
 import { trackerReducer } from "./servicesTracker/tracker";
 import servicesSlice from "./servicesTracker";
 import serviceSlice from "./services";
@@ -17,6 +17,8 @@ import {
   contactFormReducer,
   newsletterReducer,
 } from "./newsletter_n_contactform";
+import cartReducer from "./cart";
+
 
 // configure the store with all reducers
 export const store = configureStore({
@@ -34,7 +36,7 @@ export const store = configureStore({
     tracker: trackerReducer,
     contactForm: contactFormReducer,
     tabs: tabsSlice.reducer,
-    cart: cartSlice.reducer,
+    cart: cartReducer,
     service: serviceSlice,
   },
 });

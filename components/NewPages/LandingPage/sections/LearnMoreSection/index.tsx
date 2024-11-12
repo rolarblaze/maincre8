@@ -20,7 +20,7 @@ const LearnMoreSection = () => {
         </p>
 
         <Link
-          href={"/"}
+          href={"/signup"}
           className="mt-8 block w-fit rounded-lg bg-white px-12 py-3 text-sm font-medium text-[#111827]"
         >
           Learn More

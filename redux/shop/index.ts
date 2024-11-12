@@ -37,13 +37,10 @@ export const PageDataSlice = createSlice({
         state.allShopBundles = [];
         state.currentViewBundle = "";
       })
-      .addCase(
-        getBundles.fulfilled,
-        (state: ShopReduxState, action: PayloadAction<PageViewData[]>) => {
-          state.allShopBundles = action.payload;
-          state.currentViewBundle = action.payload[0];
-        },
-      )
+      .addCase(getBundles.fulfilled, (state, action) => {
+        state.allShopBundles = action.payload;
+        state.currentViewBundle = action.payload[0];
+      })
       .addCase(getBundles.rejected, (state: ShopReduxState) => {
         state.allShopBundles = [];
         state.currentViewBundle = "";

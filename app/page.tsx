@@ -22,11 +22,11 @@ const Home = () => {
   const bundlesData = useAppSelector(
     (state: RootState) => state.pageViewData.allShopBundles,
   );
-  useEffect(() => {
-    if (bundlesData.length === 0) {
-      dispatch(getBundles());
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (bundlesData.length === 0) {
+  //     dispatch(getBundles());
+  //   }
+  // }, []);
   return (
     <PageLayout>
       <HeroSection />

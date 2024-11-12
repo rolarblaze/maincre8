@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addToCart } from "@/redux/cart";
+// import { addToCart } from "@/redux/cart";
 import { MinusIcon, PlusIcon } from "@/public/svgs";
 import { ResizablePanel } from "@/components";
 
