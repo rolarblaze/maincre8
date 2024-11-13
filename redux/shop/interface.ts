@@ -71,6 +71,7 @@ export interface PackagesType {
   package_id: number;
   description: string;
   price: number;
+  bundle_id: number;
   provisions: {
     provision_id: number;
     description: string;

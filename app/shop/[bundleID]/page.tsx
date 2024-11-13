@@ -26,8 +26,10 @@ const Shop = () => {
   );
 
   const typeCastPageViewData = pageViewData as PageViewData;
+  console.log("typeCastPageViewData", typeCastPageViewData)
+  const bundleId = typeCastPageViewData.bundle_id
+ 
 
-  const bundleIDOptions = ["1", "2", "3", "4", "5"];
 
   useEffect(() => {
     // if the redux store for all bundles data is empty, fetch from endpoint
@@ -71,7 +73,10 @@ const Shop = () => {
       />
 
       {/* Selected Bundle Packages Plan */}
-      <BundlePackagesPlan packagesPlans={typeCastPageViewData.packages} />
+      <BundlePackagesPlan
+        packagesPlans={typeCastPageViewData.packages}
+        bundle_id={bundleId}
+      />
 
       {/* Not sure of the right plan banner */}
       <NotSureBanner />
