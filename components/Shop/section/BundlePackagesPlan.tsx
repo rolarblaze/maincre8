@@ -22,6 +22,7 @@ type PackagePlanCardPropsType = {
   }[];
   link: string;
   package_id: number;
+  bundle_id: number; 
 };
 
 // 3rd: Sub Component of Sub-Component-1
@@ -64,82 +65,39 @@ const PackagePlanCard = ({
   price,
   provisions,
   package_id,
+  bundle_id,
 }: PackagePlanCardPropsType) => {
   const dispatch = useAppDispatch();
   const [buttonLoading, setButtonLoading] = useState(false);
 
-  // const [pricing, setPricing] = useState({
-  //   price: 0,
-  //   code: "$",
-  // });
-
-  // function alertMsg(
-  //   id: string,
-  //   headText: string,
-  //   subText: string,
-  //   type: "error" | "warning" | "success",
-  //   autoClose: boolean,
-  // ) {
-  //   return {
-  //     id: id,
-  //     headText: headText,
-  //     subText: subText,
-  //     type: type,
-  //     autoClose: autoClose,
-  //   };
-  // }
-
-  // convert the pricing to base currency on component load
-  // useEffect(() => {
-  //   async function currencyConverter(amount: number) {
-  //     // just return the amaount back from this function
-  //     return {
-  //       price: amount,
-  //       code: "$",
-  //     };
-  //     // ignore the rest of this code on the bottom now
-  //     try {
-  //       const parsedAmount = parseFloat(amount);
-  //       const response = await fetch(
-  //         `https://v6.exchangerate-api.com/v6/${process.env.NEXT_PUBLIC_EXCHANGE_RATE_API_KEY}/pair/USD/NGN/${parsedAmount}`,
-  //       );
-
-  //       if (!response.ok) {
-  //         setPricing({
-  //           price: isNaN(parseFloat(amount)) ? 0 : parseFloat(amount),
-  //           code: "$",
-  //         });
-  //         return;
-  //       }
-
-  //       const data = await response.json();
-  //       const rate = data.conversion_rate;
-  //       setPricing({
-  //         price: isNaN(Math.round(parsedAmount * rate))
-  //           ? 0
-  //           : Math.round(parsedAmount * rate),
-  //         code: data.target_code,
-  //       });
-  //     } catch (err) {
-  //       console.error(err);
-  //       setPricing({
-  //         price: parseFloat(amount),
-  //         code: "$",
-  //       });
-  //     }
-  //   }
-  //   currencyConverter(price);
-  // }, []);
 
   const handleAddToCart = async () => {
     try {
       setButtonLoading(true);
 
-      // Initialize session
-      await dispatch(initializeSession()).unwrap();
+      // Check if session_id exists in localStorage
+      let sessionId = localStorage.getItem("session_id");
+
+      // If session_id is not found, initialize the session
+      if (!sessionId) {
+        const initializeSessionResult = await dispatch(initializeSession()).unwrap();
+        sessionId = initializeSessionResult.session_id;
+        console.log("Session initialized:", sessionId);
+      } else {
+        console.log("Using existing session_id from localStorage:", sessionId);
+      }
+
+      console.log("Adding item to cart with bundle_id:", bundle_id, "and package_id:", package_id);
+
+       // Add item to cart using the session ID and the dynamic bundle_id
+       if (!bundle_id) {
+        throw new Error("Bundle ID is missing. Please select a valid bundle.");
+      }
 
       // Add item to cart using the session ID
-      const result = await dispatch(addItemToCart({ bundle_id: 1, package_id })).unwrap();
+      const result = await dispatch(
+        addItemToCart({ bundle_id, package_id }),
+      ).unwrap();
 
       // Dispatch success alert with the response message
       dispatch(
@@ -244,10 +202,14 @@ const PackagePlanCard = ({
 // 1st: Main-Component
 const BundlePackagesPlan = ({
   packagesPlans,
+  bundle_id,
 }: {
   packagesPlans: PackagesType[];
+  bundle_id: number;
 }) => {
+
   return (
+  
     <section>
       <ul className="no-scrollbar flex w-full justify-between gap-6 xs:max-md:gap-3 xs:max-md:overflow-auto">
         {packagesPlans.map((plan) => (
@@ -259,6 +221,7 @@ const BundlePackagesPlan = ({
             price={plan.price}
             provisions={plan.provisions}
             package_id={plan.package_id}
+            bundle_id={bundle_id} 
             link={""}
           />
         ))}

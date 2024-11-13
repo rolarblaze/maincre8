@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Modal } from "@/components";
 import { ArrowDown } from "@/public/icons";
 import { TrashIcon } from "@/public/svgs";
@@ -10,10 +11,13 @@ import SwitchPackageSection from "../SwitchPackageSection";
 interface Props {
   name: string;
   type: string;
+  imageUrl: string;
 }
 
-const CartItem: React.FC<Props> = ({ name, type }) => {
+const CartItem: React.FC<Props> = ({ name, type, imageUrl }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  console.log("Rendering CartItem:", { name, type, imageUrl });
 
   return (
     <div className="flex w-full items-center justify-between py-5 sm:gap-8">
@@ -26,7 +30,11 @@ const CartItem: React.FC<Props> = ({ name, type }) => {
         </div>
 
         <div className="w-[3.25rem] overflow-hidden rounded-[0.625rem] bg-white max-sm:aspect-square sm:h-[3.25rem] sm:w-[5.375rem]">
-          {getImage(name)}
+          <img
+            src={imageUrl}
+            alt={name}
+            className="object-cover w-full h-full rounded-[0.625rem]"
+          />
         </div>
       </div>
 
