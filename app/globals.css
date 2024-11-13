@@ -284,8 +284,17 @@ h4 {
     }
   }
 
+  /* 
+  #f1f5f9
+   */
+
+
+   /* 
+   #e2e8f0
+    */
+
   .shimmer {
-    background: linear-gradient(-45deg, #eee 40%, #fafafa 50%, #eee 60%);
+    background: linear-gradient(-45deg, #dddbdb1d 40%, #fafafa 50%, #dddbdb1d 60%); 
     background-size: 300%;
     background-position-x: 100%;
     animation: shimmer 1s infinite linear;

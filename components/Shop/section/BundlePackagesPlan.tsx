@@ -171,11 +171,11 @@ const PackagePlanCard = ({
   return (
     <li
       className={`${isPackagePopular ? "bg-[#1574E5]" : "bg-white"
-        } relative flex w-1/3 max-w-[25rem] flex-col justify-between gap-40 rounded-3xl border border-[#EEEFF2] p-8 xs:max-md:min-w-[90%]`}
+        } relative flex w-1/3 min-w-[350px] flex-col justify-between gap-10 rounded-3xl border border-[#EEEFF2] p-8 xs:max-md:min-w-[350px]`}
     >
       {isPackagePopular && (
-        <div className="absolute -right-1 -top-1 rounded-bl-2xl bg-white px-6 py-3">
-          <p className="text-lg font-semibold leading-5 text-[#1574e5]">
+        <div className="absolute -right-1 -top-1 rounded-bl-2xl bg-white px-6 py-3 xs:max-md:px-3">
+          <p className="text-lg xs:max-md:text-base font-semibold leading-5 text-[#1574e5]">
             Popular
           </p>
         </div>
@@ -228,6 +228,8 @@ const PackagePlanCard = ({
           ))}
         </ul>
       </div>
+
+      
       <Button
         onClick={handleAddToCart}
         label="Add to Cart"
@@ -249,7 +251,7 @@ const BundlePackagesPlan = ({
 }) => {
   return (
     <section>
-      <ul className="no-scrollbar flex w-full justify-between gap-6 xs:max-md:gap-3 xs:max-md:overflow-auto">
+      <ul className="no-scrollbar flex w-full justify-between gap-6 xs:max-md:gap-3 overflow-auto">
         {packagesPlans.map((plan) => (
           <PackagePlanCard
             key={plan.package_id}
