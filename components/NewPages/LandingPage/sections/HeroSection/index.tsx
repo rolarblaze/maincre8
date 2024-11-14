@@ -8,6 +8,7 @@ import assetLibrary from "@/library";
 
 const HeroSection = () => {
   const [isOpen, setIsOpen] = useState(false);
+  
 
   return (
     <FadeUpDiv duration={1.5} className="py-5 lg:py-[3.75rem]">
@@ -22,7 +23,7 @@ const HeroSection = () => {
 
         <div className="z-[2] mt-4 flex items-center justify-center gap-6">
           <Link
-            href={"/"}
+            href={"/signup"}
             className="block w-fit rounded-lg bg-white px-12 py-3.5 text-base font-semibold text-grey800"
           >
             Get Started

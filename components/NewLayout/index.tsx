@@ -5,6 +5,9 @@ import { usePathname } from "next/navigation";
 import { hideComponent } from "@/hooks";
 import NewNavbar from "./NewNavbar";
 import NewFooter from "./NewFooter";
+import { getBundles } from "@/redux/shop/features";
+import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
+import { useEffect } from "react";
 
 const PageLayout = ({
   children,
@@ -14,8 +17,17 @@ const PageLayout = ({
   className?: string;
 }) => {
   const pathname = usePathname();
-
+  let dispatch = useAppDispatch();
+  const bundlesData = useAppSelector(
+    (state: RootState) => state.pageViewData.allShopBundles,
+  );
   const hide = hideComponent(pathname);
+
+  useEffect(() => {
+    if (bundlesData.length === 0) {
+      dispatch(getBundles());
+    }
+  }, []);
 
   return (
     <div

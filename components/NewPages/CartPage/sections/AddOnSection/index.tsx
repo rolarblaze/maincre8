@@ -1,6 +1,15 @@
 import { AddOnItem } from "./components";
 
-const AddOnSection = () => {
+interface AddOnSectionProps {
+  addOns: {
+    type: string;
+    recommendations: any[];
+  }[];
+}
+
+const AddOnSection: React.FC<AddOnSectionProps> = ({ addOns }) => {
+  console.log("Rendering AddOns:", addOns);
+  
   return (
     <section className="space-y-4">
       <h2 className="text-sm font-medium leading-[150%] text-grey900">

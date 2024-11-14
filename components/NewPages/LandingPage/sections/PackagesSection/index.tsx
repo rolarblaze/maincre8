@@ -1,56 +1,80 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
-import { packages } from "./constants";
-import {
-  getTabClass,
-  getBackgroundClass,
-  getUnderClass,
-  getArrowClass,
-  getFocusClass,
-} from "./helperFunc";
+import { useEffect, useState } from "react";
+import { getBundlesClass } from "./helperFunc";
 import { FadeUpDiv, ResizablePanel } from "@/components";
 import { FillArrowIcon } from "@/public/svgs";
+import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
+import { changePageData } from "@/redux/shop";
+import { getBundles } from "@/redux/shop/features";
+import Image from "next/image";
+import HomeBundleListLoadingState from "@/components/Shop/components/HomeBundleListLoadingState";
 
 const PackagesSection = () => {
   const [hovered, setHovered] = useState<string | null>(null);
+  const dispatch = useAppDispatch();
+  const bundlesData = useAppSelector(
+    (state: RootState) => state.pageViewData.allShopBundles,
+  );
+
+  useEffect(() => {
+    if (bundlesData.length === 0) {
+      dispatch(getBundles());
+    }
+  }, []);
 
   return (
-    <FadeUpDiv className="flex min-h-[500px] flex-wrap items-start justify-center gap-4 sm:gap-8 lg:min-h-72 lg:justify-between">
-      {packages.map(({ title, icon, under }) => (
-        <Link
-          href={`/shop/${title.toLowerCase().replaceAll(" ", "-")}`}
-          key={title}
-          onFocus={() => setHovered(title)}
-          onMouseEnter={() => setHovered(title)}
-          onMouseLeave={() => setHovered(null)}
-          className={`group size-fit cursor-pointer rounded-2xl border px-2 pb-2 pt-3.5 transition-colors duration-700 ease-out sm:px-2.5 sm:pb-2.5 sm:pt-5 ${getFocusClass(title)} ${getTabClass(title)} `}
-        >
-          <h3 className="mb-5 whitespace-nowrap px-2.5 text-sm font-bold leading-[1.6875rem] text-grey900 sm:text-xl">
-            {title}
-          </h3>
+    // DESKTOP FIRST STYLING WAS USED HERE
+    <FadeUpDiv className="flex justify-between gap-4 xs:max-md:flex-wrap">
+      {bundlesData.length === 0 ? (
+        <HomeBundleListLoadingState />
+      ) : (
+        bundlesData.map(
+          ({ bundle_name, bundle_id, bundle_image_link, description }) => (
+            <Link
+              href={`/shop/${bundle_id}`}
+              key={bundle_name}
+              onFocus={() => setHovered(bundle_name)}
+              onMouseEnter={() => setHovered(bundle_name)}
+              onMouseLeave={() => setHovered(null)}
+              className={`group flex size-fit h-full w-[20%] cursor-pointer flex-col justify-between rounded-2xl border px-2 pb-2 pt-3.5 transition-colors duration-700 ease-out xs:max-md:h-auto xs:max-md:w-[48%] ${getBundlesClass[bundle_id - 1].focusClass} ${getBundlesClass[bundle_id - 1].tabClass} `}
+            >
+              <h3 className="box-content text-wrap bg-opacity-30 px-2.5 pb-5 text-xl font-bold leading-[1.6875rem] text-grey900 xs:max-lg:text-lg">
+                {bundle_name}
+              </h3>
 
-          <div
-            className={`flex h-[7.5rem] w-36 items-center justify-center overflow-hidden rounded-[0.625rem] bg-error-50 transition-colors duration-700 ease-out sm:h-40 sm:w-[12.25rem] ${getBackgroundClass(title)} `}
-          >
-            {icon}
-          </div>
-
-          <ResizablePanel className="w-full">
-            {hovered === title && (
-              <div className="mt-2 flex text-prett w-full items-center justify-between px-2 pb-2">
-                <p
-                  className={`text-xs font-semibold sm:text-sm ${getUnderClass(title)}`}
+              <div>
+                <figure
+                  className={`relative aspect-square w-full overflow-hidden rounded-[0.625rem] transition-colors duration-700 ease-out ${getBundlesClass[bundle_id - 1].bgClass} `}
                 >
-                  {under}
-                </p>
+                  <Image
+                    fill={true}
+                    src={bundle_image_link as string}
+                    alt={description}
+                    className="object-cover object-bottom"
+                  />
+                </figure>
 
-                <FillArrowIcon fillColor={getArrowClass(title)} />
+                <ResizablePanel className="w-full">
+                  {hovered === bundle_name && (
+                    <div className="mt-2 flex w-full items-center justify-between px-2 pb-2">
+                      <p
+                        className={`text-xs font-semibold capitalize sm:text-sm ${getBundlesClass[bundle_id - 1].underClass}`}
+                      >
+                        {getBundlesClass[bundle_id - 1].underText}
+                      </p>
+
+                      <FillArrowIcon
+                        fillColor={getBundlesClass[bundle_id - 1].arrowClass}
+                      />
+                    </div>
+                  )}
+                </ResizablePanel>
               </div>
-            )}
-          </ResizablePanel>
-        </Link>
-      ))}
+            </Link>
+          ),
+        )
+      )}
     </FadeUpDiv>
   );
 };
