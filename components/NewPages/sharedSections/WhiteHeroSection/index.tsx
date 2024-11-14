@@ -44,6 +44,7 @@ function WhiteHeroSection({
               onChange={handleQueryInput}
               classNames="py-6 placeholder:text-sm text-grey400 border-none !bg-grey50 mx-auto w-full max-w-[900px]"
               placeholder="What do you need help with? Search by keywords."
+              icon={<SearchIcon  />}
             />
           )}
         </div>

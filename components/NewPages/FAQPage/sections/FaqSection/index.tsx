@@ -58,10 +58,10 @@ const FaqSection = ({
                   animate={{ opacity: 1, y: 0 }} // Fade in and slide down
                   exit={{ opacity: 0, y: -10 }} // Fade out and slide up on collapse
                   transition={{ duration: 0.3, ease: "easeInOut" }} // Smooth transition
-                  className="px-4"
+                  className="flex flex-col gap-6 px-4"
                 >
                   {/* Answer content */}
-                  <motion.div className="py-4">
+                  <motion.div className="">
                     <p className="text-sm">{faq.answer}</p>
                   </motion.div>
 
