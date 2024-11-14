@@ -7,7 +7,7 @@ interface InputFieldProps {
   type: "text" | "password" | "email" | "number" | "url";
   placeholder?: string;
   value?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>, inputValue: string) => void;
   onBlur?: (e: ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
   onClick?: () => void;
@@ -75,7 +75,7 @@ const InputField: React.FC<InputFieldProps> = ({
     // Call external onChange if provided
     if (onChange) {
       e.target.value = input; // Adjust the value before passing it to onChange
-      onChange(e);
+      onChange(e, input);
     }
   };
 
@@ -111,7 +111,7 @@ const InputField: React.FC<InputFieldProps> = ({
         <input
           type={type}
           placeholder={placeholder}
-          value={value}
+          value={value || inputValue}
           name={name}
           onChange={handleChange}
           onBlur={onBlur}
@@ -124,7 +124,13 @@ const InputField: React.FC<InputFieldProps> = ({
           } ${disabled ? "cursor-not-allowed" : ""}`}
         />
         {icon && (
-          <div className="cursor-pointer" onClick={ (e) => {e.stopPropagation(); onInputIconClick && onInputIconClick() }}>
+          <div
+            className="cursor-pointer"
+            onClick={(e) => {
+              e.stopPropagation();
+              onInputIconClick && onInputIconClick();
+            }}
+          >
             {icon}
           </div>
         )}

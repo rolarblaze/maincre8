@@ -3,13 +3,13 @@ import React, { useState } from "react";
 import FaqSection from "..";
 import { newFAQData } from "../faqData";
 
-function FaqTabs() {
+function FaqTabs({ queryInput }: { queryInput?: string | undefined }) {
   const Tabs = [
     "All",
     "Onboarding",
     "Bundles",
-    "Content",
-    "Marketing",
+    // "Content",
+    // "Marketing",
     "Payments",
     "Support",
     "Project Management",
@@ -23,6 +23,18 @@ function FaqTabs() {
   const activeFaqData = newFAQData.filter((faq) =>
     faq.labels.includes(activeTab),
   );
+
+  const displayedData = queryInput
+    ? activeFaqData.filter(
+        (data) =>
+          data.question
+            .toLowerCase()
+            .includes(queryInput.toLowerCase() as string) ||
+          data.answer
+            .toLowerCase()
+            .includes(queryInput.toLowerCase() as string),
+      )
+    : activeFaqData;
   return (
     <section className="relative w-full">
       {/* Tabs for the FAQs */}
@@ -44,7 +56,7 @@ function FaqTabs() {
         </div>
       </div>
 
-      <FaqSection activeFAQData={activeFaqData} />
+      <FaqSection activeFAQData={displayedData} />
     </section>
   );
 }
