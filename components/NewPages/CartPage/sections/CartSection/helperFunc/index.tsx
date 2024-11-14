@@ -14,9 +14,9 @@ export const getBackgroundClass = (title: string) => {
       return "bg-warning-50";
     case "Digital Marketing":
       return "bg-success-50";
-    case "Content Writing":
+    case "Content Creation":
       return "bg-brown-50";
-    case "All-In-One Bundle":
+    case "Ultimate Marketing":
       return "bg-primary50";
     default:
       return "";
