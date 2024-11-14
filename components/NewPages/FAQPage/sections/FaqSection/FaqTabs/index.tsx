@@ -5,6 +5,7 @@ import { newFAQData } from "../faqData";
 
 function FaqTabs() {
   const Tabs = [
+    "All",
     "Onboarding",
     "Bundles",
     "Content",
@@ -23,28 +24,27 @@ function FaqTabs() {
     faq.labels.includes(activeTab),
   );
   return (
-    <section className="relative">
-      <div className="no-scrollbar sticky top-0 z-10 mx-auto flex max-w-[1216px] items-center gap-2 py-7 max-lg:overflow-x-auto lg:gap-7">
-        {Tabs.map((tab, i) => (
-          <span
-            key={i}
-            className={`cursor-pointer text-nowrap rounded-lg border px-3 py-1.5 text-sm font-medium ${
-              tab === activeTab
-                ? "bg-black text-white"
-                : "border-grey500 text-grey500"
-            }`}
-            onClick={() => handleTabClick(tab)}
-          >
-            {tab}
-          </span>
-        ))}
+    <section className="relative w-full">
+      {/* Tabs for the FAQs */}
+      <div className="content-grid">
+        <div className="no-scrollbar sticky top-0 z-10 mx-auto flex snap-x scroll-px-5 items-center gap-2 px-5 py-7 max-lg:overflow-x-auto md:px-0 lg:gap-7">
+          {Tabs.map((tab, i) => (
+            <span
+              key={i}
+              className={`cursor-pointer text-nowrap rounded-lg border px-3 py-1.5 text-sm font-medium ${
+                tab === activeTab
+                  ? "border-primary400 bg-primary50 text-grey600"
+                  : "border-grey300 text-grey500"
+              }`}
+              onClick={() => handleTabClick(tab)}
+            >
+              {tab}
+            </span>
+          ))}
+        </div>
       </div>
-      {/* <div className="mx-auto mt-[120px] max-w-[1219px] text-center max-xl:px-6">
-        <Section {...activeService} />
-      </div> */}
-      <div>
-        <FaqSection activeFAQData={activeFaqData}  />
-      </div>
+
+      <FaqSection activeFAQData={activeFaqData} />
     </section>
   );
 }

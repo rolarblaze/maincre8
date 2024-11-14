@@ -19,28 +19,27 @@ function WhiteHeroSection({
 }: WhiteHeroSectionProps) {
   return (
     <section
-      className={`flex w-full flex-col items-center gap-10 bg-white px-5 py-8  md:pb-[5rem] md:pt-[6.25rem] ${className}`}
+      className={`full-width flex flex-col items-center gap-10 bg-white py-8 md:pb-[5rem] md:pt-[6.25rem] ${className}`}
     >
-      <h3 className="text-textMain max-w-[24.7rem] text-center">{title}</h3>
+      <h3 className="w-full max-w-[24.7rem] text-center text-textMain">
+        {title}
+      </h3>
       <p className="text-sm text-gray-500">{paragraph}</p>
-      <div className="flex flex-col gap-y-6 items-center">
-        {showSearchbar && (
-          <div className="w-[818px]">
+      {/* Search bar, FAQ tab and FAQ */}
+      <div className="flex w-full flex-col items-center gap-y-6 bg-white">
+        <div className="w-full px-5 md:px-0">
+          {showSearchbar && (
             <InputField
               type="text"
               icon={
                 <SearchIcon className="size-5 !stroke-black stroke-[0.5]" />
               }
-              classNames="py-6 placeholder:text-sm text-grey400 border-none !bg-grey50"
+              classNames="py-6 placeholder:text-sm text-grey400 border-none !bg-grey50 mx-auto w-full max-w-[900px]"
               placeholder="What do you need help with?"
             />
-          </div>
-        )}
-        {showTabs && (
-          <div>
-            <FaqTabs />
-          </div>
-        )}
+          )}
+        </div>
+        {showTabs && <FaqTabs />}
       </div>
     </section>
   );

@@ -30,7 +30,7 @@ function DeliverySteps() {
     ...SecondBottomDeliveries,
   ];
   return (
-    <section className="flex w-full flex-col gap-[3.75rem] px-16 py-16 md:px-[6.25rem] md:py-[6.25rem]">
+    <section className="flex w-full flex-col items-center gap-6 px-0 py-16 md:items-start md:gap-[3.75rem] md:px-[6.25rem] md:py-[6.25rem]">
       <h3 className="mb-6 text-center">How we deliver</h3>
       <div className="rounded-3xl bg-grey50 md:px-12 md:py-12">
         {/* <Image
@@ -95,13 +95,13 @@ function DeliverySteps() {
             className="h-fit"
           />
 
-          <div className="mb-2 flex flex-col gap-11 font-semibold text-grey900">
-            {DeliveriesSteps.map((p, idx) => (
+          <div className="flex flex-col gap-[2.6rem] font-semibold text-grey900 sm:gap-16 md:mt-0 md:gap-9">
+            {DeliveriesSteps.map((step, idx) => (
               <p
                 key={`delivery-step-${idx}`}
-                className="mb-1.5 text-sm md:text-lg"
+                className={`text-sm md:text-lg ${idx === 3 || idx === 4 || idx === 5 ? "-mt-[0.1px]" : "mt-[0.8px]"} sm:mt-0.5`}
               >
-                {p}
+                {step}
               </p>
             ))}
           </div>

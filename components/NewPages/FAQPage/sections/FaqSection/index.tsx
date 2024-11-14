@@ -23,8 +23,8 @@ const FaqSection = ({
   };
 
   return (
-    <section className="full-width z-20 flex flex-col items-center gap-8 bg-grey50 py-6 max-xl:px-5">
-      <div className="flex w-full max-w-[818px] flex-col gap-4 text-textMain md:gap-8">
+    <section className="flex flex-col items-center gap-8 bg-grey50 py-6 px-5 md:px-0 md:py-10">
+      <div className="flex w-full flex-col gap-4 text-textMain md:gap-8 max-w-[900px]">
         {activeFAQData.map((faq, index) => (
           <motion.div
             key={index}
