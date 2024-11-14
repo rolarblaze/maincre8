@@ -26,10 +26,7 @@ const Shop = () => {
   );
 
   const typeCastPageViewData = pageViewData as PageViewData;
-  console.log("typeCastPageViewData", typeCastPageViewData)
-  const bundleId = typeCastPageViewData.bundle_id
- 
-
+  const bundleId = typeCastPageViewData.bundle_id;
 
   useEffect(() => {
     // if the redux store for all bundles data is empty, fetch from endpoint
@@ -39,16 +36,18 @@ const Shop = () => {
 
     const bundleID = bundleParam.bundleID;
 
-    // const selectedBundle = bundlesData?.find(
-    //   (bundle) => bundle.bundle_id.toString() === bundleID,
-    // );
-
-    if (bundleIDOptions.includes(bundleID)) {
-      dispatch(changePageData(bundleID));
-    } else {
-      router.push("/shop/2");
+    if (bundlesData.length >= 1) {
+      let selectedBundle = bundlesData.find(
+        (bundle) => bundle.bundle_id.toString() === bundleID,
+      );
+      if (selectedBundle) {
+        dispatch(changePageData(bundleID));
+      } else {
+        let redirectID = bundlesData[0].bundle_id;
+        router.push(`/shop/${redirectID}`);
+      }
     }
-  }, []);
+  }, [bundlesData.length]);
 
   // Loading States
   if (pageViewData === "") {
