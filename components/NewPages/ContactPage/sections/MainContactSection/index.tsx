@@ -55,7 +55,7 @@ function ContactForm() {
       message: "",
     },
     validationSchema: contactValidationSchema,
-    onSubmit: async (values) => {
+    onSubmit: async (values, { resetForm }) => {
       // handle form submission
       if (values) {
         const actionResult = await dispatch(submitContactForm(values));
@@ -68,15 +68,7 @@ function ContactForm() {
               type: "success",
             }),
           );
-          formik.resetForm({
-            values: {
-              first_name: "",
-              last_name: "",
-              phone_number: "",
-              email: "",
-              message: "",
-            },
-          });
+          resetForm();
         } else if (submitContactForm.rejected.match(actionResult)) {
           const errorMessage =
             actionResult.payload?.errorMessage ||
@@ -115,6 +107,7 @@ function ContactForm() {
                   placeholder={entity.placeholder}
                   error={formik.errors[entity.name as FieldName]}
                   onChange={formik.handleChange}
+                  value={formik.values[entity.name as FieldName]}
                 />
               )}
               {entity.type !== "textArea" && (
@@ -132,6 +125,7 @@ function ContactForm() {
                   placeholder={entity.placeholder}
                   error={formik.errors[entity.name as FieldName]}
                   onChange={formik.handleChange}
+                  value={formik.values[entity.name as FieldName]}
                 />
               )}
             </div>
