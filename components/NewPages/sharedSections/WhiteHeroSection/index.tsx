@@ -4,6 +4,8 @@ import InputField from "@/components/Forms/InputField";
 import { SearchIcon } from "@/public/icons";
 import React, { ChangeEvent, useState } from "react";
 import FaqTabs from "../../FAQPage/sections/FaqSection/FaqTabs";
+import Button from "@/components/Button";
+import { BigCancelIcon } from "@/public/svgs";
 interface WhiteHeroSectionProps {
   title: string;
   paragraph: string;
@@ -21,11 +23,8 @@ function WhiteHeroSection({
 }: WhiteHeroSectionProps) {
   const [queryInput, setQueryInput] = useState<string | undefined>("");
 
-  function handleQueryInput(
-    e: ChangeEvent<HTMLInputElement>,
-    input: string | undefined,
-  ) {
-    setQueryInput(input);
+  function handleQueryInput(e: ChangeEvent<HTMLInputElement>) {
+    setQueryInput(e.target.value.trim());
   }
   return (
     <section
@@ -42,9 +41,20 @@ function WhiteHeroSection({
             <InputField
               type="text"
               onChange={handleQueryInput}
+              value={queryInput}
               classNames="py-6 placeholder:text-sm text-grey400 border-none !bg-grey50 mx-auto w-full max-w-[900px]"
-              placeholder="What do you need help with? Search by keywords."
-              icon={<SearchIcon  />}
+              placeholder="What do you need help with?"
+              icon={
+                queryInput ? (
+                  <Button
+                    label={<BigCancelIcon />}
+                    classNames="p-0 !bg-transparent w-fit h-fit"
+                    onClick={() => setQueryInput("")}
+                  />
+                ) : (
+                  <SearchIcon />
+                )
+              }
             />
           )}
         </div>

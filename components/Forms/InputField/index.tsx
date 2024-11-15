@@ -7,7 +7,7 @@ interface InputFieldProps {
   type: "text" | "password" | "email" | "number" | "url";
   placeholder?: string;
   value?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement>, inputValue: string) => void;
+  onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
   onBlur?: (e: ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (e: KeyboardEvent<HTMLInputElement>) => void;
   onClick?: () => void;
@@ -75,7 +75,7 @@ const InputField: React.FC<InputFieldProps> = ({
     // Call external onChange if provided
     if (onChange) {
       e.target.value = input; // Adjust the value before passing it to onChange
-      onChange(e, input);
+      onChange(e);
     }
   };
 
@@ -111,7 +111,7 @@ const InputField: React.FC<InputFieldProps> = ({
         <input
           type={type}
           placeholder={placeholder}
-          value={value || inputValue}
+          value={value}
           name={name}
           onChange={handleChange}
           onBlur={onBlur}

@@ -2,6 +2,9 @@
 import React, { useState } from "react";
 import FaqSection from "..";
 import { newFAQData } from "../faqData";
+import { CancelIcon } from "@/public/icons";
+import Button from "@/components/Button";
+import { BigCancelIcon } from "@/public/svgs";
 
 function FaqTabs({ queryInput }: { queryInput?: string | undefined }) {
   const Tabs = [
@@ -39,19 +42,33 @@ function FaqTabs({ queryInput }: { queryInput?: string | undefined }) {
     <section className="relative w-full">
       {/* Tabs for the FAQs */}
       <div className="content-grid">
-        <div className="no-scrollbar sticky top-0 z-10 mx-auto flex snap-x scroll-px-5 items-center gap-2 px-5 py-7 max-lg:overflow-x-auto md:px-0 lg:gap-7">
+        <div className="no-scrollbar mx-auto flex items-center px-5 py-7 max-lg:overflow-x-auto md:px-0 gap-2 lg:gap-16">
           {Tabs.map((tab, i) => (
-            <span
+            <div
               key={i}
-              className={`cursor-pointer text-nowrap rounded-lg border px-3 py-1.5 text-sm font-medium ${
+              className={`flex gap-2 text-nowrap rounded-lg border px-3 py-1.5 text-sm font-medium ${
                 tab === activeTab
                   ? "border-primary400 bg-primary50 text-grey600"
                   : "border-grey300 text-grey500"
               }`}
-              onClick={() => handleTabClick(tab)}
             >
-              {tab}
-            </span>
+              <span
+                className="cursor-pointer"
+                onClick={() => handleTabClick(tab)}
+              >
+                {tab}
+              </span>
+
+              {tab !== "All" && tab === activeTab && (
+                <Button
+                  label={
+                    <BigCancelIcon width="18" height="18" stroke="#475367" />
+                  }
+                  classNames="!bg-transparent w-fit h-fit p-0 self-center"
+                  onClick={() => handleTabClick("All")}
+                />
+              )}
+            </div>
           ))}
         </div>
       </div>
