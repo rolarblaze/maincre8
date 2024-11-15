@@ -35,7 +35,7 @@ function WhiteHeroSection({
       </h3>
       <p className="text-sm text-gray-500">{paragraph}</p>
       {/* Search bar, FAQ tab and FAQ */}
-      <div className="flex w-full flex-col items-center gap-y-6 bg-white">
+      <div className="flex w-full flex-col items-center gap-y-4 bg-white md:gap-y-6">
         <div className="w-full px-5 md:px-0">
           {showSearchbar && (
             <InputField

@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import FaqSection from "..";
 import { newFAQData } from "../faqData";
-import { CancelIcon } from "@/public/icons";
 import Button from "@/components/Button";
 import { BigCancelIcon } from "@/public/svgs";
 
@@ -42,7 +41,7 @@ function FaqTabs({ queryInput }: { queryInput?: string | undefined }) {
     <section className="relative w-full">
       {/* Tabs for the FAQs */}
       <div className="content-grid">
-        <div className="no-scrollbar mx-auto flex items-center px-5 py-7 max-lg:overflow-x-auto md:px-0 gap-2 lg:gap-16">
+        <div className="no-scrollbar mx-auto flex w-full items-center gap-2 overflow-x-scroll py-7 md:w-auto md:px-0 lg:gap-16">
           {Tabs.map((tab, i) => (
             <div
               key={i}
