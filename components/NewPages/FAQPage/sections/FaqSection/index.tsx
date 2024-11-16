@@ -23,8 +23,8 @@ const FaqSection = ({
   };
 
   return (
-    <section className="full-width z-20 flex flex-col items-center gap-8 bg-grey50 py-6 max-xl:px-5">
-      <div className="flex w-full max-w-[818px] flex-col gap-4 text-textMain md:gap-8">
+    <section className="flex flex-col items-center gap-8 bg-grey50 px-5 py-6 md:px-0 md:py-10">
+      <div className="flex w-full max-w-[900px] flex-col gap-4 text-textMain md:gap-8">
         {activeFAQData.map((faq, index) => (
           <motion.div
             key={index}
@@ -58,10 +58,10 @@ const FaqSection = ({
                   animate={{ opacity: 1, y: 0 }} // Fade in and slide down
                   exit={{ opacity: 0, y: -10 }} // Fade out and slide up on collapse
                   transition={{ duration: 0.3, ease: "easeInOut" }} // Smooth transition
-                  className="px-4"
+                  className="flex flex-col gap-6 px-4"
                 >
                   {/* Answer content */}
-                  <motion.div className="py-4">
+                  <motion.div className="">
                     <p className="text-sm">{faq.answer}</p>
                   </motion.div>
 
