@@ -30,9 +30,9 @@ function DeliverySteps() {
     ...SecondBottomDeliveries,
   ];
   return (
-    <section className="flex w-full flex-col gap-[3.75rem] px-16 py-16 md:px-[6.25rem] md:py-[6.25rem]">
-      <h3 className="mb-6 text-center">How we deliver</h3>
-      <div className="rounded-3xl bg-grey50 md:px-12 md:py-12">
+    <section className="flex w-full flex-col items-center gap-3 sm:gap-6 px-0 py-6 pt-0 sm:py-16 md:items-start md:gap-[3.75rem] md:px-[6.25rem] md:py-20">
+      <h3 className="mb-6 self-center">How we deliver</h3>
+      <div className="w-full rounded-3xl bg-grey50 py-8 px-4 md:px-12 md:py-12">
         {/* <Image
           src={assetLibrary.roadmapImg}
           alt="RoadMap"
@@ -86,7 +86,7 @@ function DeliverySteps() {
         </div>
 
         {/* Mobile */}
-        <div className="relative flex gap-4 lg:hidden">
+        <div className="flex gap-4 lg:hidden justify-center sm:px-6">
           <img
             src={"/images/deliver-steps-mob.svg"}
             alt="how we deliver"
@@ -95,13 +95,13 @@ function DeliverySteps() {
             className="h-fit"
           />
 
-          <div className="mb-2 flex flex-col gap-11 font-semibold text-grey900">
-            {DeliveriesSteps.map((p, idx) => (
+          <div className="relative w-full max-w-72">
+            {DeliveriesSteps.map((step, idx) => (
               <p
-                key={`delivery-step-${idx}`}
-                className="mb-1.5 text-sm md:text-lg"
+                key={idx}
+                className={`absolute ${idx === 0 ? "top-1" : idx === 1 ? " top-[4.4rem] sm:top-[4.8rem]" : idx === 2 ? "top-[9.2rem]" : idx === 3 ? "top-[13.4rem]" : idx === 4 ? "top-[17.7rem]" : idx === 5 ? "bottom-[13rem]" : idx === 6 ? "bottom-[8.7rem]" : idx === 7 ? "bottom-[3.8rem] sm:bottom-[4.5rem]" : "-bottom-1 sm:bottom-1"}`}
               >
-                {p}
+                {step}
               </p>
             ))}
           </div>

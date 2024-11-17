@@ -68,7 +68,7 @@ const SliderModal: React.FC<SliderModalProps> = ({
             )}
 
             {/* Modal Content */}
-            <div className="noScrollbar h-full w-full overflow-y-auto px-4 pb-60 pt-[4.8rem] md:pt-[6.5rem] md:px-8 md:pb-40">
+            <div className="noScrollbar h-full w-full overflow-y-auto px-4 pb-60 pt-[8.5rem] sm:pt-[7rem] md:pt-[6.5rem] md:px-8 md:pb-40">
               {children}
             </div>
           </motion.div>

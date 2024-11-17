@@ -1,51 +1,43 @@
 import * as Yup from "yup";
 export interface DigitalMarketingValues {
-  digitalMarketObj: string[];
+  digitalMarketObj: string;
   digitalTargetAudience: string[];
   digitalKeyMessage: string;
-  digitalVoiceTone: string[];
+  digitalVoiceTone: string;
   digitalPlatform: string[];
-  digitalConsumer: string[];
-  digitalCampaignDur: string[];
+  digitalConsumer: string;
+  digitalCampaignDur: string;
 }
 
 export const digitalMarketingInitialValues = {
-  digitalMarketObj: [],
+  digitalMarketObj: "",
   digitalTargetAudience: [],
   digitalKeyMessage: "",
-  digitalVoiceTone: [],
+  digitalVoiceTone: "",
   digitalPlatform: [],
-  digitalConsumer: [],
-  digitalCampaignDur: [],
+  digitalConsumer: "",
+  digitalCampaignDur: "",
 };
 
 // Define the validation schema for your form
 export const digitalMarketingFormSchema = Yup.object().shape({
   // SELECT FIELDS
-  digitalMarketObj: Yup.array()
-    .of(Yup.string().required())
-    .min(1, "At least one Digital Marketing Objective is required")
-    .required("Please select a marketing Objective"),
+  digitalMarketObj: Yup.string().required(
+    "Please select a marketing Objective",
+  ),
   digitalTargetAudience: Yup.array()
     .of(Yup.string().required())
     .min(1, "At least one target audience option is required")
     .required("Please select a target audience"),
   digitalKeyMessage: Yup.string().optional(),
-  digitalVoiceTone: Yup.array()
-    .of(Yup.string().required())
-    .min(1, "At least one voice tone opion is required")
-    .required("Please select a voice tone"),
+  digitalVoiceTone: Yup.string().required("Please select a voice tone"),
   digitalPlatform: Yup.array()
     .of(Yup.string().required())
     .min(1, "At least one digital platform option is required")
     .required("Please select a digital platform option"),
-  digitalConsumer: Yup.array()
-    .of(Yup.string().required())
-    .min(1, "At least one consumer type is required")
-    .required("Please select a consumer type"),
-  digitalCampaignDur: Yup.array()
-    .of(Yup.string().required())
-    .min(1, "At least one campaign duration option is required")
+  digitalConsumer: Yup.string().required("Please select a consumer type"),
+  digitalCampaignDur: Yup.string()
+    .required()
     .required("Please select a campaign duration option"),
 
   // ATTACH A FILE
