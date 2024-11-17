@@ -17,32 +17,32 @@ const Order: React.FC<OrderProps> = ({
   status,
 }) => {
   return (
-    <div className="space-y-4 bg-white hidden md:block">
-      <h4 className="text-grey500 text-2xl font-semibold">{dateBought}</h4>
+    <div className="hidden space-y-2 bg-white md:block">
+      <h4 className="text-2xl font-semibold text-grey500">{dateBought}</h4>
 
-      <section className=" bg-grey10 py-4 px-6 rounded-lg border border-grey200">
+      <section className="rounded-lg border border-grey200 bg-grey10 p-4">
         {/* Section 1 */}
-        <div className="flex items-center justify-between py-3 px-2 border-b border-grey200">
-          <div className="flex-1">
-            <div className="text-grey500 text-xs font-semibold mb-1">
+        <div className="flex items-center justify-between border-b border-grey200 px-2 py-3">
+          <div className="w-[30%]">
+            <div className="mb-1 text-xs font-semibold text-grey500">
               PACKAGE
             </div>
           </div>
           <div className="flex-1">
-            <div className="text-grey500 text-xs font-semibold mb-1">PRICE</div>
+            <div className="mb-1 text-xs font-semibold text-grey500">PRICE</div>
           </div>
-          <div className="flex-1">
-            <div className="text-grey500 text-xs font-semibold mb-1">
+          <div className="w-40">
+            <div className="mb-1 text-xs font-semibold text-grey500">
               DATE BOUGHT
             </div>
           </div>
-          <div className="flex-1">
-            <div className="text-grey500 text-xs font-semibold mb-1">
+          <div className="w-40">
+            <div className="mb-1 text-xs font-semibold text-grey500">
               DATE COMPLETED
             </div>
           </div>
           <div className="flex-1">
-            <div className="text-grey500 text-xs font-semibold mb-1">
+            <div className="mb-1 text-xs font-semibold text-grey500">
               STATUS
             </div>
           </div>
@@ -51,36 +51,36 @@ const Order: React.FC<OrderProps> = ({
         </div>
 
         {/* Section 2 */}
-        <div className="flex items-center justify-between py-3 px-2 ">
-          <div className="flex-1">
-            <div className="text-grey900 text-base font-semibold ">
+        <div className="flex w-full items-center justify-between px-2 py-3">
+          <div className="w-[30%]">
+            <div className="text-sm font-semibold text-grey900">
               {packageName}
             </div>
           </div>
           <div className="flex-1">
-            <div className="text-grey500 text-base ">{price}</div>
+            <div className="text-sm text-grey500">{price}</div>
           </div>
-          <div className="flex-1">
-            <div className="text-grey500 text-base ">{dateBought}</div>
+          <div className="w-40">
+            <div className="text-sm text-grey500">{dateBought}</div>
           </div>
-          <div className="flex-1">
-            <div className="text-grey500  text-base ">{dateCompleted}</div>
+          <div className="w-40">
+            <div className="text-sm text-grey500">{dateCompleted}</div>
           </div>
-          <div className="flex-1 flex items-center">
+          <div className="flex flex-1 items-center">
             <div
-              className={`text-xs font-semibold px-2 py-1 rounded ${
+              className={`rounded-xl px-3 py-1 text-xs font-semibold ${
                 status === "Completed"
-                  ? "bg-green-200 text-green-800"
-                  : "bg-yellow-200 text-yellow-800"
+                  ? "bg-[#101928] text-white"
+                  : "bg-[#0F973D] text-white"
               }`}
             >
               {status}
             </div>
           </div>
-          <div className="flex-1 ">
-            <div className="ml-2 text-primary500 text-xs font-semibold cursor-pointer">
-              Reorder <span className="ml-1">↻</span>
-            </div>
+          <div className="flex-1">
+            <button className="ml-2 cursor-pointer text-xs font-semibold text-primary500 p-1">
+              <span className="ml-1">+</span> Add to cart
+            </button>
           </div>
         </div>
       </section>

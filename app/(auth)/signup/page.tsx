@@ -27,17 +27,7 @@ const SignupSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email")
     .required("Email address is required"),
-  password: Yup.string()
-    .test(
-      "is-password-matching",
-      "Password doesn't match criteria",
-      (value) => {
-        validatePassword(value as string).some(
-          (criterion) => criterion.isValid === false,
-        );
-      },
-    )
-    .required("Password is required"),
+  password: Yup.string().required("Password is required")
 });
 
 export default function Signup() {
@@ -187,7 +177,7 @@ export default function Signup() {
           }
           onInputIconClick={togglePasswordVisibility}
           error={
-            formik.touched.password && formik.errors.password
+            formik.errors.password
               ? formik.errors.password
               : ""
           }
@@ -222,6 +212,9 @@ export default function Signup() {
             );
           })}
         </div>
+        {
+
+        }
 
         <Button
           label="Create account"
