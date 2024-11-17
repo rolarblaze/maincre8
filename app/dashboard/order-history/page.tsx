@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import moment from "moment"
+import moment from "moment";
 import { AllIcon, CheckboxIcon } from "@/public/svgs";
 import { Order } from "@/components";
 import Tabs from "@/components/Dashboard/Tabs";
@@ -82,7 +82,7 @@ export default function OrderHistory() {
   // };
 
   return (
-    <section className="container mx-auto space-y-8 mt-4">
+    <section className="container mx-auto mt-4 space-y-8">
       {isLoading ? (
         <Loader />
       ) : filteredOrders?.length === 0 ? (
@@ -101,18 +101,20 @@ export default function OrderHistory() {
             <div key={index}>
               {/* Desktop view order */}
               <Order
+                package_id={order.package.package_id}
+                bundle_id={order.package.bundle.bundle_id}
                 packageName={`${order.package.bundle.bundle_name} (${order.package.package_name})`}
                 price={order.amount.toLocaleString("en-US", {
                   style: "currency",
                   currency: order.currency,
                 })}
-                dateBought={moment(order.created_at).format('DD MMMM YYYY')}
+                dateBought={moment(order.created_at).format("DD MMMM YYYY")}
                 dateCompleted={
                   order.status === "successful"
                     ? new Date(order.updated_at).toLocaleDateString()
                     : "-"
                 }
-                status={order.status === "successful" ? "Completed" : "Active"}
+                status={order.status === "successful" ? "Completed" : "Open"}
               />
 
               {/* Mobile view order */}

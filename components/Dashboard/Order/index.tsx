@@ -1,7 +1,12 @@
 // components/Dashboard/Order.tsx
 import React from "react";
+import { addAlert } from "@/redux/alerts";
+import { useAppDispatch } from "@/redux/store";
+import { addItemToCart } from "@/redux/cart/features";
 
 export interface OrderProps {
+  package_id: number;
+  bundle_id: number;
   packageName: string;
   price: string;
   dateBought: string;
@@ -10,12 +15,47 @@ export interface OrderProps {
 }
 
 const Order: React.FC<OrderProps> = ({
+  package_id,
+  bundle_id,
   packageName,
   price,
   dateBought,
   dateCompleted,
   status,
 }) => {
+  const dispatch = useAppDispatch();
+
+  const handleAddToCart = async () => {
+    try {
+      const result = await dispatch(
+        addItemToCart({ bundle_id, package_id }),
+      ).unwrap();
+
+      // Dispatch success alert with the response message
+      dispatch(
+        addAlert({
+          id: `Added ${packageName} to cart`,
+          headText: "Success",
+          subText: result.detail,
+          type: "success",
+          autoClose: true,
+        }),
+      );
+    } catch (error) {
+      // Dispatch error alert
+      dispatch(
+        addAlert({
+          id: `Error adding ${packageName} to cart`,
+          headText: "Error",
+          subText: (error as Error)?.message || "Failed to add item to cart",
+          type: "error",
+          autoClose: true,
+        }),
+      );
+      console.log(error);
+    }
+  };
+
   return (
     <div className="hidden space-y-2 bg-white md:block">
       <h4 className="text-2xl font-semibold text-grey500">{dateBought}</h4>
@@ -74,11 +114,14 @@ const Order: React.FC<OrderProps> = ({
                   : "bg-[#0F973D] text-white"
               }`}
             >
-              {status}
+              {status === "Completed" ? "Completed" : "Active" } 
             </div>
           </div>
           <div className="flex-1">
-            <button className="ml-2 cursor-pointer text-xs font-semibold text-primary500 p-1">
+            <button
+              onClick={handleAddToCart}
+              className="ml-2 cursor-pointer p-1 text-xs font-semibold text-primary500"
+            >
               <span className="ml-1">+</span> Add to cart
             </button>
           </div>
