@@ -18,8 +18,11 @@ function FormFooter({
         id="document"
         name="document"
         icon={<FileUploadIcon />}
+        // showUploadButton= {false}
         handleUpload={(value: File | null) =>
           handleFileUpload && handleFileUpload()
+
+
         }
         parentClassNames="md:!flex-col"
         buttonStyles="px-4"

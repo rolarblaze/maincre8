@@ -1,4 +1,4 @@
-import { useAppDispatch } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import React from "react";
 import {
   brandDesignFormSchema,
@@ -14,21 +14,29 @@ import InputFile from "@/components/Forms/InputFile";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import { FileUploadIcon } from "@/public/svgs";
 import FormFooter from "../shared/FormFooter";
+import { brandDesignBriefs } from "@/redux/myServices/features";
+
 
 function BrandDesignForm() {
   const dispatch = useAppDispatch();
+  const { isLoading } = useAppSelector((state) => state.brandDesign);
+
+
+  console.log('loading...', isLoading);
 
   // Define formik
   const formik = useFormik<BrandDesignValues>({
     initialValues: brandDesignInitialValues,
     validationSchema: brandDesignFormSchema,
     onSubmit: async (
-      values,
+      payload,
+      
       { resetForm }: FormikHelpers<BrandDesignValues>,
     ) => {
       try {
-        console.log("Form submitted");
-
+        console.log(payload)
+        const resp = await dispatch(brandDesignBriefs(payload));
+         console.log("response", resp)
         resetForm();
       } catch (error) {
         console.error("Error submitting form:", error);
