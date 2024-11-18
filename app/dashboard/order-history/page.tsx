@@ -10,11 +10,65 @@ import { UserTransaction } from "@/redux/order/interface";
 import Loader from "@/components/Spinner/Loader";
 import { EmptyState } from "@/components";
 import MobileOrder from "@/components/Dashboard/MobileOrder";
+import { addAlert } from "@/redux/alerts";
+import { initializeSession, addItemToCart } from "@/redux/cart/features";
 
 export default function OrderHistory() {
-  const [activeTab, setActiveTab] = useState<string>("All");
   const dispatch = useAppDispatch();
+  const [activeTab, setActiveTab] = useState<string>("All");
+  const [addingToCart, setAddingToCart] = useState(false);
   const { orders, isLoading, error } = useAppSelector((state) => state.order);
+
+  // Handling the "Add To Cart" globally across the Desktop and Mobile View of the Order History
+  const handleAddToCart = async (
+    bundle_id: number,
+    package_id: number,
+    packageName: string,
+  ) => {
+    try {
+      setAddingToCart(true);
+      // Check if session_id exists in localStorage
+      let sessionId = localStorage.getItem("session_id");
+
+      if (!sessionId) {
+        const initializeSessionResult =
+          await dispatch(initializeSession()).unwrap();
+        sessionId = initializeSessionResult.session_id;
+        console.log("Session initialized:", sessionId);
+      } else {
+        console.log("Using existing session_id from localStorage:", sessionId);
+      }
+
+      const result = await dispatch(
+        addItemToCart({ bundle_id, package_id }),
+      ).unwrap();
+
+      // Dispatch success alert with the response message
+      dispatch(
+        addAlert({
+          id: `Added ${packageName} to cart`,
+          headText: "Success",
+          subText: result.detail,
+          type: "success",
+          autoClose: true,
+        }),
+      );
+    } catch (error) {
+      // Dispatch error alert
+      dispatch(
+        addAlert({
+          id: `Error adding ${packageName} to cart`,
+          headText: "Error",
+          subText: (error as Error)?.message || "Failed to add item to cart",
+          type: "error",
+          autoClose: true,
+        }),
+      );
+      console.log(error);
+    } finally {
+      setAddingToCart(false);
+    }
+  };
 
   // Trigger fetching user order history on component mount
   useEffect(() => {
@@ -58,31 +112,8 @@ export default function OrderHistory() {
             : order.status !== "successful",
         );
 
-  // let h = {
-  //   transaction_id: 1,
-  //   trans_ref: "LrENIfKxcINtjXLMgtjvpUayOQAefALriyROeBDCQASHGEraWl",
-  //   amount: 250,
-  //   currency: "NGN",
-  //   status: "pending",
-  //   package: {
-  //     package_name: "Starter Package",
-  //     package_id: 1,
-  //     price: 250,
-  //     description: "Perfect for solo entrepreneurs",
-  //     bundle: {
-  //       bundle_name: "Ultimate Marketing",
-  //       bundle_id: 1,
-  //       bundle_image_link:
-  //         "https://sellcrea8api.nyc3.cdn.digitaloceanspaces.com/bundle_image/All-In-OneBundle_XTfZJWTQXXjcMVrXbeztxHgQuixmtv_bundle_image.png",
-  //     },
-  //   },
-  //   created_at: "2024-11-15T10:46:08.736886Z",
-  //   updated_at: "2024-11-15T10:46:08.736886Z",
-  //   package_tracking: null,
-  // };
-
   return (
-    <section className="container mx-auto mt-4 space-y-8">
+    <section className="container mt-4 space-y-8 md:mx-auto">
       {isLoading ? (
         <Loader />
       ) : filteredOrders?.length === 0 ? (
@@ -101,6 +132,8 @@ export default function OrderHistory() {
             <div key={index}>
               {/* Desktop view order */}
               <Order
+                handleAddToCart={handleAddToCart}
+                addingToCart={addingToCart}
                 package_id={order.package.package_id}
                 bundle_id={order.package.bundle.bundle_id}
                 packageName={`${order.package.bundle.bundle_name} (${order.package.package_name})`}
@@ -111,7 +144,7 @@ export default function OrderHistory() {
                 dateBought={moment(order.created_at).format("DD MMMM YYYY")}
                 dateCompleted={
                   order.status === "successful"
-                    ? new Date(order.updated_at).toLocaleDateString()
+                    ? moment(order.updated_at).format("DD MMMM YYYY")
                     : "-"
                 }
                 status={order.status === "successful" ? "Completed" : "Open"}
@@ -119,15 +152,19 @@ export default function OrderHistory() {
 
               {/* Mobile view order */}
               <MobileOrder
-                packageName={order.package.package_name}
+                handleAddToCart={handleAddToCart}
+                addingToCart={addingToCart}
+                package_id={order.package.package_id}
+                bundle_id={order.package.bundle.bundle_id}
+                packageName={`${order.package.bundle.bundle_name} (${order.package.package_name})`}
                 price={order.amount.toLocaleString("en-US", {
                   style: "currency",
                   currency: order.currency,
                 })}
-                dateBought={new Date(order.created_at).toLocaleDateString()}
+                dateBought={moment(order.created_at).format("DD MMMM YYYY")}
                 dateCompleted={
                   order.status === "successful"
-                    ? new Date(order.updated_at).toLocaleDateString()
+                    ? moment(order.updated_at).format("DD MMMM YYYY")
                     : "-"
                 }
                 status={order.status === "successful" ? "Completed" : "Open"}
