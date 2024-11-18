@@ -108,7 +108,7 @@ function InputFile({
             "!text-white !bg-grey500 !w-auto !py-2 !px-8",
             buttonStyles,
           )}
-          onClick={() => handleUpload(selectedFile)}
+          onClick={() => handleUpload && handleUpload(selectedFile)}
         />
       )}
     </div>
