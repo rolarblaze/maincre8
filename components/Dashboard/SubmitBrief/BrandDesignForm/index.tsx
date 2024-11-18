@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/redux/store";
-import React from "react";
+import React, { useState } from "react";
 import {
   brandDesignFormSchema,
   brandDesignInitialValues,
@@ -14,7 +14,7 @@ import InputFile from "@/components/Forms/InputFile";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import { FileUploadIcon } from "@/public/svgs";
 import FormFooter from "../shared/FormFooter";
-import { brandDesignBriefs } from "@/redux/myServices/features";
+import { brandDesignBriefs, uploadDocument } from "@/redux/myServices/features";
 
 
 function BrandDesignForm() {
@@ -29,12 +29,12 @@ function BrandDesignForm() {
     initialValues: brandDesignInitialValues,
     validationSchema: brandDesignFormSchema,
     onSubmit: async (
-      payload,
+     payload,
       
       { resetForm }: FormikHelpers<BrandDesignValues>,
     ) => {
       try {
-        console.log(payload)
+        console.log("valuesss", payload)
         const resp = await dispatch(brandDesignBriefs(payload));
          console.log("response", resp)
         resetForm();
@@ -64,18 +64,43 @@ function BrandDesignForm() {
   } = formik;
 
   // HANDLE FILE UPLOAD ONCHANGE
-  function onFileChange(file: File | null, name: string) {
-    console.log(file);
-
-    // Write your logic for api upload here. The name parameter above is used to distinguish the api name for different form upload name since they share the same footer.
-    //----------------
-
-    // Then after getting the upload link, you set it to formik via the name here
-    // -----------
-    // if(formik){
-    //   formik.setFieldValue(name, uploadLink)
-    // }
-  }
+  const onFileChange = async (file: File | null, fieldName: string) => {
+    if (file) {
+      const formData = new FormData();
+      formData.append("file", file);
+  
+      const actionResult = await dispatch(uploadDocument(formData));
+      if (uploadDocument.fulfilled.match(actionResult)) {
+        const fileLink = actionResult.payload?.file_link; // Adjust based on your API response
+        console.log("File link received:", fileLink);
+  
+        // Dynamically update the form field with the link
+        setFieldValue(fieldName, fileLink);
+  
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Success",
+            subText: "Brief successfully uploaded.",
+            type: "success",
+          })
+        );
+      } else if (uploadDocument.rejected.match(actionResult)) {
+        const errorMessage =
+          actionResult.error?.message || "Failed to upload Brief. Please try again.";
+        console.error("Error uploading file:", errorMessage);
+  
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Error",
+            subText: errorMessage,
+            type: "error",
+          })
+        );
+      }
+    }
+  };
   return (
     <form onSubmit={handleSubmit} className="noScrollbar w-full">
       <main className="w-full space-y-8">
@@ -119,9 +144,7 @@ function BrandDesignForm() {
                       id={`${data.name}Document`}
                       name={`${data.name}Document`}
                       icon={<FileUploadIcon />}
-                      onFileChange={(file: File | null) =>
-                        onFileChange(file, `${data.name}Document`)
-                      }
+                      onFileChange={(file: File | null) => onFileChange(file, `${data.name}Document`)}
                       showUploadButton={false}
                       parentClassNames="md:!flex-col"
                       buttonStyles="px-4"

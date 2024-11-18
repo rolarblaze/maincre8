@@ -13,8 +13,8 @@ function FormFooter({
   name?: string;
 }) {
   // HANDLE FILE UPLOAD ONCHANGE
-  function onFileChange(file: File | null, name: string) {
-    console.log(file);
+  function onFileChange(file: File | null) {
+    console.log('filesss', file);
 
     // Write your logic for api upload here. The name parameter above is used to distinguish the api name for different form upload name since they share the same footer.
     //----------------
@@ -32,17 +32,8 @@ function FormFooter({
         id={name as string}
         name={name}
         icon={<FileUploadIcon />}
-<<<<<<< HEAD
-        // showUploadButton= {false}
-        handleUpload={(value: File | null) =>
-          handleFileUpload && handleFileUpload()
-
-
-        }
-=======
         showUploadButton={false}
-        onFileChange={(file: File | null) => onFileChange(file, name as string)}
->>>>>>> 02b2f4ec9bd9f1938aa26513abda4efca26be574
+        onFileChange={(file: File | null) => onFileChange(file,)}
         parentClassNames="md:!flex-col"
         buttonStyles="px-4"
         // error={}

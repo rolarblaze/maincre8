@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { brandDesignBriefs } from "./features"; // Adjust the import based on your file structure
+import { brandDesignBriefs, uploadDocument } from "./features"; // Adjust the import based on your file structure
 import { BrandDesignValues } from "@/components/Dashboard/SubmitBrief/shared/formTypes/brandDesignTypes";
 
 export interface BrandDesignSliceState {
@@ -22,6 +22,7 @@ const initialState: BrandDesignSliceState = {
     brandDeliverable: [],
     brandKPI: [],
     brandCompetitors: "",
+    brandCompetitorsDocument: "",
     brandGuidelines: "",
   }
 };
@@ -46,7 +47,6 @@ export const BrandDesignSlice = createSlice({
       .addCase(
         brandDesignBriefs.fulfilled,
         (state, action: PayloadAction<any>) => {
-            console.log('fulfuied')
           state.isLoading = false;
           
           state.successMessage = action.payload.message; // Adjust based on your API response structure
@@ -55,7 +55,22 @@ export const BrandDesignSlice = createSlice({
       .addCase(brandDesignBriefs.rejected, (state, action: PayloadAction<any>) => {
         state.isLoading = false;
         state.errorMessage = action.payload; // This will be the error from handleAxiosError
-      });
+      })
+      //upload file briefs
+      .addCase(uploadDocument.fulfilled, (state, action: PayloadAction<any>) => {
+
+        console.log('uploaded', state.brandDesign)
+        // if (state.profile && state.profile.user.profile) {
+        //    state.profile.user.profile.profile_image_link = action.payload.file_link;
+        // }
+        state.isLoading = false;
+      })
+      .addCase(uploadDocument.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(uploadDocument.rejected, (state) => {
+        state.isLoading = false;
+      })
   },
 });
 
