@@ -1,8 +1,10 @@
+"use client";
+
 // components/Dashboard/Order.tsx
-import React from "react";
+import React, { useState } from "react";
 import { addAlert } from "@/redux/alerts";
 import { useAppDispatch } from "@/redux/store";
-import { addItemToCart } from "@/redux/cart/features";
+import { initializeSession, addItemToCart } from "@/redux/cart/features";
 
 export interface OrderProps {
   package_id: number;
@@ -23,10 +25,24 @@ const Order: React.FC<OrderProps> = ({
   dateCompleted,
   status,
 }) => {
+  const [addingToCart, setAddingToCart] = useState(false);
   const dispatch = useAppDispatch();
 
   const handleAddToCart = async () => {
     try {
+      setAddingToCart(true);
+      // Check if session_id exists in localStorage
+      let sessionId = localStorage.getItem("session_id");
+
+      if (!sessionId) {
+        const initializeSessionResult =
+          await dispatch(initializeSession()).unwrap();
+        sessionId = initializeSessionResult.session_id;
+        console.log("Session initialized:", sessionId);
+      } else {
+        console.log("Using existing session_id from localStorage:", sessionId);
+      }
+
       const result = await dispatch(
         addItemToCart({ bundle_id, package_id }),
       ).unwrap();
@@ -53,6 +69,8 @@ const Order: React.FC<OrderProps> = ({
         }),
       );
       console.log(error);
+    } finally {
+      setAddingToCart(false);
     }
   };
 
@@ -114,13 +132,14 @@ const Order: React.FC<OrderProps> = ({
                   : "bg-[#0F973D] text-white"
               }`}
             >
-              {status === "Completed" ? "Completed" : "Active" } 
+              {status === "Completed" ? "Completed" : "Active"}
             </div>
           </div>
           <div className="flex-1">
             <button
+              disabled={addingToCart}
               onClick={handleAddToCart}
-              className="ml-2 cursor-pointer p-1 text-xs font-semibold text-primary500"
+              className="ml-2 p-1 text-xs font-semibold text-primary500 disabled:cursor-not-allowed disabled:text-slate-300"
             >
               <span className="ml-1">+</span> Add to cart
             </button>
