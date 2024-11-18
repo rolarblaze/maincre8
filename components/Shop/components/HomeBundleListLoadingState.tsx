@@ -1,5 +1,5 @@
 const HomeBundleListLoadingState = () => {
-  return [1, 2, 3, 4, 4].map((dummy) => {
+  return [1, 2, 3, 4, 5].map((dummy) => {
     return (
       <div
         key={dummy}
