@@ -22,7 +22,7 @@ function FormFooter({
     // Then after getting the upload link, you set it to formik via the name here
     // -----------
     // if(formik){
-    //   formik.setFieldValue(name, uploadLink)
+    //   formik.setFieldValue(name, uploadLink) 
     // }
   }
   return (
