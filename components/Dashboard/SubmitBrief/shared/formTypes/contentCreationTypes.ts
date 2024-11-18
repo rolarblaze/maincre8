@@ -11,6 +11,7 @@ export interface ContentCreationValues {
   contentCTA: string;
   contentKPI: string[];
   contentTimeline: string;
+  document: string
 }
 export const contentCreationInitialValues = {
   contentType: [],
@@ -23,6 +24,7 @@ export const contentCreationInitialValues = {
   contentCTA: "",
   contentKPI: [],
   contentTimeline: "",
+  document: ""
 };
 
 export const contentCreationFormSchema = Yup.object().shape({
