@@ -8,6 +8,7 @@ export interface BrandDesignValues {
   brandDeliverable: string[];
   brandKPI: string[];
   brandCompetitors: string;
+  brandCompetitorsDocument: string;
   brandGuidelines: string;
 }
 
@@ -19,6 +20,7 @@ export const brandDesignInitialValues = {
   brandDeliverable: [],
   brandKPI: [],
   brandCompetitors: "",
+  brandCompetitorsDocument: "",
   brandGuidelines: "",
 };
 
@@ -40,6 +42,7 @@ export const brandDesignFormSchema = Yup.object().shape({
     .min(1, "At least one brand KPI option is required")
     .required("Please select a brand KPI option"),
   brandCompetitors: Yup.string().required("Please type in a competitor option"),
+  brandCompetitorsDocument: Yup.mixed().nullable().optional(),
   brandGuidelines: Yup.string().required(
     "Please type a brand guideline option",
   ),

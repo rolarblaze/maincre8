@@ -202,7 +202,7 @@ export default function Signup() {
           }
           onInputIconClick={togglePasswordVisibility}
           error={
-            formik.touched.password && formik.errors.password
+            formik.errors.password
               ? formik.errors.password
               : ""
           }
@@ -237,6 +237,9 @@ export default function Signup() {
             );
           })}
         </div>
+        {
+
+        }
 
         <Button
           label="Create account"

@@ -7,6 +7,7 @@ export interface DigitalMarketingValues {
   digitalPlatform: string[];
   digitalConsumer: string;
   digitalCampaignDur: string;
+  document: string;
 }
 
 export const digitalMarketingInitialValues = {
@@ -17,6 +18,7 @@ export const digitalMarketingInitialValues = {
   digitalPlatform: [],
   digitalConsumer: "",
   digitalCampaignDur: "",
+  document: "",
 };
 
 // Define the validation schema for your form

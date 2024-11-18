@@ -52,11 +52,19 @@ function AllInOneBundleForm() {
     setFieldValue,
   } = formik;
 
-  // HANLDE FILE UPLOAD
-  async function handleFileUpload(file: File | null) {
-    console.log("File gotten:", file);
-  }
+  // HANDLE FILE UPLOAD ONCHANGE
+  function onFileChange(file: File | null, name: string) {
+    console.log(file);
 
+    // Write your logic for api upload here. The name parameter above is used to distinguish the api name for different form upload name since they share the same footer.
+    //----------------
+
+    // Then after getting the upload link, you set it to formik via the name here
+    // -----------
+    // if(formik){
+    //   formik.setFieldValue(name, uploadLink)
+    // }
+  }
   return (
     <form onSubmit={handleSubmit} className="noScrollbar w-full">
       <main className="w-full space-y-8">
@@ -96,11 +104,11 @@ function AllInOneBundleForm() {
                   {data.isImage && (
                     <InputFile
                       label={<CustomFileLabel />}
-                      id={`document${data.name}`}
-                      name={`document${data.name}`}
+                      id={`${data.name}Document`}
+                      name={`${data.name}Document`}
                       icon={<FileUploadIcon />}
-                      handleUpload={(value: File | null) =>
-                        handleFileUpload && handleFileUpload(value)
+                      onFileChange={(file: File | null) =>
+                        onFileChange(file, `${data.name}Document`)
                       }
                       showUploadButton={false}
                       parentClassNames="md:!flex-col"
@@ -114,7 +122,7 @@ function AllInOneBundleForm() {
           );
         })}
       </main>
-      <FormFooter />
+      <FormFooter formik={formik} name="document" />
     </form>
   );
 }
