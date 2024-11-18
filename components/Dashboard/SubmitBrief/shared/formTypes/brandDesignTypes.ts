@@ -3,22 +3,24 @@ import * as Yup from "yup";
 export interface BrandDesignValues {
   brandCoreValue: string;
   brandMarket: string[];
-  brandPersonality: string[];
-  brandAsset: string[];
+  brandPersonality: string;
+  brandAsset: string;
   brandDeliverable: string[];
   brandKPI: string[];
   brandCompetitors: string;
+  brandCompetitorsDocument: string;
   brandGuidelines: string;
 }
 
 export const brandDesignInitialValues = {
   brandCoreValue: "",
   brandMarket: [],
-  brandPersonality: [],
-  brandAsset: [],
+  brandPersonality: "",
+  brandAsset: "",
   brandDeliverable: [],
   brandKPI: [],
   brandCompetitors: "",
+  brandCompetitorsDocument: "",
   brandGuidelines: "",
 };
 
@@ -29,14 +31,8 @@ export const brandDesignFormSchema = Yup.object().shape({
     .of(Yup.string().required())
     .min(1, "At least one brand market option is required")
     .required("Please select a brand market"),
-  brandPersonality: Yup.array()
-    .of(Yup.string().required())
-    .min(1, "At least one brand personality option is required")
-    .required("Please select a brand personality"),
-  brandAsset: Yup.array()
-    .of(Yup.string().required())
-    .min(1, "At least one brand asset opion is required")
-    .required("Please select a brand asset"),
+  brandPersonality: Yup.string().required("Please select a brand personality"),
+  brandAsset: Yup.string().required("Please select a brand asset"),
   brandDeliverable: Yup.array()
     .of(Yup.string().required())
     .min(1, "At least one brand deliverable option is required")
@@ -46,6 +42,7 @@ export const brandDesignFormSchema = Yup.object().shape({
     .min(1, "At least one brand KPI option is required")
     .required("Please select a brand KPI option"),
   brandCompetitors: Yup.string().required("Please type in a competitor option"),
+  brandCompetitorsDocument: Yup.mixed().nullable().optional(),
   brandGuidelines: Yup.string().required(
     "Please type a brand guideline option",
   ),

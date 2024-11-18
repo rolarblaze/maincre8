@@ -12,6 +12,17 @@ const NewNavbar = () => {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
+  const navlink = [
+    {
+      name: "Pricing",
+      // link: "/shop",
+      link: "/shop/2",
+    },
+    {
+      name: "FAQs",
+      link: "/faqs",
+    },
+  ];
 
   const hide = hideComponent(pathname);
   const authenticated = pathname === "/checkout";

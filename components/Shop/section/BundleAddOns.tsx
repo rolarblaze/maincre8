@@ -1,7 +1,6 @@
 import { AddOnsType } from "@/redux/shop/interface";
 import Image from "next/image";
 
-
 type BundleAddOnsPropsType = {
   title: string;
   addOns: AddOnsType[];
@@ -42,8 +41,8 @@ const BundleAddOns = ({ title, addOns }: BundleAddOnsPropsType) => {
           {addOns.map((addon) => {
             return (
               <div
-                key={addon.add_ons_name}
-                className="flex aspect-square w-[23%] flex-col items-center justify-center gap-10 rounded-2xl bg-white xs:max-md:min-w-[70vw] xs:max-md:first:ml-5 xs:max-md:last:mr-5"
+                key={addon.add_ons_id}
+                className="xs:max-md:min-w-[70vw flex aspect-square min-h-[200px] w-[23%] min-w-[23%] flex-col items-center justify-between rounded-2xl bg-white px-5 py-10 xs:max-md:max-h-[300px] xs:max-md:min-w-[300px] xs:max-md:first:ml-5 xs:max-md:last:mr-5"
               >
                 <div className="center mx-auto aspect-square w-1/3 rounded-full bg-[#E8F1FC]">
                   {/* control the size on the figure tag to control the size of the rendered image */}
@@ -56,14 +55,14 @@ const BundleAddOns = ({ title, addOns }: BundleAddOnsPropsType) => {
                     />
                   </figure>
                 </div>
-                <div className="space-y-2">
-                  <p className="text-center text-xs font-semibold uppercase leading-4">
+                <div className="space-y-1">
+                  <p className="text-center text-xs font-semibold uppercase">
                     {addon.add_ons_name}
                   </p>
-                  <p className="text-center text-xs font-normal leading-7 text-[#718096]">
+                  <p className="text-center text-xs font-normal text-[#718096]">
                     {addon.description}
                   </p>
-                  <p className="text-center text-lg font-semibold leading-5 text-[#111827]">
+                  <p className="text-center text-lg font-semibold text-[#111827]">
                     {addon.price}
                   </p>
                 </div>

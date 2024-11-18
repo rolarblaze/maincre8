@@ -1,13 +1,13 @@
 "use client";
 import Image from "next/image";
-import { useParams, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { changePageData } from "@/redux/shop";
 import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { PageViewData } from "@/redux/shop/interface";
 import bundleCardsDetails from "../data/bundleCardDetails";
 import ShopBundleListLoadingState from "../components/ShopBundleListLoadingState";
 
-const BundleListCardOptions = ({redirect} : {redirect: boolean}) => {
+const BundleListCardOptions = ({ redirect }: { redirect: boolean }) => {
   const router = useRouter();
   const dispatch = useAppDispatch();
   const bundlesData = useAppSelector(
@@ -22,13 +22,13 @@ const BundleListCardOptions = ({redirect} : {redirect: boolean}) => {
   // function to handle updating the page bundle
   const updatePageViewData = (id: string) => {
     dispatch(changePageData(id));
-    redirect && router.push(`/shop/${id}`)
+    redirect && router.push(`/shop/${id}`);
   };
 
   return (
     // DESKTOP FIRST STYLING WAS USED HERE
     <section className={`${redirect && "sticky top-20"}`}>
-      <ul className="no-scrollbar flex w-full justify-between gap-4 xs:max-md:sticky xs:max-md:top-60 xs:max-md:gap-5 xs:max-md:overflow-auto bg-whit backdrop-blur-md">
+      <ul className="no-scrollbar bg-whit flex w-full justify-between gap-4 backdrop-blur-md xs:max-md:sticky xs:max-md:top-60 xs:max-md:gap-5 xs:max-md:overflow-auto">
         {bundlesData.length === 0 ? (
           <ShopBundleListLoadingState />
         ) : (
@@ -60,7 +60,7 @@ const BundleListCardOptions = ({redirect} : {redirect: boolean}) => {
                     } w-1/2 px-2 text-left text-base transition-all`}
                   >
                     {bundle.bundle_name.split(" ").map((text) => (
-                      <li key={text} className="xs:max-md:text-sm ">
+                      <li key={text} className="xs:max-md:text-sm">
                         <p>{text}</p>
                       </li>
                     ))}

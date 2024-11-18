@@ -2,27 +2,29 @@ import * as Yup from "yup";
 
 export interface ContentCreationValues {
   contentType: string[];
-  contentGoal: string[];
+  contentGoal: string;
   contentAudience: string[];
-  contentTone: string[];
+  contentTone: string;
   contentKeywords: string;
-  contentLength: string[];
+  contentLength: string;
   contentSpecificGuidelines: string;
-  contentCTA: string[];
+  contentCTA: string;
   contentKPI: string[];
-  contentTimeline: string[];
+  contentTimeline: string;
+  document: string
 }
 export const contentCreationInitialValues = {
   contentType: [],
-  contentGoal: [],
+  contentGoal: "",
   contentAudience: [],
-  contentTone: [],
+  contentTone: "",
   contentKeywords: "",
-  contentLength: [],
+  contentLength: "",
   contentSpecificGuidelines: "",
-  contentCTA: [],
+  contentCTA: "",
   contentKPI: [],
-  contentTimeline: [],
+  contentTimeline: "",
+  document: ""
 };
 
 export const contentCreationFormSchema = Yup.object().shape({
@@ -31,40 +33,27 @@ export const contentCreationFormSchema = Yup.object().shape({
     .of(Yup.string().required())
     .min(1, "At least one content type option is required")
     .required("Please select a content type"),
-  contentGoal: Yup.array()
-    .of(Yup.string().required())
-    .min(1, "At least one content goal option is required")
-    .required("Please select a content goal"),
+  contentGoal: Yup.string().required("Please select a content goal"),
   contentAudience: Yup.array()
     .of(Yup.string().required())
     .min(1, "At least one content audience opion is required")
     .required("Please select a content audience"),
-  contentTone: Yup.array()
-    .of(Yup.string().required())
-    .min(1, "At least one content tone option is required")
-    .required("Please select a content tone option"),
+  contentTone: Yup.string().required("Please select a content tone option"),
   contentKeywords: Yup.string().required(
     "Please select a content keyword option",
   ),
-  contentLength: Yup.array()
-    .of(Yup.string().required())
-    .min(1, "At least one content length option is required")
-    .required("Please select a content length option"),
+  contentLength: Yup.string().required("Please select a content length option"),
   contentSpecificGuidelines: Yup.string().required(
     "Please select a content guideline option",
   ),
-  contentCTA: Yup.array()
-    .of(Yup.string().required())
-    .min(1, "At least one content CTA option is required")
-    .required("Please select a content CTA option"),
+  contentCTA: Yup.string().required("Please select a content CTA option"),
   contentKPI: Yup.array()
     .of(Yup.string().required())
     .min(1, "At least one content KPI option is required")
     .required("Please select a content KPI option"),
-  contentTimeline: Yup.array()
-    .of(Yup.string().required())
-    .min(1, "At least one content timeline option is required")
-    .required("Please select a content timeline option"),
+  contentTimeline: Yup.string().required(
+    "Please select a content timeline option",
+  ),
 
   // ATTACH A FILE
   document: Yup.mixed().nullable().optional(),

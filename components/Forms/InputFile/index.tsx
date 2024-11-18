@@ -20,7 +20,7 @@ interface InputFileProps {
   error?: string | boolean | ReactNode;
   name?: string;
   id: string;
-  handleUpload: (value: File | null) => void;
+  handleUpload?: (value: File | null) => void;
   // touched?: boolean;
   parentClassNames?: string;
   buttonStyles?: string;
@@ -108,7 +108,7 @@ function InputFile({
             "!text-white !bg-grey500 !w-auto !py-2 !px-8",
             buttonStyles,
           )}
-          onClick={() => handleUpload(selectedFile)}
+          onClick={() => handleUpload && handleUpload(selectedFile)}
         />
       )}
     </div>
