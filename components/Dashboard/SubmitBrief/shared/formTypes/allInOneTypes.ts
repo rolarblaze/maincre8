@@ -6,6 +6,7 @@ export interface AllInOneValues {
   allInOneKPI: string[];
   allInOnePersonality: string[];
   allInOneBrandColor: string;
+  allInOneBrandColorDocument: string;
   allInOneBrandAdmire: string;
   allInOnePlatform: string[];
   allInOneExistingMarket: string;
@@ -21,6 +22,7 @@ export const allInOneInitialValues: AllInOneValues = {
   allInOneKPI: [],
   allInOnePersonality: [],
   allInOneBrandColor: "",
+  allInOneBrandColorDocument: "",
   allInOneBrandAdmire: "",
   allInOnePlatform: [],
   allInOneExistingMarket: "",
@@ -51,6 +53,8 @@ export const allInOneFormSchema = Yup.object().shape({
     .min(1, "At least one personality option is required")
     .required("Please select a personality option"),
   allInOneBrandColor: Yup.string().required("Please input a brand color."),
+  // FILE
+  allInOneBrandColorDocument:Yup.mixed().nullable().optional(),
   allInOneBrandAdmire: Yup.string().required(
     "Please input a brand admiration.",
   ),
