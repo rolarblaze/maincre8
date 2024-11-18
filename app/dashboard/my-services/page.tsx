@@ -62,7 +62,7 @@ const MyServices = () => {
 
   return (
     <>
-      <main className="absolute top-1/4 right-[35%] gap-10">
+      <main className="absolute right-[35%] top-1/4 gap-10">
         <Button
           label="Toggle Service"
           classNames="w-auto py-2 px-4 hover:bg-primary500"

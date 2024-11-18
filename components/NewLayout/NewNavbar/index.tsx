@@ -14,7 +14,7 @@ const NewNavbar = () => {
     {
       name: "Pricing",
       // link: "/shop",
-      link: "/shop/3",
+      link: "/shop/2",
     },
     {
       name: "FAQs",

@@ -13,7 +13,7 @@ import WhyChooseSellCre8 from "@/components/LandingPage/Sections/WhyChooseSellCr
 import IndustryLeadingExperts from "@/components/NewPages/LandingPage/sections/IndustryLeadingExperts";
 import ProudlyMadeSection from "@/components/NewPages/LandingPage/sections/ProudlyMadeSection";
 
-const Home = () => {;
+const Home = () => {
   return (
     <PageLayout>
       <HeroSection />

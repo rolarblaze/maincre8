@@ -5,10 +5,10 @@ export interface GraphicsDesignValues {
   graphicsColorPalette: string;
   graphicsTargetAud: string[];
   graphicsPrimaryMessage: string;
-  graphicsTone: string[];
+  graphicsTone: string;
   graphicsDeliverable: string[];
   graphicsReferences: string;
-  graphicsTimeline: string[];
+  graphicsTimeline: string;
 }
 
 export const graphicsDesignInitialValues = {
@@ -16,10 +16,10 @@ export const graphicsDesignInitialValues = {
   graphicsColorPalette: "",
   graphicsTargetAud: [],
   graphicsPrimaryMessage: "",
-  graphicsTone: [],
+  graphicsTone: "",
   graphicsDeliverable: [],
   graphicsReferences: "",
-  graphicsTimeline: [],
+  graphicsTimeline: "",
 };
 
 export const graphicsDesignFormSchema = Yup.object().shape({
@@ -34,20 +34,14 @@ export const graphicsDesignFormSchema = Yup.object().shape({
     .min(1, "At least one target audience option is required")
     .required("Please select a target audience"),
   graphicsPrimaryMessage: Yup.string().required("Please input a content tone"),
-  graphicsTone: Yup.array()
-    .of(Yup.string().required())
-    .min(1, "At least one graphics tone option is required")
-    .required("Please select a graphics tone option"),
+  graphicsTone: Yup.string().required("Please select a graphics tone option"),
 
   graphicsDeliverable: Yup.array()
     .of(Yup.string().required())
     .min(1, "At least one deliverable option is required")
     .required("Please select a deliverable option"),
   graphicsReferences: Yup.string().required("Please input a reference."),
-  graphicsTimeline: Yup.array()
-    .of(Yup.string().required())
-    .min(1, "At least one timeline option is required")
-    .required("Please select a timeline option"),
+  graphicsTimeline: Yup.string().required("Please select a timeline option"),
 
   // ATTACH A FILE
   document: Yup.mixed().nullable().optional(),
