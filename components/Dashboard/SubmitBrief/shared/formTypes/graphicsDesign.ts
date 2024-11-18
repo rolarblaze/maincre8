@@ -8,6 +8,7 @@ export interface GraphicsDesignValues {
   graphicsTone: string;
   graphicsDeliverable: string[];
   graphicsReferences: string;
+  graphicsReferencesDocument: string;
   graphicsTimeline: string;
 }
 
@@ -19,6 +20,7 @@ export const graphicsDesignInitialValues = {
   graphicsTone: "",
   graphicsDeliverable: [],
   graphicsReferences: "",
+  graphicsReferencesDocument: "",
   graphicsTimeline: "",
 };
 
@@ -41,6 +43,7 @@ export const graphicsDesignFormSchema = Yup.object().shape({
     .min(1, "At least one deliverable option is required")
     .required("Please select a deliverable option"),
   graphicsReferences: Yup.string().required("Please input a reference."),
+  graphicsReferencesDocument: Yup.mixed().nullable().optional(),
   graphicsTimeline: Yup.string().required("Please select a timeline option"),
 
   // ATTACH A FILE

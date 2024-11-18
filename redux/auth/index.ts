@@ -92,7 +92,7 @@ export const AuthSlice = createSlice({
         signUpIndividual.fulfilled,
         (state: AuthSliceState, action: PayloadAction<any>) => {
           const { otp, message } = action.payload;
-          state.otpMessage = message;
+          state.otpMessage = otp;
           state.isLoading = false;
         }
       )

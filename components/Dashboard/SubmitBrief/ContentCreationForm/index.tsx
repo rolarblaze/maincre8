@@ -52,10 +52,6 @@ function ContentCreationForm() {
     setFieldValue,
   } = formik;
 
-  // HANLDE FILE UPLOAD
-  async function handleFileUpload(file: File | null) {
-    console.log("File gotten:", file);
-  }
   return (
     <form onSubmit={handleSubmit} className="noScrollbar w-full">
       <main className="w-full space-y-8">
@@ -99,7 +95,7 @@ function ContentCreationForm() {
           );
         })}
       </main>
-      <FormFooter />
+      <FormFooter name="document" formik={formik} />
     </form>
   );
 }

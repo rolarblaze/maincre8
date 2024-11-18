@@ -32,7 +32,7 @@ const SignupSchema = Yup.object().shape({
       "is-password-matching",
       "Password doesn't match criteria",
       (value) => {
-        validatePassword(value as string).some(
+        return !validatePassword(value as string).some(
           (criterion) => criterion.isValid === false,
         );
       },
@@ -65,6 +65,7 @@ export default function Signup() {
     },
     validationSchema: SignupSchema,
     onSubmit: async (values) => {
+      // Ensure the form is being handled
       await handleIndividualSignUp(values, dispatch);
     },
   });
@@ -81,22 +82,36 @@ export default function Signup() {
     payload: SignUpFormValues,
     dispatch: AppDispatch,
   ) => {
-    const actionResult = await dispatch(signUpIndividual(payload));
+    try {
+      const actionResult = await dispatch(signUpIndividual(payload));
 
-    if (signUpIndividual.fulfilled.match(actionResult)) {
-      sessionStorage.setItem("userEmail", payload.email);
+      if (signUpIndividual.fulfilled.match(actionResult)) {
+        sessionStorage.setItem("userEmail", payload.email);
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Success",
+            subText:
+              "Successfully registered as an individual. Please check your email for verification.",
+            type: "success",
+          }),
+        );
+        router.push("/email-verify");
+      } else {
+        handleSignUpError(actionResult, dispatch);
+      }
+    } catch (error) {
+      console.error("Signup error:", error);
+      // Handle general errors
       dispatch(
         addAlert({
           id: "",
-          headText: "Success",
+          headText: "Error",
           subText:
-            "Successfully registered as an individual. Please check your email for verification.",
-          type: "success",
+            "An unexpected error occurred during registration. Please try again.",
+          type: "error",
         }),
       );
-      router.push("/email-verify");
-    } else {
-      handleSignUpError(actionResult, dispatch);
     }
   };
 
@@ -187,7 +202,7 @@ export default function Signup() {
           }
           onInputIconClick={togglePasswordVisibility}
           error={
-            formik.touched.password && formik.errors.password
+            formik.errors.password
               ? formik.errors.password
               : ""
           }
@@ -222,6 +237,9 @@ export default function Signup() {
             );
           })}
         </div>
+        {
+
+        }
 
         <Button
           label="Create account"
