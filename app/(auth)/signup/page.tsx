@@ -27,7 +27,17 @@ const SignupSchema = Yup.object().shape({
   email: Yup.string()
     .email("Invalid email")
     .required("Email address is required"),
-  password: Yup.string().required("Password is required")
+  password: Yup.string()
+    .test(
+      "is-password-matching",
+      "Password doesn't match criteria",
+      (value) => {
+        return !validatePassword(value as string).some(
+          (criterion) => criterion.isValid === false,
+        );
+      },
+    )
+    .required("Password is required"),
 });
 
 export default function Signup() {
@@ -55,6 +65,7 @@ export default function Signup() {
     },
     validationSchema: SignupSchema,
     onSubmit: async (values) => {
+      // Ensure the form is being handled
       await handleIndividualSignUp(values, dispatch);
     },
   });
@@ -71,22 +82,36 @@ export default function Signup() {
     payload: SignUpFormValues,
     dispatch: AppDispatch,
   ) => {
-    const actionResult = await dispatch(signUpIndividual(payload));
+    try {
+      const actionResult = await dispatch(signUpIndividual(payload));
 
-    if (signUpIndividual.fulfilled.match(actionResult)) {
-      sessionStorage.setItem("userEmail", payload.email);
+      if (signUpIndividual.fulfilled.match(actionResult)) {
+        sessionStorage.setItem("userEmail", payload.email);
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Success",
+            subText:
+              "Successfully registered as an individual. Please check your email for verification.",
+            type: "success",
+          }),
+        );
+        router.push("/email-verify");
+      } else {
+        handleSignUpError(actionResult, dispatch);
+      }
+    } catch (error) {
+      console.error("Signup error:", error);
+      // Handle general errors
       dispatch(
         addAlert({
           id: "",
-          headText: "Success",
+          headText: "Error",
           subText:
-            "Successfully registered as an individual. Please check your email for verification.",
-          type: "success",
+            "An unexpected error occurred during registration. Please try again.",
+          type: "error",
         }),
       );
-      router.push("/email-verify");
-    } else {
-      handleSignUpError(actionResult, dispatch);
     }
   };
 
