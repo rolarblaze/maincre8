@@ -20,7 +20,7 @@ interface InputFileProps {
   error?: string | boolean | ReactNode;
   name?: string;
   id: string;
-  handleUpload: (value: File | null) => void;
+  handleUpload?: (value: File | null) => void;
   // touched?: boolean;
   parentClassNames?: string;
   buttonStyles?: string;
