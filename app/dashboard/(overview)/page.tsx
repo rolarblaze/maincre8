@@ -1,80 +1,82 @@
 "use client";
-// import { useEffect } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import {
-  // Button,
-  // FullLoader,
+  Button,
+  FullLoader,
   Loader,
-  // ServiceCard,
-  // EmptyState,
+  ServiceCard,
+  EmptyState,
 } from "@/components";
-// import BarChart from "@/components/Dashboard/BarChart";
-// import UpcomingAppointment from "@/components/Dashboard/UpcomingAppointment";
-// import { getUserOrderHistory } from "@/redux/servicesTracker/features";
-// import { fetchLatestAppointments } from "@/redux/order/features";
-// import { fetchActivityStatistics } from "@/redux/auth/features";
-// import { getServices } from "@/redux/services/features";
-// import { BulbIcon } from "@/public/icons";
-import {
-  // useAppDispatch,
-  useAppSelector,
-} from "@/redux/store";
+import BarChart from "@/components/Dashboard/BarChart";
+import UpcomingAppointment from "@/components/Dashboard/UpcomingAppointment";
+import { getUserOrderHistory } from "@/redux/servicesTracker/features";
+import { fetchLatestAppointments } from "@/redux/order/features";
+import { fetchActivityStatistics } from "@/redux/auth/features";
+import { getBundles } from "@/redux/shop/features";
+import { BulbIcon } from "@/public/icons";
+import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 
-import { getBackgroundClass, getImage } from "./_helperFunc";
-import { packages } from "./_constants";
 import Image from "next/image";
+import Link from "next/link";
+import { getBundlesClass } from "@/components/NewPages/LandingPage/sections/PackagesSection/helperFunc";
 
 const Overview = () => {
   const router = useRouter();
-  // const dispatch = useAppDispatch();
-  // const { services, isLoading, error } = useAppSelector(
-  //   (state) => state.service,
-  // );
-  // const { orderHistory } = useAppSelector((state) => state.services);
+  const dispatch = useAppDispatch();
+  const { services, isLoading, error } = useAppSelector(
+    (state) => state.service,
+  );
+  const { orderHistory } = useAppSelector((state) => state.services);
   const { isLoadingProfile, profile } = useAppSelector((state) => state.auth);
-  // const { appointments, isApointmentLoading } = useAppSelector(
-  //   (state) => state.order,
-  // );
+  const { appointments, isApointmentLoading } = useAppSelector(
+    (state) => state.order,
+  );
+  const bundlesData = useAppSelector(
+    (state: RootState) => state.pageViewData.allShopBundles,
+  );
 
-  // useEffect(() => {
-  //   dispatch(getServices());
-  //   dispatch(getUserOrderHistory());
-  //   dispatch(fetchLatestAppointments());
-  //   dispatch(fetchActivityStatistics());
-  // }, [dispatch]);
+  useEffect(() => {
+    if (bundlesData.length === 0) {
+      dispatch(getBundles());
+    }
+    dispatch(getUserOrderHistory());
+    dispatch(fetchLatestAppointments());
+    dispatch(fetchActivityStatistics());
+  }, [dispatch]);
 
   // Extract the activity statistics from the profile
-  // const { active_services, completed_services, total_services_bought } = profile
-  //   .user.activityStatistics || {
-  //   active_services: 0,
-  //   completed_services: 0,
-  //   total_services_bought: 0,
-  // };
+  const { active_services, completed_services, total_services_bought } = profile
+    .user.activityStatistics || {
+    active_services: 0,
+    completed_services: 0,
+    total_services_bought: 0,
+  };
 
   // Updated BarChart data using fetched activity statistics
-  // const barChartData = {
-  //   labels: ["Active Services", "Completed Services", "Total Services Bought"],
-  //   dataValues: [active_services, completed_services, total_services_bought],
-  // };
+  const barChartData = {
+    labels: ["Active Services", "Completed Services", "Total Services Bought"],
+    dataValues: [active_services, completed_services, total_services_bought],
+  };
 
   // Logging for debugging purposes
-  // console.log("Bar Chart Data: ", barChartData);
+  console.log("Bar Chart Data: ", barChartData);
 
-  // const bundleColors: { [key: string]: string } = {};
-  // const colors = ["#620FA3", "#006AA5", "#A30F44"];
-  // services.forEach((service, index) => {
-  //   service.bundles.forEach((bundle) => {
-  //     if (!bundleColors[bundle.bundle_name]) {
-  //       bundleColors[bundle.bundle_name] = colors[index % colors.length];
-  //     }
-  //   });
-  // });
+  const bundleColors: { [key: string]: string } = {};
+  const colors = ["#620FA3", "#006AA5", "#A30F44"];
+  services.forEach((service, index) => {
+    service.bundles.forEach((bundle) => {
+      if (!bundleColors[bundle.bundle_name]) {
+        bundleColors[bundle.bundle_name] = colors[index % colors.length];
+      }
+    });
+  });
 
-  // if (error) {
-  //   return <div>Error: {error}</div>;
-  // }
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
 
-  if (isLoadingProfile) {
+  if (isLoadingProfile || bundlesData.length === 0) {
     return (
       <div className="flex items-center justify-center">
         <Loader />
@@ -82,13 +84,18 @@ const Overview = () => {
     );
   }
 
-  // const profileIncomplete =
-  //   !profile.user.profile?.address ||
-  //   !profile.user.profile?.country ||
-  //   !profile.user.profile?.state ||
-  //   !profile.user.profile?.phone_number;
+  const profileIncomplete =
+    !profile.user.profile?.address ||
+    !profile.user.profile?.country ||
+    !profile.user.profile?.state ||
+    !profile.user.profile?.phone_number;
 
-  // const hasTransactions = orderHistory && orderHistory?.length > 0;
+  const hasTransactions = orderHistory && orderHistory?.length > 0;
+  const showAppointments = !(!appointments || appointments.length === 0);
+  const showServices = !(
+    active_services + completed_services + total_services_bought ===
+    0
+  );
 
   return (
     <div className="noScrollbar container mx-auto flex flex-col overflow-y-scroll pb-10 font-manrope [&>*]:px-6">
@@ -101,36 +108,50 @@ const Overview = () => {
 
       <hr />
 
-      <section className="space-y-4 pt-10">
-        <h3 className="text-2xl font-bold leading-8 text-grey900">
-          Choose a Package to Get Started
-        </h3>
 
-        <div className="flex flex-wrap gap-6">
-          {packages.map(({ id, name, text }) => (
-            <div
-              key={id}
-              className="min-w-80 overflow-hidden rounded-lg border border-ash"
-            >
-              <figure
-                className={`relative min-h-60 w-full ${getBackgroundClass(name)}`}
-              >
-                <Image
-                  src={getImage(name)}
-                  alt={name}
-                  fill
-                  className={`${name === "Graphic Design Packages" && "px-4 pt-2"} ${name === "Content Writing Packages" && "pl-5"} ${name === "Digital Marketing Packages" && "pl-4"} ${name === "All In One Bundle" && "px-6"}`}
-                />
-              </figure>
+      {/* Chose a package to get started */}
+      {!hasTransactions && (
+        <section className="space-y-4 pt-10">
+          <h3 className="text-2xl font-bold leading-8 text-grey900">
+            Choose a Package to Get Started
+          </h3>
 
-              <div className="p-4 font-manrope *:leading-[150%]">
-                <h4 className="text-lg font-semibold text-grey900">{name}</h4>
-                <p className="text-sm font-medium text-grey500">{text}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+          <div className="flex flex-wrap gap-6 px-6 py-10 xs:max-md:px-2">
+            {bundlesData.map(
+              ({ bundle_id, bundle_image_link, bundle_name, description }) => {
+                return (
+                  <Link
+                    key={bundle_id}
+                    href={`/dashboard/services/${bundle_id}`}
+                    className={`group w-[30%] min-w-60 overflow-hidden rounded-lg border border-ash xs:max-md:w-[45%] xs:max-md:min-w-64 ${getBundlesClass[bundle_id - 1].tabClass}`}
+                  >
+                    <figure
+                      className={`relative min-h-60 w-full ${getBundlesClass[bundle_id - 1].bgClass}`}
+                    >
+                      <Image
+                        src={bundle_image_link as string}
+                        alt={description}
+                        fill={true}
+                        priority
+                        className="object-cover"
+                      />
+                    </figure>
+
+                    <div className="p-4 font-manrope *:leading-[150%]">
+                      <h4 className="text-lg font-semibold text-grey900">
+                        {bundle_name}
+                      </h4>
+                      <p className="text-sm font-medium text-grey500">
+                        {description}
+                      </p>
+                    </div>
+                  </Link>
+                );
+              },
+            )}
+          </div>
+        </section>
+      )}
 
       {/* <div
         className="ml-auto mt-8 hidden w-fit cursor-pointer items-center gap-2 rounded-lg border-none bg-primary500 !px-3 !py-2 text-white md:flex"
@@ -166,7 +187,9 @@ const Overview = () => {
           )}
       </div> */}
 
-      {/* <section className="flex flex-col gap-10">
+      
+      {/* Services and Appointments Activity */}
+      <section className="flex flex-col gap-10">
         <div className="noScrollbar grid place-items-center gap-6 overflow-y-auto md:grid-cols-2 md:place-items-start lg:grid-cols-3">
           {hasTransactions ? (
             orderHistory
@@ -215,52 +238,61 @@ const Overview = () => {
         </div>
 
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-          <h3 className="col-span-2 text-2xl font-bold text-grey900">
-            Activity
-          </h3>
-          <div className="col-span-2 flex flex-col justify-between rounded-lg bg-white px-6 py-4 shadow-lg md:col-span-1">
-            <h4 className="border-b border-grey200 pb-4 text-lg font-semibold text-grey900">
-              My Services
-            </h4>
-            <div>
-              <BarChart
-                labels={barChartData.labels}
-                dataValues={barChartData.dataValues}
-              />
+          {(showServices || showAppointments) && (
+            <h3 className="col-span-2 text-2xl font-bold text-grey900">
+              Activity
+            </h3>
+          )}
+          {showServices && (
+            <div className="col-span-2 flex flex-col justify-between rounded-lg bg-white px-6 py-4 shadow-lg md:col-span-1">
+              <h4 className="border-b border-grey200 pb-4 text-lg font-semibold text-grey900">
+                My Services
+              </h4>
+              <div>
+                <BarChart
+                  labels={barChartData.labels}
+                  dataValues={barChartData.dataValues}
+                />
+              </div>
             </div>
-          </div>
+          )}
 
-          <div className="flex flex-col gap-4 rounded-lg bg-white px-6 py-4 shadow-lg">
-            <h4 className="border-b border-grey200 pb-4 text-lg font-semibold text-grey900">
-              Upcoming Appointments
-            </h4>
-            <div className="flex flex-col">
-              {isApointmentLoading ? (
-                <div className="flex items-center justify-center">
-                  <Loader />
-                </div>
-              ) : !appointments || appointments.length === 0 ? (
-                <p className="flex items-center justify-center py-10">
-                  No upcoming appointments
-                </p>
-              ) : (
-                appointments?.map((app, idx) => (
-                  <UpcomingAppointment
-                    key={idx}
-                    callType={app.event_name}
-                    desc={app.product_name}
-                    date={new Date(app.event_date).toLocaleDateString("en-US", {
-                      day: "2-digit",
-                      month: "long",
-                      year: "numeric",
-                    })}
-                  />
-                ))
-              )}
+          {showAppointments && (
+            <div className="flex flex-col gap-4 rounded-lg bg-white px-6 py-4 shadow-lg">
+              <h4 className="border-b border-grey200 pb-4 text-lg font-semibold text-grey900">
+                Upcoming Appointments
+              </h4>
+              <div className="flex flex-col">
+                {isApointmentLoading ? (
+                  <div className="flex items-center justify-center">
+                    <Loader />
+                  </div>
+                ) : !appointments || appointments.length === 0 ? (
+                  <p className="flex items-center justify-center py-10">
+                    No upcoming appointments
+                  </p>
+                ) : (
+                  appointments?.map((app, idx) => (
+                    <UpcomingAppointment
+                      key={idx}
+                      callType={app.event_name}
+                      desc={app.product_name}
+                      date={new Date(app.event_date).toLocaleDateString(
+                        "en-US",
+                        {
+                          day: "2-digit",
+                          month: "long",
+                          year: "numeric",
+                        },
+                      )}
+                    />
+                  ))
+                )}
+              </div>
             </div>
-          </div>
+          )}
         </div>
-      </section> */}
+      </section>
     </div>
   );
 };
