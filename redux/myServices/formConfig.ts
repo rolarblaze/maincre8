@@ -70,6 +70,7 @@ export const formConfig: {
       target_market: convertToString(payload.brandMarket),
       brand_tone: convertToString(payload.brandPersonality),
       brand_assets: convertToString(payload.brandAsset),
+      brandUSP: convertToString(payload.brandUSP),
       key_deliverables: convertToString(payload.brandDeliverable),
       kpis: convertToString(payload.brandKPI),
       reference_brands: convertToString(payload.brandCompetitors),
