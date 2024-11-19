@@ -54,7 +54,7 @@ export default function Signup() {
       setUserTokenCookie(accessToken);
       router.push("/dashboard");
     }
-  }, [router]);
+  }, [router])
 
   const formik = useFormik<SignUpFormValues>({
     initialValues: {

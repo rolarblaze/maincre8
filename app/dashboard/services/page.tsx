@@ -1,38 +1,60 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
-import { packages } from "./_constants";
-import { getBackgroundClass, getImage } from "./_helperFunc";
+import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
+import { useEffect } from "react";
+import { getBundles } from "@/redux/shop/features";
+import { getBundlesClass } from "@/components/NewPages/LandingPage/sections/PackagesSection/helperFunc";
 
 const Services = () => {
+  let dispatch = useAppDispatch();
+
+  const bundlesData = useAppSelector(
+    (state: RootState) => state.pageViewData.allShopBundles,
+  );
+
+  useEffect(() => {
+     // if the redux store for all bundles data is empty, fetch from endpoint
+    if (bundlesData.length === 0) {
+      dispatch(getBundles());
+    }
+  }, []);
+
   return (
     <div className="flex flex-wrap gap-6 px-6 py-10">
-      {packages.map(({ id, name, text }) => {
-        const packageRoute = name.toLowerCase().replace(/\s+/g, "-");
-        return (
-          <Link
-            key={id}
-            href={`/dashboard/services/${packageRoute}`}
-            className="min-w-80 overflow-hidden rounded-lg border border-ash"
-          >
-            <figure
-              className={`relative min-h-60 w-full ${getBackgroundClass(name)}`}
+      {bundlesData.map(
+        ({ bundle_id, bundle_image_link, bundle_name, description }) => {
+          return (
+            <Link
+              key={bundle_id}
+              href={`/dashboard/services/${bundle_id}`}
+              className={`group w-[30%] overflow-hidden rounded-lg border border-ash ${getBundlesClass[bundle_id - 1].tabClass}`}
             >
-              <Image
-                src={getImage(name)}
-                alt={name}
-                fill
-                priority
-                className={`${name === "Graphic Design Packages" && "px-4 pt-2"} ${name === "Content Writing Packages" && "pl-5"} ${name === "Digital Marketing Packages" && "pl-4"} ${name === "All In One Bundle" && "px-6"}`}
-              />
-            </figure>
+              <figure
+                className={`relative min-h-60 w-full ${getBundlesClass[bundle_id - 1].bgClass}`}
+              >
+                <Image
+                  src={bundle_image_link as string}
+                  alt={description}
+                  fill={true}
+                  priority
+                  className="object-cover"
+                />
+              </figure>
 
-            <div className="p-4 font-manrope *:leading-[150%]">
-              <h4 className="text-lg font-semibold text-grey900">{name}</h4>
-              <p className="text-sm font-medium text-grey500">{text}</p>
-            </div>
-          </Link>
-        );
-      })}
+              <div className="p-4 font-manrope *:leading-[150%]">
+                <h4 className="text-lg font-semibold text-grey900">
+                  {bundle_name}
+                </h4>
+                <p className="text-sm font-medium text-grey500">
+                  {description}
+                </p>
+              </div>
+            </Link>
+          );
+        },
+      )}
     </div>
   );
 };
