@@ -27,7 +27,7 @@ function DigitalMarketForm() {
       { resetForm }: FormikHelpers<DigitalMarketingValues>,
     ) => {
       try {
-        const config = formConfig. digitalMarketing;
+        const config = formConfig.digitalMarketing;
         if (!config) {
           throw new Error("Form configuration not found");
         }
