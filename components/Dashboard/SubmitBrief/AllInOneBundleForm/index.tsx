@@ -15,9 +15,11 @@ import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import { FileUploadIcon } from "@/public/svgs";
 import FormFooter from "../shared/FormFooter";
 import { briefEndpoints } from "../shared/briefEndpoint";
+import useFileUpload from "@/hooks/UseFileUpload";
 
 function AllInOneBundleForm() {
   const dispatch = useAppDispatch();
+  const { handleFileUpload } = useFileUpload();
 
   // Define formik
   const formik = useFormik<AllInOneValues>({
@@ -54,18 +56,16 @@ function AllInOneBundleForm() {
   } = formik;
 
   // HANDLE FILE UPLOAD ONCHANGE
-  function onFileChange(file: File | null, name: string) {
-    console.log(file);
-
-    // Write your logic for api upload here. The name parameter above is used to distinguish the api name for different form upload name since they share the same footer.
-    //----------------
-
-    // Then after getting the upload link, you set it to formik via the name here
-    // -----------
-    // if(formik){
-    //   formik.setFieldValue(name, uploadLink)
-    // }
-  }
+  const onFileChange = async (file: File | null, fieldName: string) => {
+    if (formik) {
+      await handleFileUpload(
+        file,
+        briefEndpoints.allInOne,
+        fieldName,
+        formik,
+      );
+    }
+  };
   return (
     <form onSubmit={handleSubmit} className="noScrollbar w-full">
       <main className="w-full space-y-8">

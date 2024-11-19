@@ -15,9 +15,11 @@ import InputFile from "@/components/Forms/InputFile";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import { FileUploadIcon } from "@/public/svgs";
 import { briefEndpoints } from "../shared/briefEndpoint";
+import useFileUpload from "@/hooks/UseFileUpload";
 
 function GraphicsDesignForm() {
   const dispatch = useAppDispatch();
+  const { handleFileUpload } = useFileUpload();
 
   // Define formik
   const formik = useFormik<GraphicsDesignValues>({
@@ -57,18 +59,17 @@ function GraphicsDesignForm() {
   } = formik;
 
   // HANDLE FILE UPLOAD ONCHANGE
-  function onFileChange(file: File | null, name: string) {
-    console.log(file);
-
-    // Write your logic for api upload here. The name parameter above is used to distinguish the api name for different form upload name since they share the same footer.
-    //----------------
-
-    // Then after getting the upload link, you set it to formik via the name here
-    // -----------
-    // if(formik){
-    //   formik.setFieldValue(name, uploadLink)
-    // }
-  }
+  // HANDLE FILE UPLOAD ONCHANGE
+  const onFileChange = async (file: File | null, fieldName: string) => {
+    if (formik) {
+      await handleFileUpload(
+        file,
+        briefEndpoints.brandDesign,
+        fieldName,
+        formik,
+      );
+    }
+  };
   return (
     <form onSubmit={handleSubmit} className="noScrollbar w-full">
       <main className="w-full space-y-8">
