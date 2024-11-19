@@ -47,6 +47,9 @@ export const formConfig: {
     constructPayload: (payload) => ({
       design_type: convertToString(payload.graphicsType),
       palette_style: convertToString(payload.graphicsColorPalette),
+      uploaded_palette_style: convertToString(
+        payload.graphicsColorPaletteDocument,
+      ),
       target_audience: convertToString(payload.graphicsTargetAud),
       primary_message: convertToString(payload.graphicsPrimaryMessage),
       design_tone: convertToString(payload.graphicsTone),

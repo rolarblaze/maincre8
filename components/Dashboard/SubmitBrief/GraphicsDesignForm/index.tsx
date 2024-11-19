@@ -72,7 +72,6 @@ function GraphicsDesignForm() {
   } = formik;
 
   // HANDLE FILE UPLOAD ONCHANGE
-  // HANDLE FILE UPLOAD ONCHANGE
   const onFileChange = async (file: File | null, fieldName: string) => {
     if (formik) {
       await handleFileUpload(
