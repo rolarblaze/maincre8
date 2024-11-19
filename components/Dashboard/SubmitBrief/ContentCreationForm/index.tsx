@@ -11,6 +11,7 @@ import { contentCreationFormData } from "../shared/formData/contentCreation";
 import CustomDropdown from "@/components/Forms/CustomDropdown";
 import Textarea from "@/components/Forms/Textarea";
 import FormFooter from "../shared/FormFooter";
+import { briefEndpoints } from "../shared/briefEndpoint";
 
 function ContentCreationForm() {
   const dispatch = useAppDispatch();
@@ -95,7 +96,11 @@ function ContentCreationForm() {
           );
         })}
       </main>
-      <FormFooter name="document" formik={formik} />
+      <FormFooter
+        name="document"
+        formik={formik}
+        endpoint={briefEndpoints.contentCreation}
+      />
     </form>
   );
 }

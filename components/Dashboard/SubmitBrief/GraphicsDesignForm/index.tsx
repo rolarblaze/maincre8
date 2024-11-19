@@ -14,6 +14,7 @@ import FormFooter from "../shared/FormFooter";
 import InputFile from "@/components/Forms/InputFile";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import { FileUploadIcon } from "@/public/svgs";
+import { briefEndpoints } from "../shared/briefEndpoint";
 
 function GraphicsDesignForm() {
   const dispatch = useAppDispatch();
@@ -126,7 +127,11 @@ function GraphicsDesignForm() {
           );
         })}
       </main>
-      <FormFooter formik={formik} name="document" />
+      <FormFooter
+        formik={formik}
+        name="document"
+        endpoint={briefEndpoints.graphicsDesign}
+      />
     </form>
   );
 }

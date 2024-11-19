@@ -11,6 +11,7 @@ import { addAlert } from "@/redux/alerts";
 import { digitalMarketFormData } from "../shared/formData/digitalMarketing";
 import CustomDropdown from "@/components/Forms/CustomDropdown";
 import Textarea from "@/components/Forms/Textarea";
+import { briefEndpoints } from "../shared/briefEndpoint";
 
 function DigitalMarketForm() {
   const dispatch = useAppDispatch();
@@ -93,7 +94,11 @@ function DigitalMarketForm() {
           );
         })}
       </main>
-      <FormFooter name="document" formik={formik} />
+      <FormFooter
+        name="document"
+        formik={formik}
+        endpoint={briefEndpoints.digitalMarketing}
+      />
     </form>
   );
 }

@@ -14,6 +14,7 @@ import InputFile from "@/components/Forms/InputFile";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import { FileUploadIcon } from "@/public/svgs";
 import FormFooter from "../shared/FormFooter";
+import { briefEndpoints } from "../shared/briefEndpoint";
 
 function AllInOneBundleForm() {
   const dispatch = useAppDispatch();
@@ -122,7 +123,11 @@ function AllInOneBundleForm() {
           );
         })}
       </main>
-      <FormFooter formik={formik} name="document" />
+      <FormFooter
+        formik={formik}
+        name="document"
+        endpoint={briefEndpoints.allInOne}
+      />
     </form>
   );
 }
