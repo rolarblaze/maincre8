@@ -12,6 +12,8 @@ import { digitalMarketFormData } from "../shared/formData/digitalMarketing";
 import CustomDropdown from "@/components/Forms/CustomDropdown";
 import Textarea from "@/components/Forms/Textarea";
 import { briefEndpoints } from "../shared/briefEndpoint";
+import { formConfig } from "@/redux/myServices/formConfig";
+import { submitFormData } from "@/redux/myServices/features";
 
 function DigitalMarketForm() {
   const dispatch = useAppDispatch();
@@ -25,9 +27,19 @@ function DigitalMarketForm() {
       { resetForm }: FormikHelpers<DigitalMarketingValues>,
     ) => {
       try {
-        console.log("Form submitted");
+        const config = formConfig. digitalMarketing;
+        if (!config) {
+          throw new Error("Form configuration not found");
+        }
+        const formPayload = config.constructPayload(values);
 
-        resetForm();
+        // Dispatch the thunk with endpoint and payload
+        const response = await dispatch(
+          submitFormData({
+            formName: "digitalMarketing", // Pass only formName
+            payload: formPayload, // Pass only the payload
+          }),
+        );
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(

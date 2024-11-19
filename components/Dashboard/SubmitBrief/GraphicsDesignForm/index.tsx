@@ -16,6 +16,8 @@ import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import { FileUploadIcon } from "@/public/svgs";
 import { briefEndpoints } from "../shared/briefEndpoint";
 import useFileUpload from "@/hooks/UseFileUpload";
+import { formConfig } from "@/redux/myServices/formConfig";
+import { submitFormData } from "@/redux/myServices/features";
 
 function GraphicsDesignForm() {
   const dispatch = useAppDispatch();
@@ -30,8 +32,19 @@ function GraphicsDesignForm() {
       { resetForm }: FormikHelpers<GraphicsDesignValues>,
     ) => {
       try {
-        console.log("Form submitted");
+        const config = formConfig.graphicsDesign;
+        if (!config) {
+          throw new Error("Form configuration not found");
+        }
+        const formPayload = config.constructPayload(values);
 
+        // Dispatch the thunk with endpoint and payload
+        const response = await dispatch(
+          submitFormData({
+            formName: "graphicsDesign", // Pass only formName
+            payload: formPayload, // Pass only the payload
+          }),
+        );
         resetForm();
       } catch (error) {
         console.error("Error submitting form:", error);

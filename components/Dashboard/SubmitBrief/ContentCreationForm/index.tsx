@@ -12,6 +12,8 @@ import CustomDropdown from "@/components/Forms/CustomDropdown";
 import Textarea from "@/components/Forms/Textarea";
 import FormFooter from "../shared/FormFooter";
 import { briefEndpoints } from "../shared/briefEndpoint";
+import { formConfig } from "@/redux/myServices/formConfig";
+import { submitFormData } from "@/redux/myServices/features";
 
 function ContentCreationForm() {
   const dispatch = useAppDispatch();
@@ -25,8 +27,19 @@ function ContentCreationForm() {
       { resetForm }: FormikHelpers<ContentCreationValues>,
     ) => {
       try {
-        console.log("Form submitted");
+        const config = formConfig.contentCreation;
+        if (!config) {
+          throw new Error("Form configuration not found");
+        }
+        const formPayload = config.constructPayload(values);
 
+        // Dispatch the thunk with endpoint and payload
+        const response = await dispatch(
+          submitFormData({
+            formName: "contentCreation", // Pass only formName
+            payload: formPayload, // Pass only the payload
+          }),
+        );
         resetForm();
       } catch (error) {
         console.error("Error submitting form:", error);

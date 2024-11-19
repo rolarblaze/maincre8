@@ -10,6 +10,7 @@ export interface BrandDesignValues {
   brandCompetitors: string;
   brandCompetitorsDocument: string;
   brandGuidelines: string;
+  document: string;
 }
 
 export const brandDesignInitialValues = {
@@ -22,6 +23,7 @@ export const brandDesignInitialValues = {
   brandCompetitors: "",
   brandCompetitorsDocument: "",
   brandGuidelines: "",
+  document:"",
 };
 
 export const brandDesignFormSchema = Yup.object().shape({

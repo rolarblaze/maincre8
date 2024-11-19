@@ -10,6 +10,7 @@ export interface GraphicsDesignValues {
   graphicsReferences: string;
   graphicsReferencesDocument: string;
   graphicsTimeline: string;
+  document: string;
 }
 
 export const graphicsDesignInitialValues = {
@@ -22,6 +23,7 @@ export const graphicsDesignInitialValues = {
   graphicsReferences: "",
   graphicsReferencesDocument: "",
   graphicsTimeline: "",
+  document: "",
 };
 
 export const graphicsDesignFormSchema = Yup.object().shape({

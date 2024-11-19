@@ -2,36 +2,47 @@ import { BrandDesignValues } from "@/components/Dashboard/SubmitBrief/shared/for
 import api from "@/utils/axios/api";
 import { handleAxiosError } from "@/utils/helpers/general/errorHandler";
 import { createAsyncThunk } from "@reduxjs/toolkit";
+import { formConfig } from "./formConfig";
 
-// Utility function to convert payload values to string
-const convertToString = (value: unknown): string => {
-  if (Array.isArray(value)) {
-    return value.join(", ");
-  }
-  return String(value);
-};
 
-// Thunk to submit brand design brief details to the API.
-export const brandDesignBriefs = createAsyncThunk(
-  "user/brandDesignBriefs",
-  async (payload: BrandDesignValues, { rejectWithValue }) => {
+
+
+
+interface SubmitFormDataArgs {
+  formName: string;
+  payload: Record<string, any>;
+}
+
+
+// Reusable thunk for submitting form data to various endpoints
+
+export const submitFormData = createAsyncThunk(
+  "forms/submitFormData",
+  async (
+    { formName, payload }: { formName: keyof typeof formConfig; payload: any },
+    { rejectWithValue }
+  ) => {
     try {
-      const response = await api.post("", {
-        core_value: convertToString(payload?.brandCoreValue),
-        target_market: convertToString(payload?.brandMarket),
-        brand_tone: convertToString(payload?.brandPersonality),
-        brand_assets: convertToString(payload?.brandAsset),
-        key_deliverables: convertToString(payload?.brandDeliverable),
-        kpis: convertToString(payload?.brandKPI),
-        brandCompetitors: convertToString(payload?.brandCompetitors),
-        guidelines: convertToString(payload?.brandGuidelines),
-      });
-      return response.data;
+      const form = formConfig[formName];
+
+      if (!form) {
+        throw new Error(`Form configuration for ${formName} not found.`);
+      }
+
+      const response = await api.post(form.endpoint, payload);
+      console.log("Response from backend:", response.data);
+
+      return { formName, data: response.data };
     } catch (error) {
-      return rejectWithValue(handleAxiosError(error));
+      console.error("Error:", error);
+      return rejectWithValue({ formName, error: handleAxiosError(error) });
     }
-  },
+  }
 );
+
+
+
+
 
 // Upload file
 export const uploadDocument = createAsyncThunk(

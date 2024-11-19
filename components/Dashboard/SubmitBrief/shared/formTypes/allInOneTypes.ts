@@ -14,6 +14,7 @@ export interface AllInOneValues {
   allInOneCompetitorsWebsite: string;
   allInOneContentStyle: string[];
   allInOneMainGoal: string[];
+  document: string;
 }
 
 export const allInOneInitialValues: AllInOneValues = {
@@ -30,6 +31,7 @@ export const allInOneInitialValues: AllInOneValues = {
   allInOneCompetitorsWebsite: "",
   allInOneContentStyle: [],
   allInOneMainGoal: [],
+  document: "",
 };
 
 export const allInOneFormSchema = Yup.object().shape({

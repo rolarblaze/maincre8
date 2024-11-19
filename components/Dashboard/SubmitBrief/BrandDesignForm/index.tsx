@@ -14,13 +14,15 @@ import InputFile from "@/components/Forms/InputFile";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import { FileUploadIcon } from "@/public/svgs";
 import FormFooter from "../shared/FormFooter";
-import { brandDesignBriefs, uploadDocument } from "@/redux/myServices/features";
 import { briefEndpoints } from "../shared/briefEndpoint";
 import useFileUpload from "@/hooks/UseFileUpload";
+import { formConfig } from "@/redux/myServices/formConfig";
+import { submitFormData } from "@/redux/myServices/features";
+import { useSelector } from "react-redux";
 
 function BrandDesignForm() {
   const dispatch = useAppDispatch();
-  const { isLoading } = useAppSelector((state) => state.brandDesign);
+
 
   const { handleFileUpload } = useFileUpload();
 
@@ -35,9 +37,21 @@ function BrandDesignForm() {
     ) => {
       // HANDLE FORM SUBMISSION
       try {
-        console.log("valuesss", payload);
-        const resp = await dispatch(brandDesignBriefs(payload));
-        console.log("response", resp);
+        const config = formConfig.brandDesign;
+        if (!config) {
+          throw new Error("Form configuration not found");
+        }
+
+        // Construct payload using the config's logic
+        const formPayload = config.constructPayload(payload);
+
+        // Dispatch the thunk with endpoint and payload
+        const response = await dispatch(
+          submitFormData({
+            formName: 'brandDesign',  // Pass only formName
+            payload: formPayload,  // Pass only the payload
+          })
+        );
         resetForm();
       } catch (error) {
         console.error("Error submitting form:", error);
@@ -70,7 +84,7 @@ function BrandDesignForm() {
       await handleFileUpload(
         file,
         briefEndpoints.brandDesign,
-        fieldName,
+        fieldName, 
         formik,
       );
     }

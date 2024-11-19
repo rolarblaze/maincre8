@@ -1,79 +1,80 @@
+// src/redux/slices/formSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { brandDesignBriefs, uploadDocument } from "./features"; // Adjust the import based on your file structure
-import { BrandDesignValues } from "@/components/Dashboard/SubmitBrief/shared/formTypes/brandDesignTypes";
+import { formConfig } from "@/redux/myServices/formConfig";
+import { submitFormData } from "./features";
 
-export interface BrandDesignSliceState {
+// Define the state for each form
+interface FormState<T> {
   isLoading: boolean;
   successMessage: string | null;
   errorMessage: string | null;
-  brandDesign: BrandDesignValues;
-
+  formData: T | null;
 }
 
-const initialState: BrandDesignSliceState = {
-  isLoading: false,
-  successMessage: null,
-  errorMessage: null,
-  brandDesign: {
-    brandCoreValue: "",
-    brandMarket: [],
-    brandPersonality: "",
-    brandAsset: "",
-    brandDeliverable: [],
-    brandKPI: [],
-    brandCompetitors: "",
-    brandCompetitorsDocument: "",
-    brandGuidelines: "",
-  }
+// Define the state for all forms
+type FormsState = {
+  [key in keyof typeof formConfig]: FormState<any>;
 };
 
-export const BrandDesignSlice = createSlice({
-  name: "brandDesign",
+// Initial state for all forms, based on formConfig
+const initialState: FormsState = Object.keys(formConfig).reduce((state, key) => {
+  state[key as keyof typeof formConfig] = {
+    isLoading: false,
+    successMessage: null,
+    errorMessage: null,
+    formData: null,
+  };
+  return state;
+}, {} as FormsState);
+
+// Slice to handle form state
+const formSlice = createSlice({
+  name: "forms",
   initialState,
   reducers: {
-    resetBrandDesignState: (state) => {
-      state.successMessage = null;
-      state.errorMessage = null;
+    resetFormState: (state, action: PayloadAction<keyof typeof formConfig>) => {
+      const formName = action.payload;
+      if (state[formName]) {
+        state[formName] = {
+          isLoading: false,
+          successMessage: null,
+          errorMessage: null,
+          formData: null,
+        };
+      }
     },
   },
   extraReducers: (builder) => {
     builder
-      // Submit brand design brief
-      .addCase(brandDesignBriefs.pending, (state) => {
-        state.isLoading = true;
-        state.successMessage = null;
-        state.errorMessage = null;
-      })
-      .addCase(
-        brandDesignBriefs.fulfilled,
-        (state, action: PayloadAction<any>) => {
-          state.isLoading = false;
-          
-          state.successMessage = action.payload.message; // Adjust based on your API response structure
+      .addCase(submitFormData.pending, (state, action) => {
+        const formName = action.meta.arg.formName;
+        if (state[formName]) {
+         
+          state[formName].isLoading = true;
+          state[formName].successMessage = null;
+          state[formName].errorMessage = null;
         }
-      )
-      .addCase(brandDesignBriefs.rejected, (state, action: PayloadAction<any>) => {
-        state.isLoading = false;
-        state.errorMessage = action.payload; // This will be the error from handleAxiosError
       })
-      //upload file briefs
-      .addCase(uploadDocument.fulfilled, (state, action: PayloadAction<any>) => {
-
-        console.log('uploaded', state.brandDesign)
-        // if (state.profile && state.profile.user.profile) {
-        //    state.profile.user.profile.profile_image_link = action.payload.file_link;
-        // }
-        state.isLoading = false;
+      .addCase(submitFormData.fulfilled, (state, action) => {
+        const { formName, data } = action.payload;
+        if (state[formName]) {
+          
+          state[formName].isLoading = false;
+          console.log("loading....");
+          state[formName].successMessage = data.message || "Form submitted successfully!";
+          state[formName].formData = data;
+        }
       })
-      .addCase(uploadDocument.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(uploadDocument.rejected, (state) => {
-        state.isLoading = false;
-      })
+      .addCase(submitFormData.rejected, (state, action) => {
+        const formName = action.meta.arg.formName;
+        if (state[formName]) {
+          state[formName].isLoading = false;
+          // state[formName].errorMessage = action.payload.error || "Error submitting form.";
+        }
+      });
   },
 });
 
-export const { resetBrandDesignState } = BrandDesignSlice.actions;
+export const { resetFormState } = formSlice.actions;
 
-export default BrandDesignSlice.reducer;
+export default formSlice.reducer;
