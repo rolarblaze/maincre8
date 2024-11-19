@@ -148,14 +148,14 @@ const ServicePackagePage = () => {
   }
 
   return (
-    <div className="[&>*]:px-6">
+    <div className="[&>*]:px-6 xs:max-md:px-0">
       {/* PLANS */}
-      <section className="flex flex-wrap justify-start gap-6 pt-10">
+      <section className="flex w-full flex-wrap justify-start gap-6 pt-10">
         {typeCastPageViewData.packages.map((plan) => {
           return (
             <div
               key={plan.package_id}
-              className="min-w-[22rem] space-y-4 rounded-lg border border-grey200 px-8 py-5 text-grey800"
+              className="min-w-[22rem] xs:max-md:w-full xs:max-md:min-w-0 xs:max-md:max-w-72 space-y-4 rounded-lg border border-grey200 px-8 xs:max-md:px-3 py-5 text-grey800"
             >
               <div className="flex items-center justify-center gap-2 bg-grey50 p-1.5 capitalize">
                 {plan.package_name === "Starter Package" ? (

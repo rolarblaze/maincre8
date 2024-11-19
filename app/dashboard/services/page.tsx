@@ -15,21 +15,21 @@ const Services = () => {
   );
 
   useEffect(() => {
-     // if the redux store for all bundles data is empty, fetch from endpoint
+    // if the redux store for all bundles data is empty, fetch from endpoint
     if (bundlesData.length === 0) {
       dispatch(getBundles());
     }
   }, []);
 
   return (
-    <div className="flex flex-wrap gap-6 px-6 xs:max-md:px-2 py-10">
+    <div className="flex flex-wrap gap-6 px-6 py-10 xs:max-md:px-2">
       {bundlesData.map(
         ({ bundle_id, bundle_image_link, bundle_name, description }) => {
           return (
             <Link
               key={bundle_id}
               href={`/dashboard/services/${bundle_id}`}
-              className={`group w-[30%] xs:max-md:w-[45%] xs:max-md:min-w-64 min-w-60 overflow-hidden rounded-lg border border-ash ${getBundlesClass[bundle_id - 1].tabClass}`}
+              className={`group w-[30%] min-w-60 overflow-hidden rounded-lg border border-ash xs:max-md:w-[45%] xs:max-md:min-w-64 ${getBundlesClass[bundle_id - 1].tabClass}`}
             >
               <figure
                 className={`relative min-h-60 w-full ${getBundlesClass[bundle_id - 1].bgClass}`}
