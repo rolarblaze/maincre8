@@ -15,22 +15,17 @@ import {
 // import { fetchActivityStatistics } from "@/redux/auth/features";
 // import { getServices } from "@/redux/services/features";
 // import { BulbIcon } from "@/public/icons";
+import {
+  // useAppDispatch,
+  useAppSelector,
+} from "@/redux/store";
 
-
-import Link from "next/link";
+import { getBackgroundClass, getImage } from "./_helperFunc";
+import { packages } from "./_constants";
 import Image from "next/image";
-import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
-import { useEffect } from "react";
-import { getBundles } from "@/redux/shop/features";
-import { getBundlesClass } from "@/components/NewPages/LandingPage/sections/PackagesSection/helperFunc";
 
 const Overview = () => {
   const router = useRouter();
-  let dispatch = useAppDispatch();
-
-  const bundlesData = useAppSelector(
-    (state: RootState) => state.pageViewData.allShopBundles,
-  );
   // const dispatch = useAppDispatch();
   // const { services, isLoading, error } = useAppSelector(
   //   (state) => state.service,
@@ -47,12 +42,6 @@ const Overview = () => {
   //   dispatch(fetchLatestAppointments());
   //   dispatch(fetchActivityStatistics());
   // }, [dispatch]);
-
-  useEffect(() => {
-    if (bundlesData.length === 0) {
-      dispatch(getBundles());
-    }
-  }, []);
 
   // Extract the activity statistics from the profile
   // const { active_services, completed_services, total_services_bought } = profile
@@ -117,34 +106,30 @@ const Overview = () => {
           Choose a Package to Get Started
         </h3>
 
-        <div className="flex flex-wrap gap-6 px-6 py-10">
-      {bundlesData.map(({ bundle_id, bundle_image_link, bundle_name, description }) => {
-        // const packageRoute = name.toLowerCase().replace(/\s+/g, "-");
-        return (
-          <div
-            key={bundle_id}
-            className={`group w-[30%] overflow-hidden rounded-lg border border-ash ${getBundlesClass[bundle_id - 1].tabClass }`}
-          >
-            <figure
-              className={`relative min-h-60 w-full ${getBundlesClass[bundle_id - 1].bgClass}`}
+        <div className="flex flex-wrap gap-6">
+          {packages.map(({ id, name, text }) => (
+            <div
+              key={id}
+              className="min-w-80 overflow-hidden rounded-lg border border-ash"
             >
-              <Image
-                src={bundle_image_link as string}
-                alt={description}
-                fill={true}
-                priority
-                className="object-cover"
-              />
-            </figure>
+              <figure
+                className={`relative min-h-60 w-full ${getBackgroundClass(name)}`}
+              >
+                <Image
+                  src={getImage(name)}
+                  alt={name}
+                  fill
+                  className={`${name === "Graphic Design Packages" && "px-4 pt-2"} ${name === "Content Writing Packages" && "pl-5"} ${name === "Digital Marketing Packages" && "pl-4"} ${name === "All In One Bundle" && "px-6"}`}
+                />
+              </figure>
 
-            <div className="p-4 font-manrope *:leading-[150%]">
-              <h4 className="text-lg font-semibold text-grey900">{bundle_name}</h4>
-              <p className="text-sm font-medium text-grey500">{description}</p>
+              <div className="p-4 font-manrope *:leading-[150%]">
+                <h4 className="text-lg font-semibold text-grey900">{name}</h4>
+                <p className="text-sm font-medium text-grey500">{text}</p>
+              </div>
             </div>
-          </div>
-        );
-      })}
-    </div>
+          ))}
+        </div>
       </section>
 
       {/* <div
