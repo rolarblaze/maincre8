@@ -12,7 +12,7 @@ function ModalHeader({ icon, title, subtitle }: ModalHeaderProps) {
       {icon}
       <div className="space-y-2">
         <h4>{title}</h4>
-        <p>{subtitle}</p>
+        <p className="text-grey600">{subtitle}</p>
       </div>
     </header>
   );

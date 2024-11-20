@@ -1,4 +1,6 @@
 import { ArrowRight, BlueArrowRight } from "@/public/icons";
+import BlueArrowRightIcon from "@/public/svgs/BlueArrowRightIcon";
+import BlueModalArrowRight from "@/public/svgs/BlueModalArrowRight";
 import Link from "next/link";
 import React from "react";
 
@@ -9,9 +11,9 @@ interface RedirectLinkProps {
 
 function RedirectLink({ url, linkText }: RedirectLinkProps) {
   return (
-    <Link href={url} className="space-x-2 text-sm text-primary500">
+    <Link href={url} className="flex gap-2 text-sm text-primary500">
       <span>{linkText}</span>
-      <BlueArrowRight />
+      <BlueModalArrowRight className="self-center" />
     </Link>
   );
 }

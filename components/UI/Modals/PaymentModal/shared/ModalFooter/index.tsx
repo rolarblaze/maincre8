@@ -2,13 +2,13 @@ import React from "react";
 import RedirectLink from "../RedirectLink";
 
 interface ModalFooterProps {
-  total: string | number;
+  total?: string | number;
   redirectLink?: string;
   linkText?: string;
 }
 
 function ModalFooter({
-  total,
+  total = "$499",
   redirectLink = "/dashboard/my-services",
   linkText = "Go to my services",
 }: ModalFooterProps) {

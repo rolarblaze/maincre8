@@ -19,12 +19,12 @@ function ModalBody({
   return (
     <main className="w-full space-y-6 py-6">
       <h5 className="">Order details</h5>
-      <div>
-        <div>
+      <div className="space-y-4">
+        <div className="">
           <p className="text-sm font-semibold text-grey500">PACKAGE</p>
           <p className="text-grey700">{packageName}</p>
         </div>
-        <div className="flex gap-16">
+        <div className="w-full max-w-[330px] flex justify-between">
           <div>
             <p className="text-sm font-semibold text-grey500">PRICE</p>
             <p className="text-grey700">{price}</p>
