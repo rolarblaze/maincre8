@@ -28,7 +28,7 @@ const CtaSection = () => {
             marketing. Get solutions that perfectly align with your goals
           </p>
 
-          <div className="mt-4 flex gap-4 max-sm:flex-col">
+          <div className="mt-4 flex gap-4 max-sm:flex-col max-sm:items-center">
             <Link
               href={"/"}
               className="block w-fit rounded-lg bg-primary900 px-12 py-4 text-lg font-medium text-white"
