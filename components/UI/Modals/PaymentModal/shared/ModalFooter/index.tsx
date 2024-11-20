@@ -2,7 +2,7 @@ import React from "react";
 import RedirectLink from "../RedirectLink";
 
 interface ModalFooterProps {
-  total?: string | number;
+  total?: string;
   redirectLink?: string;
   linkText?: string;
 }
