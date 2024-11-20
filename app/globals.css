@@ -77,7 +77,8 @@ h2 {
 }
 
 h3,
-h4 {
+h4,
+h5 {
   font-size: 1.25rem;
 }
 
@@ -110,6 +111,13 @@ h4 {
     font-size: 1.5rem;
     font-weight: 700;
     line-height: 2rem;
+    letter-spacing: -0.02em;
+  }
+  h5,
+  .h5 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 1.7rem;
     letter-spacing: -0.02em;
   }
 
@@ -288,13 +296,17 @@ h4 {
   #f1f5f9
    */
 
-
-   /* 
+  /* 
    #e2e8f0
     */
 
   .shimmer {
-    background: linear-gradient(-45deg, #dddbdb1d 40%, #fafafa 50%, #dddbdb1d 60%); 
+    background: linear-gradient(
+      -45deg,
+      #dddbdb1d 40%,
+      #fafafa 50%,
+      #dddbdb1d 60%
+    );
     background-size: 300%;
     background-position-x: 100%;
     animation: shimmer 1s infinite linear;
