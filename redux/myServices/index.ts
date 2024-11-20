@@ -55,9 +55,10 @@ const formSlice = createSlice({
       })
       .addCase(submitFormData.fulfilled, (state, action) => {
         const { formName, data } = action.payload;
+        console.log("Data payload:", data);
         if (state[formName]) {
           state[formName].isLoading = false;
-          state[formName].successMessage = data || "Form submitted successfully!";
+          state[formName].successMessage = data.detail || "Form submitted successfully!";
           state[formName].formData = data;
         }
       })
@@ -71,29 +72,29 @@ const formSlice = createSlice({
       });
 
     // Handle file upload
-    builder
-      .addCase(uploadDocument.pending, (state) => {
-        // Optional: Add global loading state if needed
-        Object.values(state).forEach((formState) => {
-          formState.isLoading = true;
-        });
-      })
-      .addCase(uploadDocument.fulfilled, (state, action: PayloadAction<any>) => {
-        console.log("File uploaded successfully", action.payload);
-        // Update specific uploadedFile in state
-        Object.values(state).forEach((formState) => {
-          formState.isLoading = false;
-          formState.uploadedFile = action.payload;
-          formState.successMessage = "File uploaded successfully!";
-        });
-      })
-      .addCase(uploadDocument.rejected, (state, action) => {
-        Object.values(state).forEach((formState) => {
-          formState.isLoading = false;
-          formState.errorMessage =
-            action.error?.message || "Error uploading file.";
-        });
-      });
+    // builder
+    //   .addCase(uploadDocument.pending, (state) => {
+    //     // Optional: Add global loading state if needed
+    //     Object.values(state).forEach((formState) => {
+    //       formState.isLoading = true;
+    //     });
+    //   })
+    //   .addCase(uploadDocument.fulfilled, (state, action: PayloadAction<any>) => {
+    //     console.log("File uploaded successfully", action.payload);
+    //     // Update specific uploadedFile in state
+    //     Object.values(state).forEach((formState) => {
+    //       formState.isLoading = false;
+    //       formState.uploadedFile = action.payload;
+    //       formState.successMessage = "File uploaded successfully!";
+    //     });
+    //   })
+    //   .addCase(uploadDocument.rejected, (state, action) => {
+    //     Object.values(state).forEach((formState) => {
+    //       formState.isLoading = false;
+    //       formState.errorMessage =
+    //         action.error?.message || "Error uploading file.";
+    //     });
+    //   });
   },
 });
 

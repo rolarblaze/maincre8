@@ -1,4 +1,4 @@
-import { useAppDispatch } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { FormikHelpers, useFormik } from "formik";
 import React from "react";
 import {
@@ -16,9 +16,14 @@ import { FileUploadIcon } from "@/public/svgs";
 import FormFooter from "../shared/FormFooter";
 import { briefEndpoints } from "../shared/briefEndpoint";
 import useFileUpload from "@/hooks/UseFileUpload";
+import { submitFormData } from "@/redux/myServices/features";
+import { formConfig } from "@/redux/myServices/formConfig";
 
 function AllInOneBundleForm() {
   const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(
+    (state: any) => state.forms?.AllInOne?.isLoading,
+  );
   const { handleFileUpload } = useFileUpload();
 
   // Define formik
@@ -27,8 +32,28 @@ function AllInOneBundleForm() {
     validationSchema: allInOneFormSchema,
     onSubmit: async (values, { resetForm }: FormikHelpers<AllInOneValues>) => {
       try {
-        console.log("Form submitted");
+        const config = formConfig.AllInOne;
+        if (!config) {
+          throw new Error("Form configuration not found");
+        }
+        const formPayload = config.constructPayload(values);
 
+        // Dispatch the thunk with endpoint and payload
+        const response = await dispatch(
+          submitFormData({
+            formName: "AllInOne", // Pass only formName
+            payload: formPayload, // Pass only the payload
+          }),
+        );
+
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Success",
+            subText: "Your all-in-one brief has been submitted",
+            type: "success",
+          }),
+        );
         resetForm();
       } catch (error) {
         console.error("Error submitting form:", error);
@@ -36,7 +61,8 @@ function AllInOneBundleForm() {
           addAlert({
             id: "",
             headText: "Error",
-            subText: "Error submitting brief, please try again later",
+            subText:
+              "Error submitting digital marketing brief, please try again later",
             type: "error",
           }),
         );
@@ -58,12 +84,7 @@ function AllInOneBundleForm() {
   // HANDLE FILE UPLOAD ONCHANGE
   const onFileChange = async (file: File | null, fieldName: string) => {
     if (formik) {
-      await handleFileUpload(
-        file,
-        briefEndpoints.allInOne,
-        fieldName,
-        formik,
-      );
+      await handleFileUpload(file, briefEndpoints.allInOne, fieldName, formik);
     }
   };
   return (
@@ -127,6 +148,7 @@ function AllInOneBundleForm() {
         formik={formik}
         name="document"
         endpoint={briefEndpoints.allInOne}
+        isLoading={isLoading}
       />
     </form>
   );

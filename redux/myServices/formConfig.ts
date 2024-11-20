@@ -97,7 +97,7 @@ export const formConfig: {
     }),
   },
   AllInOne: {
-    endpoint: "user/content-creation-briefs",
+    endpoint: "user/all-in-one-briefs",
     constructPayload: (payload) => ({
       project_goals: convertToString(payload.allInOneGoal),
       target_audience: convertToString(payload.allInOneAudience),

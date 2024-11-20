@@ -21,7 +21,9 @@ import { submitFormData } from "@/redux/myServices/features";
 
 function GraphicsDesignForm() {
   const dispatch = useAppDispatch();
-  const isLoading =  useAppSelector((state: any) => state.forms?.graphicsDesign?.isLoading);
+  const isLoading = useAppSelector(
+    (state: any) => state.forms?.graphicsDesign?.isLoading,
+  );
   const { handleFileUpload } = useFileUpload();
 
   // Define formik
@@ -46,6 +48,14 @@ function GraphicsDesignForm() {
             payload: formPayload, // Pass only the payload
           }),
         );
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Success",
+            subText: "Your graphics design brief has been submitted",
+            type: "success",
+          }),
+        );
         resetForm();
       } catch (error) {
         console.error("Error submitting form:", error);
@@ -53,7 +63,8 @@ function GraphicsDesignForm() {
           addAlert({
             id: "",
             headText: "Error",
-            subText: "Error submitting brief, please try again later",
+            subText:
+              "Error submitting graphics design brief, please try again later",
             type: "error",
           }),
         );
@@ -132,7 +143,6 @@ function GraphicsDesignForm() {
                       showUploadButton={false}
                       parentClassNames="md:!flex-col"
                       buttonStyles="px-4"
-                      // error={errors}
                     />
                   )}
                 </div>
@@ -145,6 +155,7 @@ function GraphicsDesignForm() {
         formik={formik}
         name="document"
         endpoint={briefEndpoints.graphicsDesign}
+        isLoading={isLoading}
       />
     </form>
   );

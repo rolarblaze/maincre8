@@ -17,8 +17,10 @@ import { submitFormData } from "@/redux/myServices/features";
 
 function DigitalMarketForm() {
   const dispatch = useAppDispatch();
-  const isLoading =  useAppSelector((state: any) => state.forms?.digitalMarketing?.isLoading);
- 
+  const isLoading = useAppSelector(
+    (state: any) => state.forms?.digitalMarketing?.isLoading,
+  );
+
   // Define formik
   const formik = useFormik<DigitalMarketingValues>({
     initialValues: digitalMarketingInitialValues,
@@ -41,13 +43,24 @@ function DigitalMarketForm() {
             payload: formPayload, // Pass only the payload
           }),
         );
+
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Success",
+            subText: "Your digital marketing brief has been submitted",
+            type: "success",
+          }),
+        );
+        resetForm();
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(
           addAlert({
             id: "",
             headText: "Error",
-            subText: "Error submitting brief, please try again later",
+            subText:
+              "Error submitting digital marketing brief, please try again later",
             type: "error",
           }),
         );
@@ -111,6 +124,7 @@ function DigitalMarketForm() {
         name="document"
         formik={formik}
         endpoint={briefEndpoints.digitalMarketing}
+        isLoading={isLoading}
       />
     </form>
   );

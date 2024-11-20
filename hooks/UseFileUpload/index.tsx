@@ -8,12 +8,10 @@ const useFileUpload = () => {
   const dispatch = useDispatch<AppDispatch>();
 
    // Select the loading state from Redux
-   const isLoading = useAppSelector((state: RootState) =>
-    Object.values(state.forms).some((form) => form.isLoading)
-  );
+  //  const isLoading = useAppSelector((state: RootState) =>
+  //   Object.values(state.forms).some((form) => form.isLoading)
+  // );
 
-
-  console.log("isloading..",  isLoading);
  
   const handleFileUpload = async (
     file: File | null,
@@ -28,8 +26,6 @@ const useFileUpload = () => {
 
     const actionResult = await dispatch(uploadDocument({ formData, endpoint }));
 
-    console.log(actionResult.payload.detail);
-
     if (uploadDocument.fulfilled.match(actionResult)) {
       const fileLink = actionResult.payload?.file_link; 
 
@@ -39,7 +35,7 @@ const useFileUpload = () => {
         addAlert({
           id: "",
           headText: "Success",
-          subText: "Brief successfully uploaded.",
+          subText: actionResult.payload.detail,
           type: "success",
         }),
       );

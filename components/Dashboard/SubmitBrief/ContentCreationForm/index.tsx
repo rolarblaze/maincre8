@@ -17,22 +17,28 @@ import { submitFormData } from "@/redux/myServices/features";
 
 function ContentCreationForm() {
   const dispatch = useAppDispatch();
-  const isLoading =  useAppSelector((state: any) => state.forms?.contentCreation?.isLoading);
+  const isLoading = useAppSelector(
+    (state: any) => state.forms?.contentCreation?.isLoading,
+  );
 
   // Define formik
   const formik = useFormik<ContentCreationValues>({
     initialValues: contentCreationInitialValues,
     validationSchema: contentCreationFormSchema,
     onSubmit: async (
-      values,
+      payload,
+
       { resetForm }: FormikHelpers<ContentCreationValues>,
     ) => {
+      // HANDLE FORM SUBMISSION
       try {
         const config = formConfig.contentCreation;
         if (!config) {
           throw new Error("Form configuration not found");
         }
-        const formPayload = config.constructPayload(values);
+
+        // Construct payload using the config's logic
+        const formPayload = config.constructPayload(payload);
 
         // Dispatch the thunk with endpoint and payload
         const response = await dispatch(
@@ -41,6 +47,16 @@ function ContentCreationForm() {
             payload: formPayload, // Pass only the payload
           }),
         );
+
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Success",
+            subText: "Your content creation brief has been submitted",
+            type: "success",
+          }),
+        );
+
         resetForm();
       } catch (error) {
         console.error("Error submitting form:", error);
@@ -48,7 +64,8 @@ function ContentCreationForm() {
           addAlert({
             id: "",
             headText: "Error",
-            subText: "Error submitting brief, please try again later",
+            subText:
+              "Error submitting  content creation brief, please try again later",
             type: "error",
           }),
         );
@@ -114,6 +131,7 @@ function ContentCreationForm() {
         name="document"
         formik={formik}
         endpoint={briefEndpoints.contentCreation}
+        isLoading={isLoading}
       />
     </form>
   );

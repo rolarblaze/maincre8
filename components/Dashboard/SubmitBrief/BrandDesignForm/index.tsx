@@ -53,17 +53,16 @@ function BrandDesignForm() {
           }),
         );
 
-        console.log("response", response);
         dispatch(
           addAlert({
             id: "",
             headText: "Success",
-            subText: "Brief Successfully submitted!",
+            subText: "Your brand design brief has been submitted",
             type: "success",
           }),
         );
 
-        // resetForm();
+        resetForm();
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(
@@ -149,7 +148,6 @@ function BrandDesignForm() {
                       showUploadButton={false}
                       parentClassNames="md:!flex-col"
                       buttonStyles="px-4"
-                      // error={errors}
                     />
                   )}
                 </div>

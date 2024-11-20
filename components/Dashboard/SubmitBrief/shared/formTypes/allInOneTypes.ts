@@ -66,14 +66,8 @@ export const allInOneFormSchema = Yup.object().shape({
     .of(Yup.string().required())
     .min(1, "At least one platform option is required")
     .required("Please select a platform option"),
-  allInOneExistingMarket: Yup.array()
-    .of(Yup.string().required())
-    .min(1, "At least one existing market option is required")
-    .required("Please select an existing market option"),
-  allInOneKeywords: Yup.array()
-    .of(Yup.string().required())
-    .min(1, "At least one keyword option is required")
-    .required("Please select a keyword option"),
+  allInOneExistingMarket: Yup.string().required("Please describe any existing marketing challenges experienced"),
+  allInOneKeywords: Yup.string().required("Please enter a keyword"),
   allInOneCompetitorsWebsite: Yup.string().required("Please input a website"),
   allInOneContentStyle: Yup.array()
     .of(Yup.string().required())
