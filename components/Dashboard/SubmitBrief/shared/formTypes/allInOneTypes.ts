@@ -13,6 +13,7 @@ export interface AllInOneValues {
   allInOneKeywords: string;
   allInOneCompetitorsWebsite: string;
   allInOneContentStyle: string[];
+  allInOneKeyDeliverables: string[];
   allInOneMainGoal: string[];
   document: string;
 }
@@ -30,6 +31,7 @@ export const allInOneInitialValues: AllInOneValues = {
   allInOneKeywords: "",
   allInOneCompetitorsWebsite: "",
   allInOneContentStyle: [],
+  allInOneKeyDeliverables: [],
   allInOneMainGoal: [],
   document: "",
 };
@@ -77,6 +79,10 @@ export const allInOneFormSchema = Yup.object().shape({
     .of(Yup.string().required())
     .min(1, "At least one content style is required")
     .required("Please select a content style option"),
+    allInOneKeyDeliverables: Yup.array()
+    .of(Yup.string().required())
+    .min(1, "At least one key deliverable is required")
+    .required("Please select a key deliverable option"),
   allInOneMainGoal: Yup.array()
     .of(Yup.string().required())
     .min(1, "At least one main goal is required")
