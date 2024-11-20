@@ -146,6 +146,13 @@ export const brandDesignFormData = [
     isCheckbox: false,
   },
   {
+    name: "brandUSP",
+    type: "textArea",
+    label: "What is your unique selling proposition",
+    sublabel: "USP?",
+    placeholder: "Type",
+  },
+  {
     name: "brandDeliverable",
     type: "select",
     label: "What are the key deliverables for this brand design?",

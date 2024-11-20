@@ -1,4 +1,3 @@
-
 "use client";
 
 import React from "react";
@@ -10,7 +9,7 @@ const AlertWrapper: React.FC = () => {
   const alerts = useAppSelector((state: RootState) => state.alerts.messages);
 
   return (
-    <div className="fixed top-0 right-0 mt-12 z-50 rounded ">
+    <div className="z-9999 fixed right-0 top-0 mt-12 rounded">
       {alerts.map((alert) => (
         <Alert
           key={alert.id}

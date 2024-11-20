@@ -19,6 +19,7 @@ import {
 } from "./newsletter_n_contactform";
 import cartReducer from "./cart";
 
+import formSlice from "./myServices/index"
 
 // configure the store with all reducers
 export const store = configureStore({
@@ -38,8 +39,11 @@ export const store = configureStore({
     tabs: tabsSlice.reducer,
     cart: cartReducer,
     service: serviceSlice,
+    forms: formSlice
   },
 });
+
+
 
 // define RootState and AppDispatch types
 export type RootState = ReturnType<typeof store.getState>;

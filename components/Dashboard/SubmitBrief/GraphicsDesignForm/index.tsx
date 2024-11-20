@@ -4,7 +4,7 @@ import {
   graphicsDesignInitialValues,
   GraphicsDesignValues,
 } from "../shared/formTypes/graphicsDesign";
-import { useAppDispatch } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { FormikHelpers, useFormik } from "formik";
 import { addAlert } from "@/redux/alerts";
 import { graphicsDesignFormData } from "../shared/formData/graphicsDesign";
@@ -14,9 +14,17 @@ import FormFooter from "../shared/FormFooter";
 import InputFile from "@/components/Forms/InputFile";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import { FileUploadIcon } from "@/public/svgs";
+import { briefEndpoints } from "../shared/briefEndpoint";
+import useFileUpload from "@/hooks/UseFileUpload";
+import { formConfig } from "@/redux/myServices/formConfig";
+import { submitFormData } from "@/redux/myServices/features";
 
 function GraphicsDesignForm() {
   const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(
+    (state: any) => state.forms?.graphicsDesign?.isLoading,
+  );
+  const { handleFileUpload } = useFileUpload();
 
   // Define formik
   const formik = useFormik<GraphicsDesignValues>({
@@ -27,8 +35,27 @@ function GraphicsDesignForm() {
       { resetForm }: FormikHelpers<GraphicsDesignValues>,
     ) => {
       try {
-        console.log("Form submitted");
+        const config = formConfig.graphicsDesign;
+        if (!config) {
+          throw new Error("Form configuration not found");
+        }
+        const formPayload = config.constructPayload(values);
 
+        // Dispatch the thunk with endpoint and payload
+        const response = await dispatch(
+          submitFormData({
+            formName: "graphicsDesign", // Pass only formName
+            payload: formPayload, // Pass only the payload
+          }),
+        );
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Success",
+            subText: "Your graphics design brief has been submitted",
+            type: "success",
+          }),
+        );
         resetForm();
       } catch (error) {
         console.error("Error submitting form:", error);
@@ -36,7 +63,8 @@ function GraphicsDesignForm() {
           addAlert({
             id: "",
             headText: "Error",
-            subText: "Error submitting brief, please try again later",
+            subText:
+              "Error submitting graphics design brief, please try again later",
             type: "error",
           }),
         );
@@ -56,18 +84,16 @@ function GraphicsDesignForm() {
   } = formik;
 
   // HANDLE FILE UPLOAD ONCHANGE
-  function onFileChange(file: File | null, name: string) {
-    console.log(file);
-
-    // Write your logic for api upload here. The name parameter above is used to distinguish the api name for different form upload name since they share the same footer.
-    //----------------
-
-    // Then after getting the upload link, you set it to formik via the name here
-    // -----------
-    // if(formik){
-    //   formik.setFieldValue(name, uploadLink)
-    // }
-  }
+  const onFileChange = async (file: File | null, fieldName: string) => {
+    if (formik) {
+      await handleFileUpload(
+        file,
+        briefEndpoints.brandDesign,
+        fieldName,
+        formik,
+      );
+    }
+  };
   return (
     <form onSubmit={handleSubmit} className="noScrollbar w-full">
       <main className="w-full space-y-8">
@@ -117,7 +143,6 @@ function GraphicsDesignForm() {
                       showUploadButton={false}
                       parentClassNames="md:!flex-col"
                       buttonStyles="px-4"
-                      // error={errors}
                     />
                   )}
                 </div>
@@ -126,7 +151,12 @@ function GraphicsDesignForm() {
           );
         })}
       </main>
-      <FormFooter formik={formik} name="document" />
+      <FormFooter
+        formik={formik}
+        name="document"
+        endpoint={briefEndpoints.graphicsDesign}
+        isLoading={isLoading}
+      />
     </form>
   );
 }

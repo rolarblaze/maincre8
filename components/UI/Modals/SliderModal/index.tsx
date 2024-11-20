@@ -27,7 +27,7 @@ const SliderModal: React.FC<SliderModalProps> = ({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center">
+        <div className="fixed inset-0 z-40 flex items-center">
           {/* Backdrop */}
           <motion.div
             onClick={onClose}

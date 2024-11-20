@@ -207,7 +207,7 @@ export const digitalMarketFormData = [
     isCheckbox: true,
   },
   {
-    name: "digitalConsumer",
+    name: "digitalConsumerAction",
     type: "select",
     label: "What is the desired consumer action?",
     sublabel: "Select one",

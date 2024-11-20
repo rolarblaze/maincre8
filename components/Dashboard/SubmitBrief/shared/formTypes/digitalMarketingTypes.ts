@@ -5,7 +5,7 @@ export interface DigitalMarketingValues {
   digitalKeyMessage: string;
   digitalVoiceTone: string;
   digitalPlatform: string[];
-  digitalConsumer: string;
+  digitalConsumerAction: string;
   digitalCampaignDur: string;
   document: string;
 }
@@ -16,7 +16,7 @@ export const digitalMarketingInitialValues = {
   digitalKeyMessage: "",
   digitalVoiceTone: "",
   digitalPlatform: [],
-  digitalConsumer: "",
+  digitalConsumerAction: "",
   digitalCampaignDur: "",
   document: "",
 };
@@ -37,7 +37,7 @@ export const digitalMarketingFormSchema = Yup.object().shape({
     .of(Yup.string().required())
     .min(1, "At least one digital platform option is required")
     .required("Please select a digital platform option"),
-  digitalConsumer: Yup.string().required("Please select a consumer type"),
+  digitalConsumerAction: Yup.string().required("Please select a consumer type"),
   digitalCampaignDur: Yup.string()
     .required()
     .required("Please select a campaign duration option"),

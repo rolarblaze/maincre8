@@ -5,11 +5,13 @@ export interface BrandDesignValues {
   brandMarket: string[];
   brandPersonality: string;
   brandAsset: string;
+  brandUSP: string;
   brandDeliverable: string[];
   brandKPI: string[];
   brandCompetitors: string;
   brandCompetitorsDocument: string;
   brandGuidelines: string;
+  document: string;
 }
 
 export const brandDesignInitialValues = {
@@ -17,11 +19,13 @@ export const brandDesignInitialValues = {
   brandMarket: [],
   brandPersonality: "",
   brandAsset: "",
+  brandUSP: "",
   brandDeliverable: [],
   brandKPI: [],
   brandCompetitors: "",
   brandCompetitorsDocument: "",
   brandGuidelines: "",
+  document: "",
 };
 
 export const brandDesignFormSchema = Yup.object().shape({
@@ -33,6 +37,9 @@ export const brandDesignFormSchema = Yup.object().shape({
     .required("Please select a brand market"),
   brandPersonality: Yup.string().required("Please select a brand personality"),
   brandAsset: Yup.string().required("Please select a brand asset"),
+  brandUSP: Yup.string().required(
+    "Please type in a brand unique selling point",
+  ),
   brandDeliverable: Yup.array()
     .of(Yup.string().required())
     .min(1, "At least one brand deliverable option is required")
