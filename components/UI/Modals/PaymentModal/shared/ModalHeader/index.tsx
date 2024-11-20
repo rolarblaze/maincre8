@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
 
-function ModalHeader() {
-  return (
-    <div>ModalHeader</div>
-  )
+interface ModalHeaderProps {
+  icon: JSX.Element;
+  title: string;
+  subtitle: string;
 }
 
-export default ModalHeader
+function ModalHeader({ icon, title, subtitle }: ModalHeaderProps) {
+  return <div>ModalHeader</div>;
+}
+
+export default ModalHeader;

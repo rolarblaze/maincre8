@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
 
-function ModalBody() {
-  return (
-    <div>ModalBody</div>
-  )
+interface ModalBodyProps {
+  packageName?: string;
+  price?: string;
+  date?: string;
+  redirectLink?: string;
 }
 
-export default ModalBody
+function ModalBody({ packageName, price, date, redirectLink }: ModalBodyProps) {
+  return <div>ModalBody</div>;
+}
+
+export default ModalBody;

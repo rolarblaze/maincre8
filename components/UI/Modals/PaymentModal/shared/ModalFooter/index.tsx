@@ -1,9 +1,12 @@
-import React from 'react'
+import React from "react";
 
-function ModalFooter() {
-  return (
-    <div>ModalFooter</div>
-  )
+interface ModalFooterProps {
+  total: string;
+  redirectLink: string;
 }
 
-export default ModalFooter
+function ModalFooter({ total, redirectLink }: ModalFooterProps) {
+  return <div>ModalFooter</div>;
+}
+
+export default ModalFooter;
