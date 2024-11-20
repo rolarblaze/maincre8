@@ -13,10 +13,12 @@ function FormFooter({
   formik,
   name = "document",
   endpoint = "",
+  isLoading = false,
 }: {
   formik?: FormikProps<any>;
   name?: string;
   endpoint?: string;
+  isLoading?: boolean;
 }) {
   const { handleFileUpload } = useFileUpload();
 
@@ -43,6 +45,7 @@ function FormFooter({
         label="Submit a brief"
         type="submit"
         classNames="md:self-end w-auto py-2 px-4"
+        isLoading={isLoading}
       />
     </div>
   );

@@ -19,16 +19,13 @@ import useFileUpload from "@/hooks/UseFileUpload";
 import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
 
-
 function BrandDesignForm() {
   const dispatch = useAppDispatch();
-  const isLoading =  useAppSelector((state: any) => state.forms?.brandDesign?.isLoading);
+  const isLoading = useAppSelector(
+    (state: any) => state.forms?.brandDesign?.isLoading,
+  );
 
   const { handleFileUpload } = useFileUpload();
-
-
-  console.log(isLoading);
-
   // Define formik
   const formik = useFormik<BrandDesignValues>({
     initialValues: brandDesignInitialValues,
@@ -51,13 +48,22 @@ function BrandDesignForm() {
         // Dispatch the thunk with endpoint and payload
         const response = await dispatch(
           submitFormData({
-            formName: 'brandDesign',  // Pass only formName
-            payload: formPayload,  // Pass only the payload
-          })
+            formName: "brandDesign", // Pass only formName
+            payload: formPayload, // Pass only the payload
+          }),
         );
 
-        console.log("response", response)
-        resetForm();
+        console.log("response", response);
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Success",
+            subText: "Brief Successfully submitted!",
+            type: "success",
+          }),
+        );
+
+        // resetForm();
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(
@@ -89,7 +95,7 @@ function BrandDesignForm() {
       await handleFileUpload(
         file,
         briefEndpoints.brandDesign,
-        fieldName, 
+        fieldName,
         formik,
       );
     }
@@ -156,6 +162,7 @@ function BrandDesignForm() {
         formik={formik}
         name="document"
         endpoint={briefEndpoints.brandDesign}
+        isLoading={isLoading}
       />
     </form>
   );
