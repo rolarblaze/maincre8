@@ -4,7 +4,7 @@ import {
   graphicsDesignInitialValues,
   GraphicsDesignValues,
 } from "../shared/formTypes/graphicsDesign";
-import { useAppDispatch } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { FormikHelpers, useFormik } from "formik";
 import { addAlert } from "@/redux/alerts";
 import { graphicsDesignFormData } from "../shared/formData/graphicsDesign";
@@ -21,6 +21,7 @@ import { submitFormData } from "@/redux/myServices/features";
 
 function GraphicsDesignForm() {
   const dispatch = useAppDispatch();
+  const isLoading =  useAppSelector((state: any) => state.forms?.graphicsDesign?.isLoading);
   const { handleFileUpload } = useFileUpload();
 
   // Define formik

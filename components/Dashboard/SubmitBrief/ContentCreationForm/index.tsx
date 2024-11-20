@@ -1,4 +1,4 @@
-import { useAppDispatch } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { FormikHelpers, useFormik } from "formik";
 import React from "react";
 import {
@@ -17,6 +17,7 @@ import { submitFormData } from "@/redux/myServices/features";
 
 function ContentCreationForm() {
   const dispatch = useAppDispatch();
+  const isLoading =  useAppSelector((state: any) => state.forms?.contentCreation?.isLoading);
 
   // Define formik
   const formik = useFormik<ContentCreationValues>({

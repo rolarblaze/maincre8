@@ -6,7 +6,7 @@ import {
   digitalMarketingInitialValues,
   DigitalMarketingValues,
 } from "../shared/formTypes/digitalMarketingTypes";
-import { useAppDispatch } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { addAlert } from "@/redux/alerts";
 import { digitalMarketFormData } from "../shared/formData/digitalMarketing";
 import CustomDropdown from "@/components/Forms/CustomDropdown";
@@ -17,7 +17,8 @@ import { submitFormData } from "@/redux/myServices/features";
 
 function DigitalMarketForm() {
   const dispatch = useAppDispatch();
-
+  const isLoading =  useAppSelector((state: any) => state.forms?.digitalMarketing?.isLoading);
+ 
   // Define formik
   const formik = useFormik<DigitalMarketingValues>({
     initialValues: digitalMarketingInitialValues,

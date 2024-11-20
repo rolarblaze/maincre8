@@ -30,7 +30,6 @@ export const submitFormData = createAsyncThunk(
       }
 
       const response = await api.post(form.endpoint, payload);
-      console.log("Response from backend:", response.data);
 
       return { formName, data: response.data };
     } catch (error) {

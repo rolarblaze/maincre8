@@ -18,13 +18,16 @@ import { briefEndpoints } from "../shared/briefEndpoint";
 import useFileUpload from "@/hooks/UseFileUpload";
 import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
-import { useSelector } from "react-redux";
+
 
 function BrandDesignForm() {
   const dispatch = useAppDispatch();
-
+  const isLoading =  useAppSelector((state: any) => state.forms?.brandDesign?.isLoading);
 
   const { handleFileUpload } = useFileUpload();
+
+
+  console.log(isLoading);
 
   // Define formik
   const formik = useFormik<BrandDesignValues>({
@@ -52,6 +55,8 @@ function BrandDesignForm() {
             payload: formPayload,  // Pass only the payload
           })
         );
+
+        console.log("response", response)
         resetForm();
       } catch (error) {
         console.error("Error submitting form:", error);

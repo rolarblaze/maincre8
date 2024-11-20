@@ -1,12 +1,20 @@
 import { addAlert } from "@/redux/alerts";
 import { uploadDocument } from "@/redux/myServices/features";
-import { AppDispatch } from "@/redux/store";
+import { AppDispatch, RootState, useAppSelector } from "@/redux/store";
 import { FormikProps } from "formik";
 import { useDispatch } from "react-redux";
 
 const useFileUpload = () => {
   const dispatch = useDispatch<AppDispatch>();
 
+   // Select the loading state from Redux
+   const isLoading = useAppSelector((state: RootState) =>
+    Object.values(state.forms).some((form) => form.isLoading)
+  );
+
+
+  console.log("isloading..",  isLoading);
+ 
   const handleFileUpload = async (
     file: File | null,
     endpoint: string,
@@ -20,9 +28,10 @@ const useFileUpload = () => {
 
     const actionResult = await dispatch(uploadDocument({ formData, endpoint }));
 
+    console.log(actionResult.payload.detail);
+
     if (uploadDocument.fulfilled.match(actionResult)) {
-      const fileLink = actionResult.payload?.file_link; // Adjust based on your API response
-      console.log("File link received:", fileLink);
+      const fileLink = actionResult.payload?.file_link; 
 
       formik?.setFieldValue(fieldName, fileLink);
 
