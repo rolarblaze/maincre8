@@ -3,11 +3,12 @@ import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import InputFile from "@/components/Forms/InputFile";
 import { FileUploadIcon } from "@/public/svgs";
 import { uploadDocument } from "@/redux/myServices/features";
-import { useAppDispatch } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { FormikProps } from "formik";
 import React from "react";
 import { addAlert } from "@/redux/alerts";
 import useFileUpload from "../../../../../hooks/UseFileUpload";
+import { RootState } from "@reduxjs/toolkit/query";
 
 function FormFooter({
   formik,
@@ -21,6 +22,9 @@ function FormFooter({
   isLoading?: boolean;
 }) {
   const { handleFileUpload } = useFileUpload();
+//   const isLoading = useAppSelector((state: RootState) =>
+//     Object.values(state.forms).some((form) => form?.isLoading)
+//   );
 
   // HANDLE FILE UPLOAD ONCHANGE
   async function onFileChange(file: File | null) {
