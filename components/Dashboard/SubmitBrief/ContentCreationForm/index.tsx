@@ -132,10 +132,11 @@ function ContentCreationForm() {
         })}
       </main>
       <FormFooter
-        name="document"
         formik={formik}
+        name="document"
         endpoint={briefEndpoints.contentCreation}
         isLoading={isLoading}
+        fileId={"CCFooterFile"}
       />
     </form>
   );

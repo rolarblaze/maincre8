@@ -9,10 +9,10 @@ const AlertWrapper: React.FC = () => {
   const alerts = useAppSelector((state: RootState) => state.alerts.messages);
 
   return (
-    <div className="z-9999 fixed right-0 top-0 mt-12 rounded">
-      {alerts.map((alert) => (
+    <div className="fixed right-0 top-0 z-9999 mt-12 rounded">
+      {alerts.map((alert, alertIdx) => (
         <Alert
-          key={alert.id}
+          key={alertIdx}
           id={alert.id!}
           headText={alert.headText}
           subText={alert.subText}

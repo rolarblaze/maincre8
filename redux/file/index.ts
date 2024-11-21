@@ -1,18 +1,35 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
+import { uploadDocument } from "../myServices/features";
 import { RootState } from "../store";
-import { uploadFiles } from "./file";
 
 interface FileUploadState {
-  file: File | null;
-  status: "idle" | "loading" | "succeeded" | "failed";
-  error: string | null;
+  fileUrl: string | null;
+  fileName: string | null;
+  isLoading: boolean;
+  errorMessage: string | null;
 }
 
-const initialState: FileUploadState = {
-  file: null,
-  status: "idle",
-  error: null,
+// Default state for each fileId
+const defaultFileState: FileUploadState = {
+  fileUrl: null,
+  fileName: null,
+  isLoading: false,
+  errorMessage: null,
 };
+
+// This is our initial state.
+const initialState: Record<string, FileUploadState> = {};
+
+// Helper function to initialize state[fileId] if it doesn’t exist
+function getOrInitializeFileState(
+  state: Record<string, FileUploadState>,
+  fileId: string,
+) {
+  if (!state[fileId]) {
+    state[fileId] = { ...defaultFileState };
+  }
+  return state[fileId];
+}
 
 const fileUploadSlice = createSlice({
   name: "fileUpload",
@@ -20,27 +37,41 @@ const fileUploadSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(uploadFiles.pending, (state) => {
-        state.status = "loading";
-        state.error = null;
+      .addCase(uploadDocument.pending, (state, action) => {
+        const { fileId } = action.meta.arg;
+
+        console.log(fileId, "kkkk");
+        
+
+        const fileState = getOrInitializeFileState(state, fileId);
+
+        // Update properties for the pending state
+        fileState.isLoading = true;
+        fileState.fileUrl = null;
+        fileState.fileName = null;
       })
-      .addCase(uploadFiles.fulfilled, (state, action: PayloadAction<any>) => {
-        state.status = "succeeded";
-        state.file = action.payload;
-        state.error = null;
+      .addCase(uploadDocument.fulfilled, (state, action) => {
+        const { fileId } = action.meta.arg;
+        const fileState = getOrInitializeFileState(state, fileId);
+
+        // Update properties for the fulfilled state
+        fileState.isLoading = false;
+        fileState.fileUrl = action.payload.file_link;
+        fileState.errorMessage = null;
       })
-      .addCase(uploadFiles.rejected, (state, action: PayloadAction<any>) => {
-        state.status = "failed";
-        state.error = action.payload;
+      .addCase(uploadDocument.rejected, (state, action) => {
+        const { fileId } = action.meta.arg;
+        const fileState = getOrInitializeFileState(state, fileId);
+
+        // Update properties for the rejected state
+        fileState.isLoading = false;
+        fileState.errorMessage = action.payload as string;
       });
   },
 });
 
 export const fileUploadReducer = fileUploadSlice.reducer;
 
-// Selectors
-export const selectFileUploadStatus = (state: RootState) =>
-  state.fileUpload.status;
-export const selectFileUploadError = (state: RootState) =>
-  state.fileUpload.error;
-export const selectUploadedFile = (state: RootState) => state.fileUpload.file;
+// Selector with fallback for non-existent fileId
+export const selectFileUploadState = (state: RootState, fileId: string) =>
+  state.fileUpload[fileId] || defaultFileState;

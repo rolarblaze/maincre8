@@ -4,7 +4,7 @@ import {
   graphicsDesignInitialValues,
   GraphicsDesignValues,
 } from "../shared/formTypes/graphicsDesign";
-import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { FormikHelpers, useFormik } from "formik";
 import { addAlert } from "@/redux/alerts";
 import { graphicsDesignFormData } from "../shared/formData/graphicsDesign";
@@ -19,11 +19,19 @@ import useFileUpload from "@/hooks/UseFileUpload";
 import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
 import { handleFormModal } from "@/redux/myServices";
+import { selectFileUploadState } from "@/redux/file";
+import { useSelector } from "react-redux";
 
 function GraphicsDesignForm() {
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector(
+  const isFormLoading = useAppSelector(
     (state: any) => state.forms?.graphicsDesign?.isLoading,
+  );
+  const fileOneState = useSelector((state: RootState) =>
+    selectFileUploadState(state, "graphicsColorPaletteFile"),
+  );
+  const fileTwoState = useSelector((state: RootState) =>
+    selectFileUploadState(state, "graphicsReferencesFile"),
   );
   const { handleFileUpload } = useFileUpload();
 
@@ -88,11 +96,16 @@ function GraphicsDesignForm() {
   } = formik;
 
   // HANDLE FILE UPLOAD ONCHANGE
-  const onFileChange = async (file: File | null, fieldName: string) => {
+  const onFileChange = async (
+    file: File | null,
+    fileId: string,
+    fieldName: string,
+  ) => {
     if (formik) {
       await handleFileUpload(
         file,
         briefEndpoints.brandDesign,
+        fileId,
         fieldName,
         formik,
       );
@@ -142,11 +155,21 @@ function GraphicsDesignForm() {
                       name={`${data.name}Document`}
                       icon={<FileUploadIcon />}
                       onFileChange={(file: File | null) =>
-                        onFileChange(file, `${data.name}Document`)
+                        onFileChange(
+                          file,
+                          `${data.name}File`,
+                          `${data.name}Document`,
+                        )
                       }
+                      key={dataIdx}
                       showUploadButton={false}
                       parentClassNames="md:!flex-col"
                       buttonStyles="px-4"
+                      isLoading={
+                        `${data.name}File` === "graphicsColorPaletteFile"
+                          ? fileOneState.isLoading
+                          : fileTwoState.isLoading
+                      }
                     />
                   )}
                 </div>
@@ -159,7 +182,8 @@ function GraphicsDesignForm() {
         formik={formik}
         name="document"
         endpoint={briefEndpoints.graphicsDesign}
-        isLoading={isLoading}
+        isLoading={isFormLoading}
+        fileId={"GDFooterFile"}
       />
     </form>
   );

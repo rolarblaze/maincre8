@@ -7,15 +7,15 @@ import { useDispatch } from "react-redux";
 const useFileUpload = () => {
   const dispatch = useDispatch<AppDispatch>();
 
-   // Select the loading state from Redux
+  // Select the loading state from Redux
   //  const isLoading = useAppSelector((state: RootState) =>
   //   Object.values(state.forms).some((form) => form.isLoading)
   // );
 
- 
   const handleFileUpload = async (
     file: File | null,
     endpoint: string,
+    fileId: string,
     fieldName: string,
     formik: FormikProps<any>,
   ) => {
@@ -24,10 +24,12 @@ const useFileUpload = () => {
     const formData = new FormData();
     formData.append("file", file);
 
-    const actionResult = await dispatch(uploadDocument({ formData, endpoint }));
+    const actionResult = await dispatch(
+      uploadDocument({ formData, endpoint, fileId }),
+    );
 
     if (uploadDocument.fulfilled.match(actionResult)) {
-      const fileLink = actionResult.payload?.file_link; 
+      const fileLink = actionResult.payload?.file_link;
 
       formik?.setFieldValue(fieldName, fileLink);
 
@@ -47,7 +49,7 @@ const useFileUpload = () => {
 
       dispatch(
         addAlert({
-          id: "",
+          id: fileId,
           headText: "Error",
           subText: errorMessage,
           type: "error",

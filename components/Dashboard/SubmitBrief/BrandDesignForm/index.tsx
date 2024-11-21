@@ -93,11 +93,16 @@ function BrandDesignForm() {
   } = formik;
 
   // HANDLE FILE UPLOAD ONCHANGE
-  const onFileChange = async (file: File | null, fieldName: string) => {
+  const onFileChange = async (
+    file: File | null,
+    fileId: string,
+    fieldName: string,
+  ) => {
     if (formik) {
       await handleFileUpload(
         file,
         briefEndpoints.brandDesign,
+        fileId,
         fieldName,
         formik,
       );
@@ -147,7 +152,11 @@ function BrandDesignForm() {
                       name={`${data.name}Document`}
                       icon={<FileUploadIcon />}
                       onFileChange={(file: File | null) =>
-                        onFileChange(file, `${data.name}Document`)
+                        onFileChange(
+                          file,
+                          `${data.name}File`,
+                          `${data.name}Document`,
+                        )
                       }
                       showUploadButton={false}
                       parentClassNames="md:!flex-col"
@@ -165,6 +174,7 @@ function BrandDesignForm() {
         name="document"
         endpoint={briefEndpoints.brandDesign}
         isLoading={isLoading}
+        fileId="BDFooterFile"
       />
     </form>
   );

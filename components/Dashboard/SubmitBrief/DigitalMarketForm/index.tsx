@@ -129,6 +129,7 @@ function DigitalMarketForm() {
         formik={formik}
         endpoint={briefEndpoints.digitalMarketing}
         isLoading={isLoading}
+        fileId="DMFooterFile"
       />
     </form>
   );

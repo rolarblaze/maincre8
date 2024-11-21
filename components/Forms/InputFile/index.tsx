@@ -55,6 +55,8 @@ function InputFile({
     const file = event.target.files?.[0] || null;
     setSelectedFile(file);
 
+    console.log(isLoading, "kkkk");
+
     onFileChange?.(file);
   };
   return (
@@ -77,7 +79,7 @@ function InputFile({
             onKeyDown={onKeyDown}
             onClick={onClick}
             readOnly={readOnly}
-            disabled={disabled}
+            disabled={isLoading}
           />
 
           {/* Custom styled button */}
@@ -86,9 +88,13 @@ function InputFile({
             className={`flex cursor-pointer items-center justify-center gap-4 ${classNames}`}
           >
             {icon}
-            <span className="font-semibold text-grey900">
-              {selectedFile ? "Change File" : label}
-            </span>
+            {isLoading ? (
+              ""
+            ) : (
+              <span className="font-semibold text-grey900">
+                {selectedFile ? "Change File" : label}
+              </span>
+            )}
           </label>
 
           {/* Display file name or loader */}

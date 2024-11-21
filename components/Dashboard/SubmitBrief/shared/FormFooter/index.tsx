@@ -3,34 +3,41 @@ import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import InputFile from "@/components/Forms/InputFile";
 import { FileUploadIcon } from "@/public/svgs";
 import { uploadDocument } from "@/redux/myServices/features";
-import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { FormikProps } from "formik";
 import React from "react";
 import { addAlert } from "@/redux/alerts";
 import useFileUpload from "../../../../../hooks/UseFileUpload";
-import { RootState } from "@reduxjs/toolkit/query";
+import { useSelector } from "react-redux";
+import { selectFileUploadState } from "@/redux/file";
 
 function FormFooter({
   formik,
   name = "document",
   endpoint = "",
-  
+  fileId,
   isLoading = false,
 }: {
   formik?: FormikProps<any>;
   name?: string;
   endpoint?: string;
+  fileId: string;
   isLoading?: boolean;
 }) {
   const { handleFileUpload } = useFileUpload();
-//   const isLoading = useAppSelector((state: RootState) =>
-//     Object.values(state.forms).some((form) => form?.isLoading)
-//   );
+  // Use the selector to get the file upload state for the specific fileId
+  const fileState = useSelector((state: RootState) =>
+    selectFileUploadState(state, fileId),
+  );
+
+  // const { fileUploading } = useSelector(
+  //   (state: RootState) => state?.fileUpload,
+  // );
 
   // HANDLE FILE UPLOAD ONCHANGE
   async function onFileChange(file: File | null) {
     if (formik) {
-      await handleFileUpload(file, endpoint, name, formik);
+      await handleFileUpload(file, endpoint, fileId, name, formik); //order of parameters: file, endpoint, fileId, fieldName, formik
     }
   }
 
@@ -45,6 +52,7 @@ function FormFooter({
         onFileChange={(file: File | null) => onFileChange(file)}
         parentClassNames="md:!flex-col"
         buttonStyles="px-4"
+        isLoading={fileState?.isLoading}
       />
       <Button
         label="Submit a brief"

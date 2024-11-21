@@ -4,15 +4,10 @@ import { handleAxiosError } from "@/utils/helpers/general/errorHandler";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { formConfig } from "./formConfig";
 
-
-
-
-
 interface SubmitFormDataArgs {
   formName: string;
   payload: Record<string, any>;
 }
-
 
 // Reusable thunk for submitting form data to various endpoints
 
@@ -20,7 +15,7 @@ export const submitFormData = createAsyncThunk(
   "forms/submitFormData",
   async (
     { formName, payload }: { formName: keyof typeof formConfig; payload: any },
-    { rejectWithValue }
+    { rejectWithValue },
   ) => {
     try {
       const form = formConfig[formName];
@@ -36,18 +31,18 @@ export const submitFormData = createAsyncThunk(
       console.error("Error:", error);
       return rejectWithValue({ formName, error: handleAxiosError(error) });
     }
-  }
+  },
 );
-
-
-
-
 
 // Upload file
 export const uploadDocument = createAsyncThunk(
   "user/uploadDocument",
   async (
-    { formData, endpoint }: { formData: FormData; endpoint: string },
+    {
+      formData,
+      endpoint,
+      fileId,
+    }: { formData: FormData; endpoint: string; fileId: string },
     { rejectWithValue },
   ) => {
     try {
@@ -60,9 +55,19 @@ export const uploadDocument = createAsyncThunk(
           },
         },
       );
+      console.log(response.data);
+
       return response.data; // Return the uploaded file data
     } catch (error) {
       return rejectWithValue(handleAxiosError(error));
     }
   },
 );
+
+
+// detail: "Document successfully uploaded"
+
+// file_link: "https://sellcrea8api.nyc3.cdn.digitaloceanspaces.com/digital_marketing_brief/list_of_names_and_uni_EopUZlIURxYmUbxvDWFxbZsIdAVBfJ_digital_marketing_brief.pdf"
+
+// file_name:"list_of_names_and_uni_EopUZlIURxYmUbxvDWFxbZsIdAVBfJ_digital_marketing_brief.pdf"
+
