@@ -24,7 +24,7 @@ import { useSelector } from "react-redux";
 
 function GraphicsDesignForm() {
   const dispatch = useAppDispatch();
-  const isFormLoading = useAppSelector(
+  const isLoading = useAppSelector(
     (state: any) => state.forms?.graphicsDesign?.isLoading,
   );
   const fileOneState = useSelector((state: RootState) =>
@@ -182,7 +182,7 @@ function GraphicsDesignForm() {
         formik={formik}
         name="document"
         endpoint={briefEndpoints.graphicsDesign}
-        isLoading={isFormLoading}
+        isLoading={isLoading}
         fileId={"GDFooterFile"}
       />
     </form>

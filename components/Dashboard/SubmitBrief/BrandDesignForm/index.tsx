@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import React, { useState } from "react";
 import {
   brandDesignFormSchema,
@@ -19,11 +19,17 @@ import useFileUpload from "@/hooks/UseFileUpload";
 import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
 import { handleFormModal } from "@/redux/myServices";
+import { useSelector } from "react-redux";
+import { selectFileUploadState } from "@/redux/file";
 
 function BrandDesignForm() {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector(
     (state: any) => state.forms?.brandDesign?.isLoading,
+  );
+
+  const fileOneState = useSelector((state: RootState) =>
+    selectFileUploadState(state, "brandCompetitorsFile"),
   );
 
   const { handleFileUpload } = useFileUpload();
@@ -161,6 +167,7 @@ function BrandDesignForm() {
                       showUploadButton={false}
                       parentClassNames="md:!flex-col"
                       buttonStyles="px-4"
+                      isLoading={fileOneState.isLoading}
                     />
                   )}
                 </div>
