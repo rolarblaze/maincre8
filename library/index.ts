@@ -43,6 +43,7 @@ const assetLibrary = {
   celebrateImg: "/optimised/celebrate.png",
   brandImg: "/optimised/brand_img.webp",
   cartEmpty: "/images/cart-empty-state-icon.svg",
+  paymentBG: "/optimised/payment-bg.webp",
 
   // SVGS
   highlight: "/optimised/highlight.webp",
