@@ -8,22 +8,32 @@ interface FormState<T> {
   errorMessage: string | null;
   formData: T | null;
   uploadedFile: any | null; // Added for handling file uploads
+  isModalOpen: boolean;
+}
+
+interface ModalPayload {
+  isModalOpen: boolean;
+  formName: keyof typeof formConfig;
 }
 
 type FormsState = {
   [key in keyof typeof formConfig]: FormState<any>;
 };
 
-const initialState: FormsState = Object.keys(formConfig).reduce((state, key) => {
-  state[key as keyof typeof formConfig] = {
-    isLoading: false,
-    successMessage: null,
-    errorMessage: null,
-    formData: null,
-    uploadedFile: null, // Initialize uploadedFile to null
-  };
-  return state;
-}, {} as FormsState);
+const initialState: FormsState = Object.keys(formConfig).reduce(
+  (state, key) => {
+    state[key as keyof typeof formConfig] = {
+      isLoading: false,
+      successMessage: null,
+      errorMessage: null,
+      formData: null,
+      uploadedFile: null, // Initialize uploadedFile to null
+      isModalOpen: false,
+    };
+    return state;
+  },
+  {} as FormsState,
+);
 
 const formSlice = createSlice({
   name: "forms",
@@ -38,7 +48,14 @@ const formSlice = createSlice({
           errorMessage: null,
           formData: null,
           uploadedFile: null,
+          isModalOpen: true,
         };
+      }
+    },
+    handleFormModal: (state, action: PayloadAction<ModalPayload>) => {
+      const modalPayload = action.payload;
+      if (modalPayload) {
+        state[modalPayload.formName].isModalOpen = modalPayload.isModalOpen;
       }
     },
   },
@@ -58,8 +75,10 @@ const formSlice = createSlice({
         console.log("Data payload:", data);
         if (state[formName]) {
           state[formName].isLoading = false;
-          state[formName].successMessage = data.detail || "Form submitted successfully!";
+          state[formName].successMessage =
+            data.detail || "Form submitted successfully!";
           state[formName].formData = data;
+          state[formName].isModalOpen = false;
         }
       })
       .addCase(submitFormData.rejected, (state, action) => {
@@ -98,5 +117,5 @@ const formSlice = createSlice({
   },
 });
 
-export const { resetFormState } = formSlice.actions;
+export const { resetFormState, handleFormModal } = formSlice.actions;
 export default formSlice.reducer;
