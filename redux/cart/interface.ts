@@ -31,9 +31,20 @@ export interface CartItem {
         description: string;
     };
 }
+export interface RecommAddOns {
+    add_ons_id: number;
+    add_ons_name: string;
+    description: string;
+    price: number;
+    bundle: {
+        bundle_name: string;
+        bundle_id: number;
+    };
+}
 
 export interface GetCartItemsResponse {
     items: CartItem[];
+    recommended_addons: RecommAddOns[];
 }
 
 export interface ClearCartResponse {

@@ -2,22 +2,55 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { deleteCartItem } from "@/redux/cart/features";
+import { addAlert } from "@/redux/alerts";
 import { Modal } from "@/components";
 import { ArrowDown } from "@/public/icons";
 import { TrashIcon } from "@/public/svgs";
 import { getBackgroundClass, getImage } from "../../helperFunc";
 import SwitchPackageSection from "../SwitchPackageSection";
+import Spinner from "@/components/Spinner";
 
 interface Props {
   name: string;
   type: string;
   imageUrl: string;
+  cartItemId: number;
 }
 
-const CartItem: React.FC<Props> = ({ name, type, imageUrl }) => {
+const CartItem: React.FC<Props> = ({ name, type, imageUrl, cartItemId }) => {
+  const dispatch = useAppDispatch();
+  const [isDeleting, setIsDeleting] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
 
-  console.log("Rendering CartItem:", { name, type, imageUrl });
+  const handleDelete = async () => {
+    setIsDeleting(true);
+    try {
+      const response = await dispatch(deleteCartItem({ cartItemId })).unwrap();
+      dispatch(
+        addAlert({
+          id: `delete-cart-item-${cartItemId}`,
+          headText: "Item Removed",
+          subText: response.message,
+          type: "success",
+          autoClose: true,
+        })
+      );
+    } catch (error: any) {
+      dispatch(
+        addAlert({
+          id: `delete-cart-item-error-${cartItemId}`,
+          headText: "Error",
+          subText: error.message || "Failed to remove item from cart.",
+          type: "error",
+          autoClose: true,
+        })
+      );
+    } finally {
+      setIsDeleting(false); 
+    }
+  };
 
   return (
     <div className="flex w-full items-center justify-between py-5 sm:gap-8">
@@ -50,9 +83,13 @@ const CartItem: React.FC<Props> = ({ name, type, imageUrl }) => {
           <ArrowDown className="fill-grey300" />
         </button>
 
-        <button className="rounded-lg p-2 max-sm:pr-0 sm:bg-grey100">
-          <TrashIcon />
-        </button>
+        <div
+          onClick={handleDelete}
+          className="rounded-lg p-2 max-sm:pr-0 sm:bg-grey100"
+        >
+          {isDeleting ? <Spinner className="size-4" /> : <TrashIcon />}
+
+        </div>
       </div>
 
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)} className="">

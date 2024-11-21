@@ -79,6 +79,33 @@ export const getCartItems = createAsyncThunk<GetCartItemsResponse>(
     }
 );
 
+// Delete cart item
+export const deleteCartItem = createAsyncThunk<
+    { message: string },
+    { cartItemId: number }
+>(
+    "cart/deleteCartItem",
+    async ({ cartItemId }, { rejectWithValue }) => {
+        try {
+            const sessionId = localStorage.getItem("session_id");
+
+            if (!sessionId) {
+                throw new Error("Session ID not found. Please initialize the session first.");
+            }
+
+            // Make the DELETE request with the cart item ID and session ID
+            const response = await api.delete(`landingpage-cart/remove-from-cart/${cartItemId}`, {
+                data: { session_id: sessionId },
+            });
+
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(handleAxiosError(error));
+        }
+    }
+);
+
+
 // Clear Cart
 export const clearCart = createAsyncThunk<ClearCartResponse>(
     "cart/clearCart",
