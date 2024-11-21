@@ -72,16 +72,7 @@ function DigitalMarketForm() {
     },
   });
 
-  const {
-    values,
-    errors,
-    touched,
-    isSubmitting,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    setFieldValue,
-  } = formik;
+  const { values, errors, handleBlur, handleChange, handleSubmit } = formik;
 
   return (
     <form onSubmit={handleSubmit} className="noScrollbar w-full">

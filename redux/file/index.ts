@@ -40,9 +40,6 @@ const fileUploadSlice = createSlice({
       .addCase(uploadDocument.pending, (state, action) => {
         const { fileId } = action.meta.arg;
 
-        console.log(fileId, "kkkk");
-        
-
         const fileState = getOrInitializeFileState(state, fileId);
 
         // Update properties for the pending state

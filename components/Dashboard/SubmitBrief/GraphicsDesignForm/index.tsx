@@ -51,7 +51,7 @@ function GraphicsDesignForm() {
         const formPayload = config.constructPayload(values);
 
         // Dispatch the thunk with endpoint and payload
-        const response = await dispatch(
+        await dispatch(
           submitFormData({
             formName: "graphicsDesign", // Pass only formName
             payload: formPayload, // Pass only the payload
@@ -84,16 +84,7 @@ function GraphicsDesignForm() {
     },
   });
 
-  const {
-    values,
-    errors,
-    touched,
-    isSubmitting,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    setFieldValue,
-  } = formik;
+  const { values, errors, handleBlur, handleChange, handleSubmit } = formik;
 
   // HANDLE FILE UPLOAD ONCHANGE
   const onFileChange = async (
