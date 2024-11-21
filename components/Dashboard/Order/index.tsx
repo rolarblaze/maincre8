@@ -1,6 +1,6 @@
 // components/Dashboard/Order.tsx
 import React, { useState } from "react";
-
+import { useAppSelector } from "@/redux/store";
 export interface OrderProps {
   handleAddToCart: (
     package_id: number,
@@ -28,6 +28,8 @@ const Order: React.FC<OrderProps> = ({
   dateCompleted,
   status,
 }) => {
+  const { isAddingToCart } = useAppSelector((state) => state.cart);
+  
   return (
     <div className="hidden space-y-2 bg-white md:block">
       <h4 className="text-2xl font-semibold text-grey500">{dateBought}</h4>
@@ -80,11 +82,10 @@ const Order: React.FC<OrderProps> = ({
           </div>
           <div className="flex flex-1 items-center">
             <div
-              className={`rounded-xl px-3 py-1 text-xs font-semibold ${
-                status === "Completed"
-                  ? "bg-[#101928] text-white"
-                  : "bg-[#0F973D] text-white"
-              }`}
+              className={`rounded-xl px-3 py-1 text-xs font-semibold ${status === "Completed"
+                ? "bg-[#101928] text-white"
+                : "bg-[#0F973D] text-white"
+                }`}
             >
               {status === "Completed" ? "Completed" : "Active"}
             </div>
@@ -97,7 +98,7 @@ const Order: React.FC<OrderProps> = ({
               }
               className="ml-2 p-1 text-xs font-semibold text-primary500 hover:text-green-500 disabled:cursor-not-allowed disabled:text-slate-300"
             >
-              <span className="ml-1">+</span> Add to cart
+              <span className="ml-1">+</span> {isAddingToCart ? "Adding item.." : "Add to cart"}
             </button>
           </div>
         </div>

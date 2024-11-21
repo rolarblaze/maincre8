@@ -23,7 +23,7 @@ interface CartSectionProps {
 
 const CartSection: React.FC<CartSectionProps> = ({ cartItems }) => {
   const dispatch = useAppDispatch();
-  const loading = useAppSelector((state) => state.cart.loading);
+  const { isClearingCart } = useAppSelector((state) => state.cart);
 
   // Handle clear cart
   const handleClearCart = async () => {
@@ -65,6 +65,7 @@ const CartSection: React.FC<CartSectionProps> = ({ cartItems }) => {
         {cartItems.map((item) => (
           <CartItem
             key={item.id}
+            cartItemId={item.id}
             name={item.bundle.bundle_name}
             type={item.package.package_name}
             imageUrl={item.bundle.bundle_image_link}
@@ -80,9 +81,9 @@ const CartSection: React.FC<CartSectionProps> = ({ cartItems }) => {
         <button
           className="flex items-center justify-center gap-2 rounded-lg border border-grey100 px-4 py-2"
           onClick={handleClearCart}
-          disabled={loading}
+          disabled={isClearingCart}
         >
-          {loading ? (
+          {isClearingCart ? (
             <Spinner className="size-4" />
           ) : (
             <>
