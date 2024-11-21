@@ -90,12 +90,9 @@ function BrandDesignForm() {
   const {
     values,
     errors,
-    touched,
-    isSubmitting,
     handleBlur,
     handleChange,
     handleSubmit,
-    setFieldValue,
   } = formik;
 
   // HANDLE FILE UPLOAD ONCHANGE

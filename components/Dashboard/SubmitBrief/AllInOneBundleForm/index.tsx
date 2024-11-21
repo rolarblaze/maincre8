@@ -1,4 +1,4 @@
-import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { FormikHelpers, useFormik } from "formik";
 import React from "react";
 import {
@@ -19,11 +19,17 @@ import useFileUpload from "@/hooks/UseFileUpload";
 import { submitFormData } from "@/redux/myServices/features";
 import { formConfig } from "@/redux/myServices/formConfig";
 import { handleFormModal } from "@/redux/myServices";
+import { useSelector } from "react-redux";
+import { selectFileUploadState } from "@/redux/file";
 
 function AllInOneBundleForm() {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector(
     (state: any) => state.forms?.AllInOne?.isLoading,
+  );
+
+  const fileOneState = useSelector((state: RootState) =>
+    selectFileUploadState(state, "allInOneBrandColorFile"),
   );
   const { handleFileUpload } = useFileUpload();
 
@@ -72,16 +78,7 @@ function AllInOneBundleForm() {
     },
   });
 
-  const {
-    values,
-    errors,
-    touched,
-    isSubmitting,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    setFieldValue,
-  } = formik;
+  const { values, errors, handleBlur, handleChange, handleSubmit } = formik;
 
   // HANDLE FILE UPLOAD ONCHANGE
   const onFileChange = async (
@@ -151,7 +148,8 @@ function AllInOneBundleForm() {
                       showUploadButton={false}
                       parentClassNames="md:!flex-col"
                       buttonStyles="px-4"
-                      
+                      isLoading={fileOneState.isLoading}
+
                       // error={errors}
                     />
                   )}
