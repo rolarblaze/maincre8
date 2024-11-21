@@ -14,6 +14,7 @@ import FormFooter from "../shared/FormFooter";
 import { briefEndpoints } from "../shared/briefEndpoint";
 import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
+import { handleFormModal } from "@/redux/myServices";
 
 function ContentCreationForm() {
   const dispatch = useAppDispatch();
@@ -41,7 +42,7 @@ function ContentCreationForm() {
         const formPayload = config.constructPayload(payload);
 
         // Dispatch the thunk with endpoint and payload
-        const response = await dispatch(
+        await dispatch(
           submitFormData({
             formName: "contentCreation", // Pass only formName
             payload: formPayload, // Pass only the payload
@@ -58,6 +59,9 @@ function ContentCreationForm() {
         );
 
         resetForm();
+        dispatch(
+          handleFormModal({ formName: "contentCreation", isModalOpen: false }),
+        );
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(

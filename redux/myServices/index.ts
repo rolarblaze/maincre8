@@ -54,7 +54,8 @@ const formSlice = createSlice({
     },
     handleFormModal: (state, action: PayloadAction<ModalPayload>) => {
       const modalPayload = action.payload;
-      if (modalPayload) {
+
+      if (modalPayload.formName) {
         state[modalPayload.formName].isModalOpen = modalPayload.isModalOpen;
       }
     },

@@ -14,6 +14,7 @@ import Textarea from "@/components/Forms/Textarea";
 import { briefEndpoints } from "../shared/briefEndpoint";
 import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
+import { handleFormModal } from "@/redux/myServices";
 
 function DigitalMarketForm() {
   const dispatch = useAppDispatch();
@@ -37,7 +38,7 @@ function DigitalMarketForm() {
         const formPayload = config.constructPayload(values);
 
         // Dispatch the thunk with endpoint and payload
-        const response = await dispatch(
+        await dispatch(
           submitFormData({
             formName: "digitalMarketing", // Pass only formName
             payload: formPayload, // Pass only the payload
@@ -53,6 +54,9 @@ function DigitalMarketForm() {
           }),
         );
         resetForm();
+        dispatch(
+          handleFormModal({ formName: "digitalMarketing", isModalOpen: false }),
+        );
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(

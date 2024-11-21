@@ -18,6 +18,7 @@ import { briefEndpoints } from "../shared/briefEndpoint";
 import useFileUpload from "@/hooks/UseFileUpload";
 import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
+import { handleFormModal } from "@/redux/myServices";
 
 function GraphicsDesignForm() {
   const dispatch = useAppDispatch();
@@ -57,6 +58,9 @@ function GraphicsDesignForm() {
           }),
         );
         resetForm();
+        dispatch(
+          handleFormModal({ formName: "graphicsDesign", isModalOpen: false }),
+        );
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(

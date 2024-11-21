@@ -18,6 +18,7 @@ import { briefEndpoints } from "../shared/briefEndpoint";
 import useFileUpload from "@/hooks/UseFileUpload";
 import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
+import { handleFormModal } from "@/redux/myServices";
 
 function BrandDesignForm() {
   const dispatch = useAppDispatch();
@@ -46,7 +47,7 @@ function BrandDesignForm() {
         const formPayload = config.constructPayload(payload);
 
         // Dispatch the thunk with endpoint and payload
-        const response = await dispatch(
+        await dispatch(
           submitFormData({
             formName: "brandDesign", // Pass only formName
             payload: formPayload, // Pass only the payload
@@ -63,6 +64,9 @@ function BrandDesignForm() {
         );
 
         resetForm();
+        dispatch(
+          handleFormModal({ formName: "brandDesign", isModalOpen: false }),
+        );
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(

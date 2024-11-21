@@ -18,6 +18,7 @@ import { briefEndpoints } from "../shared/briefEndpoint";
 import useFileUpload from "@/hooks/UseFileUpload";
 import { submitFormData } from "@/redux/myServices/features";
 import { formConfig } from "@/redux/myServices/formConfig";
+import { handleFormModal } from "@/redux/myServices";
 
 function AllInOneBundleForm() {
   const dispatch = useAppDispatch();
@@ -39,7 +40,7 @@ function AllInOneBundleForm() {
         const formPayload = config.constructPayload(values);
 
         // Dispatch the thunk with endpoint and payload
-        const response = await dispatch(
+        await dispatch(
           submitFormData({
             formName: "AllInOne", // Pass only formName
             payload: formPayload, // Pass only the payload
@@ -55,6 +56,7 @@ function AllInOneBundleForm() {
           }),
         );
         resetForm();
+        dispatch(handleFormModal({ formName: "AllInOne", isModalOpen: false }));
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(
