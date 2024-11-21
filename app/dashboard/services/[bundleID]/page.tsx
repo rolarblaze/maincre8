@@ -45,9 +45,6 @@ const ServicePackagePage = () => {
         const initializeSessionResult =
           await dispatch(initializeSession()).unwrap();
         sessionId = initializeSessionResult.session_id;
-        console.log("Session initialized:", sessionId);
-      } else {
-        console.log("Using existing session_id from localStorage:", sessionId);
       }
 
       const result = await dispatch(
@@ -75,7 +72,6 @@ const ServicePackagePage = () => {
           autoClose: true,
         }),
       );
-      console.log(error);
     } finally {
       setAddingToCart({ ...addingToCart, [key]: false });
     }
