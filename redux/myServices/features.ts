@@ -1,4 +1,3 @@
-import { BrandDesignValues } from "@/components/Dashboard/SubmitBrief/shared/formTypes/brandDesignTypes";
 import api from "@/utils/axios/api";
 import { handleAxiosError } from "@/utils/helpers/general/errorHandler";
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -61,5 +60,3 @@ export const uploadDocument = createAsyncThunk(
     }
   },
 );
-
-

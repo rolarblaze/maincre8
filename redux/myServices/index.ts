@@ -90,31 +90,6 @@ const formSlice = createSlice({
             action.error?.message || "Error submitting form.";
         }
       });
-
-    // Handle file upload
-    // builder
-    //   .addCase(uploadDocument.pending, (state) => {
-    //     // Optional: Add global loading state if needed
-    //     Object.values(state).forEach((formState) => {
-    //       formState.isLoading = true;
-    //     });
-    //   })
-    //   .addCase(uploadDocument.fulfilled, (state, action: PayloadAction<any>) => {
-    //     console.log("File uploaded successfully", action.payload);
-    //     // Update specific uploadedFile in state
-    //     Object.values(state).forEach((formState) => {
-    //       formState.isLoading = false;
-    //       formState.uploadedFile = action.payload;
-    //       formState.successMessage = "File uploaded successfully!";
-    //     });
-    //   })
-    //   .addCase(uploadDocument.rejected, (state, action) => {
-    //     Object.values(state).forEach((formState) => {
-    //       formState.isLoading = false;
-    //       formState.errorMessage =
-    //         action.error?.message || "Error uploading file.";
-    //     });
-    //   });
   },
 });
 
