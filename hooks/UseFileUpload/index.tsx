@@ -1,16 +1,11 @@
 import { addAlert } from "@/redux/alerts";
 import { uploadDocument } from "@/redux/myServices/features";
-import { AppDispatch, RootState, useAppSelector } from "@/redux/store";
+import { AppDispatch } from "@/redux/store";
 import { FormikProps } from "formik";
 import { useDispatch } from "react-redux";
 
 const useFileUpload = () => {
   const dispatch = useDispatch<AppDispatch>();
-
-  // Select the loading state from Redux
-  //  const isLoading = useAppSelector((state: RootState) =>
-  //   Object.values(state.forms).some((form) => form.isLoading)
-  // );
 
   const handleFileUpload = async (
     file: File | null,

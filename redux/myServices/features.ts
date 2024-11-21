@@ -55,8 +55,6 @@ export const uploadDocument = createAsyncThunk(
           },
         },
       );
-      console.log(response.data);
-
       return response.data; // Return the uploaded file data
     } catch (error) {
       return rejectWithValue(handleAxiosError(error));
@@ -64,10 +62,4 @@ export const uploadDocument = createAsyncThunk(
   },
 );
 
-
-// detail: "Document successfully uploaded"
-
-// file_link: "https://sellcrea8api.nyc3.cdn.digitaloceanspaces.com/digital_marketing_brief/list_of_names_and_uni_EopUZlIURxYmUbxvDWFxbZsIdAVBfJ_digital_marketing_brief.pdf"
-
-// file_name:"list_of_names_and_uni_EopUZlIURxYmUbxvDWFxbZsIdAVBfJ_digital_marketing_brief.pdf"
 

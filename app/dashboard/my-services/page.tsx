@@ -66,14 +66,10 @@ const MyServices = () => {
 
   // Placeholder
   const handleNextService = () => {
-    console.log("clicked!");
 
     setCurrentServiceIndex((prevIndex) =>
       prevIndex === serviceKeys.length - 1 ? 0 : prevIndex + 1,
     );
-    // dispatch(
-    //   handleFormModal({ formName: currentServiceKey, isModalOpen: true }),
-    // );
   };
 
   if (loading)
