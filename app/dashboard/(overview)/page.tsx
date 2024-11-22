@@ -95,7 +95,7 @@ const Overview = () => {
   );
 
   return (
-    <div className="noScrollbar container mx-auto flex flex-col overflow-y-scroll pb-10 font-manrope [&>*]:px-6 xs:max-md:[&>*]:px-0">
+    <div className="noScrollbar container xs:max-md:min-w-full mx-auto flex flex-col overflow-y-scroll pb-10 font-manrope [&>*]:px-6 xs:max-md:[&>*]:px-0">
       <header className="space-y-2 pb-4 pt-10 xs:max-md:pt-5">
         <h2 className="text-2xl font-semibold leading-8 text-grey900">
           Welcome, {profile.first_name}
@@ -191,52 +191,56 @@ const Overview = () => {
       <section className="flex w-full flex-col gap-10">
         <div className="mt-10 space-y-2 xs:max-md:mt-5">
           <h3 className="lead text-2xl font-bold text-grey900">My Services</h3>
-          <div className="noScrollbar flex w-full gap-5 overflow-auto xs:max-md:max-w-full">
-            {hasTransactions ? (
-              orderHistory
-                .slice(0, 3)
-                ?.map((transaction, i) => (
-                  <ServiceCard
-                    key={i}
-                    bundleId={transaction.package.bundle.bundle_id}
-                    category={transaction.package.package_name}
-                    title={transaction.package.package_name}
-                    description={transaction.package.description}
-                    color={bundleColors[transaction.package.bundle.bundle_name]}
-                    id={transaction.package.package_id}
-                    transactionId={transaction.transaction_id}
-                    transactionDate={transaction.created_at}
-                    isPaid
-                  />
-                ))
-            ) : isLoading ? (
-              <Loader />
-            ) : (
-              services
-                .flatMap((service) =>
-                  service.bundles.flatMap((bundle) =>
-                    bundle.packages.flatMap((pkg) =>
-                      pkg.provisions.map((provision) => ({
-                        category: bundle.bundle_name,
-                        title: pkg.package_name,
-                        description: provision.description,
-                        color: bundleColors[bundle.bundle_name],
-                        id: pkg.package_id,
-                      })),
+          <div className="w-full overflow-auto noScrollbar">
+            <div className="flex gap-5">
+              {hasTransactions ? (
+                orderHistory
+                  .slice(0, 3)
+                  ?.map((transaction, i) => (
+                    <ServiceCard
+                      key={i}
+                      bundleId={transaction.package.bundle.bundle_id}
+                      category={transaction.package.package_name}
+                      title={transaction.package.package_name}
+                      description={transaction.package.description}
+                      color={
+                        bundleColors[transaction.package.bundle.bundle_name]
+                      }
+                      id={transaction.package.package_id}
+                      transactionId={transaction.transaction_id}
+                      transactionDate={transaction.created_at}
+                      isPaid
+                    />
+                  ))
+              ) : isLoading ? (
+                <Loader />
+              ) : (
+                services
+                  .flatMap((service) =>
+                    service.bundles.flatMap((bundle) =>
+                      bundle.packages.flatMap((pkg) =>
+                        pkg.provisions.map((provision) => ({
+                          category: bundle.bundle_name,
+                          title: pkg.package_name,
+                          description: provision.description,
+                          color: bundleColors[bundle.bundle_name],
+                          id: pkg.package_id,
+                        })),
+                      ),
                     ),
-                  ),
-                )
-                ?.map((card, index) => (
-                  <ServiceCard
-                    key={index}
-                    category={card.category}
-                    title={card.title}
-                    description={card.description}
-                    color={card.color}
-                    id={card.id}
-                  />
-                ))
-            )}
+                  )
+                  ?.map((card, index) => (
+                    <ServiceCard
+                      key={index}
+                      category={card.category}
+                      title={card.title}
+                      description={card.description}
+                      color={card.color}
+                      id={card.id}
+                    />
+                  ))
+              )}
+            </div>
           </div>
         </div>
 
@@ -264,9 +268,9 @@ const Overview = () => {
               </div>
             )}
 
-            {showAppointments && (
+            {(
               <div className="noScrollbar w-1/2 xs:max-md:w-full xs:max-md:overflow-auto">
-                <div className="flex w-full  h-full flex-col gap-4 rounded-lg border bg-white px-6 py-4 shadow-lg xs:max-md:min-w-[25rem]">
+                <div className="flex h-full w-full flex-col gap-4 rounded-lg border bg-white px-6 py-4 shadow-lg xs:max-md:min-w-[25rem]">
                   <h4 className="border-b border-grey200 pb-4 text-lg font-semibold text-grey900">
                     Upcoming Appointments
                   </h4>
