@@ -3,7 +3,7 @@ import Image from "next/image";
 
 const NotSureBanner = () => {
   return (
-    <section className="flex flex-wrap xs:max-lg:gap-5 items-center justify-between overflow-hidden rounded-2xl border bg-[#093160] bg-gridline bg-contain p-10">
+    <section className="flex flex-wrap xs:max-lg:gap-5 items-center justify-between overflow-hidden rounded-2xl border bg-[#093160] bg-gridline bg-contain p-10 xs:max-md:p-5">
       <div className="space-y-2">
         <h2 className="text-5xl font-medium text-white xs:max-md:text-3xl">
           Not sure of the{" "}
