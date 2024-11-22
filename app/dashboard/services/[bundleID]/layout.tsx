@@ -56,9 +56,9 @@ const ServicesPackageLayout: React.FC<ServicePackageLayoutProps> = ({
   }
 
   return (
-    <div className="font-manrope">
+    <div className="font-manrope pb-10">
       {/* HEADER */}
-      <header className="flex flex-col items-start justify-between px-6 pb-4">
+      <header className="flex flex-col items-start justify-between px-6 xs:max-md:px-0 pb-4">
         <button onClick={() => router.back()} className="my-6">
           {" "}
           ← Back to services

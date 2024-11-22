@@ -25,13 +25,13 @@ export default function TrackServicesLayout({
   }, [dispatch, trackingID]);
 
   return (
-    <section>
+    <section className="px-6">
       <button onClick={() => router.back()} className="my-6">
         {" "}
         ← Back to services
       </button>
 
-      <div className="my-5 space-y-2">
+      <div className="mb-5 space-y-2">
         <p>{trackingID}</p>
         <h1 className="text-2xl font-semibold text-[#101928]">
           {selectedBundle?.package.bundle.bundle_name}

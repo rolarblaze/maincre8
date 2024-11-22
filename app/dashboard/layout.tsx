@@ -91,7 +91,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
         )}
 
         {/* Main section */}
-        <div className="flex flex-1 flex-col">
+        <div className="flex w-full flex-1 flex-col">
           <MobileNav onClick={openSidebar} title={headerTitles[activeTab]} />
           {!isDynamicRoute && (
             <div>
@@ -104,7 +104,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
             </div>
           )}
           <main
-            className={`noScrollbar flex-1 overflow-y-auto p-6 xs:max-md:px-2 xs:max-md:py-3 border-t`}
+            className={`noScrollbar flex-1 w-full overflow-auto xs:max-md:px-2 xs:max-md:py-3 border-t`}
           >
             {children}
           </main>

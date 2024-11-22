@@ -123,7 +123,7 @@ const MyServices = () => {
           imgStyle=""
         />
       ) : (
-        <div className="noScrollbar flex flex-wrap w-full gap-5 ">
+        <div className="noScrollbar flex p-6 flex-wrap w-full gap-5 ">
           {orderHistory?.map((transaction, i) => (
             <ServiceCard
               key={i}

@@ -95,7 +95,7 @@ const Overview = () => {
   );
 
   return (
-    <div className="noScrollbar container xs:max-md:min-w-full mx-auto flex flex-col overflow-y-scroll pb-10 font-manrope [&>*]:px-6 xs:max-md:[&>*]:px-0">
+    <div className="noScrollbar container xs:max-md:min-w-full xs:max-md:mx-auto flex flex-col overflow-y-scroll pb-10 font-manrope [&>*]:pl-6  xs:max-md:[&>*]:px-0">
       <header className="space-y-2 pb-4 pt-10 xs:max-md:pt-5">
         <h2 className="text-2xl font-semibold leading-8 text-grey900">
           Welcome, {profile.first_name}
