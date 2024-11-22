@@ -1,5 +1,5 @@
-import { useAppDispatch } from "@/redux/store";
-import React from "react";
+import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
+import React, { useState } from "react";
 import {
   brandDesignFormSchema,
   brandDesignInitialValues,
@@ -14,22 +14,65 @@ import InputFile from "@/components/Forms/InputFile";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import { FileUploadIcon } from "@/public/svgs";
 import FormFooter from "../shared/FormFooter";
+import { briefEndpoints } from "../shared/briefEndpoint";
+import useFileUpload from "@/hooks/UseFileUpload";
+import { formConfig } from "@/redux/myServices/formConfig";
+import { submitFormData } from "@/redux/myServices/features";
+import { handleFormModal } from "@/redux/myServices";
+import { useSelector } from "react-redux";
+import { selectFileUploadState } from "@/redux/file";
 
 function BrandDesignForm() {
   const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(
+    (state: any) => state.forms?.brandDesign?.isLoading,
+  );
 
+  const fileOneState = useSelector((state: RootState) =>
+    selectFileUploadState(state, "brandCompetitorsFile"),
+  );
+
+  const { handleFileUpload } = useFileUpload();
   // Define formik
   const formik = useFormik<BrandDesignValues>({
     initialValues: brandDesignInitialValues,
     validationSchema: brandDesignFormSchema,
     onSubmit: async (
-      values,
+      payload,
+
       { resetForm }: FormikHelpers<BrandDesignValues>,
     ) => {
+      // HANDLE FORM SUBMISSION
       try {
-        console.log("Form submitted");
+        const config = formConfig.brandDesign;
+        if (!config) {
+          throw new Error("Form configuration not found");
+        }
+
+        // Construct payload using the config's logic
+        const formPayload = config.constructPayload(payload);
+
+        // Dispatch the thunk with endpoint and payload
+        await dispatch(
+          submitFormData({
+            formName: "brandDesign", // Pass only formName
+            payload: formPayload, // Pass only the payload
+          }),
+        );
+
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Success",
+            subText: "Your brand design brief has been submitted",
+            type: "success",
+          }),
+        );
 
         resetForm();
+        dispatch(
+          handleFormModal({ formName: "brandDesign", isModalOpen: false }),
+        );
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(
@@ -47,27 +90,27 @@ function BrandDesignForm() {
   const {
     values,
     errors,
-    touched,
-    isSubmitting,
     handleBlur,
     handleChange,
     handleSubmit,
-    setFieldValue,
   } = formik;
 
   // HANDLE FILE UPLOAD ONCHANGE
-  function onFileChange(file: File | null, name: string) {
-    console.log(file);
-
-    // Write your logic for api upload here. The name parameter above is used to distinguish the api name for different form upload name since they share the same footer.
-    //----------------
-
-    // Then after getting the upload link, you set it to formik via the name here
-    // -----------
-    // if(formik){
-    //   formik.setFieldValue(name, uploadLink)
-    // }
-  }
+  const onFileChange = async (
+    file: File | null,
+    fileId: string,
+    fieldName: string,
+  ) => {
+    if (formik) {
+      await handleFileUpload(
+        file,
+        briefEndpoints.brandDesign,
+        fileId,
+        fieldName,
+        formik,
+      );
+    }
+  };
   return (
     <form onSubmit={handleSubmit} className="noScrollbar w-full">
       <main className="w-full space-y-8">
@@ -112,12 +155,16 @@ function BrandDesignForm() {
                       name={`${data.name}Document`}
                       icon={<FileUploadIcon />}
                       onFileChange={(file: File | null) =>
-                        onFileChange(file, `${data.name}Document`)
+                        onFileChange(
+                          file,
+                          `${data.name}File`,
+                          `${data.name}Document`,
+                        )
                       }
                       showUploadButton={false}
                       parentClassNames="md:!flex-col"
                       buttonStyles="px-4"
-                      // error={errors}
+                      isLoading={fileOneState.isLoading}
                     />
                   )}
                 </div>
@@ -126,7 +173,13 @@ function BrandDesignForm() {
           );
         })}
       </main>
-      <FormFooter formik={formik} name="document" />
+      <FormFooter
+        formik={formik}
+        name="document"
+        endpoint={briefEndpoints.brandDesign}
+        isLoading={isLoading}
+        fileId="BDFooterFile"
+      />
     </form>
   );
 }

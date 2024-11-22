@@ -25,6 +25,7 @@ interface InputFileProps {
   parentClassNames?: string;
   buttonStyles?: string;
   showUploadButton?: boolean;
+  isLoading?: boolean;
 }
 
 function InputFile({
@@ -46,12 +47,15 @@ function InputFile({
   parentClassNames,
   buttonStyles,
   showUploadButton = true,
+  isLoading = false,
 }: InputFileProps) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
     setSelectedFile(file);
+
+    console.log(isLoading, "kkkk");
 
     onFileChange?.(file);
   };
@@ -75,7 +79,7 @@ function InputFile({
             onKeyDown={onKeyDown}
             onClick={onClick}
             readOnly={readOnly}
-            disabled={disabled}
+            disabled={isLoading}
           />
 
           {/* Custom styled button */}
@@ -84,16 +88,26 @@ function InputFile({
             className={`flex cursor-pointer items-center justify-center gap-4 ${classNames}`}
           >
             {icon}
-            <span className="font-semibold text-grey900">
-              {selectedFile ? "Change File" : label}
-            </span>
+            {isLoading ? (
+              ""
+            ) : (
+              <span className="font-semibold text-grey900">
+                {selectedFile ? "Change File" : label}
+              </span>
+            )}
           </label>
 
-          {/* Display file name */}
-          {selectedFile && (
-            <p className="self-center text-sm text-gray-500">
-              {selectedFile.name}
+          {/* Display file name or loader */}
+          {isLoading ? (
+            <p className="animate-pulse self-center text-sm text-gray-500">
+              uploading file...
             </p>
+          ) : (
+            selectedFile && (
+              <p className="self-center text-sm text-gray-500">
+                {selectedFile.name}
+              </p>
+            )
           )}
         </div>
         {error && <p className="text-center text-xs text-red-500">{error}</p>}
@@ -108,6 +122,7 @@ function InputFile({
             "!text-white !bg-grey500 !w-auto !py-2 !px-8",
             buttonStyles,
           )}
+          isLoading={isLoading}
           onClick={() => handleUpload && handleUpload(selectedFile)}
         />
       )}

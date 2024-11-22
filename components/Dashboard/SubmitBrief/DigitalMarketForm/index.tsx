@@ -6,14 +6,21 @@ import {
   digitalMarketingInitialValues,
   DigitalMarketingValues,
 } from "../shared/formTypes/digitalMarketingTypes";
-import { useAppDispatch } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { addAlert } from "@/redux/alerts";
 import { digitalMarketFormData } from "../shared/formData/digitalMarketing";
 import CustomDropdown from "@/components/Forms/CustomDropdown";
 import Textarea from "@/components/Forms/Textarea";
+import { briefEndpoints } from "../shared/briefEndpoint";
+import { formConfig } from "@/redux/myServices/formConfig";
+import { submitFormData } from "@/redux/myServices/features";
+import { handleFormModal } from "@/redux/myServices";
 
 function DigitalMarketForm() {
   const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(
+    (state: any) => state.forms?.digitalMarketing?.isLoading,
+  );
 
   // Define formik
   const formik = useFormik<DigitalMarketingValues>({
@@ -24,16 +31,40 @@ function DigitalMarketForm() {
       { resetForm }: FormikHelpers<DigitalMarketingValues>,
     ) => {
       try {
-        console.log("Form submitted");
+        const config = formConfig.digitalMarketing;
+        if (!config) {
+          throw new Error("Form configuration not found");
+        }
+        const formPayload = config.constructPayload(values);
 
+        // Dispatch the thunk with endpoint and payload
+        await dispatch(
+          submitFormData({
+            formName: "digitalMarketing", // Pass only formName
+            payload: formPayload, // Pass only the payload
+          }),
+        );
+
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Success",
+            subText: "Your digital marketing brief has been submitted",
+            type: "success",
+          }),
+        );
         resetForm();
+        dispatch(
+          handleFormModal({ formName: "digitalMarketing", isModalOpen: false }),
+        );
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(
           addAlert({
             id: "",
             headText: "Error",
-            subText: "Error submitting brief, please try again later",
+            subText:
+              "Error submitting digital marketing brief, please try again later",
             type: "error",
           }),
         );
@@ -41,16 +72,7 @@ function DigitalMarketForm() {
     },
   });
 
-  const {
-    values,
-    errors,
-    touched,
-    isSubmitting,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    setFieldValue,
-  } = formik;
+  const { values, errors, handleBlur, handleChange, handleSubmit } = formik;
 
   return (
     <form onSubmit={handleSubmit} className="noScrollbar w-full">
@@ -93,7 +115,13 @@ function DigitalMarketForm() {
           );
         })}
       </main>
-      <FormFooter name="document" formik={formik} />
+      <FormFooter
+        name="document"
+        formik={formik}
+        endpoint={briefEndpoints.digitalMarketing}
+        isLoading={isLoading}
+        fileId="DMFooterFile"
+      />
     </form>
   );
 }

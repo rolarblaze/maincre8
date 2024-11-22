@@ -122,6 +122,24 @@ export const allInOneContentStyleOptions = [
     value: "Humorous",
   },
 ];
+export const allInOneKeyDeliverablesOptions = [
+  {
+    label: "Final design files (JPG, PNG, PDF",
+    value: "Final design files (JPG, PNG, PDF",
+  },
+  {
+    label: "Source files (AI, PSD)",
+    value: "Source files (AI, PSD)",
+  },
+  {
+    label: "Mockups or proofs",
+    value: "Mockups or proofs",
+  },
+  {
+    label: "Print-ready files",
+    value: "Print-ready files",
+  },
+];
 
 export const allInOneMainGoalOptions = [
   {
@@ -238,6 +256,17 @@ export const allInOneFormData = [
     isRadio: false,
     isCheckbox: true,
   },
+  {
+    name: "allInOneKeyDeliverables",
+    type: "select",
+    label: "What are the key deliverables of this project?",
+    sublabel: "Select all that apply",
+    options: allInOneKeyDeliverablesOptions,
+    placeholder: "Select",
+    isRadio: false,
+    isCheckbox: true,
+  },
+
   {
     name: "allInOneMainGoal",
     type: "select",

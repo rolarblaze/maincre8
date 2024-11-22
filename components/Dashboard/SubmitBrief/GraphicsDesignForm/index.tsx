@@ -4,7 +4,7 @@ import {
   graphicsDesignInitialValues,
   GraphicsDesignValues,
 } from "../shared/formTypes/graphicsDesign";
-import { useAppDispatch } from "@/redux/store";
+import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { FormikHelpers, useFormik } from "formik";
 import { addAlert } from "@/redux/alerts";
 import { graphicsDesignFormData } from "../shared/formData/graphicsDesign";
@@ -14,9 +14,26 @@ import FormFooter from "../shared/FormFooter";
 import InputFile from "@/components/Forms/InputFile";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import { FileUploadIcon } from "@/public/svgs";
+import { briefEndpoints } from "../shared/briefEndpoint";
+import useFileUpload from "@/hooks/UseFileUpload";
+import { formConfig } from "@/redux/myServices/formConfig";
+import { submitFormData } from "@/redux/myServices/features";
+import { handleFormModal } from "@/redux/myServices";
+import { selectFileUploadState } from "@/redux/file";
+import { useSelector } from "react-redux";
 
 function GraphicsDesignForm() {
   const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(
+    (state: any) => state.forms?.graphicsDesign?.isLoading,
+  );
+  const fileOneState = useSelector((state: RootState) =>
+    selectFileUploadState(state, "graphicsColorPaletteFile"),
+  );
+  const fileTwoState = useSelector((state: RootState) =>
+    selectFileUploadState(state, "graphicsReferencesFile"),
+  );
+  const { handleFileUpload } = useFileUpload();
 
   // Define formik
   const formik = useFormik<GraphicsDesignValues>({
@@ -27,16 +44,39 @@ function GraphicsDesignForm() {
       { resetForm }: FormikHelpers<GraphicsDesignValues>,
     ) => {
       try {
-        console.log("Form submitted");
+        const config = formConfig.graphicsDesign;
+        if (!config) {
+          throw new Error("Form configuration not found");
+        }
+        const formPayload = config.constructPayload(values);
 
+        // Dispatch the thunk with endpoint and payload
+        await dispatch(
+          submitFormData({
+            formName: "graphicsDesign", // Pass only formName
+            payload: formPayload, // Pass only the payload
+          }),
+        );
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Success",
+            subText: "Your graphics design brief has been submitted",
+            type: "success",
+          }),
+        );
         resetForm();
+        dispatch(
+          handleFormModal({ formName: "graphicsDesign", isModalOpen: false }),
+        );
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(
           addAlert({
             id: "",
             headText: "Error",
-            subText: "Error submitting brief, please try again later",
+            subText:
+              "Error submitting graphics design brief, please try again later",
             type: "error",
           }),
         );
@@ -44,30 +84,24 @@ function GraphicsDesignForm() {
     },
   });
 
-  const {
-    values,
-    errors,
-    touched,
-    isSubmitting,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    setFieldValue,
-  } = formik;
+  const { values, errors, handleBlur, handleChange, handleSubmit } = formik;
 
   // HANDLE FILE UPLOAD ONCHANGE
-  function onFileChange(file: File | null, name: string) {
-    console.log(file);
-
-    // Write your logic for api upload here. The name parameter above is used to distinguish the api name for different form upload name since they share the same footer.
-    //----------------
-
-    // Then after getting the upload link, you set it to formik via the name here
-    // -----------
-    // if(formik){
-    //   formik.setFieldValue(name, uploadLink)
-    // }
-  }
+  const onFileChange = async (
+    file: File | null,
+    fileId: string,
+    fieldName: string,
+  ) => {
+    if (formik) {
+      await handleFileUpload(
+        file,
+        briefEndpoints.brandDesign,
+        fileId,
+        fieldName,
+        formik,
+      );
+    }
+  };
   return (
     <form onSubmit={handleSubmit} className="noScrollbar w-full">
       <main className="w-full space-y-8">
@@ -112,12 +146,21 @@ function GraphicsDesignForm() {
                       name={`${data.name}Document`}
                       icon={<FileUploadIcon />}
                       onFileChange={(file: File | null) =>
-                        onFileChange(file, `${data.name}Document`)
+                        onFileChange(
+                          file,
+                          `${data.name}File`,
+                          `${data.name}Document`,
+                        )
                       }
+                      key={dataIdx}
                       showUploadButton={false}
                       parentClassNames="md:!flex-col"
                       buttonStyles="px-4"
-                      // error={errors}
+                      isLoading={
+                        `${data.name}File` === "graphicsColorPaletteFile"
+                          ? fileOneState.isLoading
+                          : fileTwoState.isLoading
+                      }
                     />
                   )}
                 </div>
@@ -126,7 +169,13 @@ function GraphicsDesignForm() {
           );
         })}
       </main>
-      <FormFooter formik={formik} name="document" />
+      <FormFooter
+        formik={formik}
+        name="document"
+        endpoint={briefEndpoints.graphicsDesign}
+        isLoading={isLoading}
+        fileId={"GDFooterFile"}
+      />
     </form>
   );
 }
