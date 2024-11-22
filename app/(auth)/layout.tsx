@@ -34,7 +34,7 @@ const SingleSignOnSection = () => {
                 <figure className="center relative size-5">
                   <Image fill={true} src={sso.icon} alt={`${sso.label} Icon`} />
                 </figure>
-                <p className="text-[16px] font-semibold text-[#344054]">
+                <p className="text-[16px] font-semibold text-[#344054] xs:max-md:hidden">
                   {sso.label}
                 </p>
               </Link>
@@ -88,10 +88,10 @@ const AuthPageLayout: FC<Props> = ({ children }) => {
     pathname === "/forgot-password" ? "max-w-3xl" : "max-w-[592px]";
 
   return (
-    <PageLayout className="relative w-full bg-[#F7F9FC] pt-10">
+    <PageLayout className="relative w-full bg-[#F7F9FC] pt-10 xs:max-md:pt-2">
       <div className="mx-auto flex w-full flex-col gap-5">
         <div
-          className={`mx-auto min-w-[40%] rounded-[10px] border border-[#D0D5DD] bg-white px-7 py-8`}
+          className={`mx-auto min-w-[40%] xs:max-md:w-full xs:max-md:min-w-0 rounded-[10px] border border-[#D0D5DD] bg-white px-7 py-8 xs:max-md:px-3 `}
         >
           <div className="flex flex-col gap-4 text-center">{children}</div>
 

@@ -8,7 +8,7 @@ import {
 
 export const getBackgroundClass = (title: string) => {
   switch (title) {
-    case "Brand Design":
+    case "Brand Identity Development":
       return "bg-error-50";
     case "Graphic Design":
       return "bg-warning-50";

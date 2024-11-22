@@ -1,4 +1,5 @@
 import React from "react";
+import { useAppSelector } from "@/redux/store";
 import { OrderProps } from "../Order";
 
 const MobileOrder: React.FC<OrderProps> = ({
@@ -12,6 +13,8 @@ const MobileOrder: React.FC<OrderProps> = ({
   dateCompleted,
   status,
 }) => {
+  const { isAddingToCart } = useAppSelector((state) => state.cart);
+  
   return (
     <div className="space-y-4 bg-white md:hidden">
       <h4 className="text-base font-semibold text-grey500 md:text-2xl">
@@ -75,7 +78,7 @@ const MobileOrder: React.FC<OrderProps> = ({
               }
               className="ml-2 text-nowrap p-1 text-sm font-semibold text-primary500 hover:text-green-500 disabled:cursor-not-allowed disabled:text-slate-300"
             >
-              <span className="ml-1">+</span> Add to cart
+              <span className="ml-1">+</span> {isAddingToCart ? "Adding item.." : "Add to cart"}
             </button>
           </div>
         </div>

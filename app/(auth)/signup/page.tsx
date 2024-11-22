@@ -54,7 +54,7 @@ export default function Signup() {
       setUserTokenCookie(accessToken);
       router.push("/dashboard");
     }
-  }, [router]);
+  }, [router])
 
   const formik = useFormik<SignUpFormValues>({
     initialValues: {
@@ -139,7 +139,7 @@ export default function Signup() {
       </h3>
 
       <form onSubmit={formik.handleSubmit} className="mt-5 space-y-5">
-        <div className="flex gap-5">
+        <div className="flex xs:max-md:flex-col gap-5">
           <InputField
             label="First name"
             type="text"
@@ -209,7 +209,7 @@ export default function Signup() {
         />
 
         {/* Password Match Criteria */}
-        <div className="center -mt-5 gap-2">
+        <div className="center flex-wrap -mt-5 gap-2">
           {passwordCriteria.map((criterion, index) => {
             return (
               <div
@@ -230,7 +230,7 @@ export default function Signup() {
                   )}
                 </div>
 
-                <p className="text-sm font-medium leading-5 text-[#98A2B3]">
+                <p className="text-sm text-nowrap font-medium leading-5 text-[#98A2B3]">
                   {criterion.label}
                 </p>
               </div>

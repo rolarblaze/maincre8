@@ -13,20 +13,31 @@ import assetLibrary from "@/library";
 
 const CartPage = () => {
   const dispatch = useAppDispatch();
-  const { cartItems, loading, error } = useAppSelector((state) => state.cart);
+  const { cartItems, recommendedAddOns, isGettingCartItems, error } = useAppSelector((state) => state.cart);
 
   useEffect(() => {
-    console.log("Fetching cart items...");
     dispatch(getCartItems())
       .unwrap()
-      .then(() => console.log("Cart items fetched successfully"))
-      .catch((err) => console.error("Error fetching cart items:", err));
   }, [dispatch]);
 
-  // Extract add-ons from cart items
-  const addOns = cartItems.map((item) => ({
-    type: item.bundle.bundle_name,
-    recommendations: item.addons,
+  // Group the recommended_addons by their bundle names
+  const groupedAddOns = recommendedAddOns.reduce((acc: Record<string, any[]>, addon) => {
+    const bundleName = addon.bundle.bundle_name;
+    if (!acc[bundleName]) {
+      acc[bundleName] = [];
+    }
+    acc[bundleName].push({
+      id: addon.add_ons_id,
+      name: addon.add_ons_name,
+      feature: addon.description,
+      price: addon.price,
+    });
+    return acc;
+  }, {});
+
+  const addOns = Object.keys(groupedAddOns).map((bundleName) => ({
+    type: bundleName,
+    recommendations: groupedAddOns[bundleName],
   }));
 
 
@@ -37,8 +48,8 @@ const CartPage = () => {
   return (
     <PageLayout className="full-width content-grid min-h-[calc(100dvh-4rem)] justify-items-center sm:bg-[#F7F9FC]">
 
-      {loading ? (
-        <div className="flex items-center justify-center min-h-[50vh]">
+      {isGettingCartItems ? (
+        <div className="mx-auto flex items-center justify-center min-h-[50vh]">
           <Spinner />
         </div>
       ) : error ? (
@@ -63,7 +74,7 @@ const CartPage = () => {
           />
         </div>
       ) : (
-        <div className="h-fit space-y-10 bg-white p-8 font-manrope max-sm:px-0 sm:my-10 sm:rounded-2xl lg:w-[50rem]">
+        <div className="max-w-[900px] w-full h-fit space-y-10 bg-white p-8 font-manrope max-sm:px-0 sm:my-10 sm:rounded-2xl ">
           <h2 className="text-center text-3.5xl font-semibold leading-10 text-grey900">
             Cart
           </h2>
