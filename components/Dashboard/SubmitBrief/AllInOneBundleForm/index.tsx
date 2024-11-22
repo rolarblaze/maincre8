@@ -1,4 +1,4 @@
-import { useAppDispatch } from "@/redux/store";
+import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { FormikHelpers, useFormik } from "formik";
 import React from "react";
 import {
@@ -14,9 +14,24 @@ import InputFile from "@/components/Forms/InputFile";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import { FileUploadIcon } from "@/public/svgs";
 import FormFooter from "../shared/FormFooter";
+import { briefEndpoints } from "../shared/briefEndpoint";
+import useFileUpload from "@/hooks/UseFileUpload";
+import { submitFormData } from "@/redux/myServices/features";
+import { formConfig } from "@/redux/myServices/formConfig";
+import { handleFormModal } from "@/redux/myServices";
+import { useSelector } from "react-redux";
+import { selectFileUploadState } from "@/redux/file";
 
 function AllInOneBundleForm() {
   const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(
+    (state: any) => state.forms?.AllInOne?.isLoading,
+  );
+
+  const fileOneState = useSelector((state: RootState) =>
+    selectFileUploadState(state, "allInOneBrandColorFile"),
+  );
+  const { handleFileUpload } = useFileUpload();
 
   // Define formik
   const formik = useFormik<AllInOneValues>({
@@ -24,16 +39,38 @@ function AllInOneBundleForm() {
     validationSchema: allInOneFormSchema,
     onSubmit: async (values, { resetForm }: FormikHelpers<AllInOneValues>) => {
       try {
-        console.log("Form submitted");
+        const config = formConfig.AllInOne;
+        if (!config) {
+          throw new Error("Form configuration not found");
+        }
+        const formPayload = config.constructPayload(values);
 
+        // Dispatch the thunk with endpoint and payload
+        await dispatch(
+          submitFormData({
+            formName: "AllInOne", // Pass only formName
+            payload: formPayload, // Pass only the payload
+          }),
+        );
+
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Success",
+            subText: "Your all-in-one brief has been submitted",
+            type: "success",
+          }),
+        );
         resetForm();
+        dispatch(handleFormModal({ formName: "AllInOne", isModalOpen: false }));
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(
           addAlert({
             id: "",
             headText: "Error",
-            subText: "Error submitting brief, please try again later",
+            subText:
+              "Error submitting digital marketing brief, please try again later",
             type: "error",
           }),
         );
@@ -41,30 +78,24 @@ function AllInOneBundleForm() {
     },
   });
 
-  const {
-    values,
-    errors,
-    touched,
-    isSubmitting,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    setFieldValue,
-  } = formik;
+  const { values, errors, handleBlur, handleChange, handleSubmit } = formik;
 
   // HANDLE FILE UPLOAD ONCHANGE
-  function onFileChange(file: File | null, name: string) {
-    console.log(file);
-
-    // Write your logic for api upload here. The name parameter above is used to distinguish the api name for different form upload name since they share the same footer.
-    //----------------
-
-    // Then after getting the upload link, you set it to formik via the name here
-    // -----------
-    // if(formik){
-    //   formik.setFieldValue(name, uploadLink)
-    // }
-  }
+  const onFileChange = async (
+    file: File | null,
+    fileId: string,
+    fieldName: string,
+  ) => {
+    if (formik) {
+      await handleFileUpload(
+        file,
+        briefEndpoints.allInOne,
+        fileId,
+        fieldName,
+        formik,
+      );
+    }
+  };
   return (
     <form onSubmit={handleSubmit} className="noScrollbar w-full">
       <main className="w-full space-y-8">
@@ -108,11 +139,17 @@ function AllInOneBundleForm() {
                       name={`${data.name}Document`}
                       icon={<FileUploadIcon />}
                       onFileChange={(file: File | null) =>
-                        onFileChange(file, `${data.name}Document`)
+                        onFileChange(
+                          file,
+                          `${data.name}File`,
+                          `${data.name}Document`,
+                        )
                       }
                       showUploadButton={false}
                       parentClassNames="md:!flex-col"
                       buttonStyles="px-4"
+                      isLoading={fileOneState.isLoading}
+
                       // error={errors}
                     />
                   )}
@@ -122,7 +159,13 @@ function AllInOneBundleForm() {
           );
         })}
       </main>
-      <FormFooter formik={formik} name="document" />
+      <FormFooter
+        formik={formik}
+        name="document"
+        endpoint={briefEndpoints.allInOne}
+        isLoading={isLoading}
+        fileId="AIFooterFile"
+      />
     </form>
   );
 }

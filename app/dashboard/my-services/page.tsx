@@ -8,6 +8,8 @@ import DigitalMarketForm from "@/components/Dashboard/SubmitBrief/DigitalMarketF
 import GraphicsDesignForm from "@/components/Dashboard/SubmitBrief/GraphicsDesignForm";
 import BusinessBriefHeader from "@/components/Dashboard/SubmitBrief/shared/BusinessBriefHeader";
 import SliderModal from "@/components/UI/Modals/SliderModal";
+import { handleFormModal } from "@/redux/myServices";
+import { formConfig } from "@/redux/myServices/formConfig";
 import { getUserOrderHistory } from "@/redux/servicesTracker/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import React, { useEffect, useState } from "react";
@@ -17,19 +19,13 @@ const MyServices = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentServiceIndex, setCurrentServiceIndex] = useState(-1);
   const { orderHistory, loading } = useAppSelector((state) => state.services);
-
   const dispatch = useAppDispatch();
+
+  const bundleColors: { [key: string]: string } = {};
 
   useEffect(() => {
     dispatch(getUserOrderHistory());
   }, [dispatch]);
-
-  const bundleColors: { [key: string]: string } = {};
-
-  // Placeholder
-  function handleClose() {
-    setIsOpen(false);
-  }
 
   // Placeholder
   const servicesObj = {
@@ -37,23 +33,47 @@ const MyServices = () => {
     graphicsDesign: "Graphics Design",
     brandDesign: "Brand Design",
     contentCreation: "Content Creation",
-    allInOne: "All-In-One Bundle",
+    AllInOne: "All-In-One Bundle",
   };
 
-  const serviceKeys = Object.keys(servicesObj);
+  const serviceKeys = Object.keys(servicesObj) as Array<
+    keyof typeof formConfig
+  >;
+  // // Placeholder
+  const currentServiceKey = serviceKeys[currentServiceIndex];
+
+  const currentServiceTitle =
+    servicesObj[currentServiceKey as keyof typeof servicesObj];
+
+  // Effect to open modal whenever `currentServiceIndex` changes
+  useEffect(() => {
+    if (currentServiceKey) {
+      dispatch(
+        handleFormModal({ formName: currentServiceKey, isModalOpen: true }),
+      );
+    }
+  }, [currentServiceKey, dispatch]);
+
+  // Access the isModalOpen state for the current service form
+  const isModalOpen = useAppSelector(
+    (state) => currentServiceKey && state.forms[currentServiceKey]?.isModalOpen,
+  );
+
+  // Placeholder
+  const handleClose = () => {
+    dispatch(
+      handleFormModal({ formName: currentServiceKey, isModalOpen: false }),
+    );
+  };
 
   // Placeholder
   const handleNextService = () => {
+
     setCurrentServiceIndex((prevIndex) =>
       prevIndex === serviceKeys.length - 1 ? 0 : prevIndex + 1,
     );
-    setIsOpen(true);
   };
 
-  // // Placeholder
-  const currentServiceKey = serviceKeys[currentServiceIndex];
-  const currentServiceTitle =
-    servicesObj[currentServiceKey as keyof typeof servicesObj];
 
 
   if (loading)
@@ -72,7 +92,7 @@ const MyServices = () => {
           onClick={handleNextService}
         />
         <SliderModal
-          isOpen={isOpen}
+          isOpen={isModalOpen}
           onClose={handleClose}
           title="Digital Marketing Brief Submission Form"
           cancelBtnStyles="border-none top-1 right-6 md:top-5 md:right-10"

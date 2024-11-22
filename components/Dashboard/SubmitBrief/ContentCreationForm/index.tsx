@@ -1,4 +1,4 @@
-import { useAppDispatch } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { FormikHelpers, useFormik } from "formik";
 import React from "react";
 import {
@@ -11,29 +11,65 @@ import { contentCreationFormData } from "../shared/formData/contentCreation";
 import CustomDropdown from "@/components/Forms/CustomDropdown";
 import Textarea from "@/components/Forms/Textarea";
 import FormFooter from "../shared/FormFooter";
+import { briefEndpoints } from "../shared/briefEndpoint";
+import { formConfig } from "@/redux/myServices/formConfig";
+import { submitFormData } from "@/redux/myServices/features";
+import { handleFormModal } from "@/redux/myServices";
 
 function ContentCreationForm() {
   const dispatch = useAppDispatch();
+  const isLoading = useAppSelector(
+    (state: any) => state.forms?.contentCreation?.isLoading,
+  );
 
   // Define formik
   const formik = useFormik<ContentCreationValues>({
     initialValues: contentCreationInitialValues,
     validationSchema: contentCreationFormSchema,
     onSubmit: async (
-      values,
+      payload,
+
       { resetForm }: FormikHelpers<ContentCreationValues>,
     ) => {
+      // HANDLE FORM SUBMISSION
       try {
-        console.log("Form submitted");
+        const config = formConfig.contentCreation;
+        if (!config) {
+          throw new Error("Form configuration not found");
+        }
+
+        // Construct payload using the config's logic
+        const formPayload = config.constructPayload(payload);
+
+        // Dispatch the thunk with endpoint and payload
+        await dispatch(
+          submitFormData({
+            formName: "contentCreation", // Pass only formName
+            payload: formPayload, // Pass only the payload
+          }),
+        );
+
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Success",
+            subText: "Your content creation brief has been submitted",
+            type: "success",
+          }),
+        );
 
         resetForm();
+        dispatch(
+          handleFormModal({ formName: "contentCreation", isModalOpen: false }),
+        );
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(
           addAlert({
             id: "",
             headText: "Error",
-            subText: "Error submitting brief, please try again later",
+            subText:
+              "Error submitting  content creation brief, please try again later",
             type: "error",
           }),
         );
@@ -41,16 +77,7 @@ function ContentCreationForm() {
     },
   });
 
-  const {
-    values,
-    errors,
-    touched,
-    isSubmitting,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    setFieldValue,
-  } = formik;
+  const { values, errors, handleBlur, handleChange, handleSubmit } = formik;
 
   return (
     <form onSubmit={handleSubmit} className="noScrollbar w-full">
@@ -95,7 +122,13 @@ function ContentCreationForm() {
           );
         })}
       </main>
-      <FormFooter name="document" formik={formik} />
+      <FormFooter
+        formik={formik}
+        name="document"
+        endpoint={briefEndpoints.contentCreation}
+        isLoading={isLoading}
+        fileId={"CCFooterFile"}
+      />
     </form>
   );
 }
