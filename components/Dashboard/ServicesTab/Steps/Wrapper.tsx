@@ -46,21 +46,21 @@ const WrapperComponent: React.FC<CallComponentProps> = ({
 
   return (
     <div className="flex items-center">
-      <div className="mx-auto w-[70px] h-[70px] grid place-items-center">
+      <div className="mx-auto w-[70px] h-[70px] xs:max-md:size-8 grid place-items-center">
         <CheckboxIcon
           fillColor={iconFill}
-          className="size-8"
+          className="size-8 xs:max-md:size-5"
           unchecked={iconCheck}
           disabled
         />
       </div>
 
       <div
-        className={`w-full flex items-center justify-between gap-2 rounded-lg px-4 py-6 md:px-6 ${containerStyle} ${textColor}`}
+        className={`w-full flex flex-wrap items-center justify-between gap-2 rounded-lg px-4 py-6 xs:max-md:p-3 ${containerStyle} ${textColor}`}
       >
         <div>
           <p className="text-base md:text-lg font-semibold">{title}</p>
-          <p className={`${showDescription}`}>{description}</p>
+          <p className={`${showDescription} xs:max-md:text-sm`}>{description}</p>
           <div className={`${showDescription}`}>{extraDescription}</div>
         </div>
 
@@ -77,7 +77,7 @@ const WrapperComponent: React.FC<CallComponentProps> = ({
               )}
           {showDate && (
             <span className="text-sm text-grey500 mt-1 md:mt-2">
-              {dateBought}
+              {dateBought !== "Unknown date" && dateBought}
             </span>
           )}
         </div>

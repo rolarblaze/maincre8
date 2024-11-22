@@ -104,7 +104,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
             </div>
           )}
           <main
-            className={`noScrollbar flex-1 overflow-y-auto p-6 border-t`}
+            className={`noScrollbar flex-1 overflow-y-auto p-6 xs:max-md:p-3 border-t`}
           >
             {children}
           </main>

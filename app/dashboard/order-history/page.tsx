@@ -34,9 +34,6 @@ export default function OrderHistory() {
         const initializeSessionResult =
           await dispatch(initializeSession()).unwrap();
         sessionId = initializeSessionResult.session_id;
-        console.log("Session initialized:", sessionId);
-      } else {
-        console.log("Using existing session_id from localStorage:", sessionId);
       }
 
       const result = await dispatch(
@@ -64,7 +61,6 @@ export default function OrderHistory() {
           autoClose: true,
         }),
       );
-      console.log(error);
     } finally {
       setAddingToCart(false);
     }
