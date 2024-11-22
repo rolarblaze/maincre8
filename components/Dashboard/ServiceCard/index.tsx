@@ -1,8 +1,15 @@
-import React from "react";
+"use client";
+
+import React, { useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
+import { getBundlesClass } from "@/components/NewPages/LandingPage/sections/PackagesSection/helperFunc";
+import moment from "moment";
+import { trackUserOrder } from "@/redux/servicesTracker/features";
 
 interface ServiceCardProps {
+  bundleId?: number;
   category: string;
   title: string;
   description?: string;
@@ -10,9 +17,11 @@ interface ServiceCardProps {
   id: number;
   isPaid?: boolean;
   transactionId?: number;
+  transactionDate?: string;
 }
 
 const ServiceCard: React.FC<ServiceCardProps> = ({
+  bundleId,
   category,
   title,
   description,
@@ -20,42 +29,78 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   id,
   isPaid,
   transactionId,
+  transactionDate,
 }) => {
+  const dispatch = useAppDispatch();
+  const bundlesData = useAppSelector(
+    (state: RootState) => state.pageViewData.allShopBundles,
+  );
   const linkUrl = isPaid
-    ? `/dashboard/services/${id}/?transactionId=${transactionId}&tab=my-package`
-    : `/dashboard/services/${id}/?tab=package-info`;
+    ? `/dashboard/my-services/track-services/${transactionId}`
+    : `/dashboard/services/${bundleId}`;
 
   return (
-    <Link className="w-full rounded-lg" href={linkUrl}>
-      <div className="relative">
-        <Image
-          src="/images/seo-image.svg"
-          alt={title}
-          width={358}
-          height={240}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute top-[8%] right-[-3%] flex items-center z-20">
-          {/* Triangle */}
-          <div className="w-0 h-0 border-l-[14px] border-l-transparent border-y-[14px] border-y-primary500 border-r-[14px] border-r-primary500"></div>
-          {/* Label */}
-          <div
-            className={`text-white text-sm font-semibold py-1 pr-4 pl-6 bg-primary500 ${color}`}
-          >
-            {category}
-          </div>
-        </div>
-      </div>
-      <div className="p-4 border border-grey300 border-t-0 rounded-b-lg">
-        <h4 className="text-base font-semibold text-grey900">{title}</h4>
-        <p className="text-sm text-grey500 mb-4">{description}</p>
-        {isPaid && (
-          <span className="font-semibold text-primary500 text-sm">
-            Track package
-          </span>
+    <>
+      {bundlesData
+        .filter((bundle) => bundle.bundle_id === bundleId)
+        .map(
+          ({
+            bundle_id,
+            bundle_image_link,
+            bundle_name,
+            description,
+            packages,
+          }) => {
+            return (
+              <Link
+                key={bundle_id}
+                href={linkUrl}
+                className={`group flex w-[30%] min-w-80 flex-col justify-between overflow-hidden rounded-lg border !border-ash xs:max-md:w-[45%] xs:max-md:min-w-64 ${getBundlesClass[bundle_id - 1].tabClass}`}
+              >
+                <figure
+                  className={`relative min-h-60 w-full xs:max-md:h-40 xs:max-md:min-h-0 ${getBundlesClass[bundle_id - 1].bgClass}`}
+                >
+                  <Image
+                    src={bundle_image_link as string}
+                    alt={description}
+                    fill={true}
+                    priority
+                    className="object-cover"
+                  />
+                </figure>
+
+                <div className="flex items-center justify-between p-4 font-manrope">
+                  <div>
+                    <p className="text-lg font-semibold text-[#101928] flex flex-nowrap items-center">
+                      {bundle_name}{" "}
+                      {packages.find((pkg) => pkg.package_id === id)
+                        ?.package_name === "Starter Package" && (
+                        <span className=" leading-0 ml-2 rounded-xl bg-[#4490EA] px-2 py-[2px] text-xs font-medium text-white">
+                          Basic
+                        </span>
+                      )}
+                    </p>
+                    <p className="text-sm font-medium text-[#667185]">
+                      {
+                        packages.find((pkg) => pkg.package_id === id)
+                          ?.package_name
+                      }
+                    </p>
+                    <p className="text-sm font-medium text-[#667185]">
+                      {moment(transactionDate).format("DD MMMM YYYY")}
+                    </p>
+                  </div>
+                  <div>
+                    <p className="xs:max-sm:hidden text-nowrap text-sm font-medium text-[#4490EA]">
+                      See plan
+                    </p>
+                  </div>
+                </div>
+              </Link>
+            );
+          },
         )}
-      </div>
-    </Link>
+    </>
   );
 };
 

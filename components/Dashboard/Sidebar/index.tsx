@@ -58,7 +58,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
 
   return (
     <aside
-      className={`hidden h-full w-full max-w-[17rem] flex-col justify-between overflow-y-auto border-r border-grey200 bg-white px-2 font-manrope md:flex`}
+      className={`hidden h-full flex-col justify-between overflow-y-auto border-r border-grey200 bg-white px-2 font-manrope md:flex`}
     >
       {/* Upper section */}
       <section className="flex flex-col gap-3">
@@ -291,7 +291,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
       </section>
 
       {/* Notification and settings */}
-      <div className="mt-auto flex flex-col gap-1 pb-3">
+      <div className="mt-auto flex w-full flex-col gap-1 pb-3">
         {/* <Link href="/dashboard/notifications">
             <div
               className={`flex items-center gap-3 py-3 px-4 ${
@@ -319,7 +319,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
           </Link> */}
 
         {/* COMPLETE PROFILE */}
-        <div className="justify mb-2 mt-4 flex">
+        <div className="justify mb-2 mt-4 flex w-full max-w-60">
           <div className="h-full w-3 rounded-l bg-secondary-500" />
 
           <div className="pt- rounded-r border border-l-0 border-grey200 p-5">
@@ -363,7 +363,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
       </div>
 
       {/* PROFILE */}
-      <div className="flex items-center gap-5 py-5 pl-3">
+      <div className="flex w-full items-center gap-5 py-5 pl-3">
         <div className="flex items-center gap-3">
           {/* Profile Avatar */}
           <div className="relative h-10 w-10 rounded-full">

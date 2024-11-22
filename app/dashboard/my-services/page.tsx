@@ -1,5 +1,6 @@
 "use client";
 import { Button, EmptyState, Loader, ServiceCard } from "@/components";
+import MyPackage from "@/components/Dashboard/ServicesTab/MyPackage";
 import AllInOneBundleForm from "@/components/Dashboard/SubmitBrief/AllInOneBundleForm";
 import BrandDesignForm from "@/components/Dashboard/SubmitBrief/BrandDesignForm";
 import ContentCreationForm from "@/components/Dashboard/SubmitBrief/ContentCreationForm";
@@ -12,6 +13,7 @@ import { formConfig } from "@/redux/myServices/formConfig";
 import { getUserOrderHistory } from "@/redux/servicesTracker/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import React, { useEffect, useState } from "react";
+import { trackUserOrder } from "@/redux/servicesTracker/features";
 
 const MyServices = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -72,6 +74,8 @@ const MyServices = () => {
     );
   };
 
+
+
   if (loading)
     return (
       <div className="flex items-center justify-center">
@@ -108,6 +112,7 @@ const MyServices = () => {
             <AllInOneBundleForm />
           )}
         </SliderModal>
+        
       </main>
       {orderHistory && orderHistory?.length < 1 ? (
         <EmptyState
@@ -118,21 +123,26 @@ const MyServices = () => {
           imgStyle=""
         />
       ) : (
-        <div className="grid gap-6 overflow-y-auto md:grid-cols-3">
+        <div className="noScrollbar flex p-6 flex-wrap w-full gap-5 ">
           {orderHistory?.map((transaction, i) => (
             <ServiceCard
               key={i}
+              bundleId={transaction.package.bundle.bundle_id}
               category={transaction.package.package_name}
               title={transaction.package.package_name}
               description={transaction.package.description}
               color={bundleColors[transaction.package.bundle.bundle_name]}
               id={transaction.package.package_id}
               transactionId={transaction.transaction_id}
+              transactionDate={transaction.created_at}
               isPaid
             />
           ))}
         </div>
       )}
+
+      {/* <MyPackage /> */}
+     
     </>
   );
 };

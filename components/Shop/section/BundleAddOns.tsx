@@ -30,7 +30,7 @@ const BundleAddOns = ({ title, addOns }: BundleAddOnsPropsType) => {
               </span>
             </p>
           </h2>
-          <p className="w-[80%] text-lg font-light leading-7 text-[#B6D4F7] xs:max-md:w-[90%]">
+          <p className="w-[80%] text-lg font-light leading-7 text-[#B6D4F7] text-pretty xs:max-md:w-[100%]">
             Add-ons help you maximize your SellCrea8 package by offering
             tailored solutions that meet your specific needs, ensuring your
             brand stands out and performs across all channels.

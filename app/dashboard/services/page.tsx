@@ -22,7 +22,7 @@ const Services = () => {
   }, []);
 
   return (
-    <div className="flex flex-wrap gap-6 px-6 py-10 xs:max-md:px-2">
+    <div className="flex flex-wrap gap-6 pl-6 py-10 xs:max-md:px-2">
       {bundlesData.map(
         ({ bundle_id, bundle_image_link, bundle_name, description }) => {
           return (

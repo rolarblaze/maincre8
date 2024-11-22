@@ -144,14 +144,14 @@ const ServicePackagePage = () => {
   }
 
   return (
-    <div className="[&>*]:px-6 xs:max-md:px-0">
+    <div className="[&>*]:px-6 xs:max-md:[&>*]:px-0 w-full">
       {/* PLANS */}
-      <section className="flex w-full flex-wrap justify-start gap-6 pt-10">
+      <section className="flex w-full overflow-auto noScrollbar justify-start gap-6 pt-10 xs:max-md:pt-5">
         {typeCastPageViewData.packages.map((plan) => {
           return (
             <div
               key={plan.package_id}
-              className="min-w-[22rem] xs:max-md:w-full xs:max-md:min-w-0 xs:max-md:max-w-72 space-y-4 rounded-lg border border-grey200 px-8 xs:max-md:px-3 py-5 text-grey800"
+              className="w-[30%] min-w-[26rem] xs:max-md:w-[90%] xs:max-md:min-w-72 space-y-4 rounded-lg border border-grey200 px-8 xs:max-md:px-3 py-5 text-grey800"
             >
               <div className="flex items-center justify-center gap-2 bg-grey50 p-1.5 capitalize">
                 {plan.package_name === "Starter Package" ? (
@@ -205,7 +205,8 @@ const ServicePackagePage = () => {
                       key={provision.provision_id}
                       className="flex items-center justify-start gap-2 py-4 text-sm"
                     >
-                      <CheckedCircleSVG />
+                      <div className="size-8 min-w-8 center">  <CheckedCircleSVG /></div>
+                     
                       {provision.description}
                     </div>
                   );
@@ -218,15 +219,15 @@ const ServicePackagePage = () => {
 
       {/* ADD ONS */}
       <section className="mt-5 flex items-center justify-start gap-8 text-sm">
-        <p className="font-semibold uppercase leading-5 text-grey700">
+        <p className="font-semibold uppercase leading-5 text-grey700 text-nowrap">
           Add ons:
         </p>
 
-        <div className="flex flex-wrap gap-4">
+        <div className="flex w-full overflow-auto noScrollbar gap-4">
           {typeCastPageViewData.addons.map((addOn) => (
             <div
               key={addOn.add_ons_id}
-              className="rounded-lg bg-grey100 px-3 py-2 font-medium leading-[150%] text-grey600"
+              className="rounded-lg bg-grey100 px-3 py-2 font-medium leading-[150%] text-grey600 text-nowrap"
             >
               {addOn.add_ons_name}
             </div>
