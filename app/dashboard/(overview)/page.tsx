@@ -88,7 +88,6 @@ const Overview = () => {
     !profile.user.profile?.phone_number;
 
   const hasTransactions = orderHistory && orderHistory?.length > 0;
-  console.log({ orderHistory });
   const showAppointments = !(!appointments || appointments.length === 0);
   const showServices = !(
     active_services + completed_services + total_services_bought ===
@@ -265,7 +264,7 @@ const Overview = () => {
               </div>
             )}
 
-            {!showAppointments && (
+            {showAppointments && (
               <div className="noScrollbar w-1/2 xs:max-md:w-full xs:max-md:overflow-auto">
                 <div className="flex w-full  h-full flex-col gap-4 rounded-lg border bg-white px-6 py-4 shadow-lg xs:max-md:min-w-[25rem]">
                   <h4 className="border-b border-grey200 pb-4 text-lg font-semibold text-grey900">

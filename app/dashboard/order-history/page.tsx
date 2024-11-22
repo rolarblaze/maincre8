@@ -6,7 +6,7 @@ import { Order } from "@/components";
 import Tabs from "@/components/Dashboard/Tabs";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { fetchUserOrderHistory } from "@/redux/order/features";
-import { UserTransaction } from "@/redux/order/interface";
+import { OrderHistoryResponse, UserTransaction } from "@/redux/order/interface";
 import Loader from "@/components/Spinner/Loader";
 import { EmptyState } from "@/components";
 import MobileOrder from "@/components/Dashboard/MobileOrder";
@@ -16,17 +16,19 @@ import { initializeSession, addItemToCart } from "@/redux/cart/features";
 export default function OrderHistory() {
   const dispatch = useAppDispatch();
   const [activeTab, setActiveTab] = useState<string>("All");
-  const [addingToCart, setAddingToCart] = useState(false);
+  const [addingToCart, setAddingToCart] = useState("");
   const { orders, isLoading, error } = useAppSelector((state) => state.order);
+  // console.log({orders})
 
   // Handling the "Add To Cart" globally across the Desktop and Mobile View of the Order History
   const handleAddToCart = async (
     bundle_id: number,
     package_id: number,
     packageName: string,
+    ref: string,
   ) => {
     try {
-      setAddingToCart(true);
+      setAddingToCart(ref);
       // Check if session_id exists in localStorage
       let sessionId = localStorage.getItem("session_id");
 
@@ -62,7 +64,7 @@ export default function OrderHistory() {
         }),
       );
     } finally {
-      setAddingToCart(false);
+      setAddingToCart("");
     }
   };
 
@@ -99,6 +101,27 @@ export default function OrderHistory() {
     },
   ];
 
+  // function so sort and arrange histories by date
+  function sortOrders(transactions: UserTransaction[] | null) {
+    let sortedOrders: { [key: string]: UserTransaction[] } = {};
+
+    if (!transactions) {
+      return { sortedKeys: [], sortedOrders: {} };
+    }
+
+    for (let order of transactions) {
+      let dateBought = moment(order.created_at).format("DD MMMM YYYY");
+      if (!sortedOrders[dateBought]) {
+        sortedOrders[dateBought] = [];
+      }
+      sortedOrders[dateBought].push(order);
+    }
+    return {
+      sortedKeys: Object.keys(sortedOrders),
+      sortedOrders: sortedOrders,
+    };
+  }
+
   const filteredOrders =
     activeTab === "All"
       ? orders?.user_transactions
@@ -109,10 +132,18 @@ export default function OrderHistory() {
         );
 
   return (
-    <section className="container mt-4 space-y-8 md:mx-auto">
+    <section className="container mx-auto mt-4 space-y-8">
+      <div className="w-full overflow-auto md:hidden">
+        <Tabs
+          tabs={tabs}
+          activeTab={activeTab}
+          onTabClick={(tabName) => setActiveTab(tabName)}
+        />
+      </div>
       {isLoading ? (
         <Loader />
-      ) : filteredOrders?.length === 0 ? (
+      ) : sortOrders(filteredOrders as UserTransaction[] | null).sortedKeys
+          .length === 0 ? (
         <div className="mx-auto flex w-full items-center justify-center">
           <EmptyState
             imgSrc="/images/order-empty.png"
@@ -124,46 +155,30 @@ export default function OrderHistory() {
         </div>
       ) : (
         <div className="space-y-10">
-          {filteredOrders?.map((order: UserTransaction, index: number) => (
+          {sortOrders(
+            filteredOrders as UserTransaction[] | null,
+          ).sortedKeys?.map((dateBought: string, index: number) => (
             <div key={index}>
               {/* Desktop view order */}
               <Order
                 handleAddToCart={handleAddToCart}
                 addingToCart={addingToCart}
-                package_id={order.package.package_id}
-                bundle_id={order.package.bundle.bundle_id}
-                packageName={`${order.package.bundle.bundle_name} (${order.package.package_name})`}
-                price={order.amount.toLocaleString("en-US", {
-                  style: "currency",
-                  currency: order.currency,
-                })}
-                dateBought={moment(order.created_at).format("DD MMMM YYYY")}
-                dateCompleted={
-                  order.status === "successful"
-                    ? moment(order.updated_at).format("DD MMMM YYYY")
-                    : "-"
+                dateBought={dateBought}
+                histories={
+                  sortOrders(filteredOrders as UserTransaction[] | null)
+                    .sortedOrders[dateBought]
                 }
-                status={order.status === "successful" ? "Completed" : "Open"}
               />
 
               {/* Mobile view order */}
               <MobileOrder
                 handleAddToCart={handleAddToCart}
                 addingToCart={addingToCart}
-                package_id={order.package.package_id}
-                bundle_id={order.package.bundle.bundle_id}
-                packageName={`${order.package.bundle.bundle_name} (${order.package.package_name})`}
-                price={order.amount.toLocaleString("en-US", {
-                  style: "currency",
-                  currency: order.currency,
-                })}
-                dateBought={moment(order.created_at).format("DD MMMM YYYY")}
-                dateCompleted={
-                  order.status === "successful"
-                    ? moment(order.updated_at).format("DD MMMM YYYY")
-                    : "-"
+                dateBought={dateBought}
+                histories={
+                  sortOrders(filteredOrders as UserTransaction[] | null)
+                    .sortedOrders[dateBought]
                 }
-                status={order.status === "successful" ? "Completed" : "Open"}
               />
             </div>
           ))}
