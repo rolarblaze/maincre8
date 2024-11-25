@@ -15,6 +15,7 @@ const initialState: TrackingState = {
     BookOffboardingCallInProgress: false,
     OffboardingCallInProgress: false,
     ProjectCompletedInProgress: false,
+    activeBundle: null,
   },
 };
 
@@ -24,12 +25,19 @@ const trackerSlice = createSlice({
   reducers: {
     updateProgress: (
       state,
-      action: PayloadAction<Partial<TrackingProgress>>
+      action: PayloadAction<Partial<TrackingProgress>>,
     ) => {
       state.trackingProgress = { ...state.trackingProgress, ...action.payload };
+    },
+    handleSetCurrentTrackingBundleName: (
+      state,
+      action: PayloadAction<{ activeBundle: string }>,
+    ) => {
+      state.trackingProgress.activeBundle = action.payload.activeBundle;
     },
   },
 });
 
-export const { updateProgress } = trackerSlice.actions;
+export const { updateProgress, handleSetCurrentTrackingBundleName } =
+  trackerSlice.actions;
 export const trackerReducer = trackerSlice.reducer;

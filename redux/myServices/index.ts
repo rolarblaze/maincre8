@@ -53,10 +53,9 @@ const formSlice = createSlice({
       }
     },
     handleFormModal: (state, action: PayloadAction<ModalPayload>) => {
-      const modalPayload = action.payload;
-
-      if (modalPayload.formName) {
-        state[modalPayload.formName].isModalOpen = modalPayload.isModalOpen;
+      const { formName, isModalOpen } = action.payload;
+      if (formName && state[formName]) {
+        state[formName].isModalOpen = isModalOpen;
       }
     },
   },
@@ -73,7 +72,6 @@ const formSlice = createSlice({
       })
       .addCase(submitFormData.fulfilled, (state, action) => {
         const { formName, data } = action.payload;
-        console.log("Data payload:", data);
         if (state[formName]) {
           state[formName].isLoading = false;
           state[formName].successMessage =
