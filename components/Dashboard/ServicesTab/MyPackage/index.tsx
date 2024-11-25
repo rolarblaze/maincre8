@@ -56,7 +56,7 @@ const MyPackage = () => {
 
   // Access the isModalOpen state for the current service form
   const isModalOpen = useAppSelector((state) => {
-    
+
     if (activebundleName) {
       const formState =
         state.forms[activebundleName as keyof typeof formConfig];
@@ -98,24 +98,26 @@ const MyPackage = () => {
   };
 
   // Placeholder
-  function handleOpenBriefForm() {
+  async function handleOpenBriefForm() {
     console.log("Clicked!!!");
     console.log(activebundleName, "hhhhhh");
 
     if (activebundleName) {
-      dispatch(
+      await dispatch(
         handleSetCurrentTrackingBundleName({
           activeBundle: activebundleName,
         }),
       );
 
-      dispatch(
+      await dispatch(
         handleFormModal({
           formName: activebundleName as keyof typeof formConfig,
           isModalOpen: true,
         }),
       );
     }
+    console.log(isModalOpen, "lllll");
+    
   }
 
   return (
