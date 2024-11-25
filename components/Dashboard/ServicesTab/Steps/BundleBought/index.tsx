@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/store";
 import WrapperComponent from "../Wrapper";
-import { formatDate } from "@/helpers/formatDate";
 import { handleProgressUpdate } from "@/helpers/progressHandler";
 import { updateProgress } from "@/redux/servicesTracker/tracker";
 import moment from "moment";
@@ -31,6 +30,15 @@ const BundleBought = () => {
 
   return (
     <div className="">
+      <div className="flex flex-col rounded-md bg-red-300 p-2">
+        <p>
+          Tracking ID responsible for this UI:{" "}
+          {JSON.stringify(trackingDetails?.transaction_id)}
+        </p>
+        <p>It should correlate with the number on the URL</p>
+        <p>Look in console for more details</p>
+      </div>
+
       <WrapperComponent
         status={status}
         title="Bundle bought"

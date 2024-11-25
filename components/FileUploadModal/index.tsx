@@ -59,7 +59,7 @@ const FileUploadContent: React.FC<FileUploadContentProps> = ({ onUpload }) => {
   };
 
   return (
-    <div className="flex max-w-[400px] flex-col items-center gap-4 rounded-2xl border border-dashed border-grey300 px-6 py-7">
+    <div className="flex max-w-[400px] flex-col items-center gap-4 rounded-2xl border border-dashed bg-white border-grey300 px-6 py-7">
       <FileUploadIcon />
       <div onClick={handleClick} className="cursor-pointer">
         <p className="flex justify-center gap-1 text-sm">
