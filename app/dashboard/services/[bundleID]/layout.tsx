@@ -59,22 +59,22 @@ const ServicesPackageLayout: React.FC<ServicePackageLayoutProps> = ({
     <div className="font-manrope pb-10">
       {/* HEADER */}
       <header className="flex flex-col items-start justify-between px-6 xs:max-md:px-0 pb-4">
-        <button onClick={() => router.back()} className="my-6">
+        <button onClick={() => router.back()} className="my-6 xs:max-md:hidden">
           {" "}
           ← Back to services
         </button>
 
-        <div className="space-y-1">
-          <h2 className="text-2xl font-semibold text-grey900">
+        <div className="space-y-1 xs:max-md:space-y-0 xs:max-md:mt-5">
+          <h2 className="text-2xl xs:max-md:text-xl font-semibold text-grey900">
             {typeCastPageViewData.bundle_name}
           </h2>
-          <p className="text-base font-medium text-grey500">
+          <p className="text-base xs:max-md:text-sm font-medium text-grey500">
             {typeCastPageViewData.description}
           </p>
         </div>
       </header>
 
-      <hr />
+      <hr className="xs:max-md:hidden" />
 
       {children}
     </div>

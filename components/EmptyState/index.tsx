@@ -35,7 +35,7 @@ const EmptyState = ({
           className={`${imgStyle}`}
         />
 
-        <h4 className=" text-2xl font-semibold text-grey900">{text}</h4>
+        <h4 className=" text-2xl xs:max-md:text-base xs:max-md:text-center font-semibold text-grey900">{text}</h4>
         <p className="text-center text-sm font-medium text-grey900">{subText}</p>
 
         {link && to && (

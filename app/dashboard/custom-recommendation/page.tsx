@@ -29,7 +29,7 @@ const CustomRecommendation = () => {
   }
 
   return (
-    <div className="space-y-12 pt-10 md:pt-0">
+    <div className="space-y-12 pt-20 xs:max-md:pt-10 px-5 xs:max-md:px-2">
       <Button
         label={
           <div className="flex items-center justify-center gap-2">

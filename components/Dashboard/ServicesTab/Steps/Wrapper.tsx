@@ -56,7 +56,7 @@ const WrapperComponent: React.FC<CallComponentProps> = ({
       </div>
 
       <div
-        className={`w-full flex flex-wrap items-center justify-between gap-2 rounded-lg px-4 py-6 xs:max-md:p-3 ${containerStyle} ${textColor}`}
+        className={`w-full flex flex-wrap items-center justify-between gap-2 rounded-lg p-3 xs:max-md:p-3 ${containerStyle} ${textColor}`}
       >
         <div>
           <p className="text-base md:text-lg font-semibold">{title}</p>

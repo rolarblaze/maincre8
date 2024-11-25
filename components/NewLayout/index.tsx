@@ -8,6 +8,7 @@ import NewFooter from "./NewFooter";
 import { getBundles } from "@/redux/shop/features";
 import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { useEffect } from "react";
+import { getCartItems } from "@/redux/cart/features";
 
 const PageLayout = ({
   children,

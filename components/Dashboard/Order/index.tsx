@@ -41,8 +41,8 @@ const Order: React.FC<OrderProps> = ({
       <div className="hidden space-y-2 bg-white md:block">
         <h4 className="text-2xl font-semibold text-grey500">{dateBought}</h4>
 
-        <div className="w-full overflow-auto">
-          <section className="min-w-min rounded-lg border border-grey200 bg-grey10 p-4">
+        <div className="w-full overflow-auto noScrollbar">
+          <section className="min-w-min rounded-lg border border-grey200 bg-grey10 p-4 mr-40">
             {/* Section 1 */}
             <div className="flex items-center justify-between border-b border-grey200 px-2 py-3">
               <div className="min-w-96">
