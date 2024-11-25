@@ -54,30 +54,32 @@ const MyPackage = () => {
   // Get the active bundle name
   const activebundleName = trackingProgress?.activeBundle;
 
+  const toCamelCase = (str: string) => {
+    if (str) {
+      if (str === "Graphic Design") {
+        str = "Graphics Design";
+      }
+      return str
+        .toLowerCase()
+        .replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, (match, index) =>
+          index === 0 ? match.toLowerCase() : match.toUpperCase(),
+        )
+        .replace(/\s+/g, "");
+    }
+  };
+
+  const camelCasedName = toCamelCase(activebundleName as string);
+
   // Access the isModalOpen state for the current service form
   const isModalOpen = useAppSelector((state) => {
-
     if (activebundleName) {
-      const formState =
-        state.forms[activebundleName as keyof typeof formConfig];
+      const formState = state.forms[camelCasedName as keyof typeof formConfig];
       return formState?.isModalOpen;
     }
     return false;
   });
 
   const dispatch = useAppDispatch();
-
-  // Effect to open modal whenever `activeBundleName` changes
-  useEffect(() => {
-    if (activebundleName) {
-      dispatch(
-        handleFormModal({
-          formName: activebundleName as keyof typeof formConfig,
-          isModalOpen: true,
-        }),
-      );
-    }
-  }, [activebundleName, dispatch]);
 
   const servicesObj = {
     digitalMarketing: "Digital Marketing",
@@ -91,33 +93,28 @@ const MyPackage = () => {
   const handleClose = () => {
     dispatch(
       handleFormModal({
-        formName: activebundleName as keyof typeof formConfig,
+        formName: camelCasedName as keyof typeof formConfig,
         isModalOpen: false,
       }),
     );
   };
 
   // Placeholder
-  async function handleOpenBriefForm() {
-    console.log("Clicked!!!");
-    console.log(activebundleName, "hhhhhh");
-
+  function handleOpenBriefForm() {
     if (activebundleName) {
-      await dispatch(
+      dispatch(
         handleSetCurrentTrackingBundleName({
           activeBundle: activebundleName,
         }),
       );
 
-      await dispatch(
+      dispatch(
         handleFormModal({
-          formName: activebundleName as keyof typeof formConfig,
+          formName: camelCasedName as keyof typeof formConfig,
           isModalOpen: true,
         }),
       );
     }
-    console.log(isModalOpen, "lllll");
-    
   }
 
   return (
