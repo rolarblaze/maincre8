@@ -53,7 +53,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
               <Link
                 key={bundle_id}
                 href={`/dashboard/services/${bundleId}`}
-                className={`group flex w-[32%] max-w-[25rem] min-w-80 flex-col justify-between overflow-hidden rounded-lg border !border-ash xs:max-md:w-full xs:max-md:min-w-0 xs:max-md:max-w-[300px] xs:max-md:mx-aut ${getBundlesClass[bundle_id - 1].tabClass}`}
+                className={`xs:max-md:mx-aut group flex w-[32%] min-w-80 max-w-[25rem] flex-col justify-between overflow-hidden rounded-lg border !border-ash xs:max-md:w-full xs:max-md:min-w-0 xs:max-md:max-w-[300px] ${getBundlesClass[bundle_id - 1].tabClass}`}
               >
                 <figure
                   className={`relative min-h-60 w-full xs:max-md:h-60 xs:max-md:min-h-0 ${getBundlesClass[bundle_id - 1].bgClass}`}
@@ -67,38 +67,36 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                   />
                 </figure>
 
-                <div className="flex items-center justify-between p-2 font-manrope ">
+                <div className="flex items-center gap-5 xs:max-md:gap-0 justify-between p-2 font-manrope">
                   <div>
-                    <div>
-                      <div className="flex items-center">
-                        <p className="text-base font-semibold text-[#101928] text-nowra xs:max-md:text-base">
-                          {bundle_name}
-                        </p>
+                    <div className="flex items-center">
+                      <p className="text-base font-semibold text-[#101928] xs:max-md:text-base">
+                        {bundle_name}
+                      </p>
 
-                        {packages.find((pkg) => pkg.package_id === id)
-                          ?.package_name === "Starter Package" && (
-                          <span className="leading-0 ml-2 rounded-xl bg-[#4490EA] px-2 py-[2px] text-xs font-medium text-white xs:max-md:hidden">
-                            Basic
-                          </span>
-                        )}
-                      </div>
-                      <p className="hidden text-sm font-medium text-[#667185] xs:max-md:block">
-                        {
-                          packages.find((pkg) => pkg.package_id === id)
-                            ?.package_name
-                        }
-                      </p>
-                      <p className="text-sm font-medium text-[#667185] xs:max-md:hidden">
-                        {moment(transactionDate).format("DD MMMM YYYY")}
-                      </p>
+                      {packages.find((pkg) => pkg.package_id === id)
+                        ?.package_name === "Starter Package" && (
+                        <span className="leading-0 ml-2 rounded-xl bg-[#4490EA] px-2 py-[2px] text-xs font-medium text-white xs:max-md:hidden">
+                          Basic
+                        </span>
+                      )}
                     </div>
+                    <p className="hidden text-sm font-medium text-[#667185] xs:max-md:block">
+                      {
+                        packages.find((pkg) => pkg.package_id === id)
+                          ?.package_name
+                      }
+                    </p>
+                    <p className="text-sm font-medium text-[#667185] xs:max-md:hidden">
+                      {moment(transactionDate).format("DD MMMM YYYY")}
+                    </p>
                   </div>
 
                   <Link
                     href={`/dashboard/my-services/track-services/${transactionId}`}
                     className="flex items-center gap-1"
                   >
-                    <p className="text-nowrap text-sm xs:max-md:text-xs font-medium text-[#4490EA]">
+                    <p className="text-nowrap text-sm font-medium text-[#4490EA] xs:max-md:text-xs">
                       Track Packages
                     </p>
                     <div className="center size-4">

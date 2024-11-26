@@ -152,7 +152,7 @@ const ServicePackagePage = () => {
           return (
             <div
               key={plan.package_id}
-              className="w-[30%] min-w-[26rem] last:mr-40 xs:max-md:last:mr-0 xs:max-md:w-full xs:max-md:min-w-60 xs:max-md:max-w-80 space-y-4 rounded-lg border border-grey200 px-8 xs:max-md:px-3 py-5 text-grey800"
+              className="w-[30%] min-w-96 last:mr-40 xs:max-md:last:mr-0 xs:max-md:w-full xs:max-md:min-w-60 xs:max-md:max-w-80 space-y-4 rounded-lg border border-grey200 px-8 xs:max-md:px-3 py-5 text-grey800"
             >
               <div className="flex items-center justify-center gap-2 xs:max-md:gap-1 bg-grey50 p-1.5 capitalize">
                 {plan.package_name === "Starter Package" ? (
