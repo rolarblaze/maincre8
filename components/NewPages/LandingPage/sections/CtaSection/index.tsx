@@ -11,8 +11,8 @@ const CtaSection = () => {
 
   return (
     <FadeUpDiv className="full-width content-grid relative pt-[6.25rem]">
-      <div className="relative flex items-center justify-center overflow-hidden rounded-[2rem] bg-primary600 px-12 pb-20 pt-16 text-center sm:min-h-[40rem] sm:gap-6">
-        <div className="z-[2] flex min-h-60 flex-col items-center justify-center gap-4">
+      <div className="relative flex items-center justify-center overflow-hidden rounded-[2rem] bg-primary600 px-12 xs:max-md:px-3 pb-20 pt-16 text-center sm:min-h-[40rem] sm:gap-6">
+        <div className="z-[2] flex min-h-60 flex-col xs:max-md:w-full items-center justify-center gap-4">
           <LogoFadeIcon className="mb-8" />
 
           <h2 className="max-w-[46rem] text-xl font-bold text-white max-sm:max-w-64 sm:text-[2.5rem] sm:leading-[3rem]">
@@ -23,15 +23,15 @@ const CtaSection = () => {
             Expertly done, in One Seamless Subscription.
           </p>
 
-          <p className="max-w-[43rem] text-pretty text-primary100 sm:text-lg md:text-2xl">
+          <p className="max-w-[43rem] xs:max-md:w-full text-pretty text-primary100 sm:text-lg md:text-2xl">
             Say goodbye to the hassle of juggling content, design, and
             marketing. Get solutions that perfectly align with your goals
           </p>
 
           <div className="mt-4 flex gap-4 max-sm:flex-col max-sm:items-center">
             <Link
-              href={"/"}
-              className="block w-fit rounded-lg bg-primary900 px-12 py-4 text-lg font-medium text-white"
+              href={"/signup"}
+              className="block w-fit rounded-lg bg-primary900 px-12 py-4 text-lg xs:max-md:text-base font-medium text-white"
             >
               Get Started
             </Link>
@@ -40,7 +40,7 @@ const CtaSection = () => {
               onClick={() => setIsOpen(true)}
               className="flex items-center justify-center gap-2 rounded-lg border bg-white px-6 py-4"
             >
-              <span className="text-lg font-medium text-grey900">
+              <span className="text-lg xs:max-md:text-base font-medium text-grey900">
                 Watch demo video
               </span>
 

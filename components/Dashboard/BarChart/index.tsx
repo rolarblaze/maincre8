@@ -42,8 +42,8 @@ const BarChart: React.FC<BarChartProps> = ({ labels, dataValues }) => {
 
   // Configuration for the chart
   const options = {
-    // maintainAspectRatio: false,
-    // responsive: true,
+    maintainAspectRatio: false,
+    responsive: true,
     scales: {
       x: {
         grid: {

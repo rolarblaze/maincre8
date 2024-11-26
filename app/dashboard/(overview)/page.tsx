@@ -259,10 +259,10 @@ const Overview = () => {
             </h3>
           )}
 
-          <div className="flex w-full flex-wrap gap-10 xs:max-md:flex-col">
+          <div className="flex w-full flex-wrap gap-6 xs:max-md:gap-0 xs:max-md:gap-y-6 justify-between xs:max-md:flex-col">
             {showServices && (
-              <div className="noScrollbar w-1/2 min-w-[25rem] xs:max-md:w-full xs:max-md:overflow-auto">
-                <div className="flex w-full flex-col justify-between space-y-2 rounded-lg border bg-white px-6 py-4 shadow-lg xs:max-md:min-w-[25rem]">
+              <div className="noScrollbar w-[48%] min-w-[25rem] xs:max-md:min-w-0 xs:max-md:w-full xs:max-md:overflow-auto">
+                <div className="flex w-full h-full flex-col justify-between space-y-2 rounded-lg border bg-white px-6 py-4 shadow-lg xs:max-md:min-w-[25rem]">
                   <h4 className="border-b border-grey200 pb-4 text-lg font-semibold text-grey900">
                     My Services
                   </h4>
@@ -277,7 +277,7 @@ const Overview = () => {
             )}
 
             {
-              <div className="noScrollbar w-1/2 min-w-[25rem] xs:max-md:w-full xs:max-md:overflow-auto">
+              <div className="noScrollbar w-[48%] min-w-[25rem] xs:max-md:min-w-0 xs:max-md:w-full xs:max-md:overflow-auto">
                 <div className="flex h-full w-full flex-col gap-4 rounded-lg border bg-white px-6 py-4 shadow-lg xs:max-md:min-w-[25rem]">
                   <h4 className="border-b border-grey200 pb-4 text-lg font-semibold text-grey900">
                     Upcoming Appointments

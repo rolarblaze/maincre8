@@ -11,6 +11,7 @@ const SwitchPackageSection = () => {
   );
 
   const typeCastPageViewData = pageViewData as PageViewData;
+  const bundleId = typeCastPageViewData.bundle_id;
 
   return (
     <section className="no-scrollbar max-h-[95vh] max-w-[95vw] w-full space-y-10 overflow-auto rounded-3xl bg-white px-[3.75rem] xs:max-md:px-5 py-[3.75rem]">
@@ -22,7 +23,7 @@ const SwitchPackageSection = () => {
       <BundleListCardOptions redirect={false} />
 
       {/* Selected Bundle Packages Plan */}
-      <BundlePackagesPlan packagesPlans={typeCastPageViewData.packages} />
+      <BundlePackagesPlan packagesPlans={typeCastPageViewData.packages}  bundle_id={bundleId} />
     </section>
   );
 };

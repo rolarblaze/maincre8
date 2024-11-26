@@ -67,11 +67,11 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                   />
                 </figure>
 
-                <div className="flex items-center justify-between p-2 font-manrope">
+                <div className="flex items-center justify-between p-2 font-manrope ">
                   <div>
                     <div>
                       <div className="flex items-center">
-                        <p className="text-base font-semibold text-[#101928] text-nowrap xs:max-md:text-base">
+                        <p className="text-base font-semibold text-[#101928] text-nowra xs:max-md:text-base">
                           {bundle_name}
                         </p>
 

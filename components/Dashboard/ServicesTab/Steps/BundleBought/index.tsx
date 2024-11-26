@@ -30,13 +30,10 @@ const BundleBought = () => {
 
   return (
     <div className="">
-      <div className="flex flex-col rounded-md bg-red-300 p-2">
+      <div className="flex flex-col rounded-md text-red-400 p-2">
         <p>
-          Tracking ID responsible for this UI:{" "}
-          {JSON.stringify(trackingDetails?.transaction_id)}
+          Tracking Number: {JSON.stringify(trackingDetails?.transaction_id)}
         </p>
-        <p>It should correlate with the number on the URL</p>
-        <p>Look in console for more details</p>
       </div>
 
       <WrapperComponent

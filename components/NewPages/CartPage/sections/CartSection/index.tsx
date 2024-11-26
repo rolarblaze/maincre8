@@ -56,12 +56,12 @@ const CartSection: React.FC<CartSectionProps> = ({ cartItems }) => {
   };
 
   return (
-    <section className="flex flex-col gap-4 sm:gap-6">
-      <h3 className="text-sm font-medium leading-[150%] text-grey900">
+    <section className="flex flex-col w-full gap-4 sm:gap-6 xs:max-md:px-5">
+      <h3 className="text-sm font-medium leading-[150%] text-grey900 xs:max-md:ml-5">
         Your Cart
       </h3>
 
-      <div className="divide-y border-grey100 sm:rounded-[1.25rem] md:border md:px-6 md:py-2.5">
+      <div className="divide-y border-grey100 sm:rounded-[1.25rem] md:border md:px-6 md:py-2.5 xs:max-md:px-5">
         {cartItems.map((item) => (
           <CartItem
             key={item.id}
