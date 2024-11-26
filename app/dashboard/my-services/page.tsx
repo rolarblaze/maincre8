@@ -1,23 +1,11 @@
 "use client";
-import { Button, EmptyState, Loader, ServiceCard } from "@/components";
-import MyPackage from "@/components/Dashboard/ServicesTab/MyPackage";
-import AllInOneBundleForm from "@/components/Dashboard/SubmitBrief/AllInOneBundleForm";
-import BrandDesignForm from "@/components/Dashboard/SubmitBrief/BrandDesignForm";
-import ContentCreationForm from "@/components/Dashboard/SubmitBrief/ContentCreationForm";
-import DigitalMarketForm from "@/components/Dashboard/SubmitBrief/DigitalMarketForm";
-import GraphicsDesignForm from "@/components/Dashboard/SubmitBrief/GraphicsDesignForm";
-import BusinessBriefHeader from "@/components/Dashboard/SubmitBrief/shared/BusinessBriefHeader";
-import SliderModal from "@/components/UI/Modals/SliderModal";
-import { handleFormModal } from "@/redux/myServices";
-import { formConfig } from "@/redux/myServices/formConfig";
+import { EmptyState, Loader, ServiceCard } from "@/components";
+
 import { getUserOrderHistory } from "@/redux/servicesTracker/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
-import React, { useEffect, useState } from "react";
-import { trackUserOrder } from "@/redux/servicesTracker/features";
+import React, { useEffect } from "react";
 
 const MyServices = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [currentServiceIndex, setCurrentServiceIndex] = useState(-1);
   const { orderHistory, loading } = useAppSelector((state) => state.services);
   const dispatch = useAppDispatch();
 
@@ -26,55 +14,6 @@ const MyServices = () => {
   useEffect(() => {
     dispatch(getUserOrderHistory());
   }, [dispatch]);
-
-  // Placeholder
-  const servicesObj = {
-    digitalMarketing: "Digital Marketing",
-    graphicsDesign: "Graphics Design",
-    brandDesign: "Brand Design",
-    contentCreation: "Content Creation",
-    AllInOne: "All-In-One Bundle",
-  };
-
-  const serviceKeys = Object.keys(servicesObj) as Array<
-    keyof typeof formConfig
-  >;
-  // // Placeholder
-  const currentServiceKey = serviceKeys[currentServiceIndex];
-
-  const currentServiceTitle =
-    servicesObj[currentServiceKey as keyof typeof servicesObj];
-
-  // Effect to open modal whenever `currentServiceIndex` changes
-  useEffect(() => {
-    if (currentServiceKey) {
-      dispatch(
-        handleFormModal({ formName: currentServiceKey, isModalOpen: true }),
-      );
-    }
-  }, [currentServiceKey, dispatch]);
-
-  // Access the isModalOpen state for the current service form
-  const isModalOpen = useAppSelector(
-    (state) => currentServiceKey && state.forms[currentServiceKey]?.isModalOpen,
-  );
-
-  // Placeholder
-  const handleClose = () => {
-    dispatch(
-      handleFormModal({ formName: currentServiceKey, isModalOpen: false }),
-    );
-  };
-
-  // Placeholder
-  const handleNextService = () => {
-
-    setCurrentServiceIndex((prevIndex) =>
-      prevIndex === serviceKeys.length - 1 ? 0 : prevIndex + 1,
-    );
-  };
-
-
 
   if (loading)
     return (
@@ -85,35 +24,6 @@ const MyServices = () => {
 
   return (
     <>
-      <main className="absolute right-[35%] top-1/4 gap-10">
-        <Button
-          label="Toggle Service"
-          classNames="w-auto py-2 px-4 hover:bg-primary500"
-          onClick={handleNextService}
-        />
-        <SliderModal
-          isOpen={isModalOpen}
-          onClose={handleClose}
-          title="Digital Marketing Brief Submission Form"
-          cancelBtnStyles="border-none top-1 right-6 md:top-5 md:right-10"
-        >
-          <BusinessBriefHeader
-            title={`${currentServiceTitle} Business Brief Form`}
-          />
-          {currentServiceTitle === servicesObj.digitalMarketing ? (
-            <DigitalMarketForm />
-          ) : currentServiceTitle === servicesObj.graphicsDesign ? (
-            <GraphicsDesignForm />
-          ) : currentServiceTitle === servicesObj.brandDesign ? (
-            <BrandDesignForm />
-          ) : currentServiceTitle === servicesObj.contentCreation ? (
-            <ContentCreationForm />
-          ) : (
-            <AllInOneBundleForm />
-          )}
-        </SliderModal>
-        
-      </main>
       {orderHistory && orderHistory?.length < 1 ? (
         <EmptyState
           imgSrc="/images/myservices-empty.png"
@@ -123,7 +33,7 @@ const MyServices = () => {
           imgStyle=""
         />
       ) : (
-        <div className="noScrollbar flex p-6 flex-wrap w-full gap-5 ">
+        <div className="noScrollbar flex p-6 xs:max-md:px-0 flex-wrap w-full gap-5">
           {orderHistory?.map((transaction, i) => (
             <ServiceCard
               key={i}
@@ -142,7 +52,6 @@ const MyServices = () => {
       )}
 
       {/* <MyPackage /> */}
-     
     </>
   );
 };

@@ -79,21 +79,18 @@ const CartItem: React.FC<Props> = ({ name, type, imageUrl, cartItemId, bundleId 
   };
 
   return (
-    <div className="flex w-full items-center justify-between py-5 sm:gap-8">
+    <div className="flex w-full items-center justify-between py-5 xs:max-md:gap-2">
       <div
-        className={`flex h-[3.75rem] items-center justify-between gap-5 rounded-2xl ${getBackgroundClass(name)} py-2 pl-4 pr-1`}
+        className={`flex w-80 xs:max-md:w-auto xs:max-md:max-w-52 justify-between gap-5 rounded-xl ${getBackgroundClass(name)} py-2 pl-4 pr-1`}
       >
-        <div className="space-y-px">
+        <div className="space-y-px flex flex-col justify-center">
           <h3 className="text-sm sm:text-base">{name}</h3>
           <p className="text-xs text-grey500">{type}</p>
         </div>
 
-        <div className="w-[3.25rem] overflow-hidden rounded-[0.625rem] bg-white max-sm:aspect-square sm:h-[3.25rem] sm:w-[5.375rem]">
-          <img
-            src={imageUrl}
-            alt={name}
-            className="object-cover w-full h-full rounded-[0.625rem]"
-          />
+        <div className="relative w-[30%] max-w-48 min-h-16 overflow-hidden rounded-[0.625rem] bg-white max-sm:aspect-square">
+          <Image fill={true} src={imageUrl} alt={name} className="object-cover" />
+
         </div>
       </div>
 

@@ -19,7 +19,7 @@ const MobileOrder: React.FC<OrderProps> = ({
         return (
           <div
             key={history.trans_ref}
-            className="mx-auto max-w-[26rem] space-y-1 bg-white"
+            className=" max-w-[26rem] space-y-1 bg-white"
           >
             <h4 className="text-base font-semibold text-grey500 md:text-2xl">
               {dateBought}

@@ -47,7 +47,7 @@ const CartPage = () => {
 
 
   return (
-    <PageLayout className="full-width content-grid min-h-[calc(100dvh-4rem)] justify-items-center sm:bg-[#F7F9FC]">
+    <PageLayout className="full-width xs:max-md:w-full content-grid min-h-[calc(100dvh-4rem)] justify-items-center sm:bg-[#F7F9FC]">
 
       {isGettingCartItems ? (
         <div className="mx-auto flex items-center justify-center min-h-[50vh]">
@@ -75,7 +75,7 @@ const CartPage = () => {
           />
         </div>
       ) : (
-        <div className="max-w-[900px] w-full h-fit space-y-10 bg-white p-8 font-manrope max-sm:px-0 sm:my-10 sm:rounded-2xl ">
+        <div className="max-w-[900px] xs:max-md:max-w-full w-full h-fit space-y-10 bg-white p-8 font-manrope max-sm:px-0 sm:my-10 sm:rounded-2xl">
           <h2 className="text-center text-3.5xl font-semibold leading-10 text-grey900">
             Cart
           </h2>
