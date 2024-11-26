@@ -8,7 +8,6 @@ interface AddOnSectionProps {
 }
 
 const AddOnSection: React.FC<AddOnSectionProps> = ({ addOns }) => {
-  console.log("Rendering AddOns:", addOns);
   
   return (
     <section className="space-y-4">
@@ -24,7 +23,7 @@ const AddOnSection: React.FC<AddOnSectionProps> = ({ addOns }) => {
 
           <div className="flex flex-wrap gap-6 overflow-x-auto py-4">
             {recommendations.map((item) => (
-              <AddOnItem key={item.id} type={type} {...item} />
+              <AddOnItem key={item.uniqueKey} type={type} {...item} />
             ))}
           </div>
         </div>

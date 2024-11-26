@@ -52,3 +52,18 @@ export const getPackages = createAsyncThunk<
     return rejectWithValue(handleAxiosError(error));
   }
 });
+
+// Fetch a bundle by ID
+export const getBundleById = createAsyncThunk<PageViewData, { bundleId: number }>(
+  "shop/getBundleById",
+  async ({ bundleId }, { rejectWithValue }) => {
+    try {
+      const response = await api.get(`admin-user/bundles/${bundleId}`);
+      return response.data.bundle; // Returns the bundle object
+    } catch (error) {
+      console.error("Error fetching bundle by ID:", error);
+      return rejectWithValue(handleAxiosError(error));
+    }
+  }
+);
+

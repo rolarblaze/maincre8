@@ -5,6 +5,7 @@ import {
     getCartItems,
     clearCart,
     deleteCartItem,
+    switchPackage,
 } from "./features";
 import {
     InitializeSessionResponse,
@@ -22,6 +23,7 @@ interface CartState {
     isGettingCartItems: boolean;
     isClearingCart: boolean;
     isDeletingCartItem: boolean;
+    isSwitchingPackage: boolean;
     error: string | null;
     cartItems: CartItem[];
     recommendedAddOns: RecommAddOns[];
@@ -35,6 +37,7 @@ const initialState: CartState = {
     isGettingCartItems: false,
     isClearingCart: false,
     isDeletingCartItem: false,
+    isSwitchingPackage: false,
     error: null,
     cartItems: [],
     recommendedAddOns: [],
@@ -111,7 +114,7 @@ const cartSlice = createSlice({
             })
             .addCase(deleteCartItem.fulfilled, (state, action) => {
                 state.isDeletingCartItem = false;
-                
+
                 // Filter out the deleted cart item
                 const remainingCartItems = state.cartItems.filter(
                     (item) => item.id !== action.meta.arg.cartItemId
@@ -128,6 +131,26 @@ const cartSlice = createSlice({
             .addCase(deleteCartItem.rejected, (state, action) => {
                 state.isDeletingCartItem = false;
                 state.error = action.payload as string || action.error.message || "An unknown error occurred";
+            })
+
+            //Switch package
+            .addCase(switchPackage.pending, (state) => {
+                state.isSwitchingPackage = true;
+                state.error = null;
+            })
+            .addCase(
+                switchPackage.fulfilled,
+                (state, action: PayloadAction<{ message: string }>) => {
+                    state.isSwitchingPackage = false;
+                }
+            )
+            .addCase(switchPackage.rejected, (state, action) => {
+                state.isSwitchingPackage = false;
+                state.error =
+                    (action.payload as string) ||
+                    action.error.message ||
+                    "An unknown error occurred";
+                console.error("Switch Package Error:", state.error);
             });
 
     },

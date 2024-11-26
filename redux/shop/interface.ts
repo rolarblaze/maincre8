@@ -96,4 +96,7 @@ export interface GetBundlesEndPoint {
 export interface ShopReduxState {
   allShopBundles: PageViewData[];
   currentViewBundle: PageViewData | "";
+  selectedBundle: PageViewData | null;
+  isFetchingBundleById: boolean;
+  bundleByIdError: string | null;
 }

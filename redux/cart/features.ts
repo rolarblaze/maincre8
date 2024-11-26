@@ -129,5 +129,35 @@ export const clearCart = createAsyncThunk<ClearCartResponse>(
     }
 );
 
+// Switch Package
+export const switchPackage = createAsyncThunk<
+    { message: string },
+    { cartItemId: number; packageId: number }
+>(
+    "cart/switchPackage",
+    async ({ cartItemId, packageId }, { rejectWithValue }) => {
+        try {
+            const sessionId = localStorage.getItem("session_id");
+
+            if (!sessionId) {
+                throw new Error("Session ID not found. Please initialize the session first.");
+            }
+
+            const response = await api.put(
+                `landingpage-cart/change-package/${cartItemId}`,
+                {
+                    package_id: packageId,
+                    session_id: sessionId,
+                }
+            );
+
+            return response.data;
+        } catch (error) {
+            return rejectWithValue(handleAxiosError(error));
+        }
+    }
+);
+
+
 
 

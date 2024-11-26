@@ -6,6 +6,8 @@ import { addAlert } from "@/redux/alerts";
 import { PlusIcon, TrashIcon } from "@/public/svgs";
 import { CartItem } from "./components";
 import Spinner from "@/components/Spinner";
+import { Modal } from "@/components";
+import AddBundleSection from "./components/AddBundleSection";
 
 
 interface CartSectionProps {
@@ -14,6 +16,7 @@ interface CartSectionProps {
     bundle: {
       bundle_name: string;
       bundle_image_link: string;
+      bundle_id: number;
     };
     package: {
       package_name: string;
@@ -24,6 +27,7 @@ interface CartSectionProps {
 const CartSection: React.FC<CartSectionProps> = ({ cartItems }) => {
   const dispatch = useAppDispatch();
   const { isClearingCart } = useAppSelector((state) => state.cart);
+  const [isAddBundleModalOpen, setIsAddBundleModalOpen] = useState(false);
 
   // Handle clear cart
   const handleClearCart = async () => {
@@ -69,12 +73,15 @@ const CartSection: React.FC<CartSectionProps> = ({ cartItems }) => {
             name={item.bundle.bundle_name}
             type={item.package.package_name}
             imageUrl={item.bundle.bundle_image_link}
+            bundleId={item.bundle.bundle_id}
           />
         ))}
       </div>
 
       <div className="ml-auto flex items-center justify-center gap-4 text-sm font-semibold text-grey400 sm:gap-6">
-        <button className="flex items-center justify-center gap-2 rounded-lg bg-grey100 px-5 py-2">
+        <button
+          className="flex items-center justify-center gap-2 rounded-lg bg-grey100 px-5 py-2"
+          onClick={() => setIsAddBundleModalOpen(true)}>
           Add New Bundle <PlusIcon fillColor="#667185" />
         </button>
 
@@ -93,6 +100,11 @@ const CartSection: React.FC<CartSectionProps> = ({ cartItems }) => {
           )}
         </button>
       </div>
+
+      {/* Add Bundle Modal */}
+      <Modal isOpen={isAddBundleModalOpen} onClose={() => setIsAddBundleModalOpen(false)} className="">
+        <AddBundleSection onClose={() => setIsAddBundleModalOpen(false)} />
+      </Modal>
     </section>
   );
 };
