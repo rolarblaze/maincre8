@@ -46,7 +46,7 @@ const SupportItem: React.FC<SupportItemProps> = ({
   };
 
   const redirectToWhatsApp = () => {
-    const whatsAppNumber = "+2348123456789";
+    const whatsAppNumber = "+2349129567246";
     const whatsappLink = `https://wa.me/${whatsAppNumber}?text=Hello%2C%20I%20want%20to%20make%20inquiries%20about%20SellCrea8`;
     window.open(whatsappLink, "_blank");
   };
