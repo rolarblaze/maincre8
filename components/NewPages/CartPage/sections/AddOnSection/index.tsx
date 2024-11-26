@@ -23,8 +23,8 @@ const AddOnSection: React.FC<AddOnSectionProps> = ({ addOns }) => {
           </h3>
 
           <div className="flex flex-wrap gap-6 overflow-x-auto py-4">
-            {recommendations.map((item) => (
-              <AddOnItem key={item.id} type={type} {...item} />
+            {recommendations.map((item, index) => (
+              <AddOnItem key={`${item.id}${index}`} type={type} {...item} />
             ))}
           </div>
         </div>

@@ -20,6 +20,7 @@ import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import Image from "next/image";
 import Link from "next/link";
 import { getBundlesClass } from "@/components/NewPages/LandingPage/sections/PackagesSection/helperFunc";
+import { getCartItems } from "@/redux/cart/features";
 
 const Overview = () => {
   const router = useRouter();
@@ -28,6 +29,7 @@ const Overview = () => {
     (state) => state.service,
   );
   const { orderHistory } = useAppSelector((state) => state.services);
+  const { cartItems } = useAppSelector((state) => state.cart);
   const { isLoadingProfile, profile } = useAppSelector((state) => state.auth);
   const { appointments, isApointmentLoading } = useAppSelector(
     (state) => state.order,
@@ -43,6 +45,7 @@ const Overview = () => {
     dispatch(getUserOrderHistory());
     dispatch(fetchLatestAppointments());
     dispatch(fetchActivityStatistics());
+    dispatch(getCartItems());
   }, [dispatch]);
 
   // Extract the activity statistics from the profile
@@ -95,11 +98,12 @@ const Overview = () => {
   );
 
   return (
-    <div className="noScrollbar container xs:max-md:min-w-full xs:max-md:mx-auto flex flex-col overflow-y-scroll pb-10 font-manrope [&>*]:pl-6  xs:max-md:[&>*]:px-0">
-      <header className="space-y-2 pb-4 pt-10 xs:max-md:pt-5">
-        <h2 className="text-2xl font-semibold leading-8 text-grey900">
+    <div className="noScrollbar flex flex-col overflow-y-scroll pb-10 font-manrope xs:max-md:mx-auto xs:max-md:min-w-full [&>*]:pl-6 xs:max-md:[&>*]:px-0">
+      <header className="space-y-2 pb-4 xs:max-md:space-y-0 xs:max-md:pt-5">
+        {/* <h2 className="text-2xl font-semibold leading-8 text-grey900">
           Welcome, {profile.first_name}
         </h2>
+        <p  className="text-lg font-semibold leading text-grey600">We&apos;re glad to see you again.</p> */}
         <p className="text-grey500">
           {hasTransactions
             ? "Access your services below"
@@ -107,7 +111,7 @@ const Overview = () => {
         </p>
       </header>
 
-      <hr />
+      <hr className="xs:max-md:hidden" />
 
       {/* Chose a package to get started */}
       {!hasTransactions && (
@@ -161,16 +165,18 @@ const Overview = () => {
         <span>Custom recommendations</span>
       </div> */}
 
-      {/* {profileIncomplete && (
-        <div className="mb-10 mt-8 flex flex-wrap items-center justify-between gap-6 rounded-lg bg-white px-6 py-4 md:gap-0">
-          <p className="text-black">Complete your profile setup</p>
+      {profileIncomplete && (
+        <div className="mb-10 mt-8 hidden flex-wrap items-center justify-between gap-6 rounded-lg px-6 py-4 xs:max-md:my-0 xs:max-md:flex xs:max-md:flex-col xs:max-md:items-start xs:max-md:gap-2 xs:max-md:bg-[#F5F5F5] md:gap-0">
+          <p className="text-black xs:max-md:ml-3 xs:max-md:font-bold">
+            Complete your profile setup
+          </p>
           <Button
             label="Setup profile"
-            classNames="bg-transparent w-fit border-[1.5px] border-primary600 text-primary600 py-3 px-4"
+            classNames="bg-transparent font-bold w-fit border-[1.5px] xs:max-md:border-2 border-primary600 text-primary600 py-3 px-4 xs:max-md:p-2 xs:max-md:text-xs xs:max-md:ml-3"
             onClick={() => router.push("/dashboard/settings")}
           />
         </div>
-      )} */}
+      )}
 
       {/* <div className="flex items-center justify-between py-4">
         <h4 className="text-[18px] font-medium text-black md:text-[24px] md:font-bold">
@@ -190,9 +196,11 @@ const Overview = () => {
       {/* Services and Appointments Activity */}
       <section className="flex w-full flex-col gap-10">
         <div className="mt-10 space-y-2 xs:max-md:mt-5">
-          <h3 className="lead text-2xl font-bold text-grey900">My Services</h3>
-          <div className="w-full overflow-auto noScrollbar">
-            <div className="flex gap-5">
+          <h3 className="lead text-2xl font-bold text-grey900 xs:max-md:text-xl">
+            My Services
+          </h3>
+          <div className="noScrollbar w-full overflow-auto">
+            <div className="flex flex-wrap gap-5">
               {hasTransactions ? (
                 orderHistory
                   .slice(0, 3)
@@ -244,17 +252,17 @@ const Overview = () => {
           </div>
         </div>
 
-        <div className="space-y-10 xs:max-md:space-y-2">
+        <div className="space-y-10 pr-5 xs:max-md:space-y-2 xs:max-md:pr-0">
           {(showServices || showAppointments) && (
-            <h3 className="col-span-2 text-2xl font-bold text-grey900">
+            <h3 className="col-span-2 text-2xl font-bold text-grey900 xs:max-md:text-xl">
               Activity
             </h3>
           )}
 
-          <div className="flex w-full gap-10 xs:max-md:flex-col">
+          <div className="flex w-full flex-wrap gap-6 xs:max-md:gap-0 xs:max-md:gap-y-6 justify-between xs:max-md:flex-col">
             {showServices && (
-              <div className="noScrollbar w-1/2 xs:max-md:w-full xs:max-md:overflow-auto">
-                <div className="flex w-full flex-col justify-between rounded-lg border bg-white px-6 py-4 shadow-lg xs:max-md:min-w-[25rem]">
+              <div className="noScrollbar w-[48%] min-w-[25rem] xs:max-md:min-w-0 xs:max-md:w-full xs:max-md:overflow-auto">
+                <div className="flex w-full h-full flex-col justify-between space-y-2 rounded-lg border bg-white px-6 py-4 shadow-lg xs:max-md:min-w-[25rem]">
                   <h4 className="border-b border-grey200 pb-4 text-lg font-semibold text-grey900">
                     My Services
                   </h4>
@@ -268,8 +276,8 @@ const Overview = () => {
               </div>
             )}
 
-            {(
-              <div className="noScrollbar w-1/2 xs:max-md:w-full xs:max-md:overflow-auto">
+            {
+              <div className="noScrollbar w-[48%] min-w-[25rem] xs:max-md:min-w-0 xs:max-md:w-full xs:max-md:overflow-auto">
                 <div className="flex h-full w-full flex-col gap-4 rounded-lg border bg-white px-6 py-4 shadow-lg xs:max-md:min-w-[25rem]">
                   <h4 className="border-b border-grey200 pb-4 text-lg font-semibold text-grey900">
                     Upcoming Appointments
@@ -303,7 +311,7 @@ const Overview = () => {
                   </div>
                 </div>
               </div>
-            )}
+            }
           </div>
         </div>
       </section>

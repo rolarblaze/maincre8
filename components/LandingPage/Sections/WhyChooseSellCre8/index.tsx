@@ -14,7 +14,7 @@ function WhyChooseSellCre8() {
         </span>
       </h2>
 
-      <div className="grid grid-cols-1 place-items-center gap-5 md:grid-cols-2 md:place-items-start md:gap-[38.67px] md:overflow-x-visible lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:place-items-start md:gap-[38.67px] md:overflow-x-visible lg:grid-cols-4">
         {ChooseSellCre8Data.map((data, dataIdx) => {
           return (
             <WhyCard

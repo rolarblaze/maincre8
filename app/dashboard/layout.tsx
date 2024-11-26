@@ -9,10 +9,12 @@ import Sidebar from "@/components/Dashboard/Sidebar";
 import { Tab } from "@/components/Dashboard/Sidebar/types";
 import { BellIcon, CartIcon } from "@/public/svgs";
 import Middleware from "@/utils/middleware";
+import { useAppSelector } from "@/redux/store";
 
 const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
   children,
 }) => {
+  const { isLoadingProfile, profile } = useAppSelector((state) => state.auth);
   const [activeTab, setActiveTab] = useState<Tab>("Overview");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
@@ -36,7 +38,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
   }, []);
 
   const headerTitles: Record<Tab, string> = {
-    Overview: isMobile ? "Overview" : "",
+    Overview: isMobile ? "Overview" : `Welcome, ${profile.first_name}`,
     Services: "Services",
     MyServices: "My services",
     CustomRecommendation: "Custom Recommendation",
@@ -93,7 +95,7 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
         {/* Main section */}
         <div className="flex w-full flex-1 flex-col">
           <MobileNav onClick={openSidebar} title={headerTitles[activeTab]} />
-          {!isDynamicRoute && (
+          {
             <div>
               {headerTitles[activeTab] && (
                 <Header
@@ -102,9 +104,9 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
                 />
               )}
             </div>
-          )}
+          }
           <main
-            className={`noScrollbar flex-1 w-full overflow-auto xs:max-md:px-2 xs:max-md:py-3 border-t`}
+            className={`noScrollbar border- w-[85%] min-w-[calc(100vw_-_20rem)] flex-1 overflow-auto xs:max-md:w-full xs:max-md:border-transparent xs:max-md:px-2 xs:max-md:py-3`}
           >
             {children}
           </main>

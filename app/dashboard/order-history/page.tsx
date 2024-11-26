@@ -11,7 +11,7 @@ import Loader from "@/components/Spinner/Loader";
 import { EmptyState } from "@/components";
 import MobileOrder from "@/components/Dashboard/MobileOrder";
 import { addAlert } from "@/redux/alerts";
-import { initializeSession, addItemToCart } from "@/redux/cart/features";
+import { initializeSession, addItemToCart, getCartItems } from "@/redux/cart/features";
 
 export default function OrderHistory() {
   const dispatch = useAppDispatch();
@@ -66,6 +66,7 @@ export default function OrderHistory() {
     } finally {
       setAddingToCart("");
     }
+    dispatch(getCartItems());
   };
 
   // Trigger fetching user order history on component mount
@@ -132,7 +133,7 @@ export default function OrderHistory() {
         );
 
   return (
-    <section className="container mx-auto mt-4 space-y-8">
+    <section className="mt-4 space-y-8 px-5">
       <div className="w-full overflow-auto md:hidden">
         <Tabs
           tabs={tabs}

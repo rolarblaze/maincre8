@@ -58,7 +58,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
 
   return (
     <aside
-      className={`hidden h-full flex-col justify-between overflow-y-auto border-r border-grey200 bg-white px-2 font-manrope md:flex`}
+      className={`hidden h-full w-[15%] min-w-80 flex-col justify-between overflow-y-auto border-r border-grey200 bg-white px-2 font-manrope md:flex`}
     >
       {/* Upper section */}
       <section className="flex flex-col gap-3">
@@ -319,7 +319,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
           </Link> */}
 
         {/* COMPLETE PROFILE */}
-        <div className="justify mb-2 mt-4 flex w-full max-w-60">
+        <div className="justify mb-2 mt-4 flex w-full max-w-[300px]">
           <div className="h-full w-3 rounded-l bg-secondary-500" />
 
           <div className="pt- rounded-r border border-l-0 border-grey200 p-5">
