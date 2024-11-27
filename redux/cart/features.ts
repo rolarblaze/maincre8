@@ -136,3 +136,91 @@ export const clearCart = createAsyncThunk<ClearCartResponse>(
     }
   },
 );
+
+// Switch Package
+export const switchPackage = createAsyncThunk<
+  { message: string },
+  { cartItemId: number; packageId: number }
+>(
+  "cart/switchPackage",
+  async ({ cartItemId, packageId }, { rejectWithValue }) => {
+    try {
+      const sessionId = localStorage.getItem("session_id");
+
+      if (!sessionId) {
+        throw new Error("Session ID not found. Please initialize the session first.");
+      }
+
+      const response = await api.put(
+        `landingpage-cart/change-package/${cartItemId}`,
+        {
+          package_id: packageId,
+          session_id: sessionId,
+        }
+      );
+
+      return response.data;
+    } catch (error) {
+      return rejectWithValue(handleAxiosError(error));
+    }
+  }
+);
+
+// Checkout Cart
+export const checkoutCart = createAsyncThunk<
+  {
+    detail: string;
+    added_addons: {
+      addon_id: number;
+      cart_item_id: number;
+      quantity: number;
+      session_addon_id: number;
+    }[];
+  },
+  { addons: { addon_id: number; cart_item_id: number; quantity: number }[] }
+>("cart/checkoutCart", async ({ addons }, { rejectWithValue }) => {
+  try {
+    const sessionId = localStorage.getItem("session_id");
+
+    if (!sessionId) {
+      throw new Error(
+        "Session ID not found. Please initialize the session first."
+      );
+    }
+
+    const response = await api.post(
+      "landingpage-cart/checkout-cart-with-optional-addons",
+      {
+        session_id: sessionId,
+        addons,
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    return rejectWithValue(handleAxiosError(error));
+  }
+});
+
+// Make Payment
+export const makePayment = createAsyncThunk<
+  { status: string; message: string; data: { link: string } },
+  { package_id: number; currency: string }
+>("cart/makePayment", async ({ package_id, currency }, { rejectWithValue }) => {
+  try {
+    const response = await api.post("user/make-payment", {
+      package_id,
+      currency,
+    });
+
+    return response.data;
+  } catch (error) {
+    return rejectWithValue(handleAxiosError(error));
+  }
+});
+
+
+
+
+
+

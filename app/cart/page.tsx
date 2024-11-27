@@ -1,8 +1,9 @@
 "use client"
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { getCartItems } from "@/redux/cart/features";
+import { getCartItems, checkoutCart } from "@/redux/cart/features";
 import { Button, CartSection, AddOnSection, PageLayout } from "@/components";
 import { addAlert } from "@/redux/alerts";
 import EmptyState from "@/components/EmptyState";
@@ -13,12 +14,59 @@ import assetLibrary from "@/library";
 
 const CartPage = () => {
   const dispatch = useAppDispatch();
-  const { cartItems, recommendedAddOns, isGettingCartItems, error } = useAppSelector((state) => state.cart);
+  const router = useRouter();
+  const { cartItems, recommendedAddOns, isGettingCartItems, error, isCheckingOut } = useAppSelector((state) => state.cart);
+
+  const [selectedAddOns, setSelectedAddOns] = useState<
+    { id: number; quantity: number; bundleName: string }[]
+  >([]);
 
   useEffect(() => {
-    dispatch(getCartItems())
-      .unwrap()
+    dispatch(getCartItems());
   }, [dispatch]);
+
+  const handleAddOnChange = (addon: { id: number; quantity: number; bundleName: string }) => {
+    setSelectedAddOns((prev) => {
+      const existing = prev.find((item) => item.id === addon.id);
+      if (existing) {
+        return addon.quantity > 0
+          ? prev.map((item) => (item.id === addon.id ? addon : item))
+          : prev.filter((item) => item.id !== addon.id);
+      } else {
+        return addon.quantity > 0 ? [...prev, addon] : prev;
+      }
+    });
+  };
+
+  const handleCheckout = async () => {
+    try {
+      // Map selectedAddOns to the expected structure
+      const addons = selectedAddOns.map((addon) => {
+        // Find the cart item ID by matching the bundle name
+        const associatedCartItem = cartItems.find(
+          (item) => item.bundle.bundle_name === addon.bundleName
+        );
+
+        if (!associatedCartItem) {
+          throw new Error(`Add-on with ID ${addon.id} has no associated cart item.`);
+        }
+
+        return {
+          addon_id: addon.id,
+          cart_item_id: associatedCartItem.id,
+          quantity: addon.quantity,
+        };
+      });
+
+      // Dispatch checkoutCart
+      const result = await dispatch(checkoutCart({ addons })).unwrap();
+
+      // Redirect to the checkout page
+      router.push("/checkout");
+    } catch (err) {
+      console.error("Checkout failed:", err);
+    }
+  };
 
   // Group the recommended_addons by their bundle names
   const groupedAddOns = recommendedAddOns.reduce((acc: Record<string, any[]>, addon) => {
@@ -27,10 +75,12 @@ const CartPage = () => {
       acc[bundleName] = [];
     }
     acc[bundleName].push({
+      uniqueKey: `${addon.add_ons_id}-${addon.add_ons_name}`, // Unique key for each item
       id: addon.add_ons_id,
       name: addon.add_ons_name,
       feature: addon.description,
       price: addon.price,
+      bundleName,
     });
     return acc;
   }, {});
@@ -79,10 +129,12 @@ const CartPage = () => {
             Cart
           </h2>
           <CartSection cartItems={cartItems} />
-          <AddOnSection addOns={addOns} />
+          <AddOnSection addOns={addOns} onAddOnChange={handleAddOnChange} />
           <Button
-            link="/checkout"
+            onClick={handleCheckout}
             label="Checkout"
+            isLoading={isCheckingOut}
+            disabled={isCheckingOut}
             classNames="font-manrope block max-w-[22rem] mx-auto py-4 rounded-lg"
           />
         </div>

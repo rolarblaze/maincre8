@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { initializeSession, addItemToCart } from "@/redux/cart/features";
+import { initializeSession, addItemToCart, switchPackage, getCartItems } from "@/redux/cart/features";
 import Button from "@/components/Button";
 import Image from "next/image";
 import { addAlert } from "@/redux/alerts";
@@ -13,6 +13,9 @@ type FeaturesListPropsType = {
 
 type PackagePlanCardPropsType = {
   isPackagePopular: boolean;
+  isCurrentPackage: boolean;
+  isSwitching: boolean;
+  cartItemId?: number;
   title: string;
   description: string;
   price: number;
@@ -22,7 +25,7 @@ type PackagePlanCardPropsType = {
   }[];
   link: string;
   package_id: number;
-  bundle_id: number; 
+  bundle_id: number;
 };
 
 // 3rd: Sub Component of Sub-Component-1
@@ -49,17 +52,12 @@ const FeaturesList = ({ feature, isPackagePopular }: FeaturesListPropsType) => {
   );
 };
 
-const PricingSpinner = () => {
-  return (
-    <div
-      className={`size-5 animate-spin rounded-full border-2 border-b-transparent border-l-transparent border-r-transparent border-t-[#B6D4F7]`}
-    ></div>
-  );
-};
-
 // 2nd: Sub-Component-1 of Main-Compoent
 const PackagePlanCard = ({
   isPackagePopular,
+  isCurrentPackage,
+  isSwitching,
+  cartItemId,
   title,
   description,
   price,
@@ -89,8 +87,8 @@ const PackagePlanCard = ({
 
       console.log("Adding item to cart with bundle_id:", bundle_id, "and package_id:", package_id);
 
-       // Add item to cart using the session ID and the dynamic bundle_id
-       if (!bundle_id) {
+      // Add item to cart using the session ID and the dynamic bundle_id
+      if (!bundle_id) {
         throw new Error("Bundle ID is missing. Please select a valid bundle.");
       }
 
@@ -125,6 +123,46 @@ const PackagePlanCard = ({
       setButtonLoading(false);
     }
   };
+
+
+  const handleSwitchPackage = async () => {
+    try {
+      setButtonLoading(true);
+      if (!cartItemId) {
+        throw new Error("Cart item ID is required for switching packages.");
+      }
+
+      console.log("cartItemId", cartItemId)
+      console.log("packageId", package_id)
+      const result = await dispatch(switchPackage({ cartItemId, packageId: package_id })).unwrap();
+
+      dispatch(
+        addAlert({
+          id: `Switched to ${title}`,
+          headText: "Success",
+          subText: result.message,
+          type: "success",
+          autoClose: true,
+        })
+      );
+
+      // Refetch cart items to reflect changes
+      await dispatch(getCartItems());
+    } catch (error) {
+      dispatch(
+        addAlert({
+          id: `Error switching to ${title}`,
+          headText: "Error",
+          subText: (error as Error)?.message || "Failed to switch package",
+          type: "error",
+          autoClose: true,
+        })
+      );
+    } finally {
+      setButtonLoading(false);
+    }
+  };
+
 
   return (
     <li
@@ -187,15 +225,16 @@ const PackagePlanCard = ({
         </ul>
       </div>
 
-      
+
       <Button
-        onClick={handleAddToCart}
-        label="Add to Cart"
+        onClick={isSwitching ? handleSwitchPackage : handleAddToCart}
+        label={isSwitching ? "Switch Package" : "Add to Cart"}
         classNames={` bg-[#FAFAFA] text-[#111827] h-14 ${isPackagePopular
           ? "hover:bg-blue-400 hover:text-white"
           : "hover:bg-slate-200"
           } `}
         isLoading={buttonLoading}
+        disabled={isCurrentPackage}
       />
     </li>
   );
@@ -205,25 +244,37 @@ const PackagePlanCard = ({
 const BundlePackagesPlan = ({
   packagesPlans,
   bundle_id,
+  isSwitching = false,
+  cartItemId,
 }: {
   packagesPlans: PackagesType[];
   bundle_id: number;
+  isSwitching?: boolean;
+  cartItemId?: number;
 }) => {
+  const cartItems = useAppSelector((state) => state.cart.cartItems);
+
+  // Find the current package in the cart for the given bundle
+  const currentCartItem = cartItems.find((item) => item.bundle.bundle_id === bundle_id);
+  const currentPackageId = currentCartItem?.package.package_id;
 
   return (
-  
+
     <section>
       <ul className="no-scrollbar flex w-full justify-between gap-6 xs:max-md:gap-3 overflow-auto">
         {packagesPlans.map((plan) => (
           <PackagePlanCard
             key={plan.package_id}
+            isCurrentPackage={plan.package_id === currentPackageId}
+            isSwitching={isSwitching}
             isPackagePopular={plan.package_name === "Standard Package" ? true : false}
             title={plan.package_name}
             description={plan.description}
             price={plan.price}
             provisions={plan.provisions}
             package_id={plan.package_id}
-            bundle_id={bundle_id} 
+            bundle_id={bundle_id}
+            cartItemId={cartItemId} 
             link={""}
           />
         ))}
