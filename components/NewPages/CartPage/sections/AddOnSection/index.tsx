@@ -5,10 +5,11 @@ interface AddOnSectionProps {
     type: string;
     recommendations: any[];
   }[];
+  onAddOnChange: (addon: { id: number; quantity: number; bundleName: string }) => void;
 }
 
-const AddOnSection: React.FC<AddOnSectionProps> = ({ addOns }) => {
-  
+const AddOnSection: React.FC<AddOnSectionProps> = ({ addOns, onAddOnChange }) => {
+
   return (
     <section className="space-y-4">
       <h2 className="text-sm font-medium leading-[150%] text-grey900">
@@ -23,7 +24,13 @@ const AddOnSection: React.FC<AddOnSectionProps> = ({ addOns }) => {
 
           <div className="flex flex-wrap gap-6 overflow-x-auto py-4">
             {recommendations.map((item) => (
-              <AddOnItem key={item.uniqueKey} type={type} {...item} />
+              <AddOnItem
+                key={item.uniqueKey}
+                {...item}
+                onChange={(addon) =>
+                  onAddOnChange({ ...addon, bundleName: type }) // Include bundle name
+                }
+              />
             ))}
           </div>
         </div>
