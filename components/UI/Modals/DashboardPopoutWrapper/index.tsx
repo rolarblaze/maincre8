@@ -22,7 +22,7 @@ function DashboardPopoutWrapper({
   return (
     <div
       className={twMerge(
-        "relative flex h-[90vh] w-[920px] rounded-2xl",
+        "relative flex h-[90vh] w-full max-w-[920px] rounded-2xl",
         classNames,
       )}
     >

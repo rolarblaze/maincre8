@@ -11,7 +11,6 @@ import {
   ZohoProjectOnboarding,
 } from "../Steps";
 import { handleSetCurrentTrackingBundleName } from "@/redux/servicesTracker/tracker";
-import { useEffect } from "react";
 import { handleFormModal } from "@/redux/myServices";
 import { formConfig } from "@/redux/myServices/formConfig";
 import SliderModal from "@/components/UI/Modals/SliderModal";

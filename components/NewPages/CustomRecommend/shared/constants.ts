@@ -11,7 +11,7 @@ export const RECOMMEND_INITIAL_VALUES: RecommendFormValues = {
   // ADDITIONAL INFO
   additionalInfo: "",
 
-  document: null as File | null,
+  document: "",
 
   // CONTACT INFO
   contactEmail: "",

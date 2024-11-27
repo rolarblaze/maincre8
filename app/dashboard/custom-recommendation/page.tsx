@@ -6,7 +6,6 @@ import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { fetchRecommendationHistory } from "@/redux/order/features";
 import assetLibrary from "@/library";
 import DashboardPopoutWrapper from "@/components/UI/Modals/DashboardPopoutWrapper";
-import RecommendFormInputs from "@/components/NewPages/CustomRecommend/shared/RecommendFormInputs";
 import DashboardRecommendForm from "@/components/NewPages/CustomRecommend/DasboardRecommendForm";
 import Spinner from "@/components/Spinner";
 

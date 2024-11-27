@@ -20,9 +20,6 @@ function RecommendFormInputs({
   formik: FormikProps<RecommendFormValues>;
 }) {
   const dispatch = useAppDispatch();
-  const [uploadedDocumentLink, setUploadedDocumentLink] = useState<
-    string | null
-  >(null);
 
   const {
     values,
@@ -55,8 +52,7 @@ function RecommendFormInputs({
         ).unwrap();
         const file_link = response.file_link;
 
-        setUploadedDocumentLink(file_link); // Store the file link for later use
-        setFieldValue("document", file.name); // Store the file name as a string
+        setFieldValue("document", file_link); // Store the file name as a string
         formik.setFieldError("document", ""); // Clear any existing file errors
       }
     } catch (error) {
