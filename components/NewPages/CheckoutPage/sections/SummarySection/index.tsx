@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { makePayment } from "@/redux/cart/features";
 import { Button, InputField, Modal } from "@/components";
 import SuccessModal from "../SuccessModal";
+import { addAlert } from "@/redux/alerts";
 
 
 interface SummarySectionProps {
@@ -20,21 +21,24 @@ const SummarySection: React.FC<SummarySectionProps> = ({ totalPrice, packageId, 
   const handlePayment = async () => {
     try {
       const currency = "NGN"; // Default to NGN
-      console.log("Initiating payment with package_id:", packageId);
 
       const result = await dispatch(
         makePayment({ package_id: packageId, currency })
       ).unwrap();
 
-      console.log("Payment successful. Redirecting to:", result.data.link);
 
       // Redirect to the payment link
       window.location.href = result.data.link;
     } catch (err) {
-      console.error("Payment failed:", err);
-
-      // Show error alert or modal (optional)
-      // setIsOpen(false); // Close modal if open
+      dispatch(
+        addAlert({
+          id: "",
+          headText: "Error",
+          subText: (err as Error)?.message || "Failed to make payment",
+          type: "error",
+          autoClose: true,
+        })
+      );
     }
   };
 

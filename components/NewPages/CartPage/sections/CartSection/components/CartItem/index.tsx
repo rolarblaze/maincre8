@@ -59,12 +59,9 @@ const CartItem: React.FC<Props> = ({ name, type, imageUrl, cartItemId, bundleId 
   // Handle opening the modal and fetching the bundle details
   const handleSwitchPackage = async () => {
     try {
-      console.log("Fetching bundle details for bundleId:", bundleId);
       setIsOpen(true); // Open the modal
       await dispatch(getBundleById({ bundleId })).unwrap();
-      console.log("Fetched bundle details successfully:", selectedBundle);
     } catch (error) {
-      console.error("Error fetching bundle details:", error);
       dispatch(
         addAlert({
           id: `fetch-bundle-error-${bundleId}`,

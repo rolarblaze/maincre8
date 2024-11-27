@@ -53,7 +53,15 @@ const VerifyEmail = () => {
         );
       }
     } catch (error) {
-      console.error("Error resending verification code:", error);
+      dispatch(
+        addAlert({
+          id: "",
+          headText: "Error",
+          subText: (error as Error)?.message || "Error resending verification code",
+          type: "error",
+          autoClose: true,
+        })
+      );
     }
   };
 
@@ -69,7 +77,10 @@ const VerifyEmail = () => {
             type: "success",
           })
         );
-        router.push("/login");
+
+        // Preserve redirect parameter
+        const redirect = new URLSearchParams(window.location.search).get("redirect");
+        router.push(`/login${redirect ? `?redirect=${redirect}` : ""}`);
       } else if (verifyUser.rejected.match(actionResult)) {
         const errorMessage =
           actionResult.error?.message ||
@@ -84,7 +95,15 @@ const VerifyEmail = () => {
         );
       }
     } catch (error) {
-      console.error("Error verifying email:", error);
+      dispatch(
+        addAlert({
+          id: "",
+          headText: "Error",
+          subText: (error as Error)?.message || "Error verifying email",
+          type: "error",
+          autoClose: true,
+        })
+      );
     }
   };
 
