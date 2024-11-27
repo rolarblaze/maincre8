@@ -96,12 +96,14 @@ export default function Signup() {
             type: "success",
           }),
         );
-        router.push("/email-verify");
+
+        // Preserve redirect parameter
+        const redirect = new URLSearchParams(window.location.search).get("redirect");
+        router.push(`/email-verify${redirect ? `?redirect=${redirect}` : ""}`);
       } else {
         handleSignUpError(actionResult, dispatch);
       }
     } catch (error) {
-      console.error("Signup error:", error);
       // Handle general errors
       dispatch(
         addAlert({

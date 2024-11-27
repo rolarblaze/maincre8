@@ -80,16 +80,21 @@ const PackagePlanCard = ({
       if (!sessionId) {
         const initializeSessionResult = await dispatch(initializeSession()).unwrap();
         sessionId = initializeSessionResult.session_id;
-        console.log("Session initialized:", sessionId);
-      } else {
-        console.log("Using existing session_id from localStorage:", sessionId);
       }
-
-      console.log("Adding item to cart with bundle_id:", bundle_id, "and package_id:", package_id);
 
       // Add item to cart using the session ID and the dynamic bundle_id
       if (!bundle_id) {
-        throw new Error("Bundle ID is missing. Please select a valid bundle.");
+        // Dispatch error alert
+        dispatch(
+          addAlert({
+            id: `Error adding ${title} to cart`,
+            headText: "Error",
+            subText: "Bundle ID is missing. Please select a valid bundle.",
+            type: "error",
+            autoClose: true,
+          }),
+        );
+        return
       }
 
       // Add item to cart using the session ID
@@ -118,7 +123,6 @@ const PackagePlanCard = ({
           autoClose: true,
         }),
       );
-      console.log(error);
     } finally {
       setButtonLoading(false);
     }
@@ -132,8 +136,6 @@ const PackagePlanCard = ({
         throw new Error("Cart item ID is required for switching packages.");
       }
 
-      console.log("cartItemId", cartItemId)
-      console.log("packageId", package_id)
       const result = await dispatch(switchPackage({ cartItemId, packageId: package_id })).unwrap();
 
       dispatch(
@@ -274,7 +276,7 @@ const BundlePackagesPlan = ({
             provisions={plan.provisions}
             package_id={plan.package_id}
             bundle_id={bundle_id}
-            cartItemId={cartItemId} 
+            cartItemId={cartItemId}
             link={""}
           />
         ))}
