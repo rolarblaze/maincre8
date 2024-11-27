@@ -91,11 +91,7 @@ const Overview = () => {
     !profile.user.profile?.phone_number;
 
   const hasTransactions = orderHistory && orderHistory?.length > 0;
-  const showAppointments = !(!appointments || appointments.length === 0);
-  const showServices = !(
-    active_services + completed_services + total_services_bought ===
-    0
-  );
+  
 
   return (
     <div className="noScrollbar flex flex-col overflow-y-scroll pb-10 font-manrope xs:max-md:mx-auto xs:max-md:min-w-full [&>*]:pl-6 xs:max-md:[&>*]:px-0">
@@ -253,14 +249,14 @@ const Overview = () => {
         </div>
 
         <div className="space-y-10 pr-5 xs:max-md:space-y-2 xs:max-md:pr-0">
-          {(showServices || showAppointments) && (
+          
             <h3 className="col-span-2 text-2xl font-bold text-grey900 xs:max-md:text-xl">
               Activity
             </h3>
-          )}
+          
 
           <div className="flex w-full flex-wrap gap-6 xs:max-md:gap-0 xs:max-md:gap-y-6 justify-between xs:max-md:flex-col">
-            {showServices && (
+            {
               <div className="noScrollbar w-[48%] min-w-[25rem] xs:max-md:min-w-0 xs:max-md:w-full xs:max-md:overflow-auto">
                 <div className="flex w-full h-full flex-col justify-between space-y-2 rounded-lg border bg-white px-6 py-4 shadow-lg xs:max-md:min-w-[25rem]">
                   <h4 className="border-b border-grey200 pb-4 text-lg font-semibold text-grey900">
@@ -274,7 +270,7 @@ const Overview = () => {
                   </div>
                 </div>
               </div>
-            )}
+            }
 
             {
               <div className="noScrollbar w-[48%] min-w-[25rem] xs:max-md:min-w-0 xs:max-md:w-full xs:max-md:overflow-auto">

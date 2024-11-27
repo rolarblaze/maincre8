@@ -32,11 +32,11 @@ const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
           <BulbIcon />
           <span className="text-nowrap">Custom recommendations</span>
         </Link>
-        <div className="center size-8 rounded-full bg-[#F0F2F5] p-1">
+        {/* <div className="center size-8 rounded-full bg-[#F0F2F5] p-1">
           <button className="size-5">
             <BellIcon />
           </button>
-        </div>
+        </div> */}
         <div
           className={`${cartItems.length === 0 ? "bg-[#F0F2F5]" : "bg-[#E8F1FC]"} relative size-8 rounded-full p-1`}
         >

@@ -64,11 +64,11 @@ const MobileNav: React.FC<MobileNavprops> = ({ title, onClick }) => {
       </div>
 
       <div className="mr-2 flex gap-1">
-        <div className="center size-8 rounded-full bg-[#F0F2F5] p-1">
+        {/* <div className="center size-8 rounded-full bg-[#F0F2F5] p-1">
           <Link href="/dashboard/notifications" className="size-5">
             <BellIcon />
           </Link>
-        </div>
+        </div> */}
         <div
           className={`${cartItems.length === 0 ? "bg-[#F0F2F5]" : "bg-[#E8F1FC]"} relative size-8 rounded-full p-1`}
         >
