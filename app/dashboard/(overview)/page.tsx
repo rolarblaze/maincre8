@@ -46,6 +46,10 @@ const Overview = () => {
     dispatch(fetchLatestAppointments());
     dispatch(fetchActivityStatistics());
     dispatch(getCartItems());
+
+    // store user name indefinitely in localStorage for later access on checkout page, even without logging in
+    // log in once to store names
+    localStorage.setItem("SellCrea8User", JSON.stringify({first_name: profile.first_name, last_name: profile.last_name  }))
   }, [dispatch]);
 
   // Extract the activity statistics from the profile

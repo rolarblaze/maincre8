@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
         )}
       </header>
 
-      <div className="mr-2 flex flex-wrap items-center gap-5 pt-5">
+      <div className="mr-5 flex flex-wrap items-center gap-5 pt-5">
         <Link
           href="/dashboard/custom-recommendation"
           className="w-fit cursor-pointer items-center gap-2 rounded-lg border-none bg-primary500 !px-3 !py-2 text-white md:flex"

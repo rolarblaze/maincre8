@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { LogoIcon, MobileMenu } from "@/public/svgs";
 import { AvatarProfile } from "@/public/icons";
@@ -12,6 +12,7 @@ const NewNavbar = () => {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
+  const [name, setName] = useState("")
   const navlink = [
     {
       name: "Pricing",
@@ -26,6 +27,23 @@ const NewNavbar = () => {
 
   const hide = hideComponent(pathname);
   const authenticated = pathname === "/checkout";
+
+  useEffect(() => {
+  let userName = localStorage.getItem("SellCrea8User");
+  let loginDetails = localStorage.getItem("loginDetails");
+
+  if (!userName) {
+    try {
+      let typeCastLoginDetails = JSON.parse(loginDetails as string) as { email: string }
+      setName(typeCastLoginDetails.email);
+    } catch (error) {
+      setName("---");
+    }
+  } else {
+    let typeCastUserName = JSON.parse(userName as string) as {first_name: string, last_name: string }
+    setName(typeCastUserName.first_name);
+  }
+}, []);
 
   return (
     <header
@@ -81,7 +99,7 @@ const NewNavbar = () => {
 
         {authenticated && (
           <div className="flex items-center justify-end gap-3">
-            <p className="font-normal leading-6">Welcome, Bola</p>
+            <p className="font-normal leading-6">Welcome, {name}</p>
             <AvatarProfile />
           </div>
         )}
