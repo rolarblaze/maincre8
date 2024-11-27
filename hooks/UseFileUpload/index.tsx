@@ -14,7 +14,14 @@ const useFileUpload = () => {
     fieldName: string,
     formik: FormikProps<any>,
   ) => {
-    if (!file) return;
+    if (!file) {
+      formik.setFieldError("document", "Please attach a document.");
+      return;
+    } else if (file && file.size > 5000000) {
+      formik.setFieldValue("document", null);
+      formik.setFieldError("document", "Max file size exceeded.");
+      return;
+    }
 
     const formData = new FormData();
     formData.append("file", file);

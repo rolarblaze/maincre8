@@ -7,6 +7,7 @@ import Spinner from "../Spinner";
 interface ButtonProps {
   label: React.ReactNode | string;
   isLoading?: boolean;
+  isFileUploading?: boolean;
   onClick?: () => void;
   classNames?: string;
   link?: string;
@@ -17,6 +18,7 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({
   label,
   isLoading = false,
+  isFileUploading = false,
   onClick,
   classNames,
   link,

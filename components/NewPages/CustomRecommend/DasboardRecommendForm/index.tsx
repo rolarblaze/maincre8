@@ -1,15 +1,23 @@
 import React from "react";
 import RecommendFormInputs from "../shared/RecommendFormInputs";
 import { addAlert } from "@/redux/alerts";
-import { useAppDispatch } from "@/redux/store";
+import { RootState, useAppDispatch } from "@/redux/store";
 import { RecommendFormValues } from "../shared/type";
 import { RECOMMEND_INITIAL_VALUES } from "../shared/constants";
 import { recommendFormSchema } from "../shared/schema";
 import { FormikHelpers, useFormik } from "formik";
 import Button from "@/components/Button";
+import { useSelector } from "react-redux";
 
 function DashboardRecommendForm() {
+  const isFileUploading = useSelector((state: RootState) => {
+    const uploadedFiles = state.fileUpload;
+
+    return Object.values(uploadedFiles).some((file) => file.isLoading);
+  });
+
   const dispatch = useAppDispatch();
+
   const formik = useFormik<RecommendFormValues>({
     initialValues: RECOMMEND_INITIAL_VALUES,
     validationSchema: recommendFormSchema,
@@ -43,6 +51,7 @@ function DashboardRecommendForm() {
           label="Checkout"
           type="submit"
           classNames="active:scale-[0.98]"
+          isFileUploading={isFileUploading}
         />
       </footer>
     </form>

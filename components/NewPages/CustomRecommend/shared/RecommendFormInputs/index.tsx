@@ -11,8 +11,12 @@ import InputField from "@/components/Forms/InputField";
 import { RecommendFormType, RecommendFormValues } from "../type";
 import { FormikProps } from "formik";
 import { uploadRelevantDocument } from "@/redux/order/features";
-import { useAppDispatch } from "@/redux/store";
+import { RootState, useAppDispatch } from "@/redux/store";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
+import useFileUpload from "@/hooks/UseFileUpload";
+import { briefEndpoints } from "@/components/Dashboard/SubmitBrief/shared/briefEndpoint";
+import { useSelector } from "react-redux";
+import { selectFileUploadState } from "@/redux/file";
 
 function RecommendFormInputs({
   formik,
@@ -33,31 +37,26 @@ function RecommendFormInputs({
     setFieldError,
   } = formik;
 
-  const handleFileUpload = async (file: File | null) => {
-    if (!file) {
-      formik.setFieldError("document", "Please attach a document.");
-      return;
-    } else if (file && file.size > 5000000) {
-      setFieldValue("document", null);
-      setFieldError("document", "Max file size exceeded.");
-      return;
-    }
+  
+  const recommendBriefFileState = useSelector((state: RootState) =>
+    selectFileUploadState(state, "recommendBriefFile"),
+  );
+  const { handleFileUpload } = useFileUpload();
 
-    try {
-      if (file) {
-        const formData = new FormData();
-        formData.append("file", file);
-        const response = await dispatch(
-          uploadRelevantDocument(formData),
-        ).unwrap();
-        const file_link = response.file_link;
-
-        setFieldValue("document", file_link); // Store the file name as a string
-        formik.setFieldError("document", ""); // Clear any existing file errors
-      }
-    } catch (error) {
-      console.error("Error uploading file:", error);
-      formik.setFieldError("document", "File upload failed.");
+  // HANDLE FILE UPLOAD ONCHANGE
+  const onFileChange = async (
+    file: File | null,
+    fileId: string,
+    fieldName: string,
+  ) => {
+    if (formik) {
+      await handleFileUpload(
+        file,
+        briefEndpoints.recommendationBrief,
+        fileId,
+        fieldName,
+        formik,
+      );
     }
   };
 
@@ -103,8 +102,12 @@ function RecommendFormInputs({
           id="document"
           name="document"
           icon={<FileUploadIcon />}
-          handleUpload={(value: File | null) => handleFileUpload(value)}
+          onFileChange={(file: File | null) =>
+            onFileChange(file, `recommendBriefFile`, `document`)
+          }
+          showUploadButton={false}
           error={errors.document}
+          isLoading={recommendBriefFileState.isLoading}
         />
       </div>
 
