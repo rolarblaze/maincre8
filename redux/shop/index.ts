@@ -1,11 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getBundles } from "./features";
+import { getBundles, getBundleById } from "./features";
 import { GetBundlesEndPoint, PageViewData, ShopReduxState } from "./interface";
 
 // Define the initial state with default values
 const initialPageViewData: ShopReduxState = {
   allShopBundles: [],
   currentViewBundle: "",
+  selectedBundle: null, // New state for storing the fetched bundle
+  isFetchingBundleById: false,
+  bundleByIdError: null,
 };
 
 const filterBundle = (id: string, state: ShopReduxState) => {
@@ -18,7 +21,7 @@ const filterBundle = (id: string, state: ShopReduxState) => {
   const selectedBundle = allShopBundles.find(
     (bundle) => bundle.bundle_id.toString() === id
   );
-  
+
   return selectedBundle || allShopBundles[0];
 };
 
@@ -33,17 +36,33 @@ export const PageDataSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
+      // Handle getBundles
       .addCase(getBundles.pending, (state: ShopReduxState) => {
         state.allShopBundles = [];
         state.currentViewBundle = "";
       })
       .addCase(getBundles.fulfilled, (state, action) => {
         state.allShopBundles = action.payload;
-        state.currentViewBundle = action.payload[0];
+        state.currentViewBundle = action.payload[0] || "";
       })
       .addCase(getBundles.rejected, (state: ShopReduxState) => {
         state.allShopBundles = [];
         state.currentViewBundle = "";
+      })
+
+      // Handle getBundleById
+      .addCase(getBundleById.pending, (state: ShopReduxState) => {
+        state.isFetchingBundleById = true;
+        state.bundleByIdError = null; // Reset error on new request
+        state.selectedBundle = null; // Reset selectedBundle
+      })
+      .addCase(getBundleById.fulfilled, (state, action: PayloadAction<PageViewData>) => {
+        state.isFetchingBundleById = false;
+        state.selectedBundle = action.payload; // Store fetched bundle
+      })
+      .addCase(getBundleById.rejected, (state: ShopReduxState, action) => {
+        state.isFetchingBundleById = false;
+        state.bundleByIdError = action.payload as string || action.error.message || "Failed to fetch bundle by ID";
       });
   },
 });

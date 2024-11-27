@@ -11,6 +11,7 @@ interface ButtonProps {
   classNames?: string;
   link?: string;
   type?: "button" | "submit" | "reset";
+  disabled?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -20,6 +21,7 @@ const Button: React.FC<ButtonProps> = ({
   classNames,
   link,
   type = "button",
+  disabled = false,
 }) => {
   const content = isLoading ? <Spinner /> : label;
 
@@ -29,10 +31,11 @@ const Button: React.FC<ButtonProps> = ({
         href={link}
         passHref
         className={twMerge(
-          `w-full flex justify-center items-center gap-2 py-4 px-6 md:px-8 rounded-lg bg-primary500 text-white font-semibold text-center`,
+          `w-full flex justify-center items-center gap-2 py-4 px-6 md:px-8 rounded-lg bg-primary500 text-white font-semibold text-center ${disabled ? "cursor-not-allowed opacity-50" : ""
+          }`,
           classNames
         )}
-        onClick={onClick}
+        onClick={disabled ? undefined : onClick}
       >
         {content}
       </Link>
@@ -43,11 +46,12 @@ const Button: React.FC<ButtonProps> = ({
     <button
       type={type}
       className={twMerge(
-        `w-full flex justify-center items-center gap-2 py-4 px-8 rounded-lg bg-primary500 text-white font-semibold text-center `,
+        `w-full flex justify-center items-center gap-2 py-4 px-8 rounded-lg bg-primary500 text-white font-semibold text-center ${disabled ? "cursor-not-allowed opacity-50" : ""
+        }`,
         classNames
       )}
-      onClick={onClick}
-      disabled={isLoading}
+      onClick={disabled ? undefined : onClick} // Prevent click if disabled
+      disabled={disabled || isLoading}
     >
       {content}
     </button>

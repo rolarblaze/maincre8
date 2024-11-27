@@ -11,25 +11,27 @@ interface Props {
   price: number;
   feature: string;
   type: string;
+  onChange: (addon: { id: number; quantity: number }) => void;
 }
 
-const AddOnItem: React.FC<Props> = ({ type, id, price, name, feature }) => {
+const AddOnItem: React.FC<Props> = ({ id, price, name, feature, type, onChange }) => {
   const dispatch = useDispatch();
   const [quantity, setQuantity] = useState(0);
   const [isSelected, setIsSelected] = useState(false);
 
   const incrementQuantity = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
-    setIsSelected(true);
+    setQuantity((prevQuantity) => {
+      const newQuantity = prevQuantity + 1;
+      onChange({ id: parseInt(id), quantity: newQuantity });
+      return newQuantity;
+    });
   };
 
   const decrementQuantity = () => {
     setQuantity((prevQuantity) => {
-      const newQuantity = prevQuantity - 1;
-      if (newQuantity <= 0) {
-        setIsSelected(false);
-      }
-      return Math.max(newQuantity, 0);
+      const newQuantity = Math.max(prevQuantity - 1, 0);
+      onChange({ id: parseInt(id), quantity: newQuantity });
+      return newQuantity;
     });
   };
 
@@ -62,10 +64,10 @@ const AddOnItem: React.FC<Props> = ({ type, id, price, name, feature }) => {
           <div className="flex items-center justify-center gap-3.5 pb-1 pt-5"
             onClick={(e) => e.stopPropagation()}>
             <button
-              onClick={incrementQuantity}
+              onClick={decrementQuantity}
               className="rounded-lg bg-white p-2"
             >
-              <PlusIcon fillColor="#98A2B3" />
+              <MinusIcon fillColor="#98A2B3" />
             </button>
 
             <span className="block text-lg font-semibold text-[#111827]">
@@ -73,10 +75,10 @@ const AddOnItem: React.FC<Props> = ({ type, id, price, name, feature }) => {
             </span>
 
             <button
-              onClick={decrementQuantity}
+              onClick={incrementQuantity}
               className="rounded-lg bg-white p-2"
             >
-              <MinusIcon fillColor="#98A2B3" />
+              <PlusIcon fillColor="#98A2B3" />
             </button>
           </div>
         )}

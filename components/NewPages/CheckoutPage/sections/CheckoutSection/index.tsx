@@ -1,7 +1,56 @@
 import { CartSection, AddOnSection, InputField } from "@/components";
 import { EmailFieldIcon } from "@/public/icons";
 
-const CPCartSection = () => {
+interface CheckoutSectionProps {
+  cartItems: {
+    id: number;
+    bundle: {
+      bundle_name: string;
+      bundle_image_link: string;
+      bundle_id: number;
+    };
+    package: { package_name: string };
+  }[];
+  recommendedAddOns: {
+    add_ons_id: number;
+    add_ons_name: string;
+    description: string;
+    price: number;
+    bundle: { bundle_name: string };
+  }[];
+}
+
+const CPCartSection: React.FC<CheckoutSectionProps> = (
+  {
+    cartItems,
+    recommendedAddOns,
+  }
+) => {
+
+  const handleAddOnChange = (addon: { id: number; quantity: number }) => {
+    console.log("Add-on changed:", addon);
+  };
+
+  const groupedAddOns = recommendedAddOns.reduce((acc: Record<string, any[]>, addon) => {
+    const bundleName = addon.bundle.bundle_name;
+    if (!acc[bundleName]) {
+      acc[bundleName] = [];
+    }
+    acc[bundleName].push({
+      uniqueKey: `${addon.add_ons_id}-${addon.add_ons_name}`,
+      id: addon.add_ons_id,
+      name: addon.add_ons_name,
+      feature: addon.description,
+      price: addon.price,
+    });
+    return acc;
+  }, {});
+
+  const addOns = Object.keys(groupedAddOns).map((bundleName) => ({
+    type: bundleName,
+    recommendations: groupedAddOns[bundleName],
+  }));
+
   return (
     <div className="h-fit space-y-10 border-grey200 bg-white p-5 font-manrope sm:rounded-2xl sm:border sm:p-8 lg:w-[50rem]">
       <h2 className="text-center text-2xl font-semibold leading-10 text-grey900 lg:text-3.5xl">
@@ -15,8 +64,8 @@ const CPCartSection = () => {
         </p>
       </div>
 
-      <CartSection />
-      <AddOnSection />
+      <CartSection cartItems={cartItems} />
+      <AddOnSection addOns={addOns} onAddOnChange={handleAddOnChange} />
 
       <div className="flex items-center justify-start gap-2">
         <input type="checkbox" />
