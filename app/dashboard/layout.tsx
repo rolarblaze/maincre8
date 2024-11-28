@@ -66,12 +66,6 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
     Settings: "",
   };
 
-  // Check if the current route is dynamic
-  const isDynamicRoute = pathname.split("/").length > 3;
-  // console.log(isDynamicRoute);
-
-  // const isOverview = pathname.split("/").length === 2;
-
   const openSidebar = () => {
     setSidebarOpen(true);
   };
@@ -93,10 +87,10 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
         )}
 
         {/* Main section */}
-        <div className="flex w-full flex-1 flex-col">
+        <div className="flex w-[85%] min-w-[calc(100vw_-_20rem)] flex-1 flex-col xs:max-md:w-full">
           <MobileNav onClick={openSidebar} title={headerTitles[activeTab]} />
           {
-            <div>
+            <div className="w-full">
               {headerTitles[activeTab] && (
                 <Header
                   title={headerTitles[activeTab]}

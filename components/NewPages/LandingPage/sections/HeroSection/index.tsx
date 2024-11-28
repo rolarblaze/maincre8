@@ -5,9 +5,11 @@ import { useState } from "react";
 import { DemoVideo, FadeUpDiv, Modal } from "@/components";
 import { PlayIcon } from "@/public/svgs";
 import assetLibrary from "@/library";
+import { useAppSelector } from "@/redux/store";
 
 const HeroSection = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { profile } = useAppSelector((state) => state.auth);
   
 
   return (
@@ -23,10 +25,10 @@ const HeroSection = () => {
 
         <div className="z-[2] mt-4 flex items-center justify-center gap-6">
           <Link
-            href={"/signup"}
+            href={(profile.first_name || profile.last_name) ? "/dashboard" : "/signup"}
             className="block w-fit rounded-lg bg-white px-12 py-3.5 text-base font-semibold text-grey800"
           >
-            Get Started
+            {(profile.first_name || profile.last_name) ? "Go To Dashbaord" : "Get Started"}
           </Link>
 
           <button

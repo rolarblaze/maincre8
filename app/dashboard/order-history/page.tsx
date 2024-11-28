@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import moment from "moment";
 import { AllIcon, CheckboxIcon } from "@/public/svgs";
 import { Order } from "@/components";
+import Spinner from "@/components/Spinner";
 import Tabs from "@/components/Dashboard/Tabs";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { fetchUserOrderHistory } from "@/redux/order/features";
@@ -11,14 +12,17 @@ import Loader from "@/components/Spinner/Loader";
 import { EmptyState } from "@/components";
 import MobileOrder from "@/components/Dashboard/MobileOrder";
 import { addAlert } from "@/redux/alerts";
-import { initializeSession, addItemToCart, getCartItems } from "@/redux/cart/features";
+import {
+  initializeSession,
+  addItemToCart,
+  getCartItems,
+} from "@/redux/cart/features";
 
 export default function OrderHistory() {
   const dispatch = useAppDispatch();
   const [activeTab, setActiveTab] = useState<string>("All");
   const [addingToCart, setAddingToCart] = useState("");
   const { orders, isLoading, error } = useAppSelector((state) => state.order);
-  // console.log({orders})
 
   // Handling the "Add To Cart" globally across the Desktop and Mobile View of the Order History
   const handleAddToCart = async (
@@ -142,7 +146,9 @@ export default function OrderHistory() {
         />
       </div>
       {isLoading ? (
-        <Loader />
+        <div className="flex h-screen w-full items-center justify-center">
+          <Spinner className="h-10 w-10 border-blue-500" />
+        </div>
       ) : sortOrders(filteredOrders as UserTransaction[] | null).sortedKeys
           .length === 0 ? (
         <div className="mx-auto flex w-full items-center justify-center">
@@ -155,7 +161,7 @@ export default function OrderHistory() {
           />
         </div>
       ) : (
-        <div className="space-y-10">
+        <div className="space-y-10 pb-10">
           {sortOrders(
             filteredOrders as UserTransaction[] | null,
           ).sortedKeys?.map((dateBought: string, index: number) => (

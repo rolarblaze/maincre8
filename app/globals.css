@@ -8,6 +8,22 @@
   .center {
     @apply flex items-center justify-center;
   }
+
+  .services-card-responsiveness {
+    @apply w-[32%] min-w-80 max-w-[25rem] xs:w-full xs:min-w-0 xs:max-w-[250px] sm:w-[48%] sm:max-w-[300px] ;
+  }
+
+  @media (min-width: 500px) {
+    .services-card-responsiveness {
+      @apply min-w-[230px];
+    }
+  }
+
+  @media (min-width: 700px) {
+    .services-card-responsiveness {
+      @apply w-[30%] min-w-[300px] max-w-full;
+    }
+  }
 }
 
 :root {

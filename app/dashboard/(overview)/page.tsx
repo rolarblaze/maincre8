@@ -16,6 +16,7 @@ import { fetchActivityStatistics } from "@/redux/auth/features";
 import { getBundles } from "@/redux/shop/features";
 import { BulbIcon } from "@/public/icons";
 import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
+import Spinner from "@/components/Spinner";
 
 import Image from "next/image";
 import Link from "next/link";
@@ -199,8 +200,8 @@ const Overview = () => {
           <h3 className="lead text-2xl font-bold text-grey900 xs:max-md:text-xl">
             My Services
           </h3>
-          <div className="noScrollbar w-full overflow-auto">
-            <div className="flex flex-wrap gap-5">
+          <div className="">
+          <div className="flex p-6 xs:max-md:px-0 xs:max-md:gap-0 xs:max-md:gap-y-6 xs:max-md:justify-evenly flex-wrap w-full gap-5">
               {hasTransactions ? (
                 orderHistory
                   .slice(0, 3)
@@ -221,7 +222,8 @@ const Overview = () => {
                     />
                   ))
               ) : isLoading ? (
-                <Loader />
+
+                <Spinner className="border-blue-500" />
               ) : (
                 services
                   .flatMap((service) =>
@@ -284,11 +286,11 @@ const Overview = () => {
                   </h4>
                   <div className="flex flex-col">
                     {isApointmentLoading ? (
-                      <div className="flex items-center justify-center">
-                        <Loader />
+                      <div className="flex py-10 items-center justify-center">
+                        <Spinner className="border-blue-500" />
                       </div>
                     ) : !appointments || appointments.length === 0 ? (
-                      <p className="flex items-center justify-center py-10">
+                      <p className="flex size-full items-center justify-center py-10">
                         No upcoming appointments
                       </p>
                     ) : (

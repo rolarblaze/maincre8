@@ -400,7 +400,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
         </div>
 
         <div onClick={handleLogout} className="h-fit cursor-pointer">
-          <Logout />
+          <Logout  />
         </div>
       </div>
     </aside>

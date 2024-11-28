@@ -5,9 +5,11 @@ import { useState } from "react";
 import assetLibrary from "@/library";
 import { DemoVideo, FadeUpDiv, Modal } from "@/components";
 import { LogoFadeIcon, PlayIcon } from "@/public/svgs";
+import { useAppSelector } from "@/redux/store";
 
 const CtaSection = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { profile } = useAppSelector((state) => state.auth);
 
   return (
     <FadeUpDiv className="full-width content-grid relative pt-[6.25rem]">
@@ -30,10 +32,10 @@ const CtaSection = () => {
 
           <div className="mt-4 flex gap-4 max-sm:flex-col max-sm:items-center">
             <Link
-              href={"/signup"}
+              href={(profile.first_name || profile.last_name) ? "/dashboard" : "/signup"}
               className="block w-fit rounded-lg bg-primary900 px-12 py-4 text-lg xs:max-md:text-base font-medium text-white"
             >
-              Get Started
+              {(profile.first_name || profile.last_name) ? "Go To Dashbaord" : "Get Started"}
             </Link>
 
             <button
