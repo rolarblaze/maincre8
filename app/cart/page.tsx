@@ -91,7 +91,7 @@ const CartPage = () => {
       acc[bundleName] = [];
     }
     acc[bundleName].push({
-      uniqueKey: `${addon.add_ons_id}-${addon.add_ons_name}-${Math.random()}`, // Unique key for each item
+      uniqueKey: `${addon.add_ons_id}-${addon.add_ons_name}`, // Unique key for each item
       id: addon.add_ons_id,
       name: addon.add_ons_name,
       feature: addon.description,
@@ -116,7 +116,7 @@ const CartPage = () => {
 
       {isGettingCartItems ? (
         <div className="mx-auto flex items-center justify-center min-h-[50vh]">
-          <Spinner />
+          <Spinner className="border-blue-500" />
         </div>
       ) : error ? (
         <div className="flex flex-col items-center justify-center min-h-[50vh] space-y-4">
