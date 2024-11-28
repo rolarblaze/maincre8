@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { submitBrief } from "./contact";
+import { submitBrief } from "./features";
 
 interface BriefState {
   briefData: any | null;

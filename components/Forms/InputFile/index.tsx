@@ -54,9 +54,6 @@ function InputFile({
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
     setSelectedFile(file);
-
-    console.log(isLoading, "kkkk");
-
     onFileChange?.(file);
   };
   return (
