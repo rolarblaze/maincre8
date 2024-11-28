@@ -5,7 +5,7 @@ import { getBundles } from "@/redux/shop/features";
 import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { changePageData } from "@/redux/shop";
 import { PageViewData } from "@/redux/shop/interface";
-import Loader from "@/components/Spinner/Loader";
+import Spinner from "@/components/Spinner";
 
 interface ServicePackageLayoutProps {
   children: React.ReactNode;
@@ -51,7 +51,9 @@ const ServicesPackageLayout: React.FC<ServicePackageLayoutProps> = ({
 
   if (pageViewData === "") {
     return (
-      <Loader />
+      <div className="flex w-full h-full items-center justify-center">
+      <Spinner className="border-blue-500" />
+      </div>
     )
   }
 

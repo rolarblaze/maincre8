@@ -45,11 +45,3 @@ export const getBundlesClass = [
     underText:   "Craft Your Message",
   },
 ];
-
-// export const getUnderText = [
-//   "Move beyond just a logo",
-//   "Transform Your Visuals",
-//   "Boost Your Reach",
-//   "Craft Your Message",
-//   "Maximize your Growth"
-// ]

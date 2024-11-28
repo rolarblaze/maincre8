@@ -1,5 +1,5 @@
 "use client";
-import { EmptyState, Loader, ServiceCard } from "@/components";
+import { EmptyState, ServiceCard } from "@/components";
 
 import { getUserOrderHistory } from "@/redux/servicesTracker/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";

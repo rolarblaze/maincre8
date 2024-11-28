@@ -8,6 +8,7 @@ import { getBundlesClass } from "@/components/NewPages/LandingPage/sections/Pack
 import moment from "moment";
 import { trackUserOrder } from "@/redux/servicesTracker/features";
 import TrackServicesIcon from "@/public/svgs/TrackServicesIcon";
+import { useRouter } from "next/navigation";
 
 interface ServiceCardProps {
   bundleId?: number;
@@ -32,6 +33,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
   transactionId,
   transactionDate,
 }) => {
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const bundlesData = useAppSelector(
     (state: RootState) => state.pageViewData.allShopBundles,
@@ -50,10 +52,11 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
             packages,
           }) => {
             return (
-              <Link
+              <button
                 key={bundle_id}
-                href={`/dashboard/services/${bundleId}`}
-                className={`services-card-responsiveness group flex flex-col justify-between overflow-hidden rounded-lg border !border-ash  ${getBundlesClass[bundle_id - 1].tabClass}`}
+                onClick={() => router.push(`/dashboard/services/${bundleId}`)}
+                // href={`/dashboard/services/${bundleId}`}
+                className={`services-card-responsiveness group flex flex-col justify-between overflow-hidden rounded-lg border !border-ash ${getBundlesClass[bundle_id - 1].focusClass} ${getBundlesClass[bundle_id - 1].tabClass}`}
               >
                 <figure
                   className={`relative min-h-60 w-full xs:max-md:h-60 xs:max-md:min-h-0 ${getBundlesClass[bundle_id - 1].bgClass}`}
@@ -92,9 +95,17 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                     </p>
                   </div>
 
-                  <Link
-                    href={`/dashboard/my-services/track-services/${transactionId}`}
-                    className="flex items-center gap-1"
+                  <div
+                  role="button"
+                  tabIndex={0}
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      router.push(
+                        `/dashboard/my-services/track-services/${transactionId}`,
+                      );
+                    }}
+                    
+                    className={`${getBundlesClass[bundle_id - 1].focusClass} flex items-center gap-1`}
                   >
                     <p className="text-nowrap text-sm font-medium text-[#4490EA] xs:max-md:text-xs">
                       Track Packages
@@ -102,9 +113,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                     <div className="center size-4">
                       <TrackServicesIcon />
                     </div>
-                  </Link>
+                  </div>
                 </div>
-              </Link>
+              </button>
             );
           },
         )}

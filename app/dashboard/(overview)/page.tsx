@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import {
   Button,
   FullLoader,
-  Loader,
   ServiceCard,
   EmptyState,
 } from "@/components";
