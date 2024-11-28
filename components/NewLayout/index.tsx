@@ -28,6 +28,7 @@ const PageLayout = ({
     if (bundlesData.length === 0) {
       dispatch(getBundles());
     }
+    dispatch(getCartItems());
   }, []);
 
   return (

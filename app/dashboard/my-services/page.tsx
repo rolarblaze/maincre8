@@ -51,8 +51,6 @@ const MyServices = () => {
           ))}
         </div>
       )}
-
-      {/* <MyPackage /> */}
     </>
   );
 };

@@ -9,11 +9,13 @@ import Sidebar from "@/components/Dashboard/Sidebar";
 import { Tab } from "@/components/Dashboard/Sidebar/types";
 import { BellIcon, CartIcon } from "@/public/svgs";
 import Middleware from "@/utils/middleware";
-import { useAppSelector } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { getCartItems } from "@/redux/cart/features";
 
 const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
   children,
 }) => {
+  const dispatch = useAppDispatch();
   const { isLoadingProfile, profile } = useAppSelector((state) => state.auth);
   const [activeTab, setActiveTab] = useState<Tab>("Overview");
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -22,6 +24,8 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    dispatch(getCartItems());
+
     // Set initial mobile state based on window width
     setIsMobile(window.innerWidth < 768);
 

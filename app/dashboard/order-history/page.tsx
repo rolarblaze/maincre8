@@ -147,7 +147,7 @@ export default function OrderHistory() {
       </div>
       {isLoading ? (
         <div className="flex h-screen w-full items-center justify-center">
-          <Spinner className="h-10 w-10 border-blue-500" />
+          <Spinner className="border-blue-500" />
         </div>
       ) : sortOrders(filteredOrders as UserTransaction[] | null).sortedKeys
           .length === 0 ? (

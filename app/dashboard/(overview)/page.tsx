@@ -21,7 +21,7 @@ import Spinner from "@/components/Spinner";
 import Image from "next/image";
 import Link from "next/link";
 import { getBundlesClass } from "@/components/NewPages/LandingPage/sections/PackagesSection/helperFunc";
-import { getCartItems } from "@/redux/cart/features";
+
 
 const Overview = () => {
   const router = useRouter();
@@ -46,7 +46,7 @@ const Overview = () => {
     dispatch(getUserOrderHistory());
     dispatch(fetchLatestAppointments());
     dispatch(fetchActivityStatistics());
-    dispatch(getCartItems());
+    
 
     // store user name indefinitely in localStorage for later access on checkout page, even without logging in
     // log in once to store names
@@ -81,10 +81,10 @@ const Overview = () => {
     return <div>Error: {error}</div>;
   }
 
-  if (isLoadingProfile || bundlesData.length === 0) {
+  if (isLoadingProfile || (bundlesData.length === 0)) {
     return (
-      <div className="flex items-center justify-center">
-        <Loader />
+      <div className="flex h-full w-full items-center justify-center">
+        <Spinner className="border-blue-500" />
       </div>
     );
   }
