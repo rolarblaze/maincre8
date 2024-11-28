@@ -12,7 +12,6 @@ const CheckoutPage = () => {
   useEffect(() => {
     dispatch(getCartItems());
   }, [dispatch]);
-  console.log("cart items", cartItems)
 
   const primaryPackageId = cartItems[0]?.package.package_id || null;
 

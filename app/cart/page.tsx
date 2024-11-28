@@ -16,6 +16,8 @@ const CartPage = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const { cartItems, recommendedAddOns, isGettingCartItems, error, isCheckingOut } = useAppSelector((state) => state.cart);
+  const { isAuthenticated } = useAppSelector((state) => state.auth);
+
 
   const [selectedAddOns, setSelectedAddOns] = useState<
     { id: number; quantity: number; bundleName: string }[]
@@ -39,6 +41,12 @@ const CartPage = () => {
   };
 
   const handleCheckout = async () => {
+    if (!isAuthenticated) {
+      // Redirect to signup with the redirect parameter
+      router.push("/signup?redirect=/cart");
+      return;
+    }
+
     try {
       // Map selectedAddOns to the expected structure
       const addons = selectedAddOns.map((addon) => {
@@ -64,7 +72,15 @@ const CartPage = () => {
       // Redirect to the checkout page
       router.push("/checkout");
     } catch (err) {
-      console.error("Checkout failed:", err);
+      dispatch(
+        addAlert({
+          id: `Error switching to ${err}`,
+          headText: "Error",
+          subText: (err as Error)?.message || "Failed to switch package",
+          type: "error",
+          autoClose: true,
+        })
+      );
     }
   };
 
