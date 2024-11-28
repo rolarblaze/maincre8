@@ -2,6 +2,11 @@ import api from "@/utils/axios/api";
 import { handleAxiosError } from "@/utils/helpers/general/errorHandler";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
+export const submitBriefEndpoints = {
+  businessBrief: "user/business-briefs",
+  personalizedBrief: "user/personalized-recommendations",
+};
+
 interface BriefPayload {
   interested_services: string;
   primary_goal: string;
@@ -17,7 +22,15 @@ interface BriefPayload {
 export const submitBrief = createAsyncThunk(
   "user/submitBrief",
   async (
-    { endpoint, payload }: { endpoint: string; payload: BriefPayload },
+    {
+      formName,
+      endpoint,
+      payload,
+    }: {
+      formName: keyof typeof submitBriefEndpoints;
+      endpoint: string;
+      payload: BriefPayload;
+    },
     { rejectWithValue },
   ) => {
     try {
@@ -29,8 +42,3 @@ export const submitBrief = createAsyncThunk(
     }
   },
 );
-
-export const submitBriefEndpoints = {
-  businessBrief: "user/business-briefs",
-  personalizedBrief: "user/personalized-recommendations",
-};
