@@ -72,7 +72,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
     } else {
       setLocalValue(optionValue as string); // Fallback to local state as a single value
     }
-    setIsOpen(false);
+    if (!isCheckbox) setIsOpen(false); // Close dropdown if not a checkbox
   };
 
   const handleRadioChange = (optionValue: string | number) => {
@@ -164,6 +164,9 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
               <li
                 key={option.value}
                 className="flex cursor-pointer items-center gap-1 px-6 py-[1.22rem] font-medium text-grey900 hover:bg-gray-100"
+                onClick={(e) => {
+                  if (isCheckbox) e.stopPropagation(); // Prevent dropdown from closing for checkboxes
+                }}
               >
                 {isCheckbox ? (
                   <div className="flex cursor-pointer gap-3">
@@ -171,6 +174,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
                       type="checkbox"
                       id={option.value.toString()}
                       checked={getSelectedValue()?.includes(option.value)}
+                      onClick={(e) => e.stopPropagation()} //Prevent dropdown from closing
                       onChange={() => handleCheckboxChange(option.value)}
                       className="mr-2 h-5 w-5 cursor-pointer self-center rounded-[3.33px] border-[1.25px] border-grey300 shadow-md shadow-white"
                     />

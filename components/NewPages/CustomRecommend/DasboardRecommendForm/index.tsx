@@ -10,6 +10,7 @@ import Button from "@/components/Button";
 import { useSelector } from "react-redux";
 import { convertToString } from "@/redux/myServices/formConfig";
 import { submitBrief, submitBriefEndpoints } from "@/redux/brief/features";
+import ErrorDisplay from "../shared/ErrorDisplay";
 
 function DashboardRecommendForm() {
   const isFormLoading = useSelector(
@@ -59,7 +60,7 @@ function DashboardRecommendForm() {
           }),
         );
 
-        // resetForm();
+        resetForm();
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(
@@ -75,7 +76,7 @@ function DashboardRecommendForm() {
   });
   return (
     <form onSubmit={formik.handleSubmit} className="noScrollbar w-full">
-      <RecommendFormInputs formik={formik} />
+      <RecommendFormInputs formik={formik} isBusinessBrief={true} />
       <footer className="absolute inset-x-0 -bottom-2 rounded-b-2xl bg-white px-8 py-6">
         <Button
           label="Checkout"
@@ -84,11 +85,7 @@ function DashboardRecommendForm() {
           isFileUploading={isFileUploading}
           isLoading={isFormLoading}
         />
-        {isFileUploading && (
-          <span className="block w-full text-center text-xs text-red-800">
-            Docs still uploading, please wait.
-          </span>
-        )}
+        {isFileUploading && <ErrorDisplay message="File still uploading..." />}
       </footer>
     </form>
   );

@@ -10,39 +10,46 @@ import { FileUploadIcon } from "@/public/svgs";
 import InputField from "@/components/Forms/InputField";
 import { RecommendFormType, RecommendFormValues } from "../type";
 import { FormikProps } from "formik";
-import { RootState} from "@/redux/store";
+import { RootState } from "@/redux/store";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import useFileUpload from "@/hooks/UseFileUpload";
-import { briefEndpoints } from "@/components/Dashboard/SubmitBrief/shared/briefEndpoint";
 import { useSelector } from "react-redux";
 import { selectFileUploadState } from "@/redux/file";
+import { submitBriefEndpoints } from "@/redux/brief/features";
 
 function RecommendFormInputs({
   formik,
+  isBusinessBrief = false,
+  isPersonalizedBrief = false,
 }: {
   formik: FormikProps<RecommendFormValues>;
+  isBusinessBrief?: boolean;
+  isPersonalizedBrief?: boolean;
 }) {
+  const fileId = isBusinessBrief
+    ? "businessBriefFile"
+    : "personalizedBriefFile";
+
+  const formEndpoint = isBusinessBrief
+    ? submitBriefEndpoints.businessBrief
+    : submitBriefEndpoints.personalizedBrief;
+
   const { values, errors, touched, handleBlur, handleChange } = formik;
 
   const recommendBriefFileState = useSelector((state: RootState) =>
-    selectFileUploadState(state, "recommendBriefFile"),
+    selectFileUploadState(state, fileId),
   );
   const { handleFileUpload } = useFileUpload();
 
   // HANDLE FILE UPLOAD ONCHANGE
   const onFileChange = async (
     file: File | null,
+    endpoint: string,
     fileId: string,
     fieldName: string,
   ) => {
     if (formik) {
-      await handleFileUpload(
-        file,
-        briefEndpoints.recommendationBrief,
-        fileId,
-        fieldName,
-        formik,
-      );
+      await handleFileUpload(file, endpoint, fileId, fieldName, formik);
     }
   };
 
@@ -89,7 +96,7 @@ function RecommendFormInputs({
           name="document"
           icon={<FileUploadIcon />}
           onFileChange={(file: File | null) =>
-            onFileChange(file, `recommendBriefFile`, `document`)
+            onFileChange(file, fileId, formEndpoint, `document`)
           }
           showUploadButton={false}
           error={errors.document}
