@@ -16,11 +16,12 @@ import { fetchActivityStatistics } from "@/redux/auth/features";
 import { getBundles } from "@/redux/shop/features";
 import { BulbIcon } from "@/public/icons";
 import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
+import Spinner from "@/components/Spinner";
 
 import Image from "next/image";
 import Link from "next/link";
 import { getBundlesClass } from "@/components/NewPages/LandingPage/sections/PackagesSection/helperFunc";
-import { getCartItems } from "@/redux/cart/features";
+
 
 const Overview = () => {
   const router = useRouter();
@@ -45,7 +46,11 @@ const Overview = () => {
     dispatch(getUserOrderHistory());
     dispatch(fetchLatestAppointments());
     dispatch(fetchActivityStatistics());
-    dispatch(getCartItems());
+    
+
+    // store user name indefinitely in localStorage for later access on checkout page, even without logging in
+    // log in once to store names
+    localStorage.setItem("SellCrea8User", JSON.stringify({first_name: profile.first_name, last_name: profile.last_name  }))
   }, [dispatch]);
 
   // Extract the activity statistics from the profile
@@ -76,10 +81,10 @@ const Overview = () => {
     return <div>Error: {error}</div>;
   }
 
-  if (isLoadingProfile || bundlesData.length === 0) {
+  if (isLoadingProfile || (bundlesData.length === 0)) {
     return (
-      <div className="flex items-center justify-center">
-        <Loader />
+      <div className="flex h-full w-full items-center justify-center">
+        <Spinner className="border-blue-500" />
       </div>
     );
   }
@@ -91,11 +96,7 @@ const Overview = () => {
     !profile.user.profile?.phone_number;
 
   const hasTransactions = orderHistory && orderHistory?.length > 0;
-  const showAppointments = !(!appointments || appointments.length === 0);
-  const showServices = !(
-    active_services + completed_services + total_services_bought ===
-    0
-  );
+  
 
   return (
     <div className="noScrollbar flex flex-col overflow-y-scroll pb-10 font-manrope xs:max-md:mx-auto xs:max-md:min-w-full [&>*]:pl-6 xs:max-md:[&>*]:px-0">
@@ -199,8 +200,8 @@ const Overview = () => {
           <h3 className="lead text-2xl font-bold text-grey900 xs:max-md:text-xl">
             My Services
           </h3>
-          <div className="noScrollbar w-full overflow-auto">
-            <div className="flex flex-wrap gap-5">
+          <div className="">
+          <div className="flex p-6 xs:max-md:px-0 xs:max-md:gap-0 xs:max-md:gap-y-6 xs:max-md:justify-evenly flex-wrap w-full gap-5">
               {hasTransactions ? (
                 orderHistory
                   .slice(0, 3)
@@ -221,7 +222,8 @@ const Overview = () => {
                     />
                   ))
               ) : isLoading ? (
-                <Loader />
+
+                <Spinner className="border-blue-500" />
               ) : (
                 services
                   .flatMap((service) =>
@@ -253,14 +255,14 @@ const Overview = () => {
         </div>
 
         <div className="space-y-10 pr-5 xs:max-md:space-y-2 xs:max-md:pr-0">
-          {(showServices || showAppointments) && (
+          
             <h3 className="col-span-2 text-2xl font-bold text-grey900 xs:max-md:text-xl">
               Activity
             </h3>
-          )}
+          
 
           <div className="flex w-full flex-wrap gap-6 xs:max-md:gap-0 xs:max-md:gap-y-6 justify-between xs:max-md:flex-col">
-            {showServices && (
+            {
               <div className="noScrollbar w-[48%] min-w-[25rem] xs:max-md:min-w-0 xs:max-md:w-full xs:max-md:overflow-auto">
                 <div className="flex w-full h-full flex-col justify-between space-y-2 rounded-lg border bg-white px-6 py-4 shadow-lg xs:max-md:min-w-[25rem]">
                   <h4 className="border-b border-grey200 pb-4 text-lg font-semibold text-grey900">
@@ -274,7 +276,7 @@ const Overview = () => {
                   </div>
                 </div>
               </div>
-            )}
+            }
 
             {
               <div className="noScrollbar w-[48%] min-w-[25rem] xs:max-md:min-w-0 xs:max-md:w-full xs:max-md:overflow-auto">
@@ -284,11 +286,11 @@ const Overview = () => {
                   </h4>
                   <div className="flex flex-col">
                     {isApointmentLoading ? (
-                      <div className="flex items-center justify-center">
-                        <Loader />
+                      <div className="flex py-10 items-center justify-center">
+                        <Spinner className="border-blue-500" />
                       </div>
                     ) : !appointments || appointments.length === 0 ? (
-                      <p className="flex items-center justify-center py-10">
+                      <p className="flex size-full items-center justify-center py-10">
                         No upcoming appointments
                       </p>
                     ) : (

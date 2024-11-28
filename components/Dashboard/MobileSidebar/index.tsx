@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Tab from "../Sidebar/types";
 import { usePathname, useRouter } from "next/navigation";
-import { useAppSelector } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { CameraIcon, CancelIcon, LogoBlue, Logout } from "@/public/icons";
 import {
   BulbIcon,
@@ -21,6 +21,7 @@ import ArrowUp from "@/public/icons/arrow-up.svg";
 import Image from "next/image";
 import assetLibrary from "@/library";
 import NewLogo from "@/public/optimised/NewLogo";
+import { signOut } from "@/redux/auth/index";
 
 type MobileSidebarProps = {
   setActiveTab: (tab: Tab) => void;
@@ -32,15 +33,19 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
   onClick,
 }) => {
   const router = useRouter();
+  
   const pathname = usePathname();
+  const dispatch = useAppDispatch();
   const { profile } = useAppSelector((state) => state.auth);
   const [isSupportOpen, setIsSupportOpen] = useState(false);
 
   const isActive = (path: string) => pathname === path;
 
   const handleLogout = () => {
+    dispatch(signOut());
     router.push("/login");
   };
+
 
   const toggleSupport = () => {
     setIsSupportOpen(!isSupportOpen);
@@ -64,7 +69,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
         </div>
 
         {/* Navigations */}
-        <nav className="flex flex-col gap-1 border-b border-grey200 pb-6">
+        <nav className="flex flex-col xs:max-md:max-w-72 gap-1 border-b border-grey200 pb-6">
           <Link href="/dashboard" onClick={onClick}>
             <div
               className={`flex items-center gap-3 px-4 py-3 ${
@@ -286,7 +291,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
       {/* Notification and Settings */}
       <section className="flex flex-col gap-3 pt-2">
         <div className="flex flex-col gap-1 pb-3">
-          <Link href="/dashboard/notifications" onClick={onClick}>
+          {/* <Link href="/dashboard/notifications" onClick={onClick}>
             <div
               className={`flex items-center gap-3 px-4 py-3 ${
                 isActive("/dashboard/notifications")
@@ -310,7 +315,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
                 Notifications
               </span>
             </div>
-          </Link>
+          </Link> */}
 
           <Link href="/dashboard/settings" onClick={onClick}>
             <div

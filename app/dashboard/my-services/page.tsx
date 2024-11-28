@@ -4,6 +4,7 @@ import { EmptyState, Loader, ServiceCard } from "@/components";
 import { getUserOrderHistory } from "@/redux/servicesTracker/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import React, { useEffect } from "react";
+import Spinner from "@/components/Spinner";
 
 const MyServices = () => {
   const { orderHistory, loading } = useAppSelector((state) => state.services);
@@ -17,8 +18,8 @@ const MyServices = () => {
 
   if (loading)
     return (
-      <div className="flex items-center justify-center">
-        <Loader />
+      <div className="flex h-full w-full items-center justify-center">
+        <Spinner className="border-blue-500" />
       </div>
     );
 
@@ -33,7 +34,7 @@ const MyServices = () => {
           imgStyle=""
         />
       ) : (
-        <div className="noScrollbar flex p-6 xs:max-md:px-0 flex-wrap w-full gap-5">
+        <div className="noScrollbar flex p-6 xs:max-md:px-0 xs:max-md:gap-0 xs:max-md:gap-y-6 xs:max-md:justify-center flex-wrap w-full gap-5">
           {orderHistory?.map((transaction, i) => (
             <ServiceCard
               key={i}
@@ -50,8 +51,6 @@ const MyServices = () => {
           ))}
         </div>
       )}
-
-      {/* <MyPackage /> */}
     </>
   );
 };

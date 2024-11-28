@@ -1,8 +1,10 @@
 "use client";
 import Link from "next/link";
 import { navlinks } from "../../constants";
+import { useAppSelector } from "@/redux/store";
 
 const MobileNav = ({ onClose }: { onClose: () => void }) => {
+  const { profile } = useAppSelector((state) => state.auth);
   return (
     <nav
       onClick={onClose}
@@ -20,15 +22,15 @@ const MobileNav = ({ onClose }: { onClose: () => void }) => {
         <hr />
 
         <div className="flex items-center justify-center gap-6">
-          <Link href={"/login"} className="block w-fit hover:text-primary500">
+          <Link  href={"/login"} className={`${(profile.first_name || profile.last_name) && "hidden"}   block w-fit hover:text-primary500`}>
             Login
           </Link>
 
           <Link
-            href={"/signup"}
+            href={(profile.first_name || profile.last_name) ? "/dashboard" : "/signup"}
             className="block w-fit rounded-lg bg-grey800 px-4 py-2.5 text-grey50"
           >
-            Get Started
+            {(profile.first_name || profile.last_name) ? "Go To Dashbaord" : "Get Started"}
           </Link>
         </div>
       </div>

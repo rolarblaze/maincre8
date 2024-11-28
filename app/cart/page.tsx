@@ -91,7 +91,7 @@ const CartPage = () => {
       acc[bundleName] = [];
     }
     acc[bundleName].push({
-      uniqueKey: `${addon.add_ons_id}-${addon.add_ons_name}`, // Unique key for each item
+      uniqueKey: `${addon.add_ons_id}-${addon.add_ons_name}-${Math.random()}`, // Unique key for each item
       id: addon.add_ons_id,
       name: addon.add_ons_name,
       feature: addon.description,

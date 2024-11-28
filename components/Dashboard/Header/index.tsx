@@ -16,15 +16,15 @@ const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
   const { cartItems } = useAppSelector((state) => state.cart);
   const router = useRouter();
   return (
-    <div className="hidden items-start justify-between md:flex flex-wrap">
-      <header className="w-ful flex-col items-start space-y-1 bg-white px-6 pb-4 pt-5 font-manrope">
+    <div className="hidden items-start justify-between md:flex flex-wrap w-full max-w-full pt-5">
+      <header className=" flex-col items-start space-y-1 bg-white px-6 pb-4 font-manrope">
         <h3 className="text-2xl font-semibold text-grey900">{title}</h3>
         {subtitle && (
           <p className="text-base font-medium text-grey500">{subtitle}</p>
         )}
       </header>
 
-      <div className="mr-2 flex flex-wrap items-center gap-5 pt-5">
+      <div className="mx-5 flex flex-wrap items-center gap-5">
         <Link
           href="/dashboard/custom-recommendation"
           className="w-fit cursor-pointer items-center gap-2 rounded-lg border-none bg-primary500 !px-3 !py-2 text-white md:flex"
@@ -32,11 +32,11 @@ const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
           <BulbIcon />
           <span className="text-nowrap">Custom recommendations</span>
         </Link>
-        <div className="center size-8 rounded-full bg-[#F0F2F5] p-1">
+        {/* <div className="center size-8 rounded-full bg-[#F0F2F5] p-1">
           <button className="size-5">
             <BellIcon />
           </button>
-        </div>
+        </div> */}
         <div
           className={`${cartItems.length === 0 ? "bg-[#F0F2F5]" : "bg-[#E8F1FC]"} relative size-8 rounded-full p-1`}
         >

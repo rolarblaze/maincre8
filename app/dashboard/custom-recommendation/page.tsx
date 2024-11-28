@@ -8,6 +8,7 @@ import assetLibrary from "@/library";
 import DashboardPopoutWrapper from "@/components/UI/Modals/DashboardPopoutWrapper";
 import RecommendFormInputs from "@/components/NewPages/CustomRecommend/shared/RecommendFormInputs";
 import DashboardRecommendForm from "@/components/NewPages/CustomRecommend/DasboardRecommendForm";
+import Spinner from "@/components/Spinner";
 
 const CustomRecommendation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,7 +24,7 @@ const CustomRecommendation = () => {
   if (isLoading) {
     return (
       <div className="flex h-full w-full items-center justify-center">
-        <Loader />
+        <Spinner className="border-blue-500" />
       </div>
     );
   }

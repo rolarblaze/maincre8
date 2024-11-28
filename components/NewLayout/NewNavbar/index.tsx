@@ -1,17 +1,20 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { LogoIcon, MobileMenu } from "@/public/svgs";
 import { AvatarProfile } from "@/public/icons";
 import { hideComponent } from "@/hooks";
 import { CartButton, MobileNav } from "./components";
 import { navlinks } from "./constants";
+import { useAppSelector } from "@/redux/store";
+import { BellIcon, CartIcon } from "@/public/svgs";
 
 const NewNavbar = () => {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
+  const [name, setName] = useState("");
   const navlink = [
     {
       name: "Pricing",
@@ -26,6 +29,30 @@ const NewNavbar = () => {
 
   const hide = hideComponent(pathname);
   const authenticated = pathname === "/checkout";
+  const { profile } = useAppSelector((state) => state.auth);
+  const { cartItems } = useAppSelector((state) => state.cart);
+
+  useEffect(() => {
+    let userName = localStorage.getItem("SellCrea8User");
+    let loginDetails = localStorage.getItem("loginDetails");
+
+    if (!userName) {
+      try {
+        let typeCastLoginDetails = JSON.parse(loginDetails as string) as {
+          email: string;
+        };
+        setName(typeCastLoginDetails.email);
+      } catch (error) {
+        setName("---");
+      }
+    } else {
+      let typeCastUserName = JSON.parse(userName as string) as {
+        first_name: string;
+        last_name: string;
+      };
+      setName(typeCastUserName.first_name);
+    }
+  }, []);
 
   return (
     <header
@@ -60,28 +87,49 @@ const NewNavbar = () => {
         {/* BUTTONS */}
         {!hide && (
           <div className="flex items-center justify-center gap-6 max-lg:hidden">
-            <Link href={"/login"} className="block w-fit hover:text-primary500">
+            <Link
+              href={"/login"}
+              className={`${(profile.first_name || profile.last_name) && "hidden"} block w-fit hover:text-primary500`}
+            >
               Login
             </Link>
             <Link
-              href={"/signup"}
+              href={
+                profile.first_name || profile.last_name
+                  ? "/dashboard"
+                  : "/signup"
+              }
               className="block w-fit rounded-lg bg-grey800 px-4 py-2.5 text-grey50"
             >
-              Get Started
+              {profile.first_name || profile.last_name
+                ? "Go To Dashbaord"
+                : "Get Started"}
             </Link>
 
-            <Link href={"/cart"} className="block">
-              <CartButton
-                click={cartOpen}
-                onClick={() => setCartOpen((prev) => !prev)}
-              />
-            </Link>
+            <div
+              className={`${cartItems.length === 0 ? "bg-[#F0F2F5]" : "bg-[#E8F1FC]"} relative size-8 rounded-full p-1`}
+            >
+              {cartItems.length !== 0 && (
+                <div className="center absolute -right-1 -top-1 aspect-square min-h-4 w-auto min-w-4 rounded-full bg-[#1574E5] p-[1px]">
+                  <p className="leading-0 text-[10px] text-[#E8F1FC]">
+                    {cartItems.length}
+                  </p>
+                </div>
+              )}
+              <Link href="/cart" className="center size-full">
+                <div className="size-5">
+                  <CartIcon
+                    fillColor={`${cartItems.length === 0 ? "#667185" : "#1574E5"}`}
+                  />
+                </div>
+              </Link>
+            </div>
           </div>
         )}
 
         {authenticated && (
           <div className="flex items-center justify-end gap-3">
-            <p className="font-normal leading-6">Welcome, Bola</p>
+            <p className="font-normal leading-6">Welcome, {name}</p>
             <AvatarProfile />
           </div>
         )}
@@ -89,12 +137,24 @@ const NewNavbar = () => {
         {/* MOBILE: TOGGLE NAV */}
         {!hide && (
           <div className="flex items-center justify-end gap-4 lg:hidden">
-            <Link href={"/cart"} className="block">
-              <CartButton
-                click={cartOpen}
-                onClick={() => setCartOpen((prev) => !prev)}
-              />
-            </Link>
+            <div
+              className={`${cartItems.length === 0 ? "bg-[#F0F2F5]" : "bg-[#E8F1FC]"} relative size-8 rounded-full p-1`}
+            >
+              {cartItems.length !== 0 && (
+                <div className="center absolute -right-1 -top-1 aspect-square min-h-4 w-auto min-w-4 rounded-full bg-[#1574E5] p-[1px]">
+                  <p className="leading-0 text-[10px] text-[#E8F1FC]">
+                    {cartItems.length}
+                  </p>
+                </div>
+              )}
+              <Link href="/cart" className="center size-full">
+                <div className="size-5">
+                  <CartIcon
+                    fillColor={`${cartItems.length === 0 ? "#667185" : "#1574E5"}`}
+                  />
+                </div>
+              </Link>
+            </div>
 
             <button onClick={() => setMobileOpen((prev) => !prev)}>
               <MobileMenu />
