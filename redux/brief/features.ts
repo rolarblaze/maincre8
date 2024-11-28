@@ -7,11 +7,22 @@ export const submitBriefEndpoints = {
   personalizedBrief: "user/personalized-recommendations",
 };
 
-interface BriefPayload {
+interface PersonalizedBriefPayload {
   interested_services: string;
   primary_goal: string;
   monthly_budget: string;
   campaign_duration: string;
+  business_type: string;
+  additional_info: string;
+  phone_number: string;
+  email: string;
+  uploaded_brief: string;
+}
+interface BusinessBriefPayload {
+  interested_services: string;
+  primary_goal: string;
+  estimated_budget: string;
+  timeline: string;
   business_type: string;
   additional_info: string;
   phone_number: string;
@@ -29,7 +40,7 @@ export const submitBrief = createAsyncThunk(
     }: {
       formName: keyof typeof submitBriefEndpoints;
       endpoint: string;
-      payload: BriefPayload;
+      payload: PersonalizedBriefPayload | BusinessBriefPayload;
     },
     { rejectWithValue },
   ) => {

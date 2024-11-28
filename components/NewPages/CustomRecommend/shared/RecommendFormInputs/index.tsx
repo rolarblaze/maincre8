@@ -10,8 +10,7 @@ import { FileUploadIcon } from "@/public/svgs";
 import InputField from "@/components/Forms/InputField";
 import { RecommendFormType, RecommendFormValues } from "../type";
 import { FormikProps } from "formik";
-import { uploadRelevantDocument } from "@/redux/order/features";
-import { RootState, useAppDispatch } from "@/redux/store";
+import { RootState} from "@/redux/store";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import useFileUpload from "@/hooks/UseFileUpload";
 import { briefEndpoints } from "@/components/Dashboard/SubmitBrief/shared/briefEndpoint";
@@ -23,21 +22,8 @@ function RecommendFormInputs({
 }: {
   formik: FormikProps<RecommendFormValues>;
 }) {
-  const dispatch = useAppDispatch();
+  const { values, errors, touched, handleBlur, handleChange } = formik;
 
-  const {
-    values,
-    errors,
-    touched,
-    isSubmitting,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    setFieldValue,
-    setFieldError,
-  } = formik;
-
-  
   const recommendBriefFileState = useSelector((state: RootState) =>
     selectFileUploadState(state, "recommendBriefFile"),
   );

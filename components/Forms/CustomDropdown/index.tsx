@@ -122,7 +122,11 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
         </div>
       )}
       {/* Select field */}
-      <div ref={dropdownRef} className={twMerge("relative", className)}>
+      <div
+        ref={dropdownRef}
+        className={twMerge("relative", className)}
+        onClick={handleToggle}
+      >
         <div className="flex h-14 w-full items-center justify-between rounded-lg border border-gray-300 pl-4 pr-10 text-sm">
           {isCheckbox || isRadio ? (
             getSelectedValue()?.length > 0 ? (
@@ -138,11 +142,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
           ) : (
             <span className="text-sm text-grey400">{placeholder}</span>
           )}
-          <button
-            className="w-fit border border-none p-0"
-            onClick={handleToggle}
-            type="button"
-          >
+          <button className="w-fit border border-none p-0" type="button">
             <AshArrowDown />
           </button>
         </div>

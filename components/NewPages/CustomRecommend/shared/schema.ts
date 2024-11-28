@@ -28,7 +28,7 @@ export const recommendFormSchema = Yup.object().shape({
   additionalInfo: Yup.string().optional(),
 
   // ATTACH A FILE
-  document: Yup.mixed().nullable().optional(),
+  document: Yup.mixed().nullable().required("Please upload a brief"),
 
   // CONTACT INFO
   contactEmail: Yup.string()

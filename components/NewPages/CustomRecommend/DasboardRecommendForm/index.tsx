@@ -8,8 +8,13 @@ import { recommendFormSchema } from "../shared/schema";
 import { FormikHelpers, useFormik } from "formik";
 import Button from "@/components/Button";
 import { useSelector } from "react-redux";
+import { convertToString } from "@/redux/myServices/formConfig";
+import { submitBrief, submitBriefEndpoints } from "@/redux/brief/features";
 
 function DashboardRecommendForm() {
+  const isFormLoading = useSelector(
+    (state: RootState) => state.brief["businessBrief"].isLoading,
+  );
   const isFileUploading = useSelector((state: RootState) => {
     const uploadedFiles = state.fileUpload;
 
@@ -26,8 +31,33 @@ function DashboardRecommendForm() {
       { resetForm }: FormikHelpers<RecommendFormValues>,
     ) => {
       try {
-        console.log("Form submitted");
-        console.log(values, "formmmmmmmmmmmmmm");
+        const payload = {
+          interested_services: convertToString(values.serviceKinds),
+          primary_goal: convertToString(values.serviceGoal),
+          estimated_budget: convertToString(values.monthlyBudget),
+          timeline: convertToString(values.anticipationDuration),
+          business_type: convertToString(values.businessType),
+          additional_info: convertToString(values.additionalInfo),
+          phone_number: convertToString(values.contactPhoneNumber),
+          email: convertToString(values.contactEmail),
+          uploaded_brief: convertToString(values.document),
+        };
+
+        await dispatch(
+          submitBrief({
+            formName: "businessBrief",
+            endpoint: submitBriefEndpoints.businessBrief,
+            payload,
+          }),
+        );
+        dispatch(
+          addAlert({
+            id: "",
+            headText: "Success",
+            subText: "Your Business brief has been submitted",
+            type: "success",
+          }),
+        );
 
         // resetForm();
       } catch (error) {
@@ -52,7 +82,13 @@ function DashboardRecommendForm() {
           type="submit"
           classNames="active:scale-[0.98]"
           isFileUploading={isFileUploading}
+          isLoading={isFormLoading}
         />
+        {isFileUploading && (
+          <span className="block w-full text-center text-xs text-red-800">
+            Docs still uploading, please wait.
+          </span>
+        )}
       </footer>
     </form>
   );
