@@ -18,17 +18,17 @@ const BundleBought = () => {
   let dateBought = order?.status === "successful" ? moment(order.created_at).format("DD MMMM YYYY") : "Unknown date"
 
   // Set SubmitBriefInProgress if dateBought is not "Unknown date"
-  const isSubmitBriefCompleted = dateBought !== "Unknown date";
+  const bundleBought = dateBought !== "Unknown date";
 
   useEffect(() => {
-    if (isSubmitBriefCompleted) {
+    if (bundleBought) {
       dispatch(updateProgress({ SubmitBriefInProgress: true }));
     } else {
       dispatch(updateProgress({ SubmitBriefInProgress: false }));
     }
   }, [dispatch]);
 
-  const status = isSubmitBriefCompleted ? "completed" : "inactive";
+  const status = bundleBought ? "completed" : "inactive";
 
   return (
     <div className="">

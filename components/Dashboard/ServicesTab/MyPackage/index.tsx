@@ -31,7 +31,10 @@ type bundleNames =
 
 const MyPackage = () => {
   const { trackingProgress } = useAppSelector((state) => state.tracker);
-  console.log({trackingProgress})
+  const { trackingDetails, orderHistory } = useAppSelector((state) => state.services);
+  // console.log({orderHistory})
+  // console.log({trackingProgress})
+  // console.log({trackingDetails})
 
   const mapNewNameToOldName = {
     "Brand Identity Development": "Brand Design",
@@ -41,9 +44,10 @@ const MyPackage = () => {
     "Ultimate Marketing": "All In One",
   };
 
-  // Get the active bundle name
-  const activebundleName =
-    mapNewNameToOldName[trackingProgress?.activeBundle as bundleNames];
+  
+  let bundleName = orderHistory?.find(order => order.transaction_id === trackingDetails?.transaction_id)?.package.bundle.bundle_name
+  let activebundleName =  mapNewNameToOldName[bundleName as bundleNames];
+  
 
   const toCamelCase = (str: string) => {
     if (str === "All In One") {
@@ -59,7 +63,7 @@ const MyPackage = () => {
     }
   };
 
-  alert(activebundleName)
+  // alert(activebundleName)
   const camelCasedName = toCamelCase(activebundleName as string);
 
   // Access the isModalOpen state for the current service form
