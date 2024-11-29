@@ -13,7 +13,6 @@ export { default as CheckBoxField } from "./Forms/Checkbox";
 export { default as InputField } from "./Forms/InputField";
 export { default as DropdownSelect } from "./Forms/Select";
 export { default as Textarea } from "./Forms/Textarea";
-export { default as ProjectForm } from "./ProjectForm";
 export { default as Spinner } from "./Spinner";
 export { default as FullLoader } from "./Spinner/Loader";
 export { default as AlertWrapper } from "./AlertWrapper";
