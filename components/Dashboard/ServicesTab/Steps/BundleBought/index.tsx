@@ -7,15 +7,15 @@ import moment from "moment";
 
 const BundleBought = () => {
   const dispatch = useAppDispatch();
-  const { trackingDetails } = useAppSelector((state) => state.services);
+  const { trackingDetails, orderHistory } = useAppSelector((state) => state.services);
+
 
   useEffect(() => {
     handleProgressUpdate(dispatch, trackingDetails);
   }, [dispatch, trackingDetails]);
 
-  const dateBought = trackingDetails
-    ? moment(trackingDetails.transaction.created_at).format("DD MMMM YYYY")
-    : "Unknown date";
+  let order = orderHistory?.find(order => order.transaction_id === trackingDetails?.transaction_id)
+  let dateBought = order?.status === "successful" ? moment(order.created_at).format("DD MMMM YYYY") : "Unknown date"
 
   // Set SubmitBriefInProgress if dateBought is not "Unknown date"
   const isSubmitBriefCompleted = dateBought !== "Unknown date";
@@ -23,6 +23,8 @@ const BundleBought = () => {
   useEffect(() => {
     if (isSubmitBriefCompleted) {
       dispatch(updateProgress({ SubmitBriefInProgress: true }));
+    } else {
+      dispatch(updateProgress({ SubmitBriefInProgress: false }));
     }
   }, [dispatch, isSubmitBriefCompleted]);
 

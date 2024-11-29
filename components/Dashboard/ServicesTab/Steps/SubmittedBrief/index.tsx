@@ -26,7 +26,7 @@ const SubmittedBrief = ({
   const { trackingProgress } = useAppSelector((state) => state.tracker);
 
   const hasSubmittedBrief =
-    trackingDetails?.brief_submitted == true ? "completed" : "inactive";
+    trackingDetails?.brief_submitted || false ? "completed" : "inactive";
   const dateSubmitted = trackingDetails?.brief_submission_date
     ? formatDate(trackingDetails.brief_submission_date)
     : "Unknown date";
@@ -42,6 +42,8 @@ const SubmittedBrief = ({
   useEffect(() => {
     if (status === "completed") {
       dispatch(updateProgress({ BookDiscoveryCallInProgress: true }));
+    } else {
+      dispatch(updateProgress({ BookDiscoveryCallInProgress: false }));
     }
   }, [dispatch, status]);
 

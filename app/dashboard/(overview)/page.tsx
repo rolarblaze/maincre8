@@ -76,8 +76,6 @@ const Overview = () => {
     });
   });
 
-  console.log({orderHistory})
-
   if (error) {
     return <div>Error: {error}</div>;
   }
@@ -97,7 +95,7 @@ const Overview = () => {
     !profile.user.profile?.phone_number;
 
   const hasTransactions = orderHistory && orderHistory?.length > 0;
-  console.log({orderHistory})
+  
   
 
   return (

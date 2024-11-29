@@ -52,10 +52,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
             packages,
           }) => {
             return (
-              <button
+              <Link
                 key={bundle_id}
-                onClick={() => router.push(`/dashboard/services/${bundleId}`)}
-                // href={`/dashboard/services/${bundleId}`}
+                href={`/dashboard/services/${bundleId}`}
                 className={`services-card-responsiveness group flex flex-col justify-between overflow-hidden rounded-lg border !border-ash ${getBundlesClass[bundle_id - 1].focusClass} ${getBundlesClass[bundle_id - 1].tabClass}`}
               >
                 <figure
@@ -95,16 +94,8 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                     </p>
                   </div>
 
-                  <div
-                  role="button"
-                  tabIndex={0}
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      router.push(
-                        `/dashboard/my-services/track-services/${transactionId}`,
-                      );
-                    }}
-                    
+                  <Link
+                    href={`/dashboard/my-services/track-services/${transactionId}`}
                     className={`${getBundlesClass[bundle_id - 1].focusClass} flex items-center gap-1`}
                   >
                     <p className="text-nowrap text-sm font-medium text-[#4490EA] xs:max-md:text-xs">
@@ -113,9 +104,9 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                     <div className="center size-4">
                       <TrackServicesIcon />
                     </div>
-                  </div>
+                  </Link>
                 </div>
-              </button>
+              </Link>
             );
           },
         )}

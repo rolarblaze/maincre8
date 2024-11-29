@@ -12,9 +12,11 @@ const BookDiscoveryCall = () => {
   // first step
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
-  const transId = searchParams.get("transactionId");
+  
   const { trackingDetails } = useAppSelector((state) => state.services);
   const { trackingProgress } = useAppSelector((state) => state.tracker);
+  const transId = trackingDetails?.transaction_id
+
 
   // State to manage loading
   const [loading, setLoading] = useState(false);
@@ -22,7 +24,7 @@ const BookDiscoveryCall = () => {
   //second step
   // use a value to check if the step is completed or not (in active)
   const hasBookedDiscoveryCall =
-    trackingDetails?.onboarding_call_booked == true ? "completed" : "inactive";
+    trackingDetails?.onboarding_call_booked === true ? "completed" : "inactive";
 
   const status = trackingProgress?.BookDiscoveryCallInProgress
     ? "inprogress"
