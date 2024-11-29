@@ -26,7 +26,7 @@ const BundleBought = () => {
     } else {
       dispatch(updateProgress({ SubmitBriefInProgress: false }));
     }
-  }, [dispatch, isSubmitBriefCompleted]);
+  }, [dispatch]);
 
   const status = isSubmitBriefCompleted ? "completed" : "inactive";
 

@@ -25,7 +25,6 @@ import AllInOneBundleForm from "../../SubmitBrief/AllInOneBundleForm";
 const MyPackage = () => {
   const { trackingProgress } = useAppSelector((state) => state.tracker);
 
-
   // Get the active bundle name
   const activebundleName = trackingProgress?.activeBundle;
 
@@ -47,7 +46,7 @@ const MyPackage = () => {
 
   // Access the isModalOpen state for the current service form
   const isModalOpen = useAppSelector((state) => {
-    if (activebundleName) {
+    if (activebundleName as string) {
       const formState = state.forms[camelCasedName as keyof typeof formConfig];
       return formState?.isModalOpen;
     }

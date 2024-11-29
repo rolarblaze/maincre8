@@ -1,6 +1,6 @@
 "use client";
 
-import { trackUserOrder } from "@/redux/servicesTracker/features";
+import { getUserOrderHistory, trackUserOrder } from "@/redux/servicesTracker/features";
 import { handleSetCurrentTrackingBundleName } from "@/redux/servicesTracker/tracker";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { useRouter } from "next/navigation";
@@ -22,8 +22,9 @@ export default function TrackServicesLayout({
   );
 
   useEffect(() => {
+    dispatch(getUserOrderHistory());
     dispatch(trackUserOrder(parseInt(trackingID) as number));
-  }, [dispatch, trackingID]);
+  }, []);
 
   const activebundleName = selectedBundle?.package.bundle.bundle_name;
 
