@@ -210,7 +210,6 @@ const cartSlice = createSlice({
                     }>
                 ) => {
                     state.isMakingPayment = false;
-                    console.log("Payment link:", action.payload.data.link);
                 }
             )
             .addCase(makePayment.rejected, (state, action) => {
