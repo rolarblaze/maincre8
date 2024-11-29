@@ -29,7 +29,7 @@ const CustomRecommendation = () => {
   }
 
   return (
-    <div className="space-y-12 pt-20 xs:max-md:pt-10 px-5 xs:max-md:px-2">
+    <div className="space-y-12 px-5 pt-20 xs:max-md:px-2 xs:max-md:pt-10">
       <Button
         label={
           <div className="flex items-center justify-center gap-2">
@@ -47,8 +47,8 @@ const CustomRecommendation = () => {
         onClose={() => setIsOpen(false)}
         showCancelIcon={true}
         cancelBtnStyles="border-none mb-6 z-30"
-        cancelIconStyles="stroke-grey400 w-6 h-6"
-        className="!max-h-screen h-full"
+        cancelIconStyles="stroke-grey400 w-6 h-6 !top-0 md:!top-8"
+        className="h-full !max-h-screen"
       >
         <DashboardPopoutWrapper
           title="Business Brief Submission Form"
