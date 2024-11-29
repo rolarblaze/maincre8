@@ -11,10 +11,10 @@ import { contentCreationFormData } from "../shared/formData/contentCreation";
 import CustomDropdown from "@/components/Forms/CustomDropdown";
 import Textarea from "@/components/Forms/Textarea";
 import FormFooter from "../shared/FormFooter";
-import { briefEndpoints } from "../shared/briefEndpoint";
 import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
 import { handleFormModal } from "@/redux/myServices";
+import { briefFileUploadEndpoints } from "../shared/briefEndpoint";
 
 function ContentCreationForm() {
   const dispatch = useAppDispatch();
@@ -125,7 +125,7 @@ function ContentCreationForm() {
       <FormFooter
         formik={formik}
         name="document"
-        endpoint={briefEndpoints.contentCreation}
+        endpoint={briefFileUploadEndpoints.contentCreation}
         isLoading={isLoading}
         fileId={"CCFooterFile"}
       />

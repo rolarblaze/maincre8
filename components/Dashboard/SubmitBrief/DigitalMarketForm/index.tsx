@@ -11,16 +11,17 @@ import { addAlert } from "@/redux/alerts";
 import { digitalMarketFormData } from "../shared/formData/digitalMarketing";
 import CustomDropdown from "@/components/Forms/CustomDropdown";
 import Textarea from "@/components/Forms/Textarea";
-import { briefEndpoints } from "../shared/briefEndpoint";
 import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
 import { handleFormModal } from "@/redux/myServices";
+import { briefFileUploadEndpoints } from "../shared/briefEndpoint";
 
 function DigitalMarketForm() {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector(
     (state: any) => state.forms?.digitalMarketing?.isLoading,
   );
+  
 
   // Define formik
   const formik = useFormik<DigitalMarketingValues>({
@@ -118,7 +119,7 @@ function DigitalMarketForm() {
       <FormFooter
         name="document"
         formik={formik}
-        endpoint={briefEndpoints.digitalMarketing}
+        endpoint={briefFileUploadEndpoints.digitalMarketing}
         isLoading={isLoading}
         fileId="DMFooterFile"
       />

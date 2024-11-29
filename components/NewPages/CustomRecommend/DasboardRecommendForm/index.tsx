@@ -84,7 +84,7 @@ function DashboardRecommendForm() {
           label="Checkout"
           type="submit"
           classNames="active:scale-[0.98]"
-          isFileUploading={isFileUploading}
+          disabled={isFileUploading}
           isLoading={isFormLoading}
         />
         {isFileUploading && <ErrorDisplay message="File still uploading..." />}

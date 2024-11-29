@@ -14,13 +14,13 @@ import InputFile from "@/components/Forms/InputFile";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import { FileUploadIcon } from "@/public/svgs";
 import FormFooter from "../shared/FormFooter";
-import { briefEndpoints } from "../shared/briefEndpoint";
 import useFileUpload from "@/hooks/UseFileUpload";
 import { submitFormData } from "@/redux/myServices/features";
 import { formConfig } from "@/redux/myServices/formConfig";
 import { handleFormModal } from "@/redux/myServices";
 import { useSelector } from "react-redux";
 import { selectFileUploadState } from "@/redux/file";
+import { briefFileUploadEndpoints } from "../shared/briefEndpoint";
 
 function AllInOneBundleForm() {
   const dispatch = useAppDispatch();
@@ -89,7 +89,7 @@ function AllInOneBundleForm() {
     if (formik) {
       await handleFileUpload(
         file,
-        briefEndpoints.allInOne,
+        briefFileUploadEndpoints.allInOne,
         fileId,
         fieldName,
         formik,
@@ -162,7 +162,7 @@ function AllInOneBundleForm() {
       <FormFooter
         formik={formik}
         name="document"
-        endpoint={briefEndpoints.allInOne}
+        endpoint={briefFileUploadEndpoints.allInOne}
         isLoading={isLoading}
         fileId="AIFooterFile"
       />

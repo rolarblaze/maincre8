@@ -14,13 +14,13 @@ import FormFooter from "../shared/FormFooter";
 import InputFile from "@/components/Forms/InputFile";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import { FileUploadIcon } from "@/public/svgs";
-import { briefEndpoints } from "../shared/briefEndpoint";
 import useFileUpload from "@/hooks/UseFileUpload";
 import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
 import { handleFormModal } from "@/redux/myServices";
 import { selectFileUploadState } from "@/redux/file";
 import { useSelector } from "react-redux";
+import { briefFileUploadEndpoints } from "../shared/briefEndpoint";
 
 function GraphicsDesignForm() {
   const dispatch = useAppDispatch();
@@ -95,7 +95,7 @@ function GraphicsDesignForm() {
     if (formik) {
       await handleFileUpload(
         file,
-        briefEndpoints.brandDesign,
+        briefFileUploadEndpoints.brandDesign,
         fileId,
         fieldName,
         formik,
@@ -172,7 +172,7 @@ function GraphicsDesignForm() {
       <FormFooter
         formik={formik}
         name="document"
-        endpoint={briefEndpoints.graphicsDesign}
+        endpoint={briefFileUploadEndpoints.graphicsDesign}
         isLoading={isLoading}
         fileId={"GDFooterFile"}
       />

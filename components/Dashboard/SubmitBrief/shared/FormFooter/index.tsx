@@ -23,7 +23,11 @@ function FormFooter({
   isLoading?: boolean;
 }) {
   const { handleFileUpload } = useFileUpload();
-  
+  const isFileUploading = useSelector((state: RootState) => {
+    const uploadedFiles = state.fileUpload;
+
+    return Object.values(uploadedFiles).some((file) => file.isLoading);
+  });
 
   // Use the selector to get the file upload state for the specific fileId
   const fileState = useSelector((state: RootState) =>
@@ -55,6 +59,7 @@ function FormFooter({
         type="submit"
         classNames="md:self-end w-auto py-2 px-4"
         isLoading={isLoading}
+        disabled={isFileUploading}
       />
     </div>
   );

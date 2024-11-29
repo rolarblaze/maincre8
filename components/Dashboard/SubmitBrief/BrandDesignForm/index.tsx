@@ -14,13 +14,13 @@ import InputFile from "@/components/Forms/InputFile";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import { FileUploadIcon } from "@/public/svgs";
 import FormFooter from "../shared/FormFooter";
-import { briefEndpoints } from "../shared/briefEndpoint";
 import useFileUpload from "@/hooks/UseFileUpload";
 import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
 import { handleFormModal } from "@/redux/myServices";
 import { useSelector } from "react-redux";
 import { selectFileUploadState } from "@/redux/file";
+import { briefFileUploadEndpoints } from "../shared/briefEndpoint";
 
 function BrandDesignForm() {
   const dispatch = useAppDispatch();
@@ -104,7 +104,7 @@ function BrandDesignForm() {
     if (formik) {
       await handleFileUpload(
         file,
-        briefEndpoints.brandDesign,
+        briefFileUploadEndpoints.brandDesign,
         fileId,
         fieldName,
         formik,
@@ -176,7 +176,7 @@ function BrandDesignForm() {
       <FormFooter
         formik={formik}
         name="document"
-        endpoint={briefEndpoints.brandDesign}
+        endpoint={briefFileUploadEndpoints.brandDesign}
         isLoading={isLoading}
         fileId="BDFooterFile"
       />
