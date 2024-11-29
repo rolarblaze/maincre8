@@ -11,10 +11,10 @@ import { addAlert } from "@/redux/alerts";
 import { digitalMarketFormData } from "../shared/formData/digitalMarketing";
 import CustomDropdown from "@/components/Forms/CustomDropdown";
 import Textarea from "@/components/Forms/Textarea";
-import { briefEndpoints } from "../shared/briefEndpoint";
 import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
 import { handleFormModal } from "@/redux/myServices";
+import { briefFileUploadEndpoints } from "../shared/briefEndpoint";
 
 function DigitalMarketForm() {
   const dispatch = useAppDispatch();
@@ -38,21 +38,22 @@ function DigitalMarketForm() {
         const formPayload = config.constructPayload(values);
 
         // Dispatch the thunk with endpoint and payload
-        await dispatch(
+        const response = await dispatch(
           submitFormData({
             formName: "digitalMarketing", // Pass only formName
             payload: formPayload, // Pass only the payload
           }),
         );
-
-        dispatch(
-          addAlert({
-            id: "",
-            headText: "Success",
-            subText: "Your digital marketing brief has been submitted",
-            type: "success",
-          }),
-        );
+        if (response?.payload) {
+          dispatch(
+            addAlert({
+              id: "",
+              headText: "Success",
+              subText: "Your digital marketing brief has been submitted",
+              type: "success",
+            }),
+          );
+        }
         resetForm();
         dispatch(
           handleFormModal({ formName: "digitalMarketing", isModalOpen: false }),
@@ -118,7 +119,7 @@ function DigitalMarketForm() {
       <FormFooter
         name="document"
         formik={formik}
-        endpoint={briefEndpoints.digitalMarketing}
+        endpoint={briefFileUploadEndpoints.digitalMarketing}
         isLoading={isLoading}
         fileId="DMFooterFile"
       />

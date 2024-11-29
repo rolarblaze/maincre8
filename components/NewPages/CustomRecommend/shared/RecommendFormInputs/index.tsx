@@ -10,58 +10,47 @@ import { FileUploadIcon } from "@/public/svgs";
 import InputField from "@/components/Forms/InputField";
 import { RecommendFormType, RecommendFormValues } from "../type";
 import { FormikProps } from "formik";
-import { uploadRelevantDocument } from "@/redux/order/features";
-import { useAppDispatch } from "@/redux/store";
+import { RootState, useAppSelector } from "@/redux/store";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
+import useFileUpload from "@/hooks/UseFileUpload";
+import { selectFileUploadState } from "@/redux/file";
+import { briefFileUploadEndpoints } from "@/components/Dashboard/SubmitBrief/shared/briefEndpoint";
 
 function RecommendFormInputs({
   formik,
+  isBusinessBrief = false,
+  isPersonalizedBrief = false,
 }: {
   formik: FormikProps<RecommendFormValues>;
+  isBusinessBrief?: boolean;
+  isPersonalizedBrief?: boolean;
 }) {
-  const dispatch = useAppDispatch();
-  const [uploadedDocumentLink, setUploadedDocumentLink] = useState<
-    string | null
-  >(null);
+  const fileId = isBusinessBrief
+    ? "businessBriefFile"
+    : "personalizedBriefFile";
 
-  const {
-    values,
-    errors,
-    touched,
-    isSubmitting,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-    setFieldValue,
-    setFieldError,
-  } = formik;
+  // Endpoint to upload file
+  const formEndpoint = isBusinessBrief
+    ? briefFileUploadEndpoints.businessBrief
+    : briefFileUploadEndpoints.recommendationBrief;
 
-  const handleFileUpload = async (file: File | null) => {
-    if (!file) {
-      formik.setFieldError("document", "Please attach a document.");
-      return;
-    } else if (file && file.size > 5000000) {
-      setFieldValue("document", null);
-      setFieldError("document", "Max file size exceeded.");
-      return;
-    }
+  const { values, errors, touched, handleBlur, handleChange } = formik;
 
-    try {
-      if (file) {
-        const formData = new FormData();
-        formData.append("file", file);
-        const response = await dispatch(
-          uploadRelevantDocument(formData),
-        ).unwrap();
-        const file_link = response.file_link;
+  const recommendBriefFileState = useAppSelector((state: RootState) =>
+    selectFileUploadState(state, fileId),
+  );
 
-        setUploadedDocumentLink(file_link); // Store the file link for later use
-        setFieldValue("document", file.name); // Store the file name as a string
-        formik.setFieldError("document", ""); // Clear any existing file errors
-      }
-    } catch (error) {
-      console.error("Error uploading file:", error);
-      formik.setFieldError("document", "File upload failed.");
+  const { handleFileUpload } = useFileUpload();
+
+  // HANDLE FILE UPLOAD ONCHANGE
+  const onFileChange = async (
+    file: File | null,
+    fileId: string,
+    endpoint: string,
+    fieldName: string,
+  ) => {
+    if (formik) {
+      await handleFileUpload(file, endpoint, fileId, fieldName, formik);
     }
   };
 
@@ -107,8 +96,12 @@ function RecommendFormInputs({
           id="document"
           name="document"
           icon={<FileUploadIcon />}
-          handleUpload={(value: File | null) => handleFileUpload(value)}
+          onFileChange={(file: File | null) =>
+            onFileChange(file, fileId, formEndpoint, `document`)
+          }
+          showUploadButton={false}
           error={errors.document}
+          isLoading={recommendBriefFileState.isLoading}
         />
       </div>
 

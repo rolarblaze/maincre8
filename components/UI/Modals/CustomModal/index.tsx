@@ -51,7 +51,7 @@ const Modal: React.FC<ModalProps> = ({
               <div
                 onClick={onClose}
                 className={twMerge(
-                  "absolute right-8 top-8 z-20 mb-4 ml-auto w-fit cursor-pointer rounded-full border border-grey300 p-2",
+                  "absolute right-3 md:right-8 top-2 md:top-8 z-20 mb-4 ml-auto w-fit cursor-pointer rounded-full border border-grey300 p-2",
                   cancelBtnStyles,
                 )}
               >

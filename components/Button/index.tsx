@@ -7,6 +7,7 @@ import Spinner from "../Spinner";
 interface ButtonProps {
   label: React.ReactNode | string;
   isLoading?: boolean;
+  isFileUploading?: boolean;
   onClick?: () => void;
   classNames?: string;
   link?: string;
@@ -17,6 +18,7 @@ interface ButtonProps {
 const Button: React.FC<ButtonProps> = ({
   label,
   isLoading = false,
+  isFileUploading = false,
   onClick,
   classNames,
   link,
@@ -31,9 +33,10 @@ const Button: React.FC<ButtonProps> = ({
         href={link}
         passHref
         className={twMerge(
-          `w-full flex justify-center items-center gap-2 py-4 px-6 md:px-8 rounded-lg bg-primary500 text-white font-semibold text-center ${disabled ? "cursor-not-allowed opacity-50" : ""
+          `flex w-full items-center justify-center gap-2 rounded-lg bg-primary500 px-6 py-4 text-center font-semibold text-white md:px-8 ${
+            disabled ? "cursor-not-allowed opacity-50" : ""
           }`,
-          classNames
+          classNames,
         )}
         onClick={disabled ? undefined : onClick}
       >
@@ -46,9 +49,10 @@ const Button: React.FC<ButtonProps> = ({
     <button
       type={type}
       className={twMerge(
-        `w-full flex justify-center items-center gap-2 py-4 px-8 rounded-lg bg-primary500 text-white font-semibold text-center ${disabled ? "cursor-not-allowed opacity-50" : ""
+        `flex w-full items-center justify-center gap-2 rounded-lg bg-primary500 px-8 py-4 text-center font-semibold text-white ${
+          disabled ? "cursor-not-allowed opacity-50" : ""
         }`,
-        classNames
+        classNames,
       )}
       onClick={disabled ? undefined : onClick} // Prevent click if disabled
       disabled={disabled || isLoading}

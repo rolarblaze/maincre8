@@ -72,7 +72,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
     } else {
       setLocalValue(optionValue as string); // Fallback to local state as a single value
     }
-    setIsOpen(false);
+    if (!isCheckbox) setIsOpen(false); // Close dropdown if not a checkbox
   };
 
   const handleRadioChange = (optionValue: string | number) => {
@@ -122,7 +122,11 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
         </div>
       )}
       {/* Select field */}
-      <div ref={dropdownRef} className={twMerge("relative", className)}>
+      <div
+        ref={dropdownRef}
+        className={twMerge("relative", className)}
+        onClick={handleToggle}
+      >
         <div className="flex h-14 w-full items-center justify-between rounded-lg border border-gray-300 pl-4 pr-10 text-sm">
           {isCheckbox || isRadio ? (
             getSelectedValue()?.length > 0 ? (
@@ -138,11 +142,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
           ) : (
             <span className="text-sm text-grey400">{placeholder}</span>
           )}
-          <button
-            className="w-fit border border-none p-0"
-            onClick={handleToggle}
-            type="button"
-          >
+          <button className="w-fit border border-none p-0" type="button">
             <AshArrowDown />
           </button>
         </div>
@@ -164,6 +164,9 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
               <li
                 key={option.value}
                 className="flex cursor-pointer items-center gap-1 px-6 py-[1.22rem] font-medium text-grey900 hover:bg-gray-100"
+                onClick={(e) => {
+                  if (isCheckbox) e.stopPropagation(); // Prevent dropdown from closing for checkboxes
+                }}
               >
                 {isCheckbox ? (
                   <div className="flex cursor-pointer gap-3">
@@ -171,6 +174,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
                       type="checkbox"
                       id={option.value.toString()}
                       checked={getSelectedValue()?.includes(option.value)}
+                      onClick={(e) => e.stopPropagation()} //Prevent dropdown from closing
                       onChange={() => handleCheckboxChange(option.value)}
                       className="mr-2 h-5 w-5 cursor-pointer self-center rounded-[3.33px] border-[1.25px] border-grey300 shadow-md shadow-white"
                     />

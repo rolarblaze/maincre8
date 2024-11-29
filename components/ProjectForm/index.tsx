@@ -1,7 +1,7 @@
 "use client";
 import { AttachIcon } from "@/public/svgs";
 import { addAlert } from "@/redux/alerts";
-import { submitBrief } from "@/redux/brief/contact";
+import { submitBrief } from "@/redux/brief/features";
 import { uploadFiles } from "@/redux/file/file";
 import { AppDispatch, useAppSelector } from "@/redux/store";
 import React, { useState } from "react";
