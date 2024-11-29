@@ -21,17 +21,38 @@ import BrandDesignForm from "../../SubmitBrief/BrandDesignForm";
 import ContentCreationForm from "../../SubmitBrief/ContentCreationForm";
 import AllInOneBundleForm from "../../SubmitBrief/AllInOneBundleForm";
 
+type bundleNames =
+  | "Brand Identity Development"
+  | "Graphic Design"
+  | "Digital Marketing"
+  | "Content Creation"
+  | "Ultimate Marketing";
+
 const MyPackage = () => {
   const { trackingProgress } = useAppSelector((state) => state.tracker);
+  const { trackingDetails, orderHistory } = useAppSelector((state) => state.services);
+  // console.log({orderHistory})
+  // console.log({trackingProgress})
+  // console.log({trackingDetails})
 
-  // Get the active bundle name
-  const activebundleName = trackingProgress?.activeBundle;
+  const mapNewNameToOldName = {
+    "Brand Identity Development": "Brand Design",
+    "Graphic Design": "Graphics Design",
+    "Digital Marketing": "Digital Marketing",
+    "Content Creation": "Content Creation",
+    "Ultimate Marketing": "All In One",
+  };
+
+  
+  let bundleName = orderHistory?.find(order => order.transaction_id === trackingDetails?.transaction_id)?.package.bundle.bundle_name
+  let activebundleName =  mapNewNameToOldName[bundleName as bundleNames];
+  
 
   const toCamelCase = (str: string) => {
+    if (str === "All In One") {
+      return "AllInOne";
+    }
     if (str) {
-      if (str === "Graphic Design") {
-        str = "Graphics Design";
-      }
       return str
         .toLowerCase()
         .replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, (match, index) =>
@@ -41,6 +62,7 @@ const MyPackage = () => {
     }
   };
 
+  // alert(activebundleName)
   const camelCasedName = toCamelCase(activebundleName as string);
 
   // Access the isModalOpen state for the current service form

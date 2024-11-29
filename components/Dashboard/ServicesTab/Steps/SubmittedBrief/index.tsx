@@ -21,17 +21,22 @@ const SubmittedBrief = ({
 
   const dispatch = useAppDispatch();
 
-  const { trackingDetails } = useAppSelector((state) => state.services);
+  const { trackingDetails, orderHistory } = useAppSelector((state) => state.services);
   const servicesData = useAppSelector((state) => state.services);
   const { trackingProgress } = useAppSelector((state) => state.tracker);
+  
+
+  let order = orderHistory?.find(order => order.transaction_id === trackingDetails?.transaction_id)
+  let orderBought = order?.status === "successful"
 
   const hasSubmittedBrief =
-    trackingDetails?.brief_submitted || false ? "completed" : "inactive";
+    trackingDetails?.brief_submitted ? "completed" : "inactive";
   const dateSubmitted = trackingDetails?.brief_submission_date
     ? formatDate(trackingDetails.brief_submission_date)
     : "Unknown date";
 
-  const status = trackingProgress.SubmitBriefInProgress
+
+  const status = orderBought && !trackingDetails?.brief_submitted
     ? "inprogress"
     : hasSubmittedBrief;
 
