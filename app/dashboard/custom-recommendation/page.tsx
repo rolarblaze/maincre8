@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { Button, Loader, EmptyState, Modal } from "@/components";
+import { Button, EmptyState, Modal } from "@/components";
 import { PlusIcon } from "@/public/svgs";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { fetchRecommendationHistory } from "@/redux/order/features";

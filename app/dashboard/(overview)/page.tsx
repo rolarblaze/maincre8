@@ -4,7 +4,6 @@ import { useRouter } from "next/navigation";
 import {
   Button,
   FullLoader,
-  Loader,
   ServiceCard,
   EmptyState,
 } from "@/components";
@@ -96,6 +95,7 @@ const Overview = () => {
     !profile.user.profile?.phone_number;
 
   const hasTransactions = orderHistory && orderHistory?.length > 0;
+  
   
 
   return (

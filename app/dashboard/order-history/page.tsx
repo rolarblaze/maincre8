@@ -8,7 +8,6 @@ import Tabs from "@/components/Dashboard/Tabs";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { fetchUserOrderHistory } from "@/redux/order/features";
 import { OrderHistoryResponse, UserTransaction } from "@/redux/order/interface";
-import Loader from "@/components/Spinner/Loader";
 import { EmptyState } from "@/components";
 import MobileOrder from "@/components/Dashboard/MobileOrder";
 import { addAlert } from "@/redux/alerts";

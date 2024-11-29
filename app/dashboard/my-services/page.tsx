@@ -1,5 +1,5 @@
 "use client";
-import { EmptyState, Loader, ServiceCard } from "@/components";
+import { EmptyState, ServiceCard } from "@/components";
 
 import { getUserOrderHistory } from "@/redux/servicesTracker/features";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
@@ -8,6 +8,7 @@ import Spinner from "@/components/Spinner";
 
 const MyServices = () => {
   const { orderHistory, loading } = useAppSelector((state) => state.services);
+  
   const dispatch = useAppDispatch();
 
   const bundleColors: { [key: string]: string } = {};

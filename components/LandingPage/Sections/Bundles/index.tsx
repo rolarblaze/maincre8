@@ -10,8 +10,8 @@ import {
 import { TabButton, Card, serviceBundles } from "./Components";
 import { useAppDispatch, useAppSelector, RootState } from "@/redux/store";
 import { getServices } from "@/redux/shop/features";
-import Loader from "@/components/Spinner/Loader";
 import { mapServicesToProps } from "@/components/Shop/data/shopData";
+import Spinner from "@/components/Spinner";
 
 const Bundles = () => {
   const dispatch = useAppDispatch();
@@ -26,8 +26,8 @@ const Bundles = () => {
 
   if (shopState.isLoading) {
     return (
-      <div className="mx-auto flex items-center justify-center">
-        <Loader />
+      <div className="mx-auto flex w-full h-screen items-center justify-center">
+        <Spinner />
       </div>
     );
   }
