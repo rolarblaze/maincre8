@@ -1,6 +1,6 @@
 "use client";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "@/redux/store";
 import { privacyPolicyData } from "./constants";
 import { FadeUpDiv } from "@/components";
 import { setOrToggleActiveTab } from "@/redux/legal";
@@ -8,7 +8,7 @@ import { useEffect } from "react";
 
 const ContentSection = () => {
   const dispatch = useDispatch();
-  const { activeTab } = useSelector((state: RootState) => state.tabs);
+  const { activeTab } = useAppSelector((state) => state.tabs);
   const activeContent = privacyPolicyData.find((item) => item.id === activeTab);
 
   const hasTitle = (item: {

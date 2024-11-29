@@ -11,10 +11,10 @@ import { contentCreationFormData } from "../shared/formData/contentCreation";
 import CustomDropdown from "@/components/Forms/CustomDropdown";
 import Textarea from "@/components/Forms/Textarea";
 import FormFooter from "../shared/FormFooter";
-import { briefEndpoints } from "../shared/briefEndpoint";
 import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
 import { handleFormModal } from "@/redux/myServices";
+import { briefFileUploadEndpoints } from "../shared/briefEndpoint";
 
 function ContentCreationForm() {
   const dispatch = useAppDispatch();
@@ -42,21 +42,23 @@ function ContentCreationForm() {
         const formPayload = config.constructPayload(payload);
 
         // Dispatch the thunk with endpoint and payload
-        await dispatch(
+        const response = await dispatch(
           submitFormData({
             formName: "contentCreation", // Pass only formName
             payload: formPayload, // Pass only the payload
           }),
         );
 
-        dispatch(
-          addAlert({
-            id: "",
-            headText: "Success",
-            subText: "Your content creation brief has been submitted",
-            type: "success",
-          }),
-        );
+        if (response?.payload) {
+          dispatch(
+            addAlert({
+              id: "",
+              headText: "Success",
+              subText: "Your content creation brief has been submitted",
+              type: "success",
+            }),
+          );
+        }
 
         resetForm();
         dispatch(
@@ -125,7 +127,7 @@ function ContentCreationForm() {
       <FormFooter
         formik={formik}
         name="document"
-        endpoint={briefEndpoints.contentCreation}
+        endpoint={briefFileUploadEndpoints.contentCreation}
         isLoading={isLoading}
         fileId={"CCFooterFile"}
       />

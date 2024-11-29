@@ -14,13 +14,12 @@ import InputFile from "@/components/Forms/InputFile";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import { FileUploadIcon } from "@/public/svgs";
 import FormFooter from "../shared/FormFooter";
-import { briefEndpoints } from "../shared/briefEndpoint";
 import useFileUpload from "@/hooks/UseFileUpload";
 import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
 import { handleFormModal } from "@/redux/myServices";
-import { useSelector } from "react-redux";
 import { selectFileUploadState } from "@/redux/file";
+import { briefFileUploadEndpoints } from "../shared/briefEndpoint";
 
 function BrandDesignForm() {
   const dispatch = useAppDispatch();
@@ -28,7 +27,7 @@ function BrandDesignForm() {
     (state: any) => state.forms?.brandDesign?.isLoading,
   );
 
-  const fileOneState = useSelector((state: RootState) =>
+  const fileOneState = useAppSelector((state) =>
     selectFileUploadState(state, "brandCompetitorsFile"),
   );
 
@@ -53,21 +52,23 @@ function BrandDesignForm() {
         const formPayload = config.constructPayload(payload);
 
         // Dispatch the thunk with endpoint and payload
-        await dispatch(
+        const response = await dispatch(
           submitFormData({
             formName: "brandDesign", // Pass only formName
             payload: formPayload, // Pass only the payload
           }),
         );
 
-        dispatch(
-          addAlert({
-            id: "",
-            headText: "Success",
-            subText: "Your brand design brief has been submitted",
-            type: "success",
-          }),
-        );
+        if (response?.payload) {
+          dispatch(
+            addAlert({
+              id: "",
+              headText: "Success",
+              subText: "Your brand design brief has been submitted",
+              type: "success",
+            }),
+          );
+        }
 
         resetForm();
         dispatch(
@@ -87,13 +88,7 @@ function BrandDesignForm() {
     },
   });
 
-  const {
-    values,
-    errors,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-  } = formik;
+  const { values, errors, handleBlur, handleChange, handleSubmit } = formik;
 
   // HANDLE FILE UPLOAD ONCHANGE
   const onFileChange = async (
@@ -104,7 +99,7 @@ function BrandDesignForm() {
     if (formik) {
       await handleFileUpload(
         file,
-        briefEndpoints.brandDesign,
+        briefFileUploadEndpoints.brandDesign,
         fileId,
         fieldName,
         formik,
@@ -176,7 +171,7 @@ function BrandDesignForm() {
       <FormFooter
         formik={formik}
         name="document"
-        endpoint={briefEndpoints.brandDesign}
+        endpoint={briefFileUploadEndpoints.brandDesign}
         isLoading={isLoading}
         fileId="BDFooterFile"
       />

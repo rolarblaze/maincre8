@@ -19,7 +19,7 @@ interface FormTypeMapping {
 }
 
 // // Utility function to convert payload values to string
-const convertToString = (value: unknown): string => {
+export const convertToString = (value: unknown): string => {
   if (Array.isArray(value)) {
     return value.join(", ");
   }

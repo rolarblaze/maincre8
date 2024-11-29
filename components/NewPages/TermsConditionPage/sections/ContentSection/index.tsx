@@ -1,14 +1,14 @@
 "use client";
 import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "@/redux/store";
 import { FadeUpDiv } from "@/components";
 import { termConditionsData } from "./constants";
 import { setOrToggleActiveTab } from "@/redux/legal";
 
 const ContentSection = () => {
   const dispatch = useDispatch();
-  const { activeTab } = useSelector((state: RootState) => state.tabs);
+  const { activeTab } = useAppSelector((state) => state.tabs);
   const activeContent = termConditionsData.find(
     (item) => item.id === activeTab,
   );
@@ -86,7 +86,7 @@ const ContentSection = () => {
                 </div>
               ))}
 
-<p className="font-medium leading-6 text-primary600">
+            <p className="font-medium leading-6 text-primary600">
               <button onClick={() => dispatch(setOrToggleActiveTab("full"))}>
                 {activeContent.content.under}
               </button>

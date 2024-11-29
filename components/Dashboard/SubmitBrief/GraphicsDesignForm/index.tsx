@@ -14,23 +14,22 @@ import FormFooter from "../shared/FormFooter";
 import InputFile from "@/components/Forms/InputFile";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import { FileUploadIcon } from "@/public/svgs";
-import { briefEndpoints } from "../shared/briefEndpoint";
 import useFileUpload from "@/hooks/UseFileUpload";
 import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
 import { handleFormModal } from "@/redux/myServices";
 import { selectFileUploadState } from "@/redux/file";
-import { useSelector } from "react-redux";
+import { briefFileUploadEndpoints } from "../shared/briefEndpoint";
 
 function GraphicsDesignForm() {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector(
     (state: any) => state.forms?.graphicsDesign?.isLoading,
   );
-  const fileOneState = useSelector((state: RootState) =>
+  const fileOneState = useAppSelector((state) =>
     selectFileUploadState(state, "graphicsColorPaletteFile"),
   );
-  const fileTwoState = useSelector((state: RootState) =>
+  const fileTwoState = useAppSelector((state) =>
     selectFileUploadState(state, "graphicsReferencesFile"),
   );
   const { handleFileUpload } = useFileUpload();
@@ -51,20 +50,23 @@ function GraphicsDesignForm() {
         const formPayload = config.constructPayload(values);
 
         // Dispatch the thunk with endpoint and payload
-        await dispatch(
+        const response = await dispatch(
           submitFormData({
             formName: "graphicsDesign", // Pass only formName
             payload: formPayload, // Pass only the payload
           }),
         );
-        dispatch(
-          addAlert({
-            id: "",
-            headText: "Success",
-            subText: "Your graphics design brief has been submitted",
-            type: "success",
-          }),
-        );
+
+        if (response?.payload) {
+          dispatch(
+            addAlert({
+              id: "",
+              headText: "Success",
+              subText: "Your graphics design brief has been submitted",
+              type: "success",
+            }),
+          );
+        }
         resetForm();
         dispatch(
           handleFormModal({ formName: "graphicsDesign", isModalOpen: false }),
@@ -95,7 +97,7 @@ function GraphicsDesignForm() {
     if (formik) {
       await handleFileUpload(
         file,
-        briefEndpoints.brandDesign,
+        briefFileUploadEndpoints.brandDesign,
         fileId,
         fieldName,
         formik,
@@ -172,7 +174,7 @@ function GraphicsDesignForm() {
       <FormFooter
         formik={formik}
         name="document"
-        endpoint={briefEndpoints.graphicsDesign}
+        endpoint={briefFileUploadEndpoints.graphicsDesign}
         isLoading={isLoading}
         fileId={"GDFooterFile"}
       />

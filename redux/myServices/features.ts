@@ -46,7 +46,7 @@ export const uploadDocument = createAsyncThunk(
   ) => {
     try {
       const response = await api.post(
-        `user/upload-relevant-document/${endpoint}`,
+        `${endpoint}`,
         formData,
         {
           headers: {

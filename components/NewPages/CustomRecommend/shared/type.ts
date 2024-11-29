@@ -10,7 +10,7 @@ export interface RecommendFormValues {
   additionalInfo: string;
 
   // ATTACH A FILE
-  document: File | null;
+  document: string | null;
 
   // CONTACT INFO
   contactEmail: string;
