@@ -2,7 +2,7 @@
 import Button from "@/components/Button";
 import React from "react";
 import { addAlert } from "@/redux/alerts";
-import { RootState, useAppDispatch } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { FormikHelpers, useFormik } from "formik";
 import { RecommendFormValues } from "../shared/type";
 import { RECOMMEND_INITIAL_VALUES } from "../shared/constants";
@@ -10,14 +10,13 @@ import { recommendFormSchema } from "../shared/schema";
 import RecommendFormInputs from "../shared/RecommendFormInputs";
 import { convertToString } from "@/redux/myServices/formConfig";
 import { submitBrief, submitBriefEndpoints } from "@/redux/brief/features";
-import { useSelector } from "react-redux";
 import ErrorDisplay from "../shared/ErrorDisplay";
 
 function WebsiteRecommendForm() {
-  const isFormLoading = useSelector(
-    (state: RootState) => state.brief["personalizedBrief"].isLoading,
+  const isFormLoading = useAppSelector(
+    (state) => state.brief["personalizedBrief"].isLoading,
   );
-  const isFileUploading = useSelector((state: RootState) => {
+  const isFileUploading = useAppSelector((state) => {
     const uploadedFiles = state.fileUpload;
 
     return Object.values(uploadedFiles).some((file) => file.isLoading);

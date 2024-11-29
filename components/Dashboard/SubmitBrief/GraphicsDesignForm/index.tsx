@@ -19,7 +19,6 @@ import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
 import { handleFormModal } from "@/redux/myServices";
 import { selectFileUploadState } from "@/redux/file";
-import { useSelector } from "react-redux";
 import { briefFileUploadEndpoints } from "../shared/briefEndpoint";
 
 function GraphicsDesignForm() {
@@ -27,10 +26,10 @@ function GraphicsDesignForm() {
   const isLoading = useAppSelector(
     (state: any) => state.forms?.graphicsDesign?.isLoading,
   );
-  const fileOneState = useSelector((state: RootState) =>
+  const fileOneState = useAppSelector((state) =>
     selectFileUploadState(state, "graphicsColorPaletteFile"),
   );
-  const fileTwoState = useSelector((state: RootState) =>
+  const fileTwoState = useAppSelector((state) =>
     selectFileUploadState(state, "graphicsReferencesFile"),
   );
   const { handleFileUpload } = useFileUpload();

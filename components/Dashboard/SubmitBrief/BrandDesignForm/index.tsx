@@ -18,7 +18,6 @@ import useFileUpload from "@/hooks/UseFileUpload";
 import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
 import { handleFormModal } from "@/redux/myServices";
-import { useSelector } from "react-redux";
 import { selectFileUploadState } from "@/redux/file";
 import { briefFileUploadEndpoints } from "../shared/briefEndpoint";
 
@@ -28,7 +27,7 @@ function BrandDesignForm() {
     (state: any) => state.forms?.brandDesign?.isLoading,
   );
 
-  const fileOneState = useSelector((state: RootState) =>
+  const fileOneState = useAppSelector((state) =>
     selectFileUploadState(state, "brandCompetitorsFile"),
   );
 
@@ -87,13 +86,7 @@ function BrandDesignForm() {
     },
   });
 
-  const {
-    values,
-    errors,
-    handleBlur,
-    handleChange,
-    handleSubmit,
-  } = formik;
+  const { values, errors, handleBlur, handleChange, handleSubmit } = formik;
 
   // HANDLE FILE UPLOAD ONCHANGE
   const onFileChange = async (

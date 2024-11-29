@@ -2,11 +2,10 @@ import Button from "@/components/Button";
 import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import InputFile from "@/components/Forms/InputFile";
 import { FileUploadIcon } from "@/public/svgs";
-import { RootState } from "@/redux/store";
+import { RootState, useAppSelector } from "@/redux/store";
 import { FormikProps } from "formik";
 import React from "react";
 import useFileUpload from "../../../../../hooks/UseFileUpload";
-import { useSelector } from "react-redux";
 import { selectFileUploadState } from "@/redux/file";
 
 function FormFooter({
@@ -23,14 +22,14 @@ function FormFooter({
   isLoading?: boolean;
 }) {
   const { handleFileUpload } = useFileUpload();
-  const isFileUploading = useSelector((state: RootState) => {
+  const isFileUploading = useAppSelector((state) => {
     const uploadedFiles = state.fileUpload;
 
     return Object.values(uploadedFiles).some((file) => file.isLoading);
   });
 
   // Use the selector to get the file upload state for the specific fileId
-  const fileState = useSelector((state: RootState) =>
+  const fileState = useAppSelector((state) =>
     selectFileUploadState(state, fileId),
   );
 

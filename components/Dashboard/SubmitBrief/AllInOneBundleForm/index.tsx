@@ -18,17 +18,14 @@ import useFileUpload from "@/hooks/UseFileUpload";
 import { submitFormData } from "@/redux/myServices/features";
 import { formConfig } from "@/redux/myServices/formConfig";
 import { handleFormModal } from "@/redux/myServices";
-import { useSelector } from "react-redux";
 import { selectFileUploadState } from "@/redux/file";
 import { briefFileUploadEndpoints } from "../shared/briefEndpoint";
 
 function AllInOneBundleForm() {
   const dispatch = useAppDispatch();
-  const isLoading = useAppSelector(
-    (state: any) => state.forms?.AllInOne?.isLoading,
-  );
+  const isLoading = useAppSelector((state) => state.forms?.AllInOne?.isLoading);
 
-  const fileOneState = useSelector((state: RootState) =>
+  const fileOneState = useAppSelector((state) =>
     selectFileUploadState(state, "allInOneBrandColorFile"),
   );
   const { handleFileUpload } = useFileUpload();

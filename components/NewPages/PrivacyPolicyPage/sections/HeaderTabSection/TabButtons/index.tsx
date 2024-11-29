@@ -1,13 +1,13 @@
 "use client";
 import { motion } from "framer-motion";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "@/redux/store";
 import { setOrToggleActiveTab } from "@/redux/legal";
 
 const TabButtons = () => {
   const dispatch = useDispatch();
 
-  const { activeTab, tabs } = useSelector((state: RootState) => state.tabs);
+  const { activeTab, tabs } = useAppSelector((state) => state.tabs);
 
   const handleTabClick = (id: string) => {
     dispatch(setOrToggleActiveTab(id));

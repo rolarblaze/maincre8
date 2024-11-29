@@ -1,22 +1,21 @@
 import React from "react";
 import RecommendFormInputs from "../shared/RecommendFormInputs";
 import { addAlert } from "@/redux/alerts";
-import { RootState, useAppDispatch } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { RecommendFormValues } from "../shared/type";
 import { RECOMMEND_INITIAL_VALUES } from "../shared/constants";
 import { recommendFormSchema } from "../shared/schema";
 import { FormikHelpers, useFormik } from "formik";
 import Button from "@/components/Button";
-import { useSelector } from "react-redux";
 import { convertToString } from "@/redux/myServices/formConfig";
 import { submitBrief, submitBriefEndpoints } from "@/redux/brief/features";
 import ErrorDisplay from "../shared/ErrorDisplay";
 
 function DashboardRecommendForm() {
-  const isFormLoading = useSelector(
-    (state: RootState) => state.brief["businessBrief"].isLoading,
+  const isFormLoading = useAppSelector(
+    (state) => state.brief["businessBrief"].isLoading,
   );
-  const isFileUploading = useSelector((state: RootState) => {
+  const isFileUploading = useAppSelector((state) => {
     const uploadedFiles = state.fileUpload;
 
     return Object.values(uploadedFiles).some((file) => file.isLoading);
