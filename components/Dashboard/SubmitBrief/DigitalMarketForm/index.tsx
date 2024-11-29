@@ -21,7 +21,6 @@ function DigitalMarketForm() {
   const isLoading = useAppSelector(
     (state: any) => state.forms?.digitalMarketing?.isLoading,
   );
-  
 
   // Define formik
   const formik = useFormik<DigitalMarketingValues>({
@@ -39,21 +38,22 @@ function DigitalMarketForm() {
         const formPayload = config.constructPayload(values);
 
         // Dispatch the thunk with endpoint and payload
-        await dispatch(
+        const response = await dispatch(
           submitFormData({
             formName: "digitalMarketing", // Pass only formName
             payload: formPayload, // Pass only the payload
           }),
         );
-
-        dispatch(
-          addAlert({
-            id: "",
-            headText: "Success",
-            subText: "Your digital marketing brief has been submitted",
-            type: "success",
-          }),
-        );
+        if (response?.payload) {
+          dispatch(
+            addAlert({
+              id: "",
+              headText: "Success",
+              subText: "Your digital marketing brief has been submitted",
+              type: "success",
+            }),
+          );
+        }
         resetForm();
         dispatch(
           handleFormModal({ formName: "digitalMarketing", isModalOpen: false }),

@@ -52,21 +52,23 @@ function BrandDesignForm() {
         const formPayload = config.constructPayload(payload);
 
         // Dispatch the thunk with endpoint and payload
-        await dispatch(
+        const response = await dispatch(
           submitFormData({
             formName: "brandDesign", // Pass only formName
             payload: formPayload, // Pass only the payload
           }),
         );
 
-        dispatch(
-          addAlert({
-            id: "",
-            headText: "Success",
-            subText: "Your brand design brief has been submitted",
-            type: "success",
-          }),
-        );
+        if (response?.payload) {
+          dispatch(
+            addAlert({
+              id: "",
+              headText: "Success",
+              subText: "Your brand design brief has been submitted",
+              type: "success",
+            }),
+          );
+        }
 
         resetForm();
         dispatch(
