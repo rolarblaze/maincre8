@@ -56,7 +56,7 @@ export const getUserOrderHistory = createAsyncThunk(
   "services/getUserOrderHistory",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await api.get("user/get-user-order-history");
+      const response = await api.get("user/get-user-order-history?status=successful&sort_by_date=asc");
 
       return response.data.user_transactions;
     } catch (error) {

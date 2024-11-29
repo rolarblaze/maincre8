@@ -6,28 +6,33 @@ import { motion } from "framer-motion"; // Import motion from framer-motion
 
 interface Option {
   label: string;
+  sublabel?: string;
   value: string | number;
 }
 
 interface CustomDropdownProps {
   name: string;
   label?: string;
+  sublabel?: string;
   options: Option[];
   placeholder?: string;
   className?: string;
   optionStyles?: string;
   isCheckbox?: boolean;
+  isRadio?: boolean;
   formik?: FormikProps<any>; // Make formik optional
 }
 
 const CustomDropdown: React.FC<CustomDropdownProps> = ({
   name,
   label,
+  sublabel,
   options,
   placeholder = "Select type",
   className,
   optionStyles,
   isCheckbox = false, // Default to plain dropdown unless specified
+  isRadio = false,
   formik, // Optional Formik prop
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -67,7 +72,15 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
     } else {
       setLocalValue(optionValue as string); // Fallback to local state as a single value
     }
-    setIsOpen(false);
+    if (!isCheckbox) setIsOpen(false); // Close dropdown if not a checkbox
+  };
+
+  const handleRadioChange = (optionValue: string | number) => {
+    if (formik) {
+      formik.setFieldValue(name, optionValue);
+    } else {
+      setLocalValue(optionValue as string);
+    }
   };
 
   // Close dropdown if clicked outside
@@ -96,17 +109,26 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
   return (
     <div className="text-grey900">
       {label && (
-        <label
-          htmlFor={name}
-          className="mb-2 block text-sm font-medium text-grey900"
-        >
-          {label}
-        </label>
+        <div className="mb-2">
+          <label
+            htmlFor={name}
+            className="block text-sm font-medium text-grey900"
+          >
+            {label}
+          </label>
+          {sublabel && (
+            <span className="block text-xs text-gray-500">{sublabel}</span>
+          )}
+        </div>
       )}
       {/* Select field */}
-      <div ref={dropdownRef} className={twMerge("relative", className)}>
+      <div
+        ref={dropdownRef}
+        className={twMerge("relative", className)}
+        onClick={handleToggle}
+      >
         <div className="flex h-14 w-full items-center justify-between rounded-lg border border-gray-300 pl-4 pr-10 text-sm">
-          {isCheckbox ? (
+          {isCheckbox || isRadio ? (
             getSelectedValue()?.length > 0 ? (
               options
                 .filter((option) => getSelectedValue().includes(option.value))
@@ -120,11 +142,7 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
           ) : (
             <span className="text-sm text-grey400">{placeholder}</span>
           )}
-          <button
-            className="w-fit border border-none p-0"
-            onClick={handleToggle}
-            type="button"
-          >
+          <button className="w-fit border border-none p-0" type="button">
             <AshArrowDown />
           </button>
         </div>
@@ -146,6 +164,9 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
               <li
                 key={option.value}
                 className="flex cursor-pointer items-center gap-1 px-6 py-[1.22rem] font-medium text-grey900 hover:bg-gray-100"
+                onClick={(e) => {
+                  if (isCheckbox) e.stopPropagation(); // Prevent dropdown from closing for checkboxes
+                }}
               >
                 {isCheckbox ? (
                   <div className="flex cursor-pointer gap-3">
@@ -153,15 +174,47 @@ const CustomDropdown: React.FC<CustomDropdownProps> = ({
                       type="checkbox"
                       id={option.value.toString()}
                       checked={getSelectedValue()?.includes(option.value)}
+                      onClick={(e) => e.stopPropagation()} //Prevent dropdown from closing
                       onChange={() => handleCheckboxChange(option.value)}
                       className="mr-2 h-5 w-5 cursor-pointer self-center rounded-[3.33px] border-[1.25px] border-grey300 shadow-md shadow-white"
                     />
-                    <label
-                      htmlFor={option.value.toString()}
-                      className="cursor-pointer text-sm"
-                    >
-                      {option.label}
-                    </label>
+                    <div className="flex flex-col">
+                      <label
+                        htmlFor={option.value.toString()}
+                        className="text-sm font-semibold"
+                      >
+                        {option.label}
+                      </label>
+                      {option.sublabel && (
+                        <p className="text-xs text-gray-500">
+                          {option.sublabel}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+                ) : isRadio ? (
+                  <div className="flex cursor-pointer gap-3">
+                    <input
+                      type="radio"
+                      name={name}
+                      id={option.value.toString()}
+                      checked={getSelectedValue() === option.value}
+                      onChange={() => handleRadioChange(option.value)}
+                      className="h-5 w-5 cursor-pointer rounded-full border-[1.25px] border-grey300 shadow-md shadow-white"
+                    />
+                    <div className="flex flex-col">
+                      <label
+                        htmlFor={option.value.toString()}
+                        className="text-sm font-semibold"
+                      >
+                        {option.label}
+                      </label>
+                      {option.sublabel && (
+                        <p className="text-xs text-gray-500">
+                          {option.sublabel}
+                        </p>
+                      )}
+                    </div>
                   </div>
                 ) : (
                   <span

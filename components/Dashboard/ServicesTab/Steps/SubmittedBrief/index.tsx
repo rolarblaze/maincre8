@@ -11,31 +11,32 @@ import { submitBriefForTracking } from "@/redux/servicesTracker/features";
 import { useSearchParams } from "next/navigation";
 import { SubmittedIcon } from "@/public/icons";
 
-const SubmittedBrief = () => {
+const SubmittedBrief = ({
+  handleBriefSubmission,
+}: {
+  handleBriefSubmission?: () => void;
+}) => {
   const searchParams = useSearchParams();
   const transId = searchParams.get("transactionId");
 
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [fileAttachment, setFileAttachment] = useState<string | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalStatus, setModalStatus] = useState<
-    "idle" | "error" | "progress" | "success"
-  >("idle");
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const [uploadError, setUploadError] = useState<string | null>(null);
-
   const dispatch = useAppDispatch();
 
-  const { trackingDetails } = useAppSelector((state) => state.services);
+  const { trackingDetails, orderHistory } = useAppSelector((state) => state.services);
+  const servicesData = useAppSelector((state) => state.services);
   const { trackingProgress } = useAppSelector((state) => state.tracker);
+  
+
+  let order = orderHistory?.find(order => order.transaction_id === trackingDetails?.transaction_id)
+  let orderBought = order?.status === "successful"
 
   const hasSubmittedBrief =
-    trackingDetails?.brief_submitted == true ? "completed" : "inactive";
+    trackingDetails?.brief_submitted ? "completed" : "inactive";
   const dateSubmitted = trackingDetails?.brief_submission_date
     ? formatDate(trackingDetails.brief_submission_date)
     : "Unknown date";
 
-  const status = trackingProgress.SubmitBriefInProgress
+
+  const status = orderBought && !trackingDetails?.brief_submitted
     ? "inprogress"
     : hasSubmittedBrief;
 
@@ -46,49 +47,10 @@ const SubmittedBrief = () => {
   useEffect(() => {
     if (status === "completed") {
       dispatch(updateProgress({ BookDiscoveryCallInProgress: true }));
+    } else {
+      dispatch(updateProgress({ BookDiscoveryCallInProgress: false }));
     }
   }, [dispatch, status]);
-
-  const handleUploadedBrief = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (event.target.files && event.target.files.length > 0) {
-      const file = event.target.files[0];
-      setSelectedFile(file);
-      handleFileUpload(file);
-    }
-  };
-
-  const handleFileUpload = (file: File) => {
-    setModalStatus("progress");
-    if (transId)
-      dispatch(submitBriefForTracking({ file, id: parseInt(transId) }))
-        .unwrap()
-        .then((response) => {
-          setFileAttachment(response.file_link);
-          setModalStatus("success");
-        })
-        .catch((error) => {
-          setUploadError(error?.message);
-          setModalStatus("error");
-          dispatch(
-            addAlert({
-              id: "",
-              headText: "Error",
-              subText: error?.message,
-              type: "error",
-            })
-          );
-          console.error("Error uploading file:", error);
-        });
-  };
-
-  const handleFileSelect = (file: File) => {
-    setSelectedFile(file);
-    handleFileUpload(file);
-  };
 
   return (
     <>
@@ -96,7 +58,7 @@ const SubmittedBrief = () => {
         status={status}
         title="Submit a Brief"
         description="Kickstart your project by submitting a detailed brief immediately"
-        buttonLabel="Upload a brief"
+        buttonLabel="Submit a brief"
         buttonClassNames=""
         showDate={true}
         completedState={
@@ -107,29 +69,13 @@ const SubmittedBrief = () => {
             download
             className="flex gap-2"
           >
-            <p className="text-primary500 text-sm">Brief submitted</p>{" "}
+            <p className="text-sm text-primary500">Brief submitted</p>{" "}
             <SubmittedIcon />
           </a>
         }
         dateBought={dateSubmitted}
-        onClick={handleUploadedBrief}
+        onClick={handleBriefSubmission}
       />
-      <FileUploadModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        status={modalStatus}
-        progress={uploadProgress}
-        fileName={selectedFile?.name}
-        onUpload={handleFileSelect}
-      />
-      {isModalOpen && (
-        <input
-          type="file"
-          accept=".pdf,.doc,.docx"
-          style={{ display: "none" }}
-          onChange={handleFileChange}
-        />
-      )}
     </>
   );
 };

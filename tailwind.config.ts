@@ -9,7 +9,7 @@ const config: Config = {
   theme: {
     extend: {
       screens: {
-        xs: "300px"
+        xs: "300px",
       },
       fontFamily: {
         manrope: ["Manrope", "system-ui"],
@@ -29,6 +29,7 @@ const config: Config = {
           "linear-gradient(to right bottom, #083160 0%, #083160 25%, #04182F 50%, #04182F 100%)",
         "getStarted-bg": "url(/images/getstarted-frame.svg)",
         "getStarted-bg-mob": "url(/images/getstarted-frame-mob.svg)",
+        gridline: "url(/imgs/gridlines.png)",
       },
       fontSize: {
         "3.5xl": "2rem",
@@ -59,7 +60,9 @@ const config: Config = {
         primary700: "#0D5EBA",
         primary800: "#083160",
         primary900: "#093160",
-        textMain: "#111827",
+        secondary: {
+          500: "#0D5EBA",
+        },
         error: {
           50: "#FBEAE9",
           100: "#EB9B98",
@@ -86,6 +89,7 @@ const config: Config = {
         },
         ash: "#D0D5DD",
         ash10: "#5D5D5D",
+        textMain: "#111827",
         "dashboard-bg": "#F5F5F5",
         "dark-cyan-blue": "#030E1C",
         "alert-green": "#04802E",
@@ -93,6 +97,7 @@ const config: Config = {
       },
       zIndex: {
         "10000": "10000",
+        "9999": "9999",
       },
       boxShadow: {
         "custom-strong":

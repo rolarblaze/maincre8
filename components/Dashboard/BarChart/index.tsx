@@ -42,6 +42,7 @@ const BarChart: React.FC<BarChartProps> = ({ labels, dataValues }) => {
 
   // Configuration for the chart
   const options = {
+    maintainAspectRatio: false,
     responsive: true,
     scales: {
       x: {
@@ -90,7 +91,7 @@ const BarChart: React.FC<BarChartProps> = ({ labels, dataValues }) => {
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto">
+    <div className="w-full">
       <Bar data={data} options={options} />
     </div>
   );

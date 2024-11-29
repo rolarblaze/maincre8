@@ -1,37 +1,55 @@
 "use client";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 import {
   Button,
   FullLoader,
-  Loader,
   ServiceCard,
   EmptyState,
 } from "@/components";
 import BarChart from "@/components/Dashboard/BarChart";
 import UpcomingAppointment from "@/components/Dashboard/UpcomingAppointment";
-import { BulbIcon } from "@/public/icons";
 import { getUserOrderHistory } from "@/redux/servicesTracker/features";
 import { fetchLatestAppointments } from "@/redux/order/features";
-import { getServices } from "@/redux/services/features";
 import { fetchActivityStatistics } from "@/redux/auth/features";
-import { useAppDispatch, useAppSelector } from "@/redux/store";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import { getBundles } from "@/redux/shop/features";
+import { BulbIcon } from "@/public/icons";
+import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
+import Spinner from "@/components/Spinner";
+
+import Image from "next/image";
+import Link from "next/link";
+import { getBundlesClass } from "@/components/NewPages/LandingPage/sections/PackagesSection/helperFunc";
+
 
 const Overview = () => {
-  const dispatch = useAppDispatch();
   const router = useRouter();
-  const { services, isLoading, error } = useAppSelector((state) => state.service);
+  const dispatch = useAppDispatch();
+  const { services, isLoading, error } = useAppSelector(
+    (state) => state.service,
+  );
   const { orderHistory } = useAppSelector((state) => state.services);
+  const { cartItems } = useAppSelector((state) => state.cart);
   const { isLoadingProfile, profile } = useAppSelector((state) => state.auth);
   const { appointments, isApointmentLoading } = useAppSelector(
-    (state) => state.order
+    (state) => state.order,
+  );
+  const bundlesData = useAppSelector(
+    (state: RootState) => state.pageViewData.allShopBundles,
   );
 
   useEffect(() => {
-    dispatch(getServices());
+    if (bundlesData.length === 0) {
+      dispatch(getBundles());
+    }
     dispatch(getUserOrderHistory());
     dispatch(fetchLatestAppointments());
     dispatch(fetchActivityStatistics());
+    
+
+    // store user name indefinitely in localStorage for later access on checkout page, even without logging in
+    // log in once to store names
+    localStorage.setItem("SellCrea8User", JSON.stringify({first_name: profile.first_name, last_name: profile.last_name  }))
   }, [dispatch]);
 
   // Extract the activity statistics from the profile
@@ -48,9 +66,6 @@ const Overview = () => {
     dataValues: [active_services, completed_services, total_services_bought],
   };
 
-  // Logging for debugging purposes
-  // console.log("Bar Chart Data: ", barChartData);
-
   const bundleColors: { [key: string]: string } = {};
   const colors = ["#620FA3", "#006AA5", "#A30F44"];
   services.forEach((service, index) => {
@@ -65,10 +80,10 @@ const Overview = () => {
     return <div>Error: {error}</div>;
   }
 
-  if (isLoadingProfile) {
+  if (isLoadingProfile || (bundlesData.length === 0)) {
     return (
-      <div className="flex items-center justify-center">
-        <Loader />
+      <div className="flex h-full w-full items-center justify-center">
+        <Spinner className="border-blue-500" />
       </div>
     );
   }
@@ -80,35 +95,92 @@ const Overview = () => {
     !profile.user.profile?.phone_number;
 
   const hasTransactions = orderHistory && orderHistory?.length > 0;
+  
+  
 
   return (
-    <div className="container mx-auto py-6 px-4 md:p-6 md:-m-6 flex flex-col gap-6 md:gap-6 overflow-y-scroll noScrollbar">
-      <div>
-        <h4>Welcome, {profile.first_name}</h4>
-        <p className="text-grey500">Select a service to get started</p>
-      </div>
+    <div className="noScrollbar flex flex-col overflow-y-scroll pb-10 font-manrope xs:max-md:mx-auto xs:max-md:min-w-full [&>*]:pl-6 xs:max-md:[&>*]:px-0">
+      <header className="space-y-2 pb-4 xs:max-md:space-y-0 xs:max-md:pt-5">
+        {/* <h2 className="text-2xl font-semibold leading-8 text-grey900">
+          Welcome, {profile.first_name}
+        </h2>
+        <p  className="text-lg font-semibold leading text-grey600">We&apos;re glad to see you again.</p> */}
+        <p className="text-grey500">
+          {hasTransactions
+            ? "Access your services below"
+            : "How can we assist you today?"}
+        </p>
+      </header>
 
-      <div
-        className="ml-auto hidden md:flex gap-2 items-center w-fit border-none bg-primary500 text-white !py-2 !px-3 rounded-lg cursor-pointer mt-8"
+      <hr className="xs:max-md:hidden" />
+
+      {/* Chose a package to get started */}
+      {!hasTransactions && (
+        <section className="space-y-4 pt-10">
+          <h3 className="text-2xl font-bold leading-8 text-grey900">
+            Choose a Package to Get Started
+          </h3>
+
+          <div className="flex flex-wrap gap-6 px-6 py-10 xs:max-md:px-2">
+            {bundlesData.map(
+              ({ bundle_id, bundle_image_link, bundle_name, description }) => {
+                return (
+                  <Link
+                    key={bundle_id}
+                    href={`/dashboard/services/${bundle_id}`}
+                    className={`group w-[30%] min-w-60 overflow-hidden rounded-lg border border-ash xs:max-md:w-[45%] xs:max-md:min-w-64 ${getBundlesClass[bundle_id - 1].tabClass}`}
+                  >
+                    <figure
+                      className={`relative min-h-60 w-full ${getBundlesClass[bundle_id - 1].bgClass}`}
+                    >
+                      <Image
+                        src={bundle_image_link as string}
+                        alt={description}
+                        fill={true}
+                        priority
+                        className="object-cover"
+                      />
+                    </figure>
+
+                    <div className="p-4 font-manrope *:leading-[150%]">
+                      <h4 className="text-lg font-semibold text-grey900">
+                        {bundle_name}
+                      </h4>
+                      <p className="text-sm font-medium text-grey500">
+                        {description}
+                      </p>
+                    </div>
+                  </Link>
+                );
+              },
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* <div
+        className="ml-auto mt-8 hidden w-fit cursor-pointer items-center gap-2 rounded-lg border-none bg-primary500 !px-3 !py-2 text-white md:flex"
         onClick={() => router.push("/dashboard/custom-recommendation")}
       >
         <BulbIcon />
         <span>Custom recommendations</span>
-      </div>
+      </div> */}
 
       {profileIncomplete && (
-        <div className="mt-8 mb-10 bg-white py-4 px-6 flex items-center justify-between flex-wrap gap-6 md:gap-0 rounded-lg">
-          <p className="text-black">Complete your profile setup</p>
+        <div className="mb-10 mt-8 hidden flex-wrap items-center justify-between gap-6 rounded-lg px-6 py-4 xs:max-md:my-0 xs:max-md:flex xs:max-md:flex-col xs:max-md:items-start xs:max-md:gap-2 xs:max-md:bg-[#F5F5F5] md:gap-0">
+          <p className="text-black xs:max-md:ml-3 xs:max-md:font-bold">
+            Complete your profile setup
+          </p>
           <Button
             label="Setup profile"
-            classNames="bg-transparent w-fit border-[1.5px] border-primary600 text-primary600 py-3 px-4"
+            classNames="bg-transparent font-bold w-fit border-[1.5px] xs:max-md:border-2 border-primary600 text-primary600 py-3 px-4 xs:max-md:p-2 xs:max-md:text-xs xs:max-md:ml-3"
             onClick={() => router.push("/dashboard/settings")}
           />
         </div>
       )}
 
-      <div className="py-4 flex items-center justify-between">
-        <h4 className="text-black text-[18px] md:text-[24px] font-medium md:font-bold">
+      {/* <div className="flex items-center justify-between py-4">
+        <h4 className="text-[18px] font-medium text-black md:text-[24px] md:font-bold">
           Popular services
         </h4>
         {hasTransactions &&
@@ -120,105 +192,128 @@ const Overview = () => {
               onClick={() => router.push("/dashboard/services")}
             />
           )}
-      </div>
+      </div> */}
 
-      <section className="flex flex-col gap-10">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 place-items-center md:place-items-start gap-6 overflow-y-auto noScrollbar">
-          {/* Show only the first three cards */}
-          {hasTransactions ? (
-            orderHistory
-              ?.slice(0, 3)
-              .map((transaction, i) => (
-                <ServiceCard
-                  key={i}
-                  category={transaction.package.package_name}
-                  title={transaction.package.package_name}
-                  description={transaction.package.description}
-                  color={bundleColors[transaction.package.bundle.bundle_name]}
-                  id={transaction.package.package_id}
-                  transactionId={transaction.transaction_id}
-                  isPaid
-                />
-              ))
-          ) : isLoading ? (
-            <Loader />
-          ) : (
-            services
-              .flatMap((service) =>
-                service.bundles.flatMap((bundle) =>
-                  bundle.packages.flatMap((pkg) =>
-                    pkg.provisions.map((provision) => ({
-                      category: bundle.bundle_name,
-                      title: pkg.package_name,
-                      description: provision.description,
-                      color: bundleColors[bundle.bundle_name],
-                      id: pkg.package_id,
-                    }))
-                  )
-                )
-              )
-              .slice(0, 3)
-              .map((card, index) => (
-                <ServiceCard
-                  key={index}
-                  category={card.category}
-                  title={card.title}
-                  description={card.description}
-                  color={card.color}
-                  id={card.id}
-                />
-              ))
-          )}
-        </div>
-
-        {/* Activity Section */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
-          <h3 className="text-2xl font-bold text-grey900 col-span-2">
-            Activity
+      {/* Services and Appointments Activity */}
+      <section className="flex w-full flex-col gap-10">
+        <div className="mt-10 space-y-2 xs:max-md:mt-5">
+          <h3 className="lead text-2xl font-bold text-grey900 xs:max-md:text-xl">
+            My Services
           </h3>
-          {/* Chart Section*/}
-          <div className="flex flex-col justify-between rounded-lg bg-white px-6 py-4 shadow-lg col-span-2 md:col-span-1">
-            <h4 className="text-lg font-semibold text-grey900 border-b border-grey200 pb-4">
-              My Services
-            </h4>
-            {/* Chart */}
-            <div>
-              <BarChart
-                labels={barChartData.labels}
-                dataValues={barChartData.dataValues}
-              />
-            </div>
-          </div>
+          <div className="">
+          <div className="flex p-6 xs:max-md:px-0 xs:max-md:gap-0 xs:max-md:gap-y-6 xs:max-md:justify-evenly flex-wrap w-full gap-5">
+              {hasTransactions ? (
+                orderHistory
+                  .slice(0, 3)
+                  ?.map((transaction, i) => (
+                    <ServiceCard
+                      key={i}
+                      bundleId={transaction.package.bundle.bundle_id}
+                      category={transaction.package.package_name}
+                      title={transaction.package.package_name}
+                      description={transaction.package.description}
+                      color={
+                        bundleColors[transaction.package.bundle.bundle_name]
+                      }
+                      id={transaction.package.package_id}
+                      transactionId={transaction.transaction_id}
+                      transactionDate={transaction.created_at}
+                      isPaid
+                    />
+                  ))
+              ) : isLoading ? (
 
-          {/* Upcoming Appointments */}
-          <div className="rounded-lg bg-white px-6 py-4 flex flex-col gap-4 shadow-lg">
-            <h4 className="text-lg font-semibold text-grey900 border-b border-grey200 pb-4">
-              Upcoming Appointments
-            </h4>
-            <div className="flex flex-col">
-              {isApointmentLoading ? (
-                <div className="flex items-center justify-center">
-                  <Loader />
-                </div>
-              ) : !appointments || appointments.length === 0 ? (
-                <p className="flex items-center justify-center py-10">
-                  No upcoming appointments
-                </p>
+                <Spinner className="border-blue-500" />
               ) : (
-                appointments?.map((app, idx) => (
-                  <UpcomingAppointment
-                    key={idx}
-                    callType={app.event_name}
-                    desc={app.product_name}
-                    date={new Date(app.event_date).toLocaleDateString("en-US", {
-                      day: "2-digit",
-                      month: "long",
-                      year: "numeric",
-                    })}
-                  />
-                ))
+                services
+                  .flatMap((service) =>
+                    service.bundles.flatMap((bundle) =>
+                      bundle.packages.flatMap((pkg) =>
+                        pkg.provisions.map((provision) => ({
+                          category: bundle.bundle_name,
+                          title: pkg.package_name,
+                          description: provision.description,
+                          color: bundleColors[bundle.bundle_name],
+                          id: pkg.package_id,
+                        })),
+                      ),
+                    ),
+                  )
+                  ?.map((card, index) => (
+                    <ServiceCard
+                      key={index}
+                      category={card.category}
+                      title={card.title}
+                      description={card.description}
+                      color={card.color}
+                      id={card.id}
+                    />
+                  ))
               )}
             </div>
+          </div>
+        </div>
+
+        <div className="space-y-10 pr-5 xs:max-md:space-y-2 xs:max-md:pr-0">
+          
+            <h3 className="col-span-2 text-2xl font-bold text-grey900 xs:max-md:text-xl">
+              Activity
+            </h3>
+          
+
+          <div className="flex w-full flex-wrap gap-6 xs:max-md:gap-0 xs:max-md:gap-y-6 justify-between xs:max-md:flex-col">
+            {
+              <div className="noScrollbar w-[48%] min-w-[25rem] xs:max-md:min-w-0 xs:max-md:w-full xs:max-md:overflow-auto">
+                <div className="flex w-full h-full flex-col justify-between space-y-2 rounded-lg border bg-white px-6 py-4 shadow-lg xs:max-md:min-w-[25rem]">
+                  <h4 className="border-b border-grey200 pb-4 text-lg font-semibold text-grey900">
+                    My Services
+                  </h4>
+                  <div className="w-full">
+                    <BarChart
+                      labels={barChartData.labels}
+                      dataValues={barChartData.dataValues}
+                    />
+                  </div>
+                </div>
+              </div>
+            }
+
+            {
+              <div className="noScrollbar w-[48%] min-w-[25rem] xs:max-md:min-w-0 xs:max-md:w-full xs:max-md:overflow-auto">
+                <div className="flex h-full w-full flex-col gap-4 rounded-lg border bg-white px-6 py-4 shadow-lg xs:max-md:min-w-[25rem]">
+                  <h4 className="border-b border-grey200 pb-4 text-lg font-semibold text-grey900">
+                    Upcoming Appointments
+                  </h4>
+                  <div className="flex flex-col">
+                    {isApointmentLoading ? (
+                      <div className="flex py-10 items-center justify-center">
+                        <Spinner className="border-blue-500" />
+                      </div>
+                    ) : !appointments || appointments.length === 0 ? (
+                      <p className="flex size-full items-center justify-center py-10">
+                        No upcoming appointments
+                      </p>
+                    ) : (
+                      appointments?.map((app, idx) => (
+                        <UpcomingAppointment
+                          key={idx}
+                          callType={app.event_name}
+                          desc={app.product_name}
+                          date={new Date(app.event_date).toLocaleDateString(
+                            "en-US",
+                            {
+                              day: "2-digit",
+                              month: "long",
+                              year: "numeric",
+                            },
+                          )}
+                        />
+                      ))
+                    )}
+                  </div>
+                </div>
+              </div>
+            }
           </div>
         </div>
       </section>

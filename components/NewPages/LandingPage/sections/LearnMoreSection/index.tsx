@@ -2,8 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 import assetLibrary from "@/library";
 import { FadeUpDiv } from "@/components";
+import { useAppSelector } from "@/redux/store";
 
 const LearnMoreSection = () => {
+  const { profile } = useAppSelector((state) => state.auth);
   return (
     <FadeUpDiv className="relative mb-[6.25rem] flex justify-start overflow-hidden rounded-3xl bg-gradient-to-tr from-[#4490EA] to-[#0C407E] to-70% px-4 pb-8 pt-10 max-lg:flex-col sm:rounded-[1.875rem] sm:py-[6.25rem] sm:pl-[3.75rem]">
       <div className="z-[2] max-w-[30rem]">
@@ -20,10 +22,11 @@ const LearnMoreSection = () => {
         </p>
 
         <Link
-          href={"/"}
+          href={(profile.first_name || profile.last_name) ? "/dashboard" : "/signup"}
           className="mt-8 block w-fit rounded-lg bg-white px-12 py-3 text-sm font-medium text-[#111827]"
         >
-          Learn More
+          {(profile.first_name || profile.last_name) ? "Go To Dashbaord" : "Learn More"}
+          
         </Link>
       </div>
 

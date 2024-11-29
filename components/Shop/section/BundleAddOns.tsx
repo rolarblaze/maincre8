@@ -1,10 +1,5 @@
+import { AddOnsType } from "@/redux/shop/interface";
 import Image from "next/image";
-
-type AddOnsType = {
-  title: string;
-  description: string;
-  price: string;
-};
 
 type BundleAddOnsPropsType = {
   title: string;
@@ -35,7 +30,7 @@ const BundleAddOns = ({ title, addOns }: BundleAddOnsPropsType) => {
               </span>
             </p>
           </h2>
-          <p className="w-[80%] text-lg font-light leading-7 text-[#B6D4F7] xs:max-md:w-[90%]">
+          <p className="w-[80%] text-lg font-light leading-7 text-[#B6D4F7] text-pretty xs:max-md:w-[100%]">
             Add-ons help you maximize your SellCrea8 package by offering
             tailored solutions that meet your specific needs, ensuring your
             brand stands out and performs across all channels.
@@ -46,8 +41,8 @@ const BundleAddOns = ({ title, addOns }: BundleAddOnsPropsType) => {
           {addOns.map((addon) => {
             return (
               <div
-                key={addon.title}
-                className="flex aspect-square w-[23%] flex-col items-center justify-center gap-10 rounded-2xl bg-white xs:max-md:min-w-72 xs:max-md:first:ml-5 xs:max-md:last:mr-5"
+                key={addon.add_ons_id}
+                className="xs:max-md:min-w-[70vw flex aspect-square min-h-[200px] w-[23%] min-w-[23%] flex-col items-center justify-between rounded-2xl bg-white px-5 py-10 xs:max-md:max-h-[300px] xs:max-md:min-w-[300px] xs:max-md:first:ml-5 xs:max-md:last:mr-5"
               >
                 <div className="center mx-auto aspect-square w-1/3 rounded-full bg-[#E8F1FC]">
                   {/* control the size on the figure tag to control the size of the rendered image */}
@@ -60,14 +55,14 @@ const BundleAddOns = ({ title, addOns }: BundleAddOnsPropsType) => {
                     />
                   </figure>
                 </div>
-                <div className="space-y-2">
-                  <p className="text-center text-xs font-semibold uppercase leading-4">
-                    {addon.title}
+                <div className="space-y-1">
+                  <p className="text-center text-xs font-semibold uppercase">
+                    {addon.add_ons_name}
                   </p>
-                  <p className="text-center text-xs font-normal leading-7 text-[#718096]">
+                  <p className="text-center text-xs font-normal text-[#718096]">
                     {addon.description}
                   </p>
-                  <p className="text-center text-lg font-semibold leading-5 text-[#111827]">
+                  <p className="text-center text-lg font-semibold text-[#111827]">
                     {addon.price}
                   </p>
                 </div>

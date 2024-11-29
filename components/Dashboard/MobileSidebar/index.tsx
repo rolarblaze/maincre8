@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Tab from "../Sidebar/types";
 import { usePathname, useRouter } from "next/navigation";
-import { useAppSelector } from "@/redux/store";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { CameraIcon, CancelIcon, LogoBlue, Logout } from "@/public/icons";
 import {
   BulbIcon,
@@ -21,6 +21,7 @@ import ArrowUp from "@/public/icons/arrow-up.svg";
 import Image from "next/image";
 import assetLibrary from "@/library";
 import NewLogo from "@/public/optimised/NewLogo";
+import { signOut } from "@/redux/auth/index";
 
 type MobileSidebarProps = {
   setActiveTab: (tab: Tab) => void;
@@ -32,15 +33,19 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
   onClick,
 }) => {
   const router = useRouter();
+  
   const pathname = usePathname();
+  const dispatch = useAppDispatch();
   const { profile } = useAppSelector((state) => state.auth);
   const [isSupportOpen, setIsSupportOpen] = useState(false);
 
   const isActive = (path: string) => pathname === path;
 
   const handleLogout = () => {
+    dispatch(signOut());
     router.push("/login");
   };
+
 
   const toggleSupport = () => {
     setIsSupportOpen(!isSupportOpen);
@@ -48,28 +53,28 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
 
   return (
     <aside
-      className={`md:hidden h-full flex flex-col gap-7 px-6 border-r w-[100vw] border-grey200 fixed z-50 bg-white inset-x-0 top-0 overflow-y-auto py-8 overflow-x-hidden box-border`}
+      className={`fixed inset-x-0 top-0 z-50 box-border flex h-full w-[100vw] flex-col gap-7 overflow-y-auto overflow-x-hidden border-r border-grey200 bg-white px-6 py-8 md:hidden`}
     >
       {/* Logo section */}
-      <section className="flex flex-col gap-14 ">
+      <section className="flex flex-col gap-14">
         {/* Mobile Logo */}
-        <div className=" flex justify-between w-full md:hidden">
+        <div className="flex w-full justify-between md:hidden">
           <Link href={"/"} className="">
             {/* <MobileBlueLogo /> */}
             <NewLogo />
           </Link>
-          <button className="w-fit h-fit" onClick={onClick}>
+          <button className="h-fit w-fit" onClick={onClick}>
             <CancelIcon />
           </button>
         </div>
 
         {/* Navigations */}
-        <nav className="flex flex-col gap-1 pb-6 border-b border-grey200">
+        <nav className="flex flex-col xs:max-md:max-w-72 gap-1 border-b border-grey200 pb-6">
           <Link href="/dashboard" onClick={onClick}>
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${
+              className={`flex items-center gap-3 px-4 py-3 ${
                 isActive("/dashboard")
-                  ? "bg-primary50 rounded-sm text-primary600 "
+                  ? "rounded-sm bg-primary50 text-primary600"
                   : ""
               }`}
               onClick={() => setActiveTab("Overview")}
@@ -80,7 +85,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
               <span
                 className={`text-sm ${
                   isActive("/dashboard")
-                    ? "text-primary600 text-medium"
+                    ? "text-medium text-primary600"
                     : "grey700"
                 }`}
               >
@@ -91,9 +96,9 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
 
           <Link href="/dashboard/services" onClick={onClick}>
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${
+              className={`flex items-center gap-3 px-4 py-3 ${
                 isActive("/dashboard/services")
-                  ? "bg-primary50 rounded-sm text-primary600"
+                  ? "rounded-sm bg-primary50 text-primary600"
                   : ""
               }`}
               onClick={() => setActiveTab("Services")}
@@ -106,7 +111,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
               <span
                 className={`text-sm ${
                   isActive("/dashboard/services")
-                    ? "text-primary600 text-medium"
+                    ? "text-medium text-primary600"
                     : "grey700"
                 }`}
               >
@@ -117,9 +122,9 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
 
           <Link href="/dashboard/my-services" onClick={onClick}>
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${
+              className={`flex items-center gap-3 px-4 py-3 ${
                 isActive("/dashboard/my-services")
-                  ? "bg-primary50 rounded-sm text-primary600"
+                  ? "rounded-sm bg-primary50 text-primary600"
                   : ""
               }`}
               onClick={() => setActiveTab("MyServices")}
@@ -132,7 +137,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
               <span
                 className={`text-sm ${
                   isActive("/dashboard/my-services")
-                    ? "text-primary600 text-medium"
+                    ? "text-medium text-primary600"
                     : "grey700"
                 }`}
               >
@@ -144,9 +149,9 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
           {/* CUSTOM RECOMMENDATIONS */}
           <Link href="/dashboard/custom-recommendation" onClick={onClick}>
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${
+              className={`flex items-center gap-3 px-4 py-3 ${
                 isActive("/dashboard/custom-recommendation")
-                  ? "bg-primary50 rounded-sm text-primary600"
+                  ? "rounded-sm bg-primary50 text-primary600"
                   : ""
               }`}
               onClick={() => setActiveTab("Services")}
@@ -159,7 +164,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
               <span
                 className={`text-sm ${
                   isActive("/dashboard/custom-recommendation")
-                    ? "text-primary600 text-medium"
+                    ? "text-medium text-primary600"
                     : "grey700"
                 }`}
               >
@@ -168,11 +173,11 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
             </div>
           </Link>
 
-          <Link href="/dashboard/calendar" onClick={onClick}>
+          {/* <Link href="/dashboard/calendar" onClick={onClick}>
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${
+              className={`flex items-center gap-3 px-4 py-3 ${
                 isActive("/dashboard/calendar")
-                  ? "bg-primary50 rounded-sm text-primary600"
+                  ? "rounded-sm bg-primary50 text-primary600"
                   : ""
               }`}
               onClick={() => setActiveTab("Calendar")}
@@ -185,20 +190,20 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
               <span
                 className={`text-sm ${
                   isActive("/dashboard/calendar")
-                    ? "text-primary600 text-medium"
+                    ? "text-medium text-primary600"
                     : "grey700"
                 }`}
               >
                 Calendar
               </span>
             </div>
-          </Link>
+          </Link> */}
 
           <Link href="/dashboard/order-history" onClick={onClick}>
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${
+              className={`flex items-center gap-3 px-4 py-3 ${
                 isActive("/dashboard/order-history")
-                  ? "bg-primary50 rounded-sm text-primary600"
+                  ? "rounded-sm bg-primary50 text-primary600"
                   : ""
               }`}
               onClick={() => setActiveTab("History")}
@@ -211,7 +216,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
               <span
                 className={`text-sm ${
                   isActive("/dashboard/order-history")
-                    ? "text-primary600 text-medium"
+                    ? "text-medium text-primary600"
                     : "grey700"
                 }`}
               >
@@ -222,8 +227,8 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
 
           <div onClick={toggleSupport}>
             <div
-              className={`flex items-center justify-between gap-3 py-3 px-4 cursor-pointer ${
-                isActive("/dashboard/support") ? " text-primary600" : ""
+              className={`flex cursor-pointer items-center justify-between gap-3 px-4 py-3 ${
+                isActive("/dashboard/support") ? "text-primary600" : ""
               }`}
             >
               <div className="flex items-center gap-3">
@@ -235,7 +240,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
                 <span
                   className={`text-sm ${
                     isActive("/dashboard/support")
-                      ? "text-primary600 text-medium"
+                      ? "text-medium text-primary600"
                       : "grey700"
                   }`}
                 >
@@ -251,7 +256,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
               </div>
             </div>
             {isSupportOpen && (
-              <div className="flex flex-col gap-2 fadeInDown">
+              <div className="fadeInDown flex flex-col gap-2">
                 <Link
                   href="/dashboard/support"
                   onClick={() => {
@@ -259,7 +264,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
                   }}
                 >
                   <div
-                    className={`py-2 pl-4 pr-2 text-sm rounded-sm cursor-pointer ${
+                    className={`cursor-pointer rounded-sm py-2 pl-4 pr-2 text-sm ${
                       isActive("/dashboard/support")
                         ? "bg-primary50 text-grey900"
                         : "text-grey700"
@@ -268,15 +273,15 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
                     Support Info
                   </div>
                 </Link>
-                <div className="flex items-center justify-between py-2 pl-4 pr-2 text-sm rounded-sm cursor-pointer text-grey700">
+                {/* <div className="flex cursor-pointer items-center justify-between rounded-sm py-2 pl-4 pr-2 text-sm text-grey700">
                   Support Inbox
-                  <span className="text-white bg-primary500 px-1 py-0.5 rounded-full text-xs">
+                  <span className="rounded-full bg-primary500 px-1 py-0.5 text-xs text-white">
                     Coming soon
                   </span>
-                  <span className="text-white bg-primary500 px-1 py-0.5 rounded-full text-xs">
+                  <span className="rounded-full bg-primary500 px-1 py-0.5 text-xs text-white">
                     Coming soon
                   </span>
-                </div>
+                </div> */}
               </div>
             )}
           </div>
@@ -286,11 +291,11 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
       {/* Notification and Settings */}
       <section className="flex flex-col gap-3 pt-2">
         <div className="flex flex-col gap-1 pb-3">
-          <Link href="/dashboard/notifications" onClick={onClick}>
+          {/* <Link href="/dashboard/notifications" onClick={onClick}>
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${
+              className={`flex items-center gap-3 px-4 py-3 ${
                 isActive("/dashboard/notifications")
-                  ? "bg-primary50 rounded-sm text-primary600"
+                  ? "rounded-sm bg-primary50 text-primary600"
                   : ""
               }`}
               onClick={() => setActiveTab("Notifications")}
@@ -303,20 +308,20 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
               <span
                 className={`text-sm ${
                   isActive("/dashboard/notifications")
-                    ? "text-primary600 text-medium"
+                    ? "text-medium text-primary600"
                     : "grey700"
                 }`}
               >
                 Notifications
               </span>
             </div>
-          </Link>
+          </Link> */}
 
           <Link href="/dashboard/settings" onClick={onClick}>
             <div
-              className={`flex items-center gap-3 py-3 px-4 ${
+              className={`flex items-center gap-3 px-4 py-3 ${
                 isActive("/dashboard/settings")
-                  ? "bg-primary50 rounded-sm text-primary600"
+                  ? "rounded-sm bg-primary50 text-primary600"
                   : ""
               }`}
               onClick={() => setActiveTab("Settings")}
@@ -329,7 +334,7 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
               <span
                 className={`text-sm ${
                   isActive("/dashboard/settings")
-                    ? "text-primary600 text-medium"
+                    ? "text-medium text-primary600"
                     : "grey700"
                 }`}
               >
@@ -341,31 +346,32 @@ const MobileSidebar: React.FC<MobileSidebarProps> = ({
       </section>
 
       {/* Profile */}
-      <div className="flex items-center flex-wrap gap-8 px-6">
-        <div className="flex items-center gap-3">
+      <div className="flex flex-wrap items-center gap-8 px-6 xs:max-md:max-w-72 xs:max-md:justify-between xs:max-md:gap-0 xs:max-md:px-0">
+        <div className="flex items-center gap-3 xs:max-md:gap-2">
           {/* Profile Avatar */}
-          <div className="w-14 h-14 rounded-full relative">
+          <div className="relative h-14 w-14 rounded-full xs:max-md:size-10">
             <Image
               src={assetLibrary.defaultAvatar}
               alt="User Image"
               objectFit="cover"
               width={56}
               height={56}
-              className="rounded-full w-full h-full"
+              className="h-full w-full rounded-full"
             />
-            <div className="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full p-0.5">
+            <div className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-500 p-0.5">
               {" "}
             </div>
             {/* <UserImage /> */}
           </div>
+          {/* Name, Email */}
           <div>
-            <p className="text-grey900 text-sm font-bold">
+            <p className="text-sm font-bold text-grey900">
               {" "}
               {profile.user.is_business
                 ? profile?.business_name
                 : `${profile?.first_name} ${profile?.last_name}`}
             </p>
-            <p className="text-grey600 text-sm">
+            <p className="text-sm text-grey600 xs:max-md:text-xs">
               {profile?.user?.profile?.user_email || " "}
             </p>
           </div>

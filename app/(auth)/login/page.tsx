@@ -19,6 +19,7 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().required("Password is required"),
 });
 
+
 export default function Login() {
   const dispatch = useAppDispatch();
   const { isLoading } = useAppSelector((state) => state.auth);
@@ -84,7 +85,10 @@ export default function Login() {
           type: "success",
         })
       );
-      router.push("/dashboard");
+
+      // Check redirect parameter
+      const redirect = new URLSearchParams(window.location.search).get("redirect");
+      router.push(redirect || "/dashboard");
     } else if (loginUser.rejected.match(actionResult)) {
       if (actionResult.error) {
         const errorMessage =

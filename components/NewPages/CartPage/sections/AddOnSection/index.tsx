@@ -1,6 +1,15 @@
 import { AddOnItem } from "./components";
 
-const AddOnSection = () => {
+interface AddOnSectionProps {
+  addOns: {
+    type: string;
+    recommendations: any[];
+  }[];
+  onAddOnChange: (addon: { id: number; quantity: number; bundleName: string }) => void;
+}
+
+const AddOnSection: React.FC<AddOnSectionProps> = ({ addOns, onAddOnChange }) => {
+
   return (
     <section className="space-y-4">
       <h2 className="text-sm font-medium leading-[150%] text-grey900">
@@ -15,7 +24,13 @@ const AddOnSection = () => {
 
           <div className="flex flex-wrap gap-6 overflow-x-auto py-4">
             {recommendations.map((item) => (
-              <AddOnItem key={item.id} type={type} {...item} />
+              <AddOnItem
+                key={item.uniqueKey}
+                {...item}
+                onChange={(addon) =>
+                  onAddOnChange({ ...addon, bundleName: type }) // Include bundle name
+                }
+              />
             ))}
           </div>
         </div>
@@ -25,57 +40,3 @@ const AddOnSection = () => {
 };
 export default AddOnSection;
 
-const addOns = [
-  {
-    type: "brand designs",
-    recommendations: [
-      {
-        id: "bd-1",
-        name: "additional revisions",
-        feature: "2 revisions",
-        price: 10,
-      },
-      {
-        id: "bd-2",
-        name: "brand material design",
-        feature: "1 extra design",
-        price: 10,
-      },
-      {
-        id: "bd-3",
-        name: "marketing designs",
-        feature: "5 extra designs",
-        price: 10,
-      },
-      {
-        id: "bd-4",
-        name: "presentations & slides",
-        feature: "5 extra slides",
-        price: 10,
-      },
-    ],
-  },
-  {
-    type: "graphic designs",
-    recommendations: [
-      {
-        id: "gd-1",
-        name: "additional revisions",
-        feature: "2 revisions",
-        price: 10,
-      },
-      {
-        id: "gd-2",
-        name: "marketing designs",
-        feature: "5 extra designs",
-        price: 10,
-      },
-      {
-        id: "gd-3",
-        name: "presentations & slides",
-        feature: "5 extra slides",
-        price: 10,
-      },
-    ],
-  },
-];

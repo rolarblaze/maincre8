@@ -1,11 +1,14 @@
 "use client";
-import { useSelector } from "react-redux";
-import { RootState } from "@/redux/store";
+import { useDispatch } from "react-redux";
+import { useAppSelector } from "@/redux/store";
 import { privacyPolicyData } from "./constants";
 import { FadeUpDiv } from "@/components";
+import { setOrToggleActiveTab } from "@/redux/legal";
+import { useEffect } from "react";
 
 const ContentSection = () => {
-  const { activeTab } = useSelector((state: RootState) => state.tabs);
+  const dispatch = useDispatch();
+  const { activeTab } = useAppSelector((state) => state.tabs);
   const activeContent = privacyPolicyData.find((item) => item.id === activeTab);
 
   const hasTitle = (item: {
@@ -15,6 +18,10 @@ const ContentSection = () => {
   }): item is { id: number; title: string; text: string } => {
     return "title" in item;
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activeTab]);
 
   return (
     <FadeUpDiv
@@ -78,7 +85,9 @@ const ContentSection = () => {
               ))}
 
             <p className="font-medium leading-6 text-primary600">
-              {activeContent.content.under}
+              <button onClick={() => dispatch(setOrToggleActiveTab("full"))}>
+                {activeContent.content.under}
+              </button>
             </p>
           </>
         ) : (

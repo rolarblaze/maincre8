@@ -1,7 +1,14 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import api from "@/utils/axios/api";
 import { handleAxiosError } from "@/utils/helpers/general/errorHandler";
-import { Package, Packages, Service } from "./interface";
+import {
+  GetBundlesEndPoint,
+  Package,
+  Packages,
+  PageViewData,
+  Service,
+} from "./interface";
+import { API_BASE_URL } from "@/utils/axios/config";
 
 // Fetch services
 export const getServices = createAsyncThunk<Service[], void>(
@@ -14,7 +21,21 @@ export const getServices = createAsyncThunk<Service[], void>(
       console.error("Error fetching services:", error);
       return rejectWithValue(handleAxiosError(error));
     }
-  }
+  },
+);
+
+// Fetch bundles
+export const getBundles = createAsyncThunk<PageViewData[], void>(
+  "shop/getBundles",
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await api.get("admin-user/bundles");
+      return response.data.bundles;
+    } catch (error) {
+      console.error("Error fetching services:", error);
+      return rejectWithValue(handleAxiosError(error));
+    }
+  },
 );
 
 export const getPackages = createAsyncThunk<
@@ -23,7 +44,7 @@ export const getPackages = createAsyncThunk<
 >("shop/getPackages", async ({ limit, offset }, { rejectWithValue }) => {
   try {
     const response = await api.get(
-      `user/packages?limit=${limit}&offset=${offset}`
+      `user/packages?limit=${limit}&offset=${offset}`,
     );
     return response.data.packages;
   } catch (error) {
@@ -31,3 +52,18 @@ export const getPackages = createAsyncThunk<
     return rejectWithValue(handleAxiosError(error));
   }
 });
+
+// Fetch a bundle by ID
+export const getBundleById = createAsyncThunk<PageViewData, { bundleId: number }>(
+  "shop/getBundleById",
+  async ({ bundleId }, { rejectWithValue }) => {
+    try {
+      const response = await api.get(`admin-user/bundles/${bundleId}`);
+      return response.data.bundle; // Returns the bundle object
+    } catch (error) {
+      console.error("Error fetching bundle by ID:", error);
+      return rejectWithValue(handleAxiosError(error));
+    }
+  }
+);
+

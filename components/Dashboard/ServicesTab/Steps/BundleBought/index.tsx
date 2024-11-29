@@ -1,44 +1,54 @@
 import { useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/store";
 import WrapperComponent from "../Wrapper";
-import { formatDate } from "@/helpers/formatDate";
 import { handleProgressUpdate } from "@/helpers/progressHandler";
 import { updateProgress } from "@/redux/servicesTracker/tracker";
+import moment from "moment";
 
 const BundleBought = () => {
   const dispatch = useAppDispatch();
-  const { trackingDetails } = useAppSelector((state) => state.services);
+  const { trackingDetails, orderHistory } = useAppSelector((state) => state.services);
+
 
   useEffect(() => {
     handleProgressUpdate(dispatch, trackingDetails);
   }, [dispatch, trackingDetails]);
 
-  const dateBought = trackingDetails
-    ? formatDate(trackingDetails.transaction.created_at)
-    : "Unknown date";
+  let order = orderHistory?.find(order => order.transaction_id === trackingDetails?.transaction_id)
+  let dateBought = order?.status === "successful" ? moment(order.created_at).format("DD MMMM YYYY") : "Unknown date"
 
   // Set SubmitBriefInProgress if dateBought is not "Unknown date"
-  const isSubmitBriefCompleted = dateBought !== "Unknown date";
+  const bundleBought = dateBought !== "Unknown date";
 
   useEffect(() => {
-    if (isSubmitBriefCompleted) {
+    if (bundleBought) {
       dispatch(updateProgress({ SubmitBriefInProgress: true }));
+    } else {
+      dispatch(updateProgress({ SubmitBriefInProgress: false }));
     }
-  }, [dispatch, isSubmitBriefCompleted]);
+  }, [dispatch]);
 
-  const status = isSubmitBriefCompleted ? "completed" : "inactive";
+  const status = bundleBought ? "completed" : "inactive";
 
   return (
-    <WrapperComponent
-      status={status}
-      title="Bundle bought"
-      description={""}
-      buttonLabel=""
-      buttonClassNames=""
-      showButton={false}
-      showDate={true}
-      dateBought={dateBought}
-    />
+    <div className="">
+      <div className="flex flex-col rounded-md text-red-400 p-2">
+        <p>
+          Tracking Number: {JSON.stringify(trackingDetails?.transaction_id)}
+        </p>
+      </div>
+
+      <WrapperComponent
+        status={status}
+        title="Bundle bought"
+        description={""}
+        buttonLabel=""
+        buttonClassNames=""
+        showButton={false}
+        showDate={true}
+        dateBought={dateBought}
+      />
+    </div>
   );
 };
 

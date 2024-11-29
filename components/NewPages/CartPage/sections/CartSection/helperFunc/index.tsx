@@ -8,15 +8,15 @@ import {
 
 export const getBackgroundClass = (title: string) => {
   switch (title) {
-    case "Brand Design":
+    case "Brand Identity Development":
       return "bg-error-50";
     case "Graphic Design":
       return "bg-warning-50";
     case "Digital Marketing":
       return "bg-success-50";
-    case "Content Writing":
+    case "Content Creation":
       return "bg-brown-50";
-    case "All-In-One Bundle":
+    case "Ultimate Marketing":
       return "bg-primary50";
     default:
       return "";

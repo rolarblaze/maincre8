@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "public/svgs/BulbIcon.tsx", "components/NewPages/LandingPage/sections/PackagesSection/constants/index.tss"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "public/svgs/BulbIcon.tsx", "components/NewPages/LandingPage/sections/PackagesSection/constants/index.tss", "app/dashboard/(overview)/_helperFunc/index.tsx"],
   "exclude": ["node_modules"]
 }

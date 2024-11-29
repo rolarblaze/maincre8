@@ -1,7 +1,8 @@
 "use client";
 import { Button, InputField } from "@/components";
 import {
-  EyeIcon,
+  EyeOpenIcon,
+  EyeCloseIcon,
   PasswordMatchIcon,
   PasswordNoMatchIcon,
 } from "@/public/icons";
@@ -125,9 +126,9 @@ const NewPassword = () => {
           onChange={handlePasswordChange}
           icon={
             showPassword ? (
-              <EyeIcon className="w-5 h-5" />
+              <EyeOpenIcon className="h-5 w-5" />
             ) : (
-              <div className="size-5 bg-green-500"></div>
+              <EyeCloseIcon className="h-5 w-5" />
             )
           }
           onInputIconClick={togglePasswordVisibility}
@@ -138,7 +139,7 @@ const NewPassword = () => {
               : ""
           }
         />
-        <div className="-mt-5 center gap-2">
+        <div className="-mt-5 center flex-wrap gap-2">
           {passwordCriteria.map((criterion, index) => {
             return (
               <div
@@ -160,7 +161,7 @@ const NewPassword = () => {
                 </div>
 
                 {/* <div className="size-3 bg-slate-300"></div> */}
-                <p className="font-medium text-sm leading-5 text-[#98A2B3]">
+                <p className="font-medium text-nowrap text-sm leading-5 text-[#98A2B3]">
                   {criterion.label}
                 </p>
               </div>
@@ -175,9 +176,9 @@ const NewPassword = () => {
           value={formik.values.confirmPassword}
           icon={
             showPassword ? (
-              <EyeIcon className="w-5 h-5" />
+              <EyeOpenIcon className="h-5 w-5" />
             ) : (
-              <div className="size-5 bg-green-500"></div>
+              <EyeCloseIcon className="h-5 w-5" />
             )
           }
           onInputIconClick={togglePasswordVisibility}

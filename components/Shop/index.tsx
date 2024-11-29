@@ -4,8 +4,8 @@ import { useAppDispatch, useAppSelector } from "@/redux/store";
 import Section from "./Sections";
 import { getServices } from "../../redux/shop/features";
 import { RootState } from "@/redux/store";
-import { mapServicesToProps } from "./Data/shopData";
-import Loader from "../Spinner/Loader";
+import { mapServicesToProps } from "./data/shopData";
+import Spinner from "../Spinner";
 
 const ShopSections = () => {
   const dispatch = useAppDispatch();
@@ -17,8 +17,8 @@ const ShopSections = () => {
 
   if (shopState.isLoading) {
     return (
-      <div className="mx-auto flex items-center justify-center">
-        <Loader />
+      <div className="mx-auto flex h-screen w-full items-center justify-center">
+        <Spinner />
       </div>
     );
   }

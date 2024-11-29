@@ -74,4 +74,5 @@ export interface TrackingProgress {
   BookOffboardingCallInProgress: boolean;
   OffboardingCallInProgress: boolean;
   ProjectCompletedInProgress: boolean;
+  activeBundle: string  | null
 }

@@ -15,8 +15,7 @@ const NewFooter = () => {
     },
     {
       name: "Pricing",
-      // link: "/shop",
-      link: "/",
+      link: "/shop",
     },
     {
       name: "FAQs",
@@ -31,7 +30,7 @@ const NewFooter = () => {
     },
     {
       name: "Terms & Conditions",
-      link: "terms-and-conditions",
+      link: "/terms-and-conditions",
     },
   ];
 
@@ -61,8 +60,10 @@ const NewFooter = () => {
 
           {/* SOCIALS */}
           <div className="flex items-center justify-center gap-6">
-            {socials.map(({ id, icon }) => (
-              <span key={id}>{icon}</span>
+            {socials.map(({ id, icon, link }) => (
+              <Link key={id} href={link} target="_blank">
+                {icon}
+              </Link>
             ))}
           </div>
         </section>
@@ -80,12 +81,17 @@ const NewFooter = () => {
           <ul className="flex items-center justify-center gap-12">
             {navlinks2.map(({ name, link }) => (
               <li key={name} className="hover:text-grey300">
-                <Link href={link}>{name}</Link>
+                <Link
+                  href={link}
+                  className="xs:max-md:text-nowrap xs:max-md:text-sm"
+                >
+                  {name}
+                </Link>
               </li>
             ))}
           </ul>
 
-          <p className="text-xs text-grey300 sm:max-lg:mt-4 lg:hidden">
+          <p className="text-xs text-grey300 xs:max-md:text-center sm:max-lg:mt-4 lg:hidden">
             ©2024 SellMedia, BOSS Global. All rights reserved.
           </p>
         </section>
@@ -99,17 +105,21 @@ const socials = [
   {
     id: 1,
     icon: <FacebookLogo />,
+    link: "/",
   },
   {
     id: 2,
     icon: <XLogo />,
+    link: "https://x.com/sellcrea8frica",
   },
   {
     id: 3,
     icon: <InstagramLogo />,
+    link: "https://www.instagram.com/sellcrea8?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==",
   },
   {
     id: 4,
     icon: <LinkedinLogo />,
+    link: "/",
   },
 ];

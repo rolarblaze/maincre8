@@ -1,18 +1,22 @@
 "use client";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 
 import Header from "@/components/Dashboard/Header";
 import MobileNav from "@/components/Dashboard/MobileNav";
 import MobileSidebar from "@/components/Dashboard/MobileSidebar";
 import Sidebar from "@/components/Dashboard/Sidebar";
 import { Tab } from "@/components/Dashboard/Sidebar/types";
+import { BellIcon, CartIcon } from "@/public/svgs";
 import Middleware from "@/utils/middleware";
-
-import { usePathname } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { getCartItems } from "@/redux/cart/features";
 
 const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
   children,
 }) => {
+  const dispatch = useAppDispatch();
+  const { isLoadingProfile, profile } = useAppSelector((state) => state.auth);
   const [activeTab, setActiveTab] = useState<Tab>("Overview");
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const pathname = usePathname();
@@ -20,6 +24,8 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
+    dispatch(getCartItems());
+
     // Set initial mobile state based on window width
     setIsMobile(window.innerWidth < 768);
 
@@ -36,8 +42,8 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
   }, []);
 
   const headerTitles: Record<Tab, string> = {
-    Overview: isMobile ? "Overview" : "",
-    Services: "Explore Services",
+    Overview: isMobile ? "Overview" : `Welcome, ${profile.first_name}`,
+    Services: "Services",
     MyServices: "My services",
     CustomRecommendation: "Custom Recommendation",
     Calendar: "Calendar",
@@ -64,11 +70,6 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
     Settings: "",
   };
 
-  // Check if the current route is dynamic
-  const isDynamicRoute = pathname.split("/").length > 3;
-
-  const isOverview = pathname.split("/").length === 2;
-
   const openSidebar = () => {
     setSidebarOpen(true);
   };
@@ -76,19 +77,24 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
     setSidebarOpen(false);
   };
 
+  const [cartOpen, setCartOpen] = useState(false);
+
   return (
     <Middleware>
       <div className="flex h-screen pt-10 md:pt-0">
         {/* Desktop sidebar */}
         <Sidebar setActiveTab={setActiveTab} />
+
         {/* Mobile sidebar */}
         {sidebarOpen && (
           <MobileSidebar setActiveTab={setActiveTab} onClick={closeSidebar} />
         )}
-        <div className="flex flex-col flex-1">
+
+        {/* Main section */}
+        <div className="flex w-[85%] min-w-[calc(100vw_-_20rem)] flex-1 flex-col xs:max-md:w-full">
           <MobileNav onClick={openSidebar} title={headerTitles[activeTab]} />
-          {!isDynamicRoute && (
-            <div>
+          {
+            <div className="w-full">
               {headerTitles[activeTab] && (
                 <Header
                   title={headerTitles[activeTab]}
@@ -96,10 +102,9 @@ const DashboardLayout: React.FC<React.PropsWithChildren<{}>> = ({
                 />
               )}
             </div>
-          )}
+          }
           <main
-            className={`flex-1 p-6 overflow-y-auto noScrollbar ${isOverview ? "bg-dashboard-bg" : "bg-white"
-              }`}
+            className={`noScrollbar border- w-[85%] min-w-[calc(100vw_-_20rem)] flex-1 overflow-auto xs:max-md:w-full xs:max-md:border-transparent xs:max-md:px-2 xs:max-md:py-3`}
           >
             {children}
           </main>

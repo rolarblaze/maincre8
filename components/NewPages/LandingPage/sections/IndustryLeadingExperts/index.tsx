@@ -25,7 +25,7 @@ function IndustryLeadingExperts() {
   return (
     <FadeUpDiv className="mb-10 w-full md:mb-0">
       <div className="flex w-full flex-col justify-between gap-[56px] rounded-[20px] bg-primary50 px-[13px] py-5 md:flex-row md:rounded-3xl md:px-0 md:py-10 md:pl-10 lg:rounded-3xl lg:py-16 lg:pl-16">
-        <div className="w-full max-w-full space-y-6 md:max-w-[410px]">
+        <div className="w-1/2 xs:max-md:w-full space-y-6">
           <h4>Work with Industry-Leading Experts</h4>
           <p className="text-grey900">
             At SellCrea8, our team of seasoned industry experts brings years of
@@ -41,16 +41,20 @@ function IndustryLeadingExperts() {
             your brand and help you grow.
           </p>
         </div>
-        <div className="flex justify-between md:justify-start md:gap-8 md:self-center">
+        <div className="flex w-1/2 justify-between items-center xs:max-md:w-full xs:max-md:justify-between xs:max-md:gap-0">
           {imageData.map((image, imageIdx, imageArr) => (
-            <Image
-              key={imageIdx}
-              src={image.imgSrc}
-              alt={image.imgAlt}
-              width={130}
-              height={200}
-              className={`h-[98px] w-[63.7px] md:h-[200px] md:w-[130px] ${imageIdx === imageArr.length - 1 ? "rounded-full" : ""}`}
-            />
+            <figure
+              key={image.imgAlt}
+              className={`relative w-[23%] h-[70%] rounded-full xs:max-md:aspect-[1/2] xs:max-md:w-[23%] xs:max-md:object-contain overflow-hidden`}
+            >
+              <Image
+                key={imageIdx}
+                fill={true}
+                src={image.imgSrc}
+                alt={image.imgAlt}
+                className="object-cover"
+              />
+            </figure>
           ))}
         </div>
       </div>

@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { PageLayout } from "@/components";
-import bundleCardsDetails from "@/components/Shop/Data/bundle-cards-details";
 import BundleListCardOptions from "@/components/Shop/section/BundleListCardOptions";
 
 export const metadata: Metadata = {
@@ -23,15 +22,16 @@ export default function ShopLayout({
 }) {
   return (
     <PageLayout>
-      <main className="space-y-20 px-5 pb-20 xs:max-md:space-y-10 xs:max-md:px-0 xs:max-md:pb-10">
-        <h1 className="mt-20 w-full text-center text-3xl font-semibold leading-9 xs:max-md:text-2xl">
+      <main className="relative space-y-20 px-5 pb-20 xs:max-md:space-y-10 xs:max-md:px-0 xs:max-md:pb-10">
+        <h1 className="mt-20 w-full text-center text-3xl font-semibold leading-9 xs:max-md:mt-10 xs:max-md:text-3xl">
           Choose the Right Plan for Your Business
         </h1>
 
         {/* Bundles Card-List Options To Choose From */}
-        <BundleListCardOptions bundleCardsDetails={bundleCardsDetails} />
+        <BundleListCardOptions redirect={true} />
 
-        <div>{children}</div>
+        {/* <div className="xs:max-md:h-full no-scrollbar">{children}</div> */}
+        <div className="">{children}</div>
       </main>
     </PageLayout>
   );
