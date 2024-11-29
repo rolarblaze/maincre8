@@ -15,7 +15,7 @@ import CustomFileLabel from "@/components/Forms/CustomFileLabel";
 import useFileUpload from "@/hooks/UseFileUpload";
 import { useSelector } from "react-redux";
 import { selectFileUploadState } from "@/redux/file";
-import { submitBriefEndpoints } from "@/redux/brief/features";
+import { briefFileUploadEndpoints } from "@/components/Dashboard/SubmitBrief/shared/briefEndpoint";
 
 function RecommendFormInputs({
   formik,
@@ -30,22 +30,24 @@ function RecommendFormInputs({
     ? "businessBriefFile"
     : "personalizedBriefFile";
 
-  const formEndpoint = isBusinessBrief
-    ? submitBriefEndpoints.businessBrief
-    : submitBriefEndpoints.personalizedBrief;
+  // Endpoint to upload file
+  const formEndpoint = isBusinessBrief;
+  briefFileUploadEndpoints.businessBrief;
+  briefFileUploadEndpoints.recommendationBrief;
 
   const { values, errors, touched, handleBlur, handleChange } = formik;
 
   const recommendBriefFileState = useSelector((state: RootState) =>
     selectFileUploadState(state, fileId),
   );
+
   const { handleFileUpload } = useFileUpload();
 
   // HANDLE FILE UPLOAD ONCHANGE
   const onFileChange = async (
     file: File | null,
-    endpoint: string,
     fileId: string,
+    endpoint: string,
     fieldName: string,
   ) => {
     if (formik) {

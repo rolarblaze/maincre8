@@ -44,21 +44,23 @@ function DashboardRecommendForm() {
           uploaded_brief: convertToString(values.document),
         };
 
-        await dispatch(
+        const response = await dispatch(
           submitBrief({
             formName: "businessBrief",
             endpoint: submitBriefEndpoints.businessBrief,
             payload,
           }),
         );
-        dispatch(
-          addAlert({
-            id: "",
-            headText: "Success",
-            subText: "Your Business brief has been submitted",
-            type: "success",
-          }),
-        );
+        if (response?.payload) {
+          dispatch(
+            addAlert({
+              id: "",
+              headText: "Success",
+              subText: "Your Business brief has been submitted",
+              type: "success",
+            }),
+          );
+        }
 
         resetForm();
       } catch (error) {

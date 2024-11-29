@@ -17,12 +17,26 @@ const useFileUpload = () => {
     if (!file) {
       formik.setFieldError("document", "Please attach a document.");
       return;
-    } else if (file && file.size > 5000000) {
+    }
+
+    // Allowed file extensions
+    const allowedExtensions = ["pdf", "docx", "doc"];
+    const fileExtension = file.name.split(".").pop()?.toLowerCase();
+    // Validate file extension
+    if (!fileExtension || !allowedExtensions.includes(fileExtension)) {
+      formik.setFieldError(
+        "document",
+        "Invalid file type. Only .pdf, .docx, and .doc files are allowed.",
+      );
+      return;
+    }
+
+    // Validate file size
+    if (file.size > 5000000) {
       formik.setFieldValue("document", null);
       formik.setFieldError("document", "Max file size exceeded.");
       return;
     }
-
     const formData = new FormData();
     formData.append("file", file);
 

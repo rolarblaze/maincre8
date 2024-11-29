@@ -3,7 +3,7 @@ import { handleAxiosError } from "@/utils/helpers/general/errorHandler";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const submitBriefEndpoints = {
-  businessBrief: "user/business-briefs",
+  businessBrief: "user/business_brief",
   personalizedBrief: "user/personalized-recommendations",
 };
 

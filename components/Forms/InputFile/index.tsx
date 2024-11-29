@@ -53,6 +53,10 @@ function InputFile({
 
   const handleFileChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0] || null;
+    if (error) {
+      setSelectedFile(null);
+      return;
+    }
     setSelectedFile(file);
     onFileChange?.(file);
   };
@@ -85,9 +89,7 @@ function InputFile({
             className={`flex cursor-pointer items-center justify-center gap-4 ${classNames}`}
           >
             {icon}
-            {isLoading ? (
-              ""
-            ) : (
+            {!isLoading && (
               <span className="font-semibold text-grey900">
                 {selectedFile ? "Change File" : label}
               </span>

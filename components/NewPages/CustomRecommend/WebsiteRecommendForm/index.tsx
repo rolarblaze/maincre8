@@ -12,6 +12,7 @@ import { convertToString } from "@/redux/myServices/formConfig";
 import { submitBrief, submitBriefEndpoints } from "@/redux/brief/features";
 import { useSelector } from "react-redux";
 import ErrorDisplay from "../shared/ErrorDisplay";
+import { briefEndpoints } from "@/components/Dashboard/SubmitBrief/shared/briefEndpoint";
 
 function WebsiteRecommendForm() {
   const isFormLoading = useSelector(
@@ -44,23 +45,26 @@ function WebsiteRecommendForm() {
           uploaded_brief: convertToString(values.document),
         };
 
-        await dispatch(
+        const response = await dispatch(
           submitBrief({
             formName: "personalizedBrief",
             endpoint: submitBriefEndpoints.personalizedBrief,
             payload,
           }),
         );
-        dispatch(
-          addAlert({
-            id: "",
-            headText: "Success",
-            subText: "Your Personalized brief has been submitted",
-            type: "success",
-          }),
-        );
 
-        // resetForm();
+        if (response?.payload) {
+          dispatch(
+            addAlert({
+              id: "",
+              headText: "Success",
+              subText: "Your Personalized brief has been submitted",
+              type: "success",
+            }),
+          );
+        }
+
+        resetForm();
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(
@@ -87,7 +91,7 @@ function WebsiteRecommendForm() {
           type="submit"
           label="Submit"
           classNames="active:scale-[0.98]"
-          isFileUploading={isFileUploading}
+          disabled={isFileUploading}
           isLoading={isFormLoading}
         />
         {isFileUploading && <ErrorDisplay message="Doc still uploading..." />}
