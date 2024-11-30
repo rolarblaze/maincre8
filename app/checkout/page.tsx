@@ -12,7 +12,7 @@ const CheckoutPage = () => {
   const dispatch = useAppDispatch();
   const { cartItems, total_price, isGettingCartItems, error } = useAppSelector((state) => state.cart);
   const { isAuthenticated } = useAppSelector((state) => state.auth);
-  console.log("isAuthenticated", isAuthenticated)
+
 
   useEffect(() => {
     dispatch(getCartItems());
