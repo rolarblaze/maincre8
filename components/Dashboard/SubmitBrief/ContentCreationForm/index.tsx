@@ -22,6 +22,9 @@ function ContentCreationForm() {
     (state: any) => state.forms?.contentCreation?.isLoading,
   );
 
+  const { trackingProgress } = useAppSelector((state) => state.tracker);
+  const trackingId = trackingProgress?.activeBundle?.trackingId;
+
   // Define formik
   const formik = useFormik<ContentCreationValues>({
     initialValues: contentCreationInitialValues,
@@ -46,6 +49,7 @@ function ContentCreationForm() {
           submitFormData({
             formName: "contentCreation", // Pass only formName
             payload: formPayload, // Pass only the payload
+            trackingId: trackingId as string,
           }),
         );
 
