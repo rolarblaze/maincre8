@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
+import { useRouter } from "next/navigation";
 import { makePayment } from "@/redux/cart/features";
 import { Button, InputField, Modal } from "@/components";
 import SuccessModal from "../SuccessModal";
@@ -10,15 +11,23 @@ import { addAlert } from "@/redux/alerts";
 interface SummarySectionProps {
   totalPrice: number;
   packageId: number;
+  isAuthenticated: boolean;
 }
 
-const SummarySection: React.FC<SummarySectionProps> = ({ totalPrice, packageId, }) => {
+const SummarySection: React.FC<SummarySectionProps> = ({ totalPrice, packageId, isAuthenticated }) => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const { isMakingPayment } = useAppSelector((state) => state.cart);
 
   const [isOpen, setIsOpen] = useState(false);
 
   const handlePayment = async () => {
+    if (!isAuthenticated) {
+      // Redirect unauthenticated users to the login/signup page
+      router.push("/login?redirect=/checkout");
+      return;
+    }
+
     try {
       const currency = "NGN"; // Default to NGN
 
