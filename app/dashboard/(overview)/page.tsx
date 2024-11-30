@@ -1,11 +1,12 @@
 "use client";
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import {
   Button,
   FullLoader,
   ServiceCard,
   EmptyState,
+  Modal,
 } from "@/components";
 import BarChart from "@/components/Dashboard/BarChart";
 import UpcomingAppointment from "@/components/Dashboard/UpcomingAppointment";
@@ -20,11 +21,17 @@ import Spinner from "@/components/Spinner";
 import Image from "next/image";
 import Link from "next/link";
 import { getBundlesClass } from "@/components/NewPages/LandingPage/sections/PackagesSection/helperFunc";
+import { sendTxRefToBackend } from "@/redux/payment";
+import PaymentSuccess from "@/components/UI/Modals/PaymentModal/PaymentSuccess";
+import PaymentFailure from "@/components/UI/Modals/PaymentModal/PaymentFailure";
 
 
 const Overview = () => {
   const router = useRouter();
   const dispatch = useAppDispatch();
+  const searchParams = useSearchParams();
+  const [paymentStatus, setPaymentStatus] = useState<string | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const { services, isLoading, error } = useAppSelector(
     (state) => state.service,
   );
@@ -37,6 +44,31 @@ const Overview = () => {
   const bundlesData = useAppSelector(
     (state: RootState) => state.pageViewData.allShopBundles,
   );
+
+    // Payment successful and failure
+
+    const { orderDetails, transaction_id} = useAppSelector((state) => state.payment);
+   
+  useEffect(() => {
+    const status = searchParams.get("status");
+    const txRef = searchParams.get("tx_ref");
+    const transactionId = searchParams.get("transaction_id");
+
+    if (status && txRef) {
+      dispatch(
+        sendTxRefToBackend({
+          tx_ref: txRef,
+          status: status,
+          transaction_id: transactionId || "",
+        })
+      );
+      setPaymentStatus(status);
+      setIsModalOpen(true);
+    }
+  }, [searchParams, dispatch]);
+    
+
+
 
   useEffect(() => {
     if (bundlesData.length === 0) {
@@ -95,8 +127,6 @@ const Overview = () => {
     !profile.user.profile?.phone_number;
 
   const hasTransactions = orderHistory && orderHistory?.length > 0;
-  
-  
 
   return (
     <div className="noScrollbar flex flex-col overflow-y-scroll pb-10 font-manrope xs:max-md:mx-auto xs:max-md:min-w-full [&>*]:pl-6 xs:max-md:[&>*]:px-0">
@@ -316,6 +346,26 @@ const Overview = () => {
             }
           </div>
         </div>
+
+           {/* Modal for Payment Status */}
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        {paymentStatus === "successful" ? (
+          <PaymentSuccess package_name={orderDetails?.package?.package_name}
+          bundle_name={orderDetails?.package?.bundle?.bundle_name}
+          amount={orderDetails?.amount}
+          created_at={orderDetails?.created_at}
+          currency={orderDetails?.currency}
+          
+          />
+        ) : (
+          <PaymentFailure package_name={orderDetails?.package?.package_name}
+          bundle_name={orderDetails?.package?.bundle?.bundle_name}
+          amount={orderDetails?.amount}
+          created_at={orderDetails?.created_at}
+          currency={orderDetails?.currency}
+           />
+        )}
+      </Modal> 
       </section>
     </div>
   );
