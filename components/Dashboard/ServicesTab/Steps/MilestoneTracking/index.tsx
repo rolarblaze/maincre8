@@ -22,7 +22,7 @@ const MilestoneTracking = () => {
 
   const buttonClassNames =
     status === "inactive"
-      ? "bg-[#98A2B3] !py-1 !px-3 text-black rounded-xl text-white"
+      ? "bg-grey300 !py-1 !px-3 text-black rounded-xl text-white"
       : "bg-[#F3A218] !py-1 !px-3 text-black rounded-xl";
 
   useEffect(() => {

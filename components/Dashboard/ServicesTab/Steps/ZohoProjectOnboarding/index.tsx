@@ -33,7 +33,7 @@ const ZohoProjectOnboarding = () => {
   // Set button background color based on status
   const buttonClassNames =
     status === "inactive"
-      ? "bg-[#98A2B3] !py-1 !px-4 text-black rounded-xl text-white"
+      ? "bg-grey300 !py-1 !px-4 text-black rounded-xl text-white"
       : "bg-[#F3A218] !py-1 !px-4 text-black rounded-xl";
 
   return (
