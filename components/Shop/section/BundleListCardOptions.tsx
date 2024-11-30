@@ -4,8 +4,8 @@ import { useRouter } from "next/navigation";
 import { changePageData } from "@/redux/shop";
 import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { PageViewData } from "@/redux/shop/interface";
-import bundleCardsDetails from "../data/bundleCardDetails";
 import ShopBundleListLoadingState from "../components/ShopBundleListLoadingState";
+import bundleCardsDetails from "../Data/bundleCardDetails";
 
 const BundleListCardOptions = ({ redirect }: { redirect: boolean }) => {
   const router = useRouter();
