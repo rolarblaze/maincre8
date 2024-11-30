@@ -183,7 +183,6 @@ const cartSlice = createSlice({
                     }>
                 ) => {
                     state.isCheckingOut = false;
-                    console.log("Checkout successful:", action.payload);
                 }
             )
             .addCase(checkoutCart.rejected, (state, action) => {
