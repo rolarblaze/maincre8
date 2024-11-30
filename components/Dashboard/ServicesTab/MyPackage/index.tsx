@@ -30,10 +30,11 @@ type bundleNames =
 
 const MyPackage = () => {
   const { trackingProgress } = useAppSelector((state) => state.tracker);
-  const { trackingDetails, orderHistory } = useAppSelector((state) => state.services);
+  const { trackingDetails, orderHistory, discoveryCall } = useAppSelector((state) => state.services);
   // console.log({orderHistory})
   // console.log({trackingProgress})
   // console.log({trackingDetails})
+  // console.log({discoveryCall})
 
   const mapNewNameToOldName = {
     "Brand Identity Development": "Brand Design",
