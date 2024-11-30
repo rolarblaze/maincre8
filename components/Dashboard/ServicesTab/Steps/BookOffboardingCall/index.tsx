@@ -11,8 +11,9 @@ import { addAlert } from "@/redux/alerts";
 const BookOffboardingCall = () => {
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
-  const transId = searchParams.get("transactionId");
+  // const transId = searchParams.get("transactionId");
   const { trackingDetails } = useAppSelector((state) => state.services);
+  const transId = trackingDetails?.transaction_id
 
   // State to manage loading
   const [loading, setLoading] = useState(false);
@@ -31,8 +32,7 @@ const BookOffboardingCall = () => {
       return "inprogress";
     } else if (
       trackingDetails?.offboarding_call_booked &&
-      offBoardingEndTime &&
-      currentTime > offBoardingEndTime
+      offBoardingEndTime
     ) {
       return "completed";
     } else {

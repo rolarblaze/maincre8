@@ -73,6 +73,7 @@ const WrapperComponent: React.FC<CallComponentProps> = ({
                   classNames={`text-white w-fit !text-xs !py-2 !px-4 ${btnStyles} ${buttonClassNames}`}
                   onClick={onClick}
                   isLoading={loading}
+                  disabled={status === "inactive" || status !== "inprogress"}
                 />
               )}
           {showDate && (

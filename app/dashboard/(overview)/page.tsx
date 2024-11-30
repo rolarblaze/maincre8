@@ -24,6 +24,7 @@ import { getBundlesClass } from "@/components/NewPages/LandingPage/sections/Pack
 import { sendTxRefToBackend } from "@/redux/payment";
 import PaymentSuccess from "@/components/UI/Modals/PaymentModal/PaymentSuccess";
 import PaymentFailure from "@/components/UI/Modals/PaymentModal/PaymentFailure";
+import moment from "moment";
 
 
 const Overview = () => {
@@ -77,11 +78,16 @@ const Overview = () => {
     dispatch(getUserOrderHistory());
     dispatch(fetchLatestAppointments());
     dispatch(fetchActivityStatistics());
-    
 
     // store user name indefinitely in localStorage for later access on checkout page, even without logging in
     // log in once to store names
-    localStorage.setItem("SellCrea8User", JSON.stringify({first_name: profile.first_name, last_name: profile.last_name  }))
+    localStorage.setItem(
+      "SellCrea8User",
+      JSON.stringify({
+        first_name: profile.first_name,
+        last_name: profile.last_name,
+      }),
+    );
   }, [dispatch]);
 
   // Extract the activity statistics from the profile
@@ -112,7 +118,7 @@ const Overview = () => {
     return <div>Error: {error}</div>;
   }
 
-  if (isLoadingProfile || (bundlesData.length === 0)) {
+  if (isLoadingProfile || bundlesData.length === 0) {
     return (
       <div className="flex h-full w-full items-center justify-center">
         <Spinner className="border-blue-500" />
@@ -231,7 +237,7 @@ const Overview = () => {
             My Services
           </h3>
           <div className="">
-          <div className="flex p-6 xs:max-md:px-0 xs:max-md:gap-0 xs:max-md:gap-y-6 xs:max-md:justify-evenly flex-wrap w-full gap-5">
+            <div className="flex w-full flex-wrap gap-5 p-6 xs:max-md:justify-evenly xs:max-md:gap-0 xs:max-md:gap-y-6 xs:max-md:px-0">
               {hasTransactions ? (
                 orderHistory
                   .slice(0, 3)
@@ -252,7 +258,6 @@ const Overview = () => {
                     />
                   ))
               ) : isLoading ? (
-
                 <Spinner className="border-blue-500" />
               ) : (
                 services
@@ -285,16 +290,14 @@ const Overview = () => {
         </div>
 
         <div className="space-y-10 pr-5 xs:max-md:space-y-2 xs:max-md:pr-0">
-          
-            <h3 className="col-span-2 text-2xl font-bold text-grey900 xs:max-md:text-xl">
-              Activity
-            </h3>
-          
+          <h3 className="col-span-2 text-2xl font-bold text-grey900 xs:max-md:text-xl">
+            Activity
+          </h3>
 
-          <div className="flex w-full flex-wrap gap-6 xs:max-md:gap-0 xs:max-md:gap-y-6 justify-between xs:max-md:flex-col">
+          <div className="flex w-full flex-wrap justify-between gap-6 xs:max-md:flex-col xs:max-md:gap-0 xs:max-md:gap-y-6">
             {
-              <div className="noScrollbar w-[48%] min-w-[25rem] xs:max-md:min-w-0 xs:max-md:w-full xs:max-md:overflow-auto">
-                <div className="flex w-full h-full flex-col justify-between space-y-2 rounded-lg border bg-white px-6 py-4 shadow-lg xs:max-md:min-w-[25rem]">
+              <div className="noScrollbar w-[48%] min-w-[25rem] xs:max-md:w-full xs:max-md:min-w-0 xs:max-md:overflow-auto">
+                <div className="flex h-full w-full flex-col justify-between space-y-2 rounded-lg border bg-white px-6 py-4 shadow-lg xs:max-md:min-w-[25rem]">
                   <h4 className="border-b border-grey200 pb-4 text-lg font-semibold text-grey900">
                     My Services
                   </h4>
@@ -309,14 +312,14 @@ const Overview = () => {
             }
 
             {
-              <div className="noScrollbar w-[48%] min-w-[25rem] xs:max-md:min-w-0 xs:max-md:w-full xs:max-md:overflow-auto">
+              <div className="noScrollbar w-[48%] min-w-[25rem] xs:max-md:w-full xs:max-md:min-w-0 xs:max-md:overflow-auto">
                 <div className="flex h-full w-full flex-col gap-4 rounded-lg border bg-white px-6 py-4 shadow-lg xs:max-md:min-w-[25rem]">
                   <h4 className="border-b border-grey200 pb-4 text-lg font-semibold text-grey900">
                     Upcoming Appointments
                   </h4>
                   <div className="flex flex-col">
                     {isApointmentLoading ? (
-                      <div className="flex py-10 items-center justify-center">
+                      <div className="flex items-center justify-center py-10">
                         <Spinner className="border-blue-500" />
                       </div>
                     ) : !appointments || appointments.length === 0 ? (
@@ -324,21 +327,16 @@ const Overview = () => {
                         No upcoming appointments
                       </p>
                     ) : (
-                      appointments?.map((app, idx) => (
-                        <UpcomingAppointment
-                          key={idx}
-                          callType={app.event_name}
-                          desc={app.product_name}
-                          date={new Date(app.event_date).toLocaleDateString(
-                            "en-US",
-                            {
-                              day: "2-digit",
-                              month: "long",
-                              year: "numeric",
-                            },
-                          )}
-                        />
-                      ))
+                      <div className="max-h-40 overflow-auto">
+                        {appointments?.map((app, idx) => (
+                          <UpcomingAppointment
+                            key={idx}
+                            callType={app.event_name}
+                            desc={app.product_name}
+                            date={moment(app.event_date).format("llll")}
+                          />
+                        ))}
+                      </div>
                     )}
                   </div>
                 </div>
