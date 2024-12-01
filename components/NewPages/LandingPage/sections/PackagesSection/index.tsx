@@ -5,7 +5,6 @@ import { getBundlesClass } from "./helperFunc";
 import { FadeUpDiv, ResizablePanel } from "@/components";
 import { FillArrowIcon } from "@/public/svgs";
 import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
-import { changePageData } from "@/redux/shop";
 import { getBundles } from "@/redux/shop/features";
 import Image from "next/image";
 import HomeBundleListLoadingState from "@/components/Shop/components/HomeBundleListLoadingState";
@@ -37,7 +36,7 @@ const PackagesSection = () => {
               onFocus={() => setHovered(bundle_name)}
               onMouseEnter={() => setHovered(bundle_name)}
               onMouseLeave={() => setHovered(null)}
-              className={`group flex size-fit h-full w-[20%] cursor-pointer flex-col justify-between rounded-2xl border px-2 pb-2 pt-3.5 transition-colors duration-700 ease-out xs:max-md:h-auto xs:max-md:w-full xs:max-md:mx-auto xs:max-md:max-w-[200px] ${getBundlesClass[bundle_id - 1].focusClass} ${getBundlesClass[bundle_id - 1].tabClass} `}
+              className={`group flex size-fit h-full w-[20%] cursor-pointer flex-col justify-between rounded-2xl border px-2 pb-2 pt-3.5 transition-colors duration-700 ease-out xs:max-md:h-auto xs:max-md:w-full xs:max-md:mx-auto max-w-[300px] xs:max-w-[250px]  sm:max-w-[200px] ${getBundlesClass[bundle_id - 1].focusClass} ${getBundlesClass[bundle_id - 1].tabClass} `}
             >
               <h3 className="box-content text-wrap bg-opacity-30 px-2.5 pb-5 text-xl font-bold leading-[1.6875rem] text-grey900 xs:max-lg:text-lg">
                 {bundle_name}
