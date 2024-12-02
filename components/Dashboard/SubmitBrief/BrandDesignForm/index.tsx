@@ -31,6 +31,9 @@ function BrandDesignForm() {
     selectFileUploadState(state, "brandCompetitorsFile"),
   );
 
+  const { trackingProgress } = useAppSelector((state) => state.tracker);
+  const trackingId = trackingProgress?.activeBundle?.trackingId;
+
   const { handleFileUpload } = useFileUpload();
   // Define formik
   const formik = useFormik<BrandDesignValues>({
@@ -56,6 +59,7 @@ function BrandDesignForm() {
           submitFormData({
             formName: "brandDesign", // Pass only formName
             payload: formPayload, // Pass only the payload
+            trackingId: trackingId as string,
           }),
         );
 

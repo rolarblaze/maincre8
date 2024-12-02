@@ -32,6 +32,9 @@ function GraphicsDesignForm() {
   const fileTwoState = useAppSelector((state) =>
     selectFileUploadState(state, "graphicsReferencesFile"),
   );
+
+  const { trackingProgress } = useAppSelector((state) => state.tracker);
+  const trackingId = trackingProgress?.activeBundle?.trackingId;
   const { handleFileUpload } = useFileUpload();
 
   // Define formik
@@ -54,6 +57,7 @@ function GraphicsDesignForm() {
           submitFormData({
             formName: "graphicsDesign", // Pass only formName
             payload: formPayload, // Pass only the payload
+            trackingId: trackingId as string,
           }),
         );
 

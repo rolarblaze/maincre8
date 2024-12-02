@@ -19,7 +19,8 @@ import {
 } from "./newsletter_n_contactform";
 import cartReducer from "./cart";
 
-import formSlice from "./myServices/index"
+import formSlice from "./myServices/index";
+import paymentSlice  from "./payment/index"
 
 // configure the store with all reducers
 export const store = configureStore({
@@ -39,7 +40,8 @@ export const store = configureStore({
     tabs: tabsSlice.reducer,
     cart: cartReducer,
     service: serviceSlice,
-    forms: formSlice
+    forms: formSlice,
+    payment: paymentSlice,
   },
 });
 
