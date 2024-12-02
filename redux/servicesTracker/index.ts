@@ -92,7 +92,9 @@ export const servicesSlice = createSlice({
       })
       .addCase(trackUserOrder.rejected, (state, { payload }) => {
         state.loading = false;
+        state.trackingDetails = null;
         state.error = payload as string;
+
       })
 
       // getUserOrderHistory cases

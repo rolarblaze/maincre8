@@ -7,12 +7,15 @@ import { CheckoutSection, PageLayout, SummarySection, Button } from "@/component
 import Spinner from "@/components/Spinner";
 import EmptyState from "@/components/EmptyState";
 import assetLibrary from "@/library";
+import { useRouter } from "next/navigation";
 
 const CheckoutPage = () => {
+  const router = useRouter()
   const dispatch = useAppDispatch();
-  const { cartItems, total_price, isGettingCartItems, error } = useAppSelector((state) => state.cart);
+  let { cartItems, total_price, isGettingCartItems, error } = useAppSelector((state) => state.cart);
   const { isAuthenticated } = useAppSelector((state) => state.auth);
-  console.log("isAuthenticated", isAuthenticated)
+  
+  error = error?.toLowerCase().includes("not authenticated") ? "Go to Log In" : error
 
   useEffect(() => {
     dispatch(getCartItems());
@@ -33,14 +36,25 @@ const CheckoutPage = () => {
           <Spinner className="border-blue-500" />
         </div>
       ) : error ? (
-        <div className="flex flex-col items-center justify-center min-h-[50vh] space-y-4">
+       
+        <>
+       {error === "Go to Log In" &&   <div className="flex flex-col items-center justify-center min-h-[50vh] space-y-4">
+        <p className="text-lg font-semibold text-red-600">Error: {error}</p>
+        <Button
+          label="Go to Log In"
+          onClick={() => router.push("/login")  }
+          classNames="bg-primary500 text-white px-6 py-2 rounded-lg"
+        />
+      </div> }
+       {error !== "Go to Log In" && <div className="flex flex-col items-center justify-center min-h-[50vh] space-y-4">
           <p className="text-lg font-semibold text-red-600">Error: {error}</p>
           <Button
             label="Retry"
             onClick={() => dispatch(getCartItems())}
             classNames="bg-primary500 text-white px-6 py-2 rounded-lg"
           />
-        </div>
+        </div> }
+        </>
       ) : isCartEmpty ? (
         <div className="max-w-[300px] mx-auto w-full p-4 flex items-center justify-center mt-20">
           <EmptyState
