@@ -13,7 +13,11 @@ interface SubmitFormDataArgs {
 export const submitFormData = createAsyncThunk(
   "forms/submitFormData",
   async (
-    { formName, payload }: { formName: keyof typeof formConfig; payload: any },
+    {
+      formName,
+      payload,
+      trackingId,
+    }: { formName: keyof typeof formConfig; payload: any; trackingId: string },
     { rejectWithValue },
   ) => {
     try {
@@ -23,7 +27,10 @@ export const submitFormData = createAsyncThunk(
         throw new Error(`Form configuration for ${formName} not found.`);
       }
 
-      const response = await api.post(form.endpoint, payload);
+      const response = await api.post(
+        `${form.endpoint}/${trackingId}`,
+        payload,
+      );
 
       return { formName, data: response.data };
     } catch (error) {
@@ -45,15 +52,11 @@ export const uploadDocument = createAsyncThunk(
     { rejectWithValue },
   ) => {
     try {
-      const response = await api.post(
-        `${endpoint}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+      const response = await api.post(`${endpoint}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
         },
-      );
+      });
       return response.data; // Return the uploaded file data
     } catch (error) {
       return rejectWithValue(handleAxiosError(error));

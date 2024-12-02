@@ -1,6 +1,9 @@
 "use client";
 
-import { getUserOrderHistory, trackUserOrder } from "@/redux/servicesTracker/features";
+import {
+  getUserOrderHistory,
+  trackUserOrder,
+} from "@/redux/servicesTracker/features";
 import { handleSetCurrentTrackingBundleName } from "@/redux/servicesTracker/tracker";
 import { useAppDispatch, useAppSelector } from "@/redux/store";
 import { useRouter } from "next/navigation";
@@ -31,7 +34,8 @@ export default function TrackServicesLayout({
   useEffect(() => {
     dispatch(
       handleSetCurrentTrackingBundleName({
-        activeBundle: activebundleName as string,
+        activeBundleName: activebundleName as string,
+        trackingId: trackingID as string,
       }),
     );
   }, [dispatch, activebundleName]);
@@ -43,7 +47,7 @@ export default function TrackServicesLayout({
         ← Back to services
       </button>
 
-      <div className="mb-5 space-y-2 xs:max-md:space-y-0 xs:max-md:mt-5">
+      <div className="mb-5 space-y-2 xs:max-md:mt-5 xs:max-md:space-y-0">
         <h1 className="text-2xl font-semibold text-[#101928]">
           {selectedBundle?.package.bundle.bundle_name}
         </h1>

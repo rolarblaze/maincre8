@@ -20,6 +20,7 @@ import GraphicsDesignForm from "../../SubmitBrief/GraphicsDesignForm";
 import BrandDesignForm from "../../SubmitBrief/BrandDesignForm";
 import ContentCreationForm from "../../SubmitBrief/ContentCreationForm";
 import AllInOneBundleForm from "../../SubmitBrief/AllInOneBundleForm";
+import { string } from "yup";
 
 type bundleNames =
   | "Brand Identity Development"
@@ -40,10 +41,12 @@ const MyPackage = () => {
     "Ultimate Marketing": "All In One",
   };
 
-  
-  let bundleName = orderHistory?.find(order => order.transaction_id === trackingDetails?.transaction_id)?.package.bundle.bundle_name
-  let activebundleName =  mapNewNameToOldName[bundleName as bundleNames];
-  
+  const trackingId = trackingDetails?.transaction_id?.toString();
+
+  let bundleName = orderHistory?.find(
+    (order) => order.transaction_id === trackingDetails?.transaction_id,
+  )?.package.bundle.bundle_name;
+  let activebundleName = mapNewNameToOldName[bundleName as bundleNames];
 
   const toCamelCase = (str: string) => {
     if (str === "All In One") {
@@ -96,7 +99,8 @@ const MyPackage = () => {
     if (activebundleName) {
       dispatch(
         handleSetCurrentTrackingBundleName({
-          activeBundle: activebundleName,
+          activeBundleName: activebundleName,
+          trackingId: trackingId as string,
         }),
       );
 

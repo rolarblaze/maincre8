@@ -21,6 +21,9 @@ function DigitalMarketForm() {
   const isLoading = useAppSelector(
     (state: any) => state.forms?.digitalMarketing?.isLoading,
   );
+  const { trackingProgress } = useAppSelector((state) => state.tracker);
+  const trackingId = trackingProgress?.activeBundle?.trackingId;
+  console.log(trackingId, "kkkkkk");
 
   // Define formik
   const formik = useFormik<DigitalMarketingValues>({
@@ -42,6 +45,7 @@ function DigitalMarketForm() {
           submitFormData({
             formName: "digitalMarketing", // Pass only formName
             payload: formPayload, // Pass only the payload
+            trackingId: trackingId as string,
           }),
         );
         if (response?.payload) {

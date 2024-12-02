@@ -28,6 +28,10 @@ function AllInOneBundleForm() {
   const fileOneState = useAppSelector((state) =>
     selectFileUploadState(state, "allInOneBrandColorFile"),
   );
+
+  const { trackingProgress } = useAppSelector((state) => state.tracker);
+  const trackingId = trackingProgress?.activeBundle?.trackingId;
+
   const { handleFileUpload } = useFileUpload();
 
   // Define formik
@@ -47,6 +51,7 @@ function AllInOneBundleForm() {
           submitFormData({
             formName: "AllInOne", // Pass only formName
             payload: formPayload, // Pass only the payload
+            trackingId: trackingId as string,
           }),
         );
         if (response?.payload) {

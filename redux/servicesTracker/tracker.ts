@@ -31,9 +31,12 @@ const trackerSlice = createSlice({
     },
     handleSetCurrentTrackingBundleName: (
       state,
-      action: PayloadAction<{ activeBundle: string }>,
+      action: PayloadAction<{
+        activeBundleName: string;
+        trackingId: string;
+      }>,
     ) => {
-      state.trackingProgress.activeBundle = action.payload.activeBundle;
+      state.trackingProgress.activeBundle = action.payload;
     },
   },
 });
