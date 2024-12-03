@@ -22,7 +22,9 @@ const SummarySection: React.FC<SummarySectionProps> = ({ totalPrice, packageId, 
   const [isOpen, setIsOpen] = useState(false);
 
   const handlePayment = async () => {
-    if (!isAuthenticated) {
+    let auth = isAuthenticated ? "True" : "False"
+    alert(auth)
+    if (!isAuthenticated) { 
       // Redirect unauthenticated users to the login/signup page
       router.push("/login?redirect=/checkout");
       return;
@@ -35,7 +37,8 @@ const SummarySection: React.FC<SummarySectionProps> = ({ totalPrice, packageId, 
         makePayment({ package_id: packageId, currency })
       ).unwrap();
 
-
+      
+      
       // Redirect to the payment link
       window.location.href = result.data.link;
     } catch (err) {

@@ -97,9 +97,9 @@ const AuthPageLayout: FC<Props> = ({ children }) => {
 
           <div className="">
             {/* Only show SSO if the pathname is among the paths in the list */}
-            {["/login", "/signup"].includes(pathname) && (
+            {/* {["/login", "/signup"].includes(pathname) && (
               <SingleSignOnSection />
-            )}
+            )} */}
 
             {["/login", "/signup"].includes(pathname) && isNewMemberText}
           </div>

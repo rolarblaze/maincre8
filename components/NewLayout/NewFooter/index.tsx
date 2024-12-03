@@ -105,7 +105,7 @@ const socials = [
   {
     id: 1,
     icon: <FacebookLogo />,
-    link: "/",
+    link: "https://www.facebook.com/share/1GQhHm5L7q/?mibextid=JRoKGi",
   },
   {
     id: 2,
@@ -120,6 +120,6 @@ const socials = [
   {
     id: 4,
     icon: <LinkedinLogo />,
-    link: "/",
+    link: "https://www.linkedin.com/company/sellcrea8/",
   },
-];
+]

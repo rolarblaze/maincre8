@@ -7,15 +7,22 @@ import moment from "moment";
 
 const BundleBought = () => {
   const dispatch = useAppDispatch();
-  const { trackingDetails, orderHistory } = useAppSelector((state) => state.services);
-
+  const { trackingDetails, orderHistory } = useAppSelector(
+    (state) => state.services,
+  );
+  let transID = window.location.href.split("/").reverse()[0];
 
   useEffect(() => {
     handleProgressUpdate(dispatch, trackingDetails);
   }, [dispatch, trackingDetails]);
 
-  let order = orderHistory?.find(order => order.transaction_id === trackingDetails?.transaction_id)
-  let dateBought = order?.status === "successful" ? moment(order.created_at).format("DD MMMM YYYY") : "Unknown date"
+  let order = orderHistory?.find(
+    (order) => order.transaction_id === trackingDetails?.transaction_id,
+  );
+  let dateBought =
+    order?.status === "successful"
+      ? moment(order.created_at).format("DD MMMM YYYY")
+      : "Unknown date";
 
   // Set SubmitBriefInProgress if dateBought is not "Unknown date"
   const bundleBought = dateBought !== "Unknown date";
@@ -32,9 +39,12 @@ const BundleBought = () => {
 
   return (
     <div className="">
-      <div className="flex flex-col rounded-md text-red-400 p-2">
+      <div className="flex flex-col rounded-md p-2 text-red-400">
         <p>
-          Tracking Number: {JSON.stringify(trackingDetails?.transaction_id)}
+          Tracking Number:{" "}
+          {trackingDetails?.transaction_id.toString() === transID.toString() ? trackingDetails?.transaction_id  : transID.toString()}
+          {trackingDetails?.transaction_id.toString() !== transID.toString() &&
+            " (Pending Order has no tracking)"}
         </p>
       </div>
 
