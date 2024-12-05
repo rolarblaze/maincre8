@@ -30,9 +30,9 @@ function DeliverySteps() {
     ...SecondBottomDeliveries,
   ];
   return (
-    <section className="flex w-full flex-col items-center gap-3 sm:gap-6 px-0 py-6 pt-0 sm:py-16 md:items-start md:gap-[3.75rem] md:px-[6.25rem] md:py-20">
+    <section className="flex w-full flex-col items-center gap-3 sm:gap-6 px-0 py-6 pt-0 sm:py-16 md:items-start md:gap-0 md:px-[6.25rem] md:py-0">
       <h3 className="mb-6 self-center">How we deliver</h3>
-      <div className="w-full rounded-3xl bg-grey50 py-8 px-4 md:px-12 md:py-12">
+      <div className="w-full rounded-3xl bg-grey50 py-8 px-4 md:px-12 md:pb-12 md:pt-0">
         {/* <Image
           src={assetLibrary.roadmapImg}
           alt="RoadMap"
