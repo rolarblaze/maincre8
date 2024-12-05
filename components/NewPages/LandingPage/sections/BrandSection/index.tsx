@@ -22,7 +22,7 @@ const BrandSection = () => {
   return (
     <FadeUpDiv className="full-width content-grid bg-grey50 py-14 md:py-20 lg:py-[6.25rem]">
       <div className="flex flex-col gap-10 md:items-center md:justify-center md:gap-12 lg:gap-16">
-        <h1 className="text-3xl sm:text-[2rem]">Brands We&apos;ve Served  </h1>
+        <h2 className="">Brands We&apos;ve Served  </h2>
 
         <div className="noScrollbar flex w-full items-center gap-x-6 overflow-x-auto md:gap-x-16">
           {brands.map(({ id, icon }) => (
