@@ -5,7 +5,7 @@ import { changePageData } from "@/redux/shop";
 import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { PageViewData } from "@/redux/shop/interface";
 import ShopBundleListLoadingState from "../components/ShopBundleListLoadingState";
-import bundleCardsDetails from "../Data/bundleCardDetails";
+import bundleCardsDetails from "../data/bundleCardDetails";
 
 const BundleListCardOptions = ({ redirect }: { redirect: boolean }) => {
   const router = useRouter();

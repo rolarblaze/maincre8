@@ -11,7 +11,7 @@ import { TabButton, Card, serviceBundles } from "./Components";
 import { useAppDispatch, useAppSelector, RootState } from "@/redux/store";
 import { getServices } from "@/redux/shop/features";
 import Spinner from "@/components/Spinner";
-import { mapServicesToProps } from "@/components/Shop/Data/shopData";
+import { mapServicesToProps } from "@/components/Shop/data/shopData";
 
 
 const Bundles = () => {
