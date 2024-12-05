@@ -178,7 +178,7 @@ function MainContactSection() {
     },
   ];
   return (
-    <section className="full-width content-grid bg-grey50 px-0 py-0 md:px-10 md:py-[6.25rem] lg:px-[6.25rem]">
+    <section className="full-width content-grid bg-grey50 px-0 py-0 pb-6 md:px-10 md:py-[6.25rem] lg:px-[6.25rem]">
       <div className="flex w-full flex-col justify-between gap-8 md:flex-row">
         {/* Contact */}
         <div className="order-2 space-y-6 md:order-1">
