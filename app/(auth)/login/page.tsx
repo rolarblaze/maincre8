@@ -152,7 +152,7 @@ export default function Login() {
           />
           <Link
             href="/forgot-password"
-            className="p-0 w-auto text-xs bg-transparent font-medium text-[#1574E5]"
+            className="p-0 w-auto text-xs bg-transparent font-medium text-[#1574E5] hover:text-primary800"
           >
             Forgot Password?
           </Link>
@@ -161,7 +161,7 @@ export default function Login() {
           isLoading={isLoading}
           type="submit"
           label="Login to Dashboard"
-          classNames="text-white font-semibold"
+          classNames="text-white font-semibold hover:bg-primary700"
         />
       </form>
     </Fragment>

@@ -36,7 +36,7 @@ const PackagesSection = () => {
               onFocus={() => setHovered(bundle_name)}
               onMouseEnter={() => setHovered(bundle_name)}
               onMouseLeave={() => setHovered(null)}
-              className={`group flex size-fit h-full xs:h-auto w-[20%] xs:max-w-[180px] md:max-w-full xs:w-full cursor-pointer flex-col justify-between rounded-2xl border px-2 pb-2 pt-3.5 transition-colors duration-700 ease-out ${getBundlesClass[bundle_id - 1].focusClass} ${getBundlesClass[bundle_id - 1].tabClass} `}
+              className={`group flex size-fit h-full w-[20%] cursor-pointer flex-col justify-between rounded-2xl border px-2 pb-2 pt-3.5 transition-colors duration-700 ease-out xs:h-auto xs:w-full xs:max-w-[180px] md:max-w-full ${getBundlesClass[bundle_id - 1].focusClass} ${getBundlesClass[bundle_id - 1].tabClass} `}
             >
               <h3 className="box-content text-wrap bg-opacity-30 px-2.5 pb-5 text-xl font-bold leading-[1.6875rem] text-grey900 xs:max-lg:text-lg">
                 {bundle_name}

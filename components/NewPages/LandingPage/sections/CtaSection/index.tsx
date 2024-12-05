@@ -33,14 +33,14 @@ const CtaSection = () => {
           <div className="mt-4 flex gap-4 max-sm:flex-col max-sm:items-center">
             <Link
               href={(profile.first_name || profile.last_name) ? "/dashboard" : "/signup"}
-              className="block w-fit rounded-lg bg-primary900 px-12 py-4 text-lg xs:max-md:text-base font-medium text-white"
+              className="block w-fit rounded-lg bg-primary900 hover:bg-primary900/70 px-12 py-4 text-lg xs:max-md:text-base font-medium text-white"
             >
               {(profile.first_name || profile.last_name) ? "Go To Dashbaord" : "Get Started"}
             </Link>
 
             <button
               onClick={() => setIsOpen(true)}
-              className="flex items-center justify-center gap-2 rounded-lg border bg-white px-6 py-4"
+              className="flex items-center justify-center gap-2 rounded-lg border bg-white hover:bg-slate-300 px-6 py-4"
             >
               <span className="text-lg xs:max-md:text-base font-medium text-grey900">
                 Watch demo video

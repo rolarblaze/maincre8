@@ -143,7 +143,7 @@ const VerifyEmail = () => {
             <Button
               type="submit"
               label="Login to Dashboard"
-              classNames="text-sm text-white font-semibold"
+              classNames="text-sm text-white font-semibold hover:bg-primary700"
             />
           </Form>
         )}
@@ -154,7 +154,7 @@ const VerifyEmail = () => {
         <Button
           onClick={handleResendCode}
           label="Resend code"
-          classNames="p-2 w-auto text-xs bg-transparent font-medium text-[#1574E5]"
+          classNames="p-2 w-auto text-xs bg-transparent font-medium text-[#1574E5] hover:text-primary800"
         />
       </div>
     </Fragment>

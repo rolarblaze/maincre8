@@ -16,10 +16,10 @@ const BundlePreviewBanner = ({
   return (
     <section className="flex justify-between rounded-3xl bg-[#FAFAFA] xs:max-md:flex-col xs:max-md:max-w-[500px] xs:max-md:mx-auto">
       <div className="w-[60%] space-y-6 p-12 xs:max-md:w-full xs:max-md:px-5 xs:max-md:py-5">
-        <p className="text-4xl font-bold leading-10 xs:max-md:text-3xl">
+        <p className="text-4xl font-bold leading-10 xs:max-md:text-2xl">
           {title} Package
         </p>
-        <p className="text-sm font-semibold uppercase leading-5 tracking-wider xs:max-md:text-base">
+        <p className="text-sm font-semibold uppercase leading-5 tracking-wider xs:max-md:text-sm">
           {message}
         </p>
         <p className="text-lg font-light leading-7 text-[#718096]">{body}</p>

@@ -26,14 +26,14 @@ const HeroSection = () => {
         <div className="z-[2] mt-4 flex items-center justify-center gap-6">
           <Link
             href={(profile.first_name || profile.last_name) ? "/dashboard" : "/signup"}
-            className="block w-fit rounded-lg bg-white px-12 py-3.5 text-base font-semibold text-grey800"
+            className="block w-fit rounded-lg bg-white hover:bg-slate-300 px-12 py-3.5 text-base font-semibold text-grey800"
           >
             {(profile.first_name || profile.last_name) ? "Go To Dashbaord" : "Get Started"}
           </Link>
 
           <button
             onClick={() => setIsOpen(true)}
-            className="flex items-center justify-center gap-2.5 rounded-lg border bg-black/10 backdrop-blur-[2px] border-white px-6 py-3 text-white max-md:hidden"
+            className="flex items-center justify-center gap-2.5 rounded-lg border bg-black/10 hover:bg-black/30 backdrop-blur-[2px] border-white px-6 py-3 text-white max-md:hidden"
           >
             <PlayIcon fillColor="white" className="mt-0.5" />
             <span className="text-lg font-medium">Watch demo video</span>

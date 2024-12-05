@@ -19,7 +19,7 @@ function ComprehensiveSupport() {
           </p>
           <Button
             label="Contact Us"
-            classNames="self-start !w-auto py-2 sm:py-4"
+            classNames="self-start !w-auto py-2 sm:py-4 hover:bg-primary700"
             link="/contact-us"
           />
         </div>

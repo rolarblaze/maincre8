@@ -48,7 +48,7 @@ function FaqTabs({ queryInput }: { queryInput?: string | undefined }) {
               className={`flex gap-2 text-nowrap rounded-lg border px-3 py-1.5 text-sm font-medium ${
                 tab === activeTab
                   ? "border-primary400 bg-primary50 text-grey600"
-                  : "border-grey300 text-grey500"
+                  : "border-grey300 text-grey500 hover:border-primary400/40 hover:bg-primary50/40"
               }`}
             >
               <span
