@@ -1,6 +1,12 @@
 import React from "react";
 
-function BlueMessageIcon() {
+function BlueMessageIcon({
+  width = "35",
+  height = "35",
+}: {
+  width?: string;
+  height?: string;
+}) {
   return (
     <svg
       width="35"
@@ -9,7 +15,7 @@ function BlueMessageIcon() {
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <rect width="35" height="35" rx="17.5" fill="#E8F1FC" />
+      <rect width={width} height={height} rx="17.5" fill="#E8F1FC" />
       <g clip-path="url(#clip0_3749_25563)">
         <path
           d="M8 15.5V23.5C8 24.0304 8.21071 24.5391 8.58579 24.9142C8.96086 25.2893 9.46957 25.5 10 25.5H26C26.5304 25.5 27.0391 25.2893 27.4142 24.9142C27.7893 24.5391 28 24.0304 28 23.5V15.5L18 19.5L8 15.5Z"
