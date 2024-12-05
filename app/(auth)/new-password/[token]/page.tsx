@@ -195,13 +195,13 @@ const NewPassword = () => {
           label="Confirm password"
           isLoading={isLoading}
           type="submit"
-          classNames="text-white font-semibold"
+          classNames="text-white font-semibold hover:bg-primary700"
         />
       </form>
 
       <Button
         label="Resend code"
-        classNames="p-2 w-auto text-xs bg-transparent font-medium text-[#1574E5]"
+        classNames="p-2 w-auto text-xs bg-transparent font-medium text-[#1574E5] hover:text-primary800"
       />
     </Fragment>
   );

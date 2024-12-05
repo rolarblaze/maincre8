@@ -23,7 +23,7 @@ const LearnMoreSection = () => {
 
         <Link
           href={(profile.first_name || profile.last_name) ? "/dashboard" : "/signup"}
-          className="mt-8 block w-fit rounded-lg bg-white px-12 py-3 text-sm font-medium text-[#111827]"
+          className="mt-8 block w-fit rounded-lg bg-white hover:bg-slate-300 px-12 py-3 text-sm font-medium text-[#111827]"
         >
           {(profile.first_name || profile.last_name) ? "Go To Dashbaord" : "Learn More"}
           

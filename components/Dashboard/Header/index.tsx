@@ -27,7 +27,7 @@ const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
       <div className="mx-5 flex flex-wrap items-center gap-5">
         <Link
           href="/dashboard/custom-recommendation"
-          className="w-fit cursor-pointer items-center gap-2 rounded-lg border-none bg-primary500 !px-3 !py-2 text-white md:flex"
+          className="w-fit cursor-pointer items-center gap-2 rounded-lg border-none bg-primary500 hover:bg-primary700 !px-3 !py-2 text-white md:flex"
         >
           <BulbIcon />
           <span className="text-nowrap">Custom recommendations</span>
@@ -38,7 +38,7 @@ const Header: React.FC<HeaderProps> = ({ title, subtitle }) => {
           </button>
         </div> */}
         <div
-          className={`${cartItems.length === 0 ? "bg-[#F0F2F5]" : "bg-[#E8F1FC]"} relative size-8 rounded-full p-1`}
+          className={`${cartItems.length === 0 ? "bg-[#F0F2F5] hover:bg-slate-200" : "bg-[#E8F1FC] hover:bg-blue-200"} relative size-8 rounded-full p-1`}
         >
           {cartItems.length !== 0 && (
             <div className="center absolute -right-1 -top-1 aspect-square min-h-4 w-auto min-w-4 rounded-full bg-[#1574E5] p-[1px]">

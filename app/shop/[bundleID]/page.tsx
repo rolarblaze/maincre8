@@ -11,7 +11,7 @@ import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { changePageData } from "@/redux/shop";
 import { PageViewData } from "@/redux/shop/interface";
 import { getBundles } from "@/redux/shop/features";
-import ShopWhyChooseSellCre8Data from "@/components/Shop/Data/whyChooseUs";
+import ShopWhyChooseSellCre8Data from "@/components/Shop/data/whyChooseUs";
 
 const Shop = () => {
   const dispatch = useAppDispatch();

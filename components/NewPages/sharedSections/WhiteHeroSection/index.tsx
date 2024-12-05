@@ -42,7 +42,7 @@ function WhiteHeroSection({
               type="text"
               onChange={handleQueryInput}
               value={queryInput}
-              classNames="py-6 placeholder:text-sm text-grey400 border-none !bg-grey50 mx-auto w-full max-w-[900px]"
+              classNames="py-6 placeholder:text-sm text-grey400 border-none !bg-grey50 mx-auto w-full max-w-[900px] hover:bg-grey100"
               placeholder="What do you need help with?"
               icon={
                 queryInput ? (

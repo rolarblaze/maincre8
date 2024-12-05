@@ -22,8 +22,7 @@ const SummarySection: React.FC<SummarySectionProps> = ({ totalPrice, packageId, 
   const [isOpen, setIsOpen] = useState(false);
 
   const handlePayment = async () => {
-    let auth = isAuthenticated ? "True" : "False"
-    alert(auth)
+   
     if (!isAuthenticated) { 
       // Redirect unauthenticated users to the login/signup page
       router.push("/login?redirect=/checkout");

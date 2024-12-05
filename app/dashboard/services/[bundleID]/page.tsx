@@ -200,7 +200,7 @@ const ServicePackagePage = () => {
                   handleAddToCart(bundle_id, plan.package_id, plan.package_name)
                 }
                 label="Add to cart"
-                classNames="py-2"
+                classNames="py-2 hover:bg-primary700"
               />
 
               <div className="!mt-6 divide-y">

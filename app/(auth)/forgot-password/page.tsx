@@ -117,13 +117,13 @@ export default function ForgotPassword() {
               label="Reset password"
               isLoading={isLoading}
               type="submit"
-              classNames="text-sm text-white font-semibold"
+              classNames="text-sm text-white font-semibold hover:bg-primary700"
             />
           </form>
           <div className="center -mt-2">
             <Link
               href="/login"
-              className="p-2 w-auto text-xs bg-transparent font-medium text-[#1574E5]"
+              className="p-2 w-auto text-xs bg-transparent font-medium text-[#1574E5] hover:text-primary800"
             >
               Back to Login
             </Link>

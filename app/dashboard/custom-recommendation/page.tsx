@@ -38,7 +38,7 @@ const CustomRecommendation = () => {
           </div>
         }
         onClick={() => setIsOpen(true)}
-        classNames="max-w-[17.125rem] text-base leading-6 px-0"
+        classNames="max-w-[17.125rem] text-base leading-6 px-0 hover:bg-primary700"
       />
 
       {/* Business Brief Form Modal */}

@@ -40,7 +40,7 @@ const WrapperComponent: React.FC<CallComponentProps> = ({
 
   const textColor = status === "inactive" ? "text-[#98A2B3]" : "text-[#344054]";
 
-  const btnStyles = status !== "inprogress" ? "bg-grey300" : "bg-primary500";
+  const btnStyles = status !== "inprogress" ? "bg-grey300" : "bg-primary500 hover:bg-primary700";
 
   const showDescription = status === "completed" ? "hidden" : "block";
 

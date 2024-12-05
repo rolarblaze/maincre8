@@ -61,7 +61,7 @@ const AuthPageLayout: FC<Props> = ({ children }) => {
           </p>
           <Link
             href="/login"
-            className="w-auto bg-transparent p-2 text-xs font-medium text-[#1574E5]"
+            className="w-auto bg-transparent p-2 text-xs font-medium text-[#1574E5] hover:text-primary800"
           >
             Log in
           </Link>
@@ -75,7 +75,7 @@ const AuthPageLayout: FC<Props> = ({ children }) => {
           </p>
           <Link
             href="/signup"
-            className="w-auto bg-transparent p-2 text-xs font-medium text-[#1574E5]"
+            className="w-auto bg-transparent p-2 text-xs font-medium text-[#1574E5] hover:text-primary800"
           >
             Create Account
           </Link>
