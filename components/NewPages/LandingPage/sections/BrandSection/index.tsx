@@ -21,10 +21,10 @@ const BrandSection = () => {
   ];
   return (
     <FadeUpDiv className="full-width content-grid bg-grey50 py-14 md:py-20 lg:py-[6.25rem]">
-      <div className="flex flex-col gap-10 md:items-center md:justify-center md:gap-12 lg:gap-16">
-        <h2 className="">Brands We&apos;ve Served  </h2>
+      <div className="flex flex-col gap-10 items-center md:justify-center md:gap-12 lg:gap-16">
+        <h2 className="self-start md:self-center">Brands We&apos;ve Served  </h2>
 
-        <div className="noScrollbar flex w-full items-center gap-x-6 overflow-x-auto md:gap-x-16">
+        <div className="noScrollbar flex w-full justify-center items-center gap-x-6 overflow-x-auto md:gap-x-16">
           {brands.map(({ id, icon }) => (
             <span key={id}>{icon}</span>
           ))}
