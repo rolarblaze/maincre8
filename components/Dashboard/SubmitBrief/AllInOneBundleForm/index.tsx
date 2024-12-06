@@ -20,6 +20,7 @@ import { formConfig } from "@/redux/myServices/formConfig";
 import { handleFormModal } from "@/redux/myServices";
 import { selectFileUploadState } from "@/redux/file";
 import { briefFileUploadEndpoints } from "../shared/briefEndpoint";
+import { trackUserOrder } from "@/redux/servicesTracker/features";
 
 function AllInOneBundleForm() {
   const dispatch = useAppDispatch();
@@ -66,6 +67,7 @@ function AllInOneBundleForm() {
         }
         resetForm();
         dispatch(handleFormModal({ formName: "AllInOne", isModalOpen: false }));
+        dispatch(trackUserOrder(parseInt(trackingId as string) as number));
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(

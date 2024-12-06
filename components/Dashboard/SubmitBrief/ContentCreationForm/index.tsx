@@ -15,6 +15,7 @@ import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
 import { handleFormModal } from "@/redux/myServices";
 import { briefFileUploadEndpoints } from "../shared/briefEndpoint";
+import { trackUserOrder } from "@/redux/servicesTracker/features";
 
 function ContentCreationForm() {
   const dispatch = useAppDispatch();
@@ -68,6 +69,7 @@ function ContentCreationForm() {
         dispatch(
           handleFormModal({ formName: "contentCreation", isModalOpen: false }),
         );
+        dispatch(trackUserOrder(parseInt(trackingId as string) as number));
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(

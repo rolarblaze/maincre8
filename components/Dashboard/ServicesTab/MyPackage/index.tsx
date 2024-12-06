@@ -21,6 +21,7 @@ import BrandDesignForm from "../../SubmitBrief/BrandDesignForm";
 import ContentCreationForm from "../../SubmitBrief/ContentCreationForm";
 import AllInOneBundleForm from "../../SubmitBrief/AllInOneBundleForm";
 import { string } from "yup";
+import { trackUserOrder } from "@/redux/servicesTracker/features";
 
 type bundleNames =
   | "Brand Identity Development"
@@ -110,6 +111,8 @@ const MyPackage = () => {
           isModalOpen: true,
         }),
       );
+
+      dispatch(trackUserOrder(parseInt(trackingId as string) as number)); 
     }
   }
 
