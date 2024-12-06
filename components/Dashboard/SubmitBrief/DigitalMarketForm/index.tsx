@@ -15,6 +15,7 @@ import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
 import { handleFormModal } from "@/redux/myServices";
 import { briefFileUploadEndpoints } from "../shared/briefEndpoint";
+import { trackUserOrder } from "@/redux/servicesTracker/features";
 
 function DigitalMarketForm() {
   const dispatch = useAppDispatch();
@@ -62,6 +63,7 @@ function DigitalMarketForm() {
         dispatch(
           handleFormModal({ formName: "digitalMarketing", isModalOpen: false }),
         );
+        dispatch(trackUserOrder(parseInt(trackingId as string) as number));
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(

@@ -20,6 +20,7 @@ import { submitFormData } from "@/redux/myServices/features";
 import { handleFormModal } from "@/redux/myServices";
 import { selectFileUploadState } from "@/redux/file";
 import { briefFileUploadEndpoints } from "../shared/briefEndpoint";
+import { trackUserOrder } from "@/redux/servicesTracker/features";
 
 function BrandDesignForm() {
   const dispatch = useAppDispatch();
@@ -78,6 +79,7 @@ function BrandDesignForm() {
         dispatch(
           handleFormModal({ formName: "brandDesign", isModalOpen: false }),
         );
+        dispatch(trackUserOrder(parseInt(trackingId as string) as number));
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(
