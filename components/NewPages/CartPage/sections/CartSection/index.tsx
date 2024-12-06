@@ -80,13 +80,13 @@ const CartSection: React.FC<CartSectionProps> = ({ cartItems }) => {
 
       <div className="ml-auto flex items-center justify-center gap-4 text-sm font-semibold text-grey400 sm:gap-6">
         <button
-          className="flex items-center justify-center gap-2 rounded-lg bg-grey100 px-5 py-2"
+          className="flex items-center justify-center gap-2 rounded-lg bg-grey100 hover:bg-grey200 px-5 py-2"
           onClick={() => setIsAddBundleModalOpen(true)}>
           Add New Bundle <PlusIcon fillColor="#667185" />
         </button>
 
         <button
-          className="flex items-center justify-center gap-2 rounded-lg border border-grey100 px-4 py-2"
+          className="flex items-center justify-center gap-2 rounded-lg border hover:bg-grey100 border-grey100 px-4 py-2"
           onClick={handleClearCart}
           disabled={isClearingCart}
         >

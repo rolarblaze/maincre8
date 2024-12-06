@@ -41,10 +41,9 @@ const BundleBought = () => {
     <div className="">
       <div className="flex flex-col rounded-md p-2 text-red-400">
         <p>
-          Tracking Number:{" "}
-          {trackingDetails?.transaction_id.toString() === transID.toString() ? trackingDetails?.transaction_id  : transID.toString()}
-          {trackingDetails?.transaction_id.toString() !== transID.toString() &&
-            " (Pending Order has no tracking)"}
+          {trackingDetails?.transaction_id.toString() === transID.toString() ? <div className="size-3 rounded-full bg-green-500"></div>  :  <div className="size-3 rounded-full bg-red-500"></div> }
+          {/* {trackingDetails?.transaction_id.toString() !== transID.toString() &&
+            " (Pending Order has no tracking)"} */}
         </p>
       </div>
 

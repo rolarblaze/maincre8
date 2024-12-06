@@ -63,7 +63,7 @@ const SummarySection: React.FC<SummarySectionProps> = ({ totalPrice, packageId, 
         />
         <Button
           label="Add"
-          classNames="sm:max-w-[7rem] text-sm font-medium py-4"
+          classNames="sm:max-w-[7rem] text-sm font-medium py-4 hover:bg-primary700"
         />
       </div>
 
@@ -96,7 +96,7 @@ const SummarySection: React.FC<SummarySectionProps> = ({ totalPrice, packageId, 
         onClick={handlePayment}
         isLoading={isMakingPayment}
         disabled={isMakingPayment}
-        classNames="font-manrope text-base font-semibold mx-auto py-4 rounded-lg"
+        classNames="font-manrope text-base font-semibold mx-auto py-4 rounded-lg hover:bg-primary700"
       />
 
       <Modal

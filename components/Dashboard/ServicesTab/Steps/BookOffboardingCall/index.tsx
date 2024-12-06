@@ -4,7 +4,7 @@ import WrapperComponent from "../Wrapper";
 import { handleProgressUpdate } from "@/helpers/progressHandler";
 import { useEffect, useState, useMemo } from "react";
 import { updateProgress } from "@/redux/servicesTracker/tracker";
-import { bookOffBoardingCall } from "@/redux/servicesTracker/features";
+import { bookOffBoardingCall, trackUserOrder } from "@/redux/servicesTracker/features";
 import { useSearchParams } from "next/navigation";
 import { addAlert } from "@/redux/alerts";
 
@@ -71,6 +71,7 @@ const BookOffboardingCall = () => {
             type: "success",
           })
         );
+        dispatch(trackUserOrder(transId as number));
       } else if (bookOffBoardingCall.rejected.match(actionResult)) {
         const errorMessage =
           actionResult.error?.message ||
