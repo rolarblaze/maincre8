@@ -32,10 +32,12 @@ function ContactCard({
   icon: ReactNode;
 }) {
   return (
-    <div className="flex max-w-[488px] gap-6 rounded-lg border border-grey300 px-6 py-6">
-      <div>{icon}</div>
+    <div className="flex w-full max-w-[488px] gap-6 rounded-lg border border-grey300 px-4 md:px-6 py-6">
+      <div className="h-auto w-auto">{icon}</div>
       <div className="space-y-2">
-        <h3 className="text-lg font-semibold text-primary600">{title}</h3>
+        <h3 className="text-base font-semibold text-primary600 md:text-lg">
+          {title}
+        </h3>
         <div>{body}</div>
       </div>
     </div>
@@ -166,7 +168,7 @@ function MainContactSection() {
       icon: <BlueSocialMediaIcon />,
       title: "Social Media",
       body: (
-        <div className="flex gap-10 rounded-lg bg-primary50 px-4 py-4">
+        <div className="flex gap-4 md:gap-10 rounded-lg bg-primary50 px-4 py-4">
           <FacebookIcon href="https://web.facebook.com/sellmediagroup?_rdc=1&_rdr" />
           <XIcon href="https://x.com/SellMediaInc" />
           <InstagramIcon href="https://www.instagram.com/sellmediainc/" />
@@ -176,8 +178,8 @@ function MainContactSection() {
     },
   ];
   return (
-    <section className="full-width content-grid w-full bg-grey50 px-5 py-[6.25rem] md:px-10 lg:px-[6.25rem]">
-      <div className="flex flex-col justify-between gap-8 md:flex-row">
+    <section className="full-width content-grid bg-grey50 px-0 py-0 pb-6 md:px-10 md:py-[6.25rem] lg:px-[6.25rem]">
+      <div className="flex w-full flex-col justify-between gap-8 md:flex-row">
         {/* Contact */}
         <div className="order-2 space-y-6 md:order-1">
           {contactData.map((contact, contactIdx) => {

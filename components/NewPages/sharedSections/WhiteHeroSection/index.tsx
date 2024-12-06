@@ -28,7 +28,7 @@ function WhiteHeroSection({
   }
   return (
     <section
-      className={`full-width flex flex-col items-center gap-10 bg-white py-8 md:pb-[5rem] md:pt-[6.25rem] ${className}`}
+      className={`full-width flex flex-col items-center gap-2 md:gap-6 lg:gap-10 bg-white py-8 px-5 md:pb-[5rem] md:pt-[6.25rem] ${className}`}
     >
       <h3 className="w-full max-w-[24.7rem] text-center text-textMain">
         {title}

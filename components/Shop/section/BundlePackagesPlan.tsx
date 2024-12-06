@@ -26,6 +26,7 @@ type PackagePlanCardPropsType = {
   link: string;
   package_id: number;
   bundle_id: number;
+  onClose?: () => void;
 };
 
 // 3rd: Sub Component of Sub-Component-1
@@ -64,6 +65,7 @@ const PackagePlanCard = ({
   provisions,
   package_id,
   bundle_id,
+  onClose,
 }: PackagePlanCardPropsType) => {
   const dispatch = useAppDispatch();
   const [buttonLoading, setButtonLoading] = useState(false);
@@ -112,6 +114,11 @@ const PackagePlanCard = ({
           autoClose: true,
         })
       );
+
+      // Close the modal after adding to cart
+      if (onClose) {
+        onClose(); // This will close the modal
+      }
     } catch (error) {
       // Dispatch error alert
       dispatch(
@@ -248,11 +255,13 @@ const BundlePackagesPlan = ({
   bundle_id,
   isSwitching = false,
   cartItemId,
+  onClose,
 }: {
   packagesPlans: PackagesType[];
   bundle_id: number;
   isSwitching?: boolean;
   cartItemId?: number;
+  onClose?: () => void;
 }) => {
   const cartItems = useAppSelector((state) => state.cart.cartItems);
 
@@ -278,6 +287,7 @@ const BundlePackagesPlan = ({
             bundle_id={bundle_id}
             cartItemId={cartItemId}
             link={""}
+            onClose={onClose}
           />
         ))}
       </ul>
