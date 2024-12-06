@@ -7,6 +7,7 @@ interface BriefFormInterface<T> {
   errorMessage: string | null;
   formData: T | null;
   status?: string;
+  isModalOpen?: boolean;
 }
 
 type StateInterface = {
@@ -21,11 +22,17 @@ const initialState: StateInterface = Object.keys(submitBriefEndpoints).reduce(
       errorMessage: null,
       formData: null,
       status: "",
+      isModalOpen: false,
     };
     return state;
   },
   {} as StateInterface,
 );
+
+interface ModalPayload {
+  isModalOpen: boolean;
+  formName: keyof typeof submitBriefEndpoints
+}
 
 const briefSlice = createSlice({
   name: "brief",
@@ -42,6 +49,13 @@ const briefSlice = createSlice({
         state[formName].errorMessage = null;
         state[formName].formData = null;
         state[formName].status = "";
+      }
+    },
+    handleBriefFormModal: (state, action: PayloadAction<ModalPayload>) => {
+      const { formName, isModalOpen } = action.payload;
+      
+      if (formName && state[formName]) {
+        state[formName].isModalOpen = isModalOpen;
       }
     },
   },
@@ -69,5 +83,5 @@ const briefSlice = createSlice({
   },
 });
 
-export const { clearFormState } = briefSlice.actions;
+export const { clearFormState, handleBriefFormModal } = briefSlice.actions;
 export const briefReducer = briefSlice.reducer;

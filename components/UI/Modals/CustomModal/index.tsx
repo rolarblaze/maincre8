@@ -4,8 +4,8 @@ import { CancelIcon } from "@/public/icons";
 import { twMerge } from "tailwind-merge";
 
 interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
+  isOpen: boolean | undefined;
+  onClose?: () => void;
   children: React.ReactNode;
   className?: string;
   cancelBtnStyles?: string;
@@ -27,7 +27,7 @@ const Modal: React.FC<ModalProps> = ({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex justify-center items-center">
+        <div className="fixed inset-0 z-50 flex items-center justify-center">
           <motion.div
             onClick={onClose}
             initial={{ opacity: 0 }}
@@ -51,7 +51,7 @@ const Modal: React.FC<ModalProps> = ({
               <div
                 onClick={onClose}
                 className={twMerge(
-                  "absolute right-3 md:right-8 top-2 md:top-8 z-20 mb-4 ml-auto w-fit cursor-pointer rounded-full border border-grey300 p-2",
+                  "absolute right-3 top-2 z-20 mb-4 ml-auto w-fit cursor-pointer rounded-full border border-grey300 p-2 md:right-8 md:top-8",
                   cancelBtnStyles,
                 )}
               >
