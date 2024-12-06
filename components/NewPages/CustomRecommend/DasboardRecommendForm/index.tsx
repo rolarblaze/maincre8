@@ -10,6 +10,7 @@ import Button from "@/components/Button";
 import { convertToString } from "@/redux/myServices/formConfig";
 import { submitBrief, submitBriefEndpoints } from "@/redux/brief/features";
 import ErrorDisplay from "../shared/ErrorDisplay";
+import { handleBriefFormModal } from "@/redux/brief";
 
 function DashboardRecommendForm() {
   const isFormLoading = useAppSelector(
@@ -60,6 +61,13 @@ function DashboardRecommendForm() {
             }),
           );
         }
+
+        dispatch(
+          handleBriefFormModal({
+            isModalOpen: false,
+            formName: "businessBrief",
+          }),
+        );
 
         resetForm();
       } catch (error) {

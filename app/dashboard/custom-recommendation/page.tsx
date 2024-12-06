@@ -8,12 +8,16 @@ import assetLibrary from "@/library";
 import DashboardPopoutWrapper from "@/components/UI/Modals/DashboardPopoutWrapper";
 import DashboardRecommendForm from "@/components/NewPages/CustomRecommend/DasboardRecommendForm";
 import Spinner from "@/components/Spinner";
+import { handleBriefFormModal } from "@/redux/brief";
 
 const CustomRecommendation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useAppDispatch();
   const { recommendationHistory, isLoading } = useAppSelector(
     (state) => state.order,
+  );
+  const isModalOpen = useAppSelector(
+    (state) => state.brief?.businessBrief.isModalOpen,
   );
 
   useEffect(() => {
@@ -28,6 +32,12 @@ const CustomRecommendation = () => {
     );
   }
 
+  function handleOpenModal() {
+    dispatch(
+      handleBriefFormModal({ isModalOpen: true, formName: "businessBrief" }),
+    );
+  }
+
   return (
     <div className="space-y-12 px-5 pt-20 xs:max-md:px-2 xs:max-md:pt-10">
       <Button
@@ -37,14 +47,13 @@ const CustomRecommendation = () => {
             <span>Get new recommendation</span>
           </div>
         }
-        onClick={() => setIsOpen(true)}
+        onClick={handleOpenModal}
         classNames="max-w-[17.125rem] text-base leading-6 px-0 hover:bg-primary700"
       />
 
       {/* Business Brief Form Modal */}
       <Modal
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
+        isOpen={isModalOpen}
         showCancelIcon={true}
         cancelBtnStyles="border-none mb-6 z-30"
         cancelIconStyles="stroke-grey400 w-6 h-6 !top-0 md:!top-8"
