@@ -151,7 +151,7 @@ const CartPage = () => {
             label="Checkout"
             isLoading={isCheckingOut}
             disabled={isCheckingOut}
-            classNames="font-manrope block max-w-[22rem] mx-auto py-4 rounded-lg"
+            classNames="font-manrope block max-w-[22rem] mx-auto py-4 rounded-lg hover:bg-primary700"
           />
         </div>
       )}

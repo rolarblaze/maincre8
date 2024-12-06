@@ -66,7 +66,7 @@ const AddOnItem: React.FC<Props> = ({ id, price, name, feature, type, bundleName
   return (
     <div
       onClick={handleSelection}
-      className={`min-h-[150px] h-fit min-w-44 w-fit cursor-pointer rounded-[0.875rem] border-2 border-grey100 p-6 transition-all duration-300 ${isSelected ? "border-success-200 bg-success-50" : ""}`}
+      className={`min-h-[150px] h-fit min-w-44 w-fit cursor-pointer rounded-[0.875rem] border-2 border-grey100 hover:bg-grey200 p-6 transition-all duration-300 ${isSelected ? "border-success-200 bg-success-50" : ""}`}
     >
       <div className="flex max-w-28 flex-col items-center justify-center gap-3">
         <h4 className="text-center text-xs font-semibold uppercase lg:text-sm">{name}</h4>
