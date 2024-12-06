@@ -30,6 +30,7 @@ export interface CartItem {
         price: number;
         description: string;
     };
+    quantity: number;
 }
 export interface RecommAddOns {
     add_ons_id: number;

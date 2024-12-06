@@ -6,6 +6,7 @@ interface BriefFormInterface<T> {
   successMessage: string | null;
   errorMessage: string | null;
   formData: T | null;
+  status?: string;
 }
 
 type StateInterface = {
@@ -19,6 +20,7 @@ const initialState: StateInterface = Object.keys(submitBriefEndpoints).reduce(
       successMessage: null,
       errorMessage: null,
       formData: null,
+      status: "",
     };
     return state;
   },
@@ -39,6 +41,7 @@ const briefSlice = createSlice({
         state[formName].successMessage = null;
         state[formName].errorMessage = null;
         state[formName].formData = null;
+        state[formName].status = "";
       }
     },
   },
