@@ -10,7 +10,7 @@ function WhyChooseSellCre8() {
         Why Choose{" "}
         <span className="text-2xl text-primary500 md:text-4xl lg:text-5.5xl">
           {" "}
-          SellCre8?
+          SellCrea8?
         </span>
       </h2>
 

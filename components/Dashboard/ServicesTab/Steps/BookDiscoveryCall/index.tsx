@@ -4,7 +4,7 @@ import WrapperComponent from "../Wrapper";
 import { handleProgressUpdate } from "@/helpers/progressHandler";
 import { useEffect, useState } from "react";
 import { updateProgress } from "@/redux/servicesTracker/tracker";
-import { bookDiscoveryCall } from "@/redux/servicesTracker/features";
+import { bookDiscoveryCall, trackUserOrder } from "@/redux/servicesTracker/features";
 import { useSearchParams } from "next/navigation";
 import { addAlert } from "@/redux/alerts";
 
@@ -63,6 +63,7 @@ const BookDiscoveryCall = () => {
             type: "success",
           })
         );
+        dispatch(trackUserOrder(transId as number));
       } else if (bookDiscoveryCall.rejected.match(actionResult)) {
         const errorMessage =
           actionResult.error?.message ||

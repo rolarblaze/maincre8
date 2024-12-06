@@ -22,7 +22,7 @@ const NotSureBanner = () => {
         <Button
           link="/custom-recommendation"
           label="Get a Recommendation"
-          classNames="bg-white p-4 text-[#1D2739]"
+          classNames="bg-white p-4 text-[#1D2739] hover:bg-slate-300"
         />
       </div>
     </section>

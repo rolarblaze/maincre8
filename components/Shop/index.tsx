@@ -4,8 +4,8 @@ import { useAppDispatch, useAppSelector } from "@/redux/store";
 import Section from "./Sections";
 import { getServices } from "../../redux/shop/features";
 import { RootState } from "@/redux/store";
-import { mapServicesToProps } from "./data/shopData";
 import Spinner from "../Spinner";
+import { mapServicesToProps } from "./data/shopData";
 
 const ShopSections = () => {
   const dispatch = useAppDispatch();

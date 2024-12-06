@@ -247,7 +247,7 @@ export default function Signup() {
           label="Create account"
           isLoading={isLoading}
           type="submit"
-          classNames="text-white font-semibold"
+          classNames="text-white font-semibold hover:bg-primary700"
         />
       </form>
     </Fragment>

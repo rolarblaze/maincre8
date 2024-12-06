@@ -20,6 +20,7 @@ import { formConfig } from "@/redux/myServices/formConfig";
 import { handleFormModal } from "@/redux/myServices";
 import { selectFileUploadState } from "@/redux/file";
 import { briefFileUploadEndpoints } from "../shared/briefEndpoint";
+import { trackUserOrder } from "@/redux/servicesTracker/features";
 
 function AllInOneBundleForm() {
   const dispatch = useAppDispatch();
@@ -28,6 +29,10 @@ function AllInOneBundleForm() {
   const fileOneState = useAppSelector((state) =>
     selectFileUploadState(state, "allInOneBrandColorFile"),
   );
+
+  const { trackingProgress } = useAppSelector((state) => state.tracker);
+  const trackingId = trackingProgress?.activeBundle?.trackingId;
+
   const { handleFileUpload } = useFileUpload();
 
   // Define formik
@@ -47,6 +52,7 @@ function AllInOneBundleForm() {
           submitFormData({
             formName: "AllInOne", // Pass only formName
             payload: formPayload, // Pass only the payload
+            trackingId: trackingId as string,
           }),
         );
         if (response?.payload) {
@@ -61,6 +67,7 @@ function AllInOneBundleForm() {
         }
         resetForm();
         dispatch(handleFormModal({ formName: "AllInOne", isModalOpen: false }));
+        dispatch(trackUserOrder(parseInt(trackingId as string) as number));
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(

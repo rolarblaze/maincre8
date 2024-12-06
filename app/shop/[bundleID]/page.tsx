@@ -2,7 +2,6 @@
 
 import { useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import ShopWhyChooseSellCre8Data from "@/components/Shop/data/whyChooseUs";
 import BundlePreviewBanner from "@/components/Shop/section/BundlePreviewBanner";
 import BundlePackagesPlan from "@/components/Shop/section/BundlePackagesPlan";
 import NotSureBanner from "@/components/Shop/section/NotSureBanner";
@@ -12,7 +11,7 @@ import { RootState, useAppDispatch, useAppSelector } from "@/redux/store";
 import { changePageData } from "@/redux/shop";
 import { PageViewData } from "@/redux/shop/interface";
 import { getBundles } from "@/redux/shop/features";
-import { addAlert } from "@/redux/alerts";
+import ShopWhyChooseSellCre8Data from "@/components/Shop/data/whyChooseUs";
 
 const Shop = () => {
   const dispatch = useAppDispatch();

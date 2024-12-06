@@ -28,7 +28,7 @@ function WhiteHeroSection({
   }
   return (
     <section
-      className={`full-width flex flex-col items-center gap-10 bg-white py-8 md:pb-[5rem] md:pt-[6.25rem] ${className}`}
+      className={`full-width flex flex-col items-center gap-2 md:gap-6 lg:gap-10 bg-white py-8 px-5 md:pb-[5rem] md:pt-[6.25rem] ${className}`}
     >
       <h3 className="w-full max-w-[24.7rem] text-center text-textMain">
         {title}
@@ -42,7 +42,7 @@ function WhiteHeroSection({
               type="text"
               onChange={handleQueryInput}
               value={queryInput}
-              classNames="py-6 placeholder:text-sm text-grey400 border-none !bg-grey50 mx-auto w-full max-w-[900px]"
+              classNames="py-6 placeholder:text-sm text-grey400 border-none !bg-grey50 mx-auto w-full max-w-[900px] hover:bg-grey100"
               placeholder="What do you need help with?"
               icon={
                 queryInput ? (

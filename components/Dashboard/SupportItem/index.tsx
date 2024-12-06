@@ -57,7 +57,7 @@ const SupportItem: React.FC<SupportItemProps> = ({
       <p className="mb-4 text-sm text-grey600">{description}</p>
       <div
         onClick={isLink ? redirectToWhatsApp : handleCopy}
-        className="flex cursor-pointer items-center gap-2 font-medium text-primary600"
+        className="flex cursor-pointer items-center gap-2 font-medium text-primary600 hover:text-primary800"
       >
         <span>{content}</span>
         <div>{isLink ? <LinkIcon /> : <Copy />}</div>

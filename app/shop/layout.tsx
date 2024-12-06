@@ -23,7 +23,7 @@ export default function ShopLayout({
   return (
     <PageLayout>
       <main className="relative space-y-20 px-5 pb-20 xs:max-md:space-y-10 xs:max-md:px-0 xs:max-md:pb-10">
-        <h1 className="mt-20 w-full text-center text-3xl font-semibold leading-9 xs:max-md:mt-10 xs:max-md:text-3xl">
+        <h1 className="mt-20 w-full text-center text-3xl font-semibold leading-9 xs:max-md:mt-10 xs:max-md:text-2xl">
           Choose the Right Plan for Your Business
         </h1>
 

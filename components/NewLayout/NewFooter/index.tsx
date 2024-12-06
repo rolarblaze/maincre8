@@ -52,7 +52,7 @@ const NewFooter = () => {
             <ul className="flex items-center justify-center gap-[2.75rem] text-sm text-grey200">
               {navlinks.map(({ name, link }) => (
                 <li key={name}>
-                  <Link href={link}>{name}</Link>
+                  <Link href={link} className="hover:text-grey400">{name}</Link>
                 </li>
               ))}
             </ul>
@@ -61,7 +61,8 @@ const NewFooter = () => {
           {/* SOCIALS */}
           <div className="flex items-center justify-center gap-6">
             {socials.map(({ id, icon, link }) => (
-              <Link key={id} href={link} target="_blank">
+              <Link key={id} href={link} target="_blank" className="group relative">
+                <div className="hidden group-hover:block absolute size-full bg-primary900/50"></div>
                 {icon}
               </Link>
             ))}
@@ -105,7 +106,7 @@ const socials = [
   {
     id: 1,
     icon: <FacebookLogo />,
-    link: "/",
+    link: "https://www.facebook.com/share/1GQhHm5L7q/?mibextid=JRoKGi",
   },
   {
     id: 2,
@@ -120,6 +121,6 @@ const socials = [
   {
     id: 4,
     icon: <LinkedinLogo />,
-    link: "/",
+    link: "https://www.linkedin.com/company/sellcrea8/",
   },
-];
+]

@@ -20,6 +20,7 @@ import { submitFormData } from "@/redux/myServices/features";
 import { handleFormModal } from "@/redux/myServices";
 import { selectFileUploadState } from "@/redux/file";
 import { briefFileUploadEndpoints } from "../shared/briefEndpoint";
+import { trackUserOrder } from "@/redux/servicesTracker/features";
 
 function GraphicsDesignForm() {
   const dispatch = useAppDispatch();
@@ -32,6 +33,9 @@ function GraphicsDesignForm() {
   const fileTwoState = useAppSelector((state) =>
     selectFileUploadState(state, "graphicsReferencesFile"),
   );
+
+  const { trackingProgress } = useAppSelector((state) => state.tracker);
+  const trackingId = trackingProgress?.activeBundle?.trackingId;
   const { handleFileUpload } = useFileUpload();
 
   // Define formik
@@ -54,6 +58,7 @@ function GraphicsDesignForm() {
           submitFormData({
             formName: "graphicsDesign", // Pass only formName
             payload: formPayload, // Pass only the payload
+            trackingId: trackingId as string,
           }),
         );
 
@@ -71,6 +76,7 @@ function GraphicsDesignForm() {
         dispatch(
           handleFormModal({ formName: "graphicsDesign", isModalOpen: false }),
         );
+        dispatch(trackUserOrder(parseInt(trackingId as string) as number));
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(

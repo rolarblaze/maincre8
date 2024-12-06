@@ -3,22 +3,11 @@ import { Card, Reviews } from "./Components";
 
 const CustomerReviews = () => {
   return (
-    <FadeUpDiv className="w-full py-5 md:py-14 lg:py-20 max-xl:px-5 text-center bg-white z-20">
-      <div className="max-w-[1216px] text-2xl md:text-4xl lg:text-5.5xl mx-auto">
-        <h2 className="text-2xl md:text-4xl lg:text-5.5xl">
-          What Our{" "}
-          <span className="text-2xl md:text-4xl lg:text-5.5xl text-primary500">
-            {" "}
-            Customers
-          </span>{" "}
-          Say  
-        </h2>
+    <FadeUpDiv className="z-20 w-full bg-white py-5 md:py-14 lg:py-20">
+      <div className="w-full md:max-w-[1216px] text-2xl md:text-4xl lg:text-5.5xl space-y-4">
+        <h2 className="md:text-center">Our Clients Speak for Us</h2>
 
-        <p className="mb-8 mt-2 font-medium max-sm:text-xs max-md:text-sm md:mt-4 leading-6">
-          Customer Reviews
-        </p>
-
-        <div className="flex gap-8 text-left max-lg:overflow-x-scroll no-scrollbar">
+        <div className="no-scrollbar flex gap-8 text-left max-lg:overflow-x-scroll">
           {Reviews.map((review) => (
             <Card
               key={review.name}

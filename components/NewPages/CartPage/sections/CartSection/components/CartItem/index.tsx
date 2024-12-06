@@ -94,7 +94,7 @@ const CartItem: React.FC<Props> = ({ name, type, imageUrl, cartItemId, bundleId 
       <div className="flex items-center justify-center gap-2.5 sm:gap-6">
         <div
           onClick={handleSwitchPackage}
-          className="flex items-center justify-center gap-2 border-grey100 py-2 text-sm font-semibold text-grey400 cursor-pointer sm:px-4 md:rounded-lg md:border md:shadow-sm"
+          className="flex items-center justify-center gap-2 border-grey100 hover:bg-grey200 py-2 text-sm font-semibold text-grey400 cursor-pointer sm:px-4 md:rounded-lg md:border md:shadow-sm"
         >
           {isFetchingBundleById ? <Spinner className="size-4" /> : (
             <>
@@ -109,7 +109,7 @@ const CartItem: React.FC<Props> = ({ name, type, imageUrl, cartItemId, bundleId 
 
         <div
           onClick={handleDelete}
-          className="rounded-lg p-2 max-sm:pr-0 sm:bg-grey100 cursor-pointer"
+          className="rounded-lg p-2 max-sm:pr-0 sm:bg-grey100 cursor-pointer hover:bg-grey200"
         >
           {isDeleting ? <Spinner className="size-4" /> : <TrashIcon />}
 

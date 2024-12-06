@@ -22,7 +22,8 @@ const SummarySection: React.FC<SummarySectionProps> = ({ totalPrice, packageId, 
   const [isOpen, setIsOpen] = useState(false);
 
   const handlePayment = async () => {
-    if (!isAuthenticated) {
+   
+    if (!isAuthenticated) { 
       // Redirect unauthenticated users to the login/signup page
       router.push("/login?redirect=/checkout");
       return;
@@ -35,7 +36,8 @@ const SummarySection: React.FC<SummarySectionProps> = ({ totalPrice, packageId, 
         makePayment({ package_id: packageId, currency })
       ).unwrap();
 
-
+      
+      
       // Redirect to the payment link
       window.location.href = result.data.link;
     } catch (err) {
@@ -61,7 +63,7 @@ const SummarySection: React.FC<SummarySectionProps> = ({ totalPrice, packageId, 
         />
         <Button
           label="Add"
-          classNames="sm:max-w-[7rem] text-sm font-medium py-4"
+          classNames="sm:max-w-[7rem] text-sm font-medium py-4 hover:bg-primary700"
         />
       </div>
 
@@ -94,7 +96,7 @@ const SummarySection: React.FC<SummarySectionProps> = ({ totalPrice, packageId, 
         onClick={handlePayment}
         isLoading={isMakingPayment}
         disabled={isMakingPayment}
-        classNames="font-manrope text-base font-semibold mx-auto py-4 rounded-lg"
+        classNames="font-manrope text-base font-semibold mx-auto py-4 rounded-lg hover:bg-primary700"
       />
 
       <Modal

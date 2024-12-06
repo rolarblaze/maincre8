@@ -15,12 +15,16 @@ import { formConfig } from "@/redux/myServices/formConfig";
 import { submitFormData } from "@/redux/myServices/features";
 import { handleFormModal } from "@/redux/myServices";
 import { briefFileUploadEndpoints } from "../shared/briefEndpoint";
+import { trackUserOrder } from "@/redux/servicesTracker/features";
 
 function DigitalMarketForm() {
   const dispatch = useAppDispatch();
   const isLoading = useAppSelector(
     (state: any) => state.forms?.digitalMarketing?.isLoading,
   );
+  const { trackingProgress } = useAppSelector((state) => state.tracker);
+  const trackingId = trackingProgress?.activeBundle?.trackingId;
+  console.log(trackingId, "kkkkkk");
 
   // Define formik
   const formik = useFormik<DigitalMarketingValues>({
@@ -42,6 +46,7 @@ function DigitalMarketForm() {
           submitFormData({
             formName: "digitalMarketing", // Pass only formName
             payload: formPayload, // Pass only the payload
+            trackingId: trackingId as string,
           }),
         );
         if (response?.payload) {
@@ -58,6 +63,7 @@ function DigitalMarketForm() {
         dispatch(
           handleFormModal({ formName: "digitalMarketing", isModalOpen: false }),
         );
+        dispatch(trackUserOrder(parseInt(trackingId as string) as number));
       } catch (error) {
         console.error("Error submitting form:", error);
         dispatch(

@@ -99,7 +99,7 @@ const NewNavbar = () => {
                   ? "/dashboard"
                   : "/signup"
               }
-              className="block w-fit rounded-lg bg-grey800 px-4 py-2.5 text-grey50"
+              className="block w-fit rounded-lg bg-grey800 hover:bg-grey700 px-4 py-2.5 text-grey50"
             >
               {profile.first_name || profile.last_name
                 ? "Go To Dashbaord"
@@ -107,7 +107,7 @@ const NewNavbar = () => {
             </Link>
 
             <div
-              className={`${cartItems.length === 0 ? "bg-[#F0F2F5]" : "bg-[#E8F1FC]"} relative size-8 rounded-full p-1`}
+              className={`${cartItems.length === 0 ? "bg-[#F0F2F5] hover:bg-slate-200" : "bg-[#E8F1FC] hover:bg-blue-200"} relative size-8 rounded-full p-1`}
             >
               {cartItems.length !== 0 && (
                 <div className="center absolute -right-1 -top-1 aspect-square min-h-4 w-auto min-w-4 rounded-full bg-[#1574E5] p-[1px]">

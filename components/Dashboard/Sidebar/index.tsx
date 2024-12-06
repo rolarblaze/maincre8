@@ -74,10 +74,10 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
           {/* OVERVIEW */}
           <Link href="/dashboard">
             <div
-              className={`flex items-center gap-3 px-4 py-3 ${
+              className={`flex items-center gap-3 px-4 py-3  ${
                 isActive("/dashboard")
                   ? "rounded-sm bg-primary50 text-primary600"
-                  : ""
+                  : "hover:bg-primary50/50 hover:text-primary600"
               }`}
               onClick={() => setActiveTab("Overview")}
             >
@@ -102,7 +102,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
               className={`flex items-center gap-3 px-4 py-3 ${
                 isActive("/dashboard/services")
                   ? "rounded-sm bg-primary50 text-primary600"
-                  : ""
+                  : "hover:bg-primary50/50 hover:text-primary600"
               }`}
               onClick={() => setActiveTab("Services")}
             >
@@ -129,7 +129,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
               className={`flex items-center gap-3 px-4 py-3 ${
                 isActive("/dashboard/my-services")
                   ? "rounded-sm bg-primary50 text-primary600"
-                  : ""
+                  : "hover:bg-primary50/50 hover:text-primary600"
               }`}
               onClick={() => setActiveTab("MyServices")}
             >
@@ -156,7 +156,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
               className={`flex items-center gap-3 px-4 py-3 ${
                 isActive("/dashboard/custom-recommendation")
                   ? "rounded-sm bg-primary50 text-primary600"
-                  : ""
+                  : "hover:bg-primary50/50 hover:text-primary600"
               }`}
               onClick={() => setActiveTab("Services")}
             >
@@ -210,7 +210,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
               className={`flex items-center gap-3 px-4 py-3 ${
                 isActive("/dashboard/order-history")
                   ? "rounded-sm bg-primary50 text-primary600"
-                  : ""
+                  : "hover:bg-primary50/50 hover:text-primary600"
               }`}
               onClick={() => setActiveTab("History")}
             >
@@ -235,7 +235,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
           <div onClick={toggleSupport}>
             <div
               className={`flex cursor-pointer items-center justify-between gap-3 px-4 py-3 ${
-                isActive("/dashboard/support") ? "text-primary600" : ""
+                isActive("/dashboard/support") ? "text-primary600" : "hover:bg-primary50/50 hover:text-primary600"
               }`}
             >
               <div className="flex items-center gap-3">
@@ -263,7 +263,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
               </div>
             </div>
             {isSupportOpen && (
-              <div className="fadeInDown flex flex-col gap-2">
+              <div className="fadeInDown flex flex-col gap-2 ml-5">
                 <Link
                   href="/dashboard/support"
                   onClick={() => setActiveTab("Support")}
@@ -271,19 +271,19 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
                   <div
                     className={`cursor-pointer rounded-sm py-2 pl-4 pr-2 text-sm ${
                       isActive("/dashboard/support")
-                        ? "bg-primary50 text-grey900"
-                        : "text-grey700"
+                        ? "bg-primary50 text-primary600"
+                        : "text-grey700 hover:bg-primary50/50 hover:text-primary600"
                     }`}
                   >
                     Support Info
                   </div>
                 </Link>
-                <div className="flex cursor-pointer items-center justify-between rounded-sm py-2 pl-4 pr-2 text-sm text-grey700">
+                {/* <div className="flex cursor-pointer items-center justify-between rounded-sm py-2 pl-4 pr-2 text-sm text-grey700">
                   Support Inbox
                   <span className="rounded-full bg-primary500 px-1 py-0.5 text-xs text-white">
                     Coming soon
                   </span>
-                </div>
+                </div> */}
               </div>
             )}
           </div>
@@ -328,8 +328,13 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
               Please provide a few more details to tailor the experience to your
               needs and preferences.
             </p>
-            <button className="rounded-lg border-[1.5px] border-primary600 px-4 py-2 text-sm font-semibold text-primary600">
-              Complete profile
+            <button>
+              <Link
+                href="/dashboard/settings"
+                className="rounded-lg border-[1.5px] border-primary600 px-4 py-2 text-sm font-semibold text-primary600 hover:text-white hover:bg-primary600"
+              >
+                Complete profile
+              </Link>
             </button>
           </div>
         </div>
@@ -340,7 +345,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
             className={`flex items-center gap-3 px-4 py-3 ${
               isActive("/dashboard/settings")
                 ? "rounded-sm bg-primary50 text-primary600"
-                : ""
+                : "hover:bg-primary50/50 hover:text-primary600"
             }`}
             onClick={() => setActiveTab("Settings")}
           >
@@ -400,7 +405,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActiveTab }) => {
         </div>
 
         <div onClick={handleLogout} className="h-fit cursor-pointer">
-          <Logout  />
+          <Logout />
         </div>
       </div>
     </aside>

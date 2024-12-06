@@ -98,7 +98,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                     href={`/dashboard/my-services/track-services/${transactionId}`}
                     className={`${getBundlesClass[bundle_id - 1].focusClass} flex items-center gap-1`}
                   >
-                    <p className="text-nowrap text-sm font-medium text-[#4490EA] xs:max-md:text-xs">
+                    <p className="text-nowrap text-sm font-medium text-[#4490EA] hover:text-primary800 xs:max-md:text-xs">
                       Track Packages
                     </p>
                     <div className="center size-4">
