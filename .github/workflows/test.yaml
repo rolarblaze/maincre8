@@ -1,0 +1,24 @@
+name: "Sonarcloud Scan"
+
+on:
+    push:
+        branches: [main]
+
+jobs:
+    sonarcloudScan:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v3
+              with:
+                fetch-depth: 0
+            - name: Sonarcloud Scan
+              uses: sonarsource/sonarqube-scan-action@master
+            - name: Run SonarQube Analysis
+             env:
+                SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }} # Store your SonarQube token in GitHub secrets
+            run: |
+                sonar-scanner \
+                    -Dsonar.projectKey=rolarblaze \
+                    -Dsonar.organization=rolarblaze \
+                    -Dsonar.host.url=https://your-sonarqube-server-url \
+                    -Dsonar.login=$SONAR_TOKEN
