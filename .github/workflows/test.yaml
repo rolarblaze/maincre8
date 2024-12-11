@@ -33,6 +33,7 @@ jobs:
           SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
         run: |
           sonar-scanner \
+            -X \
             -Dsonar.projectKey=maincre8 \
             -Dsonar.organization=rolarblaze \
             -Dsonar.host.url=${SONAR_HOST_URL} \
