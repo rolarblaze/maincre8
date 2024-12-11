@@ -30,3 +30,4 @@ jobs:
         - name: Push Docker Image
           run: docker push ghcr.io/${{ github.repository_owner }}/sellcrea8:latest
 
+#- name: Log in to GitHub Container Registry
