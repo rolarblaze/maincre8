@@ -27,6 +27,6 @@ jobs:
           projectBaseDir: .
           args: >
             -Dsonar.organization=rolarblaze
-            -Dsonar.projectKey=maincre8
+            -Dsonar.projectKey=rolarblaze
             -Dsonar.sources=.
             -Dsonar.exclusions=**/*.java
