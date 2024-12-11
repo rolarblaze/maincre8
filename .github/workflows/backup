@@ -24,3 +24,44 @@ jobs:
                     -Dsonar.organization=rolarblaze \
                     -Dsonar.host.url=https://sonarcloud.io \
                     -Dsonar.login=$SONAR_TOKEN
+
+
+name: SonarCloud Scan
+
+on:
+  push:
+    branches:
+      - main
+      - master
+      - develop
+      - 'releases/**'
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  sonarqube:
+    name: SonarCloud Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Ensures full commit history for SonarCloud analysis
+
+      - name: Install SonarCloud Scanner
+        uses: SonarSource/sonarcloud-github-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: https://sonarcloud.io
+
+      - name: Run SonarCloud Analysis
+        run: |
+          sonar-scanner \
+            -X \
+            -Dsonar.projectKey=maincre8 \
+            -Dsonar.organization=rolarblaze \
+            -Dsonar.host.url=${SONAR_HOST_URL} \
+            -Dsonar.login=${SONAR_TOKEN}
+
+
+# second Job 
