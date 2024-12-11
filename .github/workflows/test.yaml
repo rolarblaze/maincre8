@@ -22,10 +22,16 @@ jobs:
 
       - name: Install SonarScanner CLI
         run: |
-            wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-4.8.0.2856-linux.zip
-            unzip sonar-scanner-cli-4.8.0.2856-linux.zip
-            mv sonar-scanner-4.8.0.2856-linux /home/runner/sonar-scanner
-            echo "/home/runner/sonar-scanner/bin" >> $GITHUB_PATH
+         mkdir -p $HOME/sonarscanner
+          wget https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-6.2.1.4610-linux-x64.zip
+          unzip sonar-scanner-cli-6.2.1.4610-linux-x64.zip -d $HOME/sonarscanner
+          echo "$HOME/sonarscanner/sonar-scanner-6.2.1.4610-linux-x64/bin" >> $GITHUB_PATH
+          
+      - name: Debug SonarScanner
+        run: sonar-scanner -X
+        env:
+            SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
 
       - name: SonarQube Scanner
         env:
