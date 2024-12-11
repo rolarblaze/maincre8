@@ -22,5 +22,5 @@ jobs:
                 sonar-scanner \
                     -Dsonar.projectKey=maincre8 \
                     -Dsonar.organization=rolarblaze \
-                    -Dsonar.host.url=https://your-sonarqube-server-url \
+                    -Dsonar.host.url=https://sonarcloud.io \
                     -Dsonar.login=$SONAR_TOKEN
