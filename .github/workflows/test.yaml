@@ -17,8 +17,8 @@ jobs:
       - name: Set up Java
         uses: actions/setup-java@v3
         with:
-          distribution: 'temurin'
-          java-version: '17'
+          java-version: 18
+          distribution: 'adopt'
 
       - name: Install SonarScanner CLI
         run: |
@@ -38,3 +38,4 @@ jobs:
             -Dsonar.organization=rolarblaze \
             -Dsonar.host.url=${SONAR_HOST_URL} \
             -Dsonar.login=${SONAR_TOKEN}
+
