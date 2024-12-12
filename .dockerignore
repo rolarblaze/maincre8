@@ -36,3 +36,5 @@ next-env.d.ts
 .history
 .gitignore
 README.md
+.github/workflows/test-legacy
+.github/workflows/backup

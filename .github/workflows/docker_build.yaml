@@ -1,12 +1,40 @@
-name: Build and Push Docker Image
-
+name: SonarCloud Scan
 on:
   push:
-    branches: [main]
+    branches:
+      - main
+      - master
+      - develop
+      - 'releases/**'
+  pull_request:
+    types: [opened, synchronize, reopened]
+
 jobs:
+  sonarqube:
+    name: SonarCloud_Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+      
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: .
+          args: >
+            -Dsonar.organization=rolarblaze
+            -Dsonar.projectKey=rolarblaze_maincre8
+            -Dsonar.sources=.
+            -Dsonar.exclusions=**/*.java
+
+  # docker build workflow
   build-and-push:
     runs-on: ubuntu-latest
-
+    needs: sonarqube
     steps:
         - name:  Checkout Code
           uses: actions/checkout@v3
@@ -29,5 +57,3 @@ jobs:
 
         - name: Push Docker Image
           run: docker push ghcr.io/${{ github.repository_owner }}/sellcrea8:latest
-
-#- name: Log in to GitHub Container Registry
