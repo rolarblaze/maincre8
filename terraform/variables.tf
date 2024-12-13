@@ -7,7 +7,7 @@ variable "aws_region" {
 variable "app_name" {
   description = "Name of the application"
   type        = string
-  default     = "myapp"
+  default     = "sellcrea8"
 }
 
 variable "environment" {
