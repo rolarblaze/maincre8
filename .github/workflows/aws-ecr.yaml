@@ -46,6 +46,11 @@ jobs:
                 npm run lint || echo "Linting errors found."
                 npm run lint -- --fix || true
                 
+            - name: Run Format Check
+              run: |
+                npm run format:check || echo "Formatting errors found."
+                npm run format || true
+
             # Run unit tests with coverage
             - name: Run Unit Tests
               run: |
