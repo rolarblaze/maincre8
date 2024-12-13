@@ -40,3 +40,4 @@ next-env.d.ts
 .terraform.lock.hcl
 terraform.tfstate
 terraform.tfstate.backup
+#ignore
