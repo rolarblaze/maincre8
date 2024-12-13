@@ -74,8 +74,8 @@ jobs:
             - name: Vulnerability Scan 
               uses: aquasecurity/trivy-action@master
               with:
-                scan-types: 'fs'
-                ignore-unfix: true
+                scan-type: 'fs'
+                ignore-unfixed: true
                 format: 'sarif'
                 output: 'trivy-results.sarif'
                 severity: 'CRITICAL,HIGH'
