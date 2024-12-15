@@ -9,7 +9,7 @@ env:
     ECR_REPOSITORY: sellcrea8
     DOCKER_IMAGE_NAME: sell-crea8
     NODE_VERSION: 20.x
-
+    
 # permission 
 permissions:
     contents: read
@@ -114,7 +114,15 @@ jobs:
               id: login-ecr
               uses: aws-actions/amazon-ecr-login@v2
 
-                # Build and push with multiple tags
+            - name: Set NODE_ENV
+              run: |
+                if [ "${GITHUB_REF##*/}" = "main" ]; then
+                  echo "NODE_ENV=production" >> $GITHUB_ENV
+                elif [[ "${GITHUB_REF##*/}" == release/* ]]; then
+                  echo "NODE_ENV=dev" >> $GITHUB_ENV
+                fi
+      
+            # Build and push with multiple tags
             - name: Build, tag, and push Docker image
               uses: docker/build-push-action@v5
               with:
@@ -127,5 +135,6 @@ jobs:
                 cache-to: type=gha,mode=max
                 build-args: |
                     BUILDKIT_INLINE_CACHE=1
-                    NODE_ENV=production 
+                    NODE_ENV=${{ env.NODE_ENV }}
+                     
 
