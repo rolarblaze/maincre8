@@ -136,5 +136,26 @@ jobs:
                 build-args: |
                     BUILDKIT_INLINE_CACHE=1
                     NODE_ENV=${{ env.NODE_ENV }}
-                     
+    deploy-ecs:
+      name: Deploy to ECS 
+      needs: build-and-push
+      runs-on: ubuntu-latest
+      steps:
 
+      # AWS Credentials with OIDC
+        - name: Configure AWS credentials
+          uses: aws-actions/configure-aws-credentials@v4
+          with:
+            role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/openid_roles
+            aws-region: ${{ env.AWS_REGION }}
+        - name: Deploy to ECS 
+          run: |
+            if [ "${GITHUB_REF##*/}" = "main" ]; then
+                  echo "deploy to production" 
+                  prod -chdir=prod/terraform init
+                  prod -chdir=prod/terraform apply -auto-approve
+            elif [[ "${GITHUB_REF##*/}" == release/* ]]; then
+                  echo "Deploying to test environment"
+                  prod -chdir=prod/test init
+                  prod -chdir=prod/test apply -auto-approve
+            fi

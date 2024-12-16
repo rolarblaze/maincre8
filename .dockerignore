@@ -38,3 +38,4 @@ next-env.d.ts
 README.md
 .github/workflows/test-legacy
 .github/workflows/backup
+main.tf 
