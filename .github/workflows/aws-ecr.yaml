@@ -142,6 +142,9 @@ jobs:
       runs-on: ubuntu-latest
       steps:
 
+        - name: Set up Terraform
+          uses: hashicorp/setup-terraform@v2
+
       # AWS Credentials with OIDC
         - name: Configure AWS credentials
           uses: aws-actions/configure-aws-credentials@v4
@@ -152,10 +155,10 @@ jobs:
           run: |
             if [ "${GITHUB_REF##*/}" = "main" ]; then
               echo "Deploying to production environment"
-              terraform -chdir=terraform/production init
-              terraform -chdir=terraform/production apply -auto-approve
+              terraform -chdir=./terraform/production init
+              terraform -chdir=./terraform/production apply -auto-approve
             elif [[ "${GITHUB_REF##*/}" == release/* ]]; then
               echo "Deploying to test environment"
-              terraform -chdir=dev/test init
-              terraform -chdir=dev/test apply -auto-approve
+              terraform -chdir=./terraform/test init
+              terraform -chdir=./terraform/test apply -auto-approve
             fi
