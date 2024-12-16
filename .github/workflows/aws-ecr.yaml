@@ -153,9 +153,12 @@ jobs:
             aws-region: ${{ env.AWS_REGION }}
         - name: Deploy to ECS 
           run: |
+           set -e   
+
             if [ "${GITHUB_REF##*/}" = "main" ]; then
               echo "Deploying to production environment"
-              terraform -chdir=./terraform/production init
+              terraform -chdir=./terraform/production init -input=false
+              terraform -chdir=./terraform/production plan
               terraform -chdir=./terraform/production apply -auto-approve
             elif [[ "${GITHUB_REF##*/}" == release/* ]]; then
               echo "Deploying to test environment"
