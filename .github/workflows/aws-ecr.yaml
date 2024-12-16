@@ -151,11 +151,11 @@ jobs:
         - name: Deploy to ECS 
           run: |
             if [ "${GITHUB_REF##*/}" = "main" ]; then
-                  echo "deploy to production" 
-                  prod -chdir=terraform/production init
-                  prod -chdir=terraform/production apply -auto-approve
-            elif [[ "${GITHUB_REF##*/}" == release/* ]]; then
-                  echo "Deploying to test environment"
-                  prod -chdir=production/test init
-                  prod -chdir=production/test apply -auto-approve
+              echo "Deploying to production environment"
+              terraform -chdir=terraform/production init
+              terraform -chdir=terraform/production apply -auto-approve
+            elif[[ "${GITHUB_REF##*/}" == release/* ]]; then
+                echo "Deploying to test environment"
+                terraform -chdir=terraform/test init
+                terraform -chdir=terraform/test apply -auto-approve
             fi
