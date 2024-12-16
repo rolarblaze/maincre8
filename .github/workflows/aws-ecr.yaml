@@ -152,10 +152,10 @@ jobs:
           run: |
             if [ "${GITHUB_REF##*/}" = "main" ]; then
                   echo "deploy to production" 
-                  prod -chdir=prod/terraform init
-                  prod -chdir=prod/terraform apply -auto-approve
+                  prod -chdir=terraform/production init
+                  prod -chdir=terraform/production apply -auto-approve
             elif [[ "${GITHUB_REF##*/}" == release/* ]]; then
                   echo "Deploying to test environment"
-                  prod -chdir=prod/test init
-                  prod -chdir=prod/test apply -auto-approve
+                  prod -chdir=production/test init
+                  prod -chdir=production/test apply -auto-approve
             fi
