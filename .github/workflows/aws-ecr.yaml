@@ -154,8 +154,8 @@ jobs:
               echo "Deploying to production environment"
               terraform -chdir=terraform/production init
               terraform -chdir=terraform/production apply -auto-approve
-            elif[[ "${GITHUB_REF##*/}" == release/* ]]; then
-                echo "Deploying to test environment"
-                terraform -chdir=terraform/test init
-                terraform -chdir=terraform/test apply -auto-approve
+            elif [[ "${GITHUB_REF##*/}" == release/* ]]; then
+              echo "Deploying to test environment"
+              terraform -chdir=terraform/test init
+              terraform -chdir=terraform/test apply -auto-approve
             fi
