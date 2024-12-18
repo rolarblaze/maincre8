@@ -1,3 +1,12 @@
+# provider.tf
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
 provider "aws" {
   region = "us-west-2" #The region where the environment 
   #is going to be deployed # Use your own region here
