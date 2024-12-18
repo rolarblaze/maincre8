@@ -157,9 +157,9 @@ jobs:
 
             if [ "${GITHUB_REF##*/}" = "main" ]; then
               echo "Deploying to production environment"
-              terraform -chdir=../production init -input=false
-              terraform -chdir=../production plan
-              terraform -chdir=../production apply -auto-approve
+              terraform -chdir=./deploy/production init -input=false
+              terraform -chdir=./deploy/production plan
+              terraform -chdir=./deploy/production apply -auto-approve
             elif [[ "${GITHUB_REF##*/}" == release/* ]]; then
               echo "Deploying to test environment"
               terraform -chdir=../productiont init
