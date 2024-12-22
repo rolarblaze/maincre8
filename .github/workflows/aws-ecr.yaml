@@ -136,6 +136,8 @@ jobs:
                 build-args: |
                     BUILDKIT_INLINE_CACHE=1
                     NODE_ENV=${{ env.NODE_ENV }}
+                    NEXT_PUBLIC_API_BASE_URL=${{ env.NEXT_PUBLIC_API_BASE_URL}}
+                    NEXT_PUBLIC_USER_TOKEN_KEY=${{env.NEXT_PUBLIC_USER_TOKEN_KEY}}
     deploy-ecs:
       name: Deploy to ECS 
       needs: build-and-push
