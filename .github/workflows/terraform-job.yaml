@@ -7,10 +7,12 @@ on:
     paths:
       - "deploy/production/**"
       - "deploy/staging/**"
+      - ".github/workflows/terraform-job.yaml"
   pull_request:
     paths:
       - "deploy/production/**"
       - "deploy/staging/**"
+      - ".github/workflows/terraform-job.yaml"
 
 env:
   AWS_REGION: us-west-2
