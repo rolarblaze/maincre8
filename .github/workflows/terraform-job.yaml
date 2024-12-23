@@ -7,16 +7,15 @@ on:
     paths:
       - "deploy/production/**"
       - "deploy/staging/**"
-      - "./github/workflows/terraform-job.yaml"
   pull_request:
     paths:
       - "deploy/production/**"
       - "deploy/staging/**"
-      - "./github/workflows/terraform-job.yaml"
+
 env:
-    AWS_REGION: us-west-2
-    
-# permission 
+  AWS_REGION: us-west-2
+
+# Permissions
 permissions:
   contents: read
   id-token: write 
@@ -28,17 +27,6 @@ jobs:
     name: Deploy to ECS using Terraform
     runs-on: ubuntu-latest
 
-    permissions:
-      contents: "read"
-      id-token: "write"
-    
-    defaults:
-      run:
-        shell: bash
-        working-directory: |
-          - "deploy/production/"
-          - "deploy/staging/"
-    
     steps:
       # Checkout the repository to the GitHub Actions runner
       - name: Checkout
@@ -50,38 +38,35 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/openid_roles
           aws-region: ${{ env.AWS_REGION }}
-      
-      # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
+
+      # Install the latest version of Terraform
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
-      # Checks which files that should be rewritten to Terraform canonical style and format for configuration files - If triggered run terraform fmt locally and commit affected files
+      # Check Terraform format
       - name: Terraform Format
         run: |
-          # Check the Terraform fmt command 
           if terraform fmt -check; then
             echo "Terraform format succeeded"
           else
             echo "Terraform format failed"
             exit 1
           fi
-      # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
+
+      # Initialize Terraform
       - name: Terraform Init
         run: |
-          # Print Terraform version
           terraform --version
-
-          # Check the Terraform init command 
           if terraform init --upgrade=true; then
             echo "Terraform init succeeded"
           else
             echo "Terraform init failed"
             exit 1
           fi
-      # Validates the syntax of the Terraform configuration files
+
+      # Validate Terraform configuration
       - name: Terraform Validate
         run: |
-          # Check the Terraform validate command 
           if terraform validate; then
             echo "Terraform validate succeeded"
           else
@@ -89,23 +74,21 @@ jobs:
             exit 1
           fi
 
-      # Generates an execution plan for Terraform
+      # Generate Terraform execution plan
       - name: Terraform Plan
         run: |
-          # Check the Terraform plan command 
-          if terraform plan -input=false ; then
+          if terraform plan -input=false; then
             echo "Terraform plan succeeded"
           else
             echo "Terraform plan failed"
             exit 1
           fi
 
-      # Applies execution plan for Terraform
+      # Apply Terraform execution plan
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main' && github.ref == 'refs/heads/release/*'
+        if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/heads/release/')
         run: |
-          # Check the Terraform apply command 
-          if terraform apply -auto-approve ; then
+          if terraform apply -auto-approve; then
             echo "Terraform apply succeeded"
           else
             echo "Terraform apply failed"
