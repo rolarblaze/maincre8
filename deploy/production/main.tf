@@ -13,11 +13,11 @@ provider "aws" {
 
 # creating an ecr on aws 
 resource "aws_ecr_repository" "app_ecr_repo" {
-  name = "sellcrea8"
+  name = "sellcrea8-prod"
 }
 
 resource "aws_ecs_cluster" "my_cluster" {
-  name = "sellcrea8" # Cluster
+  name = "sellcrea8-prod" # Cluster
 }
 
 # create a fargate task to ochastrate the deployment
