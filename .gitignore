@@ -40,8 +40,7 @@ next-env.d.ts
 .terraform.lock.hcl
 terraform.tfstate
 terraform.tfstate.backup
-#ignore
-main.tf 
+#ignore 
 ./terraform/*
 ./terra/*
 ./module/*
