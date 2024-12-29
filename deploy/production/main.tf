@@ -49,10 +49,33 @@ resource "aws_ecs_task_definition" "app_task" {
 }
 
 # Task Execution Role
-resource "aws_iam_role" "ecsTaskExecutionRole" {
-  name               = "ecsTaskExecutionRole"
-  assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
+# resource "aws_iam_role" "ecsTaskExecutionRole" {
+#   name               = "ecsTaskExecutionRole"
+#   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
+# }
+
+resource "aws_iam_role_policy" "ecs_task_execution_policy" {
+  name   = "ecsTaskExecutionPolicy"
+  role   = aws_iam_role.ecsTaskExecutionRole.name
+  policy = <<EOF
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": [
+          "ecs:CreateCluster",
+          "ecs:DescribeClusters",
+          "ecs:ListClusters",
+          "ecs:UpdateCluster"
+        ],
+        "Resource": "*"
+      }
+    ]
+  }
+  EOF
 }
+
 
 data "aws_iam_policy_document" "assume_role_policy" {
   statement {
