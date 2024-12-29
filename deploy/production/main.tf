@@ -48,35 +48,14 @@ resource "aws_ecs_task_definition" "app_task" {
   execution_role_arn       = aws_iam_role.ecsTaskExecutionRole.arn
 }
 
-# Task Execution Role
-# resource "aws_iam_role" "ecsTaskExecutionRole" {
-#   name               = "ecsTaskExecutionRole"
-#   assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
-# }
 
-resource "aws_iam_role_policy" "ecs_task_execution_policy" {
-  name   = "ecsTaskExecutionPolicy"
-  role   = aws_iam_role.ecsTaskExecutionRole.name
-  policy = <<EOF
-  {
-    "Version": "2012-10-17",
-    "Statement": [
-      {
-        "Effect": "Allow",
-        "Action": [
-          "ecs:CreateCluster",
-          "ecs:DescribeClusters",
-          "ecs:ListClusters",
-          "ecs:UpdateCluster"
-        ],
-        "Resource": "*"
-      }
-    ]
-  }
-  EOF
+# Task Execution Role
+resource "aws_iam_role" "ecsTaskExecutionRole" {
+  name = "ecsTaskExecutionRole"
+  assume_role_policy = data.aws_iam_policy_document.assume_role_policy.json
 }
 
-
+# Assume role policy for ECS tasks
 data "aws_iam_policy_document" "assume_role_policy" {
   statement {
     actions = ["sts:AssumeRole"]
@@ -88,11 +67,11 @@ data "aws_iam_policy_document" "assume_role_policy" {
   }
 }
 
+# Attach the ECS Task Execution Role policy
 resource "aws_iam_role_policy_attachment" "ecsTaskExecutionRole_policy" {
   role       = aws_iam_role.ecsTaskExecutionRole.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AmazonECSTaskExecutionRolePolicy"
 }
-
 # Provide a reference to your default VPC
 resource "aws_default_vpc" "default_vpc" {
 }
